@@ -7,7 +7,7 @@ CREATE TABLE  campingSite  (
 	 zip 		varchar2(50)		not null,
 	 zip2 		varchar2(100)		not null,
 	 zip3		VARCHAR2(255)		not null,
-	 thumbnail	varchar2()		not null,
+	 thumbnail	varchar2(200)		not null,
 	 category 	number			not null,
 	 environment 	number			not null,
 	 hitcount		number			default 0,
@@ -15,7 +15,7 @@ CREATE TABLE  campingSite  (
 	 chkOut 		VARCHAR2(30)		not null,
 	 memberIdx 	number			not null,
 	 option		varchar2(200)		not null,
-	enabled		number(1)		default 0
+	enabled		number(1)		default 0,
 	 CONSTRAINT fk_member_memberIdx FOREIGN KEY(memberIdx)
                     REFERENCES member(memberIdx)
 );
@@ -108,12 +108,12 @@ CREATE TABLE  siteCart  (
                     REFERENCES member1(memberIdx),
 	CONSTRAINT fk_detailNum FOREIGN KEY(detailNum)
                     REFERENCES siteDetail(detailNum) ON DELETE CASCADE,
-	CONSTRAINT primary key(memberIdx,detailNum)
+	primary key (memberIdx,detailNum)
 );
-reg_date: 마지막 수정으로부터 1시간이 지나면 장바구니 삭제	(실제로는 일주일 설정)
+--reg_date: 마지막 수정으로부터 1시간이 지나면 장바구니 삭제	(실제로는 일주일 설정)
 
 CREATE TABLE  BookList  (
-	 listNum		number		primaey key,
+	 listNum		number		primary key,
 	 order_date 	date		default sysdate,
 	 memberIdx 	number		not null,
 	 totalPrice 	number		not null,
@@ -140,7 +140,7 @@ CREATE TABLE  book  (
                     REFERENCES bookList(Listnum ),
 	CONSTRAINT fk_detailNum FOREIGN KEY(detailNum)
                     REFERENCES siteDetail(detailNum) ON DELETE CASCADE,
-	 CONSTRAINT primary key(detailNum	,bookNum )
+	primary key(detailNum	,bookNum )
 );
 -- 기본키로 시퀀스와 장소를 묶어 한번 결제시 같은 장소를 중복예약하는것은 불가능하게 한다.
 CREATE SEQUENCE book_seq
@@ -157,7 +157,7 @@ CREATE TABLE  bookPayment  (
 	 purchaseDate	number			not null,
 	 CONSTRAINT fk_bookNum FOREIGN KEY(bookNum)
                     REFERENCES book(bookNum) ON DELETE CASCADE,
-	 CONSTRAINT primary key(bookNum)
+	 primary key(bookNum)
 );
 CREATE TABLE  bookPaymentCancle  (
 	 bookNum	number		not null,
@@ -165,7 +165,7 @@ CREATE TABLE  bookPaymentCancle  (
 	 cancleDate	date		not null,
 	 CONSTRAINT fk_bookNum FOREIGN KEY(bookNum)
                     REFERENCES book(bookNum) ON DELETE CASCADE,
-	 CONSTRAINT primary key(bookNum)
+	 primary key(bookNum)
 );
 CREATE TABLE  Review  (
 	 bookNum	number		,
@@ -174,16 +174,16 @@ CREATE TABLE  Review  (
 	 memberIdx	number		not null,
 	score		number(2,1)	not null,
 	reg_date 		date		default sysdate,
-	answer		varchar2(100)	null
-	detailNum	number		not null
-	enabled		number		notnull,
+	answer		varchar2(100)	null,
+	detailNum	number		not null,
+	enabled		number		not null,
 	CONSTRAINT fk_memberIdx FOREIGN KEY(memberIdx)
                     REFERENCES member1(memberIdx),
 	CONSTRAINT fk_detailNum FOREIGN KEY(detailNum)
                     REFERENCES siteDetail(detailNum) ON DELETE CASCADE,
 	 CONSTRAINT fk_bookNum FOREIGN KEY(bookNum)
                     REFERENCES book(bookNum) ON DELETE CASCADE,
-	 CONSTRAINT primary key(bookNum)
+     primary key(bookNum)
 
 
 );
