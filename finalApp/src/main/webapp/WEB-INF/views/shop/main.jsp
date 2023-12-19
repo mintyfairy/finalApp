@@ -62,10 +62,20 @@ main {
     height: 100%;
 }
 
-.main_slider {
-    height: 700px;
+.main_slider_wrap {
+    position: relative;
+    height: 820px;
     background: url("${pageContext.request.contextPath}/resources/images/shop/ocean.jpg") no-repeat center center;
     background-size: cover;
+}
+
+.main_slider {
+    position: absolute;
+    bottom: 0;
+    left: calc(50% - 540px);
+    z-index: 100;
+    width: 1080px;
+    height: 650px;
 }
 
 .category_container {
@@ -90,20 +100,25 @@ main {
 }
 
 .best_container {
+    position: relative;
     height: 590px;
     padding-top: 60px;
-    border: 1px solid red;
 }
 
 .best_container h1 {
+    width: 1080px;
+    margin: 0 auto;
     margin-bottom: 50px;
 }
 
-.best_container .best_wrap {
+.best_container .best_slider {
+    position: absolute;
+    bottom: 0;
+    left: calc(50% - 540px);
+    z-index: 100;
     width: 1080px;
     height: 447px;
     margin: 0 auto;
-    border: 1px solid blue;
 }
 
 .focus_container {
@@ -259,8 +274,10 @@ main {
     </div>
 </nav>
 
-<div class="main_slider">
-    <!-- 메인 슬라이더 -->
+<div class="main_slider_wrap">
+    <div class="main_slider">
+        <jsp:include page="/WEB-INF/views/slider/shop/main_slider.jsp"/>
+    </div>
 </div>
 
 <div class="category_container">
@@ -281,9 +298,9 @@ main {
 </div>
 
 <div class="best_container">
-    <div class="best_wrap">
-        <h1>베스트 셀러</h1>
-
+    <h1>베스트 셀러</h1>
+    <div class="best_slider">
+    	<!-- 베스트 슬라이더 -->
     </div>
 </div>
 

@@ -1,6 +1,7 @@
 package com.fa.plus.controller.shop;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -12,6 +13,12 @@ public class ProductController {
 	String productList() throws Exception {
 		
 		return ".shop.product.list";
+	}
+	
+	@GetMapping("{productNum}")
+	String detailList() throws Exception {
+		
+		return ".shop.detail";
 	}
 	
 }

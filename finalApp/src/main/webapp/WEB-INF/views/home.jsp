@@ -91,7 +91,7 @@ main .recommend .recommend_place .recommend_list {
 
 main .excellent {
     height: 680px;
-    background: url('/image/메인 배경.jpg') no-repeat center center;
+    background: url("${pageContext.request.contextPath}/resources/images/main/mountain.jpg") no-repeat center center;
     background-size: cover;
     background-color: rgba(255, 255, 255, 0.5);
     padding-top: 88px;
