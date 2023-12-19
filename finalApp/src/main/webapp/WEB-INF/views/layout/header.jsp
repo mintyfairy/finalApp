@@ -1,152 +1,310 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<style>
+@charset "utf-8";
 
-<style type="text/css">
-.fixed-top { position: fixed; top: 0; left: 0; right: 0; }
-.header-top.topbar-scrolled { top: -37px; }
-header .navbar.navbar-scrolled { top: 0; padding: 15px; }
-header .navbar { padding: 15px 0; top: 37px; z-index: 997; }
-main { margin-top: 115px; }
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color: #333;
+    box-sizing: border-box;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+.header_top {
+    padding: 18px 120px;
+    overflow: hidden;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.header_top .header_top_list {
+    display: flex;
+    align-items: center;
+    width: 1160px;
+}
+
+.header_top .header_top_list .header_top_item {
+    margin-right: 48px;
+}
+
+.header_top .header_top_list #tour_list_wrap .tour_list {
+    overflow: hidden;
+    vertical-align: middle;
+    background-color: #ededed;
+    border-radius: 100px;
+    height: 40px;
+    padding: 0 16px;
+    display: flex;
+    line-height: 40px;
+}
+
+#tour_list_wrap .tour_list li {
+    position: relative;
+    margin: 0 8px;
+}
+
+#tour_list_wrap .tour_list li::after {
+    content: '';
+    position: absolute;
+    top: 14px;
+    right: -9px;
+    width: 1px;
+    height: 14px;
+    background-color: #c3c3c3;
+}
+
+#tour_list_wrap .tour_list li:last-child::after {
+    display: none;
+}
+
+#tour_list_wrap .tour_list li a {
+    font-size: 13px;
+}
+
+#tour_list_wrap .tour_list li a:hover {
+    text-decoration: underline;
+}
+
+.header_top_left .login_wrap {
+    width: 128px;
+    height: 40px;
+    vertical-align: middle;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    border-radius: 22px;
+    border: 2px solid orangered;
+}
+
+.header_top_left .login_wrap a {
+    position: relative;
+    display: inline-block;
+    line-height: 37px;
+    padding-left: 12px;
+    font-size: 14px;
+}
+
+.header_top_left .login_wrap a::before {
+    position: absolute;
+    background: url(${pageContext.request.contextPath}/resources/images/main/icon_login.png) no-repeat 0 0;
+    top: 11px;
+    right: -26px;
+    content: '';
+    width: 14px;
+    height: 14px;
+}
+
+.header_bottom {
+    position: relative;
+    height: 149px;
+}
+
+.header_bottom .header_bottom_wrap {
+    height: 84px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.header_bottom .header_bottom_in {
+    width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.header_bottom .header_bottom_in .header_bottom_list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header_bottom_list #sns_area .sns_list {
+    display: flex;
+    margin-top: 26px;
+}
+
+.header_bottom_list #sns_area .sns_list li {
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+}
+
+.header_bottom_list #sns_area .sns_list .sns_item1 {
+    background: url(${pageContext.request.contextPath}/resources/images/main/sns.gif) no-repeat 0 0;
+    margin-right: 5px;
+}
+
+.header_bottom_list #sns_area .sns_list .sns_item2 {
+    background: url(${pageContext.request.contextPath}/resources/images/main/sns.gif) no-repeat -39px 0;
+    margin-right: 5px;
+}
+
+.header_bottom_list #sns_area .sns_list .sns_item3 {
+    background: url(${pageContext.request.contextPath}/resources/images/main/sns.gif) no-repeat -78px 0;
+    margin-right: 5px;
+}
+
+.header_bottom_list #sns_area .sns_list .sns_item4 {
+    background: url(${pageContext.request.contextPath}/resources/images/main/sns.gif) no-repeat -117px 0;
+    margin-right: 5px;
+}
+
+.header_bottom_list .logo_area {
+    width: 206px;
+    height: 40px;
+    margin-top: 26px;
+}
+
+#logo2 {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.header_bottom_list .my_page {
+    height: 40px;
+    margin-top: 26px;
+}
+
+.header_bottom_list .my_page a {
+    display: block;
+    height: 100%;
+    font-size: 13px;
+    line-height: 40px;
+}
+
+.header_bottom_list .my_page a:hover {
+    text-decoration: underline;
+}
+
+nav .navi_wrap {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+nav .navi_wrap .menu_bar {
+    display: flex;
+}
+
+nav .navi_wrap .menu_bar .menu_item {
+    width: 25%;
+    text-align: center;
+}
+
+nav .navi_wrap .menu_bar .menu_item a {
+    display: block;
+    font-size: 18px;
+    padding: 20px 0;
+}
+
+nav .navi_wrap .menu_bar .menu_item a:hover {
+    text-decoration: underline;
+    color: orangered;
+}
 </style>
+</head>
+	<div class="header_top">
+        <ul class="header_top_list">
+            <li id="logo" class="header_top_item">
+                <a href="#">
+                    <img src="https://via.placeholder.com/108x38" alt="logo">
+                </a>
+            </li>
+            <li id="tour_list_wrap" class="header_top_item">
+                <ul class="tour_list">
+                    <li>
+                        <a href="#">캠핑장 구석구석</a>
+                    </li>
+                    <li>
+                        <a href="#">열린관광 모두의 캠핑</a>
+                    </li>
+                    <li>
+                        <a href="#">캠핑트립코리아</a>
+                    </li>
+                    <li>
+                        <a href="#">캠핑e배움터</a>
+                    </li>
+                    <li>
+                        <a href="#">캠핑카</a>
+                    </li>
+                    <li>
+                        <a href="#">사진갤러리</a>
+                    </li>
+                    <li>
+                        <a href="#">한국캠핑콘텐츠랩</a>
+                    </li>
+                    <li>
+                        <a href="#">TourAPI</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
 
-<script type="text/javascript">
-$(function(){
-	$(window).scroll(function() {
-		if ($(this).scrollTop() > 100) {
-			$('.navbar').addClass('navbar-scrolled');
-			$('.header-top').addClass('topbar-scrolled');
-		} else {
-			$('.navbar').removeClass('navbar-scrolled');
-			$('.header-top').removeClass('topbar-scrolled');
-		}
-	});
+        <div class="header_top_left">
+            <div class="login_wrap">
+                <a href="#">통합로그인</a>
+            </div>
+        </div>
+    </div>
 
-	if ($(window).scrollTop() > 100) {
-		$('.navbar').addClass('navbar-scrolled');
-		$('.header-top').addClass('topbar-scrolled');
-	}
-});
-</script>
-
-	<div class="container-fluid bg-light header-top fixed-top">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="p-2">
-						<i class="bi bi-telephone-inbound-fill"></i> +82-1234-1234
-					</div>
-				</div>
-				<div class="col">
-					<div class="d-flex justify-content-end">
-						<c:choose>
-							<c:when test="${empty sessionScope.member}">
-								<div class="p-2">
-									<a href="javascript:dialogLogin();" title="로그인"><i class="bi bi-lock"></i></a>
-								</div>
-								<div class="p-2">
-									<a href="#" title="회원가입"><i class="bi bi-person-plus"></i></a>
-								</div>	
-							</c:when>
-							<c:otherwise>
-								<div class="p-2">
-									<a href="${pageContext.request.contextPath}/member/logout" title="로그아웃"><i class="bi bi-unlock"></i></a>
-								</div>					
-								<div class="p-2">
-									<a href="#" title="쪽지" class="position-relative">
-										<i class="bi bi-bell"></i>
-										<span class="new-noteCount position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary" style="font-size: 6px;"></span>
-									</a>
-								</div>
-								<c:if test="${sessionScope.member.membership>50}">
-									<div class="p-2">
-										<a href="${pageContext.request.contextPath}/admin" title="관리자"><i class="bi bi-gear"></i></a>
-									</div>					
-								</c:if>
-							</c:otherwise>
-						</c:choose>
-					</div>
-					
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<nav class="navbar navbar-expand-lg navbar-light fixed-top">
-		<div class="container">
-			<a class="navbar-brand" href="${pageContext.request.contextPath}/"><i class="bi bi-app-indicator"></i></a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-				
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav ms-auto flex-nowrap">
-					<li class="nav-item">
-						<a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/">홈</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">가볼만한곳</a>
-					</li>
-	
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							커뮤니티
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="#">방명록</a></li>
-							<li><a class="dropdown-item" href="#">게시판</a></li>
-							<li><a class="dropdown-item" href="#">답변형 게시판</a></li>
-							<li><a class="dropdown-item" href="#">포토갤러리</a></li>
-							<li><hr class="dropdown-divider"></li>
-							<li><a class="dropdown-item" href="#">채팅</a></li>
-						</ul>
-					</li>
-	
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							강좌
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="#">프로그래밍</a></li>
-							<li><a class="dropdown-item" href="#">데이터베이스</a></li>
-							<li><a class="dropdown-item" href="#">웹 프로그래밍</a></li>
-							<li><a class="dropdown-item" href="#">데이터분석 및 AI</a></li>
-							<li><a class="dropdown-item" href="#">클라우드 및 기타</a></li>
-							<li><hr class="dropdown-divider"></li>
-							<li><a class="dropdown-item" href="#">질문과 답변</a></li>
-						</ul>
-					</li>
-					
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							고객센터
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="#">자주하는질문</a></li>
-							<li><a class="dropdown-item" href="#">공지사항</a></li>
-							<li><a class="dropdown-item" href="#">1:1문의</a></li>
-							<li><hr class="dropdown-divider"></li>
-							<li><a class="dropdown-item" href="#">이벤트</a></li>
-						</ul>
-					</li>
-					
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							마이페이지
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="#">일정관리</a></li>
-							<li><a class="dropdown-item" href="#">사진첩</a></li>
-							<li><a class="dropdown-item" href="#">쪽지함</a></li>
-							<li><a class="dropdown-item" href="#">친구관리</a></li>
-							<li><a class="dropdown-item" href="#">메일</a></li>
-							<li><hr class="dropdown-divider"></li>
-							<li><a class="dropdown-item" href="#">정보수정</a></li>
-						</ul>
-					</li>
-					
-				</ul>
-			</div>
-			
-		</div>
-	</nav>
+    <div class="header_bottom">
+        <div class="header_bottom_wrap">
+            <div class="header_bottom_in">
+                <ul class="header_bottom_list">
+                    <li id="sns_area">
+                        <ul class="sns_list">
+                            <li class="sns_item1">
+                                <a href="#" target="_blank"></a>
+                            </li>
+                            <li class="sns_item2">
+                                <a href="#" target="_blank"></a>
+                            </li>
+                            <li class="sns_item3">
+                                <a href="#" target="_blank"></a>
+                            </li>
+                            <li class="sns_item4">
+                                <a href="#" target="_blank"></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="logo_area">
+                        <a id="logo2" href="#">
+                            <img src="https://via.placeholder.com/206x40" alt="logo">
+                        </a>
+                    </li>
+                    <li class="my_page">
+                        <a href="#"><i class="fa-regular fa-user"></i>&nbsp;마이페이지</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <nav>
+            <div class="navi_wrap">
+                <ul class="menu_bar">
+                    <li class="menu_item">
+                        <a href="#">CAMPING AREA</a>
+                    </li>
+                    <li class="menu_item">
+                        <a href="#">CAMPING CAR</a>
+                    </li>
+                    <li class="menu_item">
+                        <a href="#">CAMPING SHOP</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</body>
+</html>
