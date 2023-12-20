@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fa.plus.admin.mapper.shop.TotalManageMapper">
+	<select id="todayProduct" resultType="map">
+		SELECT COUNT(*) count, NVL(SUM(totalMoney - cancelAmount), 0) total 
+		FROM productOrder 
+		WHERE orderState != 6 AND TO_CHAR(orderDate, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+	</select>
+	
+	<select id="totalBrand" parameterType="Long" resultType="map">
+		SELECT COUNT(*) count, NVL(SUM(productMoney - cancelAmount), 0) total 
+		FROM orderDetail o JOIN product p 
+		ON o.productNum = p.productNum
+		WHERE p.brandNum = #{brandNum}
+	</select>
+	
+	<select id="totalCategory" parameterType="Long" resultType="map">
+		SELECT COUNT(*) count, NVL(SUM(productMoney - cancelAmount), 0) total 
+		FROM orderDetail o JOIN product p 
+		ON o.productNum = p.productNum
+		WHERE p.categoryNum = #{categoryNum}
+	</select>
+	
+	<select id="brandRank" parameterType="Long" resultType="map">
+	</select>
+	
+	<select id="memberRank" resultType="map">
+		SELECT total, userId 
+		FROM (
+		SELECT NVL(SUM(totalMoney - cancelAmount), 0) AS total, userId 
+		FROM 
+		(SELECT totalMoney, cancelAmount, userId 
+		FROM productOrder p JOIN member1 m ON p.memberIdx = m.memberIdx) 
+		GROUP BY userId 
+		ORDER BY total DESC)
+		ORDER BY total DESC
+	</select>
+</mapper>

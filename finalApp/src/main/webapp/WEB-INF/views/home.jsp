@@ -24,6 +24,17 @@ ul {
     list-style: none;
 }
 
+.main_slider {
+	position: relative;
+}
+
+.main_slider .searchBox {
+	position: absolute;
+	top: -50px;
+	left: calc(50% - 310px);
+	z-index: 500;
+}
+
 main .recommend {
     width: 100%;
     height: 685px;
@@ -182,6 +193,9 @@ main .story {
 <body>
 	<div class="main_slider" style="height: 700px;">
 		<jsp:include page="/WEB-INF/views/slider/main_slider.jsp"/>
+		<div class="searchBox">
+			<jsp:include page="/WEB-INF/views/searchBox/search_box.jsp"/>
+		</div>
 	</div>
 	<div class="recommend">
         <h1>추천 여행지</h1>
