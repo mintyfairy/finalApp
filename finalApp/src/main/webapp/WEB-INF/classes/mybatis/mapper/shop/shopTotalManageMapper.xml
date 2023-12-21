@@ -8,11 +8,16 @@
 		WHERE orderState != 6 AND TO_CHAR(orderDate, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
 	</select>
 	
-	<select id="totalBrand" parameterType="Long" resultType="map">
-		SELECT COUNT(*) count, NVL(SUM(productMoney - cancelAmount), 0) total 
-		FROM orderDetail o JOIN product p 
+	<select id="totalBrand" resultType="map">
+		SELECT COUNT(*) count, NVL(SUM(salePrice - qty), 0) total 
+		FROM 
+	    (
+	    SELECT * 
+	    FROM orderDetail 
+	    WHERE userDelete = 0 
+	    ) o 
+		JOIN product p 
 		ON o.productNum = p.productNum
-		WHERE p.brandNum = #{brandNum}
 	</select>
 	
 	<select id="totalCategory" parameterType="Long" resultType="map">
@@ -25,8 +30,12 @@
 	<select id="brandRank" resultType="map">
 		SELECT total, brandNum
 		FROM (
-		    SELECT NVL(SUM(salePrice * qty), 0) AS total, brandNum
-		    FROM orderDetail o
+		    SELECT NVL(SUM(salePrice * qty), 0) AS total, brandNum  
+		    FROM (
+		        SELECT salePrice, qty, productNum 
+		        FROM orderDetail 
+		        WHERE userDelete = 0
+		    ) o 
 		    JOIN product p ON o.productNum = p.productNum
 		    GROUP BY brandNum
 		    ORDER BY total DESC
