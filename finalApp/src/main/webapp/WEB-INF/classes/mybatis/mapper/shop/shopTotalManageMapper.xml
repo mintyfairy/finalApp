@@ -22,18 +22,17 @@
 		WHERE p.categoryNum = #{categoryNum}
 	</select>
 	
-	<select id="brandRank" parameterType="Long" resultType="map">
+	<select id="brandRank" resultType="map">
+		SELECT 
 	</select>
 	
 	<select id="memberRank" resultType="map">
-		SELECT total, userId 
-		FROM (
-		SELECT NVL(SUM(totalMoney - cancelAmount), 0) AS total, userId 
-		FROM 
-		(SELECT totalMoney, cancelAmount, userId 
-		FROM productOrder p JOIN member1 m ON p.memberIdx = m.memberIdx) 
-		GROUP BY userId 
+		SELECT total, memberIdx
+		FROM
+		(SELECT NVL(SUM(totalMoney - cancelAmount), 0) AS total, memberIdx
+		FROM productOrder
+		GROUP BY memberIdx
 		ORDER BY total DESC)
-		ORDER BY total DESC
+		WHERE ROWNUM &lt;= 5
 	</select>
 </mapper>

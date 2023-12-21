@@ -34,7 +34,6 @@ ul {
     width: 620px;
     height: 220px;
     background-color: orange;
-    opacity: 0.8;
 }
 
 #camSearchForm {

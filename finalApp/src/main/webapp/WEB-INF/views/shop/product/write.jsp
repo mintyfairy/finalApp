@@ -76,6 +76,7 @@ body {
 	width: 50px; height: 50px; border-radius: 10px;
 	cursor: pointer;
 }
+
 </style>
 
 <div class="container">
