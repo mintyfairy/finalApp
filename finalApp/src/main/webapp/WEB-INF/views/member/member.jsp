@@ -103,13 +103,8 @@
                         <label class="col-sm-2 col-form-label" for="tel1">전화번호</label>
                         <div class="col-sm-10 row">
                           <div class="col-sm-3 pe-1">
-                            <select name="selectTel1" id="selectTel1" class="form-select" onchange="changeEmail();">
-                              <option value="">선 택</option>
-                               <option value="010" ${dto.tel1=="010 ? "selected" : ""}>010</option>
-                               <option value="011" ${dto.tel1=="011 ? "selected" : ""}>011</option>
-                               <option value="019" ${dto.tel1=="019 ? "selected" : ""}>019</option>
-                               <option value="02" ${dto.tel1=="02 ? "selected" : ""}>02</option>
-                            </select> 
+                         <!--     -->
+                            <input type="text" name="tel1" id="tel1" class="form-control" value="${dto.tel1}" maxlength="3">
                           </div>
                           <div class="col-sm-1 px-1" style="width: 2%;">
                             <p class="form-control-plaintext text-center">-</p>
@@ -182,4 +177,11 @@
     </div>
   </div>  
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+function memberOk(){
+	const f=document.memberForm;
+ 	f.action = "${pageContext.request.contextPath}/member/${mode}";
+    f.submit();
+}
+</script>
 </div>

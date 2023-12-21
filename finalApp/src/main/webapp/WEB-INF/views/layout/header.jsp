@@ -253,9 +253,19 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
         </ul>
 
         <div class="header_top_left">
-            <div class="login_wrap">
-                <a href="#">통합로그인</a>
-            </div>
+       		 <c:choose>
+				<c:when test="${empty sessionScope.member}">
+		            <div class="login_wrap">
+		                <a href="${pageContext.request.contextPath}/member/login">통합로그인</a>
+		            </div>
+		        </c:when>
+		        <c:otherwise>
+					<div class="p-2">
+						<a href="${pageContext.request.contextPath}/member/logout" title="로그아웃">로그아웃</a>
+					</div>					
+				</c:otherwise>
+		     </c:choose>
+            
         </div>
     </div>
 

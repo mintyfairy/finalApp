@@ -31,12 +31,12 @@
 .joinmember {
   width: 50%;
   height: 100%;
-  background-image: url("images/loginMountain.jpg");
   no-repeat center;
   background-size: cover;
   text-align: center;
   
 }
+--  background-image: url("images/loginMountain.jpg");
 
 .loginForm {
   width: 50%;
@@ -75,11 +75,11 @@ button[name=join] {
 
    </div>
 
-   <div class="loginForm">
-     <input type="text" name="userId" placeholder="Id"> 
-     <input type="text" name="password" placeholder="password"> 
+   <form class="loginForm" method="Post" action="${pageContext.request.contextPath}/member/login">
+     <input type="text" name="userId" placeholder="Id" class="form-control"> 
+     <input type="password" name="userPwd" placeholder="password" class="form-control"> 
      <br>
      <button type="submit" class="btn btn-primary">Login</button>
-   </div>
+   </form>
  </div>
 </div>

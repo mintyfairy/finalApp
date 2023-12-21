@@ -19,8 +19,23 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
 	private MailSender mailSender;
+	
 	@Autowired
 	private BCryptPasswordEncoder bCryptEncoder;
+	
+	/*@Override 스시로 처리해서 쓸모없어짐
+	public Member loginMember(String userId) {
+		Member dto = null;
+
+		try {
+			dto = mapper.loginMember(userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return dto;
+	}*/
+
 	@Override
 	public void insertMember(Member dto) throws Exception {
 		try {
@@ -31,7 +46,9 @@ public class MemberServiceImpl implements MemberService {
 			if (dto.getTel1().length() != 0 && dto.getTel2().length() != 0 && dto.getTel3().length() != 0) {
 				dto.setTel(dto.getTel1() + "-" + dto.getTel2() + "-" + dto.getTel3());
 			}
-
+			dto.setEmail("임시전화번호");
+			dto.setTel("임시번호");
+			dto.setZip("11");
 			// 패스워드 암호화
 			dto.setUserPwd(bCryptEncoder.encode(dto.getUserPwd()));
 			
@@ -42,8 +59,8 @@ public class MemberServiceImpl implements MemberService {
 			// 회원정보 저장
 			mapper.insertMember(memberSeq);
 
-			 mapper.insertMember1(dto);
-			 mapper.insertMember2(dto);
+			mapper.insertMember1(dto);
+			mapper.insertMember2(dto);
 			
 			// 권한 저장
 			dto.setAuthority("USER");//관리자나 등등은 여기서 다르게
@@ -218,7 +235,7 @@ public class MemberServiceImpl implements MemberService {
 			return false;
 		}
 		
-		//암호화한값 비교
+		//알아서 암호화한값으로 비교 ㄷㄷ. 암호화할때마다 값이 바뀜으로 무조건 이방법으로 검증해야함
 		return bCryptEncoder.matches(userPwd, dto.getUserPwd());
 	}
 

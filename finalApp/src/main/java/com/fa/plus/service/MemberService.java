@@ -5,7 +5,8 @@ import java.util.Map;
 import com.fa.plus.domain.Member;
 
 public interface MemberService {
-
+	//public Member loginMember(String userId);
+	
 	public void insertMember(Member dto) throws Exception;
 	
 	public void updateMembership(Map<String, Object> map) throws Exception;
