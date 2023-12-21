@@ -23,7 +23,15 @@
 	</select>
 	
 	<select id="brandRank" resultType="map">
-		SELECT 
+		SELECT total, brandNum
+		FROM (
+		    SELECT NVL(SUM(salePrice * qty), 0) AS total, brandNum
+		    FROM orderDetail o
+		    JOIN product p ON o.productNum = p.productNum
+		    GROUP BY brandNum
+		    ORDER BY total DESC
+		)
+		WHERE ROWNUM &lt;= 5
 	</select>
 	
 	<select id="memberRank" resultType="map">
