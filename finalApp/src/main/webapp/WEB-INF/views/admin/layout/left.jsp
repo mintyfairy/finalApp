@@ -60,15 +60,13 @@ $(function(){
 	
 	<div class="header-container">
 		<div class="header-left">
-			<h1>관리자 페이지</h1>
+			<h1>CAMBRIDGE ADMIN PAGE</h1>
 		</div>
 		<div class="header-right">
-			<span class="img" style="background-image: url('${pageContext.request.contextPath}/resources/images/person.png');"></span>
 			<span class="roll-user">
-				<label class="roll">관리자</label>
 				<label class="user">
-					<span class="name">관리자 님</span>
-					<a href="${pageContext.request.contextPath}/"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+					<span class="name">관리자 님<i class="fa-solid fa-user" style="color: #e1e2e5;"></i>&nbsp;</span>
+					<a href="${pageContext.request.contextPath}/"><i class="fa-solid fa-arrow-right-from-bracket" style="color: #e1e2e5;"></i></a>
 				</label>
 			</span>
 		</div>
@@ -94,76 +92,109 @@ $(function(){
 		</li>
 	
 		<li class="menu--item menu--item__has_sub_menu">
-			<label class="menu--link" title="고객센터관리">
-				<i class="menu--icon  fa-fw fa-solid fa-person-circle-question"></i>
-				<span class="menu--label">고객센터관리</span>
+			<label class="menu--link" title="숙소예약관리">
+				<i class="menu--icon fa-fw fa-solid fa-tent"></i>
+				<span class="menu--label">캠핑장예약관리</span>
 			</label>
 
 			<ul class="sub_menu">
 				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">자주하는 질문</a>
+					<a href="#" class="sub_menu--link">캠핑장-1</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">공지사항</a>
+					<a href="#" class="sub_menu--link">캠핑장-2</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">1:1문의</a>
+					<a href="#" class="sub_menu--link">캠핑장-3</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">이벤트</a>
+					<a href="#" class="sub_menu--link">캠핑장-4</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">신고</a>
+					<a href="#" class="sub_menu--link">캠핑장-5</a>
 				</li>
 			</ul>
 		</li>
 
 		<li class="menu--item menu--item__has_sub_menu">
-			<label class="menu--link" title="강좌관리">
-				<i class="menu--icon  fa-fw fa-solid fa-graduation-cap"></i>
-				<span class="menu--label">강좌관리</span>
+			<label class="menu--link" title="캠핑카관리">
+				<i class="menu--icon  fa-fw fa-solid fa-caravan"></i>
+				<span class="menu--label">캠핑카관리</span>
 			</label>
 
 			<ul class="sub_menu">
 				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">카테고리</a>
+					<a href="#" class="sub_menu--link">캠핑카-1</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">강좌</a>
+					<a href="#" class="sub_menu--link">캠핑카-2</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">강사</a>
+					<a href="#" class="sub_menu--link">캠핑카-3</a>
+				</li>
+				<li class="sub_menu--item">
+					<a href="#" class="sub_menu--link">캠핑카-4</a>
+				</li>
+				<li class="sub_menu--item">
+					<a href="#" class="sub_menu--link">캠핑카-5</a>
+				</li>
+			</ul>
+		</li>
+		
+		<li class="menu--item menu--item__has_sub_menu">
+			<label class="menu--link" title="쇼핑몰관리">
+				<i class="menu--icon  fa-fw fa-solid fa-cart-shopping"></i>
+				<span class="menu--label">쇼핑몰관리</span>
+			</label>
+
+			<ul class="sub_menu">
+				<li class="sub_menu--item">
+					<a href="#" class="sub_menu--link">쇼핑몰-1</a>
+				</li>
+				<li class="sub_menu--item">
+					<a href="#" class="sub_menu--link">쇼핑몰-2</a>
+				</li>
+				<li class="sub_menu--item">
+					<a href="#" class="sub_menu--link">쇼핑몰-3</a>
+				</li>
+				<li class="sub_menu--item">
+					<a href="#" class="sub_menu--link">쇼핑몰-4</a>
+				</li>
+				<li class="sub_menu--item">
+					<a href="#" class="sub_menu--link">쇼핑몰-5</a>
 				</li>
 			</ul>
 		</li>
 
-		<li class="menu--item">
-			<a href="#" class="menu--link" title="일정관리">
-				<i class="menu--icon  fa-fw fa-regular fa-calendar"></i>
-				<span class="menu--label">일정관리</span>
-			</a>
+		<li class="menu--item menu--item__has_sub_menu">
+			<label class="menu--link" title="고객센터관리">
+				<i class="menu--icon  fa-fw fa-solid fa-headphones"></i>
+				<span class="menu--label">고객센터관리</span>
+			</label>
+
+			<ul class="sub_menu">
+				<li class="sub_menu--item">
+					<a href="#" class="sub_menu--link">1:1문의</a>
+				</li>
+				<li class="sub_menu--item">
+					<a href="#" class="sub_menu--link">자주묻는질문</a>
+				</li>
+				<li class="sub_menu--item">
+					<a href="#" class="sub_menu--link">이벤트</a>
+				</li>
+				<li class="sub_menu--item">
+					<a href="#" class="sub_menu--link">공지사항</a>
+				</li>
+			</ul>
 		</li>
 		
 		<li class="menu--item">
-			<a href="#" class="menu--link" title="지역명소관리">
-				<i class="menu--icon  fa-fw fa-solid fa-location-dot"></i>
-				<span class="menu--label">지역명소관리</span>
+	        <a href="<c:url value='/admin/memberManage/list'/>" class="menu--link" title="회원 관리">
+				<i class="menu--icon  fa-fw fa-solid fa-sack-dollar"></i>
+				<span class="menu--label">매출 관리</span>
 			</a>
 		</li>
 
-		<li class="menu--item">
-			<a href="#" class="menu--link" title="메인화면 설정">
-				<i class="menu--icon  fa-fw fa-solid fa-gear"></i>
-				<span class="menu--label">메인화면 설정</span>
-			</a>
-		</li>
-
-		<li class="menu--item">
-			<a href="#" class="menu--link" title="GroupWare">
-				<i class="menu--icon  fa-fw fa-solid fa-id-card"></i>
-				<span class="menu--label">GroupWare</span>
-			</a>
-		</li>
 
 		<li class="menu--item">
 			<a href="${pageContext.request.contextPath}/member/logout" class="menu--link" title="Logout">
