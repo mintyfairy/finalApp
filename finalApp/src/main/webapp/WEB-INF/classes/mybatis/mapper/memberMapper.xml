@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fa.plus.mapper.member.MemberMapper">
+<mapper namespace="com.fa.plus.mapper.MemberMapper">
 	<select id="loginMember" parameterType="String" resultType="com.fa.plus.domain.Member">
 		SELECT m.memberIdx, membership, userId, userName, userPwd, register_date, modify_date, last_login
 		FROM member m

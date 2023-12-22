@@ -48,7 +48,10 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 			e.printStackTrace();
 		}
 		// 로그인정보 세션에 저장
+		System.out.println(authentication +"@@");
+		System.out.println(authentication.getName()+"@@@");
 		Member member=memberservice.findById(authentication.getName());
+		System.out.println(member+"@@@");
 		SessionInfo info= new SessionInfo();
 		info.setMemberIdx(member.getMemberIdx());
 		info.setMembership(member.getMembership());

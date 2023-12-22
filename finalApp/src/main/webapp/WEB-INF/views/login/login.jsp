@@ -32,7 +32,7 @@
   width: 50%;
   height: 100%;
   no-repeat center;
-  background-image: url("images/loginMountain.jpg");
+  background-image: url("/plus/resources/images/member/loginMountain.jpg");
   background-size: cover;
   text-align: center;
   
