@@ -115,12 +115,16 @@
   to {opacity: 1}
 } 
 :root {
+	
 	--bs-primary-rgb: 254, 161, 22;
     --primary: #FEA116;
     --light: #F1F8FF;
     --dark: #0F172B;
     
   
+}
+.dropdown-menu {
+    width: 95% !important;
 }
 .btn-primary2 {
     --bs-btn-color: #fff;
