@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class ProductManage {
+public class ShopProductManage {
 	private long productNum;
 	private String productName;
 	private int special;

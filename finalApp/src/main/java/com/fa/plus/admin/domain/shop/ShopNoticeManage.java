@@ -1,6 +1,6 @@
 package com.fa.plus.admin.domain.shop;
 
-public class NoticeManage {
+public class ShopNoticeManage {
 	private long noticeNum;
 	private String userId;
 	private String userName;

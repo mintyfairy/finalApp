@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fa.plus.admin.mapper.shop.ProductManageMapper">
+<mapper namespace="com.fa.plus.admin.mapper.shop.ShopProductManageMapper">
 	<!-- 상품 등록 -->
 	<insert id="insertProduct" parameterType="com.fa.plus.admin.domain.shop.ProductManage">
 		INSERT INTO product(productNum, categoryNum, 
@@ -11,13 +11,20 @@
 		starter, brandNum, deletion) VALUES (product_seq.NEXTVAL, 
 		#{categoryNum}, #{productName}, #{special}, 
 		#{price}, #{discountRate}, #{savedMoney}, 
-		#{delivery}, #{content}, #{thumbnail}, #{productShow}, 
+		#{delivery}, #{content, jdbcType=VARCHAR}, #{thumbnail}, #{productShow}, 
 		SYSDATE, #{md}, #{starter}, #{brandNum}, #{deletion})
 	</insert>
 	
 	<!-- 추가 이미지 등록 -->
-	<insert id="com.fa.plus.admin.domain.shop.ProductManage">
+	<insert id="insertProductFile" parameterType="com.fa.plus.admin.domain.shop.ProductManage">
 		INSERT INTO productFile(fileNum, productNum, filename)
 			VALUES(productFile_seq.NEXTVAL, #{productNum}, #{filename})
 	</insert>
+	
+	<!-- 상위/하위 옵션 등록 -->
+	<insert id="insertProductOption" parameterType="com.fa.plus.admin.domain.shop.ProductManage">
+		INSERT INTO
+	</insert>
+	
+	
 </mapper>
