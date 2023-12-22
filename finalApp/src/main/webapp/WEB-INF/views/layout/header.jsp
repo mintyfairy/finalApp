@@ -218,7 +218,7 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
 	<div class="header_top">
         <ul class="header_top_list">
             <li id="logo" class="header_top_item">
-                <a href="#">
+                <a href="${pageContext.request.contextPath}/">
                     <img src="https://via.placeholder.com/108x38" alt="logo">
                 </a>
             </li>
@@ -304,7 +304,7 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
             <div class="navi_wrap">
                 <ul class="menu_bar">
                     <li class="menu_item">
-                        <a href="#">CAMPING AREA</a>
+                        <a href="${pageContext.request.contextPath}/site/list">CAMPING AREA</a>
                     </li>
                     <li class="menu_item">
                         <a href="#">CAMPING CAR</a>

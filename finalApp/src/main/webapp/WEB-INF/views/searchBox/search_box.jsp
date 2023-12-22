@@ -375,7 +375,7 @@ $(function(){
 function what(){
 	const f= document.camSearchForm;
 	console.log("a");
-	f.action="./searchpage/room.jsp";
+	f.action="${pageContext.request.contextPath}/site/list";
 	f.submit();
 	
 }
