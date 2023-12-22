@@ -25,6 +25,7 @@ public class ShopProductManage {
 	private long categoryNum;
 	private String categoryName;
 	private Long parentNum;
+	private String parentName;
 	
 	private long brandNum;
 	private String brandName;
@@ -35,7 +36,6 @@ public class ShopProductManage {
 	
 	private long optionNum;
 	private String optionName;
-	private String parentName;
 	
 	private long optionNum2;
 	private String optionName2;

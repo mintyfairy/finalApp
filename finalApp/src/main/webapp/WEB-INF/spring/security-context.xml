@@ -47,7 +47,8 @@
 
 
 	        <intercept-url pattern="/shop/product/reivew/list" access="permitAll"/>
-	        <intercept-url pattern="/shop/product/detail/**" access="permitAll"/>
+	        <intercept-url pattern="/shop/product/list" access="permitAll"/>
+	        <intercept-url pattern="/shop/product/detail" access="permitAll"/>
 
 	        <intercept-url pattern="/shop/customer/notice/list" access="permitAll"/>
 	        <intercept-url pattern="/shop/customer/notice/article" access="permitAll"/>
