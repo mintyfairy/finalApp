@@ -32,11 +32,11 @@
   width: 50%;
   height: 100%;
   no-repeat center;
+  background-image: url("images/loginMountain.jpg");
   background-size: cover;
   text-align: center;
   
 }
---  background-image: url("images/loginMountain.jpg");
 
 .loginForm {
   width: 50%;
