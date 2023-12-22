@@ -15,7 +15,7 @@
 
 .background {
   width: 100%
-  background-image: url('images/loginbackground.jpg');
+  background-image: url('/plus/resources/images/member/loginbackground.jpg');
 }
 
 .login {
@@ -67,11 +67,11 @@ button[name=join] {
 }
 
 </style>
-
+ <link href="${pageContext.request.contextPath}/resources/css/login.css" rel="stylesheet">
 <div class="background">
  <div class="login">
    <div class="joinmember">
-     <button type="button" class="btn btn-primary" name="join">Join</button>
+     <button type="button" class="btn btn-primary" name="join" onclick="location.href='${pageContext.request.contextPath}/member/join'">Join</button>
 
    </div>
 

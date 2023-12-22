@@ -42,13 +42,11 @@ public class MemberServiceImpl implements MemberService {
 			if (dto.getEmail1().length() != 0 && dto.getEmail2().length() != 0) {
 				dto.setEmail(dto.getEmail1() + "@" + dto.getEmail2());
 			}
-
+			System.out.println();
 			if (dto.getTel1().length() != 0 && dto.getTel2().length() != 0 && dto.getTel3().length() != 0) {
 				dto.setTel(dto.getTel1() + "-" + dto.getTel2() + "-" + dto.getTel3());
 			}
-			dto.setEmail("임시전화번호");
-			dto.setTel("임시번호");
-			dto.setZip("11");
+
 			// 패스워드 암호화
 			dto.setUserPwd(bCryptEncoder.encode(dto.getUserPwd()));
 			

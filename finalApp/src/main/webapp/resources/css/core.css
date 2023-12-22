@@ -14,7 +14,10 @@ textarea:focus, input:focus { outline: none; }
 .border-top2 { border-top: 2px solid #212529; }
 .border-bottom1 { border-bottom: 1px solid #212529; }
 .border-bottom2 { border-bottom: 2px solid #212529; }
-
+input:read-only{
+	background-color:#e7e6e6
+	
+}
 /* Navigation */
 .navbar {
 	background-color: #fcfafb;
