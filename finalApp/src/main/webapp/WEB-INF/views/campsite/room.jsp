@@ -4,33 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>Insert title here</title>
-	<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 
     <title>캠브릿지-예약</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
-
-
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" >
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">  
-
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="${pageContext.request.contextPath}/resources/lib/campsite/animate/animate.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/resources/lib/campsite/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/resources/lib/campsite/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-
-  
-    <!-- Template Stylesheet -->
-    <link href="${pageContext.request.contextPath}/resources/css/campsite.css" rel="stylesheet">
+    
+    
 </head>
 <body>
  <div class="container-xxl bg-white p-0">
@@ -409,19 +387,5 @@
         <a href="#" class="btn btn-lg btn-primary2 btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/lib/campsite/wow/wow.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/lib/campsite/easing/easing.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/lib/campsite/waypoints/waypoints.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/lib/campsite/counterup/counterup.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/lib/campsite/owlcarousel/owl.carousel.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/lib/campsite/tempusdominus/js/moment.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/lib/campsite/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/lib/campsite/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
-    <!-- Template Javascript -->
-    <script src="${pageContext.request.contextPath}/resources/js/campsite.js"></script>
 </body>
 </html>

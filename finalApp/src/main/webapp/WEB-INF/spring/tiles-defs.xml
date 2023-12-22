@@ -34,6 +34,20 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
 	</definition>
+	<!-- 캠핑장 -->
+	<definition name=".siteLayout" template="/WEB-INF/views/layout/site.jsp">
+	    <put-attribute name="title" value="site" />
+	  	<put-attribute name="header" value="/WEB-INF/views/layout/site_header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
+	</definition>
+	
+	<definition name=".campsite.*.*" extends=".siteLayout">
+		<put-attribute name="body" value="/WEB-INF/views/campsite/{1}/{2}.jsp"/>
+	</definition>
+	<definition name=".campsite.*" extends=".siteLayout">
+    	<put-attribute name="body" value="/WEB-INF/views/campsite/{1}.jsp" />
+	</definition>
 	
 	<definition name=".admin.*.*.*" extends=".adminLayout">
 		<put-attribute name="body" value="/WEB-INF/views/admin/{1}/{2}/{3}.jsp"/>
