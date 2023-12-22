@@ -63,9 +63,23 @@
 			<!-- admin페이지 -->
 			<intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>
 			<intercept-url pattern="/cs/**" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>
+			
+			<intercept-url pattern="/shopping/customer/notice/write" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>
+			<intercept-url pattern="/shopping/customer/notice/update" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>
+			<intercept-url pattern="/shopping/customer/notice/delete" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>
+			<intercept-url pattern="/shopping/customer/qna/answer/**" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>
+			<intercept-url pattern="/shopping/customer/partnershipAnswer/**" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>
 	        
+			<intercept-url pattern="/shopping/admin/**" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>
+
+
+
+			<!-- 캠핑장업체 페이지 -->
+			<intercept-url pattern="/siteManage/**" access="hasAnyRole('ROLE_CAMP')"/>
+			<intercept-url pattern="/siteChart/**" access="hasAnyRole('ROLE_CAMP')"/>
+			
 			<!-- 모든 페이지 -->
-			<intercept-url pattern="/**" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP','ROLE_USER','ROLE_CAMP')"/>
+			<intercept-url pattern="/**" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP','ROLE_CAMP')"/>
 			
 			<!-- 사용자 정의 로긴 폼 -->
 	    	<form-login
@@ -109,7 +123,7 @@
 	<beans:bean id="LoginFailureHandler"
 				class="com.fa.plus.security.LoginFailureHandler">
 				<!--  여기서포스트로 보내서 컨트롤러에서 리퀘스트 매핑으로 받음 -->
-			<beans:property name="defaultFailureUrl" value="/member/login?login_error"/>			
+			<beans:property name="defaultFailureUrl" value="member/login?login_error"/>			
 	</beans:bean>
 
 	<!-- bcrypt: 페스워드에 특화된 password hashing function -->

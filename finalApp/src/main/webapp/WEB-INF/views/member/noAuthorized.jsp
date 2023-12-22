@@ -9,6 +9,8 @@
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 </head>
 <body>
- no no square
+<div style="width: 500px ;height: 500px;background: yellow; text-align: center;padding-top: 200px;font-size: 30px;margin-left: 40%">
+	 no no square
+</div>
 </body>
 </html>	   
