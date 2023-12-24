@@ -307,7 +307,7 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
                         <a href="${pageContext.request.contextPath}/site/list">CAMPING AREA</a>
                     </li>
                     <li class="menu_item">
-                        <a href="#">CAMPING CAR</a>
+                        <a href="${pageContext.request.contextPath}/car/main">CAMPING CAR</a>
                     </li>
                     <li class="menu_item">
                         <a href="#">CAMPING SHOP</a>

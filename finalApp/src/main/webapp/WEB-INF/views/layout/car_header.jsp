@@ -130,25 +130,25 @@ main {
         <div class="navi_wrap">
             <ul class="menu clearfix">
                 <li class="hamburger">
-                    <a href="#">
+                    <a href="${pageContext.request.contextPath}/">
                         <img src="../image/logo.png" alt="hamburger">
                     </a>
                 </li>
                 <li>
-                    <a href="#">오시는길</a>
+                    <a href="${pageContext.request.contextPath}/car/location">오시는길</a>
                 </li>
                 <li>
-                    <a href="#">고객센터</a>
+                    <a href="${pageContext.request.contextPath}/car/cs.faq">고객센터</a>
                     <ul class="submenu1">
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">공지사항</a></li>
+                        <li><a href="${pageContext.request.contextPath}/car/cs.faq">FAQ</a></li>
+                        <li><a href="${pageContext.request.contextPath}/car/cs.notice">공지사항</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="#">마이페이지</a>
                     <ul class="submenu2">
                         <li><a href="#">운전자 정보</a></li>
-                        <li><a href="#">찜</a></li>
+                        <li><a href="${pageContext.request.contextPath}/car/mypage.zzim">찜</a></li>
                         <li><a href="#">예약내역</a></li>
                         <li><a href="#">1:1 문의</a></li>
                     </ul>

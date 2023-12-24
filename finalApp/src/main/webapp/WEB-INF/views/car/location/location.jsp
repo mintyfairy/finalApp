@@ -7,13 +7,9 @@
 
 
 .container{
-  width: 1080px; /* 너비를 70%로 설정합니다. */
+  width: 1080px; 
   height: 120px;
-  margin: 0 auto; /* 왼쪽과 오른쪽에 10px의 공백을 추가합니다. */
-  margin-top: 50px;
-  /*border: 1px solid #e2e2e2;
-  border-radius: 20px;
-  */
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
 }
@@ -30,7 +26,7 @@
 
 .map {
   width: 1080px;
-  margin:0 350px;
+  height: 500px;
 }
 
 .come h3 {
@@ -50,8 +46,8 @@
   margin-bottom: 30px;
 }
 
-
 </style>
+
  <div class="container">
 	<div>
 		<p class="name1" style="line-height:80px; float:left;"><i class="fa-solid fa-location-dot" style="margin-right: 10px;"></i> 오시는길 </p>
