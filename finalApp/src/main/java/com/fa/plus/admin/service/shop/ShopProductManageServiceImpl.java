@@ -1,6 +1,7 @@
 package com.fa.plus.admin.service.shop;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,11 +80,64 @@ public class ShopProductManageServiceImpl implements ShopProductManageService {
 				dto.getDetailNums2().add(detailNum);
 			}
 			
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
 		
+	}
+	
+	@Override
+	public void insertBrand(ShopProductManage dto) throws Exception {
+		
+		try {
+			mapper.insertBrand(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public List<ShopProductManage> listCategory() {
+		List<ShopProductManage> list = null;
+		
+		try {
+			list = mapper.listCategory();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<ShopProductManage> listSubCategory(long categoryNum) {
+		List<ShopProductManage> list = null;
+		
+		try {
+			list = mapper.listSubCategory(categoryNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<ShopProductManage> listBrand() {
+		List<ShopProductManage> list = null;
+		
+		try {
+			list = mapper.listBrand();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 
 }

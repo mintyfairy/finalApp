@@ -162,7 +162,7 @@ main {
 
 
 .car_main {
-    background: url('../resources/images/campingcar/campingcar.jpg') no-repeat center center;
+    background: url('/image/campingcar.jpg') no-repeat center center;
     height: 400px;
     border-radius: 10px;
 }

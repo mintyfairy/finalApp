@@ -1,6 +1,7 @@
 package com.fa.plus.admin.mapper.shop;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -16,6 +17,14 @@ public interface ShopProductManageMapper {
 	
 	public long detailSeq();
 	public void insertOptionDetail(ShopProductManage dto) throws SQLException;
+	
+	public void insertBrand(ShopProductManage dto) throws SQLException;
+	
+	public ShopProductManage findByCategory(long categoryNum);
+	public List<ShopProductManage> listCategory();
+	public List<ShopProductManage> listSubCategory(long parentNum);
+	
+	public List<ShopProductManage> listBrand();
 	
 	
 }

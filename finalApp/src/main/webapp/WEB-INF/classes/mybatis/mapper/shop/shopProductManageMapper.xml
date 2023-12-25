@@ -44,5 +44,232 @@
 		VALUES(#{detailNum}, #{optionNum}, #{optionValue})
 	</insert>
 	
+	<!-- 브랜드 정보 등록 -->
+	<insert id="insertBrand" parameterType="com.fa.plus.admin.domain.shop.ShopProductManage">
+		INSERT INTO brand(brandNum, brandName, showOrderNo, reg_date) 
+		VALUES(brand_seq.NEXTVAL, #{brandName}, #{showOrderNo}, SYSDATE)
+	</insert>
+	
+	<!-- 상품 카테고리 -->
+	<select id="findByCategory" parameterType="Long" resultType="com.fa.plus.admin.domain.shop.ShopProductManage">
+		SELECT categoryNum, categoryName, use, showNo, parentNum 
+		FROM productCategory 
+		WHERE categoryNum = #{categoryNum}
+	</select>
+	
+	<!-- 상품 상위 카테고리 목록 -->
+	<select id="listCategory" resultType="com.fa.plus.admin.domain.shop.ShopProductManage">
+		SELECT categoryNum, categoryName, use, showNo, parentNum 
+		FROM productCategory 
+		WHERE use = 1 AND parentNum IS NULL 
+		ORDER BY showNo
+	</select>
+	
+	<!-- 상품 하위 카테고리 목록 -->
+	<select id="listSubCategory" parameterType="Long" resultType="com.fa.plus.admin.domain.shop.ShopProductManage">
+		SELECT categoryNum, categoryName, use, showNo, parentNum 
+		FROM productCategory 
+		WHERE use = 1 AND parentNum = #{parentNum}
+		ORDER BY showNo
+	</select>
+	
+	<select id="listBrand" resultType="com.fa.plus.admin.domain.shop.ShopProductManage">
+		SELECT brandNum, brandName 
+		FROM brand 
+		WHERE showBrand = 1 
+		ORDER BY brandName
+	</select>
+	
+	<!-- 상품 목록 -->
+	<sql id="where-list">
+		<if test="schType=='all'">
+			(INSTR(productName, #{kwd}) &gt; 0 
+				OR DBMS_LOB.INSTR(content, #{kwd}) &gt; 0 
+				OR INSTR(brandName, #{kwd}) &gt; 0)
+		</if>
+		<if test="schType=='productName'">
+			INSTR(productName, #{kwd}) &gt; 0
+		</if>
+		<if test="schType=='brandName'">
+			INSTR(brandName, #{kwd}) &gt; 0
+		</if>
+		<if test="schType=='content'">
+			DBMS_LOB.INSTR(content, #{kwd}) &gt; 0
+		</if>
+	</sql>
+	
+	<!-- 미완성 -->
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0) 
+		FROM product p 
+		<where>
+			productShow != 0 
+			<if test="categoryNum != 0">
+				AND p.categoryNum = #{categoryNum}
+			</if>
+			<if test="special == 1">
+				AND special = 1
+			</if>
+			<if test="starter == 1">
+				AND starter = 1
+			</if>
+			<if test="md == 1">
+				AND md = 1
+			</if>
+			<if test="kwd != null and kwd != ''">
+				AND <include refid="where-list"/>
+			</if>
+		</where>
+	</select>
+	
+	<select id="listProduct" parameterType="map" resultType="com.fa.plus.admin.domain.shop.ShopProductManage">
+		SELECT p.productNum, categoryNum, productName, price, discountRate, 
+			brandName, productShow, reg_date, TO_CHAR(update_date, 'YYYY-MM-DD') update_date, 
+			NVL(totalStock, 0) totalStock 
+		FROM product p 
+		LEFT OUTER JOIN (
+			SELECT productNum, NVL(SUM(totalStock), 0) totalStock 
+			FROM productStock 
+			GROUP BY productNum
+		) t ON p.productNum = t.productNum 
+		<where>
+			productShow != 0 
+			<if test="categoryNum != 0">
+				AND p.categoryNum = #{categoryNum}
+			</if>
+			<if test="special != 1">
+				AND special = 1
+			</if>
+			<if test="starter != 1">
+				AND starter = 1
+			</if>
+			<if test="md != 1">
+				AND md = 1
+			</if>
+			<if test="productShow != 1">
+				AND productShow = 1 
+			</if>
+			<if test="showBrand != 1">
+				AND showBrand = 1 
+			</if>
+			<if test="kwd != null and kwd != ''">
+				AND <include refid="where-list"/>
+			</if>
+		</where>
+		ORDER BY p.${listOrder} DESC, p.productNum DESC 
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+	
+	<!-- 상품 상세 정보 -->
+	<select id="findById" parameterType="Long" resultType="com.fa.plus.admin.domain.shop.ShopProductManage">
+		SELECT f.*, b.brandName 
+		FROM 
+		(SELECT productNum, productName, 
+		special, price, c.categoryNum, 
+		discountRate, savedMoney, delivery, 
+		content, thumbnail, productShow, 
+		reg_date, updateDate, md, starter, 
+		deletion, brandNum 
+		FROM product p 
+		JOIN productCategory c 
+		ON p.categoryNum = c.categoryNum) f 
+		JOIN brand b ON f.brandNum = b.brandNum 
+		WHERE productNum = #{productNum}
+	</select>
+	
+	<select id="listProductFile" parameterType="Long" resultType="com.fa.plus.admin.domain.shop.ShopProductManage">
+		SELECT fileNum, productNum, fileName 
+		FROM productFile 
+		WHERE productNum = #{productNum}
+	</select>
+	
+	<!-- 상위/하위 옵션 -->
+	<select id="listProductOption" parameterType="Long" resultType="com.fa.plus.admin.domain.shop.ShopProductManage">
+		SELECT optionNum, optionName, productNum, parentNum 
+		FROM productOption WHERE productNum = #{productNum} 
+		ORDER BY parentNum NULLS FIRST, parentNum
+	</select>
+	
+	<!-- 옵션 상세 정보 -->
+	<select id="listOptionDetail" parameterType="Long" resultType="com.fa.plus.admin.domain.shop.ShopProductManage">
+		SELECT detailNum, optionValue, optionNum 
+		FROM optionDetail 
+		WHERE optionNum = #{optionNum} 
+		ORDER BY detailNum
+	</select>
+	
+	<!-- brand 수정 -->
+	<update id="updateBrand" parameterType="com.fa.plus.admin.domain.shop.ShopProductManage">
+		UPDATE brand SET brandName = #{brandName}, 
+		showBrand = #{showBrand} 
+		WHERE brandNum = #{brandNum}
+	</update>
+	
+	<!-- 재고 -->
+	<select id="listProductStock" parameterType="Long" resultType="com.fa.plus.admin.domain.shop.ShopProductManage">
+		SELECT stockNum, detailNum, detailNum2, totalStock, p.productNum, productName 
+		FROM productStock s 
+		JOIN product p ON s.productNum = p.productNum 
+		WHERE p.productNum = #{productNum} 
+		ORDER BY stockNum
+	</select>
+	
+	<insert id="insertProductStock" parameterType="com.fa.plus.admin.domain.shop.ShopProductManage">
+		INSERT INTO productStock(stockNum, totalStock, 
+		productNum, detailNum, detailNum2) 
+		VALUES(productStock_seq.NEXTVAL, #{totalStock}, 
+		#{productNum}, #{detailNum}, #{detailNum2})
+	</insert>
+	
+	<update id="updateProductStock" parameterType="com.fa.plus.admin.domain.shop.ShopProductManage">
+		UPDATE productStock SET 
+		totalStock = #{totalStock} 
+		WHERE stockNum = #{stockNum}
+	</update>
+	
+	<!-- productShow(상품 진열 여부) 수정 -->
+	<update id="updateListProduct" parameterType="map">
+		UPDATE product SET productShow = #{productShow} 
+		WHERE productNum = #{productNum}
+	</update>
+	
+	
+	<!-- 상품 수정 -->
+	<update id="updateProduct" parameterType="com.fa.plus.admin.domain.shop.ShopProductManage">
+		UPDATE product SET productName = #{productName}, 
+		price = #{price}, categoryNum = #{categoryNum}, 
+		discountRate = #{discountRate}, savedMoney = #{savedMoney}, 
+		delivery = #{delivery}, content = #{content}, 
+		thumbnail = #{thumbnail}, updateDate = SYSDATE, 
+		brandNum = #{brandNum} 
+		WHERE productNum = #{productNum}
+	</update>
+	
+	<!-- 상품 사진 삭제 -->
+	<update id="deleteProductFile" parameterType="Long">
+		DELETE FROM productFile WHERE fileNum = #{fileNum}
+	</update>
+
+	<!-- 옵션 변경 -->
+	<update id="updateProductOption" parameterType="com.fa.plus.admin.domain.shop.ShopProductManage">
+		UPDATE productOption SET optionName = #{optionName} 
+		WHERE optionNum = #{optionNum}
+	</update>
+	
+	<!-- 옵션 삭제 -->
+	<delete id="deleteProductOption" parameterType="Long">
+		DELETE FROM productOption WHERE optionNum = #{optionNum}
+	</delete>
+	
+	<update id="updateOptionDetail" parameterType="com.fa.plus.admin.domain.shop.ShopProductManage">
+		UPDATE optionDetail SET optionValue = #{optionValue} 
+		WHERE detailNum = #{detailNum}
+	</update>
+	
+	<delete id="deleteOptionDetail" parameterType="Long">
+		DELETE FROM optionDetail WHERE detailNum = #{detailNum}
+	</delete>
+	
+	
 	
 </mapper>
