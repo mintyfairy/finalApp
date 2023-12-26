@@ -66,7 +66,7 @@ main {
 
 
 
-.goods_wrap {
+.car_wrap {
     width: 1158px;
     margin: 30px auto;
    /* border: 1px solid silver; */
@@ -83,31 +83,31 @@ main {
 }
 */
 
-.goods_wrap .goods_list .goods_item p .goods_photo {
+.car_wrap .car_list .car_item p .car_photo {
     position: relative;
 }
 
-.goods_wrap .goods_list .goods_item p .goods_photo i {
+.car_wrap .car_list .car_item p .car_photo i {
     position: absolute;
     top: 7px;
     right: 9px;
     font-size: 30px;
 }
 
-.goods_wrap .goods_list {
+.car_wrap .car_list {
     display: flex;
     flex-wrap: wrap;
 }
 
 
-.goods_wrap .goods_list .goods_item {
+.car_wrap .car_list .car_item {
     width: 350px;
     margin: 17px;
     height: 450px;
     /* border: 1px solid skyblue */
 }
 
-.goods_list .goods_item .goods_photo {
+.car_list .car_item .car_photo {
     display: block;
     height: 250px;
     overflow: hidden;
@@ -115,13 +115,13 @@ main {
     border-radius: 12px;
 }
 
-.goods_list .goods_item .goods_text {
+.car_list .car_item .car_text {
     height: 200px;
     padding-top: 8px;
     margin-bottom: 28px;
 }
 
-.goods_text {
+.car_text {
     display: flex;
     flex-wrap: wrap;
 }
@@ -162,7 +162,7 @@ main {
 
 
 .car_main {
-    background: url('/image/campingcar.jpg') no-repeat center center;
+    background: url('../resources/images/campingcar/campingcar.jpg') no-repeat center center;
     height: 400px;
     border-radius: 10px;
 }
@@ -179,7 +179,7 @@ main {
     background-color: white;
     text-align: center;
     position: absolute;
-    bottom: 33%;
+    bottom: 10%;
     left: 50%;
 }
 
@@ -224,8 +224,8 @@ main {
 </style>
 
 <main>
-	<div class="goods_wrap car_main" id="wrap">
-       <ul class="goods_list">
+	<div class="car_wrap car_main" id="wrap">
+       <div class="car_list">
            <div class="maintitle">
                <p style="color: white;">캠핑카,</p>
                <p style="color: white;">더이상 멀지 않아!</p>
@@ -270,17 +270,17 @@ main {
                    </table>
                </form>
            </div>
-       </ul>
+       </div>
    </div>
 
-   <div class="goods_wrap" id="wrap">
-       <ul class="goods_list">
-           <li class="goods_item">
-               <p><a href="#" class="goods_photo">
-                       <img src="https://via.placeholder.com/350x250" alt="goods_item">
+   <div class="car_wrap" id="wrap">
+       <ul class="car_list">
+           <li class="car_item">
+               <p><a href="#" class="car_photo">
+                       <img src="https://via.placeholder.com/350x250" alt="car_item">
                        <i class="fa-regular fa-heart"></i>
                    </a></p>
-               <div class="goods_text">
+               <div class="car_text">
                    <div>
                        <span class="car_sort">소형차</span>
                        <span class="car_star" style="text-decoration: underline;">후기 2개</span>
@@ -303,12 +303,12 @@ main {
                    </div>
                </div>
            </li>
-           <li class="goods_item">
-               <p><a href="#" class="goods_photo">
-                   <img src="https://via.placeholder.com/350x250" alt="goods_item">
+           <li class="car_item">
+               <p><a href="#" class="car_photo">
+                   <img src="https://via.placeholder.com/350x250" alt="car_item">
                    <i class="fa-regular fa-heart"></i>
                </a></p>
-               <div class="goods_text">
+               <div class="car_text">
                    <div>
                        <span class="car_sort">소형차</span>
                        <span class="car_star" style="text-decoration: underline;">후기 2개</span>
@@ -331,12 +331,12 @@ main {
                    </div>
                </div>
            </li>
-           <li class="goods_item">
-               <p><a href="#" class="goods_photo">
-                   <img src="https://via.placeholder.com/350x250" alt="goods_item">
+           <li class="car_item">
+               <p><a href="#" class="car_photo">
+                   <img src="https://via.placeholder.com/350x250" alt="car_item">
                    <i class="fa-regular fa-heart"></i>
                </a></p>
-               <div class="goods_text">
+               <div class="car_text">
                    <div>
                        <span class="car_sort">소형차</span>
                        <span class="car_star" style="text-decoration: underline;">후기 2개</span>
@@ -359,12 +359,12 @@ main {
                    </div>
                </div>
            </li>
-           <li class="goods_item">
-               <p><a href="#" class="goods_photo">
-                   <img src="https://via.placeholder.com/350x250" alt="goods_item">
+           <li class="car_item">
+               <p><a href="#" class="car_photo">
+                   <img src="https://via.placeholder.com/350x250" alt="car_item">
                    <i class="fa-regular fa-heart"></i>
                </a></p>
-               <div class="goods_text">
+               <div class="car_text">
                    <div>
                        <span class="car_sort">소형차</span>
                        <span class="car_star" style="text-decoration: underline;">후기 2개</span>
@@ -387,12 +387,12 @@ main {
                    </div>
                </div>
            </li>
-           <li class="goods_item">
-               <p><a href="#" class="goods_photo">
-                   <img src="https://via.placeholder.com/350x250" alt="goods_item">
+           <li class="car_item">
+               <p><a href="#" class="car_photo">
+                   <img src="https://via.placeholder.com/350x250" alt="car_item">
                    <i class="fa-regular fa-heart"></i>
                </a></p>
-               <div class="goods_text">
+               <div class="car_text">
                    <div>
                        <span class="car_sort">소형차</span>
                        <span class="car_star" style="text-decoration: underline;">후기 2개</span>

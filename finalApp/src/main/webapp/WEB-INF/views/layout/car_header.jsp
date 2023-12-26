@@ -29,7 +29,7 @@ ul {
 }
 
 main {
-  margin-bottom: 150px;
+  margin-bottom: 100px;
 }
 
 .container {
@@ -46,9 +46,7 @@ main {
 .hamburger {
   width: 100px;
   height: 50px;
-  margin-right: 130px;
-  border-left: 1px solid #cecece;
-  border-right: 1px solid #cecece;
+  margin-right: 110px;
 }
 
 .hamburger a {
@@ -57,14 +55,14 @@ main {
 }
 
 .menu {
-  width: 1080px;
+  width: 1300px;
   overflow: hidden;
   margin: 0 auto;
 }
 
 
 .menu>li {
-  width: 150px;
+  width: 130px;
   float: left;
   line-height: 60px;
   text-align: center;
@@ -76,20 +74,26 @@ main {
 
 .submenu1>li {
   line-height: 50px;
+  text-align: center;
+  border-top: 1px solid silver;
 }
 
 .submenu2>li {
   line-height: 50px;
+  text-align: center;
+  border-top: 1px solid silver;
 }
 
 .submenu1 {
   height: 0;
+  background-color: white;
   /*ul의 높이를 안보이게 처리*/
   overflow: hidden;
 }
 
 .submenu2 {
   height: 0;
+  background-color: white;
   /*ul의 높이를 안보이게 처리*/
   overflow: hidden;
 }
@@ -101,27 +105,33 @@ main {
 .menu>li:hover .submenu1 {
   height: 100px;
   transition-duration: 1s;
-  text-align: center;
+  
 }
 
 .menu>li:hover .submenu2 {
   height: 200px;
   transition-duration: 1s;
-  text-align: center;
+ 
 }
 
 .loginout {
-  width: 100px;
+  width: 50px;
   line-height: 60px;
   float: right;
+  margin:0;
 }
 
 .bell {
-  width: 120px;
+  width: 80px;
   line-height: 60px;
-  float: right;
+  float: left;
   text-align: center;
 }
+
+
+i {
+  text-align: left;
+ }
 
 </style>
 
@@ -131,8 +141,11 @@ main {
             <ul class="menu clearfix">
                 <li class="hamburger">
                     <a href="${pageContext.request.contextPath}/">
-                        <img src="../image/logo.png" alt="hamburger">
+                        <img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="logo" width="152px" height="65px">
                     </a>
+                </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/car/main">홈</a>
                 </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/car/location">오시는길</a>
@@ -157,7 +170,20 @@ main {
                     <a href="#"><i class="fa-solid fa-bell"></i></a>
                 </li>
                 <li class="loginout">
-                    <span>login</span>
+	                <c:choose>
+						<c:when test="${empty sessionScope.member}">
+			               	<a href="${pageContext.request.contextPath}/member/login">Login</a>
+				        </c:when>
+				        <c:otherwise>
+							<a href="${pageContext.request.contextPath}/member/logout" title="로그아웃">Logout</a>
+						</c:otherwise>
+			     	</c:choose>
+                </li>
+                <li>
+	                <c:if test="${sessionScope.member.membership > 51}">
+						<a href="#"><i class="fa-solid fa-gear" title="관리자"></i></a>
+					</c:if>
+                	
                 </li>
             </ul>
         </div>

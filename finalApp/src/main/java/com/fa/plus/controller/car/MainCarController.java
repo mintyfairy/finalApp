@@ -15,5 +15,5 @@ public class MainCarController {
 	@RequestMapping(value="main", method = RequestMethod.GET)
 	String carHome(Locale locale, Model model) {
 		return ".car.main";
-	}
+	} 
 }
