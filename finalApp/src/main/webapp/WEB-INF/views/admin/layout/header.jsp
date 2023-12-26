@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+
 <script type="text/javascript">
 // 메뉴 활성화
 $(function(){
@@ -99,7 +100,7 @@ $(function(){
 
 			<ul class="sub_menu">
 				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">캠핑장-1</a>
+					<a href="#" class="sub_menu--link">업체관리</a>
 				</li>
 				<li class="sub_menu--item">
 					<a href="#" class="sub_menu--link">캠핑장-2</a>
@@ -124,19 +125,19 @@ $(function(){
 
 			<ul class="sub_menu">
 				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">캠핑카-1</a>
+					<a href="${pageContext.request.contextPath}/admin/carManage" class="sub_menu--link">캠핑카관리</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">캠핑카-2</a>
+					<a href="${pageContext.request.contextPath}/admin/carReservation" class="sub_menu--link">예약관리</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">캠핑카-3</a>
+					<a href="${pageContext.request.contextPath}/admin/carCs" class="sub_menu--link">고객센터관리</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">캠핑카-4</a>
+					<a href="${pageContext.request.contextPath}/admin/carReview" class="sub_menu--link">리뷰 및 문의 관리</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">캠핑카-5</a>
+					<a href="${pageContext.request.contextPath}/admin/carSales" class="sub_menu--link">매출관리</a>
 				</li>
 			</ul>
 		</li>
