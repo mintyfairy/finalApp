@@ -29,33 +29,58 @@ ul {
     justify-content: space-between;
     align-items: center;
     width: 1080px;
-    height: 200px;
+    height: 110px;
     margin: 0 auto;
 }
 
-.header_search {
-    width: 500px;
+.header_center {
+	padding-top: 16px;
+}
+
+.header_center .header_center_wrap .header_center_list {
+    display: flex;
+}
+
+.header_center .header_center_wrap .header_center_list .header_center_item {
+    text-align: center;
+}
+
+.header_center .header_center_wrap .header_center_list .header_center_item:first-child {
     position: relative;
 }
 
-.header_search form input {
-    width: 100%;
-    height: 54px;
-    border-radius: 27px;
-}
-
-.header_search form button {
+.header_center .header_center_wrap .header_center_list .header_center_item:first-child::after {
+    content: '';
     position: absolute;
-    width: 50px;
-    height: 50px;
-    top: 2px;
-    right: 24px;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
+    top: 18px;
+    right: 0;
+    width: 1px;
+    height: 32px;
+    background-color: #dedede;
+
 }
 
-.header_right {
+.header_center .header_center_wrap .header_center_list .header_center_item a {
+    display: block;
+    font-size: 18px;
+    padding: 20px;
+}
+
+.header_center .header_center_wrap .header_center_list .header_center_item a:hover {
+    text-decoration: underline;
+    color: orangered;
+}
+
+.logo {
+    margin-right: 48px;
+    padding-top: 6px;
+}
+
+.header_right_wrap {
+    padding-top: 10px;
+}
+
+.header_right_wrap .header_right {
     width: 160px;
     height: 100%;
     display: flex;
@@ -63,9 +88,8 @@ ul {
     align-items: center;
 }
 
-.header_item {
-    width: 32px;
-    height: 32px;
+.header_right_wrap .header_right .header_item {
+    margin-left: 30px;
 }
 
 .navi_container {
@@ -111,23 +135,31 @@ ul {
 </head>
 <div class="header_top">
     <div class="header_top_wrap">
+        <div class="header_center">
+            <div class="header_center_wrap">
+                <ul class="header_center_list">
+                    <li class="header_center_item">
+                        <a href="#">CAMPING AREA</a>
+                    </li>
+                    <li class="header_center_item">
+                        <a href="#">CAMPINGCAR</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
         <div class="logo">
             <a href="#">
-                <img src="https://via.placeholder.com/120x80" alt="logo">
+                <img src="${pageContext.request.contextPath}/resources/images/main/logo.png" alt="logo" width="228">
             </a>
         </div>
-        <div class="header_search">
-            <form action="">
-                <input type="text">
-                <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </form>
-        </div>
+
         <div class="header_right_wrap">
             <ul class="header_right">
-                <li class="header_item"><a href="#"><i class="fa-solid fa-right-to-bracket"></i></a></li>
-                <li class="header_item"><a href="#"><i class="fa-regular fa-user"></i></a></li>
-                <li class="header_item"><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
-                <li class="header_item"><a href="#"><i class="fa-solid fa-headset"></i></a></li>
+                <li class="header_item"><a href="#"><i class="fa-solid fa-right-to-bracket fa-lg"></i></a></li>
+                <li class="header_item fa-lg"><a href="#"><i class="fa-regular fa-user"></i></a></li>
+                <li class="header_item fa-lg"><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <li class="header_item fa-lg"><a href="#"><i class="fa-solid fa-headset"></i></a></li>
             </ul>
         </div>
     </div>

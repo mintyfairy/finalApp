@@ -133,30 +133,30 @@
 			GROUP BY productNum
 		) t ON p.productNum = t.productNum 
 		<where>
-			productShow != 0 
-			<if test="categoryNum != 0">
+			productShow = 
+			<if test="categoryNum != 0 and categoryNum != ''">
 				AND p.categoryNum = #{categoryNum}
 			</if>
-			<if test="special != 1">
+			<if test="special != 1 and special != ''">
 				AND special = 1
 			</if>
-			<if test="starter != 1">
+			<if test="starter != 1 and starter != ''">
 				AND starter = 1
 			</if>
-			<if test="md != 1">
+			<if test="md != 1 and md != ''">
 				AND md = 1
 			</if>
-			<if test="productShow != 1">
+			<if test="productShow != 1 and productShow != ''">
 				AND productShow = 1 
 			</if>
-			<if test="showBrand != 1">
+			<if test="showBrand != 1 and showBrand != ''">
 				AND showBrand = 1 
 			</if>
 			<if test="kwd != null and kwd != ''">
 				AND <include refid="where-list"/>
 			</if>
 		</where>
-		ORDER BY p.${listOrder} DESC, p.productNum DESC 
+		ORDER BY p.productNum DESC 
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
 	
