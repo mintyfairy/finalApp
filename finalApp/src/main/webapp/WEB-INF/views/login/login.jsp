@@ -24,7 +24,9 @@
   background-color: lightblue;
   display: flex;
   border-radius: 10px;
-  margin: 200px auto;
+  margin: 0 auto;
+  margin-top: 150px;
+  margin-bottom: 300px;
   
 }
 
@@ -35,18 +37,23 @@
   background-image: url("/plus/resources/images/member/loginMountain.jpg");
   background-size: cover;
   text-align: center;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
   
 }
 
 .loginForm {
   width: 50%;
   height: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
-input[type=text] {
+form input {
   border: none;
   padding: 15px;
   margin-bottom: 5px;
+  height:45px;
 }
 
 button[type=submit] {
@@ -79,6 +86,7 @@ button[name=join] {
      <input type="text" name="userId" placeholder="Id" class="form-control"> 
      <input type="password" name="userPwd" placeholder="password" class="form-control"> 
      <br>
+      <div><a href="${pageContext.request.contextPath}/member/join">회원가입</a> | <a>아이디,패스워드 찾기</a></div>
      <button type="submit" class="btn btn-primary">Login</button>
    </form>
  </div>
