@@ -47,8 +47,7 @@
 
 
 	        <intercept-url pattern="/shop/product/reivew/list" access="permitAll"/>
-	        <intercept-url pattern="/shop/product/list" access="permitAll"/>
-	        <intercept-url pattern="/shop/product/detail" access="permitAll"/>
+	        <intercept-url pattern="/shop/product/**" access="permitAll"/>
 
 	        <intercept-url pattern="/shop/customer/notice/list" access="permitAll"/>
 	        <intercept-url pattern="/shop/customer/notice/article" access="permitAll"/>
@@ -78,6 +77,9 @@
 			<!-- 캠핑장업체 페이지 -->
 			<intercept-url pattern="/siteManage/**" access="hasAnyRole('ROLE_CAMP')"/>
 			<intercept-url pattern="/siteChart/**" access="hasAnyRole('ROLE_CAMP')"/>
+			
+			<!-- 쇼팡 페이지 -->
+			<intercept-url pattern="/shop/product/write" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>
 			
 			<!-- 모든 페이지 -->
 			<intercept-url pattern="/**" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP','ROLE_CAMP','ROLE_USER')"/>
