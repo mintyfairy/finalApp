@@ -39,6 +39,7 @@ ul {
 
 .header_center .header_center_wrap .header_center_list {
     display: flex;
+    padding-left: 0;
 }
 
 .header_center .header_center_wrap .header_center_list .header_center_item {
@@ -57,7 +58,6 @@ ul {
     width: 1px;
     height: 32px;
     background-color: #dedede;
-
 }
 
 .header_center .header_center_wrap .header_center_list .header_center_item a {
@@ -139,10 +139,10 @@ ul {
             <div class="header_center_wrap">
                 <ul class="header_center_list">
                     <li class="header_center_item">
-                        <a href="${pageContext.request.contextPath}/site/list">CAMPING AREA</a>
+                        <a href="${pageContext.request.contextPath}/site/list" style="padding-left:0;">CAMPING AREA</a>
                     </li>
                     <li class="header_center_item">
-                        <a href="${pageContext.request.contextPath}/car/main">CAMPINGCAR</a>
+                        <a href="${pageContext.request.contextPath}/car/main">CAMPING CAR</a>
                     </li>
                 </ul>
             </div>
