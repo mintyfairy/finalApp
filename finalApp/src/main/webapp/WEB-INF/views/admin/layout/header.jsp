@@ -100,19 +100,10 @@ $(function(){
 
 			<ul class="sub_menu">
 				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">업체관리</a>
+					<a href="${pageContext.request.contextPath}/admin/siteManage/siteManage" class="sub_menu--link">캠핑장 관리</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">캠핑장-2</a>
-				</li>
-				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">캠핑장-3</a>
-				</li>
-				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">캠핑장-4</a>
-				</li>
-				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">캠핑장-5</a>
+					<a href="${pageContext.request.contextPath}/admin/siteChart/siteChart" class="sub_menu--link">통계</a>
 				</li>
 			</ul>
 		</li>
@@ -125,19 +116,19 @@ $(function(){
 
 			<ul class="sub_menu">
 				<li class="sub_menu--item">
-					<a href="${pageContext.request.contextPath}/admin/carManage" class="sub_menu--link">캠핑카관리</a>
+					<a href="${pageContext.request.contextPath}/admin/carManage/car" class="sub_menu--link">캠핑카 관리</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="${pageContext.request.contextPath}/admin/carReservation" class="sub_menu--link">예약관리</a>
+					<a href="${pageContext.request.contextPath}/admin/carReservation/reservation" class="sub_menu--link">예약 관리</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="${pageContext.request.contextPath}/admin/carCs" class="sub_menu--link">고객센터관리</a>
+					<a href="${pageContext.request.contextPath}/admin/carCs/cs" class="sub_menu--link">고객센터 관리</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="${pageContext.request.contextPath}/admin/carReview" class="sub_menu--link">리뷰 및 문의 관리</a>
+					<a href="${pageContext.request.contextPath}/admin/carReview/review" class="sub_menu--link">리뷰 및 문의 관리</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="${pageContext.request.contextPath}/admin/carSales" class="sub_menu--link">매출관리</a>
+					<a href="${pageContext.request.contextPath}/admin/carSales/sales" class="sub_menu--link">매출 관리</a>
 				</li>
 			</ul>
 		</li>
@@ -150,47 +141,22 @@ $(function(){
 
 			<ul class="sub_menu">
 				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">쇼핑몰-1</a>
+					<a href="${pageContext.request.contextPath}/admin/shopOrder/order" class="sub_menu--link">주문 관리</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">쇼핑몰-2</a>
+					<a href="${pageContext.request.contextPath}/admin/shopProduct/main" class="sub_menu--link">상품 및 재고 관리</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">쇼핑몰-3</a>
+					<a href="${pageContext.request.contextPath}/admin/shopReview/review" class="sub_menu--link">리뷰 및 문의 관리</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">쇼핑몰-4</a>
-				</li>
-				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">쇼핑몰-5</a>
-				</li>
-			</ul>
-		</li>
-
-		<li class="menu--item menu--item__has_sub_menu">
-			<label class="menu--link" title="고객센터관리">
-				<i class="menu--icon  fa-fw fa-solid fa-headphones"></i>
-				<span class="menu--label">고객센터관리</span>
-			</label>
-
-			<ul class="sub_menu">
-				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">1:1문의</a>
-				</li>
-				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">자주묻는질문</a>
-				</li>
-				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">이벤트</a>
-				</li>
-				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">공지사항</a>
+					<a href="${pageContext.request.contextPath}/admin/shopCustomer/customer" class="sub_menu--link">고객센터 관리</a>
 				</li>
 			</ul>
 		</li>
 		
 		<li class="menu--item">
-	        <a href="<c:url value='/admin/memberManage/list'/>" class="menu--link" title="회원 관리">
+	        <a href="<c:url value='/admin/salesManage/main'/>" class="menu--link" title="매출 관리">
 				<i class="menu--icon  fa-fw fa-solid fa-sack-dollar"></i>
 				<span class="menu--label">매출 관리</span>
 			</a>
