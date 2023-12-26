@@ -26,6 +26,7 @@ ul {
 
 .main_slider {
 	position: relative;
+	height: 100vh;
 }
 
 .main_slider .searchBox {
@@ -37,7 +38,7 @@ ul {
 
 main .recommend {
     width: 100%;
-    height: 685px;
+    height: 100vh;
     background-color: #f8f9fa;
     margin-bottom: 200px;
     padding-top: 90px;
@@ -101,7 +102,7 @@ main .recommend .recommend_place .recommend_list {
 }
 
 main .excellent {
-    height: 680px;
+    height: 100vh;
     background: url("${pageContext.request.contextPath}/resources/images/main/mountain.jpg") no-repeat center center;
     background-size: cover;
     background-color: rgba(255, 255, 255, 0.5);
@@ -156,7 +157,7 @@ main .excellent .best_list .best_excellent {
 }
 
 main .story {
-    height: 520px;
+    height: 100vh;
     padding-top: 88px;
     background-color: #f7f8f9;
 }
@@ -191,14 +192,14 @@ main .story {
 </head>
 
 <body>
-	<div class="main_slider" style="height: 700px;">
+	<div class="main_slider">
 		<jsp:include page="/WEB-INF/views/slider/main_slider.jsp"/>
 		<div class="searchBox">
 			<jsp:include page="/WEB-INF/views/searchBox/search_box.jsp"/>
 		</div>
 	</div>
 	<div class="recommend">
-        <h1>추천 여행지</h1>
+        <h1>추천 캠핑카</h1>
         <div class="recommend_place">
             <ul class="recommend_list">
                 <li class="recommend_item">
@@ -234,7 +235,7 @@ main .story {
     </div>
 
     <div class="excellent">
-        <h1 class="excellent_title">우수 야영장</h1>
+        <h1 class="excellent_title">캠핑 용품</h1>
         <div class="best_list">
             <div class="best_excellent">
                 <a href="#" class="bestpic_wrap">
@@ -257,5 +258,6 @@ main .story {
             <div class="story_pic"></div>
         </div>
     </div>
+    
 </body>
 </html>

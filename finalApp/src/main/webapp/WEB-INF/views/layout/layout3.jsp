@@ -37,6 +37,24 @@
     <tiles:insertAttribute name="footer"/>
 </footer>
 
+<script type="text/javascript">
+	let site_height = document.querySelector(".main_slider").offsetTop;
+	let car_height = document.querySelector(".recommend").offsetTop;
+	let shop_height = document.querySelector(".excellent").offsetTop;
+	
+	function site() {
+		window.scrollTo({top:site_height, left:0, behavior:'smooth'});
+	}
+	
+	function car() {
+		window.scrollTo({top:car_height, left:0, behavior:'smooth'});
+	}
+	
+	function shop() {
+		window.scrollTo({top:shop_height, left:0, behavior:'smooth'});
+	}
+</script>
+
 <!-- 
 <div id="loadingLayout" style="display:none; position: absolute; left: 0; top:0; width: 100%; height: 100%; z-index: 9000; background: #eee;">
 	<div class="loader"></div>

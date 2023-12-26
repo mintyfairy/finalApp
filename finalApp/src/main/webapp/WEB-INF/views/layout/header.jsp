@@ -304,13 +304,13 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
             <div class="navi_wrap">
                 <ul class="menu_bar">
                     <li class="menu_item">
-                        <a href="${pageContext.request.contextPath}/site/list">CAMPING AREA</a>
+                        <a href="#" onclick="site()">CAMPING AREA</a>
                     </li>
                     <li class="menu_item">
-                        <a href="${pageContext.request.contextPath}/car/main">CAMPING CAR</a>
+                        <a href="#" onclick="car()">CAMPING CAR</a>
                     </li>
                     <li class="menu_item">
-                        <a href="${pageContext.request.contextPath}/shop/main">CAMPING SHOP</a>
+                        <a href="#" onclick="shop()">CAMPING SHOP</a>
                     </li>
                 </ul>
             </div>
