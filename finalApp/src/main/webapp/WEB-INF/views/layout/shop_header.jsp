@@ -77,7 +77,7 @@ ul {
 }
 
 .header_right_wrap {
-    padding-top: 10px;
+    padding-top: 20px;
 }
 
 .header_right_wrap .header_right {
@@ -88,8 +88,8 @@ ul {
     align-items: center;
 }
 
-.header_right_wrap .header_right .header_item {
-    margin-left: 30px;
+.header_right_wrap .header_right .header_item a {
+    display: inline-block;
 }
 
 .navi_container {
