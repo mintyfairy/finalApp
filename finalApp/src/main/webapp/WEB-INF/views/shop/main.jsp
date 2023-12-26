@@ -22,46 +22,6 @@ main {
     margin-bottom: 150px;
 }
 
-.navi_container {
-    border-top: 1px solid #cecece;
-    border-bottom: 1px solid #cecece;
-}
-
-.navi_container .navi_wrap {
-    width: 1080px;
-    height: 60px;
-    margin: 0 auto;
-}
-
-.navi_container .navi_wrap .navi_list {
-    display: flex;
-    height: 100%;
-}
-
-.navi_list .navi_item {
-    width: calc((100% - 60px)/7);
-    height: 100%;
-}
-
-.navi_list .navi_item a {
-    display: block;
-    height: 100%;
-    text-align: center;
-    line-height: 60px;
-}
-
-.hamburger {
-    width: 60px;
-    height: 60px;
-    border-left: 1px solid #cecece;
-    border-right: 1px solid #cecece;
-}
-
-.hamburger a {
-    display: block;
-    height: 100%;
-}
-
 .main_slider_wrap {
     position: relative;
     height: 820px;
@@ -241,38 +201,7 @@ main {
 }
 </style>
 
-<nav class="navi_container">
-    <div class="navi_wrap">
-        <ul class="navi_list">
-            <li class="hamburger">
-                <a href="#">
-                    <img src="https://via.placeholder.com/60x60" alt="hamburger">
-                </a>
-            </li>
-            <li class="navi_item">
-                <a href="#">브랜드</a>
-            </li>
-            <li class="navi_item">
-                <a href="#">베스트 셀러</a>
-            </li>
-            <li class="navi_item">
-                <a href="#">특가상품</a>
-            </li>
-            <li class="navi_item">
-                <a href="#">MD 추천</a>
-            </li>
-            <li class="navi_item">
-                <a href="#">캠핑 스타터</a>
-            </li>
-            <li class="navi_item">
-                <a href="#">AS 라운지</a>
-            </li>
-            <li class="navi_item">
-                <a href="#">고객센터</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+
 
 <div class="main_slider_wrap">
     <div class="main_slider">
