@@ -188,7 +188,7 @@ table th, td {
                            <td>23,000원</td>
                            <td>1개</td>
                            <td>0건</td>
-                           <td>상태변경</span>
+                           <td>상태변경</td>
                            </td>
                        </tr>
                    </c:forEach>

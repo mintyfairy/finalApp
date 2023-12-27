@@ -1,12 +1,12 @@
 package com.fa.plus.controller.campsite;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-@RequestMapping("/site/*")
-public class CampBookController {
+@RestController
+@RequestMapping("/siteChart/*")
+public class CampChartController {
 
 	@RequestMapping("list")
 	public String list() {

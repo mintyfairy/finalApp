@@ -1,6 +1,7 @@
 (function ($) {
     "use strict";
-
+	
+	var period=0;
     // Spinner
     var spinner = function () {
         setTimeout(function () {
@@ -380,8 +381,10 @@
 			} else { generateCalendars("next"); }
 			clickedElement = bothCals.find(".calendar_content").find("div");
 			console.log("checking");
+			
 		});
 		$(".defaultButton").on("click",function() {
+			period=0;
 			var clicked=$(this);
 			var generateCalendars = function(e) {
 				
@@ -399,6 +402,9 @@
 			} else { generateCalendars("next"); }
 			clickedElement = bothCals.find(".calendar_content").find("div");
 			console.log("checking");
+			bothCals.find(".calendar_content").find("div").each(function(){
+							$(this).removeClass("selected");
+						});	
 		});
 
 
@@ -417,7 +423,16 @@
 							"month": clickedMonth,
 							"year": clickedYear}
 			//console.log(clickedInfo);
+			period=0;
 			return clickedInfo;
+		}
+		const getDateDiff = (d1, d2) => {
+		  const date1 = new Date(d1);
+		  const date2 = new Date(d2);
+		  
+		  const diffDate = date1.getTime() - date2.getTime();
+		  
+		  return Math.abs(diffDate / (1000 * 60 * 60 * 24)); // 밀리세컨 * 초 * 분 * 시 = 일
 		}
 
 
@@ -431,6 +446,7 @@
 				var added_month = secondClicked.month;
 				var added_date = secondClicked.date;
 				console.log(selected);
+			
 
 				if (added_year > firstClicked.year) {	
 					// first add all dates from all months of Second-Clicked-Year
@@ -500,15 +516,51 @@
 					selected[added_year][added_month].push(i);
 				}
 			}
+				
+			let first=firstClicked.year+'-'+(firstClicked.month+1)+'-'+firstClicked.date;
+			let second= secondClicked.year+'-'+(secondClicked.month+1)+'-'+secondClicked.date;
+			period=getDateDiff(first, second)+1;
+			if(period>5){
+				alert("최대 5일까지 예약할 수 있습니다 ");
+				return false;
+			}
+			
 			return selected;
 		}
-	});
 	
+	
+	
+		$('.closeModal').click(function(){
+			bothCals.find(".calendar_content").find("div").each(function(){
+							$(this).removeClass("selected");
+						});	
+			$(this).closest(".modal").hide();
+	    });
+		$(document).on("click",".calBook",function(){
+				if(period>5){
+					alert("5일 이상 예약할 수 없습니다.");
+					return false;
+				}else if(period<1){
+					alert("날짜를 선택하지 않으셨습니다.");
+					return false;
+				}
+				console.log(period);
+				$(this).closest(".modal").hide();
+		    });
+		$(document).on("click",".calCart",function(){
+				if(period>5){
+					alert("5일 이상 예약할 수 없습니다.");
+					return false;
+				}else if(period<1){
+					alert("날짜를 선택하지 않으셨습니다.");
+					return false;
+				}
+				console.log(period);
+				$(this).closest(".modal").hide();
+		    })
+		});
 
-	$('.closeModal').click(function(){
-		$(this).closest(".modal").hide();
-    });
-	
+
 
 })(jQuery);
 
@@ -543,7 +595,18 @@ function showSlides(n) {
 $(function(){
 	$('.btnCart').click(function(){
 		
+      $("#periodModal").find(".calAJAXbtn").html("장바구니에 넣기");
+      $("#periodModal").find(".calAJAXbtn").addClass("calCart");
+      $("#periodModal").find(".calAJAXbtn").removeClass("calBook");
       $("#periodModal").show();
+    });
+	$('.btnBook').click(function(){
+		
+      $("#periodModal").find(".calAJAXbtn").html("지금 예약하기");
+      $("#periodModal").find(".calAJAXbtn").addClass("calBook");
+      $("#periodModal").find(".calAJAXbtn").removeClass("calCart");
+      $("#periodModal").show();
+		
     });
 })
 
