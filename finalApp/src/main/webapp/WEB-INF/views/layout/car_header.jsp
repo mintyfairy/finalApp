@@ -86,14 +86,14 @@ main {
 
 .submenu1 {
   height: 0;
-  background-color: white;
+  /*background-color: white;*/
   /*ul의 높이를 안보이게 처리*/
   overflow: hidden;
 }
 
 .submenu2 {
   height: 0;
-  background-color: white;
+  /*background-color: white;*/
   /*ul의 높이를 안보이게 처리*/
   overflow: hidden;
 }
@@ -132,18 +132,135 @@ main {
 i {
   text-align: left;
  }
+ 
+
+ /* 공통헤더 css*/
+ 
+.header_top {
+	width: 1080px;
+    padding: 0 40px;
+    border-bottom: 1px solid #efefef;
+    margin: 0 auto;
+   
+}
+
+.header_top_wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1080px;
+    height: 110px;
+
+}
+
+.header_center {
+	padding-top: 16px;
+}
+
+.header_center .header_center_wrap .header_center_list {
+    display: flex;
+    padding-left: 0;
+}
+
+.header_center .header_center_wrap .header_center_list .header_center_item {
+    text-align: center;
+}
+
+.header_center .header_center_wrap .header_center_list .header_center_item:first-child {
+    position: relative;
+}
+
+.header_center .header_center_wrap .header_center_list .header_center_item:first-child::after {
+    content: '';
+    position: absolute;
+    top: 18px;
+    right: 0;
+    width: 1px;
+    height: 32px;
+    background-color: #dedede;
+
+}
+
+.header_center .header_center_wrap .header_center_list .header_center_item a {
+    display: block;
+    font-size: 18px;
+    padding: 20px;
+}
+
+.header_center .header_center_wrap .header_center_list .header_center_item a:hover {
+    text-decoration: underline;
+    color: orangered;
+}
+
+.logo {
+    margin-right: 48px;
+    padding-top: 6px;
+}
+
+.header_right_wrap {
+    padding-top: 20px;
+}
+
+.header_right_wrap .header_right {
+    width: 160px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header_right_wrap .header_right .header_item a {
+    display: inline-block;
+}
+
+/* 공통헤더 마지막 */
 
 </style>
+
+<div class="header_top">
+    <div class="header_top_wrap">
+        <div class="header_center">
+            <div class="header_center_wrap">
+                <ul class="header_center_list">
+                    <li class="header_center_item">
+                        <a href="#" style="padding-left:0;">CAMPING AREA</a>
+                    </li>
+                    <li class="header_center_item">
+                        <a href="#">CAMPINGCAR</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="logo">
+            <a href="#">
+                <img src="${pageContext.request.contextPath}/resources/images/main/logo.png" alt="logo" width="228">
+            </a>
+        </div>
+
+        <div class="header_right_wrap">
+            <ul class="header_right">
+            	<c:choose>
+						<c:when test="${empty sessionScope.member}">
+			               	<li class="header_item"><a href="${pageContext.request.contextPath}/member/login"><i class="fa-solid fa-right-to-bracket fa-lg"></i></a></li>
+				        </c:when>
+				        <c:otherwise>
+				        	<li class="header_item"><a href="${pageContext.request.contextPath}/member/logout" title="로그아웃"><i class="fa-solid fa-right-to-bracket fa-lg"></i></a></li>
+						</c:otherwise>
+			     </c:choose>
+                
+                <li class="header_item fa-lg"><a href="${pageContext.request.contextPath}/member/join"><i class="fa-solid fa-user-plus"></i></a></li>
+                <li class="header_item fa-lg"><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <li class="header_item fa-lg"><a href="#"><i class="fa-solid fa-headset"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
 
 <main>
     <nav class="navi_container">
         <div class="navi_wrap">
             <ul class="menu clearfix">
-                <li class="hamburger">
-                    <a href="${pageContext.request.contextPath}/">
-                        <img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="logo" width="152px" height="65px">
-                    </a>
-                </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/car/main">홈</a>
                 </li>
@@ -169,22 +286,7 @@ i {
                 <li class="bell" style="text-align: right;">
                     <a href="#"><i class="fa-solid fa-bell"></i></a>
                 </li>
-                <li class="loginout">
-	                <c:choose>
-						<c:when test="${empty sessionScope.member}">
-			               	<a href="${pageContext.request.contextPath}/member/login">Login</a>
-				        </c:when>
-				        <c:otherwise>
-							<a href="${pageContext.request.contextPath}/member/logout" title="로그아웃">Logout</a>
-						</c:otherwise>
-			     	</c:choose>
-                </li>
-                <li>
-	                <c:if test="${sessionScope.member.membership > 51}">
-						<a href="#"><i class="fa-solid fa-gear" title="관리자"></i></a>
-					</c:if>
-                	
-                </li>
+                
             </ul>
         </div>
     </nav>

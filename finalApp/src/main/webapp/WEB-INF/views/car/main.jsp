@@ -178,7 +178,7 @@ main {
     border-radius: 10px;
     background-color: white;
     text-align: center;
-    position: absolute;
+	margin: 60px auto;
     bottom: 10%;
     left: 50%;
 }
@@ -188,13 +188,14 @@ main {
     margin: 20px auto;
     padding: 10px 30px 0px 30px;
     width: 450px;
-
 }
+
 
 #search1, #search2 {
     border: 2px solid silver;
     border-radius: 10px;
     font-size: 15px;
+   
 }
 
 #search1 {
@@ -204,9 +205,11 @@ main {
 }
 
 #search2 {
-    width: 157px;
+    width: 130px;
     height: 40px;
     margin-bottom: 20px;
+    text-align: center;
+
 }
 
 #searchbutton {
@@ -253,7 +256,7 @@ main {
                            <td>
                                <input id="search2" type="date" name="대여일">
                            </td>
-                           <td style="width: 5%; height: 40px;">
+                           <td>
                                ~
                            </td>
                            <td>
