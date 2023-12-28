@@ -2,7 +2,7 @@ package com.fa.plus.domain.site;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class siteDetail {
+public class SiteDetail {
 	private	int	DETAILNUM	;
 	private	int	SITENUM	;
 	private	String	DETAILNAME	;
