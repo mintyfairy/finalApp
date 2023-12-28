@@ -2,13 +2,14 @@ package com.fa.plus.admin.service.shop;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fa.plus.admin.domain.shop.ShopProductManage;
-import com.fa.plus.admin.mapper.shop.ShopProductManageMapper;
+import com.fa.plus.admin.mapper.ShopProductManageMapper;
 import com.fa.plus.common.FileManager;
 
 @Service
@@ -138,6 +139,25 @@ public class ShopProductManageServiceImpl implements ShopProductManageService {
 		}
 		
 		return list;
+	}
+
+	@Override
+	public List<ShopProductManage> listProduct(Map<String, Object> map) {
+		List<ShopProductManage> list = null;
+		
+		try {
+			list = mapper.listProduct(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public ShopProductManage findByCategory(long categoryNum) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

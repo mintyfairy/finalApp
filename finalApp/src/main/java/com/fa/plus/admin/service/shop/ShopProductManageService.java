@@ -1,6 +1,7 @@
 package com.fa.plus.admin.service.shop;
 
 import java.util.List;
+import java.util.Map;
 
 import com.fa.plus.admin.domain.shop.ShopProductManage;
 
@@ -8,8 +9,12 @@ public interface ShopProductManageService {
 	public void insertProduct(ShopProductManage dto, String pathname) throws Exception;
 	public void insertBrand(ShopProductManage dto) throws Exception;
 	
+	public List<ShopProductManage> listBrand();
+	
+	public List<ShopProductManage> listProduct(Map<String, Object> map);
+	
+	// 상품 상위 카테고리 목록
+	public ShopProductManage findByCategory(long categoryNum);
 	public List<ShopProductManage> listCategory();
 	public List<ShopProductManage> listSubCategory(long parentNum);
-	
-	public List<ShopProductManage> listBrand();
 }

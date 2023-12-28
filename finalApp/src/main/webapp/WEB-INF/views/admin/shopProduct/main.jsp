@@ -81,7 +81,60 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tabs.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
 
+<script type="text/javascript">
+function searchList() {
+	const f = document.searchForm;
+	f.submit();
+}
 
+function changeList() {
+	let parentNum = $("#changeCategory").val();
+	let productShow = $("#changeShowProduct").val();
+	let brandNum = $("#changeBrand").val();
+	
+	const f = document.searchForm;
+	f.parentNum.value = parentNum;
+	f.categoryNum.value = 0;
+	f.productShow.value = productShow;
+	f.brandNum.value = brandNum;
+	searchList();
+}
+
+function changeSubList() {
+	let parentNum = $("#changeCategory").val();
+	let categoryNum = $("#changeSubCategory").val();
+	let productShow = $("#changeShowProduct").val();
+	
+	const f = document.searchForm;
+	f.parentNum.value = parentNum;
+	f.categoryNum.value = categoryNum;
+	f.productShow.value = productShow;
+	searchList();
+}
+
+// 탭
+$(function(){
+	$("button[role='tab']").on('click', function(){
+		const tab = $(this).attr("aria-controls");
+		
+		if(tab === "1") { // 일반상품
+			location.href="${pageContext.request.contextPath}/admin/shopProduct/main";
+		} else if( tab === "2") { // 특가상품
+			$("#changeCategory").val(0);
+			$("#changeBrand").val(0);
+			location.href="${pageContext.request.contextPath}/admin/shopProduct/main?special=1&tab=2&categoryNum=0&brandNum=0";
+		} else if( tab === "3") { // md추천
+			$("#changeCategory").val(0);
+			$("#changeBrand").val(0);
+			location.href="${pageContext.request.contextPath}/admin/shopProduct/main?md=1&tab=3&categoryNum=0&brandNum=0";
+		} else if( tab === "4") { // 캠핑스타터
+			$("#changeCategory").val(0);
+			$("#changeBrand").val(0);
+			location.href="${pageContext.request.contextPath}/admin/shopProduct/main?starter=1&tab=4&categoryNum=0&brandNum=0";
+		}
+	});
+});
+</script>
 
 
 <div class="body-container">
@@ -92,50 +145,55 @@
     <div class="body-main">
 		<ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
 			<li class="nav-item" role="presentation">
-				<button class="nav-link ${special==0?'active':''}" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="1" aria-selected="${special==0?'true':'false'}">모든상품</button>
+				<button class="nav-link ${tab==1?'active':''}" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="1" aria-selected="${tab==1?'true':'false'}">모든상품</button>
 			</li>
 			<li class="nav-item" role="presentation">
-				<button class="nav-link ${special==1?'active':''}" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="2" aria-selected="${special==1?'true':'false'}">분류별상품</button>
+				<button class="nav-link ${special==1?'active':''}" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="2" aria-selected="${special==1?'true':'false'}">특가상품</button>
 			</li>
 			<li class="nav-item" role="presentation">
-				<button class="nav-link ${special==2?'active':''}" id="tab-3" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="3" aria-selected="${brand != ''?'true':'false'}">브랜드</button>
+				<button class="nav-link ${md==1?'active':''}" id="tab-3" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="3" aria-selected="${md==1?'true':'false'}">MD추천</button>
 			</li>
 			<li class="nav-item" role="presentation">
-				<button class="nav-link ${special==2?'active':''}" id="tab-4" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="4" aria-selected="${special==2?'true':'false'}">베스트셀러</button>
-			</li>
-			<li class="nav-item" role="presentation">
-				<button class="nav-link ${special==2?'active':''}" id="tab-5" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="5" aria-selected="${special==1?'true':'false'}">특가상품</button>
-			</li>
-			<li class="nav-item" role="presentation">
-				<button class="nav-link ${special==2?'active':''}" id="tab-6" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="6" aria-selected="${md==1?'true':'false'}">MD추천</button>
-			</li>
-			<li class="nav-item" role="presentation">
-				<button class="nav-link ${special==2?'active':''}" id="tab-7" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="7" aria-selected="${starter==1?'true':'false'}">캠핑스타터</button>
+				<button class="nav-link ${starter==1?'active':''}" id="tab-4" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="4" aria-selected="${starter==1?'true':'false'}">캠핑스타터</button>
 			</li>
 		</ul>
 		
 		<div class="tab-content pt-4" id="myTabContent">
 			<div class="tab-pane fade show active" id="tab-pane" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
 				<div class="row mb-2">
-					<div class="col">
+					<c:if test="${ tab == 1 }">
+					<div id="option_wrap" class="col">
 						<div class="row text-end">
 							<div class="col-auto pe-1">
 								<select id="changeCategory" class="form-select" onchange="changeList();">
 									<c:if test="${listCategory.size() == 0}">
 										<option value="0">:: 텐트 ::</option>
 									</c:if>
+									<option value="0">대분류</option>
 									<c:forEach var="vo" items="${listCategory}">
-										<option value="${vo.categoryNum}" ${parentNum==vo.categoryNum?"selected":""}>타프</option>
+										<option value="${vo.categoryNum}" ${parentNum==vo.categoryNum?"selected":""}>${ vo.categoryName }</option>
 									</c:forEach>
 								</select>
 							</div>
 							<div class="col-auto pe-1">
 								<select id="changeSubCategory" class="form-select" onchange="changeSubList();">
 									<c:if test="${listSubCategory.size() == 0}">
-										<option value="0">:: 듀랑고 ::</option>
+										<option value="0">:: 베이직 텐트 ::</option>
 									</c:if>
+									<option value="0">상세분류</option>
 									<c:forEach var="vo" items="${listSubCategory}">
-										<option value="${vo.categoryNum}" ${categoryNum==vo.categoryNum?"selected":""}>2인텐트</option>
+										<option value="${vo.categoryNum}" ${categoryNum==vo.categoryNum?"selected":""}>${ vo.categoryName }</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="col-auto pe-1">
+								<select id="changeBrand" class="form-select" onchange="changeList();">
+									<c:if test="${listBrand.size() == 0}">
+										<option value="0">:: 브랜드 ::</option>
+									</c:if>
+									<option value="0">브랜드</option>
+									<c:forEach var="vo" items="${listBrand}">
+										<option value="${vo.brandNum}" ${brandNum==vo.brandNum?"selected":""}>${vo.brandName}</option>
 									</c:forEach>
 								</select>
 							</div>
@@ -148,12 +206,13 @@
 							</div>
 						</div>
 					</div>
+					</c:if>
 					<div class="col-auto pt-2 text-end">
 						3개(1/1 페이지)
 					</div>
 				</div>
 				
-				<table class="table table-border table-list">
+				<table class="table table-border table-list" style="width: 1080px;">
 					<colgroup>
 						<col width="100">
 						<col width="*">
@@ -161,7 +220,8 @@
 						<col width="100">
 						<col width="60">
 						<col width="60">
-						<col width="100">
+						<col width="130">
+						<col width="130">
 						<col width="230">
 					</colgroup>
 					<thead>
@@ -172,6 +232,7 @@
 							<th>할인율</th>
 							<th>재고</th>
 							<th>진열</th>
+							<th>등록일</th>
 							<th>수정일</th>
 							<th>변경</th>
 						</tr>
@@ -179,19 +240,21 @@
 					<tbody>
 						<c:forEach var="dto" items="${list}" varStatus="status">
 							<tr valign="middle">
-								<td>1</td>
+								<td>${dto.productNum}</td>
 								<td class="product-subject left">
 									<img src="">
-									<a href="#"><label>튼튼한 텐트</label></a>
+									<a href="#"><label>${ dto.productName }</label></a>
 								</td>
-								<td>30,000</td>
-								<td>10%</td>
-								<td>27,000</td>
-								<td>표시</td>
-								<td>2023.12.23</td>
+								<td>${ dto.price }</td>
+								<td>${ dto.discountRate }%</td>
+								<td>${ dto.totalStock }</td>
+								<td>${ dto.productShow == 1 ? "O" : "X" }</td>
+								<td>${ dto.reg_date }</td>
+								<td>${ dto.updateDate }</td>
 								<td>
 									<button type="button" class="btn border">재고</button>
-									<button type="button" class="btn border">수정</button>
+									<button type="button" class="btn border" onclick="location.href='';">수정</button>
+									<button type="button" class="btn border" onclick="location.href='';">숨김</button>
 								</td>
 							</tr>					
 						</c:forEach>
@@ -222,7 +285,7 @@
 							<button type="button" class="btn btn-light"> <i class="bi bi-arrow-clockwise"></i> </button>				
 						</td>
 						<td align="center">
-							<form class="row justify-content-center" name="searchForm" action="" method="post">
+							<form class="row justify-content-center" name="searchForm" action="${pageContext.request.contextPath}/admin/shopProduct/main" method="post">
 								<div class="col-auto p-1">
 									<select name="schType" class="form-select">
 										<option value="all" >상품명+설명</option>
@@ -232,12 +295,13 @@
 									</select>
 								</div>
 								<div class="col-auto p-1">
-									<input type="text" name="kwd" value="" class="form-control">
-									<input type="hidden" name="size" value="">
-									<input type="hidden" name="special" value="">
-									<input type="hidden" name="parentNum" value="">
-									<input type="hidden" name="categoryNum" value="">
-									<input type="hidden" name="productShow" value="">
+									<input type="text" name="kwd" value="${kwd}" class="form-control">
+									<input type="hidden" name="size" value="${size}">
+									<input type="hidden" name="special" value="${special}">
+									<input type="hidden" name="parentNum" value="${parentNum}">
+									<input type="hidden" name="categoryNum" value="${categoryNum}">
+									<input type="hidden" name="productShow" value="${productShow}">
+									<input type="hidden" name="brandNum" value="${brandNum}">
 								</div>
 								<div class="col-auto p-1">
 									<button type="button" class="btn btn-light" onclick="searchList()"> <i class="bi bi-search"></i> </button>
@@ -251,7 +315,7 @@
 									<c:param name="special" value=""/>
 								</c:if>
 							</c:url>
-							<button type="button" class="btn btn-light">등록하기</button>
+							<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/admin/shopProduct/write';">등록하기</button>
 						</td>
 					</tr>
 				</table>

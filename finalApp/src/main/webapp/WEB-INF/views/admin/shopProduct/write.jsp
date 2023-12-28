@@ -10,20 +10,10 @@
     margin: 0;
 }
 
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    background-color: #f8f9fa;
-}
 
 .container {
-    background-color: #ffffff;
     margin: 70px 0;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .body-title h3 {
@@ -31,13 +21,14 @@ body {
 }
 
 .body-main {
+	display: block;
     margin-top: 20px;
 }
 
 .body-container {
-	max-width: 950px;
+	max-width: 1080px;
     clear: both;
-    margin: 0 auto 10px;
+    margin: 0 auto;
     min-height: 500px;
     padding-top: 20px;
 }
@@ -76,6 +67,7 @@ body {
 	width: 50px; height: 50px; border-radius: 10px;
 	cursor: pointer;
 }
+
 
 </style>
 

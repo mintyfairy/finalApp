@@ -15,16 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fa.plus.admin.domain.shop.ShopProductManage;
 import com.fa.plus.admin.service.shop.ShopProductManageService;
-import com.fa.plus.common.MyUtil;
 
 @Controller
 @RequestMapping("/shop/admin/product/*")
 public class ShopProductManageController {
 	@Autowired
 	private ShopProductManageService service;
-	
-	@Autowired
-	private MyUtil myUtil;
 	
 	@GetMapping("write")
 	public String writeForm(
