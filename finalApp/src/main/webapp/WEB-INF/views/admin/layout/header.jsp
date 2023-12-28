@@ -122,9 +122,6 @@ $(function(){
 					<a href="${pageContext.request.contextPath}/admin/carReservation/reservation" class="sub_menu--link">예약 관리</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="${pageContext.request.contextPath}/admin/carCs/cs" class="sub_menu--link">고객센터 관리</a>
-				</li>
-				<li class="sub_menu--item">
 					<a href="${pageContext.request.contextPath}/admin/carReview/review" class="sub_menu--link">리뷰 및 문의 관리</a>
 				</li>
 				<li class="sub_menu--item">
@@ -149,11 +146,32 @@ $(function(){
 				<li class="sub_menu--item">
 					<a href="${pageContext.request.contextPath}/admin/shopReview/review" class="sub_menu--link">리뷰 및 문의 관리</a>
 				</li>
+			</ul>
+		</li>
+		
+		<li class="menu--item menu--item__has_sub_menu">
+			<label class="menu--link" title="고객센터관리">
+				<i class="menu--icon  fa-fw fa-solid fa-cart-shopping"></i>
+				<span class="menu--label">고객센터관리</span>
+			</label>
+
+			<ul class="sub_menu">
 				<li class="sub_menu--item">
-					<a href="${pageContext.request.contextPath}/admin/shopCustomer/customer" class="sub_menu--link">고객센터 관리</a>
+					<a href="${pageContext.request.contextPath}/admin/cs/notice" class="sub_menu--link">공지사항</a>
+				</li>
+				<li class="sub_menu--item">
+					<a href="${pageContext.request.contextPath}/admin/cs/faq" class="sub_menu--link">faq</a>
+				</li>
+				<li class="sub_menu--item">
+					<a href="${pageContext.request.contextPath}/admin/cs/qna" class="sub_menu--link">1:1문의</a>
+				</li>
+				<li class="sub_menu--item">
+					<a href="${pageContext.request.contextPath}/admin/cs/event" class="sub_menu--link">이벤트</a>
 				</li>
 			</ul>
 		</li>
+		
+		
 		
 		<li class="menu--item">
 	        <a href="<c:url value='/admin/salesManage/main'/>" class="menu--link" title="매출 관리">
