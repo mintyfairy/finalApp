@@ -56,112 +56,14 @@ function check() {
 	let str, b;
 	let mode = "${mode}";
 	
-	if(! f.parentNum.value) {
-		alert("카테고리를 선택하세요.");
-		f.parentNum.focus();
-		return false;
-	}
-
-	if(! f.categoryNum.value) {
-		alert("카테고리를 선택하세요.");
-		f.categoryNum.focus();
-		return false;
-	}
 	
 	if(! f.productName.value.trim()) {
-		alert("상품명을 입력하세요.");
+		alert("장소명을 입력하세요.");
 		f.productName.focus();
 		return false;
 	}
 	
-	if(!/^(\d){1,8}$/.test(f.price.value)) {
-		alert("상품가격을 입력 하세요.");
-		f.price.focus();
-		return false;
-	}
-	
-	if(!/^(\d){1,2}$/.test(f.discountRate.value)) {
-		alert("할인율을 입력 하세요.");
-		f.discountRate.focus();
-		return false;
-	}
-
-	if(!/^(\d){1,7}$/.test(f.savedMoney.value)) {
-		alert("적립금을 입력 하세요.");
-		f.savedMoney.focus();
-		return false;
-	}
-	
-	if(!/^(\d){1,8}$/.test(f.delivery.value)) {
-		alert("배송비를 입력 하세요.");
-		f.delivery.focus();
-		return false;
-	}
-	
-	if(! f.optionName.value.trim()) {
-		alert("상위 옵션명 입력 하세요.");
-		f.optionName.focus();
-		return false;
-	}
-	
-	b = true;
-	$("input[name=optionValues]").each(function(){
-		if(! $(this).val().trim()) {
-			b= false;
-			return false;
-		}
-	});
-	
-	if(! b) {
-		alert("상위 옵션값을 입력 하세요.");
-		return false;
-	}
-	
-	if(! f.optionName2.value.trim()) {
-		alert("하위 옵션명 입력 하세요.");
-		f.optionName2.focus();
-		return false;
-	}
-	
-	b = true;
-	$("input[name=optionValues2]").each(function(){
-		if(! $(this).val().trim()) {
-			b= false;
-			return false;
-		}
-	});
-	if(! b) {
-		alert("하위 옵션값을 입력 하세요.");
-		return false;
-	}
-	
-	b = false;
-	for(let ps of f.productShow) {
-		if( ps.checked ) {
-			b = true;
-			break;
-		}
-	}
-	if( ! b ) {
-		alert("상품진열 여부를 선택하세요.");
-		f.productShow[0].focus();
-		return false;
-	}
-	
-	str = f.content.value.trim();
-	if( !str || str === "<p><br></p>" ) {
-		alert("상품 설명을 입력하세요.");
-		f.content.focus();
-		return false;
-	}
-
-	if(mode === "write" && ! f.thumbnailFile.value) {
-		alert("대표 이미지를 등록하세요.");
-		f.thumbnailFile.focus();
-		return false;
-	}
-	
-	f.action = "${pageContext.request.contextPath}/admin/product/${mode}";
+	f.action = "{pageContext.request.contextPath}/siteManage/room/${num}/${mode}";
 	return true;
 }
 </script>
@@ -204,142 +106,9 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 	$.ajax(url, settings);
 }
 
-$(function(){
-	$("form select[name=parentNum]").change(function(){
-		let parentNum = $(this).val();
-		
-		$("form select[name=categoryNum]").find('option').remove().end()
-			.append("<option value=''>:: 카테고리 선택 ::</option>");	
-		
-		if(! parentNum) {
-			return false;
-		}
-		
-		let url = "${pageContext.request.contextPath}/admin/product/listSubCategory";
-		let query = "parentNum="+parentNum;
-		
-		const fn = function(data) {
-			$.each(data.listSubCategory, function(index, item){
-				let categoryNum = item.categoryNum;
-				let categoryName = item.categoryName;
-				let s = "<option value='"+categoryNum+"'>"+categoryName+"</option>";
-				$("form select[name=categoryNum]").append(s);
-			});
-		};
-		ajaxFun(url, "get", query, "json", fn);
-		
-	});
-});
+
 </script>
 
-<script type="text/javascript">
-$(function(){
-	$(".btnOptionAdd").click(function(){
-		let $el = $(this).closest(".option-area").find(".optionValue-area");
-		if($el.find(".input-group").length >= 5) {
-			alert("옵션은 최대 5개까지 가능합니다.");
-			return false;
-		}
-		let $option = $(".option-area .optionValue-area .input-group:first-child").clone();
-		
-		$option.find("input[type=hidden]").remove();
-		$option.find("input[name=optionValues]").removeAttr("value");
-		$option.find("input[name=optionValues]").val("");
-		$el.append($option);
-	});
-	
-	$(".option-area").on("click", ".option-minus", function(){
-		let $minus = $(this);
-		let $el = $minus.closest(".option-area").find(".optionValue-area");
-		
-		// 수정에서 등록된 자료 삭제
-		let mode = "${mode}";
-		if(mode === "update" && $minus.parent(".input-group").find("input[name=detailNums]").length === 1) {
-			// 저장된 옵션값중 최소 하나는 삭제되지 않도록 설정
-			if($el.find(".input-group input[name=detailNums]").length <= 1) {
-				alert("옵션값은 최소 하나이상 필요합니다.");	
-				return false;
-			}
-			
-			if(! confirm("옵션값을 삭제 하시겠습니까 ? ")) {
-				return false;
-			}
-			
-			let detailNum = $minus.parent(".input-group").find("input[name=detailNums]").val();
-			let url = "${pageContext.request.contextPath}/admin/product/deleteOptionDetail";
-			$.post(url, {detailNum:detailNum}, function(data){
-				if(data.state === "true") {
-					$minus.closest(".input-group").remove();
-				} else {
-					alert("옵션값을 삭제할 수 없습니다.");
-				}
-			}, "json");
-			
-			return false;			
-		}
-		
-		if($el.find(".input-group").length <= 1) {
-			$el.find("input[name=optionValues]").val("");
-			return false;
-		}
-		
-		$minus.closest(".input-group").remove();
-	});
-});
-
-$(function(){
-	$(".btnOptionAdd2").click(function(){
-		let $el = $(this).closest(".option-area2").find(".optionValue-area2");
-		if($el.find(".input-group").length >= 5) {
-			alert("옵션 값은 최대 5개까지 가능합니다.");
-			return false;
-		}
-		let $option = $(".option-area2 .optionValue-area2 .input-group:first-child").clone();
-		
-		$option.find("input[type=hidden]").remove();
-		$option.find("input[name=optionValues2]").removeAttr("value");
-		$option.find("input[name=optionValues2]").val("");
-		$el.append($option);
-	});
-	
-	$(".option-area2").on("click", ".option-minus2", function(){
-		let $minus = $(this);
-		let $el = $minus.closest(".option-area2").find(".optionValue-area2");
-		
-		// 수정에서 등록된 자료 삭제
-		let mode = "${mode}";
-		if(mode === "update" && $minus.parent(".input-group").find("input[name=detailNums2]").length === 1) {
-			// 저장된 옵션값중 최소 하나는 삭제되지 않도록 설정
-			if($el.find(".input-group input[name=detailNums2]").length <= 1) {
-				alert("옵션값은 최소 하나이상 필요합니다.");	
-				return false;
-			}
-			
-			if(! confirm("옵션값을 삭제 하시겠습니까 ? ")) {
-				return false;
-			}
-			
-			let detailNum = $minus.parent(".input-group").find("input[name=detailNums2]").val();
-			let url = "${pageContext.request.contextPath}/admin/product/deleteOptionDetail";
-			$.post(url, {detailNum:detailNum}, function(data){
-				if(data.state === "true") {
-					$minus.closest(".input-group").remove();
-				} else {
-					alert("옵션값을 삭제할 수 없습니다.");
-				}
-			}, "json");
-			
-		}
-		
-		if($el.find(".input-group").length <= 1) {
-			$el.find("input[name=optionValues2]").val("");
-			return false;
-		}
-		
-		$minus.closest(".input-group").remove();
-	});
-});
-</script>
 
 
 <div class="container">
@@ -356,27 +125,40 @@ $(function(){
 					<tr>
 						<td class="table-light col-sm-2">장소명</td>
 						<td>
-							<input type="text" name="productName" class="form-control" value="${dto.productName}">
+							<input type="text" name="detailName" class="form-control" value="${dto.productName}">
 						</td>
 					</tr>
 					
 					<tr>
-						<td class="table-light col-sm-2 ">일일 대여 가격</td><!-- 나중에 특별 요금변화 (성수기)테이블 추가? -->
+						<td class="table-light col-sm-2 ">일일 대여비(원)</td><!-- 나중에 특별 요금변화 (성수기)테이블 추가? -->
 						<td class="col-auto">
-							<input type="text" name="price" class="form-control " value="${dto.price}"> <div>원</div> 
+							<input type="text" name="price" class="form-control " value="${dto.price}"> 
 						</td>
 					</tr>
 					<tr>
-						<td class="table-light col-sm-2">장소 크기</td>
+						<td class="table-light col-sm-2">장소 크기(평)</td>
 						<td>
-							<input type="text" name="price" class="form-control" value="${dto.price}">
+							<input type="text" name="area" class="form-control" value="${dto.area}">
+						</td>
+					</tr>
+					<tr>
+						<td class="table-light col-sm-2">바닥 재질</td>
+						<td>
+							<select name="floor" class="form-select">
+										<option value="" >:: 분류 ::</option>
+										<option value="1" ${dto.floor==1?"selected":""}>데크</option>
+                                        <option value="2" ${dto.floor==2?"selected":""}>잔디</option>
+                                        <option value="3" ${dto.floor==3?"selected":""}>자갈</option>
+                                        <option value="4" ${dto.floor==4?"selected":""}>흙</option>
+                                        <option value="5" ${dto.floor==5?"selected":""}>기타</option>
+									</select>
 						</td>
 					</tr>
 					
 					<tr>
-						<td class="table-light col-sm-2">적정인원</td>
+						<td class="table-light col-sm-2">적정인원(명)</td>
 						<td>
-							<input type="text" name="price" class="form-control" value="${dto.price}">
+							<input type="text" name="capacity" class="form-control" value="${dto.capacity}">
 						</td>
 					</tr>
 					
@@ -438,47 +220,7 @@ $(function(){
 
 <script type="text/javascript">
 // 대표(썸네일) 이미지
-$(function(){
-	var img = "${dto.thumbnail}";
-	if( img ) {
-		img = "${pageContext.request.contextPath}/uploads/product/"+img;
-		$(".table-form .thumbnail-viewer").empty();
-		$(".table-form .thumbnail-viewer").css("background-image", "url("+img+")");
-	}
-	
-	$(".table-form .thumbnail-viewer").click(function(){
-		$("form[name=productForm] input[name=thumbnailFile]").trigger("click");
-	});
-	
-	$("form[name=productForm] input[name=thumbnailFile]").change(function(){
-		let file = this.files[0];
-		
-		if(! file) {
-			$(".table-form .thumbnail-viewer").empty();
-			
-			if( img ) {
-				img = "${pageContext.request.contextPath}/uploads/product/"+img;
-			} else {
-				img = "${pageContext.request.contextPath}/resources/images/add_photo.png";
-			}
-			$(".table-form .thumbnail-viewer").css("background-image", "url("+img+")");
-			
-			return false;
-		}
-		
-		if( ! file.type.match("image.*") ) {
-			this.focus();
-			return false;
-		}
-		
-		var reader = new FileReader();
-		reader.onload = function(e) { // 파일의 내용을 다 읽었으면
-			$(".table-form .thumbnail-viewer").empty();
-			$(".table-form .thumbnail-viewer").css("background-image", "url("+e.target.result+")");
-		};
-		reader.readAsDataURL( file );
-	});
-});
+
 
 // 수정에서 등록된 추가 이미지 삭제
 $(function(){

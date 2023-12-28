@@ -47,7 +47,7 @@ $(function(){
 		let special = "${special}";
 		$("select[name=special]").val(special);
 		
-		$("#productShow1").prop("checked", true);
+		$("#siteOption1").prop("checked", true);
 	}
 });
 
@@ -56,104 +56,13 @@ function check() {
 	let str, b;
 	let mode = "${mode}";
 	
-	if(! f.parentNum.value) {
-		alert("카테고리를 선택하세요.");
-		f.parentNum.focus();
-		return false;
-	}
-
-	if(! f.categoryNum.value) {
-		alert("카테고리를 선택하세요.");
-		f.categoryNum.focus();
-		return false;
-	}
 	
-	if(! f.productName.value.trim()) {
-		alert("상품명을 입력하세요.");
+	if(! f.siteName.value.trim()) {
+		alert("이름을 입력하세요.");
 		f.productName.focus();
 		return false;
 	}
 	
-	if(!/^(\d){1,8}$/.test(f.price.value)) {
-		alert("상품가격을 입력 하세요.");
-		f.price.focus();
-		return false;
-	}
-	
-	if(!/^(\d){1,2}$/.test(f.discountRate.value)) {
-		alert("할인율을 입력 하세요.");
-		f.discountRate.focus();
-		return false;
-	}
-
-	if(!/^(\d){1,7}$/.test(f.savedMoney.value)) {
-		alert("적립금을 입력 하세요.");
-		f.savedMoney.focus();
-		return false;
-	}
-	
-	if(!/^(\d){1,8}$/.test(f.delivery.value)) {
-		alert("배송비를 입력 하세요.");
-		f.delivery.focus();
-		return false;
-	}
-	
-	if(! f.optionName.value.trim()) {
-		alert("상위 옵션명 입력 하세요.");
-		f.optionName.focus();
-		return false;
-	}
-	
-	b = true;
-	$("input[name=optionValues]").each(function(){
-		if(! $(this).val().trim()) {
-			b= false;
-			return false;
-		}
-	});
-	
-	if(! b) {
-		alert("상위 옵션값을 입력 하세요.");
-		return false;
-	}
-	
-	if(! f.optionName2.value.trim()) {
-		alert("하위 옵션명 입력 하세요.");
-		f.optionName2.focus();
-		return false;
-	}
-	
-	b = true;
-	$("input[name=optionValues2]").each(function(){
-		if(! $(this).val().trim()) {
-			b= false;
-			return false;
-		}
-	});
-	if(! b) {
-		alert("하위 옵션값을 입력 하세요.");
-		return false;
-	}
-	
-	b = false;
-	for(let ps of f.productShow) {
-		if( ps.checked ) {
-			b = true;
-			break;
-		}
-	}
-	if( ! b ) {
-		alert("상품진열 여부를 선택하세요.");
-		f.productShow[0].focus();
-		return false;
-	}
-	
-	str = f.content.value.trim();
-	if( !str || str === "<p><br></p>" ) {
-		alert("상품 설명을 입력하세요.");
-		f.content.focus();
-		return false;
-	}
 
 	if(mode === "write" && ! f.thumbnailFile.value) {
 		alert("대표 이미지를 등록하세요.");
@@ -161,7 +70,7 @@ function check() {
 		return false;
 	}
 	
-	f.action = "${pageContext.request.contextPath}/admin/product/${mode}";
+	f.action = "${pageContext.request.contextPath}/siteManage/site/${mode}";
 	return true;
 }
 </script>
@@ -204,148 +113,12 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 	$.ajax(url, settings);
 }
 
-$(function(){
-	$("form select[name=parentNum]").change(function(){
-		let parentNum = $(this).val();
-		
-		$("form select[name=categoryNum]").find('option').remove().end()
-			.append("<option value=''>:: 카테고리 선택 ::</option>");	
-		
-		if(! parentNum) {
-			return false;
-		}
-		
-		let url = "${pageContext.request.contextPath}/admin/product/listSubCategory";
-		let query = "parentNum="+parentNum;
-		
-		const fn = function(data) {
-			$.each(data.listSubCategory, function(index, item){
-				let categoryNum = item.categoryNum;
-				let categoryName = item.categoryName;
-				let s = "<option value='"+categoryNum+"'>"+categoryName+"</option>";
-				$("form select[name=categoryNum]").append(s);
-			});
-		};
-		ajaxFun(url, "get", query, "json", fn);
-		
-	});
-});
 </script>
-
-<script type="text/javascript">
-$(function(){
-	$(".btnOptionAdd").click(function(){
-		let $el = $(this).closest(".option-area").find(".optionValue-area");
-		if($el.find(".input-group").length >= 5) {
-			alert("옵션은 최대 5개까지 가능합니다.");
-			return false;
-		}
-		let $option = $(".option-area .optionValue-area .input-group:first-child").clone();
-		
-		$option.find("input[type=hidden]").remove();
-		$option.find("input[name=optionValues]").removeAttr("value");
-		$option.find("input[name=optionValues]").val("");
-		$el.append($option);
-	});
-	
-	$(".option-area").on("click", ".option-minus", function(){
-		let $minus = $(this);
-		let $el = $minus.closest(".option-area").find(".optionValue-area");
-		
-		// 수정에서 등록된 자료 삭제
-		let mode = "${mode}";
-		if(mode === "update" && $minus.parent(".input-group").find("input[name=detailNums]").length === 1) {
-			// 저장된 옵션값중 최소 하나는 삭제되지 않도록 설정
-			if($el.find(".input-group input[name=detailNums]").length <= 1) {
-				alert("옵션값은 최소 하나이상 필요합니다.");	
-				return false;
-			}
-			
-			if(! confirm("옵션값을 삭제 하시겠습니까 ? ")) {
-				return false;
-			}
-			
-			let detailNum = $minus.parent(".input-group").find("input[name=detailNums]").val();
-			let url = "${pageContext.request.contextPath}/admin/product/deleteOptionDetail";
-			$.post(url, {detailNum:detailNum}, function(data){
-				if(data.state === "true") {
-					$minus.closest(".input-group").remove();
-				} else {
-					alert("옵션값을 삭제할 수 없습니다.");
-				}
-			}, "json");
-			
-			return false;			
-		}
-		
-		if($el.find(".input-group").length <= 1) {
-			$el.find("input[name=optionValues]").val("");
-			return false;
-		}
-		
-		$minus.closest(".input-group").remove();
-	});
-});
-
-$(function(){
-	$(".btnOptionAdd2").click(function(){
-		let $el = $(this).closest(".option-area2").find(".optionValue-area2");
-		if($el.find(".input-group").length >= 5) {
-			alert("옵션 값은 최대 5개까지 가능합니다.");
-			return false;
-		}
-		let $option = $(".option-area2 .optionValue-area2 .input-group:first-child").clone();
-		
-		$option.find("input[type=hidden]").remove();
-		$option.find("input[name=optionValues2]").removeAttr("value");
-		$option.find("input[name=optionValues2]").val("");
-		$el.append($option);
-	});
-	
-	$(".option-area2").on("click", ".option-minus2", function(){
-		let $minus = $(this);
-		let $el = $minus.closest(".option-area2").find(".optionValue-area2");
-		
-		// 수정에서 등록된 자료 삭제
-		let mode = "${mode}";
-		if(mode === "update" && $minus.parent(".input-group").find("input[name=detailNums2]").length === 1) {
-			// 저장된 옵션값중 최소 하나는 삭제되지 않도록 설정
-			if($el.find(".input-group input[name=detailNums2]").length <= 1) {
-				alert("옵션값은 최소 하나이상 필요합니다.");	
-				return false;
-			}
-			
-			if(! confirm("옵션값을 삭제 하시겠습니까 ? ")) {
-				return false;
-			}
-			
-			let detailNum = $minus.parent(".input-group").find("input[name=detailNums2]").val();
-			let url = "${pageContext.request.contextPath}/admin/product/deleteOptionDetail";
-			$.post(url, {detailNum:detailNum}, function(data){
-				if(data.state === "true") {
-					$minus.closest(".input-group").remove();
-				} else {
-					alert("옵션값을 삭제할 수 없습니다.");
-				}
-			}, "json");
-			
-		}
-		
-		if($el.find(".input-group").length <= 1) {
-			$el.find("input[name=optionValues2]").val("");
-			return false;
-		}
-		
-		$minus.closest(".input-group").remove();
-	});
-});
-</script>
-
 
 <div class="container">
 	<div class="body-container">
 		<div class="body-title">
-			<h3><i class="bi bi-app"></i> 상품관리 </h3>
+			<h3><i class="bi bi-app"></i> 캠핑장 관리 </h3>
 		</div>
 		
 		<div class="body-main">
@@ -357,26 +130,33 @@ $(function(){
 						<td>
 							<div class="row">
 								<div class="col-6 pe-1">
-									<select name="parentNum" class="form-select">
-										<option value="">:: 분류 ::</option>
-										<c:forEach var="vo" items="${listCategory}">
-											<option value="${vo.categoryNum}" ${parentNum==vo.categoryNum?"selected":""}>${vo.categoryName}</option>
-										</c:forEach>
+									<select name="category" class="form-select">
+										<option value="" >:: 분류 ::</option>
+										<option value="1" ${dto.category==1?"selected":""}>오토캠핑</option>
+                                        <option value="2" ${dto.category==2?"selected":""}>글램핑</option>
+                                        <option value="3" ${dto.category==3?"selected":""}>카라반</option>
+                                        <option value="4" ${dto.category==4?"selected":""}>방갈로</option>
+                                        <option value="5" ${dto.category==5?"selected":""}>차박</option>
 									</select>
 								</div>
 								<div class="col-6 ps-1">
-									<select name="categoryNum" class="form-select">
+									<select name="environment" class="form-select">
 										<option value="">:: 환경 ::</option>
-										<c:forEach var="vo" items="${listSubCategory}">
-											<option value="${vo.categoryNum}" ${dto.categoryNum==vo.categoryNum?"selected":""}>${vo.categoryName}</option>
-										</c:forEach>
+										<option value="1" ${dto.environment==1?"selected":""}>산</option>
+                                        <option value="2" ${dto.environment==2?"selected":""}>강</option>
+                                        <option value="3" ${dto.environment==3?"selected":""}>바다</option>
+                                        <option value="4" ${dto.environment==4?"selected":""}>도심</option>
+                                        <option value="5" ${dto.environment==5?"selected":""}>계곡</option>
+                                        <option value="6" ${dto.environment==6?"selected":""}>호수</option>
+                                        <option value="7" ${dto.environment==7?"selected":""}>평야</option>
+                                        <option value="8" ${dto.environment==8?"selected":""}>기타</option>
 									</select>
 								</div>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td class="table-light col-sm-2">업소명</td>
+						<td class="table-light col-sm-2">업체명</td>
 						<td>
 							<input type="text" name="sitetName" class="form-control" value="${dto.siteName}">
 						</td>
@@ -384,24 +164,37 @@ $(function(){
 					<tr>
 						<td class="table-light col-sm-2">지역구분</td>
 						<td>
-							<select name="special" class="form-select">
-								<option value="0" ${dto.special==0?"selected":""}>일반상품</option>
-								<option value="1" ${dto.special==1?"selected":""}>특가상품</option>
-								<option value="2" ${dto.special==2?"selected":""}>기획상품</option>
+							<select name="siteLocal" class="form-select">
+										<option selected> 지역 </option>
+                              			<option value="1" ${dto.siteLocal==1?"selected":""}>서울</option>
+                               			<option value="2" ${dto.siteLocal==2?"selected":""}>인천</option>
+                                        <option value="3" ${dto.siteLocal==3?"selected":""}>경기</option>
+                                        <option value="4" ${dto.siteLocal==4?"selected":""}>강원</option>
+                                        <option value="5" ${dto.siteLocal==5?"selected":""}>대전</option>
+                                        <option value="6" ${dto.siteLocal==6?"selected":""}>세종</option>
+                                        <option value="7" ${dto.siteLocal==7?"selected":""}>충북</option>
+                                        <option value="8" ${dto.siteLocal==8?"selected":""}>충남</option>
+                                        <option value="9" ${dto.siteLocal==9?"selected":""}>대구</option>
+                                        <option value="10" ${dto.siteLocal==10?"selected":""}>울산</option>
+                                        <option value="11" ${dto.siteLocal==11?"selected":""}>경북</option>
+                                        <option value="12" ${dto.siteLocal==12?"selected":""}>경남</option>
+                                        <option value="13" ${dto.siteLocal==13?"selected":""}>전북</option>
+                                        <option value="14" ${dto.siteLocal==14?"selected":""}>전남</option>
+                                        <option value="15" ${dto.siteLocal==15?"selected":""}>제주</option>
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<td class="table-light col-sm-2">입실시간</td>
 						<td>
-							<input type="time" name="price" class="form-control" value="${dto.price}">
+							<input type="time" name="chekcIn" class="form-control" value="${dto.chekcIn}">
 						</td>
 					</tr>
 
 					<tr>
 						<td class="table-light col-sm-2">퇴실시간</td>
 						<td>
-							<input type="time" name="savedMoney" class="form-control" value="${dto.savedMoney}">
+							<input type="time" name="checkOut" class="form-control" value="${dto.checkOut}">
 						</td>
 					</tr>
 					
@@ -411,21 +204,18 @@ $(function(){
 						<td class="table-light col-sm-2">캠핑장옵션</td>
 						<td>
 							<div class="pt-2 pb-2">
-								<input type="checkbox" name="productShow" class="form-check-input"  value="1" ${dto.productShow==1 ? "checked='checked'" : "" }> <label class="form-check-label" for="productShow1">상품진열</label>
+								<input type="checkbox" name="siteOption" class="form-check-input"  value="1" ${dto.siteOption==1 ? "checked='checked'" : "" }> <label class="form-check-label" >전기</label>
 								&nbsp;&nbsp;
-								<input type="checkbox" name="productShow" class="form-check-input"  value="0" ${dto.productShow==0 ? "checked='checked'" : "" }> <label class="form-check-label" for="productShow0">진열안함</label>
+								<input type="checkbox" name="siteOption" class="form-check-input"  value="0" ${dto.siteOption==0 ? "checked='checked'" : "" }> <label class="form-check-label" >와이파이</label>
 								&nbsp;&nbsp;
-								<input type="checkbox" name="productShow" class="form-check-input"  value="0" ${dto.productShow==0 ? "checked='checked'" : "" }> <label class="form-check-label" for="productShow0">진열안함</label>
+								<input type="checkbox" name="siteOption" class="form-check-input"  value="0" ${dto.siteOption==0 ? "checked='checked'" : "" }> <label class="form-check-label" > 비비큐 장비 대여</label>
 								&nbsp;&nbsp;
-								<input type="checkbox" name="productShow" class="form-check-input"  value="0" ${dto.productShow==0 ? "checked='checked'" : "" }> <label class="form-check-label" for="productShow0">진열안함</label>
+								<input type="checkbox" name="siteOption" class="form-check-input"  value="0" ${dto.siteOption==0 ? "checked='checked'" : "" }> <label class="form-check-label" >운동장</label>
 								&nbsp;&nbsp;
-								<input type="checkbox" name="productShow" class="form-check-input" value="0" ${dto.productShow==0 ? "checked='checked'" : "" }> <label class="form-check-label" for="productShow0">진열안함</label>
+								<input type="checkbox" name="siteOption" class="form-check-input" value="0" ${dto.siteOption==0 ? "checked='checked'" : "" }> <label class="form-check-label" >화장실</label>
 								&nbsp;&nbsp;
-								<input type="checkbox" name="productShow" class="form-check-input"  value="0" ${dto.productShow==0 ? "checked='checked'" : "" }> <label class="form-check-label" for="productShow0">진열안함</label>
-								&nbsp;&nbsp;
-								<input type="checkbox" name="productShow" class="form-check-input"  value="0" ${dto.productShow==0 ? "checked='checked'" : "" }> <label class="form-check-label" for="productShow0">진열안함</label>
-								&nbsp;&nbsp;
-								<input type="checkbox" name="productShow" class="form-check-input"  value="0" ${dto.productShow==0 ? "checked='checked'" : "" }> <label class="form-check-label" for="productShow0">진열안함</label>
+								<input type="checkbox" name="siteOption" class="form-check-input"  value="0" ${dto.siteOption==0 ? "checked='checked'" : "" }> <label class="form-check-label" >샤워장</label>
+								
 							</div>
 						</td>
 					</tr>
@@ -433,10 +223,40 @@ $(function(){
 					<tr>
 						<td class="table-light col-sm-2">캠핑장 설명</td>
 						<td>
-							<textarea name="content" id="ir1" class="form-control" style="max-width: 95%; height: 290px;">${dto.content}</textarea>
+							<textarea name="introduce" id="ir1" class="form-control" style="max-width: 95%; height: 290px;">${dto.content}</textarea>
 						</td>
 					</tr>
+					<tr>
+						<td class="table-light col-sm-2" ><label  for="zip">우편번호</label></td>
+						<td>
+							<div class="row mb-3">
+		                        <div class="col-sm-5">
+		                           <div class="input-group">
+		                               <input type="text" name="zip" id="zip" class="form-control" placeholder="우편번호" value="${dto.zip}" readonly>
+		                               <button class="btn btn-light" type="button" style="margin-left: 3px;" onclick="daumPostcode();">우편번호 검색</button>
+		                           </div>
+		                    	</div>
+		                    </div>
+              
+                    
+						</td>
 					
+					</tr>
+					<tr>
+						<td class="table-light col-sm-2" ><label  for="addr1">주소</label></td>
+						<td>
+							<div class="row mb-3">
+			                    <div class="col-sm-10">
+			                           <div>
+			                               <input type="text" name="addr1" id="addr1" class="form-control" placeholder="기본 주소" value="${dto.addr1}" readonly>
+			                           </div>
+			                           <div style="margin-top: 5px;">
+			                             <input type="text" name="addr2" id="addr2" class="form-control" placeholder="상세 주소" value="${dto.addr2}">
+			                      		</div>
+			                    </div>
+		                    </div>
+						</td>
+					</tr>
 					<tr>
 						<td class="table-light col-sm-2">대표이미지</td>
 						<td>
@@ -618,6 +438,7 @@ $(function(){
 </script>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
@@ -644,5 +465,46 @@ function setDefaultFont() {
 	var sDefaultFont = '돋움';
 	var nFontSize = 12;
 	oEditors.getById["ir1"].setDefaultFont(sDefaultFont, nFontSize);
+}
+function daumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var fullAddr = ''; // 최종 주소 변수
+            var extraAddr = ''; // 조합형 주소 변수
+
+            // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                fullAddr = data.roadAddress;
+
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                fullAddr = data.jibunAddress;
+            }
+
+            // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+            if(data.userSelectedType === 'R'){
+                //법정동명이 있을 경우 추가한다.
+                if(data.bname !== ''){
+                    extraAddr += data.bname;
+                }
+                // 건물명이 있을 경우 추가한다.
+                if(data.buildingName !== ''){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('zip').value = data.zonecode; //5자리 새우편번호 사용
+            document.getElementById('addr1').value = fullAddr;
+
+            // 커서를 상세주소 필드로 이동한다.
+            document.getElementById('addr2').focus();
+        }
+    }).open();
 }
 </script>

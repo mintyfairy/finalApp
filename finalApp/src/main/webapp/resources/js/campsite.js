@@ -1,6 +1,8 @@
 (function ($) {
     "use strict";
 	
+	var first;
+	var second;
 	var period=0;
     // Spinner
     var spinner = function () {
@@ -123,6 +125,12 @@
 						) 
 							&& iter_date < today) {						
 						var m = '<div class="past-date">';
+					}else if (
+								(
+									1>4 
+								)
+							&& iter_date > today){
+						var m = '<div class="choosed-date">';
 					} else {
 						var m = checkToday(iter_date)?'<div class="today">':"<div>";
 					}
@@ -146,8 +154,9 @@
 			clickedElement.on("click", function(){
 				clicked = $(this);
 				if (clicked.hasClass('past-date')) { return; }
+				//if (clicked.hasClass('choosed-date')) { return; }
 				var whichCalendar = calendar.name;
-				console.log(whichCalendar);
+				//console.log(whichCalendar);
 				// Understading which element was clicked;
 				// var parentClass = $(this).parent().parent().attr('class');
 				if (firstClick && secondClick) {
@@ -189,7 +198,7 @@
 					selected[firstClicked.year] = {};
 					selected[firstClicked.year][firstClicked.month] = [firstClicked.date];
 				} else {
-					console.log('second click');
+					//console.log('second click');
 					secondClick = true;
 					secondClicked = getClickedInfo(clicked, calendar);
 					//console.log(secondClicked);
@@ -401,7 +410,7 @@
 				generateCalendars("previous");
 			} else { generateCalendars("next"); }
 			clickedElement = bothCals.find(".calendar_content").find("div");
-			console.log("checking");
+			//console.log("checking");
 			bothCals.find(".calendar_content").find("div").each(function(){
 							$(this).removeClass("selected");
 						});	
@@ -445,7 +454,22 @@
 				var added_year = secondClicked.year;
 				var added_month = secondClicked.month;
 				var added_date = secondClicked.date;
+				/*console.log("---------------------------");
 				console.log(selected);
+				
+				console.log(Object.keys(selected));
+				console.log(Object.keys(Object.keys(selected)));
+				console.log(Object.keys(selected)[0][0]);
+				console.log(JSON.stringify(selected));*/
+				if(Object.keys(selected).length>2){
+					let cnt=1;
+					for (let i of Object.keys(selected)){
+						console.log((cnt++)+"번째 :"+i)
+						for(let j= 0; j < i.length; j++){
+							console.log(i.j);
+						}
+					}
+				}
 			
 
 				if (added_year > firstClicked.year) {	
@@ -459,7 +483,7 @@
 					}
 			
 					added_month = added_month - 1;
-					console.log(added_month);
+					//console.log(added_month);
 					while (added_month >= 0) {
 						selected[added_year][added_month] = [];
 						for (var i = 1; 
@@ -517,8 +541,8 @@
 				}
 			}
 				
-			let first=firstClicked.year+'-'+(firstClicked.month+1)+'-'+firstClicked.date;
-			let second= secondClicked.year+'-'+(secondClicked.month+1)+'-'+secondClicked.date;
+			first=firstClicked.year+'-'+(firstClicked.month+1)+'-'+firstClicked.date;
+			second= secondClicked.year+'-'+(secondClicked.month+1)+'-'+secondClicked.date;
 			period=getDateDiff(first, second)+1;
 			if(period>5){
 				alert("최대 5일까지 예약할 수 있습니다 ");
@@ -544,7 +568,8 @@
 					alert("날짜를 선택하지 않으셨습니다.");
 					return false;
 				}
-				console.log(period);
+				console.log(first+"~"+second);
+				console.log(period+"일 예약");
 				$(this).closest(".modal").hide();
 		    });
 		$(document).on("click",".calCart",function(){
@@ -556,6 +581,8 @@
 					return false;
 				}
 				console.log(period);
+				console.log(first+"~"+second);
+				console.log(period+"일 예약");
 				$(this).closest(".modal").hide();
 		    })
 		});

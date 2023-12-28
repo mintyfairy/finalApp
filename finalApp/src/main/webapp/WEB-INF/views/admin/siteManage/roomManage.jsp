@@ -16,12 +16,12 @@
 
 <div class="body-container">
     <div class="body-title">
-		<h2><i class="fa-solid fa-user-group"></i> 캠핑장관리 </h2>
+		<h2><i class="fa-solid fa-user-group"></i> ${dto.siteName} 관리 </h2>
 		<table class="table">
 			<tr>
 				<td align="right">
 					<button type="button" class="btn-border-primary" onclick="
-								location.href ='${pageContext.request.contextPath}/siteManage/site/write'">켐핑장 등록</button>
+								location.href ='${pageContext.request.contextPath}/siteManage/room/1/write'">장소 등록</button>
 				</td>
 			</tr>
 		</table>
@@ -38,10 +38,9 @@
 			<tbody>
 				<tr>
 						<td>1</td>
-						<td><a href="${pageContext.request.contextPath}/admin/siteManage/roomList/1">이름ㅇㅇ라믕ㅁ</a></td>
+						<td><a href=" ">이름ㅇㅇ라믕ㅁ</a></td>
 						<td>머임?</td>
 						<td>
-							<button type="button" class="btn-border-primary" onclick="deleteBoard('${dto.boardUrl}')">장소 등록</button>
 							<button type="button" class="btn-border-primary">수정</button>
 							<button type="button" class="btn-border-primary" onclick="deleteBoard('${dto.boardUrl}')">삭제</button>
 						</td>

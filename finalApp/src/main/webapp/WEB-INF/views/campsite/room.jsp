@@ -57,25 +57,44 @@
                                 <div class="col-md-2">
                                     <select class="form-select" name="siteLocal">
                                         <option selected> 지역 </option>
-                                        <option value="1">Adult 1</option>
-                                        <option value="2">Adult 2</option>
-                                        <option value="3">Adult 3</option>
+                                        <option value="1">서울</option>
+                                        <option value="2">인천</option>
+                                        <option value="3">경기</option>
+                                        <option value="4">강원</option>
+                                        <option value="5">대전</option>
+                                        <option value="6">세종</option>
+                                        <option value="7">충북</option>
+                                        <option value="8">충남</option>
+                                        <option value="9">대구</option>
+                                        <option value="10">울산</option>
+                                        <option value="11">경북</option>
+                                        <option value="12">경남</option>
+                                        <option value="13">전북</option>
+                                        <option value="14">전남</option>
+                                        <option value="15">제주</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2">
                                     <select class="form-select" name="siteEnvironment">
                                         <option selected> 환경 </option>
-                                        <option value="1">Child 1</option>
-                                        <option value="2">Child 2</option>
-                                        <option value="3">Child 3</option>
+                                        <option value="1">산</option>
+                                        <option value="2">강</option>
+                                        <option value="3">바다</option>
+                                        <option value="4">도심</option>
+                                        <option value="5">계곡</option>
+                                        <option value="6">호수</option>
+                                        <option value="7">평야</option>
+                                        <option value="8">기타</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2">
                                     <select class="form-select" name="siteCategory">
                                         <option selected> 분류 </option>
-                                        <option value="1">Child 1</option>
-                                        <option value="2">Child 2</option>
-                                        <option value="3">Child 3</option>
+                                        <option value="1">오토캠핑</option>
+                                        <option value="2">글램핑</option>
+                                        <option value="3">카라반</option>
+                                        <option value="4">방갈로</option>
+                                        <option value="5">차박</option>
                                     </select>
                                 </div>
                             </div>
@@ -92,21 +111,39 @@
 									  <form class="dropdown-menu p-4 ">
 									    <div class="mb-3">
 									      <div class="form-check">
-									        <input type="checkbox" class="form-check-input" id="dropdownCheck1">
+									        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck1">
 									        <label class="form-check-label" for="dropdownCheck1">
-									          Remember me
+									          전기
 									        </label>
 									      </div>
 									      <div class="form-check">
-									        <input type="checkbox" class="form-check-input" id="dropdownCheck2">
+									        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck2">
 									        <label class="form-check-label" for="dropdownCheck2">
-									          Remember me2
+									          와이파이
 									        </label>
 									      </div>
 									      <div class="form-check">
-									        <input type="checkbox" class="form-check-input" id="dropdownCheck3">
+									        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck3">
 									        <label class="form-check-label" for="dropdownCheck3">
-									          Remember me3
+									          비비큐 장비 대여
+									        </label>
+									      </div>
+									      <div class="form-check">
+									        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck3">
+									        <label class="form-check-label" for="dropdownCheck3">
+									          운동장
+									        </label>
+									      </div>
+									      <div class="form-check">
+									        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck3">
+									        <label class="form-check-label" for="dropdownCheck3">
+									          화장실
+									        </label>
+									      </div>
+									      <div class="form-check">
+									        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck3">
+									        <label class="form-check-label" for="dropdownCheck3">
+									          샤워장
 									        </label>
 									      </div>
 									    </div>
@@ -185,10 +222,6 @@
                 <div class="row g-4">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="room-item shadow rounded overflow-hidden">
-                            <div class="position-relative">
-                                <img class="img-fluid" src="${pageContext.request.contextPath}/resources/images/campsite/room-1.jpg" alt="">
-                                <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">$100/Night</small>
-                            </div>
                             <div class="p-4 mt-2">
                                 <div class="d-flex justify-content-between mb-3">
                                     <h5 class="mb-0">Junior Suite</h5>

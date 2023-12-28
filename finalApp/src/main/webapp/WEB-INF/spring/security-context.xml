@@ -61,7 +61,7 @@
 	        <intercept-url pattern="/uploads/photo/**" access="permitAll"/>
 	        
 			<!-- admin페이지 -->
-			<intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>
+			<intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP','ROLE_CAMP')"/>
 			<intercept-url pattern="/cs/**" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>
 			
 			<intercept-url pattern="/shopping/customer/notice/write" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>
