@@ -12,11 +12,11 @@
 		productName, special, price, discountRate, 
 		savedMoney, delivery, content, thumbnail, 
 		productShow, reg_date, updateDate, md, 
-		starter, brandNum, savedMoney) VALUES (#{productNum}, 
+		starter, brandNum) VALUES (#{productNum}, 
 		#{categoryNum}, #{productName}, #{special}, 
 		#{price}, #{discountRate}, #{savedMoney}, 
 		#{delivery}, #{content, jdbcType=VARCHAR}, #{thumbnail}, #{productShow}, 
-		SYSDATE, SYSDATE, #{md}, #{starter}, #{brandNum}, #{savedMoney})
+		SYSDATE, SYSDATE, #{md}, #{starter}, #{brandNum})
 	</insert>
 	
 	<!-- 추가 이미지 등록 -->

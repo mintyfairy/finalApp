@@ -299,9 +299,11 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
 		            </div>
 		        </c:when>
 		        <c:otherwise>
-					<div class="p-2">
-						<a href="${pageContext.request.contextPath}/member/logout" title="로그아웃">로그아웃</a>
-					</div>					
+					<div class="login_wrap">
+						<a href="${pageContext.request.contextPath}/member/logout">
+		                	<button class="custom-btn btn-4">Logout</button>
+		                </a>
+		            </div>					
 				</c:otherwise>
 		     </c:choose>
             

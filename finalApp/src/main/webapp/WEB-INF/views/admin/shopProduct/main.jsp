@@ -50,7 +50,9 @@
 }
 
 .product-subject {
-	width: 330px;
+	display: flex;
+	align-items: center;
+	border: none;
 }
 
 .product-subject img {
@@ -252,7 +254,7 @@ $(function(){
 							<tr valign="middle">
 								<td>${dto.productNum}</td>
 								<td class="product-subject left">
-									<img src="">
+									<img src="${pageContext.request.contextPath}/uploads/shop/product/${dto.thumbnail}">
 									<a href="#"><label>${ dto.productName }</label></a>
 								</td>
 								<td>${ dto.price }</td>
