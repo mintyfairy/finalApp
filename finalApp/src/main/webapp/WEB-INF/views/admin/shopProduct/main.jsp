@@ -134,6 +134,16 @@ $(function(){
 		}
 	});
 });
+
+// 새로고침
+$(function(){
+	$(document).ready(function() {
+	    // 버튼 클릭 시 페이지 새로고침
+	    $("#refreshButton").on("click", function() {
+	        location.reload();
+	    });
+	});
+});
 </script>
 
 
@@ -208,7 +218,7 @@ $(function(){
 					</div>
 					</c:if>
 					<div class="col-auto pt-2 text-end">
-						3개(1/1 페이지)
+						${ dataCount }개(${ page }/${ total_page } 페이지)
 					</div>
 				</div>
 				
@@ -282,7 +292,7 @@ $(function(){
 				<table class="table table-borderless">
 					<tr>
 						<td width="150">
-							<button type="button" class="btn btn-light"> <i class="bi bi-arrow-clockwise"></i> </button>				
+							<button id="refreshButton" type="button" class="btn btn-light"> <i class="bi bi-arrow-clockwise"></i> </button>				
 						</td>
 						<td align="center">
 							<form class="row justify-content-center" name="searchForm" action="${pageContext.request.contextPath}/admin/shopProduct/main" method="post">
@@ -327,4 +337,49 @@ $(function(){
     
 </div>
 
+
+
+<div class="modal hidden" id="detailModal" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Modal title</h5>
+				<button type="button" class="btn-close closeModal" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>Modal body text goes here.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary closeModal" data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div id="member-dialog" style="display: none;"></div>
+
+
+<script>
+// 모달창 띄우기
+$(function() {
+	$('.product-subject').click(function() {
+		$("#detailModal").show();
+	});
+});
+
+// 모달창 닫기
+$(function() {
+	$('.closeModal').click(function() {
+		$(this).closest(".modal").hide();
+	});
+});
+</script>
+
+
+
+
+
+
+
+

@@ -10,6 +10,7 @@ import com.fa.plus.admin.domain.shop.ShopProductManage;
 
 @Mapper
 public interface ShopProductManageMapper {
+	public long productSeq();
 	public void insertProduct(ShopProductManage dto) throws SQLException;
 	public void insertProductFile(ShopProductManage dto) throws SQLException;
 	
@@ -25,8 +26,8 @@ public interface ShopProductManageMapper {
 	public List<ShopProductManage> listCategory();
 	public List<ShopProductManage> listSubCategory(long parentNum);
 	
+	public int dataCount(Map<String, Object> map);
 	public List<ShopProductManage> listBrand();
-	
 	public List<ShopProductManage> listProduct(Map<String, Object> map);
 	
 	

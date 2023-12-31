@@ -9,8 +9,8 @@ public interface ShopProductManageService {
 	public void insertProduct(ShopProductManage dto, String pathname) throws Exception;
 	public void insertBrand(ShopProductManage dto) throws Exception;
 	
+	public int dataCount(Map<String, Object> map);
 	public List<ShopProductManage> listBrand();
-	
 	public List<ShopProductManage> listProduct(Map<String, Object> map);
 	
 	// 상품 상위 카테고리 목록

@@ -80,32 +80,69 @@ ul {
     text-decoration: underline;
 }
 
-.header_top_left .login_wrap {
-    width: 128px;
-    height: 40px;
-    vertical-align: middle;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15);
-    cursor: pointer;
-    border-radius: 22px;
-    border: 2px solid orangered;
-}
-
 .header_top_left .login_wrap a {
     position: relative;
     display: inline-block;
-    line-height: 37px;
     padding-left: 12px;
     font-size: 14px;
 }
 
-.header_top_left .login_wrap a::before {
-    position: absolute;
-    background: url(${pageContext.request.contextPath}/resources/images/main/icon_login.png) no-repeat 0 0;
-    top: 11px;
-    right: -26px;
-    content: '';
-    width: 14px;
-    height: 14px;
+.header_top_left .login_wrap a .custom-btn {
+	margin: 20px;
+	outline: none;
+	width: 130px;
+	height: 40px;
+	border: 2px solid #000;
+	font-family: 'Lato', sans-serif;
+	font-weight: 500;
+	background: transparent;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	position: relative;
+	display: inline-block;
+}
+
+.btn-4 {
+  position: relative;
+  color: #000;
+  z-index: 2;
+  line-height: 40px;
+  padding: 0;
+}
+.btn-4:hover{
+  border: none;
+}
+.btn-4:before,
+.btn-4:after {
+  position: absolute;
+  content: "";
+  width: 0%;
+  height: 0%;
+  border: 2px solid;
+  z-index: -1;
+  transition: all 0.3s ease;
+}
+.btn-4:before {
+  top: 0;
+   left: 0;
+   border-bottom-color: transparent;
+   border-right-color: transparent;
+   border-top-color: #000;
+   border-left-color: #000;
+}
+.btn-4:after{
+   bottom: 0;
+   right: 0;
+   border-top-color: transparent;
+   border-left-color: transparent;
+   border-bottom-color: #000;
+   border-right-color: #000;
+}
+.btn-4:hover:before,
+.btn-4:hover:after {
+  border-color: #000;
+  height: 100%;
+  width: 100%;
 }
 
 .header_bottom {
@@ -256,7 +293,9 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
        		 <c:choose>
 				<c:when test="${empty sessionScope.member}">
 		            <div class="login_wrap">
-		                <a href="${pageContext.request.contextPath}/member/login">통합로그인</a>
+		                <a href="${pageContext.request.contextPath}/member/login">
+		                	<button class="custom-btn btn-4">Login</button>
+		                </a>
 		            </div>
 		        </c:when>
 		        <c:otherwise>

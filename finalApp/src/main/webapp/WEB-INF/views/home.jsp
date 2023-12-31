@@ -170,7 +170,7 @@ main .story {
 
 .story .story_board {
     width: 1080px;
-    height: 275px;
+    height: 375px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -186,6 +186,65 @@ main .story {
 .story .story_board .story_pic {
     width: 25%;
     height: 100%;
+}
+
+.story_board .news .news_title {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 72px;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 25px 39px 13px 39px;
+    box-sizing: border-box;
+}
+
+.story_board .news .news_title .news_title_right h3 {
+    width: 170px;
+    height: 34px;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.story_board .news .news_title .news_title_right span {
+    position: relative;
+    font-size: 12px;
+    color: #bdbdbd;
+    margin-left: -40px;
+    padding-left: 9px;
+}
+
+.story_board .news .news_title .news_title_right span::before {
+    position: absolute;
+    top: -6px;
+    left: 0;
+    content: '';
+    width: 1px;
+    height: 16px;
+    background-color: #bdbdbd;
+}
+
+.story_board .news .news_title a {
+    display: inline-block;
+    width: 70px;
+    height: 26px;
+    line-height: 26px;
+    color: #bdbdbd;
+    font-size: 13px;
+    text-align: center;
+    border: 1px solid #bdbdbd;
+    border-radius: 13px;
+}
+
+.story_board .news .news_subject {
+    padding: 32px 48px 32px 39px;
+}
+
+.story_board .news .news_subject .subject {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 50px;
 }
 </style>
 	
@@ -250,14 +309,37 @@ main .story {
         </div>
     </div>
 
-    <div class="story">
-        <h1 class="story_title">캠핑소식</h1>
-        <div class="story_board">
-            <div class="news"></div>
-            <div class="story_pic"></div>
-            <div class="story_pic"></div>
-        </div>
-    </div>
+	<div class="story">
+		<h1 class="story_title">캠핑소식</h1>
+		<div class="story_board">
+			<div class="news">
+				<div class="news_title">
+					<div class="news_title_right">
+						<h3>캠핑스토리</h3>
+						<span>소식</span>
+					</div>
+					<a href="#">see more</a>
+				</div>
+				<div class="news_subject">
+					<p class="subject subject1">Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+					<p class="subject subject1">Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+					<p class="subject subject1">Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+					<p class="subject subject1">Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+					<p class="subject subject1">Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+				</div>
+			</div>
+			<div class="story_pic story_pic1">
+				<a href="#">
+					<img src="https://via.placeholder.com/300x274" alt="pic1">
+				</a>
+			</div>
+			<div class="story_pic story_pic2">
+				<a href="#">
+					<img src="https://via.placeholder.com/300x274" alt="pic2">
+				</a>
+			</div>
+		</div>
+	</div>
     
 </body>
 </html>

@@ -23,11 +23,21 @@ public class ShopProductManageServiceImpl implements ShopProductManageService {
 	@Override
 	public void insertProduct(ShopProductManage dto, String pathname) throws Exception {
 		try {
+			
+			// 적립금. 0.5%씩 적립
+			int total_price = (int)(Math.ceil(dto.getPrice() * (1 - dto.getDiscountRate()/100)));
+			
+			int savedMoney = (int)(Math.floor(total_price * 0.005));
+			dto.setSavedMoney(savedMoney);
+			
 			// 썸네일 이미지
 			String filename = fileManager.doFileUpload(dto.getThumbnailFile(), pathname);
 			dto.setThumbnail(filename);
 			
 			// 상품저장
+			long productNum = mapper.productSeq();
+			
+			dto.setProductNum(productNum);
 			mapper.insertProduct(dto);
 			
 			// 추가 이미지 저장
@@ -47,7 +57,6 @@ public class ShopProductManageServiceImpl implements ShopProductManageService {
 			long optionNum = mapper.optionSeq();
 			dto.setOptionNum(optionNum);
 			dto.setParentNum(null);
-			dto.setParentName(null);
 			mapper.insertProductOption(dto);
 			
 			// 상위 옵션 값 저장
@@ -103,6 +112,12 @@ public class ShopProductManageServiceImpl implements ShopProductManageService {
 	}
 
 	@Override
+	public ShopProductManage findByCategory(long categoryNum) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public List<ShopProductManage> listCategory() {
 		List<ShopProductManage> list = null;
 		
@@ -155,9 +170,16 @@ public class ShopProductManageServiceImpl implements ShopProductManageService {
 	}
 
 	@Override
-	public ShopProductManage findByCategory(long categoryNum) {
-		// TODO Auto-generated method stub
-		return null;
+	public int dataCount(Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			result = mapper.dataCount(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 }

@@ -12,7 +12,7 @@
 
 
 .container {
-    margin: 70px 0;
+    margin: 20px 0;
     padding: 20px;
 }
 
@@ -22,7 +22,6 @@
 
 .body-main {
 	display: block;
-    margin-top: 20px;
 }
 
 .body-container {
@@ -71,6 +70,213 @@
 
 </style>
 
+<script type="text/javascript">
+function check() {
+	const f = document.productForm;
+	
+	f.action = "${pageContext.request.contextPath}/admin/shopProduct/${mode}";
+	return true;
+}
+</script>
+
+<script type="text/javascript">
+function login() {
+	location.href = '${pageContext.request.contextPath}/member/login';
+}
+
+function ajaxFun(url, method, formData, dataType, fn, file = false) {
+	const settings = {
+			type: method, 
+			data: formData,
+			success:function(data) {
+				fn(data);
+			},
+			beforeSend: function(jqXHR) {
+				jqXHR.setRequestHeader('AJAX', true);
+			},
+			complete: function () {
+			},
+			error: function(jqXHR) {
+				if(jqXHR.status === 403) {
+					login();
+					return false;
+				} else if(jqXHR.status === 400) {
+					alert('요청 처리가 실패 했습니다.');
+					return false;
+		    	}
+		    	
+				console.log(jqXHR.responseText);
+			}
+	};
+	
+	if(file) {
+		settings.processData = false;  // file 전송시 필수. 서버로전송할 데이터를 쿼리문자열로 변환여부
+		settings.contentType = false;  // file 전송시 필수. 서버에전송할 데이터의 Content-Type. 기본:application/x-www-urlencoded
+	}
+	
+	$.ajax(url, settings);
+}
+
+$(function(){
+	$("form select[name=parentNum]").change(function(){
+		let parentNum = $(this).val();
+		
+		$("form select[name=categoryNum]").find('option').remove().end()
+			.append("<option value=''>:: 카테고리 선택 ::</option>");	
+		
+		if(! parentNum) {
+			return false;
+		}
+		
+		let url = "${pageContext.request.contextPath}/admin/shopProduct/listSubCategory";
+		let query = "parentNum="+parentNum;
+		
+		const fn = function(data) {
+			$.each(data.listSubCategory, function(index, item){
+				let categoryNum = item.categoryNum;
+				let categoryName = item.categoryName;
+				let s = "<option value='"+categoryNum+"'>"+categoryName+"</option>";
+				$("form select[name=categoryNum]").append(s);
+			});
+		};
+		ajaxFun(url, "get", query, "json", fn);
+		
+	});
+});
+
+$(function(){
+	$("form select[name=brandNum]").ready(function(){
+		
+		$("form select[name=brandNum]").find('option').remove().end()
+			.append("<option value=''>:: 브랜드 선택 ::</option>");	
+		
+		let url = "${pageContext.request.contextPath}/admin/shopProduct/listBrand";
+		let query = "";
+		
+		const fn = function(data) {
+			console.log(data);
+			$.each(data.listBrand, function(index, item){
+				let brandNum = item.brandNum;
+				let brandName = item.brandName;
+				let s = "<option value='"+brandNum+"'>"+brandName+"</option>";
+				$("form select[name=brandNum]").append(s);
+			});
+		};
+		ajaxFun(url, "get", query, "json", fn);
+		
+	});
+});
+</script>
+
+<script type="text/javascript">
+$(function(){
+	$(".btnOptionAdd").click(function(){
+		let $el = $(this).closest(".option-area").find(".optionValue-area");
+		if($el.find(".input-group").length >= 5) {
+			alert("옵션은 최대 5개까지 가능합니다.");
+			return false;
+		}
+		let $option = $(".option-area .optionValue-area .input-group:first-child").clone();
+		
+		$option.find("input[type=hidden]").remove();
+		$option.find("input[name=optionValues]").removeAttr("value");
+		$option.find("input[name=optionValues]").val("");
+		$el.append($option);
+	});
+	
+	$(".option-area").on("click", ".option-minus", function(){
+		let $minus = $(this);
+		let $el = $minus.closest(".option-area").find(".optionValue-area");
+		
+		// 수정에서 등록된 자료 삭제
+		let mode = "${mode}";
+		if(mode === "update" && $minus.parent(".input-group").find("input[name=detailNums]").length === 1) {
+			// 저장된 옵션값중 최소 하나는 삭제되지 않도록 설정
+			if($el.find(".input-group input[name=detailNums]").length <= 1) {
+				alert("옵션값은 최소 하나이상 필요합니다.");	
+				return false;
+			}
+			
+			if(! confirm("옵션값을 삭제 하시겠습니까 ? ")) {
+				return false;
+			}
+			
+			let detailNum = $minus.parent(".input-group").find("input[name=detailNums]").val();
+			let url = "${pageContext.request.contextPath}/admin/shopProduct/deleteOptionDetail";
+			$.post(url, {detailNum:detailNum}, function(data){
+				if(data.state === "true") {
+					$minus.closest(".input-group").remove();
+				} else {
+					alert("옵션값을 삭제할 수 없습니다.");
+				}
+			}, "json");
+			
+			return false;			
+		}
+		
+		if($el.find(".input-group").length <= 1) {
+			$el.find("input[name=optionValues]").val("");
+			return false;
+		}
+		
+		$minus.closest(".input-group").remove();
+	});
+});
+
+$(function(){
+	$(".btnOptionAdd2").click(function(){
+		let $el = $(this).closest(".option-area2").find(".optionValue-area2");
+		if($el.find(".input-group").length >= 5) {
+			alert("옵션 값은 최대 5개까지 가능합니다.");
+			return false;
+		}
+		let $option = $(".option-area2 .optionValue-area2 .input-group:first-child").clone();
+		
+		$option.find("input[type=hidden]").remove();
+		$option.find("input[name=optionValues2]").removeAttr("value");
+		$option.find("input[name=optionValues2]").val("");
+		$el.append($option);
+	});
+	
+	$(".option-area2").on("click", ".option-minus2", function(){
+		let $minus = $(this);
+		let $el = $minus.closest(".option-area2").find(".optionValue-area2");
+		
+		// 수정에서 등록된 자료 삭제
+		let mode = "${mode}";
+		if(mode === "update" && $minus.parent(".input-group").find("input[name=detailNums2]").length === 1) {
+			// 저장된 옵션값중 최소 하나는 삭제되지 않도록 설정
+			if($el.find(".input-group input[name=detailNums2]").length <= 1) {
+				alert("옵션값은 최소 하나이상 필요합니다.");	
+				return false;
+			}
+			
+			if(! confirm("옵션값을 삭제 하시겠습니까 ? ")) {
+				return false;
+			}
+			
+			let detailNum = $minus.parent(".input-group").find("input[name=detailNums2]").val();
+			let url = "${pageContext.request.contextPath}/admin/shopProduct/deleteOptionDetail";
+			$.post(url, {detailNum:detailNum}, function(data){
+				if(data.state === "true") {
+					$minus.closest(".input-group").remove();
+				} else {
+					alert("옵션값을 삭제할 수 없습니다.");
+				}
+			}, "json");
+			
+		}
+		
+		if($el.find(".input-group").length <= 1) {
+			$el.find("input[name=optionValues2]").val("");
+			return false;
+		}
+		
+		$minus.closest(".input-group").remove();
+	});
+});
+</script>
+
 <div class="container">
 	<div class="body-container">
 		<div class="body-title">
@@ -107,33 +313,8 @@
 					<tr>
 						<td class="table-light col-sm-2">브랜드 명</td>
 						<td>
-							<select name="special" class="form-select">
-								<option value="0" ${dto.special==0?"selected":""}>가스웨어</option>
-								<option value="1" ${dto.special==1?"selected":""}>거버</option>
-								<option value="2" ${dto.special==2?"selected":""}>나인스토라</option>
-								<option value="0" ${dto.special==0?"selected":""}>노마드</option>
-								<option value="1" ${dto.special==1?"selected":""}>더벤</option>
-								<option value="2" ${dto.special==2?"selected":""}>듀랑고</option>
-								<option value="0" ${dto.special==0?"selected":""}>라시에스타</option>
-								<option value="1" ${dto.special==1?"selected":""}>레드오크</option>
-								<option value="2" ${dto.special==2?"selected":""}>마운틴 스미스</option>
-								<option value="0" ${dto.special==0?"selected":""}>마티니</option>
-								<option value="1" ${dto.special==1?"selected":""}>바운스</option>
-								<option value="2" ${dto.special==2?"selected":""}>브루클린윅스</option>
-								<option value="0" ${dto.special==0?"selected":""}>세이즈</option>
-								<option value="1" ${dto.special==1?"selected":""}>씨엠 26</option>
-								<option value="2" ${dto.special==2?"selected":""}>에어포스</option>
-								<option value="0" ${dto.special==0?"selected":""}>오리지널 스와트</option>
-								<option value="1" ${dto.special==1?"selected":""}>자칼</option>
-								<option value="2" ${dto.special==2?"selected":""}>잭다니엘</option>
-								<option value="0" ${dto.special==0?"selected":""}>카고컨테이너</option>
-								<option value="1" ${dto.special==1?"selected":""}>커쇼</option>
-								<option value="2" ${dto.special==2?"selected":""}>타이탄</option>
-								<option value="0" ${dto.special==0?"selected":""}>테라노바</option>
-								<option value="1" ${dto.special==1?"selected":""}>프리즘</option>
-								<option value="2" ${dto.special==2?"selected":""}>폭스나이프</option>
-								<option value="1" ${dto.special==1?"selected":""}>휴너스도르프</option>
-								<option value="2" ${dto.special==2?"selected":""}>힐레베르브</option>
+							<select name="brandNum" class="form-select">
+								<option value="">:: 브랜드 선택 ::</option>
 							</select>
 						</td>
 					</tr>
@@ -149,7 +330,6 @@
 							<select name="special" class="form-select">
 								<option value="0" ${dto.special==0?"selected":""}>일반상품</option>
 								<option value="1" ${dto.special==1?"selected":""}>특가상품</option>
-								<option value="2" ${dto.special==2?"selected":""}>기획상품</option>
 							</select>
 						</td>
 					</tr>
@@ -254,9 +434,20 @@
 						<td class="table-light col-sm-2">md 여부</td>
 						<td>
 							<div class="pt-2 pb-2">
-								<input type="radio" name="mdShow" class="form-check-input" id="productShow1" value="1" ${dto.productShow==1 ? "checked='checked'" : "" }> <label class="form-check-label" for="productShow1">md X</label>
+								<input type="radio" name="md" class="form-check-input" id="md0" value="0" ${dto.md==0 ? "checked='checked'" : "" }> <label class="form-check-label" for="md0">md X</label>
 								&nbsp;&nbsp;
-								<input type="radio" name="mdShow" class="form-check-input" id="productShow0" value="0" ${dto.productShow==0 ? "checked='checked'" : "" }> <label class="form-check-label" for="productShow0">md O</label>
+								<input type="radio" name="md" class="form-check-input" id="md1" value="1" ${dto.md==1 ? "checked='checked'" : "" }> <label class="form-check-label" for="md1">md O</label>
+							</div>
+						</td>
+					</tr>
+					
+					<tr>
+						<td class="table-light col-sm-2">starter 상품 여부</td>
+						<td>
+							<div class="pt-2 pb-2">
+								<input type="radio" name="starter" class="form-check-input" id="starter0" value="0" ${dto.starter==0 ? "checked='checked'" : "" }> <label class="form-check-label" for="starter0">starter X</label>
+								&nbsp;&nbsp;
+								<input type="radio" name="starter" class="form-check-input" id="starter1" value="1" ${dto.starter==1 ? "checked='checked'" : "" }> <label class="form-check-label" for="starter1">starter O</label>
 							</div>
 						</td>
 					</tr>
@@ -297,7 +488,7 @@
 				<table class="table table-borderless">
 					<tr>
 						<td class="text-center">
-							<c:url var="url" value="/admin/product/main">
+							<c:url var="url" value="/admin/shopProduct/main">
 								<c:if test="${not empty page}">
 									<c:param name="page" value="${page}"/>
 								</c:if>
@@ -321,3 +512,161 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+// 대표(썸네일) 이미지
+$(function(){
+	var img = "${dto.thumbnail}";
+	if( img ) {
+		img = "${pageContext.request.contextPath}/uploads/shop/product/"+img;
+		$(".table-form .thumbnail-viewer").empty();
+		$(".table-form .thumbnail-viewer").css("background-image", "url("+img+")");
+	}
+	
+	$(".table-form .thumbnail-viewer").click(function(){
+		$("form[name=productForm] input[name=thumbnailFile]").trigger("click");
+	});
+	
+	$("form[name=productForm] input[name=thumbnailFile]").change(function(){
+		let file = this.files[0];
+		
+		if(! file) {
+			$(".table-form .thumbnail-viewer").empty();
+			
+			if( img ) {
+				img = "${pageContext.request.contextPath}/uploads/shop/product/"+img;
+			} else {
+				img = "${pageContext.request.contextPath}/resources/images/add_photo.png";
+			}
+			$(".table-form .thumbnail-viewer").css("background-image", "url("+img+")");
+			
+			return false;
+		}
+		
+		if( ! file.type.match("image.*") ) {
+			this.focus();
+			return false;
+		}
+		
+		var reader = new FileReader();
+		reader.onload = function(e) { // 파일의 내용을 다 읽었으면
+			$(".table-form .thumbnail-viewer").empty();
+			$(".table-form .thumbnail-viewer").css("background-image", "url("+e.target.result+")");
+		};
+		reader.readAsDataURL( file );
+	});
+});
+
+// 수정에서 등록된 추가 이미지 삭제
+$(function(){
+	$(".delete-img").click(function(){
+		if(! confirm("이미지를 삭제 하시겠습니까 ?")) {
+			return false;
+		}
+		
+		let $img = $(this);
+		let fileNum = $img.attr("data-fileNum");
+		let filename = $img.attr("data-filename");
+		let url="${pageContext.request.contextPath}/admin/shopProduct/deleteFile";
+		$.post(url, {fileNum:fileNum, filename:filename}, function(data){
+			$img.remove();
+		}, "json");
+	});
+});
+
+// 추가 이미지
+$(function(){
+	var sel_files = [];
+	
+	$("body").on("click", ".table-form .img-add", function(){
+		$("form[name=productForm] input[name=addFiles]").trigger("click");
+	});
+	
+	$("form[name=productForm] input[name=addFiles]").change(function(){
+		if(! this.files) {
+			let dt = new DataTransfer();
+			for(let f of sel_files) {
+				dt.items.add(f);
+			}
+			document.productForm.addFiles.files = dt.files;
+			
+			return false;
+		}
+		
+        for(let file of this.files) {
+        	sel_files.push(file);
+        	
+            const reader = new FileReader();
+			const $img = $("<img>", {class:"item img-item"});
+			$img.attr("data-filename", file.name);
+            reader.onload = e => {
+            	$img.attr("src", e.target.result);
+            };
+			reader.readAsDataURL(file);
+            
+            $(".img-grid").append($img);
+        }
+		
+		let dt = new DataTransfer();
+		for(let f of sel_files) {
+			dt.items.add(f);
+		}
+		document.productForm.addFiles.files = dt.files;
+	});
+	
+	$("body").on("click", ".table-form .img-item", function(){
+		if(! confirm("선택한 파일을 삭제 하시겠습니까 ? ")) {
+			return false;
+		}
+		
+		let filename = $(this).attr("data-filename");
+		
+		for(let i=0; i<sel_files.length; i++) {
+			if(filename === sel_files[i].name) {
+				sel_files.splice(i, 1);
+				break;
+			}
+		}
+		
+		let dt = new DataTransfer();
+		for(let f of sel_files) {
+			dt.items.add(f);
+		}
+		document.productForm.addFiles.files = dt.files;		
+		
+		$(this).remove();
+	});
+});
+</script>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript">
+var oEditors = [];
+nhn.husky.EZCreator.createInIFrame({
+	oAppRef: oEditors,
+	elPlaceHolder: "ir1",
+	sSkinURI: "${pageContext.request.contextPath}/resources/vendor/se2/SmartEditor2Skin.html",
+	fCreator: "createSEditor2"
+});
+
+function submitContents(elClickedObj) {
+	 oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+	 try {
+		if(! check()) {
+			return;
+		}
+		
+		elClickedObj.submit();
+		
+	} catch(e) {
+	}
+}
+
+function setDefaultFont() {
+	var sDefaultFont = '돋움';
+	var nFontSize = 12;
+	oEditors.getById["ir1"].setDefaultFont(sDefaultFont, nFontSize);
+}
+</script>
+
+
