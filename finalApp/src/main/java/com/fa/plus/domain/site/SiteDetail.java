@@ -1,9 +1,11 @@
 package com.fa.plus.domain.site;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class SiteDetail {
-	private	int	DETAILNUM	;
+	private	long	DETAILNUM	;
 	private	int	SITENUM	;
 	private	String	DETAILNAME	;
 	private	int	PRICE	;
@@ -12,13 +14,16 @@ public class SiteDetail {
 	private	String	CAPACITY	;
 	private	int	floor	;
 	
-	private String saveFilename;
-	private String originalFilename;
-	private MultipartFile selectFile;
-	public int getDETAILNUM() {
+
+	private long fileNum;
+	private String filename;
+	private List<MultipartFile> addFiles;
+	
+	
+	public long getDETAILNUM() {
 		return DETAILNUM;
 	}
-	public void setDETAILNUM(int dETAILNUM) {
+	public void setDETAILNUM(long dETAILNUM) {
 		DETAILNUM = dETAILNUM;
 	}
 	public int getSITENUM() {
@@ -63,24 +68,25 @@ public class SiteDetail {
 	public void setFloor(int floor) {
 		this.floor = floor;
 	}
-	public String getSaveFilename() {
-		return saveFilename;
+	public long getFileNum() {
+		return fileNum;
 	}
-	public void setSaveFilename(String saveFilename) {
-		this.saveFilename = saveFilename;
+	public void setFileNum(long fileNum) {
+		this.fileNum = fileNum;
 	}
-	public String getOriginalFilename() {
-		return originalFilename;
+	public String getFilename() {
+		return filename;
 	}
-	public void setOriginalFilename(String originalFilename) {
-		this.originalFilename = originalFilename;
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
-	public MultipartFile getSelectFile() {
-		return selectFile;
+	public List<MultipartFile> getAddFiles() {
+		return addFiles;
 	}
-	public void setSelectFile(MultipartFile selectFile) {
-		this.selectFile = selectFile;
-	} 
+	public void setAddFiles(List<MultipartFile> addFiles) {
+		this.addFiles = addFiles;
+	}
+	
 	
 	
 }

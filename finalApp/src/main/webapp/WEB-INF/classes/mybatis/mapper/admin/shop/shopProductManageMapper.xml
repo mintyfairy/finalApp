@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fa.plus.admin.mapper.ShopProductManageMapper">
+<mapper namespace="com.fa.plus.admin.mapper.shop.TotalManageMapper">
 	<!-- 상품 등록 -->
 	<select id="productSeq" resultType="Long">
 		SELECT product_seq.NEXTVAL FROM dual
