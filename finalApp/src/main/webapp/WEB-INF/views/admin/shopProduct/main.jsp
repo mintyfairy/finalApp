@@ -256,17 +256,20 @@ $(function(){
 								<td class="product-subject left">
 									<img src="${pageContext.request.contextPath}/uploads/shop/product/${dto.thumbnail}">
 									<a href="#"><label>${ dto.productName }</label></a>
+									<input type="hidden" value="${ dto.productNum }">
 								</td>
 								<td>${ dto.price }</td>
 								<td>${ dto.discountRate }%</td>
 								<td>${ dto.totalStock }</td>
-								<td>${ dto.productShow == 1 ? "O" : "X" }</td>
+								<td class="productShow">${ dto.productShow == 1 ? "O" : "X" }
+									<input type="hidden" value="${ dto.productShow }">
+								</td>
 								<td>${ dto.reg_date }</td>
 								<td>${ dto.updateDate }</td>
 								<td>
-									<button type="button" class="btn border">재고</button>
-									<button type="button" class="btn border" onclick="location.href='';">수정</button>
-									<button type="button" class="btn border" onclick="location.href='';">숨김</button>
+									<button class="stockBtn" type="button" class="btn border">재고</button>
+									<button class="modifyBtn" type="button" class="btn border" onclick="location.href='${pageContext.request.contextPath}/admin/shopProduct/update';">수정</button>
+									<button class="hideBtn" type="button" class="btn border">숨김</button>
 								</td>
 							</tr>					
 						</c:forEach>
@@ -349,7 +352,18 @@ $(function(){
 				<button type="button" class="btn-close closeModal" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
-				<p>Modal body text goes here.</p>
+				<p>분류 : </p>
+				<p>브랜드 이름 : </p>
+				<p>옵션1 : </p>
+				<p>옵션값1 : </p>
+				<p>옵션2 : </p>
+				<p>옵션값2 : </p>
+				<p>내용 : </p>
+				<p>배송비 : </p>
+				<p>등록일 : </p>
+				<p>마지막 수정일 : </p>
+				<p>썸네일 : </p>
+				<p>추가사진 : </p>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary closeModal" data-bs-dismiss="modal">Close</button>
@@ -359,16 +373,184 @@ $(function(){
 	</div>
 </div>
 
+<div class="modal hidden" id="stockModal" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Modal title</h5>
+				<button type="button" class="btn-close closeModal" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>현재 재고 : </p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary closeModal" data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal hidden" id="hideModal" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Modal title</h5>
+				<button type="button" class="btn-close closeModal" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>상품 숨김 여부 : </p>
+			</div>
+			<div class="modal-footer">
+				<form name="hideProduct" action="${pageContext.request.contextPath}/admin/shopProduct/hide">
+					<input class="productNum" type="hidden" value="상품번호">
+					<input class="productShow" type="hidden" value="상품 진열 여부">
+				</form>
+				<button type="button" class="btn btn-secondary closeModal" data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary hideUpdate">진열여부 수정</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div id="member-dialog" style="display: none;"></div>
 
 
 <script>
-// 모달창 띄우기
+function ajaxFun(url, method, formData, dataType, fn, file = false) {
+	const settings = {
+			type: method, 
+			data: formData,
+			success:function(data) {
+				fn(data);
+			},
+			beforeSend: function(jqXHR) {
+				jqXHR.setRequestHeader('AJAX', true);
+			},
+			complete: function () {
+			},
+			error: function(jqXHR) {
+				if(jqXHR.status === 403) {
+					login();
+					return false;
+				} else if(jqXHR.status === 400) {
+					alert('요청 처리가 실패 했습니다.');
+					return false;
+		    	}
+		    	
+				console.log(jqXHR.responseText);
+			}
+	};
+	
+	if(file) {
+		settings.processData = false;  // file 전송시 필수. 서버로전송할 데이터를 쿼리문자열로 변환여부
+		settings.contentType = false;  // file 전송시 필수. 서버에전송할 데이터의 Content-Type. 기본:application/x-www-urlencoded
+	}
+	
+	$.ajax(url, settings);
+}
+
+// 상품 상세 모달창 띄우기
 $(function() {
 	$('.product-subject').click(function() {
-		$("#detailModal").show();
+		let productNum = $(this).children('input').val();
+		console.log(productNum);
+		
+		let url = "${pageContext.request.contextPath}/admin/shopProduct/article";
+		let query = "productNum=" + productNum;
+		
+		const fn = function(data) {
+			console.log(data);
+			let out = "";
+			out += "<p>분류 : " + data.categoryName + "</p>";
+			out += "<p>브랜드 이름 : " + data.brandName + "</p>";
+			out += "<p>옵션1 : " + data.optionName + "</p>";
+			out += "<p>옵션값1 : " + data.optionValue + "</p>";
+			out += "<p>옵션2 : " + data.optionName2 + "</p>";
+			out += "<p>옵션값2 : " + data.optionValue2 + "</p>";
+			out += "<p>내용 : " + data.content + "</p>";
+			out += "<p>배송비 : " + data.delivery + "원</p>";
+			out += "<p>등록일 : " + data.reg_date + "</p>";
+			out += "<p>마지막 수정일 : " + data.updateDate + "</p>";
+			out += "<p>썸네일 : " + data.thumbnail + "</p>";
+			out += "<p>추가사진 : " + data.thumbnailFile + "</p>";
+			
+			$("#detailModal").find(".modal-body").html(out);
+			
+			$("#detailModal").find('.modal-title').text(data.productName);
+			
+			$("#detailModal").show();
+		};
+		ajaxFun(url, "get", query, "json", fn);
+		
 	});
 });
+
+// 재고 수정
+$(function() {
+	$('.stockBtn').click(function() {
+		let productNum = $(this).closest('tr').find('input').val();
+		console.log(productNum);
+
+		
+	});
+});
+
+// 상품 숨김여부 수정창 나타나기
+$(function() {
+	$('.hideBtn').click(function() {
+		let productNum = $(this).closest('tr').find('input').val();
+		console.log(productNum);
+		
+		let url = "${pageContext.request.contextPath}/admin/shopProduct/hide";
+		let query = "productNum=" + productNum;
+		
+		const fn = function(data) {
+			console.log(data);
+			
+			let productShow;
+			
+			if(data.productShow === 1) {
+				productShow = 'O';
+			} else {
+				productShow = "X";
+			}
+			
+			let out = "진열 여부 : " + productShow;
+			
+			$("#hideModal").find('.modal-title').text(data.productName);
+			
+			$("#hideModal").find(".modal-body").text(out);
+			
+			$("#hideModal").find('.productNum').val(data.productNum);
+			$("#hideModal").find('.productShow').val(data.productShow);
+						
+			$("#hideModal").show();
+			
+		};
+		ajaxFun(url, "get", query, "json", fn);
+		
+	});
+	
+	$('.hideUpdate').on('click', function(){
+		let productNum = $(this).closest('#hideModal').find('.productNum').val();
+		let productShow = $(this).closest('#hideModal').find('.productShow').val();
+		console.log(productNum, productShow);
+		
+		let url = "${pageContext.request.contextPath}/admin/shopProduct/hide";
+		let query=  {productNum:productNum, productShow:productShow};
+		
+		const fn = function(data) {
+			console.log(data);
+			let replace = "${pageContext.request.contextPath}" + data;
+			window.location.href = replace;
+		}
+		ajaxFun(url, "post", query, "json", fn);
+	});
+});
+
+//상품 숨김여부 완료
+
 
 // 모달창 닫기
 $(function() {

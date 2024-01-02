@@ -29,6 +29,12 @@ public interface ShopProductManageMapper {
 	public int dataCount(Map<String, Object> map);
 	public List<ShopProductManage> listBrand();
 	public List<ShopProductManage> listProduct(Map<String, Object> map);
+	public List<ShopProductManage> listProductFile(long productNum);
+	public List<ShopProductManage> listProductOption(long productNum);
+	public List<ShopProductManage> listOptionDetail(long optionNum);
+	public ShopProductManage findById(long productNum);
 	
+	
+	public int updateHide(Map<String, Object> map) throws SQLException;
 	
 }

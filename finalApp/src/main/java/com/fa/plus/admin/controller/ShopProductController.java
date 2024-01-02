@@ -3,6 +3,7 @@ package com.fa.plus.admin.controller;
 import java.io.File;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -189,7 +190,7 @@ public class ShopProductController {
 	
 	@PostMapping("write")
 	public String writeSubmit(
-			ShopProductManage dto,  
+			ShopProductManage dto, 
 			HttpSession session, 
 			Model model) {
 		
@@ -206,4 +207,113 @@ public class ShopProductController {
 		
 		return url;
 	}
+	
+	@GetMapping("update")
+	public String updateForm() {
+		return ".admin.shopProduct.write";
+	}
+	
+	@GetMapping("article")
+	@ResponseBody
+	public ShopProductManage article(@RequestParam long productNum) throws Exception {
+		ShopProductManage dto = service.findById(productNum);
+		
+		try {
+			List<ShopProductManage> listProductFile = service.listProductFile(productNum);
+			List<ShopProductManage> listOption = service.listProductOption(productNum);
+			List<ShopProductManage> listOptionDetail = null;
+			if(listOption.size() > 0) {
+				if(listOption.size() == 1) {
+					listOptionDetail = service.listOptionDetail(listOption.get(0).getOptionNum());
+					System.out.println(listOption);
+					dto.setOptionNum(listOption.get(0).getOptionNum());
+					dto.setOptionName(listOption.get(0).getOptionName());
+					List<Long> detailNums = new ArrayList<Long>();
+					List<String> detailValues = new ArrayList<String>();
+					for(ShopProductManage item : listOptionDetail) {
+						detailNums.add(item.getDetailNum());
+						detailValues.add(item.getOptionValue());
+						dto.setDetailNums(detailNums);
+						dto.setOptionValues(detailValues);
+					}
+				} else if(listOption.size() == 2) {
+					// 옵션1
+					listOptionDetail = service.listOptionDetail(listOption.get(0).getOptionNum());
+					System.out.println(listOption);
+					dto.setOptionNum(listOption.get(0).getOptionNum());
+					dto.setOptionName(listOption.get(0).getOptionName());
+					List<Long> detailNums = new ArrayList<Long>();
+					List<String> detailValues = new ArrayList<String>();
+					for(ShopProductManage item : listOptionDetail) {
+						detailNums.add(item.getDetailNum());
+						detailValues.add(item.getOptionValue());
+					}
+					dto.setDetailNums(detailNums);
+					dto.setOptionValues(detailValues);
+					
+					// 옵션2
+					listOptionDetail = service.listOptionDetail(listOption.get(1).getOptionNum());
+					dto.setOptionNum2(listOption.get(1).getOptionNum());
+					dto.setOptionName2(listOption.get(1).getOptionName());
+					System.out.println(listOption);
+					detailNums = new ArrayList<Long>();
+					detailValues = new ArrayList<String>();
+					for(ShopProductManage item : listOptionDetail) {
+						detailNums.add(item.getDetailNum());
+						detailValues.add(item.getOptionValue());
+					}
+					dto.setDetailNums2(detailNums);
+					dto.setOptionValues2(detailValues);
+				}
+			}
+			dto.setFilename(dto.getThumbnail());
+			listProductFile.add(0, dto);	
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+	
+	@GetMapping("hide")
+	@ResponseBody
+	public Map<String, Object> hideForm(@RequestParam long productNum
+			) throws Exception {
+		
+		ShopProductManage dto = service.findById(productNum);
+		
+		String productName = dto.getProductName();
+		int productShow = dto.getProductShow();		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("productNum", productNum);
+		map.put("productName", productName);
+		map.put("productShow", productShow);
+		
+		return map;
+	}
+	
+	@PostMapping("hide")
+	@ResponseBody
+	public String hideSubmit(@RequestParam long productNum, 
+			@RequestParam int productShow) throws Exception {
+		
+		if(productShow == 0) {
+			productShow = 1;
+		} else {
+			productShow = 0;
+		}
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("productNum", productNum);
+		map.put("productShow", productShow);
+		
+		service.updateHide(map);
+		
+		return "/admin/shopProduct/main";
+	}
+	
+	
 }

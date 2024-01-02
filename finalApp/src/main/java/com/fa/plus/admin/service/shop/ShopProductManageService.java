@@ -12,9 +12,16 @@ public interface ShopProductManageService {
 	public int dataCount(Map<String, Object> map);
 	public List<ShopProductManage> listBrand();
 	public List<ShopProductManage> listProduct(Map<String, Object> map);
+	public List<ShopProductManage> listProductFile(long productNum);
+	public List<ShopProductManage> listProductOption(long productNum);
+	public List<ShopProductManage> listOptionDetail(long optionNum);
+	
+	public ShopProductManage findById(long productNum);
 	
 	// 상품 상위 카테고리 목록
 	public ShopProductManage findByCategory(long categoryNum);
 	public List<ShopProductManage> listCategory();
 	public List<ShopProductManage> listSubCategory(long parentNum);
+	
+	public void updateHide(Map<String, Object> map);
 }
