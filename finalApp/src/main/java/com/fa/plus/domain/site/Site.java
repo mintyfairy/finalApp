@@ -5,15 +5,15 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 public class Site {
-	private	long	SITENUM	;
-	private	String	SITENAME	;
-	private	String	INTODUCE	;
+	private	long	sitenum	;
+	private	String	sitename	;
+	private	String	introduce	;
 	private	int	SITELOCAL	;
 	private	String	ZIP	;
 	private	String	ADDR1	;
 	private	String	ADDR2	;
 	private	String	THUMBNAIL	;
-	private	MultipartFile	THUMBNAILFILE	;
+	private	MultipartFile	thumbnailfile	;
 	private	int	CATEGORY	;
 	private	int	ENVIRONMENT	;
 	private	int	HITCOUNT	;
@@ -21,7 +21,8 @@ public class Site {
 	private	String	CHKOUT	;
 	private	int	MEMBERIDX	;
 	private	double	AVGSTAR	;
-	private	String[] SITEOPTION	;
+	private	String[] SITEOPTIONList	;
+	private	String SITEOPTION	;
 	private	int	ENABLED	;
 	
 	
@@ -37,30 +38,30 @@ public class Site {
 		return THUMBNAIL ;
 	}
 
-	public long getSITENUM() {
-		return SITENUM;
+	public long getsitenum() {
+		return sitenum;
 	}
-	public void setSITENUM(long sITENUM) {
-		SITENUM = sITENUM;
+	public void setsitenum(long sitenum) {
+		sitenum = sitenum;
 	}
 	
-	public MultipartFile getTHUMBNAILFILE() {
-		return THUMBNAILFILE;
+	public MultipartFile getthumbnailfile() {
+		return thumbnailfile;
 	}
-	public void setTHUMBNAILFILE(MultipartFile tHUMBNAILFILE) {
-		THUMBNAILFILE = tHUMBNAILFILE;
+	public void setthumbnailfile(MultipartFile thumbnailfile) {
+		thumbnailfile = thumbnailfile;
 	}
-	public String getSITENAME() {
-		return SITENAME;
+	public String getsitename() {
+		return sitename;
 	}
-	public void setSITENAME(String sITENAME) {
-		SITENAME = sITENAME;
+	public void setsitename(String sitename) {
+		sitename = sitename;
 	}
-	public String getINTODUCE() {
-		return INTODUCE;
+	public String getintroduce() {
+		return introduce;
 	}
-	public void setINTODUCE(String iNTODUCE) {
-		INTODUCE = iNTODUCE;
+	public void setintroduce(String introduce) {
+		introduce = introduce;
 	}
 	public int getSITELOCAL() {
 		return SITELOCAL;
@@ -137,10 +138,10 @@ public class Site {
 	public void setENABLED(int eNABLED) {
 		ENABLED = eNABLED;
 	}
-	public String[] getSITEOPTION() {
+	public String getSITEOPTION() {
 		return SITEOPTION;
 	}
-	public void setSITEOPTION(String[] sITEOPTION) {
+	public void setSITEOPTION(String sITEOPTION) {
 		SITEOPTION = sITEOPTION;
 	}
 	public long getFileNum() {
@@ -161,5 +162,12 @@ public class Site {
 	public void setAddFiles(List<MultipartFile> addFiles) {
 		this.addFiles = addFiles;
 	}
+	public String[] getSITEOPTIONList() {
+		return SITEOPTIONList;
+	}
+	public void setSITEOPTIONList(String[] sITEOPTIONList) {
+		SITEOPTIONList = sITEOPTIONList;
+	}
 
+	
 }

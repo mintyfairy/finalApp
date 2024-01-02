@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fa.plus.admin.service.CampAdminService;
 import com.fa.plus.common.MyUtil;
+import com.fa.plus.domain.SessionInfo;
 import com.fa.plus.domain.site.Site;
 import com.fa.plus.domain.site.SiteDetail;
 
@@ -26,6 +28,8 @@ import com.fa.plus.domain.site.SiteDetail;
 @RequestMapping("/siteManage/*")
 public class CampAdminController {
 
+	@Autowired
+	private CampAdminService service;
 	@Autowired
 	private MyUtil myUtil;
 	
@@ -74,7 +78,7 @@ public class CampAdminController {
 			e.printStackTrace();
 			throw e;
 		}
-		return ".campsite.admin.main";
+		return ".admin.siteManage.siteManage";
 	}
 	
 	@RequestMapping("site/{num}")
@@ -122,7 +126,7 @@ public class CampAdminController {
 			e.printStackTrace();
 			throw e;
 		}
-		return ".campsite.admin.main";
+		return ".admin.siteManage.roomManage";
 	}
 	
 	
@@ -130,35 +134,36 @@ public class CampAdminController {
 	//이거 트렌젝션처리 이름ㅇ시작잇엇는데 머더라
 	
 	@GetMapping("site/write")
-	public String siteForm(Model model) {
+	public String writeSiteForm(Model model) {
 		
 		model.addAttribute("mode", "write");
 		return ".campsite.siteWrite";
 	}
 	
 	@PostMapping("site/write")
-	public String siteSubmit(Site dto,HttpSession session,
-			Model model) {
+	public String writeSiteSubmit(Site dto,HttpSession session,
+			Model model) throws Exception {
+		
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		String root = session.getServletContext().getRealPath("/");
 		String path = root + "uploads" + File.separator + "product";
-		/*
+		
 		try {
-			service.insertProduct(dto, path);
+			dto.setMEMBERIDX((int)info.getMemberIdx());
+			service.insertSite(dto, path);
 		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		}
 		
-		String url = "redirect:/admin/product/main?parentNum=" + dto.getParentNum()
-						+ "&categoryNum=" + dto.getCategoryNum();
-		if(special != 0) {
-			url += "&special=" + special;
-		}
-		*/
 		
-		return ".admin.siteManage.roomList.1";
+		
+		
+		return "redirect:/siteManage/main";
 	}
 	
 	@GetMapping("site/update")
-	public String updateForm(Model model) {
+	public String updateSiteForm(Model model) {
 		Public Site=null;
 		
 		model.addAttribute("mode", "write");
@@ -166,7 +171,7 @@ public class CampAdminController {
 	}
 	
 	@PostMapping("site/update")
-	public String updateSubmit(Site dto,HttpSession session,
+	public String updateSiteSubmit(Site dto,HttpSession session,
 			Model model) {
 		String root = session.getServletContext().getRealPath("/");
 		String path = root + "uploads" + File.separator + "product";
@@ -183,7 +188,7 @@ public class CampAdminController {
 		}
 		 */
 		
-		return ".admin.siteManage.roomList.1";
+		return "redirect:/siteManage/main";
 	}
 	
 	@GetMapping("site/{num}/write")
@@ -194,7 +199,7 @@ public class CampAdminController {
 		
 		model.addAttribute("dto", dto);
 		model.addAttribute("mode", "write");
-		return ".campsite.";
+		return ".campsite.roomWrite";
 	}
 	
 	@PostMapping("site/{num}/write")
@@ -216,7 +221,7 @@ public class CampAdminController {
 		*/
 		
 		
-		return ".admin.siteManage.siteManage";
+		return "redirect:/siteManage/site/1";
 	}
 	
 	@GetMapping("site/{num}/update")
@@ -226,7 +231,7 @@ public class CampAdminController {
 		
 		model.addAttribute("dto", dto);
 		model.addAttribute("mode", "write");
-		return ".campsite.";
+		return ".campsite.roomWrite";
 	}
 	
 	@PostMapping("site/{num}/update")
@@ -248,7 +253,7 @@ public class CampAdminController {
 		 */
 		
 		
-		return ".admin.siteManage.siteManage";
+		return "redirect:/siteManage/site/1";
 	}
 	
 

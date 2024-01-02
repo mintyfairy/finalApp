@@ -125,20 +125,20 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 					<tr>
 						<td class="table-light col-sm-2">장소명</td>
 						<td>
-							<input type="text" name="detailName" class="form-control" value="${dto.productName}">
+							<input type="text" name="DETAILNAME" class="form-control" value="${dto.productName}">
 						</td>
 					</tr>
 					
 					<tr>
 						<td class="table-light col-sm-2 ">일일 대여비(원)</td><!-- 나중에 특별 요금변화 (성수기)테이블 추가? -->
 						<td class="col-auto">
-							<input type="text" name="price" class="form-control " value="${dto.price}"> 
+							<input type="text" name="PRICE" class="form-control " value="${dto.price}"> 
 						</td>
 					</tr>
 					<tr>
 						<td class="table-light col-sm-2">장소 크기(평)</td>
 						<td>
-							<input type="text" name="area" class="form-control" value="${dto.area}">
+							<input type="text" name="AREA" class="form-control" value="${dto.area}">
 						</td>
 					</tr>
 					<tr>
@@ -158,7 +158,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 					<tr>
 						<td class="table-light col-sm-2">적정인원(명)</td>
 						<td>
-							<input type="text" name="capacity" class="form-control" value="${dto.capacity}">
+							<input type="text" name="CAPACITY" class="form-control" value="${dto.capacity}">
 						</td>
 					</tr>
 					
@@ -167,7 +167,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 					<tr>
 						<td class="table-light col-sm-2">장소 설명</td>
 						<td>
-							<textarea name="content" id="ir1" class="form-control" style="max-width: 95%; height: 290px;">${dto.content}</textarea>
+							<textarea name="CONTENT" id="ir1" class="form-control" style="max-width: 95%; height: 290px;">${dto.content}</textarea>
 						</td>
 					</tr>
 					
@@ -197,16 +197,12 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 								<c:if test="${not empty page}">
 									<c:param name="page" value="${page}"/>
 								</c:if>
-								<c:if test="${special != 0}">
-									<c:param name="special" value="${special}"/>
-								</c:if>
 							</c:url>
 							<button type="button" class="btn btn-dark" onclick="submitContents(this.form);">${mode=="update"?"수정완료":"등록완료"}</button>
 							<button type="reset" class="btn btn-light">다시입력</button>
 							<button type="button" class="btn btn-light" onclick="location.href='${url}';">${mode=="update"?"수정취소":"등록취소"}</button>
 							<c:if test="${mode=='update'}">
 								<input type="hidden" name="productNum" value="${dto.productNum}">
-								<input type="hidden" name="thumbnail" value="${dto.thumbnail}">
 								<input type="hidden" name="page" value="${page}">
 							</c:if>
 						</td>
