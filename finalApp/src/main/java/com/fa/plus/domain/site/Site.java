@@ -8,141 +8,140 @@ public class Site {
 	private	long	sitenum	;
 	private	String	sitename	;
 	private	String	introduce	;
-	private	int	SITELOCAL	;
-	private	String	ZIP	;
-	private	String	ADDR1	;
-	private	String	ADDR2	;
-	private	String	THUMBNAIL	;
+	private	int	sitelocal	;
+	private	String	zip	;
+	private	String	addr1	;
+	private	String	addr2	;
+	private	String	thumbnail	;
 	private	MultipartFile	thumbnailfile	;
-	private	int	CATEGORY	;
-	private	int	ENVIRONMENT	;
-	private	int	HITCOUNT	;
-	private	String	CHECKIN	;
-	private	String	CHKOUT	;
-	private	int	MEMBERIDX	;
-	private	double	AVGSTAR	;
-	private	String[] SITEOPTIONList	;
-	private	String SITEOPTION	;
-	private	int	ENABLED	;
+	private	int	category	;
+	private	int	environment	;
+	private	int	hitcount	;
+	private	String	checkin	;
+	private	String	chkout	;
+	private	int	memberidx	;
+	private	double	avgstar	;
+	private	String[] siteoptionList	;
+	private	String siteoption	;
+	private	int	enabled	;
 	
 	
 	private long fileNum;
-	private String filename;
+	private String fileName;
 	private List<MultipartFile> addFiles;
-	
-
-	public void setTHUMBNAIL(String tHUMBNAIL) {
-		THUMBNAIL = tHUMBNAIL;
-	}
-	public String getTHUMBNAIL() {
-		return THUMBNAIL ;
-	}
-
-	public long getsitenum() {
+	public long getSitenum() {
 		return sitenum;
 	}
-	public void setsitenum(long sitenum) {
-		sitenum = sitenum;
+	public void setSitenum(long sitenum) {
+		this.sitenum = sitenum;
 	}
-	
-	public MultipartFile getthumbnailfile() {
-		return thumbnailfile;
-	}
-	public void setthumbnailfile(MultipartFile thumbnailfile) {
-		thumbnailfile = thumbnailfile;
-	}
-	public String getsitename() {
+	public String getSitename() {
 		return sitename;
 	}
-	public void setsitename(String sitename) {
-		sitename = sitename;
+	public void setSitename(String sitename) {
+		this.sitename = sitename;
 	}
-	public String getintroduce() {
+	public String getIntroduce() {
 		return introduce;
 	}
-	public void setintroduce(String introduce) {
-		introduce = introduce;
+	public void setIntroduce(String introduce) {
+		this.introduce = introduce;
 	}
-	public int getSITELOCAL() {
-		return SITELOCAL;
+	public int getSitelocal() {
+		return sitelocal;
 	}
-	public void setSITELOCAL(int sITELOCAL) {
-		SITELOCAL = sITELOCAL;
+	public void setSitelocal(int sitelocal) {
+		this.sitelocal = sitelocal;
 	}
-	public String getZIP() {
-		return ZIP;
+	public String getZip() {
+		return zip;
 	}
-	public void setZIP(String zIP) {
-		ZIP = zIP;
+	public void setZip(String zip) {
+		this.zip = zip;
 	}
-	public String getADDR1() {
-		return ADDR1;
+	public String getAddr1() {
+		return addr1;
 	}
-	public void setADDR1(String ADDR1) {
-		this.ADDR1 = ADDR1;
+	public void setAddr1(String addr1) {
+		this.addr1 = addr1;
 	}
-	public String getADDR2() {
-		return ADDR2;
+	public String getAddr2() {
+		return addr2;
 	}
-	public void setADDR2(String ADDR2) {
-		this.ADDR2 = ADDR2;
+	public void setAddr2(String addr2) {
+		this.addr2 = addr2;
 	}
-
-	
-	public int getCATEGORY() {
-		return CATEGORY;
+	public String getThumbnail() {
+		return thumbnail;
 	}
-	public void setCATEGORY(int cATEGORY) {
-		CATEGORY = cATEGORY;
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
 	}
-	public int getENVIRONMENT() {
-		return ENVIRONMENT;
+	public MultipartFile getThumbnailfile() {
+		return thumbnailfile;
 	}
-	public void setENVIRONMENT(int eNVIRONMENT) {
-		ENVIRONMENT = eNVIRONMENT;
+	public void setThumbnailfile(MultipartFile thumbnailfile) {
+		this.thumbnailfile = thumbnailfile;
 	}
-	public int getHITCOUNT() {
-		return HITCOUNT;
+	public int getCategory() {
+		return category;
 	}
-	public void setHITCOUNT(int hITCOUNT) {
-		HITCOUNT = hITCOUNT;
+	public void setCategory(int category) {
+		this.category = category;
 	}
-	public String getCHECKIN() {
-		return CHECKIN;
+	public int getEnvironment() {
+		return environment;
 	}
-	public void setCHECKIN(String cHECKIN) {
-		CHECKIN = cHECKIN;
+	public void setEnvironment(int environment) {
+		this.environment = environment;
 	}
-	public String getCHKOUT() {
-		return CHKOUT;
+	public int getHitcount() {
+		return hitcount;
 	}
-	public void setCHKOUT(String cHKOUT) {
-		CHKOUT = cHKOUT;
+	public void setHitcount(int hitcount) {
+		this.hitcount = hitcount;
 	}
-	public int getMEMBERIDX() {
-		return MEMBERIDX;
+	public String getCheckin() {
+		return checkin;
 	}
-	public void setMEMBERIDX(int mEMBERIDX) {
-		MEMBERIDX = mEMBERIDX;
+	public void setCheckin(String checkin) {
+		this.checkin = checkin;
 	}
-	public double getAVGSTAR() {
-		return AVGSTAR;
+	public String getChkout() {
+		return chkout;
 	}
-	public void setAVGSTAR(double aVGSTAR) {
-		AVGSTAR = aVGSTAR;
+	public void setChkout(String chkout) {
+		this.chkout = chkout;
 	}
-
-	public int getENABLED() {
-		return ENABLED;
+	public int getMemberidx() {
+		return memberidx;
 	}
-	public void setENABLED(int eNABLED) {
-		ENABLED = eNABLED;
+	public void setMemberidx(int memberidx) {
+		this.memberidx = memberidx;
 	}
-	public String getSITEOPTION() {
-		return SITEOPTION;
+	public double getAvgstar() {
+		return avgstar;
 	}
-	public void setSITEOPTION(String sITEOPTION) {
-		SITEOPTION = sITEOPTION;
+	public void setAvgstar(double avgstar) {
+		this.avgstar = avgstar;
+	}
+	public String[] getSiteoptionList() {
+		return siteoptionList;
+	}
+	public void setSiteoptionList(String[] siteoptionList) {
+		this.siteoptionList = siteoptionList;
+	}
+	public String getSiteoption() {
+		return siteoption;
+	}
+	public void setSiteoption(String siteoption) {
+		this.siteoption = siteoption;
+	}
+	public int getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
 	}
 	public long getFileNum() {
 		return fileNum;
@@ -150,11 +149,11 @@ public class Site {
 	public void setFileNum(long fileNum) {
 		this.fileNum = fileNum;
 	}
-	public String getFilename() {
-		return filename;
+	public String getFileName() {
+		return fileName;
 	}
-	public void setFilename(String filename) {
-		this.filename = filename;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 	public List<MultipartFile> getAddFiles() {
 		return addFiles;
@@ -162,12 +161,8 @@ public class Site {
 	public void setAddFiles(List<MultipartFile> addFiles) {
 		this.addFiles = addFiles;
 	}
-	public String[] getSITEOPTIONList() {
-		return SITEOPTIONList;
-	}
-	public void setSITEOPTIONList(String[] sITEOPTIONList) {
-		SITEOPTIONList = sITEOPTIONList;
-	}
+	
+
 
 	
 }

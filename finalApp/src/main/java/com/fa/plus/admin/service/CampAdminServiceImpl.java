@@ -28,28 +28,28 @@ public class CampAdminServiceImpl implements CampAdminService {
 		try {
 			StringBuffer options =new StringBuffer();
 			//배열을 스트링으로 변환
-			if(dto.getSITEOPTIONList()!=null) {
-				for(String option:dto.getSITEOPTIONList()) {
+			if(dto.getSiteoptionList()!=null) {
+				for(String option:dto.getSiteoptionList()) {
 					options.append(option);
 					
 				}
-				dto.setSITEOPTION(options.toString());
+				dto.setSiteoption(pathname);
 			}//여러변 수정되는 문자열이라 스트링버퍼를 사용했다.
 			//[0,0,1...]이던 배열이 001..형태의 스트링이 될것으로 기대된다.
-			System.out.println(dto.getSITEOPTION());
-			System.out.println(dto.getSITEOPTIONList()+"리스트");
-			System.out.println(dto.getSITEOPTIONList().toString());
+			System.out.println(dto.getSiteoption());
+			System.out.println(dto.getSiteoptionList()+"리스트");
+			System.out.println(dto.getSiteoptionList().toString());
 			
 			
 			
 			// 썸네일 이미지
-			String filename = fileManager.doFileUpload(dto.getTHUMBNAILFILE(), pathname);
-			dto.setTHUMBNAIL(filename);
+			String filename = fileManager.doFileUpload(dto.getThumbnailfile(), pathname);
+			dto.setThumbnail(filename);
 
 			// 상품 저장
 			long Num = mapper.SiteSeq();
 
-			dto.setSITENUM(Num);
+			dto.setSitenum(Num);
 			mapper.insertSite(dto);
 
 			// 추가 이미지 저장
@@ -59,7 +59,7 @@ public class CampAdminServiceImpl implements CampAdminService {
 					if (filename == null) {
 						continue;
 					}
-					dto.setFilename(filename);
+					dto.setFileName(filename);
 
 					mapper.insertSiteFile(dto);
 				}

@@ -149,7 +149,7 @@ public class CampAdminController {
 		String path = root + "uploads" + File.separator + "product";
 		
 		try {
-			dto.setMEMBERIDX((int)info.getMemberIdx());
+			dto.setMemberidx((int)info.getMemberIdx());
 			service.insertSite(dto, path);
 		} catch (Exception e) {
 			e.printStackTrace();
