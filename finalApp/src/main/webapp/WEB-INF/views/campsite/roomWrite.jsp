@@ -125,7 +125,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 					<tr>
 						<td class="table-light col-sm-2">장소명</td>
 						<td>
-							<input type="text" name="detailname" class="form-control" value="${dto.productName}">
+							<input type="text" name="detailname" class="form-control" value="${dto.detailname}">
 						</td>
 					</tr>
 					

@@ -170,7 +170,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 					<tr>
 						<td class="table-light col-sm-2">업체명</td>
 						<td>
-							<input type="text" name="sitename" class="form-control" value="${dto.siteName}">
+							<input type="text" name="sitename" class="form-control" value="${dto.sitename}">
 						</td>
 					</tr>
 					<tr>
@@ -178,35 +178,35 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 						<td>
 							<select name="sitelocal" class="form-select">
 										<option selected> 지역 </option>
-                              			<option value="1" ${dto.siteLocal==1?"selected":""}>서울</option>
-                               			<option value="2" ${dto.siteLocal==2?"selected":""}>인천</option>
-                                        <option value="3" ${dto.siteLocal==3?"selected":""}>경기</option>
-                                        <option value="4" ${dto.siteLocal==4?"selected":""}>강원</option>
-                                        <option value="5" ${dto.siteLocal==5?"selected":""}>대전</option>
-                                        <option value="6" ${dto.siteLocal==6?"selected":""}>세종</option>
-                                        <option value="7" ${dto.siteLocal==7?"selected":""}>충북</option>
-                                        <option value="8" ${dto.siteLocal==8?"selected":""}>충남</option>
-                                        <option value="9" ${dto.siteLocal==9?"selected":""}>대구</option>
-                                        <option value="10" ${dto.siteLocal==10?"selected":""}>울산</option>
-                                        <option value="11" ${dto.siteLocal==11?"selected":""}>경북</option>
-                                        <option value="12" ${dto.siteLocal==12?"selected":""}>경남</option>
-                                        <option value="13" ${dto.siteLocal==13?"selected":""}>전북</option>
-                                        <option value="14" ${dto.siteLocal==14?"selected":""}>전남</option>
-                                        <option value="15" ${dto.siteLocal==15?"selected":""}>제주</option>
+                              			<option value="1" ${dto.sitelocal==1?"selected":""}>서울</option>
+                               			<option value="2" ${dto.sitelocal==2?"selected":""}>인천</option>
+                                        <option value="3" ${dto.sitelocal==3?"selected":""}>경기</option>
+                                        <option value="4" ${dto.sitelocal==4?"selected":""}>강원</option>
+                                        <option value="5" ${dto.sitelocal==5?"selected":""}>대전</option>
+                                        <option value="6" ${dto.sitelocal==6?"selected":""}>세종</option>
+                                        <option value="7" ${dto.sitelocal==7?"selected":""}>충북</option>
+                                        <option value="8" ${dto.sitelocal==8?"selected":""}>충남</option>
+                                        <option value="9" ${dto.sitelocal==9?"selected":""}>대구</option>
+                                        <option value="10" ${dto.sitelocal==10?"selected":""}>울산</option>
+                                        <option value="11" ${dto.sitelocal==11?"selected":""}>경북</option>
+                                        <option value="12" ${dto.sitelocal==12?"selected":""}>경남</option>
+                                        <option value="13" ${dto.sitelocal==13?"selected":""}>전북</option>
+                                        <option value="14" ${dto.sitelocal==14?"selected":""}>전남</option>
+                                        <option value="15" ${dto.sitelocal==15?"selected":""}>제주</option>
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<td class="table-light col-sm-2">입실시간</td>
 						<td>
-							<input type="time" name="checkin" class="form-control" value="${dto.chekcIn}">
+							<input type="time" name="checkin" class="form-control" value="${dto.checkin}">
 						</td>
 					</tr>
 
 					<tr>
 						<td class="table-light col-sm-2">퇴실시간</td>
 						<td>
-							<input type="time" name="chkout" class="form-control" value="${dto.checkOut}">
+							<input type="time" name="chkout" class="form-control" value="${dto.checkout}">
 						</td>
 					</tr>
 					
@@ -216,17 +216,17 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 						<td class="table-light col-sm-2">캠핑장옵션</td>
 						<td>
 							<div class="pt-2 pb-2">
-								<input type="checkbox" name="siteoptionList" class="form-check-input"  value="0" ${dto.siteOption==1 ? "checked='checked'" : "" }> <label class="form-check-label" >전기</label>
+								<input type="checkbox" name="siteoptionList" class="form-check-input"  value="0" ${dto.siteoptionList[0]==1 ? "checked='checked'" : "" }> <label class="form-check-label" >전기</label>
 								&nbsp;&nbsp;
-								<input type="checkbox" name="siteoptionList" class="form-check-input"  value="0" ${dto.siteOption==0 ? "checked='checked'" : "" }> <label class="form-check-label" >와이파이</label>
+								<input type="checkbox" name="siteoptionList" class="form-check-input"  value="0" ${dto.siteoptionList[1]==1 ? "checked='checked'" : "" }> <label class="form-check-label" >와이파이</label>
 								&nbsp;&nbsp;
-								<input type="checkbox" name="siteoptionList" class="form-check-input"  value="0" ${dto.siteOption==0 ? "checked='checked'" : "" }> <label class="form-check-label" > 비비큐 장비 대여</label>
+								<input type="checkbox" name="siteoptionList" class="form-check-input"  value="0" ${dto.siteoptionList[2]==1 ? "checked='checked'" : "" }> <label class="form-check-label" > 비비큐 장비 대여</label>
 								&nbsp;&nbsp;
-								<input type="checkbox" name="siteoptionList" class="form-check-input"  value="0" ${dto.siteOption==0 ? "checked='checked'" : "" }> <label class="form-check-label" >운동장</label>
+								<input type="checkbox" name="siteoptionList" class="form-check-input"  value="0" ${dto.siteoptionList[3]==1 ? "checked='checked'" : "" }> <label class="form-check-label" >운동장</label>
 								&nbsp;&nbsp;
-								<input type="checkbox" name="siteoptionList" class="form-check-input" value="0" ${dto.siteOption==0 ? "checked='checked'" : "" }> <label class="form-check-label" >화장실</label>
+								<input type="checkbox" name="siteoptionList" class="form-check-input" value="0" ${dto.siteoptionList[4]==1 ? "checked='checked'" : "" }> <label class="form-check-label" >화장실</label>
 								&nbsp;&nbsp;
-								<input type="checkbox" name="siteoptionList" class="form-check-input"  value="0" ${dto.siteOption==0 ? "checked='checked'" : "" }> <label class="form-check-label" >샤워장</label>
+								<input type="checkbox" name="siteoptionList" class="form-check-input"  value="0" ${dto.siteoptionList[5]==1 ? "checked='checked'" : "" }> <label class="form-check-label" >샤워장</label>
 								
 							</div>
 						</td>
@@ -235,7 +235,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 					<tr>
 						<td class="table-light col-sm-2">캠핑장 설명</td>
 						<td>
-							<textarea name="introduce" id="ir1" class="form-control" style="max-width: 95%; height: 290px;">${dto.content}</textarea>
+							<textarea name="introduce" id="ir1" class="form-control" style="max-width: 95%; height: 290px;">${dto.introduce}</textarea>
 						</td>
 					</tr>
 					<tr>

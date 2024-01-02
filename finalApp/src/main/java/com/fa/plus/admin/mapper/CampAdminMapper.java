@@ -23,11 +23,14 @@ public interface CampAdminMapper {
 	public int dataCountSite(Map<String, Object> map);
 	
 	public List<Site> listSite(Map<String, Object> map);
-	public List<Site> listRoom(Map<String, Object> map);
+	public List<SiteDetail> listRoom(Map<String, Object> map);
 	
 	public void updateSite(Site dto) throws SQLException;
 	public void deleteSite(long SiteNum) throws SQLException;
 	public void deleteSiteFile(long fileNum) throws SQLException;
+	
+	public Site findByIdSite(long SiteNum) throws SQLException;
+	public SiteDetail findByIdRoom(long DetailNum) throws SQLException;
 	
 	
 	public void updateRoom(SiteDetail dto) throws SQLException;

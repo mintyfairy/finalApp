@@ -21,6 +21,9 @@ public interface CampAdminService {
 	public int dataCountSite(Map<String, Object> map);
 	public int dataCountRoom(Map<String, Object> map);
 	
+	public Site findByIdSite(long SiteNum) throws Exception ;
+	public SiteDetail findByIdRoom(long DetailNum) throws Exception  ;
+	
 	
 	public List<Site> listSite(Map<String, Object> map);
 	public List<SiteDetail> listRoom(Map<String, Object> map);

@@ -57,7 +57,7 @@ public class CampAdminController {
 			map.put("offset", offset);
 			map.put("size", size);
 			
-			List<Site> list= null;//service.listCategory();
+			List<Site> list= service.listSite(map);
 			
 			String listUrl = cp + "/siteManage/main";
 			String articleUrl = cp + "/siteManage/article?page=" + current_page;
@@ -83,7 +83,7 @@ public class CampAdminController {
 	
 	@RequestMapping("site/{num}")
 	public String listRoom(@RequestParam(value = "page", defaultValue = "1") int current_page,
-			HttpServletRequest req,
+			HttpServletRequest req, @PathVariable int num,
 			Model model) {
 		String cp= req.getContextPath();
 		int size = 10;
@@ -92,8 +92,8 @@ public class CampAdminController {
 		try {
 			
 			Map<String, Object> map = new HashMap<String, Object>();
-			
-			dataCount = 0;//service.dataCount(map);
+			map.put("siteNum", num);
+			dataCount = service.dataCountRoom(map);
 			total_page = myUtil.pageCount(dataCount, size);
 			if(current_page > total_page) {
 				current_page = total_page;
@@ -195,9 +195,6 @@ public class CampAdminController {
 	
 	public String writeroomForm(@PathVariable int num,Model model) {
 		
-		//SiteDetail dto=null;
-		
-		//model.addAttribute("dto", dto);
 		model.addAttribute("mode", "write");
 		return ".campsite.roomWrite";
 	}

@@ -36,25 +36,15 @@
 			</thead>
 			
 			<tbody>
-				<tr>
-						<td>1</td>
-						<td><a href="${pageContext.request.contextPath}/admin/siteManage/roomList/1">이름ㅇㅇ라믕ㅁ</a></td>
-						<td>머임?</td>
-						<td>
-							<button type="button" class="btn-border-primary" onclick="deleteBoard('${dto.boardUrl}')">장소 등록</button>
-							<button type="button" class="btn-border-primary">수정</button>
-							<button type="button" class="btn-border-primary" onclick="deleteBoard('${dto.boardUrl}')">삭제</button>
-						</td>
-					</tr>
 				<c:forEach var="dto" items="${ list}" varStatus="status">
 					<tr>
 						<td>${dataCount-(page-1)*size-status.index}</td>
-						<td><a href="${pageContext.request.contextPath}/community/${dto.boardUrl}/list">${dto.boardTitle}</a></td>
-						<td>${dto.boardUrl}</td>
+						<td><a href="${pageContext.request.contextPath}/siteManage/${dto.sitenum}">${dto.sitename}</a></td>
+						<td>${dto.addr1}</td>
 
 						<td>
-							<button type="button" class="btn-border-primary">수정</button>
-							<button type="button" class="btn-border-primary" onclick="deleteBoard('${dto.boardUrl}')">삭제</button>
+							<button type="button" class="btn-border-primary" onclick="updateSite('${dto.sitenum}')">수정</button>
+							<button type="button" class="btn-border-primary" onclick="deleteSite('${dto.sitenum}')">삭제</button>
 						</td>
 					</tr>
 				</c:forEach>
@@ -70,10 +60,15 @@
 
 <div id="member-dialog" style="display: none;"></div>
 <script>
-function deleteBoard(boardUrl){
+function deleteSite(num){
 	if(confirm('게시판 및 게시판의 게시글을 삭제하시겠습니까?')){
-		let q="tableName="+boardUrl;
-		location.href="${pageContext.request.contextPath}/boardManage/drop?"+q;
+		let q="siteNum="+num;
+		location.href="${pageContext.request.contextPath}/siteManage/deleteSite?"+q;
 	}
+}
+function updateSite(num){
+	let q="siteNum="+num;
+	location.href="${pageContext.request.contextPath}/siteManage/site/update?"+q;
+	
 }
 </script>

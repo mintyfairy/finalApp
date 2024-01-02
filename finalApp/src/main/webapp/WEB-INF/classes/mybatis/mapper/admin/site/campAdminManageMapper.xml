@@ -28,7 +28,8 @@
 		
 	<select id="dataCountSite" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*), 0)
-		FROM campingsite p
+		FROM campingsite 
+		where  MEMBERIDX=#{memberIdx}
 	</select>
 	
 
@@ -54,9 +55,76 @@
 		
 	<select id="dataCountRoom" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*), 0)
-		FROM sitedetail p
+		FROM sitedetail
+		where  sitenum=#{siteNum}
 	</select>
 	
+	<!-- 리스트 -->
+	<select id="listSite" parameterType="map" resultType="com.fa.plus.domain.site.Site">
+		SELECT SITENUM,SITENAME,SITELOCAL,addr1,addr2,
+	 		CATEGORY,ENVIRONMENT,HITCOUNT,
+	 		 AVGSTAR,
+		FROM campingsite 		
+		where MEMBERIDX=#{memberIdx}
+		ORDER BY SITENUM DESC
+		
+	</select>
+	<select id="listRoom" parameterType="map" resultType="com.fa.plus.domain.site.SiteDetail">
+		SELECT DETAILNUM,SITENUM,DETAILNAME,PRICE,AREA,CONTENT,CAPACITY,floor
+		FROM sitedetail 
+		where sitenum=#{siteNum}
+		ORDER BY DETAILNUM DESC
+		
+	</select>
+	<!-- 탐색 -->
+	<select id="findByIdSite" parameterType="Long" resultType="com.fa.plus.domain.site.Site">
+		SELECT SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,
+	 		 THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,CHKOUT,
+	 		 MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED
+		FROM campingsite 
+		where 	SITENUM=#{SiteNum}
+	</select>
+	<select id="findByIdRoom" parameterType="Long" resultType="com.fa.plus.domain.site.SiteDetail">
+		SELECT DETAILNUM,SITENUM,DETAILNAME,PRICE,AREA,CONTENT,CAPACITY,floor
+		FROM sitedetail 
+		where 	DETAILNUM=#{DetailNum}
+	</select>
+	
+	<!-- 업데이트/삭제 -->
 	
 	
+	<update id="updateSite" parameterType="com.fa.plus.domain.site.Site">
+		UPDATE campingsite SET SITENAME=#{sitename},INTrODUCE=#{introduce},
+				SITELOCAL=#{sitelocal},ZIP=#{zip},addr1=#{addr1},addr2=#{addr2},
+	 		 THUMBNAIL= #{thumbnail},CATEGORY=#{category},
+	 		 ENVIRONMENT=#{environment},CHECKIN= #{checkin},CHKOUT= #{chkout},
+	 		 SITEOPTION= #{siteoption}
+		WHERE SITENUM = #{SITENUM}
+	</update>
+
+	<delete id="deleteSite" parameterType="Long">
+		DELETE FROM campingsite WHERE  SITENUM = #{SITENUM}
+	</delete>
+	
+	<delete id="deleteSiteFile" parameterType="Long">
+		DELETE FROM sitepic WHERE spicnum = #{fileNum}
+	</delete>
+	
+	
+	<update id="updateRoom" parameterType="com.fa.plus.domain.site.Site">
+		UPDATE sitedetail SET
+			DETAILNAME=#{detailname},PRICE=#{price},
+			AREA=#{area},CONTENT=#{content},CAPACITY=#{capacity},floor=#{floor}
+		WHERE detailnum = #{detailnum}
+	</update>
+
+	<delete id="deleteRoom" parameterType="Long">
+		DELETE FROM sitedetail WHERE  detailnum = #{detailnum}
+	</delete>
+	
+	<delete id="deleteRoomFile" parameterType="Long">
+		DELETE FROM sitedetailPic WHERE SdPICNUM = #{SdPicNum}
+	</delete>
+	
+
 </mapper>
