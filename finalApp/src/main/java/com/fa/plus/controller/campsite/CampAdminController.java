@@ -146,7 +146,7 @@ public class CampAdminController {
 		
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		String root = session.getServletContext().getRealPath("/");
-		String path = root + "uploads" + File.separator + "product";
+		String path = root + "uploads" + File.separator + "camp";
 		
 		try {
 			dto.setMemberidx((int)info.getMemberIdx());
@@ -174,7 +174,7 @@ public class CampAdminController {
 	public String updateSiteSubmit(Site dto,HttpSession session,
 			Model model) {
 		String root = session.getServletContext().getRealPath("/");
-		String path = root + "uploads" + File.separator + "product";
+		String path = root + "uploads" + File.separator + "camp";
 		/*
 		try {
 			service.insertProduct(dto, path);
@@ -195,30 +195,30 @@ public class CampAdminController {
 	
 	public String writeroomForm(@PathVariable int num,Model model) {
 		
-		SiteDetail dto=null;
+		//SiteDetail dto=null;
 		
-		model.addAttribute("dto", dto);
+		//model.addAttribute("dto", dto);
 		model.addAttribute("mode", "write");
 		return ".campsite.roomWrite";
 	}
 	
 	@PostMapping("site/{num}/write")
 	public String writeroomSubmit(@PathVariable int num,SiteDetail dto,HttpSession session,
-			Model model) {
-		String root = session.getServletContext().getRealPath("/");
-		String path = root + "uploads" + File.separator + "product";
-		/*
-		try {
-			service.insertProduct(dto, path);
-		} catch (Exception e) {
-		}
+			Model model) throws Exception {
 		
-		String url = "redirect:/admin/product/main?parentNum=" + dto.getParentNum()
-						+ "&categoryNum=" + dto.getCategoryNum();
-		if(special != 0) {
-			url += "&special=" + special;
+		//SessionInfo info = (SessionInfo)session.getAttribute("member");
+		//이걸로 본인  검증하자
+		
+		String root = session.getServletContext().getRealPath("/");
+		String path = root + "uploads" + File.separator + "room";
+		
+		try {
+			dto.setSitenum(num);//캠핑장 번호
+			service.insertRoom(dto, path);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		}
-		*/
 		
 		
 		return "redirect:/siteManage/site/1";
@@ -238,7 +238,7 @@ public class CampAdminController {
 	public String updateroomSubmit(@PathVariable int num,SiteDetail dto,HttpSession session,
 			Model model) {
 		String root = session.getServletContext().getRealPath("/");
-		String path = root + "uploads" + File.separator + "product";
+		String path = root + "uploads" + File.separator + "room";
 		/*
 		try {
 			service.insertProduct(dto, path);

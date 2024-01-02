@@ -59,7 +59,7 @@ public class FileManager {
 			if (! f.getParentFile().exists()) {
 				f.getParentFile().mkdirs();
 			}
-
+			System.out.println(fullpathname);
 			partFile.transferTo(f);
 			
 		} catch (IOException e) {

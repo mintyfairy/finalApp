@@ -33,12 +33,9 @@ public class CampAdminServiceImpl implements CampAdminService {
 					options.append(option);
 					
 				}
-				dto.setSiteoption(pathname);
+				dto.setSiteoption(options.toString());
 			}//여러변 수정되는 문자열이라 스트링버퍼를 사용했다.
 			//[0,0,1...]이던 배열이 001..형태의 스트링이 될것으로 기대된다.
-			System.out.println(dto.getSiteoption());
-			System.out.println(dto.getSiteoptionList()+"리스트");
-			System.out.println(dto.getSiteoptionList().toString());
 			
 			
 			

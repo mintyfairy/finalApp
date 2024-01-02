@@ -59,19 +59,19 @@ function check() {
 	let mode = "${mode}";
 	
 	
-	if(! f.SITENAME.value.trim()) {
+	if(! f.sitename.value.trim()) {
 		alert("이름을 입력하세요.");
 		f.SITENAME.focus();
 		return false;
 	}
 	
 
-	if(mode === "write" && ! f.THUMBNAILFILE.value) {
+	if(mode === "write" && ! f.thumbnailfile.value) {
 		alert("대표 이미지를 등록하세요.");
-		f.THUMBNAILFILE.focus();
+		f.thumbnailfile.focus();
 		return false;
 	}
-	let list=f.SITEOPTIONList;
+	let list=f.siteoptionList;
 	console.log(list);
 	for(var i=0; i<list.length; i++){
 		if(list[i].checked){
@@ -142,7 +142,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 						<td>
 							<div class="row">
 								<div class="col-6 pe-1">
-									<select name="CATEGORY" class="form-select">
+									<select name="category" class="form-select">
 										<option value="" >:: 분류 ::</option>
 										<option value="1" ${dto.category==1?"selected":""}>오토캠핑</option>
                                         <option value="2" ${dto.category==2?"selected":""}>글램핑</option>
@@ -152,7 +152,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 									</select>
 								</div>
 								<div class="col-6 ps-1">
-									<select name="ENVIRONMENT" class="form-select">
+									<select name="environment" class="form-select">
 										<option value="">:: 환경 ::</option>
 										<option value="1" ${dto.environment==1?"selected":""}>산</option>
                                         <option value="2" ${dto.environment==2?"selected":""}>강</option>
@@ -170,13 +170,13 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 					<tr>
 						<td class="table-light col-sm-2">업체명</td>
 						<td>
-							<input type="text" name="SITENAME" class="form-control" value="${dto.siteName}">
+							<input type="text" name="sitename" class="form-control" value="${dto.siteName}">
 						</td>
 					</tr>
 					<tr>
 						<td class="table-light col-sm-2">지역구분</td>
 						<td>
-							<select name="SITELOCAL" class="form-select">
+							<select name="sitelocal" class="form-select">
 										<option selected> 지역 </option>
                               			<option value="1" ${dto.siteLocal==1?"selected":""}>서울</option>
                                			<option value="2" ${dto.siteLocal==2?"selected":""}>인천</option>
@@ -199,14 +199,14 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 					<tr>
 						<td class="table-light col-sm-2">입실시간</td>
 						<td>
-							<input type="time" name="CHECKIN" class="form-control" value="${dto.chekcIn}">
+							<input type="time" name="checkin" class="form-control" value="${dto.chekcIn}">
 						</td>
 					</tr>
 
 					<tr>
 						<td class="table-light col-sm-2">퇴실시간</td>
 						<td>
-							<input type="time" name="CHKOUT" class="form-control" value="${dto.checkOut}">
+							<input type="time" name="chkout" class="form-control" value="${dto.checkOut}">
 						</td>
 					</tr>
 					
@@ -216,17 +216,17 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 						<td class="table-light col-sm-2">캠핑장옵션</td>
 						<td>
 							<div class="pt-2 pb-2">
-								<input type="checkbox" name="SITEOPTIONList" class="form-check-input"  value="0" ${dto.siteOption==1 ? "checked='checked'" : "" }> <label class="form-check-label" >전기</label>
+								<input type="checkbox" name="siteoptionList" class="form-check-input"  value="0" ${dto.siteOption==1 ? "checked='checked'" : "" }> <label class="form-check-label" >전기</label>
 								&nbsp;&nbsp;
-								<input type="checkbox" name="SITEOPTIONList" class="form-check-input"  value="0" ${dto.siteOption==0 ? "checked='checked'" : "" }> <label class="form-check-label" >와이파이</label>
+								<input type="checkbox" name="siteoptionList" class="form-check-input"  value="0" ${dto.siteOption==0 ? "checked='checked'" : "" }> <label class="form-check-label" >와이파이</label>
 								&nbsp;&nbsp;
-								<input type="checkbox" name="SITEOPTIONList" class="form-check-input"  value="0" ${dto.siteOption==0 ? "checked='checked'" : "" }> <label class="form-check-label" > 비비큐 장비 대여</label>
+								<input type="checkbox" name="siteoptionList" class="form-check-input"  value="0" ${dto.siteOption==0 ? "checked='checked'" : "" }> <label class="form-check-label" > 비비큐 장비 대여</label>
 								&nbsp;&nbsp;
-								<input type="checkbox" name="SITEOPTIONList" class="form-check-input"  value="0" ${dto.siteOption==0 ? "checked='checked'" : "" }> <label class="form-check-label" >운동장</label>
+								<input type="checkbox" name="siteoptionList" class="form-check-input"  value="0" ${dto.siteOption==0 ? "checked='checked'" : "" }> <label class="form-check-label" >운동장</label>
 								&nbsp;&nbsp;
-								<input type="checkbox" name="SITEOPTIONList" class="form-check-input" value="0" ${dto.siteOption==0 ? "checked='checked'" : "" }> <label class="form-check-label" >화장실</label>
+								<input type="checkbox" name="siteoptionList" class="form-check-input" value="0" ${dto.siteOption==0 ? "checked='checked'" : "" }> <label class="form-check-label" >화장실</label>
 								&nbsp;&nbsp;
-								<input type="checkbox" name="SITEOPTIONList" class="form-check-input"  value="0" ${dto.siteOption==0 ? "checked='checked'" : "" }> <label class="form-check-label" >샤워장</label>
+								<input type="checkbox" name="siteoptionList" class="form-check-input"  value="0" ${dto.siteOption==0 ? "checked='checked'" : "" }> <label class="form-check-label" >샤워장</label>
 								
 							</div>
 						</td>
@@ -235,7 +235,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 					<tr>
 						<td class="table-light col-sm-2">캠핑장 설명</td>
 						<td>
-							<textarea name="INTODUCE" id="ir1" class="form-control" style="max-width: 95%; height: 290px;">${dto.content}</textarea>
+							<textarea name="introduce" id="ir1" class="form-control" style="max-width: 95%; height: 290px;">${dto.content}</textarea>
 						</td>
 					</tr>
 					<tr>
@@ -244,7 +244,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 							<div class="row mb-3">
 		                        <div class="col-sm-5">
 		                           <div class="input-group">
-		                               <input type="text" name="ZIP" id="zip" class="form-control" placeholder="우편번호" value="${dto.zip}" readonly>
+		                               <input type="text" name="zip" id="zip" class="form-control" placeholder="우편번호" value="${dto.zip}" readonly>
 		                               <button class="btn btn-light" type="button" style="margin-left: 3px;" onclick="daumPostcode();">우편번호 검색</button>
 		                           </div>
 		                    	</div>
@@ -260,10 +260,10 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 							<div class="row mb-3">
 			                    <div class="col-sm-10">
 			                           <div>
-			                               <input type="text" name="ADDR1" id="addr1" class="form-control" placeholder="기본 주소" value="${dto.addr1}" readonly>
+			                               <input type="text" name="addr1" id="addr1" class="form-control" placeholder="기본 주소" value="${dto.addr1}" readonly>
 			                           </div>
 			                           <div style="margin-top: 5px;">
-			                             <input type="text" name="ADDR2" id="addr2" class="form-control" placeholder="상세 주소" value="${dto.addr2}">
+			                             <input type="text" name="addr2" id="addr2" class="form-control" placeholder="상세 주소" value="${dto.addr2}">
 			                      		</div>
 			                    </div>
 		                    </div>
@@ -273,7 +273,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 						<td class="table-light col-sm-2">대표이미지</td>
 						<td>
 							<div class="thumbnail-viewer"></div>
-							<input type="file" name="THUMBNAILFILE" accept="image/*" class="form-control" style="display: none;">
+							<input type="file" name="thumbnailfile" accept="image/*" class="form-control" style="display: none;">
 						</td>
 					</tr>
 					
@@ -298,7 +298,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 				<table class="table table-borderless">
 					<tr>
 						<td class="text-center">
-							<c:url var="url" value="/admin/product/main">
+							<c:url var="url" value="/siteManage/main">
 								<c:if test="${not empty page}">
 									<c:param name="page" value="${page}"/>
 								</c:if>
@@ -307,8 +307,8 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 							<button type="reset" class="btn btn-light">다시입력</button>
 							<button type="button" class="btn btn-light" onclick="location.href='${url}';">${mode=="update"?"수정취소":"등록취소"}</button>
 							<c:if test="${mode=='update'}">
-								<input type="hidden" name="productNum" value="${dto.productNum}">
-								<input type="hidden" name="THUMBNAIL" value="${dto.thumbnail}">
+								<input type="hidden" name="sitenum" value="${dto.sitenum}">
+								<input type="hidden" name="thumbnail" value="${dto.thumbnail}">
 								<input type="hidden" name="page" value="${page}">
 							</c:if>
 						</td>
@@ -331,10 +331,10 @@ $(function(){
 	}
 	
 	$(".table-form .thumbnail-viewer").click(function(){
-		$("form[name=productForm] input[name=THUMBNAILFILE]").trigger("click");
+		$("form[name=productForm] input[name=thumbnailfile]").trigger("click");
 	});
 	
-	$("form[name=productForm] input[name=THUMBNAILFILE]").change(function(){
+	$("form[name=productForm] input[name=thumbnailfile]").change(function(){
 		let file = this.files[0];
 		
 		if(! file) {
@@ -463,8 +463,6 @@ function submitContents(elClickedObj) {
 		if(! check()) {
 			return;
 		}
-		console.log(elClickedObj);
-		console.log(elClickedObj.action);
 		elClickedObj.submit();
 		
 	} catch(e) {

@@ -18,6 +18,8 @@ public class SiteDetail {
 	private long fileNum;
 	private String filename;
 	private List<MultipartFile> addFiles;
+	
+	
 	public long getDetailnum() {
 		return detailnum;
 	}
