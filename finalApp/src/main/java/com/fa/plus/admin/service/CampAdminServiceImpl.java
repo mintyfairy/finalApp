@@ -99,7 +99,7 @@ public class CampAdminServiceImpl implements CampAdminService {
 			// 상품 저장
 			long Num = mapper.RoomSeq();
 
-			dto.setDETAILNUM(Num);
+			dto.setDetailnum(Num);
 			mapper.insertRoom(dto);
 
 			// 추가 이미지 저장

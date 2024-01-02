@@ -5,62 +5,60 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 public class SiteDetail {
-	private	long	DETAILNUM	;
-	private	int	SITENUM	;
-	private	String	DETAILNAME	;
-	private	int	PRICE	;
-	private	String	AREA	;
-	private	String	CONTENT	;
-	private	String	CAPACITY	;
+	private	long	detailnum	;
+	private	int	sitenum	;
+	private	String	detailname	;
+	private	int	price	;
+	private	String	area	;
+	private	String	content	;
+	private	String	capacity	;
 	private	int	floor	;
 	
 
 	private long fileNum;
 	private String filename;
 	private List<MultipartFile> addFiles;
-	
-	
-	public long getDETAILNUM() {
-		return DETAILNUM;
+	public long getDetailnum() {
+		return detailnum;
 	}
-	public void setDETAILNUM(long dETAILNUM) {
-		DETAILNUM = dETAILNUM;
+	public void setDetailnum(long detailnum) {
+		this.detailnum = detailnum;
 	}
-	public int getSITENUM() {
-		return SITENUM;
+	public int getSitenum() {
+		return sitenum;
 	}
-	public void setSITENUM(int sITENUM) {
-		SITENUM = sITENUM;
+	public void setSitenum(int sitenum) {
+		this.sitenum = sitenum;
 	}
-	public String getDETAILNAME() {
-		return DETAILNAME;
+	public String getDetailname() {
+		return detailname;
 	}
-	public void setDETAILNAME(String dETAILNAME) {
-		DETAILNAME = dETAILNAME;
+	public void setDetailname(String detailname) {
+		this.detailname = detailname;
 	}
-	public int getPRICE() {
-		return PRICE;
+	public int getPrice() {
+		return price;
 	}
-	public void setPRICE(int pRICE) {
-		PRICE = pRICE;
+	public void setPrice(int price) {
+		this.price = price;
 	}
-	public String getAREA() {
-		return AREA;
+	public String getArea() {
+		return area;
 	}
-	public void setAREA(String aREA) {
-		AREA = aREA;
+	public void setArea(String area) {
+		this.area = area;
 	}
-	public String getCONTENT() {
-		return CONTENT;
+	public String getContent() {
+		return content;
 	}
-	public void setCONTENT(String cONTENT) {
-		CONTENT = cONTENT;
+	public void setContent(String content) {
+		this.content = content;
 	}
-	public String getCAPACITY() {
-		return CAPACITY;
+	public String getCapacity() {
+		return capacity;
 	}
-	public void setCAPACITY(String cAPACITY) {
-		CAPACITY = cAPACITY;
+	public void setCapacity(String capacity) {
+		this.capacity = capacity;
 	}
 	public int getFloor() {
 		return floor;
@@ -86,6 +84,7 @@ public class SiteDetail {
 	public void setAddFiles(List<MultipartFile> addFiles) {
 		this.addFiles = addFiles;
 	}
+	
 	
 	
 	
