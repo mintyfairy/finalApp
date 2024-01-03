@@ -6,7 +6,17 @@ public class SessionInfo {
 	private String userId;
 	private String userName;
 	private int membership;
+
+	private String authority;
 	
+	
+	
+	public String getAuthority() {
+		return authority;
+	}
+	public void setAuthority(String authority) {
+		this.authority = authority;
+	}
 	public long getMemberIdx() {
 		return memberIdx;
 	}

@@ -289,17 +289,24 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
             </li>
         </ul>
 
-        <div class="header_top_left">
+        <div class="header_top_left row">
+			<c:if test='${sessionScope.member.authority=="CAMP"||"ADMIN"||"EMP"}'>
+		            <div class="login_wrap col-auto">
+		                <a href="${pageContext.request.contextPath}/admin">
+		                	<button class="custom-btn btn-4">관리 페이지</button>
+		                </a>
+		            </div>
+		     </c:if>
        		 <c:choose>
 				<c:when test="${empty sessionScope.member}">
-		            <div class="login_wrap">
+		            <div class="login_wrap col-auto">
 		                <a href="${pageContext.request.contextPath}/member/login">
 		                	<button class="custom-btn btn-4">Login</button>
 		                </a>
 		            </div>
 		        </c:when>
 		        <c:otherwise>
-					<div class="login_wrap">
+					<div class="login_wrap col-auto">
 						<a href="${pageContext.request.contextPath}/member/logout">
 		                	<button class="custom-btn btn-4">Logout</button>
 		                </a>
