@@ -16,12 +16,12 @@
 
 <div class="body-container">
     <div class="body-title">
-		<h2><i class="fa-solid fa-user-group"></i> ${dto.siteName} 관리 </h2>
+		<h2><i class="fa-solid fa-user-group"></i> 객실 관리 </h2>
 		<table class="table">
 			<tr>
 				<td align="right">
 					<button type="button" class="btn-border-primary" onclick="
-								location.href ='${pageContext.request.contextPath}/siteManage/room/1/write'">장소 등록</button>
+								location.href ='${pageContext.request.contextPath}/admin/siteManage/site/${num}/write'">장소 등록</button>
 				</td>
 			</tr>
 		</table>
@@ -37,14 +37,14 @@
 			
 			<tbody>
 
-				<c:forEach var="dto" items="${ list}" varStatus="status">
+				<c:forEach var="dto" items="${list}" varStatus="status">
 					<tr>
 						<td>${dataCount-(page-1)*size-status.index}</td>
 						<td><p>${dto.detailname}</p></td>
 						<td>${dto.price}</td>
 
 						<td>
-							<button type="button" class="btn-border-primary" onclick="updateRoom('${dto.detailnum},${dto.sitenum}')">수정</button>
+							<button type="button" class="btn-border-primary" onclick="updateRoom(${dto.detailnum},${dto.sitenum})">수정</button>
 							<button type="button" class="btn-border-primary" onclick="deleteRoom('${dto.detailnum}')">삭제</button>
 						</td>
 					</tr>
@@ -64,12 +64,12 @@
 function deleteRoom(num){
 	if(confirm('게시판 및 게시판의 게시글을 삭제하시겠습니까?')){
 		let q="detailnum="+num;
-		location.href="${pageContext.request.contextPath}/siteManage/deleteRoom?"+q;
+		location.href="${pageContext.request.contextPath}/admin/siteManage/deleteRoom?"+q;
 	}
 }
 function updateRoom(num,sitenum){
 	let q="detailnum="+num;
-	location.href="${pageContext.request.contextPath}/siteManage/site/"+sitenum+"/update?"+q;
+	location.href="${pageContext.request.contextPath}/admin/siteManage/site/"+sitenum+"/update?"+q;
 	
 }
 </script>

@@ -24,6 +24,7 @@
 	z-index: 9999;
 	background-repeat: no-repeat;
 	background-size: cover;
+	
 }
 
 .table-form .img-grid {
@@ -82,7 +83,7 @@ function check() {
 		list[i].checked=true;
 		//console.log(list[i].value);
 	}
-	f.action = "${pageContext.request.contextPath}/siteManage/site/${mode}";
+	f.action = "${pageContext.request.contextPath}/admin/siteManage/site/${mode}";
 	return true;
 }
 </script>
@@ -129,7 +130,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 
 <div class="container">
 	<div class="body-container">
-		<div class="body-title">
+		<div class="body-title"> 
 			<h3><i class="bi bi-app"></i> 캠핑장 관리 </h3>
 		</div>
 		
@@ -272,7 +273,8 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 					<tr>
 						<td class="table-light col-sm-2">대표이미지</td>
 						<td>
-							<div class="thumbnail-viewer"></div>
+							<div class="thumbnail-viewer">
+							</div>
 							<input type="file" name="thumbnailfile" accept="image/*" class="form-control" style="display: none;">
 						</td>
 					</tr>
@@ -283,7 +285,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 							<div class="img-grid">
 								<img class="item img-add" src="${pageContext.request.contextPath}/resources/images/add_photo.png">
 								<c:forEach var="vo" items="${listFile}">
-									<img src="${pageContext.request.contextPath}/uploads/product/${vo.filename}"
+									<img src="${pageContext.request.contextPath}/uploads/camp/${vo.filename}"
 										class="item delete-img"
 										data-fileNum="${vo.fileNum}"
 										data-filename="${vo.filename}">

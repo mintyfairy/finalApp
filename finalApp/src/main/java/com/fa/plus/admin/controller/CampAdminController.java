@@ -1,4 +1,4 @@
-package com.fa.plus.controller.campsite;
+package com.fa.plus.admin.controller;
 
 import java.io.File;
 import java.util.HashMap;
@@ -8,7 +8,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +24,7 @@ import com.fa.plus.domain.site.Site;
 import com.fa.plus.domain.site.SiteDetail;
 
 @Controller
-@RequestMapping("/siteManage/*")
+@RequestMapping("/admin/siteManage/*")
 public class CampAdminController {
 
 	@Autowired
@@ -35,7 +34,7 @@ public class CampAdminController {
 	
 	@RequestMapping("main")
 	public String main(@RequestParam(value = "page", defaultValue = "1") int current_page,
-			HttpServletRequest req,
+			HttpServletRequest req,HttpSession session,
 			Model model) {
 		String cp= req.getContextPath();
 		int size = 10;
@@ -44,6 +43,7 @@ public class CampAdminController {
 		try {
 
 			Map<String, Object> map = new HashMap<String, Object>();
+			SessionInfo info = (SessionInfo)session.getAttribute("member");
 			
 			dataCount = 0;//service.dataCount(map);
 			total_page = myUtil.pageCount(dataCount, size);
@@ -54,6 +54,7 @@ public class CampAdminController {
 			int offset = (current_page - 1) * size;
 			if(offset < 0) offset = 0;
 			
+			map.put("memberIdx", info.getMemberIdx());
 			map.put("offset", offset);
 			map.put("size", size);
 			
@@ -102,16 +103,18 @@ public class CampAdminController {
 			int offset = (current_page - 1) * size;
 			if(offset < 0) offset = 0;
 			
+			map.put("siteNum", num);
 			map.put("offset", offset);
 			map.put("size", size);
 			
-			List<Site> list= null;//service.listCategory();
+			List<SiteDetail> list= service.listRoom(map);
 			
 			String listUrl = cp + "/siteManage/main";
 			String articleUrl = cp + "/siteManage/article?page=" + current_page;
 			
 			String paging = myUtil.pagingUrl(current_page, total_page, listUrl);
 			
+			model.addAttribute("num", num);
 			model.addAttribute("list", list);
 			model.addAttribute("dataCount", dataCount);
 			
@@ -159,14 +162,24 @@ public class CampAdminController {
 		
 		
 		
-		return "redirect:/siteManage/main";
+		return "redirect:/admin/siteManage/main";
 	}
 	
 	@GetMapping("site/update")
-	public String updateSiteForm(Model model) {
-		Public Site=null;
+	public String updateSiteForm(@RequestParam long siteNum, Model model) {
+		Site dto=null;
+		List<Site> listFile =null;
+		try {
+			dto=service.findByIdSite(siteNum);
+			//listFile=service.
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		model.addAttribute("listFile", listFile);
+		model.addAttribute("dto", dto);
+		model.addAttribute("mode", "update");
 		
-		model.addAttribute("mode", "write");
 		return ".campsite.siteWrite";
 	}
 	
@@ -175,20 +188,14 @@ public class CampAdminController {
 			Model model) {
 		String root = session.getServletContext().getRealPath("/");
 		String path = root + "uploads" + File.separator + "camp";
-		/*
+		
 		try {
-			service.insertProduct(dto, path);
+			service.updateSite(dto, path);
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
-		String url = "redirect:/admin/product/main?parentNum=" + dto.getParentNum()
-						+ "&categoryNum=" + dto.getCategoryNum();
-		if(special != 0) {
-			url += "&special=" + special;
-		}
-		 */
-		
-		return "redirect:/siteManage/main";
+		return "redirect:/admin/siteManage/main";
 	}
 	
 	@GetMapping("site/{num}/write")
@@ -206,6 +213,7 @@ public class CampAdminController {
 		//SessionInfo info = (SessionInfo)session.getAttribute("member");
 		//이걸로 본인  검증하자
 		
+		
 		String root = session.getServletContext().getRealPath("/");
 		String path = root + "uploads" + File.separator + "room";
 		
@@ -218,16 +226,22 @@ public class CampAdminController {
 		}
 		
 		
-		return "redirect:/siteManage/site/1";
+		return "redirect:/admin/siteManage/site/"+num;
 	}
 	
 	@GetMapping("site/{num}/update")
-	public String updateroomForm(@PathVariable int num,Model model) {
+	public String updateroomForm(@PathVariable int num,Model model,@RequestParam long detailnum) {
 		
 		SiteDetail dto=null;
+		try {
+			dto = service.findByIdRoom(detailnum);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		model.addAttribute("dto", dto);
-		model.addAttribute("mode", "write");
+		model.addAttribute("mode", "update");
 		return ".campsite.roomWrite";
 	}
 	
@@ -235,23 +249,48 @@ public class CampAdminController {
 	public String updateroomSubmit(@PathVariable int num,SiteDetail dto,HttpSession session,
 			Model model) {
 		String root = session.getServletContext().getRealPath("/");
-		String path = root + "uploads" + File.separator + "room";
-		/*
+		String path = root + "uploads" + File.separator + "camp";
+		
 		try {
-			service.insertProduct(dto, path);
+			service.updateRoom(dto, path);
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
-		String url = "redirect:/admin/product/main?parentNum=" + dto.getParentNum()
-						+ "&categoryNum=" + dto.getCategoryNum();
-		if(special != 0) {
-			url += "&special=" + special;
-		}
-		 */
 		
-		
-		return "redirect:/siteManage/site/1";
+		return "redirect:/admin/siteManage/site/"+num;
 	}
 	
 
+	@GetMapping("deleteSite")
+	public String deleteSite(@RequestParam long siteNum,Model model,HttpSession session) {
+		String root = session.getServletContext().getRealPath("/");
+		String path = root + "uploads" + File.separator + "camp";
+		
+		try {
+			service.deleteSite(siteNum, path);
+			service.deleteSiteFile(siteNum, path);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		return "redirect:/admin/siteManage/main";
+	}
+	@GetMapping("site/{num}/delete")
+	public String deleteRoom(@PathVariable long num,@RequestParam long detailNum,Model model,HttpSession session) {
+		String root = session.getServletContext().getRealPath("/");
+		String path = root + "uploads" + File.separator + "camp";
+		
+		try {
+			service.deleteRoom(detailNum, path);
+			service.deleteRoomFile(detailNum, path);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "redirect:/admin/siteManage/site/"+num;
+	}
 }
+

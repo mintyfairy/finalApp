@@ -290,7 +290,7 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
         </ul>
 
         <div class="header_top_left row">
-			<c:if test='${sessionScope.member.authority=="CAMP"||"ADMIN"||"EMP"}'>
+			<c:if test='${sessionScope.member.authority=="CAMP"||sessionScope.member.authority=="ADMIN"}'>
 		            <div class="login_wrap col-auto">
 		                <a href="${pageContext.request.contextPath}/admin">
 		                	<button class="custom-btn btn-4">관리 페이지</button>

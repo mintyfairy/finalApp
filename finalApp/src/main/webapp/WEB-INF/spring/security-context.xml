@@ -75,8 +75,8 @@
 
 
 			<!-- 캠핑장업체 페이지 -->
-			<intercept-url pattern="/siteManage/**" access="hasAnyRole('ROLE_CAMP')"/>
-			<intercept-url pattern="/siteChart/**" access="hasAnyRole('ROLE_CAMP')"/>
+			<intercept-url pattern="/admin/siteManage/**" access="hasAnyRole('ROLE_CAMP')"/>
+			<intercept-url pattern="/admin/siteChart/**" access="hasAnyRole('ROLE_CAMP')"/>
 			
 			<!-- 쇼팡 페이지 -->
 			<intercept-url pattern="/shop/product/write" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>

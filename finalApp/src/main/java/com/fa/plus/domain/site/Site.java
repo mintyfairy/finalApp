@@ -18,7 +18,7 @@ public class Site {
 	private	int	environment	;
 	private	int	hitcount	;
 	private	String	checkin	;
-	private	String	chkout	;
+	private	String	checkout	;
 	private	int	memberidx	;
 	private	double	avgstar	;
 	private	String[] siteoptionList	;
@@ -107,13 +107,13 @@ public class Site {
 	public void setCheckin(String checkin) {
 		this.checkin = checkin;
 	}
-	public String getChkout() {
-		return chkout;
+	public String getCheckout() {
+		return checkout;
 	}
-	public void setChkout(String chkout) {
-		this.chkout = chkout;
+	public void setCheckout(String checkout) {
+		this.checkout = checkout;
 	}
-	public int getMemberidx() {
+	int getMemberidx() {
 		return memberidx;
 	}
 	public void setMemberidx(int memberidx) {

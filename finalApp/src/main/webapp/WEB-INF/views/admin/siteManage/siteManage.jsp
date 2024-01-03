@@ -21,7 +21,7 @@
 			<tr>
 				<td align="right">
 					<button type="button" class="btn-border-primary" onclick="
-								location.href ='${pageContext.request.contextPath}/siteManage/site/write'">켐핑장 등록</button>
+								location.href ='${pageContext.request.contextPath}/admin/siteManage/site/write'">켐핑장 등록</button>
 				</td>
 			</tr>
 		</table>
@@ -39,7 +39,7 @@
 				<c:forEach var="dto" items="${ list}" varStatus="status">
 					<tr>
 						<td>${dataCount-(page-1)*size-status.index}</td>
-						<td><a href="${pageContext.request.contextPath}/siteManage/${dto.sitenum}">${dto.sitename}</a></td>
+						<td><a href="${pageContext.request.contextPath}/admin/siteManage/site/${dto.sitenum}">${dto.sitename}</a></td>
 						<td>${dto.addr1}</td>
 
 						<td>
@@ -63,12 +63,12 @@
 function deleteSite(num){
 	if(confirm('게시판 및 게시판의 게시글을 삭제하시겠습니까?')){
 		let q="siteNum="+num;
-		location.href="${pageContext.request.contextPath}/siteManage/deleteSite?"+q;
+		location.href="${pageContext.request.contextPath}/admin/siteManage/deleteSite?"+q;
 	}
 }
 function updateSite(num){
 	let q="siteNum="+num;
-	location.href="${pageContext.request.contextPath}/siteManage/site/update?"+q;
+	location.href="${pageContext.request.contextPath}/admin/siteManage/site/update?"+q;
 	
 }
 </script>

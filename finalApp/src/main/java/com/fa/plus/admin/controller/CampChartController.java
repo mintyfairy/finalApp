@@ -1,11 +1,11 @@
-package com.fa.plus.controller.campsite;
+package com.fa.plus.admin.controller;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/siteChart/*")
+@RequestMapping("/admin/siteChart/*")
 public class CampChartController {
 
 	@RequestMapping("list")

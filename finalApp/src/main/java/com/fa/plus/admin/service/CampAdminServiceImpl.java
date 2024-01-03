@@ -244,7 +244,7 @@ public class CampAdminServiceImpl implements CampAdminService {
 		// TODO Auto-generated method stub
 		int a = 0;
 		try {
-			a = dataCountRoom(map);
+			a = mapper.dataCountRoom(map);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

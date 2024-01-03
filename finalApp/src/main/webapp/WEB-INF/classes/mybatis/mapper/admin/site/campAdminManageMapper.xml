@@ -63,7 +63,7 @@
 	<select id="listSite" parameterType="map" resultType="com.fa.plus.domain.site.Site">
 		SELECT SITENUM,SITENAME,SITELOCAL,addr1,addr2,
 	 		CATEGORY,ENVIRONMENT,HITCOUNT,
-	 		 AVGSTAR,
+	 		 AVGSTAR
 		FROM campingsite 		
 		where MEMBERIDX=#{memberIdx}
 		ORDER BY SITENUM DESC
@@ -82,12 +82,12 @@
 	 		 THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,CHKOUT,
 	 		 MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED
 		FROM campingsite 
-		where 	SITENUM=#{SiteNum}
+		where 	SITENUM=#{siteNum}
 	</select>
 	<select id="findByIdRoom" parameterType="Long" resultType="com.fa.plus.domain.site.SiteDetail">
 		SELECT DETAILNUM,SITENUM,DETAILNAME,PRICE,AREA,CONTENT,CAPACITY,floor
 		FROM sitedetail 
-		where 	DETAILNUM=#{DetailNum}
+		where 	DETAILNUM=#{detailNum}
 	</select>
 	
 	<!-- 업데이트/삭제 -->
@@ -99,11 +99,11 @@
 	 		 THUMBNAIL= #{thumbnail},CATEGORY=#{category},
 	 		 ENVIRONMENT=#{environment},CHECKIN= #{checkin},CHKOUT= #{chkout},
 	 		 SITEOPTION= #{siteoption}
-		WHERE SITENUM = #{SITENUM}
+		WHERE SITENUM = #{sitenum}
 	</update>
 
 	<delete id="deleteSite" parameterType="Long">
-		DELETE FROM campingsite WHERE  SITENUM = #{SITENUM}
+		DELETE FROM campingsite WHERE  SITENUM = #{siteNum}
 	</delete>
 	
 	<delete id="deleteSiteFile" parameterType="Long">
@@ -119,7 +119,7 @@
 	</update>
 
 	<delete id="deleteRoom" parameterType="Long">
-		DELETE FROM sitedetail WHERE  detailnum = #{detailnum}
+		DELETE FROM sitedetail WHERE  detailnum = #{detailNum}
 	</delete>
 	
 	<delete id="deleteRoomFile" parameterType="Long">
