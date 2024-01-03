@@ -75,7 +75,7 @@ public class ShopProductManageServiceImpl implements ShopProductManageService {
 			// 하위 옵션 저장
 			long optionNum2 = mapper.optionSeq();
 			dto.setOptionNum(optionNum2);
-			dto.setOptionName2(dto.getOptionName2());
+			dto.setOptionName(dto.getOptionName2());
 			dto.setParentNum(optionNum);
 			mapper.insertProductOption(dto);
 			
@@ -84,7 +84,7 @@ public class ShopProductManageServiceImpl implements ShopProductManageService {
 			for(String optionValue2 : dto.getOptionValues2()) {
 				detailNum = mapper.detailSeq();
 				dto.setDetailNum(detailNum);
-				dto.setOptionValue2(optionValue2);
+				dto.setOptionValue(optionValue2);
 				mapper.insertOptionDetail(dto);
 				
 				dto.getDetailNums2().add(detailNum);
@@ -180,6 +180,69 @@ public class ShopProductManageServiceImpl implements ShopProductManageService {
 		}
 		
 		return result;
+	}
+
+	@Override
+	public ShopProductManage findById(long productNum) {
+		ShopProductManage dto = null;
+		
+		try {
+			dto = mapper.findById(productNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+
+	@Override
+	public List<ShopProductManage> listProductFile(long productNum) {
+		List<ShopProductManage> list = null;
+		
+		try {
+			list = mapper.listProductFile(productNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<ShopProductManage> listProductOption(long productNum) {
+		List<ShopProductManage> list = null;
+		
+		try {
+			list = mapper.listProductOption(productNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<ShopProductManage> listOptionDetail(long optionNum) {
+		List<ShopProductManage> list = null;
+		
+		try {
+			list = mapper.listOptionDetail(optionNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public void updateHide(Map<String, Object> map) {
+		
+		try {
+			mapper.updateHide(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

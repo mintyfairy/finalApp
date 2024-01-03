@@ -36,6 +36,7 @@ public class ShopProductManage {
 	
 	private long optionNum;
 	private String optionName;
+	private Long parent;
 	
 	private long optionNum2;
 	private String optionName2;
@@ -354,6 +355,14 @@ public class ShopProductManage {
 
 	public void setTotalStock(int totalStock) {
 		this.totalStock = totalStock;
+	}
+
+	public Long getParent() {
+		return parent;
+	}
+
+	public void setParent(Long parent) {
+		this.parent = parent;
 	}
 	
 	

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fa.plus.admin.mapper.shop.TotalManageMapper">
+<mapper namespace="com.fa.plus.admin.mapper.ShopProductManageMapper">
 	<!-- 상품 등록 -->
 	<select id="productSeq" resultType="Long">
 		SELECT product_seq.NEXTVAL FROM dual
@@ -171,7 +171,7 @@
 		SELECT f.*, b.brandName 
 		FROM 
 		(SELECT productNum, productName, 
-		special, price, c.categoryNum, 
+		special, price, c.categoryNum, c.categoryName,  
 		discountRate, savedMoney, delivery, 
 		content, thumbnail, productShow, 
 		reg_date, updateDate, md, starter, 
@@ -248,6 +248,12 @@
 		delivery = #{delivery}, content = #{content}, 
 		thumbnail = #{thumbnail}, updateDate = SYSDATE, 
 		brandNum = #{brandNum} 
+		WHERE productNum = #{productNum}
+	</update>
+	
+	<update id="updateHide" parameterType="map">
+		UPDATE product SET 
+		productShow = #{productShow} 
 		WHERE productNum = #{productNum}
 	</update>
 	
