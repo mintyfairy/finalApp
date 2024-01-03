@@ -184,7 +184,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 							</select>
 						</td>
 					</tr>
-					<tr>
+					<tr> 
 						<td class="table-light col-sm-2">주중가격</td>
 						<td style="display:flex;">
 						<input type="text" name="weekCost" class="form-control" value="" style="width:300px;"><span style="margin:5px;">&nbsp;원</span>
