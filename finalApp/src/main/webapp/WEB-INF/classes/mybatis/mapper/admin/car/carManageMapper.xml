@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fa.plus.admin.mapper.CarManageMapper">
+	<!-- 카라반 등록 -->
+	<select id="carNumseq" resultType="Long">
+		SELECT carNum_seq.NEXTVAL FROM dual
+	</select>
+	
+	<insert id="insertCar" parameterType="com.fa.plus.admin.domain.car.CampingCar">
+		INSERT INTO campingCar(carNum, carName, carSize, thumbnail, discountRate, 
+				carShow, reg_date, rev_date, carMaxNum, sleepNum, 
+				content, petOrNot, description) 
+		VALUES (#{carNum}, #{carName}, #{carSize}, #{thumbnail}, #{discountRate}, 
+				#{carShow}, SYSDATE, SYSDATE, #{carMaxNum}, #{sleepNum}, 
+				#{content}, #{petOrNot}, #{description})
+	</insert>
+	
+	<insert id="insertCarDetail" parameterType="com.fa.plus.admin.domain.car.CampingCar">
+		INSERT INTO carDetail(caravanNum, weekCost, wkndCost, carBirth, carNum) 
+				VALUES (#{caravanNum}, #{weekCost}, #{wkndCost}, #{carBirth}, #{carNum})
+	</insert>
+	
+	<insert id="insertCarOption" parameterType="com.fa.plus.admin.domain.car.CampingCar">
+		INSERT INTO carOption(caravanNum, toilet, shower, bed, sink, microwave,
+		 frige, waterHeater, desk, tv, airCondition, heater, powerBank, induction, gasStove) 
+		VALUES (#{caravanNum}, #{toilet}, #{shower}, #{bed}, #{sink},
+			#{microwave}, #{frige}, #{waterHeater}, #{desk}, #{tv},
+			#{airCondition}, #{heater}, #{powerBank}, #{induction}, #{gasStove})
+	</insert>
+	
+	<!-- 추가 이미지 등록 -->
+	<insert id="insertImageFile" parameterType="com.fa.plus.admin.domain.car.CampingCar">
+		INSERT INTO addImagefile(carImagenum, imageFilename, caravanNum)
+			VALUES(carImagenum_seq.NEXTVAL, #{imageFilename}, #{caravanNum})
+	</insert>
+	
+	
+</mapper>

@@ -51,6 +51,25 @@ table > tr > td {
 	font-size: 12px;
 }
 
+/* 옵션 CSS */
+
+legend {
+	font-size: 14px;
+}
+
+p,
+label {
+  font:
+    1rem 'Fira Sans',
+    sans-serif;
+}
+
+input {
+  margin: 0.4rem;
+}
+
+
+
 </style>
 
 
@@ -78,16 +97,62 @@ $(function(){
 
 });
 
-var oEditors = [];
-nhn.husky.EZCreator.createInIFrame({
-	oAppRef: oEditors,
-	elPlaceHolder: "ir1",
-	sSkinURI: "${pageContext.request.contextPath}/resources/vendor/se2/SmartEditor2Skin.html",
-	fCreator: "createSEditor2"
+$(function(){
+	let mode = "${mode}";
+	if(mode === "insert") {
+		$("carShow1").prop("checked", true);
+	}
 });
 
-
+function check() {
+	const f = document.writeForm;
+	let mode = "${mode}";
+	f.action = "${pageContext.request.contextPath}/admin/carManage/${mode}";
+	return true;
+}
 </script>
+
+<script type="text/javascript">
+function login() {
+	location.href = '${pageContext.request.contextPath}/member/login';
+}
+
+function ajaxFun(url, method, formData, dataType, fn, file = false) {
+	const settings = {
+			type: method, 
+			data: formData,
+			success:function(data) {
+				fn(data);
+			},
+			beforeSend: function(jqXHR) {
+				jqXHR.setRequestHeader('AJAX', true);
+			},
+			complete: function () {
+			},
+			error: function(jqXHR) {
+				if(jqXHR.status === 403) {
+					login();
+					return false;
+				} else if(jqXHR.status === 400) {
+					alert('요청 처리가 실패 했습니다.');
+					return false;
+		    	}
+		    	
+				console.log(jqXHR.responseText);
+			}
+	};
+	
+	if(file) {
+		settings.processData = false;  // file 전송시 필수. 서버로전송할 데이터를 쿼리문자열로 변환여부
+		settings.contentType = false;  // file 전송시 필수. 서버에전송할 데이터의 Content-Type. 기본:application/x-www-urlencoded
+	}
+	
+	$.ajax(url, settings);
+}
+</script>
+
+
+
 
 <div class="body-container">
 	<div class="body-title">
@@ -113,22 +178,22 @@ nhn.husky.EZCreator.createInIFrame({
 						<td>
 							<select name="carSize" class="form-select">
 								<option value="" ${dto.special==0?"selected":""}>:: 차량 종류 선택 ::</option>
-								<option value="0" ${dto.special==0?"selected":""}>모터홈</option>
-								<option value="1" ${dto.special==1?"selected":""}>차박형(중형)</option>
-								<option value="2" ${dto.special==2?"selected":""}>차박형(소형)</option>
+								<option value="모터홈" ${dto.special=="모터홈"?"selected":""}>모터홈</option>
+								<option value="차박형(중형)" ${dto.special=="차박형(중형)"?"selected":""}>차박형(중형)</option>
+								<option value="차박형(소형)" ${dto.special=="차박형(소형)"?"selected":""}>차박형(소형)</option>
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<td class="table-light col-sm-2">주중가격</td>
 						<td style="display:flex;">
-						<input type="text" name="weekCost" class="form-control" value="" style="width:300px;"><span style="margin:5px;">&nbsp; 원</span>
+						<input type="text" name="weekCost" class="form-control" value="" style="width:300px;"><span style="margin:5px;">&nbsp;원</span>
 						</td>
 					</tr>
 					<tr>
 						<td class="table-light col-sm-2">주말가격</td>
 						<td style="display:flex;">
-						<input type="text" name="wkndCost" class="form-control" value="" style="width:300px;"><span style="margin:5px;">&nbsp; 원</span>
+						<input type="text" name="wkndCost" class="form-control" value="" style="width:300px;"><span style="margin:5px;">&nbsp;원</span>
 						</td>
 					</tr>
 					<tr>
@@ -143,19 +208,22 @@ nhn.husky.EZCreator.createInIFrame({
 						<td class="table-light col-sm-2">상품 진열</td>
 						<td>
 							<div class="pt-2 pb-2">
-								<input type="radio" name="productShow" class="form-check-input" id="productShow1" value="1" ${dto.productShow==1 ? "checked='checked'" : "" }> <label class="form-check-label" for="productShow1">상품진열</label>
+								<input type="radio" name="carShow" class="form-check-input" id="carShow1" value="1" > <label class="form-check-label" for="carShow1">상품진열</label>
 								&nbsp;&nbsp;
-								<input type="radio" name="productShow" class="form-check-input" id="productShow0" value="0" ${dto.productShow==0 ? "checked='checked'" : "" }> <label class="form-check-label" for="productShow0">진열안함</label>
+								<input type="radio" name="carShow" class="form-check-input" id="carShow0" value="0" > <label class="form-check-label" for="carShow0">진열안함</label>
 							</div>
 						</td>
 					</tr>
 					<tr>
+						<td class="table-light col-sm-2">한줄설명</td>
+						<td><input type="text" name="description" class="form-control" value=""></td>
+					</tr>
+					<tr>
 						<td class="table-light col-sm-2">상품설명</td>
 						<td>
-							<textarea name="carDetail" id="ir1" class="form-control" style="max-width: 95%; height: 290px;">${dto.content}</textarea>
+							<textarea name="content" id="ir1" class="form-control" style="max-width: 95%; height: 290px;">${dto.content}</textarea>
 						</td>
 					</tr>
-					
 					<tr>
 						<td class="table-light col-sm-2">대표이미지</td>
 						<td>
@@ -163,18 +231,17 @@ nhn.husky.EZCreator.createInIFrame({
 							<input type="file" name="thumbnailFile" accept="image/*" class="form-control" style="display: none;">
 						</td>
 					</tr>
-					
 					<tr>
 						<td class="bg-light col-sm-2" scope="row">추가이미지</td>
 						<td>
 							<div class="img-grid"><img class="item img-add rounded" src="${pageContext.request.contextPath}/resources/images/add_photo.png"></div>
-							<input type="file" name="selectFile" accept="image/*" multiple style="display: none;" class="form-control">	
+							<input type="file" name="addFiles" accept="image/*" multiple style="display: none;" class="form-control">	
 						</td>
 					</tr>
 					
 					<tr>
 						<td class="table-light col-sm-2">할인율</td>
-						<td><input type="text" name="discount-rate" class="form-control" value=""></td>
+						<td><input type="text" name="discountRate" class="form-control" value=""></td>
 					</tr>
 					<tr>
 						<td class="table-light col-sm-2">탑승가능인원</td>
@@ -194,14 +261,84 @@ nhn.husky.EZCreator.createInIFrame({
 							</div>
 						</td>
 					</tr>
+					<tr>
+						<td class="table-light col-sm-2">상세옵션</td>
+						<td>
+							<fieldset>
+							  <legend>옵션을 선택해주세요. (복수선택 가능)</legend>
+							  <div>
+							  <span>
+							    <input type="checkbox" id="toilet" value= "1"  name="toilet" ${dto.toilet==1? "checked" : ""} />
+							    <label for="toilet">화장실</label>
+							  </span>
+							  <span>
+							    <input type="checkbox" id="shower" name="shower" value= "1" ${dto.shower==1? "checked" : ""} />
+							    <label for="shower">샤워가능</label>
+							  </span>
+							  <span>
+							    <input type="checkbox" id="bed" name="bed" value= "1" ${dto.bed==1? "checked" : ""}/>
+							    <label for="bed">침대</label>
+							  </span>
+							  <span>
+							    <input type="checkbox" id="sink" name="sink" value= "1" ${dto.sink==1? "checked" : ""}/>
+							    <label for="sink">싱크대</label>
+							  </span>
+							  <span>
+							    <input type="checkbox" id="microwave" name="microwave" value= "1" ${dto.microwave==1? "checked" : ""}/>
+							    <label for="microwave">전자레인지</label>
+							  </span>
+							  </div>
+							  <div>
+							  <span>
+							    <input type="checkbox" id="frige" name="frige" value= "1" ${dto.frige==1? "checked" : ""}/>
+							    <label for="fridge">냉장고</label>
+							  </span>
+							  <span>
+							    <input type="checkbox" id="waterHeater" name="waterHeater" value= "1" ${dto.waterHeater==1? "checked" : ""}/>
+							    <label for="waterHeater">온수기</label>
+							  </span>
+							  <span>
+							    <input type="checkbox" id="desk" name="desk" value= "1" ${dto.desk==1? "checked" : ""}/>
+							    <label for="desk">식탁</label>
+							  </span>
+							  <span>
+							    <input type="checkbox" id="tv" name="tv" value= "1" ${dto.tv==1? "checked" : ""}/>
+							    <label for="tv">TV</label>
+							  </span>
+							  <span>
+							    <input type="checkbox" id="airCondition" name="airCondition" value= "1" ${dto.airCondition==1? "checked" : ""}/>
+							    <label for="airCondition">에어컨</label>
+							  </span>
+							  </div>
+							  <div>
+							  <span>
+							    <input type="checkbox" id="heater" name="heater" value= "1" ${dto.heater==1? "checked" : ""}/>
+							    <label for="heater">히터</label>
+							  </span>
+							  <span>
+							    <input type="checkbox" id="powerbank" name="powerbank" value= "1" ${dto.powerbank==1? "checked" : ""}>
+							    <label for="powerbank">파워뱅크</label>
+							  </span>
+							  <span>
+							    <input type="checkbox" id="induction" name="induction" value= "1" ${dto.induction==1? "checked" : ""}/>
+							    <label for="induction">인덕션</label>
+							  </span>
+							  <span>
+							    <input type="checkbox" id="gasStove" name="gasStove" value= "1" ${dto.gasStove==1? "checked" : ""}/>
+							    <label for="gasStove">가스레인지</label>
+							  </span>
+							  </div>
+							</fieldset>
+						</td>
+					</tr>
 				</table>
 				
 				<table class="table table-borderless">
 					<tr>
 						<td class="text-center">
-							<button type="button" class="btn btn-dark" onclick="submitContents(this.form);">등록완료</button>
+							<button type="button" class="btn btn-dark" onclick="submitContents(this.form);">${mode=="update"?"수정완료":"등록완료"}</button>
 							<button type="reset" class="btn btn-light">다시입력</button>
-							<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/admin/carManage/car';">등록취소</button>
+							<button type="button" class="btn btn-light" onclick="location.href='${url}';">${mode=="update"?"수정취소":"등록취소"}</button>
 						</td>
 					</tr>
 				</table>
@@ -217,7 +354,7 @@ nhn.husky.EZCreator.createInIFrame({
 <script type="text/javascript">
 // 대표(썸네일) 이미지 등록
 $(function(){
-	var img = "${dto.thumbnail}";
+	var img = "${dto.thumbnailFile}";
 	if( img ) {
 		img = "${pageContext.request.contextPath}/uploads/campingCar/thumbnail/"+img;
 		$(".table-form .thumbnail-viewer").empty();
@@ -263,16 +400,16 @@ $(function(){
 	var sel_files = [];
 	
 	$(".table-form").on("click", ".img-add", function(){
-		$("form[name=writeForm] input[name=selectFile]").trigger("click");
+		$("form[name=writeForm] input[name=addFiles]").trigger("click");
 	});
 	
-	$("form[name=writeForm] input[name=selectFile]").change(function(){
+	$("form[name=writeForm] input[name=addFiles]").change(function(){
 		if (! this.files) {
 			let dt = new DataTransfer();
 			for(let f of sel_files) {
 				dt.items.add(f);
 			}
-			document.writeForm.selectFile.files = dt.files;
+			document.writeForm.addFiles.files = dt.files;
 			
 	    	return false;	
 		}
@@ -294,7 +431,7 @@ $(function(){
 			for(let f of sel_files) {
 				dt.items.add(f);
 			}
-			document.writeForm.selectFile.files = dt.files;		
+			document.writeForm.addFiles.files = dt.files;		
 	});
 });
 
@@ -318,10 +455,48 @@ $(function(){
 		for(let f of sel_files) {
 			dt.items.add(f);
 		}
-		document.writeForm.selectFile.files = dt.files;
+		document.writeForm.addFiles.files = dt.files;
 		
 		$(this).remove();
 	});
 
   */
+  
 </script>
+
+<!-- 에디터 연결 -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript">
+var oEditors = [];
+nhn.husky.EZCreator.createInIFrame({
+	oAppRef: oEditors,
+	elPlaceHolder: "ir1",
+	sSkinURI: "${pageContext.request.contextPath}/resources/vendor/se2/SmartEditor2Skin.html",
+	fCreator: "createSEditor2"
+});
+
+function submitContents(elClickedObj) {
+	 oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+	 try {
+		if(! check()) {
+			return;
+		}
+		
+		elClickedObj.submit();
+		
+	} catch(e) {
+	}
+}
+
+function setDefaultFont() {
+	var sDefaultFont = '돋움';
+	var nFontSize = 12;
+	oEditors.getById["ir1"].setDefaultFont(sDefaultFont, nFontSize);
+}
+
+
+</script>
+
+
+
+
