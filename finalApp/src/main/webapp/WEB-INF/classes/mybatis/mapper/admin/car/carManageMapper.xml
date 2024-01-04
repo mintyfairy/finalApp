@@ -35,5 +35,56 @@
 			VALUES(carImagenum_seq.NEXTVAL, #{imageFilename}, #{caravanNum})
 	</insert>
 	
+	<sql id="where-list">
+		<if test="schType=='all'">
+			(INSTR(carName, #{kwd}) &gt; 0
+				OR (INSTR(carNum, #{kwd}) &gt; 0
+				OR (TO_CHAR(reg_date, 'YYYYMMDD') = #{kwd} 
+			)
+		</if>
+		<if test="schType=='carName'">
+			INSTR(carName, #{kwd}) &gt; 0
+		</if>
+		<if test="schType=='carNum'">
+			INSTR(carNum, #{kwd}) = &gt; 0
+		</if>
+		<if test="schType=='reg_date'">
+			( TO_CHAR(reg_date, 'YYYY-MM-DD') = #{kwd}
+				OR TO_CHAR(reg_date, 'YYYYMMDD') = #{kwd} )
+		</if>
+	</sql>
 	
+	<!-- 데이터 갯수 세기 -->
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM campingCar c
+		<where>
+			<if test="carShow != -1">
+				AND carShow = #{carShow}
+			</if>
+			<if test="kwd != null and kwd != ''">
+				AND <include refid="where-list"/>
+			</if>
+		</where>
+	</select>
+	
+	<!-- 리스트 -->
+	<select id="listCar" parameterType="map" resultType="com.fa.plus.admin.domain.car.CampingCar">
+		SELECT c.carNum, thumbnail, carName, d.weekCost, d.wkndCost, discountRate, TO_CHAR(reg_date, 'YYYY-MM-DD') reg_date
+		FROM campingCar c 
+		JOIN carDetail d ON c.carNum = d.carNum
+		<where>
+			<if test="carShow != -1">
+				AND carShow = #{carShow}
+			</if>
+			<if test="kwd != null and kwd != ''">
+				<include refid="where-list"/>
+			</if>
+		</where>
+		ORDER BY c.carNum DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+
+	
+
 </mapper>
