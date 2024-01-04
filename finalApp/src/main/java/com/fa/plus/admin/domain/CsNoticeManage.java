@@ -1,10 +1,10 @@
-package com.fa.plus.admin.domain.shop;
+package com.fa.plus.admin.domain;
 
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class ShopNoticeManage {
+public class CsNoticeManage {
 	private long num;
 	private String userId;
 	private String userName;
@@ -13,8 +13,8 @@ public class ShopNoticeManage {
 	private String reg_date;
 	private int hitCount;
 	private int notice;
-	private int showNotice;
-
+	private int showNotice;   
+	
 	private long fileNum;
 	private String originalFilename;
 	private String saveFilename;
@@ -22,8 +22,11 @@ public class ShopNoticeManage {
 	private int fileCount;
 	
 	// 스프링에서 파일 받기
-	private List<MultipartFile> selectFile; // <input type="file" name="selectFile"
+	private List<MultipartFile> selectFile;
 	private long gap;
+	
+	
+	
 	public long getNum() {
 		return num;
 	}
@@ -120,6 +123,8 @@ public class ShopNoticeManage {
 	public void setGap(long gap) {
 		this.gap = gap;
 	}
+	
+	
 	
 	
 	
