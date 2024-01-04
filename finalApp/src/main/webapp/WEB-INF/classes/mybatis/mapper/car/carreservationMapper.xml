@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fa.plus.mapper.car.CarReservationMapper">
+	
+	<insert id="insertCarReservation" parameterType="com.fa.plus.domain.car.CarReservation">
+		INSERT INTO carReservation(orderNum, orderDate, totMoney, discount, payment, orderState, 
+			start_date, end_date, addRider, memberIdx, carNum) VALUES ('CR-'||orderNum_seq.nextval, #{orderDate}, #{totMoney}, #{discount}, #{payment},
+			#{orderState}, #{start_date}, #{end_date}, #{addRider}, #{memberIdx}, #{carNum})
+	</insert>
+	
+	<insert id="insertCarPayDetail" parameterType="com.fa.plus.domain.car.CarReservation">
+		INSERT INTO payDetail(orderNum, payMethod, cardName, authNumber, authDate) 
+			VALUES (#{orderNum}, #{payMethod}, #{cardName}, #{authNumber}, TO_DATE(#{authDate}, 'YYYY-MM-DD HH24:MI:SS') )
+	</insert>
+</mapper>

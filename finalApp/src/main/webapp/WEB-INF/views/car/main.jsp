@@ -129,42 +129,51 @@ main {
 .car_star {
     font-size: 17px;
     float: right;
-    margin-right: 5px;
 }
 
 .car_title {
-    font-size: 20px;
-    margin: 0 10px 20px 10px;
+	font-size: 23px;
+	font-weight: bold;
+    margin: 5px 10px 20px 15px;
 }
 
 .car_sort {
-    font-size: 13px;
-    font-weight: 500;
-    margin: 0 0 30px 10px;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 5px 15px;
 }
 
 .car_content {
-    margin: 0 0 3px 10px;
+	font-size: 15px;
+    margin: 5px 0 3px 10px;
 }
 
 .car_option {
+	font-size: 18px;
     margin: 3px 0 0 10px;
 }
 
 .price {
-    float: right;
     margin-top: 20px;
     margin-right: 5px;
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 700;
-    
+    width: 350px;
+    float: right;
 }
+
+.price p {
+    text-align: right;
+}
+
+
 
 
 .car_main {
     background: url('../resources/images/campingcar/campingcar.jpg') no-repeat center center;
     height: 400px;
     border-radius: 10px;
+    margin-top: 70px;
 }
 
 .maintitle {
@@ -178,49 +187,56 @@ main {
     border-radius: 10px;
     background-color: white;
     text-align: center;
-	margin: 60px auto;
+	margin: 40px auto;
     bottom: 10%;
     left: 50%;
+    width: 450px;
+}
+
+.searchbox p {
+	font-size: 21px;
+	font-weight: 800;
+	margin-top: 30px;
 }
 
 .car_search {
-    
     margin: 20px auto;
-    padding: 10px 30px 0px 30px;
-    width: 450px;
+    width: 360px;
 }
 
 
 #search1, #search2 {
     border: 2px solid silver;
     border-radius: 10px;
-    font-size: 15px;
+    font-size: 18px;
+    padding-left: 10px;
    
 }
 
 #search1 {
-    width: 360px;
-    height: 40px;
+    width: 356px;
+    height: 45px;
     margin-bottom: 10px;
 }
 
 #search2 {
-    width: 130px;
-    height: 40px;
-    margin-bottom: 20px;
+    width: 170px;
+    height: 45px;
     text-align: center;
 
 }
 
 #searchbutton {
     width: 360px;
-    height: 40px;
+    height: 45px;
     background-color: rgb(84, 63, 202);
     color: white;
     border: 1px solid rgb(84, 63, 202);
     border-radius: 10px;
     font-weight: 600;
-    font-size: 15px;
+    font-size: 18px;
+    margin-top: 20px;
+    
 }
 
 
@@ -234,7 +250,7 @@ main {
                <p style="color: white;">더이상 멀지 않아!</p>
            </div>
            <div class="searchbox">
-               <h3 style="margin: 30px 0 5px 0;">캠핑카, 이제는 쉽게 예약하세요</h3>
+               <p>캠핑카, 이제는 쉽게 예약하세요</p>
                <form>
                    <table class="car_search" style="text-align: center;">
                        <tr>
@@ -247,9 +263,9 @@ main {
                                </select>
                            </td>
                        </tr>
-                       <tr style="font-size: 13px;">
+                       <tr style="font-size: 14px; font-weight: 700;">
                            <td>대여일</td>
-                           <td>&nbsp;</td>
+                           <td style="width: 3%;">&nbsp;</td>
                            <td>반납일</td>
                        </tr>
                        <tr>
@@ -278,146 +294,35 @@ main {
 
    <div class="car_wrap" id="wrap">
        <ul class="car_list">
+         <c:forEach var="dto" items="${list}" varStatus="status">
            <li class="car_item">
-               <p><a href="#" class="car_photo">
+               <p><a href="${pageContext.request.contextPath}/car/car_detail?carNum=${dto.carNum}" class="car_photo">
                        <img src="https://via.placeholder.com/350x250" alt="car_item">
                        <i class="fa-regular fa-heart"></i>
                    </a></p>
                <div class="car_text">
-                   <div>
-                       <span class="car_sort">소형차</span>
+                   <div style="width: 350px;">
+                       <p class="car_sort">${dto.carSize}</p>
+                   	   <span class="car_title">${dto.carName}</span>
                        <span class="car_star" style="text-decoration: underline;">후기 2개</span>
-                       <span class="car_star">★ 4.7 ·&nbsp;</span>
+                       <!-- <span class="car_star" style="margin-left: 160px;">★ 4.7 ·&nbsp;</span> -->
+                   	   <p class="car_content" style="color: #aaaaaa;">${dto.description}</p>
                    </div>
-                   <div class="car_title">
-                       <span style="font-weight: bold;">레이 2인승 1호차</span>
-                   </div>
-                   <p class="car_content" style="color: #aaaaaa;">#커플 추천</p>
-                   <hr>
                    <div class="car_option">
-                       <span><i class="fa-solid fa-user-group"></i>동승 2인&nbsp;</span>
-                       <span><i class="fa-solid fa-campground"></i>취침 2인&nbsp;</span>
+                       <span><i class="fa-solid fa-user-group"></i>&nbsp;${dto.carMaxNum}인&nbsp;</span>
+                       <span><i class="fa-solid fa-campground"></i>&nbsp;${dto.sleepNum}인&nbsp;</span>
+                       <c:if test="${dto.petOrNot == 1}">
                        <span><i class="fa-solid fa-dog"></i>반려동물동반가능</span>
+                       </c:if>
                    </div>
 
                    <div class="price">
-                       <p style="color: rgb(80, 103, 231);">주중 : 80,000원 부터</p>
-                       <p style="color: rgb(80, 103, 231);">주말 : 130,000원 부터</p>
+                       <p style="color: rgb(80, 103, 231);">주중 : ${dto.weekCost}원 부터</p>
+                       <p style="color: rgb(80, 103, 231);">주말 : ${dto.wkndCost}원 부터</p>
                    </div>
                </div>
            </li>
-           <li class="car_item">
-               <p><a href="#" class="car_photo">
-                   <img src="https://via.placeholder.com/350x250" alt="car_item">
-                   <i class="fa-regular fa-heart"></i>
-               </a></p>
-               <div class="car_text">
-                   <div>
-                       <span class="car_sort">소형차</span>
-                       <span class="car_star" style="text-decoration: underline;">후기 2개</span>
-                       <span class="car_star">★ 4.7 ·&nbsp;</span>
-                   </div>
-                   <div class="car_title">
-                       <span style="font-weight: bold;">레이 2인승 1호차</span>
-                   </div>
-                   <p class="car_content" style="color: #aaaaaa;">#커플 추천</p>
-                   <hr>
-                   <div class="car_option">
-                       <span><i class="fa-solid fa-user-group"></i>동승 2인&nbsp;</span>
-                       <span><i class="fa-solid fa-campground"></i>취침 2인&nbsp;</span>
-                       <span><i class="fa-solid fa-dog"></i>반려동물동반가능</span>
-                   </div>
-
-                   <div class="price">
-                       <p style="color: rgb(80, 103, 231);">주중 : 80,000원 부터</p>
-                       <p style="color: rgb(80, 103, 231);">주말 : 130,000원 부터</p>
-                   </div>
-               </div>
-           </li>
-           <li class="car_item">
-               <p><a href="#" class="car_photo">
-                   <img src="https://via.placeholder.com/350x250" alt="car_item">
-                   <i class="fa-regular fa-heart"></i>
-               </a></p>
-               <div class="car_text">
-                   <div>
-                       <span class="car_sort">소형차</span>
-                       <span class="car_star" style="text-decoration: underline;">후기 2개</span>
-                       <span class="car_star">★ 4.7 ·&nbsp;</span>
-                   </div>
-                   <div class="car_title">
-                       <span style="font-weight: bold;">레이 2인승 1호차</span>
-                   </div>
-                   <p class="car_content" style="color: #aaaaaa;">#커플 추천</p>
-                   <hr>
-                   <div class="car_option">
-                       <span><i class="fa-solid fa-user-group"></i>동승 2인&nbsp;</span>
-                       <span><i class="fa-solid fa-campground"></i>취침 2인&nbsp;</span>
-                       <span><i class="fa-solid fa-dog"></i>반려동물동반가능</span>
-                   </div>
-
-                   <div class="price">
-                       <p style="color: rgb(80, 103, 231);">주중 : 80,000원 부터</p>
-                       <p style="color: rgb(80, 103, 231);">주말 : 130,000원 부터</p>
-                   </div>
-               </div>
-           </li>
-           <li class="car_item">
-               <p><a href="#" class="car_photo">
-                   <img src="https://via.placeholder.com/350x250" alt="car_item">
-                   <i class="fa-regular fa-heart"></i>
-               </a></p>
-               <div class="car_text">
-                   <div>
-                       <span class="car_sort">소형차</span>
-                       <span class="car_star" style="text-decoration: underline;">후기 2개</span>
-                       <span class="car_star">★ 4.7 ·&nbsp;</span>
-                   </div>
-                   <div class="car_title">
-                       <span style="font-weight: bold;">레이 2인승 1호차</span>
-                   </div>
-                   <p class="car_content" style="color: #aaaaaa;">#커플 추천</p>
-                   <hr>
-                   <div class="car_option">
-                       <span><i class="fa-solid fa-user-group"></i>동승 2인&nbsp;</span>
-                       <span><i class="fa-solid fa-campground"></i>취침 2인&nbsp;</span>
-                       <span><i class="fa-solid fa-dog"></i>반려동물동반가능</span>
-                   </div>
-
-                   <div class="price">
-                       <p style="color: rgb(80, 103, 231);">주중 : 80,000원 부터</p>
-                       <p style="color: rgb(80, 103, 231);">주말 : 130,000원 부터</p>
-                   </div>
-               </div>
-           </li>
-           <li class="car_item">
-               <p><a href="#" class="car_photo">
-                   <img src="https://via.placeholder.com/350x250" alt="car_item">
-                   <i class="fa-regular fa-heart"></i>
-               </a></p>
-               <div class="car_text">
-                   <div>
-                       <span class="car_sort">소형차</span>
-                       <span class="car_star" style="text-decoration: underline;">후기 2개</span>
-                       <span class="car_star">★ 4.7 ·&nbsp;</span>
-                   </div>
-                   <div class="car_title">
-                       <span style="font-weight: bold;">레이 2인승 1호차</span>
-                   </div>
-                   <p class="car_content" style="color: #aaaaaa;">#커플 추천</p>
-                   <hr>
-                   <div class="car_option">
-                       <span><i class="fa-solid fa-user-group"></i>동승 2인&nbsp;</span>
-                       <span><i class="fa-solid fa-campground"></i>취침 2인&nbsp;</span>
-                       <span><i class="fa-solid fa-dog"></i>반려동물동반가능</span>
-                   </div>
-
-                   <div class="price">
-                       <p style="color: rgb(80, 103, 231);">주중 : 80,000원 부터</p>
-                       <p style="color: rgb(80, 103, 231);">주말 : 130,000원 부터</p>
-                    </div>
-                </div>
-            </li>
+           </c:forEach>
         </ul>
     </div>
 </main>

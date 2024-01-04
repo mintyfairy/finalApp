@@ -28,16 +28,12 @@ ul {
   clear:both;
 }
 
-main {
-  margin-bottom: 100px;
-}
-
-.container {
+.navi_container {
   border-top: 1px solid #cecece;
   border-bottom: 1px solid #cecece;
 }
 
-.container .navi_wrap {
+.navi_container .navi_wrap {
   width: 1080px;
   height: 60px;
   margin: 0 auto;
@@ -55,7 +51,7 @@ main {
 }
 
 .menu {
-  width: 1300px;
+  width: 700px;
   overflow: hidden;
   margin: 0 auto;
 }
@@ -86,14 +82,14 @@ main {
 
 .submenu1 {
   height: 0;
-  /*background-color: white;*/
+  background-color: white;
   /*ul의 높이를 안보이게 처리*/
   overflow: hidden;
 }
 
 .submenu2 {
   height: 0;
-  /*background-color: white;*/
+  background-color: white;
   /*ul의 높이를 안보이게 처리*/
   overflow: hidden;
 }
@@ -257,7 +253,7 @@ i {
     </div>
 </div>
 
-<main>
+
     <nav class="navi_container">
         <div class="navi_wrap">
             <ul class="menu clearfix">
@@ -290,4 +286,3 @@ i {
             </ul>
         </div>
     </nav>
-</main>

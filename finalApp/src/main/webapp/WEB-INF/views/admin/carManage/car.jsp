@@ -65,7 +65,7 @@ function login() {
 			<table class="table">
 				<tr>
 					<td align="left" width="50%">
-						${dataCount}2개(${page}2/${total_page}3 페이지)
+						${dataCount}개(${page}/${total_page} 페이지)
 					</td>
 					<td align="right">
 						<select id="selectEnabled" class="form-select" onchange="searchList();">
@@ -82,29 +82,31 @@ function login() {
 					<tr> 
 						<th width="60">차량코드</th>
 						<th width="60">썸네일</th>
-						<th width="200">종류</th>
-						<th width="80">가격</th>
-						<th width="50">할인율</th>
-						<th width="50">수정일</th>
+						<th width="200">캠핑카이름</th>
+						<th width="50">주중가격</th>
+						<th width="50">주말가격</th>
+						<th width="30">할인율</th>
+						<th width="70">수정일</th>
 						<th width="100">변경</th>
 					</tr>
 				</thead>
 				
 				<tbody>
-					
+					<c:forEach var="dto" items="${list}" varStatus="status">
 						<tr class="hover" onclick="" style="vertical-align: middle;"> 
-							<td>1</td>
-							<td><img src="${pageContext.request.contextPath}/resources/images/campingcar/thumbnail.png" alt="thumbnail" width="50" height="50"></td>
-							<td>스타렉스</td>
-							<td>250,000</td>
-							<td>10%</td>
-							<td>2023.12.27</td>
+							<td>${dto.carNum}</td>
+							<td><img src="${pageContext.request.contextPath}/uploads/caravan/${dto.thumbnail}" alt="thumbnail" width="50" height="50"></td>
+							<td>${dto.carName}</td>
+							<td>${dto.weekCost}</td>
+							<td>${dto.wkndCost}</td>
+							<td>${dto.discountRate}%</td>
+							<td>${dto.reg_date}</td>
 							<td>
 								<button type="button" class="btn border">재고</button>
 								<button type="button" class="btn border" onclick="location.href='${updateUrl}';">수정</button>
 							</td>
 						</tr>
-				
+					</c:forEach>
 				</tbody>
 			</table>
 					 
@@ -124,10 +126,10 @@ function login() {
 						<form class="row justify-content-center" name="searchForm" action="${pageContext.request.contextPath}/admin/product/main" method="post">
 							<div class="col-auto p-1">
 								<select name="schType" class="form-select">
-									<option value="all" ${schType=="all"?"selected":""}>상품명+설명</option>
-									<option value="productNum" ${schType=="productNum"?"selected":""}>상품코드</option>
-									<option value="productName" ${schType=="productName"?"selected":""}>상품명</option>
-									<option value="content" ${schType=="content"?"selected":""}>설명</option>
+									<option value="all" ${schType=="all"?"selected":""}>전체</option>
+									<option value="carName" ${schType=="carSize"?"selected":""}>캠핑카이름</option>
+									<option value="productName" ${schType=="productName"?"selected":""}>차량코드</option>
+									<option value="reg_date" ${schType=="reg_date"?"selected":""}>등록일</option>
 								</select>
 							</div>
 							<div class="col-auto p-1">

@@ -235,7 +235,14 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 						<td class="bg-light col-sm-2" scope="row">추가이미지</td>
 						<td>
 							<div class="img-grid"><img class="item img-add rounded" src="${pageContext.request.contextPath}/resources/images/add_photo.png"></div>
-							<input type="file" name="addFiles" accept="image/*" multiple style="display: none;" class="form-control">	
+							<c:forEach var="vo" items="${listFile}">
+									<img src="${pageContext.request.contextPath}/uploads/product/${vo.imageFilename}"
+										class="item delete-img"
+										data-fileNum="${vo.carImagenum}"
+										data-filename="${vo.imageFilename}">
+								</c:forEach>
+							<input type="file" name="addFiles" accept="image/*" multiple style="display: none;" class="form-control">
+								
 						</td>
 					</tr>
 					
@@ -336,6 +343,11 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 				<table class="table table-borderless">
 					<tr>
 						<td class="text-center">
+							<c:url var="url" value="/admin/carManage/car">
+								<c:if test="${not empty page}">
+									<c:param name="page" value="${page}"/>
+								</c:if>
+							</c:url>
 							<button type="button" class="btn btn-dark" onclick="submitContents(this.form);">${mode=="update"?"수정완료":"등록완료"}</button>
 							<button type="reset" class="btn btn-light">다시입력</button>
 							<button type="button" class="btn btn-light" onclick="location.href='${url}';">${mode=="update"?"수정취소":"등록취소"}</button>
@@ -356,7 +368,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 $(function(){
 	var img = "${dto.thumbnailFile}";
 	if( img ) {
-		img = "${pageContext.request.contextPath}/uploads/campingCar/thumbnail/"+img;
+		img = "${pageContext.request.contextPath}/uploads/caravan/"+img;
 		$(".table-form .thumbnail-viewer").empty();
 		$(".table-form .thumbnail-viewer").css("background-image", "url("+img+")");
 	}
@@ -372,7 +384,7 @@ $(function(){
 			$(".table-form .thumbnail-viewer").empty();
 			
 			if( img ) {
-				img = "${pageContext.request.contextPath}/uploads/campingCar/thumbnail/"+img;
+				img = "${pageContext.request.contextPath}/uploads/caravan"+img;
 			} else {
 				img = "${pageContext.request.contextPath}/resources/images/add_photo.png";
 			}
