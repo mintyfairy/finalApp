@@ -157,16 +157,16 @@ $(function(){
 
 			<ul class="sub_menu">
 				<li class="sub_menu--item">
-					<a href="${pageContext.request.contextPath}/admin/cs/notice" class="sub_menu--link">공지사항</a>
+					<a href="${pageContext.request.contextPath}/admin/cs/notice/list" class="sub_menu--link">공지사항</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="${pageContext.request.contextPath}/admin/cs/faq" class="sub_menu--link">faq</a>
+					<a href="${pageContext.request.contextPath}/admin/cs/faq/list" class="sub_menu--link">faq</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="${pageContext.request.contextPath}/admin/cs/qna" class="sub_menu--link">1:1문의</a>
+					<a href="${pageContext.request.contextPath}/admin/cs/qna/list" class="sub_menu--link">1:1문의</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="${pageContext.request.contextPath}/admin/cs/event" class="sub_menu--link">이벤트</a>
+					<a href="${pageContext.request.contextPath}/admin/cs/event/list" class="sub_menu--link">이벤트</a>
 				</li>
 			</ul>
 		</li>
