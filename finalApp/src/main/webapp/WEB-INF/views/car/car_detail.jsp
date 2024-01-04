@@ -37,10 +37,17 @@ h1, h2, h3, h4, h5, h6 {
 .thumbnail-addImages {
   box-sizing: border-box;
   border: none;
-  width: 500px;
+  width: 250px;
   height: 550px;
   padding: 35px;
   
+}
+
+.addImages > img {
+  box-sizing: border-box;
+  border: 1px solid grey;
+  width: 50px;
+  height: 50px;
 }
 
 .car-detail {
@@ -68,12 +75,6 @@ h1, h2, h3, h4, h5, h6 {
   
 }
 
-div img{
-  width: 50px;
-  height: 50px;
-  background-repeat : no-repeat; 
-  background-size : cover  
-}
 
 .carName-liked {
   display: flex;
@@ -264,12 +265,23 @@ button[name=reservation]:hover {
   padding-top: 8px;
 }
 
+/*
 .option-detail > div > img {
   font-size: 14px;
   font-weight: 500;
   margin-top: 10px;
   margin-right: 100px;
 }
+*/
+
+
+
+.option-detail > div > img{
+  width: 50px;
+  height: 50px;
+  background-repeat : no-repeat; 
+  background-size : cover  
+}
 
 /*탭*/
 ol,
@@ -828,38 +840,67 @@ table {
     padding: 45px 20px;
     font-size: 13px;
     border-bottom: 1px solid #e6e6e6;
+}
+
+.container-detail{
+	width: 1080px;
+	margin: 0 auto;
 }
 </style>
 
+<script type="text/javascript">
+ function sendOk() {
+		// 구매하기
+		const f = document.datepickForm;
+		/*
+		let cnt = $("form input[name=nums]:checked").length;
+	    if (cnt === 0) {
+			alert("구매할 상품을 먼저 선택 하세요 !!!");
+			return;
+	    }
+	    
+	    $("form input[name=nums]").each(function(index, item){
+			if(! $(this).is(":checked")) {
+				$(this).closest("tr").remove();
+			}
+		});
+	    */
+		
+		f.action = "${pageContext.request.contextPath}/car/orderPage";
+		f.submit();
+	}
+</script>
 
 <div id="wrap">
+
   <div class="first-container">
     <div class="thumbnail-addImages">
       <div class="thumbnail">
-        <img src="images/thumbnail.png"/>
+        <img src="${pageContext.request.contextPath}/resources/images/campingcar/campingcar.jpg"/>
       </div>
       <div class="addImages">
-        <img src=""/>
-        <img src=""/>
+        <img src="${pageContext.request.contextPath}/resources/images/campingcar/bed.png" alt="bed">
+        <img src="${pageContext.request.contextPath}/resources/images/campingcar/bed.png" alt="bed">
       </div>
     </div>
     <div class="car-detail">
       <div class="carName-liked">
         <h2>
-          스타렉스 캠퍼밴 (애견동반가능)
+          ${dto.carName}
         </h2>
         <i class="fa-regular fa-heart"></i>
       </div>
       <div class="option-mini">
-        <span># 애견동반가능</span>
-        <span># 동승4명</span>
-        <span># 캠핑장비대여가능</span>
-        <span># 옵션2</span>
+      	<c:if test="${dto.petOrNot == 1}">
+        	<span># 애견동반가능</span>
+        </c:if>
       </div>
+    
       
       <div class="calendar">
         <form name="datepickForm">
           <div class="start-date">
+          
             <p style="font-size: medium; font-weight: bold; margin-left: 65px;">대여일</p>
             <input type="date" name="start">
           </div>
@@ -868,8 +909,7 @@ table {
             <p style="font-size: medium; font-weight: bold; margin-left: 65px;">반납일</p>
             <input type="date" name="end">
           </div>
-
-      </form>
+		</form>
       </div>
       <br>
       <hr style="width: 400px;">
@@ -893,33 +933,31 @@ table {
         <div class="price">
           <p style="font-size: 15px; font-weight: bold;">차량대여료</p>
           
-          <p style="padding-left: 75px; padding-top: 5px; font-size: 20px;">250,000원</p>
+          <p style="padding-left: 75px; padding-top: 5px; font-size: 20px;">주중 : ${dto.weekCost}</p>
+          <p style="padding-left: 75px; padding-top: 5px; font-size: 20px;">주말 : ${dto.wkndCost}</p>
           </div>
-          <button name="reservation">예약하기</button>
-        
+          <button type="button" name="reservation" onclick="sendOk();">
+          예약하기
+          </button>
+          </div>
+          
       </div>
-     
-      
-    
-     
    
     </div>
-
-  </div>
   </div>
 
-
+<div id="wrap">
   <div class="second-container">
     <div class="available-size">
       <div>
         
         <h5 style="padding: 30px;">탑승가능인원</h5>
-        <p style="font-size: 18px; padding:30px 150px">6인승</p>
+        <p style="font-size: 18px; padding:30px 150px">${dto.carMaxNum}</p>
       </div>
       <br>
       <div>
         <h5 style="padding-left: 30px;">취침가능인원</h5>
-        <p style="font-size: 18px; padding-left: 180px">6인승</p>
+        <p style="font-size: 18px; padding-left: 180px">${dto.sleepNum}</p>
       </div>
      </div>
      </div>
@@ -929,44 +967,88 @@ table {
     <div class="car-options">
       <h5 style="padding-left: 30px;">보유 옵션</h5>
       <div class="option-detail">
-        <div>
-          <p>침대</p>
-          <img src="images/free-icon-bed-3009931.png">
+      	<div>
+        	<c:if test="${dto.toilet != null}">
+          		<p>화장실</p>
+          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/bed.png" alt="bed">
+          	</c:if>
         </div>
         <div>
-          <p>싱크대</p>
-          <img src="images/free-icon-kitchen-sink-3289525.png">
+        	<c:if test="${dto.shower != null}">
+          		<p>샤워실</p>
+          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/bed.png" alt="bed">
+          	</c:if>
         </div>
         <div>
-          <p>전자레인지</p>
-          <img src="images/free-icon-microwaves-508620.png">
+        	<c:if test="${dto.bed != null}">
+          		<p>침대</p>
+          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/bed.png" alt="bed">
+          	</c:if>
         </div>
         <div>
-          <p>냉장고</p>
-          <img src="images/free-icon-refrigerator-3441529.png">
+        	<c:if test="${dto.sink != null}">
+          		<p>싱크대</p>
+          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/sink.png" alt="sink">
+        	</c:if>
+        </div>
+        
+        <div>
+        	<c:if test="${dto.microwave != null}">
+          		<p>전자레인지</p>
+           		<img src="${pageContext.request.contextPath}/resources/images/campingcar/microwave.png" alt="microwave">
+        	</c:if>
         </div>
         <div>
-          <p>테이블</p>
-          <img src="images/free-icon-table-804144.png">
+        	<c:if test="${dto.frige != null}">
+          		<p>냉장고</p>
+          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/refrigerator.png" alt="refrigerator">
+        	</c:if>
         </div>
         <div>
-          <p>TV</p>
-          <img src="images/free-icon-tv-screen-5955428.png">
+        	<c:if test="${dto.desk != null}">
+          		<p>테이블</p>
+          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/table.png" alt="table">
+        	</c:if>
         </div>
         <div>
-          <p>에어컨</p>
-          <img src="images/free-icon-air-conditioner-1530297.png">
+        	<c:if test="${dto.waterHeater != null}">
+          		<p>온수기</p>
+          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/table.png" alt="table">
+        	</c:if>
         </div>
         <div>
-          <p>무시동히터</p>
-          <img src="images/free-icon-heater-2316515.png">
+        	<c:if test="${dto.tv != null}">
+          		<p>TV</p>
+          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/tv.png" alt="tv">
+        	</c:if>
         </div>
         <div>
-          <p>배터리</p>
-          <img src="images/free-icon-battery-3444043.png">
+        	<c:if test="${dto.airCondition != null}">
+          		<p>에어컨</p>
+          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/airconditioner.png" alt="airconditioner">
+        	</c:if>
+        </div>
+        <div>
+        	<c:if test="${dto.heater != null}">
+          		<p>무시동히터</p>
+          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/heater.png" alt="heater">
+        	</c:if>
+        </div>
+        <div>
+        	<c:if test="${dto.powerbank != null}">
+          		<p>배터리</p>
+          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/battery.png" alt="battery">
+        	</c:if>
+        </div>
+        <div>
+        	<c:if test="${dto.gasStove != null}">
+          		<p>가스레인지</p>
+          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/battery.png" alt="battery">
+        	</c:if>
         </div>
       </div>
     </div>
+</div>
 
     <div class="container-detail">
       <div class="detail_wrap">
@@ -980,14 +1062,6 @@ table {
           </div>
           <div class="detail_img">
               <img src="https://via.placeholder.com/538x540" alt="detail_img">
-          </div>
-          <div class="detail_tab">
-              <ul class="tab_list">
-                  <li class="tab_item"><a href="#">상세정보</a></li>
-                  <li class="tab_item"><a href="#">상품후기0</a></li>
-                  <li class="tab_item"><a href="#">상품문의0</a></li>
-                  <li class="tab_item"><a href="#">배송/교환/반품/AS</a></li>
-              </ul>
           </div>
           <div class="detail_review">
               <div class="review_table">
@@ -1041,15 +1115,6 @@ table {
                   <a href="#">글쓰기</a>
               </div>
           </div>
-          <div class="detail_tab">
-              <ul class="tab_list">
-                  <li class="tab_item"><a href="#">상세정보</a></li>
-                  <li class="tab_item"><a href="#">상품후기0</a></li>
-                  <li class="tab_item"><a href="#">상품문의0</a></li>
-                  <li class="tab_item"><a href="#">배송/교환/반품/AS</a></li>
-              </ul>
-          </div>
-
   </div>
 
   <div class="detail_as">

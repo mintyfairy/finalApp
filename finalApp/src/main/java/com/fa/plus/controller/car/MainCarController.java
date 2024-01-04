@@ -1,19 +1,91 @@
 package com.fa.plus.controller.car;
 
-import java.util.Locale;
+import java.net.URLDecoder;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.fa.plus.common.MyUtil;
+import com.fa.plus.domain.car.CampingCar;
+import com.fa.plus.service.car.CampingCarService;
 
 @Controller
-@RequestMapping(value = "/car/*")
-
+@RequestMapping("/car/*")
 public class MainCarController {
+	@Autowired
+	private CampingCarService service;
 	
-	@RequestMapping(value="main", method = RequestMethod.GET)
-	String carHome(Locale locale, Model model) {
+	@Autowired
+	@Qualifier("myUtil")
+	private MyUtil myUtil;
+	
+	@RequestMapping(value="main")
+	public String main(
+			@RequestParam(defaultValue = "all") String schType,
+			@RequestParam(defaultValue = "") String kwd,
+			HttpServletRequest req,
+			Model model) throws Exception {
+		
+		int dataCount = 0;
+
+		if (req.getMethod().equalsIgnoreCase("GET")) { // GET 방식인 경우
+			kwd = URLDecoder.decode(kwd, "utf-8");
+		}
+
+		// 전체 페이지 수
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("schType", schType);
+		map.put("kwd", kwd);
+		// map.put("carNum", carNum);
+
+		// 글 리스트
+		List<CampingCar> list = service.listCampingCar(map);
+
+		model.addAttribute("list", list);
+		model.addAttribute("dataCount", dataCount);
+		model.addAttribute("schType", schType);
+		model.addAttribute("kwd", kwd);
+		// model.addAttribute("carNum",carNum);
+
 		return ".car.main";
-	} 
+		
+	}
+	
+	@GetMapping("car_detail")
+	public String article(@RequestParam long carNum,
+			@RequestParam(defaultValue = "all") String schType,
+			@RequestParam(defaultValue = "") String kwd,
+			HttpSession session,
+			Model model) throws Exception {
+		
+		kwd = URLDecoder.decode(kwd, "utf-8");
+
+		// 해당 레코드 가져 오기
+		CampingCar dto = service.findById(carNum);
+		if (dto == null) {
+			return "redirect:/car/main";
+		}
+		
+		// 스마트 에디터를 사용하므로
+		// dto.setContent(myUtil.htmlSymbols(dto.getContent()));
+
+		
+		model.addAttribute("dto", dto);
+		
+		
+		return ".car.car_detail";
+	}
+	
+	
 }
