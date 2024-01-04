@@ -304,6 +304,11 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
 		                	<button class="custom-btn btn-4">Login</button>
 		                </a>
 		            </div>
+		            <div class="login_wrap col-auto">
+		                <a href="${pageContext.request.contextPath}/member/join">
+		                	<button class="custom-btn btn-4">Sign Up</button>
+		                </a>
+		            </div>
 		        </c:when>
 		        <c:otherwise>
 					<div class="login_wrap col-auto">

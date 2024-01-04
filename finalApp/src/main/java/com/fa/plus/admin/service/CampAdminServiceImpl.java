@@ -84,13 +84,18 @@ public class CampAdminServiceImpl implements CampAdminService {
 
 			// 썸네일 이미지
 			String filename = fileManager.doFileUpload(dto.getThumbnailfile(), pathname);
-			dto.setThumbnail(filename);
+			if(filename != null) {
+				// 이전 파일 지우기
+				if (dto.getThumbnail().length() != 0) {
+					fileManager.doFileDelete(dto.getThumbnail(), pathname);
+				}
+				
+				dto.setThumbnail(filename);
+			}
 
 			// 상품 저장
-			long Num = mapper.SiteSeq();
 
-			dto.setSitenum(Num);
-			mapper.insertSite(dto);
+			mapper.updateSite(dto);
 
 			// 추가 이미지 저장
 			if (!dto.getAddFiles().isEmpty()) {
@@ -103,7 +108,7 @@ public class CampAdminServiceImpl implements CampAdminService {
 
 					mapper.insertSiteFile(dto);
 				}
-			}
+			}//추가이미지는 새로 추가된 사진만 저장되고 사진의 삭제는 작성페이지에서 ajax로 처리한다.
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -184,6 +189,19 @@ public class CampAdminServiceImpl implements CampAdminService {
 
 		try {
 			mapper.updateRoom(dto);
+			
+			String filename = null;
+			if (!dto.getAddFiles().isEmpty()) {
+				for (MultipartFile mf : dto.getAddFiles()) {
+					filename = fileManager.doFileUpload(mf, pathname);
+					if (filename == null) {
+						continue;
+					}
+					dto.setFilename(filename);
+
+					mapper.insertRoomFile(dto);
+				}
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -314,6 +332,34 @@ public class CampAdminServiceImpl implements CampAdminService {
 		}
 
 		return dto;
+	}
+
+	@Override
+	public List<Site> listSiteFile(long siteNum) {
+		
+		List<Site> list = null;
+		try {
+			list = mapper.listSiteFile(siteNum);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw e;
+		}
+		return list;
+	}
+
+	@Override
+	public List<SiteDetail> listRoomFile(long detailNum) {
+		
+		List<SiteDetail> list = null;
+		try {
+			list = mapper.listRoomFile(detailNum);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw e;
+		}
+		return list;
 	}
 
 }

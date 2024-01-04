@@ -9,11 +9,11 @@
 	
 	<insert id="insertSite" parameterType="com.fa.plus.domain.site.Site">
 	insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,
-	 THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,CHKOUT,
+	 THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,
 	  MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)
 		
 		values(#{sitenum}, #{sitename}, #{introduce}, #{sitelocal}, #{zip}, #{addr1}, #{addr2},
-		 #{thumbnail}, #{category}, #{environment}, 0 , #{checkin}, #{chkout},
+		 #{thumbnail}, #{category}, #{environment}, 0 , #{checkin}, #{checkout},
 		  #{memberidx}, 0 , #{siteoption}, 0)
 	
 		
@@ -21,7 +21,7 @@
 	
 	<!-- 추가 이미지 등록 -->
 	<insert id="insertSiteFile" parameterType="com.fa.plus.domain.site.Site">
-		INSERT INTO sitePic(SPICNUM, SITENUM, filename)
+		INSERT INTO sitePic(SPICNUM, SITENUM, fileName)
 			VALUES(SITEPIC_SEQ.NEXTVAL, #{sitenum}, #{fileName})
 	</insert>
 
@@ -48,8 +48,8 @@
 	
 	<!-- 추가 이미지 등록 -->
 	<insert id="insertRoomFile" parameterType="com.fa.plus.domain.site.SiteDetail">
-		INSERT INTO sitedetailPic(SdPICNUM, DETAILNUM, filename)
-			VALUES(sitedetailPic_SEQ.NEXTVAL, #{detailnum}, #{filename})
+		INSERT INTO sitedetailPic(SdPICNUM, DETAILNUM, fileName)
+			VALUES(sitedetailPic_SEQ.NEXTVAL, #{detailnum}, #{fileName})
 	</insert>
 
 		
@@ -67,6 +67,7 @@
 		FROM campingsite 		
 		where MEMBERIDX=#{memberIdx}
 		ORDER BY SITENUM DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 		
 	</select>
 	<select id="listRoom" parameterType="map" resultType="com.fa.plus.domain.site.SiteDetail">
@@ -74,12 +75,13 @@
 		FROM sitedetail 
 		where sitenum=#{siteNum}
 		ORDER BY DETAILNUM DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 		
 	</select>
 	<!-- 탐색 -->
 	<select id="findByIdSite" parameterType="Long" resultType="com.fa.plus.domain.site.Site">
 		SELECT SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,
-	 		 THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,CHKOUT,
+	 		 THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,
 	 		 MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED
 		FROM campingsite 
 		where 	SITENUM=#{siteNum}
@@ -89,7 +91,16 @@
 		FROM sitedetail 
 		where 	DETAILNUM=#{detailNum}
 	</select>
-	
+	<select id="listSiteFile" parameterType="Long" resultType="com.fa.plus.domain.site.Site">
+		SELECT SPICNUM fileNum, SITENUM, fileName
+		FROM sitepic
+		WHERE sitenum = #{sitenum}
+	</select>
+	<select id="listRoomFile" parameterType="Long" resultType="com.fa.plus.domain.site.SiteDetail">
+		SELECT SdPICNUM fileNum, DETAILNUM , fileName
+		FROM sitedetailPic
+		WHERE detailNum = #{detailNum}
+	</select>
 	<!-- 업데이트/삭제 -->
 	
 	
@@ -97,7 +108,7 @@
 		UPDATE campingsite SET SITENAME=#{sitename},INTrODUCE=#{introduce},
 				SITELOCAL=#{sitelocal},ZIP=#{zip},addr1=#{addr1},addr2=#{addr2},
 	 		 THUMBNAIL= #{thumbnail},CATEGORY=#{category},
-	 		 ENVIRONMENT=#{environment},CHECKIN= #{checkin},CHKOUT= #{chkout},
+	 		 ENVIRONMENT=#{environment},CHECKIN= #{checkin},checkout= #{checkout},
 	 		 SITEOPTION= #{siteoption}
 		WHERE SITENUM = #{sitenum}
 	</update>

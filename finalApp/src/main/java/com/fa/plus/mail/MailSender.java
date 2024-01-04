@@ -46,21 +46,13 @@ public class MailSender {
 		this.pathname = pathname;
 	}
 
-	// 네이버를 이용하여 메일을 보내는 경우 보내는사람의 이메일이 아래 계정(SMTP 권한 계정)과 다르면 메일 전송이 안된다.
-	// gmail은 기본적으로 <a href ...> 태그가 있으면 href를 제거한다.
 	// SMTP 권한
 	private class SMTPAuthenticator extends javax.mail.Authenticator {
 		@Override
 		public PasswordAuthentication getPasswordAuthentication() {
-			// gmail : 프로필(자기이름) 클릭 => 구글계정관리 버튼 클릭 => 좌측화면 보안 => 2단계인증 설정 후
-			//       2단계인증 => 앱비밀번호 => App name 입력(spring) => 생성
-			//       패스워드 대신 2단계 인증 웹번호 입력
-			// 네이버 : 메일 아래부분 환경설정 클릭후 POP3등을 허용
-            //       POP3/SMTP, IMAP/SMTP 사용함 설정(나머지는 기본 설정)
-
-			String username = "아이디@naver.com"; // 네이버 사용자;
-			// String username = "아이디"; // gmail 사용자;
-			String password = "패스워드"; // 패스워드;
+			
+			 String username = "project20231207"; 
+			String password = "scho vghu mqsn yvrp"; 
 			return new PasswordAuthentication(username, password);
 		}
 	}
@@ -69,15 +61,12 @@ public class MailSender {
 	private void makeMessage(Message msg, Mail dto) throws MessagingException {
 		if (dto.getSelectFile() == null || dto.getSelectFile().isEmpty()) {
 			// 파일을 첨부하지 않은 경우
-			// msg.setText(dto.getContent()); // 태그가 태그로 보임
 			msg.setContent(dto.getContent(), "text/html; charset=utf-8");
 			msg.setHeader("Content-Type", mailType);
 		} else {
-			// 파일을 첨부하는 경우
-
+			
 			// 메일 내용
 			MimeBodyPart mbp1 = new MimeBodyPart();
-			// mbp1.setText(dto.getContent());
 			mbp1.setContent(dto.getContent(), "text/html; charset=utf-8");
 			mbp1.setHeader("Content-Type", mailType);
 
@@ -125,13 +114,10 @@ public class MailSender {
 		Properties p = new Properties();
 
 		// SMTP 서버의 계정 설정
-		// Naver와 연결할 경우 네이버 아이디
-		// Gmail과 연결할 경우 Gmail 아이디
-		p.put("mail.smtp.user", "아이디");
+		p.put("mail.smtp.user", "project20231207");
 
 		// SMTP 서버 정보 설정
-		String host = "smtp.naver.com"; // 네이버
-		// String host = "smtp.gmail.com"; // gmail
+		 String host = "smtp.gmail.com"; // gmail
 		
 		p.put("mail.smtp.host", host);
 

@@ -19,9 +19,6 @@
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/jquery/js/jquery.min.js"></script>
 	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/util-jquery.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/menu.js"></script>
-	
     <meta content="" name="keywords">
     <meta content="" name="description">
 
@@ -67,6 +64,9 @@
     <script src="${pageContext.request.contextPath}/resources/lib/campsite/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/lib/campsite/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
     
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/util-jquery.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/menu.js"></script>
+	
 
     <!-- Template Javascript -->
     <script src="${pageContext.request.contextPath}/resources/js/campsite.js"></script>

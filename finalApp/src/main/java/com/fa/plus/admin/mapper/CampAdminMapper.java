@@ -36,5 +36,7 @@ public interface CampAdminMapper {
 	public void updateRoom(SiteDetail dto) throws SQLException;
 	public void deleteRoom(long DetailNum) throws SQLException;
 	public void deleteRoomFile(long SdPicNum) throws SQLException;
+	public List<Site> listSiteFile(long siteNum);
+	public List<SiteDetail> listRoomFile(long detailNum);
 	
 }

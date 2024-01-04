@@ -29,4 +29,8 @@ public interface CampAdminService {
 	public List<SiteDetail> listRoom(Map<String, Object> map);
 	
 	
+	public List<Site> listSiteFile(long siteNum);
+	public List<SiteDetail> listRoomFile(long detailNum);
+	
+	
 }

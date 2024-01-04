@@ -40,6 +40,10 @@
 }
 </style>
 
+
+<div id="loadingLayout" style="display:none; position: absolute; left: 0; top:0; width: 100%; height: 100%; z-index: 9000; background: #eee;">
+	<div class="loader"></div>
+</div>
 <script type="text/javascript">
 $(function(){
 	let mode = "${mode}";
@@ -109,8 +113,6 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 
 </script>
 
-
-
 <div class="container">
 	<div class="body-container">
 		<div class="body-title">
@@ -178,10 +180,10 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 							<div class="img-grid">
 								<img class="item img-add" src="${pageContext.request.contextPath}/resources/images/add_photo.png">
 								<c:forEach var="vo" items="${listFile}">
-									<img src="${pageContext.request.contextPath}/uploads/room/${vo.filename}"
+									<img src="${pageContext.request.contextPath}/uploads/room/${vo.fileName}"
 										class="item delete-img"
 										data-fileNum="${vo.fileNum}"
-										data-filename="${vo.filename}">
+										data-fileName="${vo.fileName}">
 								</c:forEach>
 							</div>
 							<input type="file" name="addFiles" accept="image/*" multiple class="form-control" style="display: none;">
@@ -193,13 +195,13 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 				<table class="table table-borderless">
 					<tr>
 						<td class="text-center">
-							<c:url var="url" value="/siteManage/site/${num}">
+							<c:url var="url" value="/admin/siteManage/site/${num}">
 								<c:if test="${not empty page}">
 									<c:param name="page" value="${page}"/>
 								</c:if>
 							</c:url>
 							<button type="button" class="btn btn-dark" onclick="submitContents(this.form);">${mode=="update"?"수정완료":"등록완료"}</button>
-							<button type="reset" class="btn btn-light">다시입력</button>
+							
 							<button type="button" class="btn btn-light" onclick="location.href='${url}';">${mode=="update"?"수정취소":"등록취소"}</button>
 							<c:if test="${mode=='update'}">
 								<input type="hidden" name="detailnum" value="${dto.detailnum}">
@@ -227,9 +229,9 @@ $(function(){
 		
 		let $img = $(this);
 		let fileNum = $img.attr("data-fileNum");
-		let filename = $img.attr("data-filename");
-		let url="${pageContext.request.contextPath}/admin/product/deleteFile";//삭제추가하기
-		$.post(url, {fileNum:fileNum, filename:filename}, function(data){
+		let fileName = $img.attr("data-fileName");
+		let url="${pageContext.request.contextPath}/admin/siteManage/deleteFile/room";//삭제추가하기
+		$.post(url, {fileNum:fileNum, fileName:fileName}, function(data){
 			$img.remove();
 		}, "json");
 	});
@@ -259,7 +261,7 @@ $(function(){
         	
             const reader = new FileReader();
 			const $img = $("<img>", {class:"item img-item"});
-			$img.attr("data-filename", file.name);
+			$img.attr("data-fileName", file.name);
             reader.onload = e => {
             	$img.attr("src", e.target.result);
             };
@@ -280,10 +282,10 @@ $(function(){
 			return false;
 		}
 		
-		let filename = $(this).attr("data-filename");
+		let fileName = $(this).attr("data-fileName");
 		
 		for(let i=0; i<sel_files.length; i++) {
-			if(filename === sel_files[i].name) {
+			if(fileName === sel_files[i].name) {
 				sel_files.splice(i, 1);
 				break;
 			}

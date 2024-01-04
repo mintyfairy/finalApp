@@ -8,17 +8,23 @@
 }
 </style>
 
+<div id="loadingLayout" style="display:none; position: absolute; left: 0; top:0; width: 100%; height: 100%; z-index: 9000; background: #eee;">
+	<div class="loader"></div>
+</div>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tabs.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
-
 
 
 
 <div class="body-container">
     <div class="body-title">
 		<h2><i class="fa-solid fa-user-group"></i> 객실 관리 </h2>
-		<table class="table">
+		<table class="table mt-1">
 			<tr>
+				<td align="left">
+					<button type="button" class="btn-border-primary" onclick="
+								location.href ='${pageContext.request.contextPath}/admin/siteManage/main'">돌아가기</button>
+				</td>
 				<td align="right">
 					<button type="button" class="btn-border-primary" onclick="
 								location.href ='${pageContext.request.contextPath}/admin/siteManage/site/${num}/write'">장소 등록</button>
@@ -45,7 +51,7 @@
 
 						<td>
 							<button type="button" class="btn-border-primary" onclick="updateRoom(${dto.detailnum},${dto.sitenum})">수정</button>
-							<button type="button" class="btn-border-primary" onclick="deleteRoom('${dto.detailnum}')">삭제</button>
+							<button type="button" class="btn-border-primary" onclick="deleteRoom(${dto.detailnum},${dto.sitenum})">삭제</button>
 						</td>
 					</tr>
 				</c:forEach>
@@ -61,14 +67,14 @@
 
 <div id="member-dialog" style="display: none;"></div>
 <script>
-function deleteRoom(num){
+function deleteRoom(num,sitenum){
 	if(confirm('게시판 및 게시판의 게시글을 삭제하시겠습니까?')){
-		let q="detailnum="+num;
-		location.href="${pageContext.request.contextPath}/admin/siteManage/deleteRoom?"+q;
+		let q="detailNum="+num;
+		location.href="${pageContext.request.contextPath}/admin/siteManage/site/"+sitenum+"/delete?"+q;
 	}
 }
 function updateRoom(num,sitenum){
-	let q="detailnum="+num;
+	let q="detailNum="+num;
 	location.href="${pageContext.request.contextPath}/admin/siteManage/site/"+sitenum+"/update?"+q;
 	
 }

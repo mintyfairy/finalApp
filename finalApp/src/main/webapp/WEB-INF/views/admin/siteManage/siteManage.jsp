@@ -8,9 +8,11 @@
 }
 </style>
 
+<div id="loadingLayout" style="display:none; position: absolute; left: 0; top:0; width: 100%; height: 100%; z-index: 9000; background: #eee;">
+	<div class="loader"></div>
+</div>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tabs.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
-
 
 
 
