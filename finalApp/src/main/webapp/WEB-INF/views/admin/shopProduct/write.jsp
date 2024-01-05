@@ -73,6 +73,118 @@
 <script type="text/javascript">
 function check() {
 	const f = document.productForm;
+	let str, b;
+	let mode = "${mode}";
+	
+	if(! f.parentNum.value) {
+		alert("카테고리를 선택하세요.");
+		f.parentNum.focus();
+		return false;
+	}
+
+	if(! f.categoryNum.value) {
+		alert("카테고리를 선택하세요.");
+		f.categoryNum.focus();
+		return false;
+	}
+	
+	if(! f.brandNum.value) {
+		alert("브랜드를 선택하세요.");
+		f.categoryNum.focus();
+		return false;
+	}
+	
+	if(! f.special.value) {
+		alert("특가상품 여부를 선택하세요.");
+		f.categoryNum.focus();
+		return false;
+	}
+	
+	if(! f.productName.value.trim()) {
+		alert("상품명을 입력하세요.");
+		f.productName.focus();
+		return false;
+	}
+	
+	if(!/^(\d){1,8}$/.test(f.price.value)) {
+		alert("상품가격을 입력 하세요.");
+		f.price.focus();
+		return false;
+	}
+	
+	if(!/^(\d){1,2}$/.test(f.discountRate.value)) {
+		alert("할인율을 입력 하세요.");
+		f.discountRate.focus();
+		return false;
+	}
+	
+	if(!/^(\d){1,8}$/.test(f.delivery.value)) {
+		alert("배송비를 입력 하세요.");
+		f.delivery.focus();
+		return false;
+	}
+	
+	if(! f.optionName.value.trim()) {
+		alert("상위 옵션명 입력 하세요.");
+		f.optionName.focus();
+		return false;
+	}
+	
+	b = true;
+	$("input[name=optionValues]").each(function(){
+		if(! $(this).val().trim()) {
+			b= false;
+			return false;
+		}
+	});
+	
+	if(! b) {
+		alert("상위 옵션값을 입력 하세요.");
+		return false;
+	}
+	
+	if(! f.optionName2.value.trim()) {
+		alert("하위 옵션명 입력 하세요.");
+		f.optionName2.focus();
+		return false;
+	}
+	
+	b = true;
+	$("input[name=optionValues2]").each(function(){
+		if(! $(this).val().trim()) {
+			b= false;
+			return false;
+		}
+	});
+	if(! b) {
+		alert("하위 옵션값을 입력 하세요.");
+		return false;
+	}
+	
+	if(! f.md.value) {
+		alert("특가상품 여부를 선택하세요.");
+		f.categoryNum.focus();
+		return false;
+	}
+	
+	if(! f.starter.value) {
+		alert("특가상품 여부를 선택하세요.");
+		f.categoryNum.focus();
+		return false;
+	}
+	
+	str = f.content.value.trim();
+	if( !str || str === "<p><br></p>" ) {
+		alert("상품 설명을 입력하세요.");
+		f.content.focus();
+		return false;
+	}
+
+	if(mode === "write" && ! f.thumbnailFile.value) {
+		alert("대표 이미지를 등록하세요.");
+		f.thumbnailFile.focus();
+		return false;
+	}
 	
 	f.action = "${pageContext.request.contextPath}/admin/shopProduct/${mode}";
 	return true;
@@ -202,7 +314,7 @@ $(function(){
 			}
 			
 			let detailNum = $minus.parent(".input-group").find("input[name=detailNums]").val();
-			let url = "${pageContext.request.contextPath}/admin/shopProduct/deleteOptionDetail";
+			let url = "${pageContext.request.contextPath}/admin/shopProduct/deleteOptionDetail1";
 			$.post(url, {detailNum:detailNum}, function(data){
 				if(data.state === "true") {
 					$minus.closest(".input-group").remove();
@@ -256,7 +368,7 @@ $(function(){
 			}
 			
 			let detailNum = $minus.parent(".input-group").find("input[name=detailNums2]").val();
-			let url = "${pageContext.request.contextPath}/admin/shopProduct/deleteOptionDetail";
+			let url = "${pageContext.request.contextPath}/admin/shopProduct/deleteOptionDetail2";
 			$.post(url, {detailNum:detailNum}, function(data){
 				if(data.state === "true") {
 					$minus.closest(".input-group").remove();
@@ -418,17 +530,6 @@ $(function(){
 							<small class="form-control-plaintext help-block">판매 상품이 존재하면 옵션은 삭제 되지 않습니다.</small>
 						</td>
 					</tr>
-					
-					<tr>
-						<td class="table-light col-sm-2">상품 진열</td>
-						<td>
-							<div class="pt-2 pb-2">
-								<input type="radio" name="productShow" class="form-check-input" id="productShow1" value="1" ${dto.productShow==1 ? "checked='checked'" : "" }> <label class="form-check-label" for="productShow1">상품진열</label>
-								&nbsp;&nbsp;
-								<input type="radio" name="productShow" class="form-check-input" id="productShow0" value="0" ${dto.productShow==0 ? "checked='checked'" : "" }> <label class="form-check-label" for="productShow0">진열안함</label>
-							</div>
-						</td>
-					</tr>
 
 					<tr>
 						<td class="table-light col-sm-2">md 여부</td>
@@ -503,6 +604,7 @@ $(function(){
 								<input type="hidden" name="productNum" value="${dto.productNum}">
 								<input type="hidden" name="thumbnail" value="${dto.thumbnail}">
 								<input type="hidden" name="page" value="${page}">
+								<input type="hidden" name="productShow" value="${dto.productShow}">
 							</c:if>
 						</td>
 					</tr>
@@ -667,6 +769,7 @@ function setDefaultFont() {
 	var nFontSize = 12;
 	oEditors.getById["ir1"].setDefaultFont(sDefaultFont, nFontSize);
 }
+
 </script>
 
 

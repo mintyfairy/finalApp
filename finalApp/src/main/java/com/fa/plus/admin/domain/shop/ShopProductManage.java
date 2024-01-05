@@ -19,7 +19,7 @@ public class ShopProductManage {
 	private String thumbnail;
 	private String reg_date;
 	private String updateDate;
-	private String starter;
+	private int starter;
 	private MultipartFile thumbnailFile;
 	
 	private long categoryNum;
@@ -51,6 +51,7 @@ public class ShopProductManage {
 	private List<Long> detailNums2;
 	private List<String> optionValues2;
 	
+	private long stockNum;
 	private int totalStock;
 
 	public long getProductNum() {
@@ -165,11 +166,11 @@ public class ShopProductManage {
 		this.updateDate = updateDate;
 	}
 
-	public String getStarter() {
+	public int getStarter() {
 		return starter;
 	}
 
-	public void setStarter(String starter) {
+	public void setStarter(int starter) {
 		this.starter = starter;
 	}
 
@@ -363,6 +364,14 @@ public class ShopProductManage {
 
 	public void setParent(Long parent) {
 		this.parent = parent;
+	}
+
+	public long getStockNum() {
+		return stockNum;
+	}
+
+	public void setStockNum(long stockNum) {
+		this.stockNum = stockNum;
 	}
 	
 	

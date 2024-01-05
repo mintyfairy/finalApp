@@ -254,7 +254,7 @@ $(function(){
 							<tr valign="middle">
 								<td>${dto.productNum}</td>
 								<td class="product-subject left">
-									<img src="${pageContext.request.contextPath}/uploads/shop/product/${dto.thumbnail}">
+									<img src="${pageContext.request.contextPath}/uploads/shop/${dto.thumbnail}">
 									<a href="#"><label>${ dto.productName }</label></a>
 									<input type="hidden" value="${ dto.productNum }">
 								</td>
@@ -268,8 +268,9 @@ $(function(){
 								<td>${ dto.updateDate }</td>
 								<td>
 									<button class="stockBtn" type="button" class="btn border">재고</button>
-									<button class="modifyBtn" type="button" class="btn border" onclick="location.href='${pageContext.request.contextPath}/admin/shopProduct/update';">수정</button>
-									<button class="hideBtn" type="button" class="btn border">숨김</button>
+									<button class="modifyBtn" type="button" class="btn border" 
+									onclick="location.href='${pageContext.request.contextPath}/admin/shopProduct/update/${dto.productNum}?parentNum=${parentNum}&page=${page}';">수정</button>
+									<button class="hideBtn" type="button" class="btn border">${ dto.productShow == 1 ? "숨김" : "보임" }</button>
 								</td>
 							</tr>					
 						</c:forEach>
@@ -385,7 +386,7 @@ $(function(){
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary closeModal" data-bs-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="button" class="btn btn-primary">Send</button>
 			</div>
 		</div>
 	</div>
@@ -461,13 +462,17 @@ $(function() {
 		
 		const fn = function(data) {
 			console.log(data);
+			let optionValue = data.optionValues;
+			let optionValue2 = data.optionValues2;
+			console.log(...optionValue);
+			
 			let out = "";
 			out += "<p>분류 : " + data.categoryName + "</p>";
 			out += "<p>브랜드 이름 : " + data.brandName + "</p>";
 			out += "<p>옵션1 : " + data.optionName + "</p>";
-			out += "<p>옵션값1 : " + data.optionValue + "</p>";
+			out += "<p>옵션값1 : " + data.optionValues + "</p>";
 			out += "<p>옵션2 : " + data.optionName2 + "</p>";
-			out += "<p>옵션값2 : " + data.optionValue2 + "</p>";
+			out += "<p>옵션값2 : " + data.optionValues2 + "</p>";
 			out += "<p>내용 : " + data.content + "</p>";
 			out += "<p>배송비 : " + data.delivery + "원</p>";
 			out += "<p>등록일 : " + data.reg_date + "</p>";
@@ -491,8 +496,22 @@ $(function() {
 	$('.stockBtn').click(function() {
 		let productNum = $(this).closest('tr').find('input').val();
 		console.log(productNum);
-
 		
+		let url = "${pageContext.request.contextPath}/admin/shopProduct/stock";
+		let query = "productNum=" + productNum;
+		
+		const fn = function(data) {
+			console.log(data);
+			
+			//let out = "";
+			//out += "<p>옵션명 : >" + 
+			
+			$("#stockModal").find('.modal-title').text(data[0].productName);
+			
+			$('#stockModal').show();
+		};
+		ajaxFun(url, "get", query, "json", fn);
+
 	});
 });
 

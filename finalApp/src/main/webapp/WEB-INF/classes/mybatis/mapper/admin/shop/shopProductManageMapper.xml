@@ -171,8 +171,8 @@
 		SELECT f.*, b.brandName 
 		FROM 
 		(SELECT productNum, productName, 
-		special, price, c.categoryNum, c.categoryName,  
-		discountRate, savedMoney, delivery, 
+		special, price, c.categoryNum, c.categoryName, 
+		parentNum, discountRate, savedMoney, delivery, 
 		content, thumbnail, productShow, 
 		reg_date, updateDate, md, starter, 
 		deletion, brandNum 
@@ -213,11 +213,30 @@
 	
 	<!-- 재고 -->
 	<select id="listProductStock" parameterType="Long" resultType="com.fa.plus.admin.domain.shop.ShopProductManage">
-		SELECT stockNum, detailNum, detailNum2, totalStock, p.productNum, productName 
-		FROM productStock s 
-		JOIN product p ON s.productNum = p.productNum 
+		SELECT p.productNum, productName, o1.optionNum AS optionNum, 
+		o1.optionName AS optionName, o2.optionNum AS optionNum2, 
+		o2.optionName AS optionName2, d1.detailNum AS detailNum, 
+		d1.optionValue AS optionValue, d2.detailNum AS detailNum2, 
+		d2.optionValue AS optionValue2, NVL(stockNum, 0) stockNum, 
+		NVL(totalStock, 0) totalStock 
+		FROM product p 
+		JOIN ( 
+		    SELECT productNum, optionNum, optionName, parentNum 
+		    FROM productOption WHERE 
+		    productNum = #{productNum} AND parentNum IS NULL) o1 
+		ON p.productNum = o1.productNum 
+		LEFT OUTER JOIN ( 
+		    SELECT optionNum, optionName, parentNum 
+		    FROM productOption WHERE 
+		    productNum = #{productNum} AND parentNum IS NOT NULL) o2 
+		ON o1.optionNum = o2.parentNum 
+		JOIN optionDetail d1 ON o1.optionNum = d1.optionNum 
+		LEFT OUTER JOIN optionDetail d2 
+		ON o2.optionNum = d2.optionNum 
+		LEFT OUTER JOIN productStock s 
+		ON d1.detailNum = s.detailNum AND d2.detailNum = s.detailNum2 
 		WHERE p.productNum = #{productNum} 
-		ORDER BY stockNum
+		ORDER BY detailNum, detailNum2
 	</select>
 	
 	<insert id="insertProductStock" parameterType="com.fa.plus.admin.domain.shop.ShopProductManage">
@@ -233,6 +252,16 @@
 		WHERE stockNum = #{stockNum}
 	</update>
 	
+	<update id="deleteProductStock1" parameterType="Long">
+		DELETE FROM productStock 
+		WHERE detailNum = #{detailNum}
+	</update>
+	
+	<update id="deleteProductStock2" parameterType="Long">
+		DELETE FROM productStock 
+		WHERE detailNum2 = #{detailNum}
+	</update>
+	
 	<!-- productShow(상품 진열 여부) 수정 -->
 	<update id="updateListProduct" parameterType="map">
 		UPDATE product SET productShow = #{productShow} 
@@ -245,11 +274,16 @@
 		UPDATE product SET productName = #{productName}, 
 		price = #{price}, categoryNum = #{categoryNum}, 
 		discountRate = #{discountRate}, savedMoney = #{savedMoney}, 
-		delivery = #{delivery}, content = #{content}, 
+		starter = #{starter}, md = ${md}, special = ${special}, 
+		productShow = ${productShow}, delivery = #{delivery}, content = #{content}, 
 		thumbnail = #{thumbnail}, updateDate = SYSDATE, 
 		brandNum = #{brandNum} 
 		WHERE productNum = #{productNum}
 	</update>
+	
+	<delete id="deleteProduct" parameterType="Long">
+		DELETE FROM product WHERE productNum = #{productNum}
+	</delete>
 	
 	<update id="updateHide" parameterType="map">
 		UPDATE product SET 
@@ -258,9 +292,9 @@
 	</update>
 	
 	<!-- 상품 사진 삭제 -->
-	<update id="deleteProductFile" parameterType="Long">
+	<delete id="deleteProductFile" parameterType="Long">
 		DELETE FROM productFile WHERE fileNum = #{fileNum}
-	</update>
+	</delete>
 
 	<!-- 옵션 변경 -->
 	<update id="updateProductOption" parameterType="com.fa.plus.admin.domain.shop.ShopProductManage">
