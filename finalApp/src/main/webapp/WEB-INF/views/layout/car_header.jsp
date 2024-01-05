@@ -216,10 +216,10 @@ ul {
             <div class="header_center_wrap">
                 <ul class="header_center_list">
                     <li class="header_center_item">
-                        <a href="#" style="padding-left:0;">CAMPING AREA</a>
+                        <a href="${pageContext.request.contextPath}/" style="padding-left:0;">CAMPING AREA</a>
                     </li>
                     <li class="header_center_item">
-                        <a href="#">CAMPINGCAR</a>
+                        <a href="${pageContext.request.contextPath}/shop/main">CAMPINGSHOP</a>
                     </li>
                 </ul>
             </div>
