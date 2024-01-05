@@ -74,7 +74,7 @@ ul {
 						<i class="fa-solid fa-magnifying-glass"></i>
 					</div>
 					<div class="col-11">
-						<input type="text" class="form-control" id="siteKwd" name="siteKwd"
+						<input type="text" class="form-control" id="siteKwd" name="siteKwd" value=""
 							placeholder="캠핑장 명으로 검색하기">
 					</div>
 				</div>
@@ -82,19 +82,19 @@ ul {
 					style="display: flex; justify-content: space-between; width: 545px; margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0;">
 					<div class="col-4 localBox" data-toggle="modal" data-target="#localModal">
 						<div class="form-control">
-							<input class="siteLocal" name="siteLocal" type="hidden">
+							<input class="siteLocal" name="siteLocal" type="hidden" value="">
 							<p class="m-0 siteHtml"> <i class="fa-solid fa-location-dot"></i> 지역 </p>
 						</div>
 					</div>
 					<div class="col-4 environmentBox">
 						<div class="form-control">
-							<input class="siteEnvironment" name="siteEnvironment" type="hidden">
+							<input class="siteEnvironment" name="siteEnvironment" type="hidden" value="">
 							<p class="m-0  enHtml"> <i class="fa-solid fa-mountain-sun"></i> 환경</p>
 						</div>
 					</div>
 					<div class="col-4 siteCatBox">
 						<div class="form-control">
-							<input class="siteCategory" name="siteCategory" type="hidden">
+							<input class="siteCategory" name="siteCategory" type="hidden" value="">
 							<p class="m-0  catHtml"> <i class="fa-solid fa-campground"></i> 분류</p>
 						</div>
 					</div>
@@ -374,7 +374,6 @@ $(function(){
 
 function what(){
 	const f= document.camSearchForm;
-	console.log("a");
 	f.action="${pageContext.request.contextPath}/site/list";
 	f.submit();
 	

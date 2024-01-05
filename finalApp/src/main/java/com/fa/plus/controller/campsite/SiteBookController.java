@@ -23,66 +23,66 @@ import com.fa.plus.domain.site.SiteSearch;
 public class SiteBookController {
 	@Autowired
 	private SiteAdminServiceImpl adminService;
-	
-	//@Autowired
-	//private siteCampAdminServiceImpl adminService;
-	
+
+	// @Autowired
+	// private siteCampAdminServiceImpl adminService;
 
 	@RequestMapping("list")
-	public String main(SiteSearch dto,Model model
-			) {
+	public String main(
+			SiteSearch dto,
+			Model model) {
 		
-		model.addAttribute("dto", dto);
+		
+		if (dto != null)model.addAttribute("dto", dto);
 		return ".campsite.room";
 	}
+
 	// AJAX-JSON
-		@GetMapping(value = "list")
-		@ResponseBody
-		public Map<String, Object> list(
-				@RequestParam(value = "pageNo", defaultValue = "1") int current_page,
-				SiteSearch dto) throws Exception {
+	@GetMapping(value = "scroll")
+	@ResponseBody
+	public Map<String, Object> list(@RequestParam(value = "pageNo", defaultValue = "1") int current_page,
+			SiteSearch dto) throws Exception {
 
-			int size = 4;
-			int total_page;
-			int dataCount;
-
+		int size = 4;
+		int total_page;
+		int dataCount;
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (dto.getSiteKwd() != null) {
 			dto.setSiteKwd(URLDecoder.decode(dto.getSiteKwd(), "utf-8"));
-
-			// 전체 페이지 수
-			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("kwd", dto.getSiteKwd());
-
-			dataCount = adminService.dataCountSite(map);
-			total_page = dataCount / size + (dataCount % size > 0 ? 1 : 0);
-
-			if (total_page < current_page) {
-				current_page = total_page;
-			}
-
-			int offset = (current_page - 1) * size;
-			if(offset < 0) offset = 0;
-
-			map.put("offset", offset);
-			map.put("size", size);
-
-			List<Site> list = adminService.listSite(map);
-
-			Map<String, Object> model = new HashMap<String, Object>();
-			model.put("list", list);
-			model.put("dataCount", dataCount);
-			model.put("size", size);
-			model.put("total_page", total_page);
-			model.put("pageNo", current_page);
-
-			return model;
 		}
+
+		// 전체 페이지 수
+		dataCount = adminService.dataCountSite(map);
+		total_page = dataCount / size + (dataCount % size > 0 ? 1 : 0);
+
+		if (total_page < current_page) {
+			current_page = total_page;
+		}
+
+		int offset = (current_page - 1) * size;
+		if (offset < 0)
+			offset = 0;
+
+		map.put("offset", offset);
+		map.put("size", size);
+
+		List<Site> list = adminService.listSite(map);
+
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("list", list);
+		model.put("dataCount", dataCount);
+		model.put("size", size);
+		model.put("total_page", total_page);
+		model.put("pageNo", current_page);
+
+		return model;
+	}
 
 	@RequestMapping("places/{num}")
 	public String sitelist(@PathVariable int num) {
-		
-		
+
 		return ".campsite.roomDetail";
 	}
-	
 
 }

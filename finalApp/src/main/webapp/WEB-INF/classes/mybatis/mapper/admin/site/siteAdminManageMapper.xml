@@ -66,10 +66,12 @@
 		SELECT SITENUM,SITENAME,SITELOCAL,addr1,addr2,
 	 		CATEGORY,ENVIRONMENT,HITCOUNT,
 	 		 AVGSTAR
-		FROM campingsite 		
-		<if test="memberIdx!=0 and memberIdx!=''">		
-			where  MEMBERIDX=#{memberIdx}
-		</if>
+		FROM campingsite
+		<where>
+			<if test="memberIdx!=0 and memberIdx!=''">		
+				where  MEMBERIDX=#{memberIdx}
+			</if>
+		</where> 		
 		ORDER BY SITENUM DESC
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 		
