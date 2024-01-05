@@ -211,6 +211,8 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 								<input type="radio" name="carShow" class="form-check-input" id="carShow1" value="1" > <label class="form-check-label" for="carShow1">상품진열</label>
 								&nbsp;&nbsp;
 								<input type="radio" name="carShow" class="form-check-input" id="carShow0" value="0" > <label class="form-check-label" for="carShow0">진열안함</label>
+								&nbsp;&nbsp;
+								<input type="radio" name="carShow" class="form-check-input" id="carShow0" value="2" > <label class="form-check-label" for="carShow0">단종</label>
 							</div>
 						</td>
 					</tr>

@@ -38,19 +38,18 @@
 	<sql id="where-list">
 		<if test="schType=='all'">
 			(INSTR(carName, #{kwd}) &gt; 0
-				OR (INSTR(carNum, #{kwd}) &gt; 0
-				OR (TO_CHAR(reg_date, 'YYYYMMDD') = #{kwd} 
+				OR INSTR(c.carNum, #{kwd}) &gt; 0
 			)
 		</if>
-		<if test="schType=='carName'">
-			INSTR(carName, #{kwd}) &gt; 0
-		</if>
 		<if test="schType=='carNum'">
-			INSTR(carNum, #{kwd}) = &gt; 0
+			INSTR(c.carNum, #{kwd}) = 1
+		</if>
+		<if test="schType=='carName'">
+			INSTR(c.carName, #{kwd}) &gt; 0
 		</if>
 		<if test="schType=='reg_date'">
-			( TO_CHAR(reg_date, 'YYYY-MM-DD') = #{kwd}
-				OR TO_CHAR(reg_date, 'YYYYMMDD') = #{kwd} )
+		   ( TO_CHAR(reg_date, 'YYYYMMDD') = #{kwd}
+	          OR TO_CHAR(reg_date, 'YYYY-MM-DD') = #{kwd} )
 		</if>
 	</sql>
 	
@@ -78,7 +77,7 @@
 				AND carShow = #{carShow}
 			</if>
 			<if test="kwd != null and kwd != ''">
-				<include refid="where-list"/>
+				AND <include refid="where-list"/>
 			</if>
 		</where>
 		ORDER BY c.carNum DESC

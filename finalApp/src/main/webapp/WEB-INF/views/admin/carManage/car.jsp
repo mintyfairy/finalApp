@@ -14,6 +14,10 @@ img {
 	border: 1px solid rightgrey;
 }
 
+a {
+	color:black; text-decoration: none; outline: none
+}
+
 
 </style>
 
@@ -42,6 +46,21 @@ function login() {
 	   location.href = '${pageContext.request.contextPath}/member/login';
 }
 
+function searchList() {
+	const f = document.searchForm;
+	f.submit();
+}
+
+
+function changeList() {
+	let carShow = $("#changeShowCar").val();
+	
+	const f = document.searchForm;
+	f.carShow.value = carShow;
+	searchList();
+}
+
+
 
 </script>
 
@@ -68,10 +87,11 @@ function login() {
 						${dataCount}개(${page}/${total_page} 페이지)
 					</td>
 					<td align="right">
-						<select id="selectEnabled" class="form-select" onchange="searchList();">
-							<option value="" ${enabled=="" ? "selected":""}>::노출상태::</option>
-							<option value="0" ${enabled=="0" ? "selected":""}>숨김</option>
-							<option value="1" ${enabled=="1" ? "selected":""}>노출</option>
+						<select id="changeShowCar" class="form-select" onchange="changeList();">
+							<option value="-1">::진열 여부::</option>
+							<option value="1" ${carShow==1?"selected":""}>진열</option>
+							<option value="0" ${carShow==0?"selected":""}>숨김</option>
+							<option value="2" ${carShow==2?"selected":""}>단종</option>
 						</select>
 					</td>
 				</tr>
@@ -95,8 +115,8 @@ function login() {
 					<c:forEach var="dto" items="${list}" varStatus="status">
 						<tr class="hover" onclick="" style="vertical-align: middle;"> 
 							<td>${dto.carNum}</td>
-							<td><img src="${pageContext.request.contextPath}/uploads/caravan/${dto.thumbnail}" alt="thumbnail" width="50" height="50"></td>
-							<td>${dto.carName}</td>
+							<td><a href="${pageContext.request.contextPath}/car/car_detail?carNum=${dto.carNum}"><img src="${pageContext.request.contextPath}/uploads/caravan/${dto.thumbnail}" alt="thumbnail" width="50" height="50"></a></td>
+							<td><a href="${pageContext.request.contextPath}/car/car_detail?carNum=${dto.carNum}">${dto.carName}</a></td>
 							<td>${dto.weekCost}</td>
 							<td>${dto.wkndCost}</td>
 							<td>${dto.discountRate}%</td>
@@ -123,22 +143,19 @@ function login() {
 					</td>
 					
 					<td align="center">
-						<form class="row justify-content-center" name="searchForm" action="${pageContext.request.contextPath}/admin/product/main" method="post">
+						<form class="row justify-content-center" name="searchForm" action="${pageContext.request.contextPath}/admin/carManage/car" method="post">
 							<div class="col-auto p-1">
 								<select name="schType" class="form-select">
 									<option value="all" ${schType=="all"?"selected":""}>전체</option>
 									<option value="carName" ${schType=="carSize"?"selected":""}>캠핑카이름</option>
-									<option value="productName" ${schType=="productName"?"selected":""}>차량코드</option>
+									<option value="carNum" ${schType=="productName"?"selected":""}>차량코드</option>
 									<option value="reg_date" ${schType=="reg_date"?"selected":""}>등록일</option>
 								</select>
 							</div>
 							<div class="col-auto p-1">
 								<input type="text" name="kwd" value="${kwd}" class="form-control">
 								<input type="hidden" name="size" value="${size}">
-								<input type="hidden" name="special" value="${special}">
-								<input type="hidden" name="parentNum" value="${parentNum}">
-								<input type="hidden" name="categoryNum" value="${categoryNum}">
-								<input type="hidden" name="productShow" value="${productShow}">
+								<input type="hidden" name="carShow" value="${carShow}">
 							</div>
 							<div class="col-auto p-1">
 								<button type="button" class="btn btn-light" onclick="searchList()"> <i class="bi bi-search"></i> </button>
