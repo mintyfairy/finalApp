@@ -36,9 +36,12 @@ public class CarReservationsController {
 			int discount = 0; // 총 할인액
 			
 			
+			
 			model.addAttribute("carNum", carNum);
+			model.addAttribute("orderUser", orderUser);
 			
 			return ".car.orderPage";
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

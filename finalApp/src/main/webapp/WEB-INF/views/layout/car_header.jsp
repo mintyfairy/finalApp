@@ -51,14 +51,14 @@ ul {
 }
 
 .menu {
-  width: 700px;
+  width: 1100px;
   overflow: hidden;
   margin: 0 auto;
 }
 
 
 .menu>li {
-  width: 130px;
+  width: 150px;
   float: left;
   line-height: 60px;
   text-align: center;
@@ -120,21 +120,18 @@ ul {
 .bell {
   width: 80px;
   line-height: 60px;
-  float: left;
-  text-align: center;
+  text-align: right;
+  font-size: 17px;
 }
 
 
-i {
-  text-align: left;
- }
- 
+
 
  /* 공통헤더 css*/
  
 .header_top {
 	width: 1080px;
-    padding: 0 40px;
+    padding: 0 70px 0 0;
     border-bottom: 1px solid #efefef;
     margin: 0 auto;
    
@@ -189,7 +186,7 @@ i {
 }
 
 .logo {
-    margin-right: 48px;
+    margin-right: 100px;
     padding-top: 6px;
 }
 
@@ -229,7 +226,7 @@ i {
         </div>
 
         <div class="logo">
-            <a href="#">
+            <a href="${pageContext.request.contextPath}/car/main">
                 <img src="${pageContext.request.contextPath}/resources/images/main/logo.png" alt="logo" width="228">
             </a>
         </div>
@@ -279,7 +276,13 @@ i {
                         <li><a href="#">1:1 문의</a></li>
                     </ul>
                 </li>
-                <li class="bell" style="text-align: right;">
+                <li>
+                	&nbsp;
+                </li>
+                <li>
+                	&nbsp;
+                </li>
+                <li class="bell">
                     <a href="#"><i class="fa-solid fa-bell"></i></a>
                 </li>
                 

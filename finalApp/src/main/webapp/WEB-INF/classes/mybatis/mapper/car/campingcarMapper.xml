@@ -30,7 +30,8 @@
 	
 	<select id="listCampingCar" parameterType="map" resultType="com.fa.plus.domain.car.CampingCar">
 		SELECT d.carNum, carName, carSize, thumbnail, discountRate, carShow, carMaxNum, sleepNum, content, petOrNot, 
-			description, caravanNum, weekCost, wkndCost, carBirth
+			description, caravanNum, weekCost, wkndCost,
+			carBirth
 		FROM campingCar c
 		JOIN carDetail d ON c.carNum = d.carNum
 		WHERE carShow = 1
@@ -39,7 +40,8 @@
 	
 	<select id="findById" parameterType="Long" resultType="com.fa.plus.domain.car.CampingCar">
 		SELECT d.carNum, carName, carSize, thumbnail, discountRate, carMaxNum, sleepNum, content, petOrNot, 
-			description, caravanNum, weekCost, wkndCost, carBirth
+			description, caravanNum, weekCost, wkndCost,
+			carBirth
 		FROM campingCar c
 		JOIN carDetail d ON c.carNum = d.carNum
 		WHERE c.carNum = #{carNum}

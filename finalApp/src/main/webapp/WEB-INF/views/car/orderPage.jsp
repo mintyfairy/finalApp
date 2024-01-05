@@ -249,7 +249,7 @@ button {
                 <ul class="goods_list">
                     <li class="goods_item">
                     <h4>선택된 차량</h4>
-                        <p><a href="#" class="goods_photo">
+                        <p><a href="${pageContext.request.contextPath}/resources/images/campingcar/casper.jpg" class="goods_photo">
                                 <img src="https://via.placeholder.com/250x200" alt="goods_item">
                             </a></p>
                         <div class="goods_text" style="width: 580px;">

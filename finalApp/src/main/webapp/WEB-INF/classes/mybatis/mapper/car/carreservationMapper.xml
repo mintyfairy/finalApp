@@ -10,7 +10,7 @@
 	</insert>
 	
 	<insert id="insertCarPayDetail" parameterType="com.fa.plus.domain.car.CarReservation">
-		INSERT INTO payDetail(orderNum, payMethod, cardName, authNumber, authDate) 
+		INSERT INTO carPayDetail(orderNum, payMethod, cardName, authNumber, authDate) 
 			VALUES (#{orderNum}, #{payMethod}, #{cardName}, #{authNumber}, TO_DATE(#{authDate}, 'YYYY-MM-DD HH24:MI:SS') )
 	</insert>
 </mapper>

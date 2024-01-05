@@ -22,12 +22,19 @@ h1, h2, h3, h4, h5, h6 {
   
   width: 1080px;
   box-sizing: border-box;
-  margin: 100px auto;
+  margin: 50px 100px auto;
 
 }
 
+#wrap2 {
+  
+  width: 1080px;
+  box-sizing: border-box;
+  margin: 50px 100px auto;
+  padding-left: 90px;
+}
+
 .first-container {
-  width: 90%;
   height: 600px;
   padding: 25px;
   display: flex;
@@ -37,9 +44,7 @@ h1, h2, h3, h4, h5, h6 {
 .thumbnail-addImages {
   box-sizing: border-box;
   border: none;
-  width: 250px;
-  height: 550px;
-  padding: 35px;
+  padding-left: 80px;
   
 }
 
@@ -55,12 +60,12 @@ h1, h2, h3, h4, h5, h6 {
   border: none;
   width: 500px;
   height: 550px; 
-  padding: 35px;
+  padding-left: 70px;
 }
 
 .thumbnail{
-  width: 400px;
-  height: 450px;
+  width: 450px;
+  height: 350px;
   box-sizing: border-box;
   border: none;
   
@@ -83,9 +88,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-.car-detail > h2 {
-  font-size: 30px;
-}
 
 .fa-heart {
   font-size: 25px;
@@ -158,7 +160,19 @@ h1, h2, h3, h4, h5, h6 {
 
 input[type=date] {
   width: 100%;
-  height: 80%;
+  height: 60px;
+  font-size: 20px;
+  text-align: center;
+  border-radius: 10px;
+  margin-top: 5px;
+  
+  
+}
+
+#date {
+	border: 2px solid #bebebe;
+	font-weight: 600;
+	color: #3c3c3c;
 }
 
 input[type='date']::before {
@@ -173,7 +187,6 @@ input[type='date']:valid::before {
 
 
 .usetime {
-  margin-top: 15px;
   width: 400px;
   height: 80px;
   box-sizing: border-box;
@@ -196,32 +209,32 @@ input[type='date']:valid::before {
   height: 80px;
   box-sizing: border-box;
   border: none;
-  display: flex;
 }
 .price {
-  width: 200px;
-  height: 70px;
+  font-size: 20px;
+  font-weight: 700;
   box-sizing: border-box;
   border: none;
+  text-align: center;
+  margin-top: 10px;
 }
-
 
 
 button[name=reservation] {
   background-color: #275efe;
-  font-size: 13px;
+  font-size: 15px;
   color: #fff;
   padding:4px 8px;
-  width: 150px;
+  width: 300px;
   height: 50px;
   font-family: 'Roboto';
-  font-weight: 500;
+  font-weight: 600;
   border-radius: 24px;
   display: block;
   outline: none;
   appearance: none;
   border: none;
-  margin: 10px auto;
+  margin: 0 auto;
 }
 button[name=reservation]:hover {
   background-color:#002ead;
@@ -231,12 +244,12 @@ button[name=reservation]:hover {
 .second-container {
   box-sizing: border-box;
   background-color: white;
-  width: 100%;
 
   margin: 0 auto;
 }
 
-.available-size > div {
+
+.available-size {
   display: flex;
 }
 
@@ -869,7 +882,11 @@ table {
 		f.action = "${pageContext.request.contextPath}/car/orderPage";
 		f.submit();
 	}
+ 
+
+
 </script>
+
 
 <div id="wrap">
 
@@ -885,29 +902,28 @@ table {
     </div>
     <div class="car-detail">
       <div class="carName-liked">
-        <h2>
+        <p style="font-size: 25px; font-weight: 600;">
           ${dto.carName}
-        </h2>
+        </p>
         <i class="fa-regular fa-heart"></i>
       </div>
-      <div class="option-mini">
-      	<c:if test="${dto.petOrNot == 1}">
-        	<span># 애견동반가능</span>
-        </c:if>
-      </div>
-    
+     
+    <div style="text-align: center; margin-top: 5px;">
+    	<p>${dto.description}</p>
+    </div>
       
       <div class="calendar">
-        <form name="datepickForm">
+        <form name="datepickForm" method="post">
           <div class="start-date">
           
             <p style="font-size: medium; font-weight: bold; margin-left: 65px;">대여일</p>
-            <input type="date" name="start">
+            <input id="date" type="date" name="start">
           </div>
           <p style="margin-top: 40px; font-size: large; font-weight: 600;"> | </p>
           <div class="end-date">
             <p style="font-size: medium; font-weight: bold; margin-left: 65px;">반납일</p>
-            <input type="date" name="end">
+            <input id="date" type="date" name="end">
+            <input type="hidden" name="carNum" value="${dto.carNum}">
           </div>
 		</form>
       </div>
@@ -930,34 +946,39 @@ table {
       <hr style="width: 400px;">
     
       <div class="price-reservation">
-        <div class="price">
           <p style="font-size: 15px; font-weight: bold;">차량대여료</p>
+          <div class="price">
           
-          <p style="padding-left: 75px; padding-top: 5px; font-size: 20px;">주중 : ${dto.weekCost}</p>
-          <p style="padding-left: 75px; padding-top: 5px; font-size: 20px;">주말 : ${dto.wkndCost}</p>
+          <span>주중 : ${dto.weekCost}</span>
+          <span>&nbsp;&nbsp;</span>
+          <span>주말 : ${dto.wkndCost}</span>
+          </div>
           </div>
           <button type="button" name="reservation" onclick="sendOk();">
           예약하기
           </button>
-          </div>
           
       </div>
    
     </div>
   </div>
 
-<div id="wrap">
+<div id="wrap2">
   <div class="second-container">
     <div class="available-size">
-      <div>
-        
-        <h5 style="padding: 30px;">탑승가능인원</h5>
-        <p style="font-size: 18px; padding:30px 150px">${dto.carMaxNum}</p>
+      <div style="text-align: center;">
+        <h3 style="padding: 15px;">탑승가능인원</h3>
+        <p style="font-size: 18px;">${dto.carMaxNum}</p>
       </div>
       <br>
-      <div>
-        <h5 style="padding-left: 30px;">취침가능인원</h5>
-        <p style="font-size: 18px; padding-left: 180px">${dto.sleepNum}</p>
+      <div style="text-align: center;">
+        <h3 style="padding: 15px;">취침가능인원</h3>
+        <p style="font-size: 18px;">${dto.sleepNum}</p>
+      </div>
+      <div style="text-align: center;">
+        <h3 style="padding: 15px;">반려동물동반가능여부</h3>
+        
+        <p style="font-size: 18px;"><c:if test="${dto.petOrNot == 1 ? '가능':'불가능'}" /></p>
       </div>
      </div>
      </div>
@@ -965,18 +986,19 @@ table {
     <hr style="margin-top: 20px; margin-bottom: 20px;">
 
     <div class="car-options">
-      <h5 style="padding-left: 30px;">보유 옵션</h5>
+      <h2 style="padding-left: 30px;">보유 옵션</h2>
       <div class="option-detail">
       	<div>
         	<c:if test="${dto.toilet != null}">
           		<p>화장실</p>
-          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/bed.png" alt="bed">
+          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/toilet.png" alt="toilet">
           	</c:if>
         </div>
         <div>
         	<c:if test="${dto.shower != null}">
           		<p>샤워실</p>
-          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/bed.png" alt="bed">
+          		
+          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/shower.png" alt="shower">
           	</c:if>
         </div>
         <div>
@@ -1013,7 +1035,7 @@ table {
         <div>
         	<c:if test="${dto.waterHeater != null}">
           		<p>온수기</p>
-          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/table.png" alt="table">
+          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/waterHeater.png" alt="waterHeater">
         	</c:if>
         </div>
         <div>
@@ -1043,7 +1065,7 @@ table {
         <div>
         	<c:if test="${dto.gasStove != null}">
           		<p>가스레인지</p>
-          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/battery.png" alt="battery">
+          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/gasStove.png" alt="gasStove">
         	</c:if>
         </div>
       </div>
@@ -1063,36 +1085,8 @@ table {
           <div class="detail_img">
               <img src="https://via.placeholder.com/538x540" alt="detail_img">
           </div>
-          <div class="detail_review">
-              <div class="review_table">
-                  <table summary="번호, 평점, 내용, 작성자, 작성일, 조회">
-                      <colgroup>
-                          <col width="40">
-                          <col width="40">
-                          <col width="*">
-                          <col width="95">
-                          <col width="110">
-                          <col width="40">
-                      </colgroup>
-                      <tbody>
-                          <tr>
-                              <td colspan="6">등록된 리뷰가 없습니다.</td>
-                          </tr>
-                      </tbody>
-                  </table>
-              </div>
-              <div class="review_write">
-                  <a href="#">글쓰기</a>
-              </div>
-          </div>
-          <div class="detail_tab">
-              <ul class="tab_list">
-                  <li class="tab_item"><a href="#">상세정보</a></li>
-                  <li class="tab_item"><a href="#">상품후기0</a></li>
-                  <li class="tab_item"><a href="#">상품문의0</a></li>
-                  <li class="tab_item"><a href="#">배송/교환/반품/AS</a></li>
-              </ul>
-          </div>
+          
+          
           <div class="detail_qna">
               <div class="qna_table">
                   <table summary="번호, 평점, 내용, 작성자, 작성일, 조회">
@@ -1126,7 +1120,7 @@ table {
             </colgroup>
             <tbody>
                 <tr>
-                    <th>캐핑카 업체</th>
+                    <th>캠핑카 업체</th>
                     <td>
                         <b>캠브릿지 한국지점</b>
                         <br>
@@ -1179,3 +1173,15 @@ table {
     </div>
 </div>
 </div>
+<a href="https://www.flaticon.com/kr/free-icons/" title="화장실 아이콘">화장실 아이콘  제작자: Creaticca Creative Agency - Flaticon</a>
+<a href="https://www.flaticon.com/kr/free-icons/" title="화장실 아이콘">화장실 아이콘  제작자: Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/kr/free-icons/" title="침실 아이콘">침실 아이콘  제작자: Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/kr/free-icons/" title="싱크대 아이콘">싱크대 아이콘  제작자: Eucalyp - Flaticon</a>
+<a href="https://www.flaticon.com/kr/free-icons/" title="마이크로파 아이콘">마이크로파 아이콘  제작자: Dreamstale - Flaticon</a>
+<a href="https://www.flaticon.com/kr/free-icons/" title="냉장고 아이콘">냉장고 아이콘  제작자: pojok d - Flaticon</a>
+<a href="https://www.flaticon.com/kr/free-icons/" title="표 아이콘">표 아이콘  제작자: itim2101 - Flaticon</a>
+<a href="https://www.flaticon.com/kr/free-icons/" title="온수기 아이콘">온수기 아이콘  제작자: manshagraphics - Flaticon</a>
+<a href="https://www.flaticon.com/kr/free-icons/tu-tv" title="tu tv 아이콘">Tu tv 아이콘  제작자: Icon.verse - Flaticon</a>
+<a href="https://www.flaticon.com/kr/free-icons/-" title="공기 조절 아이콘">공기 조절 아이콘  제작자: Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/kr/free-icons/" title="히터 아이콘">히터 아이콘  제작자: Linector - Flaticon</a>
+<a href="https://www.flaticon.com/kr/free-icons/" title="배터리 아이콘">배터리 아이콘  제작자: kmg design - Flaticon</a>

@@ -297,7 +297,7 @@ main {
          <c:forEach var="dto" items="${list}" varStatus="status">
            <li class="car_item">
                <p><a href="${pageContext.request.contextPath}/car/car_detail?carNum=${dto.carNum}" class="car_photo">
-                       <img src="https://via.placeholder.com/350x250" alt="car_item">
+                       <img src="${dto.thumbnail}/350x250" alt="car_item">
                        <i class="fa-regular fa-heart"></i>
                    </a></p>
                <div class="car_text">
