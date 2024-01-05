@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fa.plus.admin.service.CampAdminService;
+import com.fa.plus.admin.service.SiteAdminService;
 import com.fa.plus.common.MyUtil;
 import com.fa.plus.domain.SessionInfo;
 import com.fa.plus.domain.site.Site;
@@ -26,10 +26,10 @@ import com.fa.plus.domain.site.SiteDetail;
 
 @Controller
 @RequestMapping("/admin/siteManage/*")
-public class CampAdminController {
+public class SiteAdminController {
 
 	@Autowired
-	private CampAdminService service;
+	private SiteAdminService service;
 	@Autowired
 	private MyUtil myUtil;
 	

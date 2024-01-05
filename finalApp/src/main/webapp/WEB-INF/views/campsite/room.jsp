@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
- <div class="container-xxl bg-white p-0">
+<div class="container-xxl bg-white p-0">
         <!-- Spinner Start -->
         <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
@@ -104,7 +104,7 @@
                     <div class="row g-2">
                         <div class="col-md-10">
 							<div class="row g-2">
-                                <div class="col-md-4 dropdown ">
+                                <div class="col-md-3 dropdown ">
 									  <button type="button" class="form-select " data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
 									    부대시설
 									  </button>
@@ -125,7 +125,7 @@
 									      <div class="form-check">
 									        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck3">
 									        <label class="form-check-label" for="dropdownCheck3">
-									          비비큐 장비 대여
+									          비비큐 장비
 									        </label>
 									      </div>
 									      <div class="form-check">
@@ -151,14 +151,17 @@
                                 </div>
                                
                             
-                                <div class="col-md-3">
-                                     <input type="text" class="form-control" placeholder="가격">
+                                <div class="col-md-2">
+                                     <input type="text" class="form-control" placeholder="최소가격" name="minFee">
                                 </div> 
-                                <div class="col-md-1 align-self-center">원 &emsp;~</div>
-                                <div class="col-md-3">
-                                     <input type="text" class="form-control" placeholder="가격">
+                                <div class="col-md-auto align-self-center">원 &emsp;~</div>
+                                <div class="col-md-2">
+                                     <input type="text" class="form-control" placeholder="최대가격" name="maxFee">
                                 </div>
-                                <div class="col-md-1 align-self-center">원</div>
+                                <div class="col-md-auto align-self-center">원</div>
+                                <div class="col-md-auto">
+                                     <input type="text" class="form-control" placeholder="캠핑장 이름 검색" name="siteKwd">
+                                </div>
                             </div>
                         </div>
                          <div class="col-md-2">

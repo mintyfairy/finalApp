@@ -277,7 +277,7 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
                           <a href="${pageContext.request.contextPath}/site/list"><i class="fa-regular fa-user"></i>&nbsp;검색창으로</a>
                     </li>
                     <li class="logo_area">
-                        <a id="logo2" href="#">
+                        <a id="logo2" href="${pageContext.request.contextPath}/site/list">
                             <img src="${pageContext.request.contextPath}/resources/images/campsite/logocamp.png" alt="logo" width="206"height= "40">
                         </a>
                     </li>

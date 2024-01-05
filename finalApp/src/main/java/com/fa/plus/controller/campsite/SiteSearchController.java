@@ -5,6 +5,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/csearch/*")
-public class CampSearchController {
+public class SiteSearchController {
 
 }

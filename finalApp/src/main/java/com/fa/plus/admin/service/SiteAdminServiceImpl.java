@@ -8,16 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fa.plus.admin.mapper.CampAdminMapper;
+import com.fa.plus.admin.mapper.SiteAdminMapper;
 import com.fa.plus.common.FileManager;
 import com.fa.plus.domain.site.Site;
 import com.fa.plus.domain.site.SiteDetail;
 
 @Service
-public class CampAdminServiceImpl implements CampAdminService {
+public class SiteAdminServiceImpl implements SiteAdminService {
 
 	@Autowired
-	private CampAdminMapper mapper;
+	private SiteAdminMapper mapper;
 
 	@Autowired
 	private FileManager fileManager;
@@ -171,7 +171,7 @@ public class CampAdminServiceImpl implements CampAdminService {
 					if (filename == null) {
 						continue;
 					}
-					dto.setFilename(filename);
+					dto.setFileName(filename);
 
 					mapper.insertRoomFile(dto);
 				}
@@ -197,7 +197,7 @@ public class CampAdminServiceImpl implements CampAdminService {
 					if (filename == null) {
 						continue;
 					}
-					dto.setFilename(filename);
+					dto.setFileName(filename);
 
 					mapper.insertRoomFile(dto);
 				}

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fa.plus.admin.mapper.CampAdminMapper">
+<mapper namespace="com.fa.plus.admin.mapper.SiteAdminMapper">
 	<!-- 캠핑장 등록 -->
 	<select id="SiteSeq" resultType="Long">
 		SELECT CAMPINGSITE_SEQ.NEXTVAL FROM dual
@@ -29,7 +29,9 @@
 	<select id="dataCountSite" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*), 0)
 		FROM campingsite 
-		where  MEMBERIDX=#{memberIdx}
+		<if test="memberIdx!=0 and memberIdx!=''">		
+			where  MEMBERIDX=#{memberIdx}
+		</if>
 	</select>
 	
 
@@ -65,7 +67,9 @@
 	 		CATEGORY,ENVIRONMENT,HITCOUNT,
 	 		 AVGSTAR
 		FROM campingsite 		
-		where MEMBERIDX=#{memberIdx}
+		<if test="memberIdx!=0 and memberIdx!=''">		
+			where  MEMBERIDX=#{memberIdx}
+		</if>
 		ORDER BY SITENUM DESC
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 		

@@ -16,7 +16,7 @@ public class SiteDetail {
 	
 
 	private long fileNum;
-	private String filename;
+	private String fileName;
 	private List<MultipartFile> addFiles;
 	
 	
@@ -74,11 +74,12 @@ public class SiteDetail {
 	public void setFileNum(long fileNum) {
 		this.fileNum = fileNum;
 	}
-	public String getFilename() {
-		return filename;
+	
+	public String getFileName() {
+		return fileName;
 	}
-	public void setFilename(String filename) {
-		this.filename = filename;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 	public List<MultipartFile> getAddFiles() {
 		return addFiles;

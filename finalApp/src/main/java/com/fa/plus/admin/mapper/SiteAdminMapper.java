@@ -10,7 +10,7 @@ import com.fa.plus.domain.site.Site;
 import com.fa.plus.domain.site.SiteDetail;
 
 @Mapper
-public interface CampAdminMapper {
+public interface SiteAdminMapper {
 	public long SiteSeq();
 	public void insertSite(Site dto) throws SQLException;
 	public void insertSiteFile(Site dto) throws SQLException;

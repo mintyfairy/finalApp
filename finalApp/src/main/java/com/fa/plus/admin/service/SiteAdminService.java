@@ -7,7 +7,7 @@ import com.fa.plus.domain.site.Site;
 import com.fa.plus.domain.site.SiteDetail;
 
 
-public interface CampAdminService {
+public interface SiteAdminService {
 	public void insertSite(Site dto, String pathname) throws Exception;
 	public void updateSite(Site dto, String pathname) throws Exception;
 	public void deleteSite(long SiteNum, String pathname) throws Exception;
