@@ -41,6 +41,13 @@ table th, td {
 .orderStatus-update, .orderDetailStatus-update { cursor: pointer;  }
 .orderStatus-update:hover, .orderDetailStatus-update:hover { color: #0d6efd; }
 
+.page-navigation {
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+
 /* 글 리스트 */
 .board-list-header { padding-top: 7px; padding-bottom: 7px; }
 

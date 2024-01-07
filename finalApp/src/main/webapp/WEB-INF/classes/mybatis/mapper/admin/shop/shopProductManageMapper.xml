@@ -239,6 +239,11 @@
 		ORDER BY detailNum, detailNum2
 	</select>
 	
+	<select id="findTotalStock" parameterType="Long" resultType="Integer">
+		SELECT totalStock FROM productStock 
+		WHERE stockNum = #{stockNum}
+	</select>
+	
 	<insert id="insertProductStock" parameterType="com.fa.plus.admin.domain.shop.ShopProductManage">
 		INSERT INTO productStock(stockNum, totalStock, 
 		productNum, detailNum, detailNum2) 

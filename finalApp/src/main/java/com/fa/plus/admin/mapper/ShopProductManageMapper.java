@@ -25,6 +25,7 @@ public interface ShopProductManageMapper {
 	public ShopProductManage findByCategory(long categoryNum);
 	public List<ShopProductManage> listCategory();
 	public List<ShopProductManage> listSubCategory(long parentNum);
+	public int findTotalStock(long stockNum);
 	
 	public int dataCount(Map<String, Object> map);
 	public List<ShopProductManage> listBrand();

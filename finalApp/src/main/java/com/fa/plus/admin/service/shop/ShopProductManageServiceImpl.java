@@ -247,12 +247,13 @@ public class ShopProductManageServiceImpl implements ShopProductManageService {
 	}
 
 	@Override
-	public void updateHide(Map<String, Object> map) {
+	public void updateHide(Map<String, Object> map) throws Exception {
 		
 		try {
 			mapper.updateHide(map);
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		}
 		
 	}
@@ -425,6 +426,30 @@ public class ShopProductManageServiceImpl implements ShopProductManageService {
 		}
 		
 		return list;
+	}
+
+	@Override
+	public void updateProductStock(ShopProductManage dto) throws Exception {
+		try {
+			mapper.updateProductStock(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public int findTotalStock(long stockNum) {
+		int totalStock = 0;
+		
+		try {
+			totalStock = mapper.findTotalStock(stockNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return totalStock;
 	}
 
 }

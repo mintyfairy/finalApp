@@ -94,15 +94,15 @@ function check() {
 		return false;
 	}
 	
-	if(! f.special.value) {
-		alert("특가상품 여부를 선택하세요.");
-		f.categoryNum.focus();
-		return false;
-	}
-	
 	if(! f.productName.value.trim()) {
 		alert("상품명을 입력하세요.");
 		f.productName.focus();
+		return false;
+	}
+	
+	if(! f.special.value) {
+		alert("특가상품 여부를 선택하세요.");
+		f.categoryNum.focus();
 		return false;
 	}
 	

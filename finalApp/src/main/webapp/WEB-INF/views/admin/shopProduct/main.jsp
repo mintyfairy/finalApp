@@ -503,18 +503,92 @@ $(function() {
 		const fn = function(data) {
 			console.log(data);
 			
-			//let out = "";
-			//out += "<p>옵션명 : >" + 
+			let out = "";
+			out += "<p>옵션명 : " + data[0].optionName + 
+			"&nbsp;&nbsp;&nbsp;" + data[0].optionName2 + "</p>";
+			$.each(data, function(index, item) {
+				out += "<div id='stock_num" + index + "' stock-data=" + item.stockNum + ">"
+				out += "<form name='stockForm" + item.stockNum + "' method='post' " + 
+				"action='${pageContext.request.contextPath}/admin/shopProduct/stock'>";
+				out += "<p>" + item.optionValue + 
+				"&nbsp;-&nbsp" + item.optionValue2 + 
+				"&nbsp;:&nbsp;<span class='totalStock'>" + 
+				item.totalStock + "</span>";
+				out += "<input id='qty_value" + index + 
+				"' type='text' name='totalStock' value='' " + 
+				"style='width: 60px; height: 35px; " + 
+				"margin-left: 15px; padding-left: 15px; " + 
+				"font-size: 13px; text-align: left; " + 
+				"border-radius: 0; border: 1px solid #e6e6e6;'>";
+				out += "<button type='button' " + 
+				"name='minus' class='minus_btn' " + 
+				"style='width: 35px; height: 35px; " + 
+				"font-size: 20px; cursor: pointer; " + 
+				"background-color: #fff; border-radius: 0; " + 
+				"border: 1px solid #e6e6e6;'>-</button>";
+				out += "<button type='button' name='plus' " + 
+				"class='plus_btn' style='width: 35px; " + 
+				"height: 35px; font-size: 20px; cursor: pointer; " + 
+				"background-color: #fff; border-radius: 0; " + 
+				"border: 1px solid #e6e6e6;'>+</button>";
+				out += "<button type='button' " + 
+				"class='btn btn-secondary stockUpdate' " + 
+				"style='margin-left: 24px;'>수량변경</button>";
+				out += "<input name='stockNum' type='hidden' " + 
+				"value='" + item.stockNum + "'>";
+				out += "</form>";
+				out += "</div>";
+			});
+			
+			$("#stockModal").find(".modal-body").html(out);
 			
 			$("#stockModal").find('.modal-title').text(data[0].productName);
 			
 			$('#stockModal').show();
+			
+			$.each(data, function(index, item) {
+				let totalStock = $("#stock_num" + index).find('input[name="totalStock"]');
+				totalStock.val(0);
+			});
+			
+			$('.plus_btn').click(function() {
+                let input = $(this).closest('div').find('input[name="totalStock"]');
+                input.val(parseInt(input.val()) + 1);
+            });
+			
+			$('.minus_btn').click(function() {
+                let input = $(this).closest('div').find('input[name="totalStock"]');
+                if (parseInt(input.val()) > 0) {
+                	input.val(parseInt(input.val()) - 1);
+                }
+            });
 		};
 		ajaxFun(url, "get", query, "json", fn);
 
 	});
+	
+	
+	$(document).on('click', '.stockUpdate', function(){
+		let stockNum = $(this).closest('form').find('input[name="stockNum"]').val();
+		let totalStock = $(this).closest('form').find('input[name="totalStock"]').val();
+		
+		let url = "${pageContext.request.contextPath}/admin/shopProduct/stock";
+		let query = {stockNum : stockNum, totalStock : totalStock};
+		
+		const fn = function(data) {
+			console.log(data);
+			let f = $('form[name="stockForm' + data.stockNum + '"]');
+			console.log(f.find('.totalStock').text());
+			f.find('.totalStock').text(data.totalStock);
+			
+			//console.log($(this).closest('form').find('.totalStock').text());
+			//$('#stockModal').find("#stock_num").find('.totalStock').text(data);
+			//console.log($(this).closest('form').find('.totalStock').text());
+			
+		};
+		ajaxFun(url, "post", query, "json", fn);
+	});
 });
-
 // 상품 숨김여부 수정창 나타나기
 $(function() {
 	$('.hideBtn').click(function() {

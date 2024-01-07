@@ -80,6 +80,10 @@ ul {
     text-decoration: underline;
 }
 
+.header_top_left {
+	display: flex;
+}
+
 .header_top_left .login_wrap a {
     position: relative;
     display: inline-block;
@@ -289,11 +293,11 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
             </li>
         </ul>
 
-        <div class="header_top_left row">
+        <div class="header_top_left">
 			<c:if test='${sessionScope.member.authority=="CAMP"||sessionScope.member.authority=="ADMIN"}'>
 		            <div class="login_wrap col-auto">
 		                <a href="${pageContext.request.contextPath}/admin">
-		                	<button class="custom-btn btn-4">관리 페이지</button>
+		                	<button class="custom-btn btn-4">관리자</button>
 		                </a>
 		            </div>
 		     </c:if>

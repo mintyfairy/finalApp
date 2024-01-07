@@ -364,6 +364,30 @@ public class ShopProductController {
 		return listStock;
 	}
 	
+	@PostMapping("stock")
+	@ResponseBody
+	public ShopProductManage updateStock(
+			@RequestParam long stockNum, 
+			@RequestParam int totalStock) throws Exception {
+		
+		ShopProductManage dto = new ShopProductManage();
+		
+		dto.setStockNum(stockNum);
+		dto.setTotalStock(totalStock);
+		
+		try {
+			service.updateProductStock(dto);
+			totalStock = service.findTotalStock(stockNum);
+			dto.setTotalStock(totalStock);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+		return dto;
+	}
+	
 	@GetMapping("hide")
 	@ResponseBody
 	public Map<String, Object> hideForm(@RequestParam long productNum
