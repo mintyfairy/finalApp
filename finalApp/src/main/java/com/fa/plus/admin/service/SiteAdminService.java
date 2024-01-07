@@ -27,6 +27,8 @@ public interface SiteAdminService {
 	
 	public List<Site> listSite(Map<String, Object> map);
 	public List<SiteDetail> listRoom(Map<String, Object> map);
+	public List<Site> listSearchSite(Map<String, Object> map);
+	public List<SiteDetail> listSearchRoom(Map<String, Object> map);
 	
 	
 	public List<Site> listSiteFile(long siteNum);

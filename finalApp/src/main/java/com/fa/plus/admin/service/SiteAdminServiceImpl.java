@@ -299,6 +299,59 @@ public class SiteAdminServiceImpl implements SiteAdminService {
 		}
 		return list;
 	}
+	@Override
+	public List<Site> listSearchSite(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		List<Site> list = null;
+		List<Site> list2 = null;
+		
+		try {
+			StringBuffer options = new StringBuffer();
+			// 배열을 스트링으로 변환
+			String[] optionlist=(String[]) map.get("siteOption");
+			System.out.println(options+"체크");
+			
+			list = mapper.listSearchSite(map);
+			
+			if (optionlist != null ) {
+				for (String option : optionlist) {
+					options.append(option);
+				}
+				for (Site dto : list) {
+					int test=Integer.parseInt(options.toString())
+						-Integer.parseInt(dto.getSiteoption());
+					if(Integer.toString(test).indexOf("9")!=-1) {
+						list2.add(dto);
+						System.out.println(dto+"체크");
+					}//옵션이 다른게 잇으면 뺸값에 9가 존재하게된다.
+				}
+			}else {
+				for (Site dto : list) {
+						System.out.println(dto+"체크");
+					}//옵션이 다른게 잇으면 뺸값에 9가 존재하게된다.
+				return list;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw e;
+		}
+		return list2;
+	}
+	
+	@Override
+	public List<SiteDetail> listSearchRoom(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		List<SiteDetail> list = null;
+		try {
+			list = mapper.listSearchRoom(map);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw e;
+		}
+		return list;
+	}
 
 	@Override
 	public Site findByIdSite(long SiteNum) throws Exception {

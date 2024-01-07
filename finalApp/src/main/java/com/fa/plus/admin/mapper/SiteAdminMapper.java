@@ -23,7 +23,9 @@ public interface SiteAdminMapper {
 	public int dataCountSite(Map<String, Object> map);
 	
 	public List<Site> listSite(Map<String, Object> map);
+	public List<Site> listSearchSite(Map<String, Object> map);
 	public List<SiteDetail> listRoom(Map<String, Object> map);
+	public List<SiteDetail> listSearchRoom(Map<String, Object> map);
 	
 	public void updateSite(Site dto) throws SQLException;
 	public void deleteSite(long SiteNum) throws SQLException;
