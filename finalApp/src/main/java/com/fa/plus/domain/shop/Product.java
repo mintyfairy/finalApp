@@ -1,32 +1,34 @@
 package com.fa.plus.domain.shop;
 
 public class Product {
-	private long productNum;
-	private String productName;
-	private int special;
-	private int price;
-	private int discountRate;
-	private int savedMoney;
-	private int delivery;
-	private String content;
-	private String thumbnail;
-	private int productShow;
-	private String reg_date;
+	private long productNum; //
+	private String productName; // 
+	private int special; // 
+	private int price; // 
+	private int discountRate; //
+	private int salePrice;
+	private int savedMoney; // 
+	private int delivery; // 
+	private String content; // 
+	private String thumbnail; // 
+	private int productShow; // 
+	private String reg_date; // 
+	private String updateDate; //
 	private String md;
 	private String starter;
-	private String delete;
+	private String deletion;
 	
 	private String startDate;
 	private String endDate;
 	private int showSpecial;
 	private int saleCount;
 	
-	private long categoryNum;
+	private long categoryNum; //
 	private String categoryName;
 	private Long parentNum;
 	private int level;
 	
-	private long brandNum;
+	private long brandNum; //
 	private String brandName;
 	
 	
@@ -121,12 +123,7 @@ public class Product {
 	public void setStarter(String starter) {
 		this.starter = starter;
 	}
-	public String getDelete() {
-		return delete;
-	}
-	public void setDelete(String delete) {
-		this.delete = delete;
-	}
+	
 	public String getStartDate() {
 		return startDate;
 	}
@@ -240,5 +237,23 @@ public class Product {
 	}
 	public void setOptionValue(String optionValue) {
 		this.optionValue = optionValue;
+	}
+	public String getDeletion() {
+		return deletion;
+	}
+	public void setDeletion(String deletion) {
+		this.deletion = deletion;
+	}
+	public String getUpdateDate() {
+		return updateDate;
+	}
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
+	}
+	public int getSalePrice() {
+		return salePrice;
+	}
+	public void setSalePrice(int salePrice) {
+		this.salePrice = salePrice;
 	}
 }
