@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.fa.plus.domain.site.Site;
 import com.fa.plus.domain.site.SiteDetail;
+import com.fa.plus.domain.site.SiteSearch;
 
 @Mapper
 public interface SiteAdminMapper {
@@ -23,9 +24,9 @@ public interface SiteAdminMapper {
 	public int dataCountSite(Map<String, Object> map);
 	
 	public List<Site> listSite(Map<String, Object> map);
-	public List<Site> listSearchSite(Map<String, Object> map);
+	public List<Site> listSearchSite(SiteSearch map);
 	public List<SiteDetail> listRoom(Map<String, Object> map);
-	public List<SiteDetail> listSearchRoom(Map<String, Object> map);
+	public List<SiteDetail> listSearchRoom(SiteSearch map);
 	
 	public void updateSite(Site dto) throws SQLException;
 	public void deleteSite(long SiteNum) throws SQLException;

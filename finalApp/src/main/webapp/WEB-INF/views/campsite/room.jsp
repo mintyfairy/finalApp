@@ -38,137 +38,140 @@
         <!-- Booking Start -->
         <div class="container-fluid booking pb-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container">
-                <div class="bg-white shadow" style="padding: 35px;">
-                    <div class="row g-2">
-                        <div class="col-md-12">
-                            <div class="row g-2 mb-1">
-                                <div class="col-md-3">	
-                                    <div class="date" id="date1" data-target-input="nearest">
-                                        <input type="date" class="form-control" name="startDate"
-                                            placeholder="s" data-target="#date1"  />
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="date" id="date2" data-target-input="nearest">
-                                        <input type="date" class="form-control" name="endDate" 
-                                        placeholder="Check out" data-target="#date2" />
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <select class="form-select" name="siteLocal">
-                                        <option selected> 지역 </option>
-                                        <option value="1">서울</option>
-                                        <option value="2">인천</option>
-                                        <option value="3">경기</option>
-                                        <option value="4">강원</option>
-                                        <option value="5">대전</option>
-                                        <option value="6">세종</option>
-                                        <option value="7">충북</option>
-                                        <option value="8">충남</option>
-                                        <option value="9">대구</option>
-                                        <option value="10">울산</option>
-                                        <option value="11">경북</option>
-                                        <option value="12">경남</option>
-                                        <option value="13">전북</option>
-                                        <option value="14">전남</option>
-                                        <option value="15">제주</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <select class="form-select" name="siteEnvironment">
-                                        <option selected> 환경 </option>
-                                        <option value="1">산</option>
-                                        <option value="2">강</option>
-                                        <option value="3">바다</option>
-                                        <option value="4">도심</option>
-                                        <option value="5">계곡</option>
-                                        <option value="6">호수</option>
-                                        <option value="7">평야</option>
-                                        <option value="8">기타</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <select class="form-select" name="siteCategory">
-                                        <option selected> 분류 </option>
-                                        <option value="1">오토캠핑</option>
-                                        <option value="2">글램핑</option>
-                                        <option value="3">카라반</option>
-                                        <option value="4">방갈로</option>
-                                        <option value="5">차박</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                       
-                    </div>
-                    <div class="row g-2">
-                        <div class="col-md-10">
-							<div class="row g-2">
-                                <div class="col-md-3 dropdown ">
-									  <button type="button" class="form-select " data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-									    부대시설
-									  </button>
-									  <form class="dropdown-menu p-4 ">
-									    <div class="mb-3">
-									      <div class="form-check">
-									        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck1">
-									        <label class="form-check-label" for="dropdownCheck1">
-									          전기
-									        </label>
-									      </div>
-									      <div class="form-check">
-									        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck2">
-									        <label class="form-check-label" for="dropdownCheck2">
-									          와이파이
-									        </label>
-									      </div>
-									      <div class="form-check">
-									        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck3">
-									        <label class="form-check-label" for="dropdownCheck3">
-									          비비큐 장비
-									        </label>
-									      </div>
-									      <div class="form-check">
-									        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck3">
-									        <label class="form-check-label" for="dropdownCheck3">
-									          운동장
-									        </label>
-									      </div>
-									      <div class="form-check">
-									        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck3">
-									        <label class="form-check-label" for="dropdownCheck3">
-									          화장실
-									        </label>
-									      </div>
-									      <div class="form-check">
-									        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck3">
-									        <label class="form-check-label" for="dropdownCheck3">
-									          샤워장
-									        </label>
-									      </div>
-									    </div>
-									  </form>
-                                </div>
-                               
-                            
-                                <div class="col-md-2">
-                                     <input type="text" class="form-control" placeholder="최소가격" name="minFee">
-                                </div> 
-                                <div class="col-md-auto align-self-center">원 &emsp;~</div>
-                                <div class="col-md-2">
-                                     <input type="text" class="form-control" placeholder="최대가격" name="maxFee">
-                                </div>
-                                <div class="col-md-auto align-self-center">원</div>
-                                <div class="col-md-auto">
-                                     <input type="text" class="form-control" placeholder="캠핑장 이름 검색" name="siteKwd">
-                                </div>
-                            </div>
-                        </div>
-                         <div class="col-md-2">
-                            <button class="btn btn-primary2 w-100">Submit</button>
-                        </div>
-                    </div>
-                </div>
+            	<form name="siteSearchForm" id="siteSearchForm" method="post">
+	                <div class="bg-white shadow" style="padding: 35px;">
+	                    <div class="row g-2">
+	                        <div class="col-md-12">
+	                            <div class="row g-2 mb-1">
+	                                <div class="col-md-3">	
+	                                    <div class="date" id="date1" data-target-input="nearest">
+	                                        <input type="date" class="form-control" name="startDate" value=${dto.startDate }
+	                                            placeholder="s" data-target="#date1"  />
+	                                    </div>
+	                                </div>
+	                                <div class="col-md-3">
+	                                    <div class="date" id="date2" data-target-input="nearest">
+	                                        <input type="date" class="form-control" name="endDate"  value=${dto.endDate }
+	                                        placeholder="Check out" data-target="#date2" />
+	                                    </div>
+	                                </div>
+	                                <div class="col-md-2">
+	                                    <select class="form-select" name="siteLocal" >
+	                                        <option value=""> 지역 </option>
+	                                        <option value="1" ${dto.siteLocal==1?"selected":""}>서울</option>
+	                                        <option value="2" ${dto.siteLocal==2?"selected":""}>인천</option>
+	                                        <option value="3" ${dto.siteLocal==3?"selected":""}>경기</option>
+	                                        <option value="4" ${dto.siteLocal==4?"selected":""}>강원</option>
+	                                        <option value="5"  ${dto.siteLocal==5?"selected":""}>대전</option>
+	                                        <option value="6"  ${dto.siteLocal==6?"selected":""}>세종</option>
+	                                        <option value="7"  ${dto.siteLocal==7?"selected":""}>충북</option>
+	                                        <option value="8"  ${dto.siteLocal==8?"selected":""}>충남</option>
+	                                        <option value="9"  ${dto.siteLocal==9?"selected":""}>대구</option>
+	                                        <option value="10"  ${dto.siteLocal==10?"selected":""}>울산</option>
+	                                        <option value="11"  ${dto.siteLocal==11?"selected":""}>경북</option>
+	                                        <option value="12"  ${dto.siteLocal==12?"selected":""}>경남</option>
+	                                        <option value="13"  ${dto.siteLocal==13?"selected":""}>전북</option>
+	                                        <option value="14"  ${dto.siteLocal==14?"selected":""}>전남</option>
+	                                        <option value="15"  ${dto.siteLocal==15?"selected":""}>제주</option>
+	                                    </select>
+	                                </div>
+	                                <div class="col-md-2">
+	                                    <select class="form-select" name="siteEnvironment" >
+	                                        <option value=""> 환경 </option>
+	                                        <option value="1" ${dto.siteEnvironment==1?"selected":""}>산</option>
+	                                        <option value="2" ${dto.siteEnvironment==2?"selected":""}>강</option>
+	                                        <option value="3" ${dto.siteEnvironment==3?"selected":""}>바다</option>
+	                                        <option value="4" ${dto.siteEnvironment==4?"selected":""}>도심</option>
+	                                        <option value="5" ${dto.siteEnvironment==5?"selected":""}>계곡</option>
+	                                        <option value="6" ${dto.siteEnvironment==6?"selected":""}>호수</option>
+	                                        <option value="7" ${dto.siteEnvironment==7?"selected":""}>평야</option>
+	                                        <option value="8" ${dto.siteEnvironment==8?"selected":""}>기타</option>
+	                                    </select>
+	                                </div>
+	                                <div class="col-md-2">
+	                                    <select class="form-select" name="siteCategory">
+	                                        <option value=""> 분류 </option>
+	                                        <option value="1" ${dto.siteCategory==1?"selected":""}>오토캠핑</option>
+	                                        <option value="2" ${dto.siteCategory==2?"selected":""}>글램핑</option>
+	                                        <option value="3" ${dto.siteCategory==3?"selected":""}>카라반</option>
+	                                        <option value="4" ${dto.siteCategory==4?"selected":""}>방갈로</option>
+	                                        <option value="5" ${dto.siteCategory==5?"selected":""}>차박</option>
+	                                    </select>
+	                                </div>
+	                            </div>
+	                        </div>
+	                       
+	                    </div>
+	                    <div class="row g-2">
+	                        <div class="col-md-10">
+								<div class="row g-2">
+	                                <div class="col-md-3 dropdown ">
+										  <button type="button" class="form-select " data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+										    부대시설
+										  </button>
+										  <div class="dropdown-menu p-4 ">
+										    <div class="mb-3">
+										      <div class="form-check">
+										        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck1"  value="0" ${dto.siteOption[0]==1 ? "checked='checked'" : "" }>
+										        <label class="form-check-label" for="dropdownCheck1">
+										          전기
+										        </label>
+										      </div>
+										      <div class="form-check">
+										        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck2" value="0" ${dto.siteOption[1]==1 ? "checked='checked'" : "" }>
+										        <label class="form-check-label" for="dropdownCheck2">
+										          와이파이
+										        </label>
+										      </div>
+										      <div class="form-check">
+										        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck3" value="0" ${dto.siteOption[2]==1 ? "checked='checked'" : "" }>
+										        <label class="form-check-label" for="dropdownCheck3">
+										          비비큐 장비
+										        </label>
+										      </div>
+										      <div class="form-check">
+										        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck4" value="0" ${dto.siteOption[3]==1 ? "checked='checked'" : "" }>
+										        <label class="form-check-label" for="dropdownCheck3">
+										          운동장
+										        </label>
+										      </div>
+										      <div class="form-check">
+										        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck5" value="0" ${dto.siteOption[4]==1 ? "checked='checked'" : "" }>
+										        <label class="form-check-label" for="dropdownCheck3">
+										          화장실
+										        </label>
+										      </div>
+										      <div class="form-check">
+										        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck6" value="0" ${dto.siteOption[5]==1 ? "checked='checked'" : "" }>
+										        <label class="form-check-label" for="dropdownCheck3">
+										          샤워장
+										        </label>
+										      </div>
+										    </div>
+										  </div>
+	                                </div>
+	                               
+	                            
+	                                <div class="col-md-2">
+	                                     <input type="text" class="form-control" placeholder="최소가격" name="minFee" value="${dto.minFee}">
+	                                </div> 
+	                                <div class="col-md-auto align-self-center">원 &emsp;~</div>
+	                                <div class="col-md-2">
+	                                     <input type="text" class="form-control" placeholder="최대가격" name="maxFee" value="${dto.maxFee}">
+	                                </div>
+	                                <div class="col-md-auto align-self-center">원</div>
+	                                <div class="col-md-auto">
+	                                     <input type="text" class="form-control" placeholder="캠핑장 이름 검색" name="siteKwd"  value="${dto.siteKwd}">
+	                                </div>
+	                            </div>
+	                        </div>
+	                         <div class="col-md-2">
+	                            <button class="btn btn-primary2 w-100" type="button" onclick="searchSite()">Submit</button>
+	                        </div>
+	                    </div>
+	                </div>
+	                <input type="hidden" name="pageNo" value="${pageNo}">
+                </form>
             </div>
         </div>
         <!-- Booking End -->
@@ -222,38 +225,36 @@
             </div>
         </div>
         <!-- Testimonial End -->
-                <div class="row g-4">
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="room-item shadow rounded overflow-hidden">
-                            <div class="p-4 mt-2">
-                                <div class="d-flex justify-content-between mb-3">
+                <div class="row g-4 list-content" data-pageNo="0" data-totalPage="0"> </div>
+                
+                <div class="sentinel" data-loading="false"></div> 
+                    
+               
+            </div>
+        </div>
+        <!-- Room End -->
+                    <!-- 
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s"> <div class="room-item shadow rounded overflow-hidden">
+                            <div class="p-4 mt-2"><div class="d-flex justify-content-between mb-3">
                                     <h5 class="mb-0">Junior Suite</h5>
                                     <div class="ps-2">
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                    </div>
-                                </div>
-                                <div class="d-flex mb-3">
+                                        <small class="fa fa-star text-primary">4</small> 
+                                    </div></div> <div class="d-flex mb-3">
+                                    
                                     <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
                                     <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
                                     <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
+                                   
                                 </div>
-                                <p class="text-body mb-3">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                                <p class="text-body mb-3">${dto.siteLocal}</p>
                                 <div class="d-flex justify-content-between">
                                     <a class="btn btn-sm btn-primary2 rounded py-2 px-4" href="${pageContext.request.contextPath}/site/places/1">View Detail</a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                      -->
                     
-                    
-                </div>
-            </div>
-        </div>
-        <!-- Room End -->
 
 
       
@@ -265,4 +266,160 @@
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary2 btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <script>
+        console.log('aa')
+        console.log(${dto.siteLocal})
+        
+        function login() {
+        	location.href = '${pageContext.request.contextPath}/member/login';
+        }
+        function searchSite() {
+        	const f= document.siteSearchForm;
+        	let list=f.siteOption;
+        	for(var i=0; i<list.length; i++){
+        		if(list[i].checked){
+        			list[i].value="1";
+        		}else{
+        			list[i].value="0";
+        		}
+        		list[i].checked=true;
+        	}
+        	console.log(list)
+        	f.action = "${pageContext.request.contextPath}/site/list";
+        	f.submit();
+        }
+        function ajaxFun(url, method, formData, dataType, fn, file = false) {
+        	const sentinelNode = document.querySelector('.sentinel');
+        	
+        	const settings = {
+        			type: method, 
+        			data: formData,
+        			success:function(data) {
+        				fn(data);
+        			},
+        			beforeSend: function(jqXHR) {
+        				sentinelNode.setAttribute('data-loading', 'true');
+        				
+        				jqXHR.setRequestHeader('AJAX', true);
+        			},
+        			complete: function () {
+        			},
+        			error: function(jqXHR) {
+        				if(jqXHR.status === 403) {
+        					login();
+        					return false;
+        		    	} else if(jqXHR.status === 401) {
+        		    		return false;
+        		    	} else if(jqXHR.status === 402) {
+        		    		alert('권한이 없습니다.');
+        		    		return false;
+        				} else if(jqXHR.status === 400) {
+        					alert('요청 처리가 실패 했습니다.');
+        					return false;
+        		    	}
+        		    	
+        				console.log(jqXHR.responseText);
+        			}
+        	};
+        	
+        	if(file) {
+        		settings.processData = false;  // file 전송시 필수. 서버로전송할 데이터를 쿼리문자열로 변환여부
+        		settings.contentType = false;  // file 전송시 필수. 서버에전송할 데이터의 Content-Type. 기본:application/x-www-urlencoded
+        	}
+        	
+        	$.ajax(url, settings);
+        }
+
+        function loadContent(page) {
+        	let formData = $('form[name=siteSearchForm]').serialize();
+        	
+        	let url = '${pageContext.request.contextPath}/site/scroll';
+        	
+        	const fn = function(data) {
+        		addNewContent(data);
+        	};
+        	ajaxFun(url, 'post', formData, 'json', fn);
+        }
+
+        function addNewContent(data) {
+        	const listNode = document.querySelector('.list-content');
+        	const sentinelNode = document.querySelector('.sentinel'); // 센터널 노드(화면의 마지막인지 감시할 마지막 노드)
+        	
+        	let dataCount = data.dataCount;
+        	let pageNo = data.pageNo;
+        	let total_page = data.total_page;
+        	
+        	listNode.setAttribute('data-pageNo', pageNo);
+        	listNode.setAttribute('data-totalPage', total_page);
+        	
+        	sentinelNode.style.display = 'none';
+        	
+        	if(parseInt(dataCount) === 0) {
+        		listNode.innerHTML = '';
+        		return;
+        	}
+        	
+        	let htmlText;
+        	for(let item of data.list) {
+        		let sitenum = item.sitenum;
+        		let sitename = item.sitename;
+        		let introduce = item.introduce;
+        		let star = item.avgstar;
+        		let thumbnail = item.thumbnail;
+        		
+        		htmlText =  '<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s"> <div class="room-item shadow rounded overflow-hidden"><div class="position-relative">';
+        		htmlText += '  <img class="img-fluid" src="${pageContext.request.contextPath}/uploads/site/'+thumbnail+'" alt="">';
+        		htmlText += '        </div><div class="p-4 mt-2"><div class="d-flex justify-content-between mb-3">';
+        		htmlText += '        <h5 class="mb-0">'+sitename+'</h5>';
+        		htmlText += '     <div class="ps-2">';
+        		htmlText += ' <small class="fa fa-star text-primary">'+star+'</small>';
+        		htmlText += '</div></div> <div class="d-flex mb-3"></div>';
+        		htmlText += '<p class="text-body mb-3">'+introduce+'</p>';
+        		htmlText += '<div class="d-flex justify-content-between">';
+        		htmlText += '<a class="btn btn-sm btn-primary2 rounded py-2 px-4" href="${pageContext.request.contextPath}/site/places/'+sitenum+'">View Detail</a>';
+        		htmlText += '                        </div></div></div> </div>';
+        		
+        		// 인써트 어제이슨트 함수로 마지막에 HTML 추가
+        		listNode.insertAdjacentHTML('beforeend', htmlText);
+        	}
+        	
+        	if(pageNo < total_page) {
+        		sentinelNode.setAttribute('data-loading', 'false');
+        		sentinelNode.style.display = 'block';
+        		
+        		io.observe(sentinelNode);
+        	}
+        }
+
+        // 인터섹션 업저버를 이용한 무한 스크롤
+        const sentinelNode = document.querySelector('.sentinel'); // 센터널 노드(화면의 마지막인지 감시할 마지막 노드)
+        const ioCallback = (entries, io) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) { // 관찰 대상의 교차(겹치는)상태(Boolean) : 화면에 보이면
+            	
+            	// 현재 페이지가 로딩중이면 빠져 나감
+            	let loading = sentinelNode.getAttribute('data-loading');
+            
+            	if(loading !== 'false') {
+            		return;
+            	}
+
+            	io.unobserve(entry.target); // 기존 관찰하던 요소는 더 이상 관찰하지 않음
+            
+            	const listNode = document.querySelector('.list-content');
+        		let pageNo = parseInt(listNode.getAttribute('data-pageNo'));
+        		let total_page = parseInt(listNode.getAttribute('data-totalPage'));
+        		
+        		if(pageNo === 0 || pageNo < total_page) {
+        			pageNo++;
+        			loadContent(pageNo);
+        		}
+            }
+          });
+        };
+
+        const io = new IntersectionObserver(ioCallback); // 관찰자 초기화
+        io.observe(sentinelNode); // 관찰할 대상(요소) 등록
+
+        </script>
     </div>

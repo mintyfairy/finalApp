@@ -12,6 +12,7 @@ import com.fa.plus.admin.mapper.SiteAdminMapper;
 import com.fa.plus.common.FileManager;
 import com.fa.plus.domain.site.Site;
 import com.fa.plus.domain.site.SiteDetail;
+import com.fa.plus.domain.site.SiteSearch;
 
 @Service
 public class SiteAdminServiceImpl implements SiteAdminService {
@@ -300,7 +301,7 @@ public class SiteAdminServiceImpl implements SiteAdminService {
 		return list;
 	}
 	@Override
-	public List<Site> listSearchSite(Map<String, Object> map) {
+	public List<Site> listSearchSite(SiteSearch dto) {
 		// TODO Auto-generated method stub
 		List<Site> list = null;
 		List<Site> list2 = null;
@@ -308,26 +309,26 @@ public class SiteAdminServiceImpl implements SiteAdminService {
 		try {
 			StringBuffer options = new StringBuffer();
 			// 배열을 스트링으로 변환
-			String[] optionlist=(String[]) map.get("siteOption");
+			String[] optionlist=(String[])dto.getSiteOption();
 			System.out.println(options+"체크");
 			
-			list = mapper.listSearchSite(map);
+			list = mapper.listSearchSite(dto);
 			
 			if (optionlist != null ) {
 				for (String option : optionlist) {
 					options.append(option);
 				}
-				for (Site dto : list) {
+				for (Site vo : list) {
 					int test=Integer.parseInt(options.toString())
-						-Integer.parseInt(dto.getSiteoption());
+						-Integer.parseInt(vo.getSiteoption());
 					if(Integer.toString(test).indexOf("9")!=-1) {
-						list2.add(dto);
-						System.out.println(dto+"체크");
+						list2.add(vo);
+						System.out.println(vo+"체크");
 					}//옵션이 다른게 잇으면 뺸값에 9가 존재하게된다.
 				}
 			}else {
-				for (Site dto : list) {
-						System.out.println(dto+"체크");
+				for (Site vo : list) {
+						System.out.println(vo+"체크");
 					}//옵션이 다른게 잇으면 뺸값에 9가 존재하게된다.
 				return list;
 			}
@@ -340,11 +341,11 @@ public class SiteAdminServiceImpl implements SiteAdminService {
 	}
 	
 	@Override
-	public List<SiteDetail> listSearchRoom(Map<String, Object> map) {
+	public List<SiteDetail> listSearchRoom(SiteSearch dto) {
 		// TODO Auto-generated method stub
 		List<SiteDetail> list = null;
 		try {
-			list = mapper.listSearchRoom(map);
+			list = mapper.listSearchRoom(dto);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

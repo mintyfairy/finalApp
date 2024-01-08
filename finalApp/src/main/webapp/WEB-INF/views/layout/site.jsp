@@ -16,8 +16,10 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/core.css" type="text/css">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/jquery/js/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/util-jquery.js"></script>
 	
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -53,7 +55,6 @@
 <main>
     <tiles:insertAttribute name="body"/>
      <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/lib/campsite/wow/wow.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/lib/campsite/easing/easing.min.js"></script>
@@ -64,7 +65,6 @@
     <script src="${pageContext.request.contextPath}/resources/lib/campsite/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/lib/campsite/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
     
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/util-jquery.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/menu.js"></script>
 	
 
