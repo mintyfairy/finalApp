@@ -2,7 +2,10 @@ package com.fa.plus.admin.domain.shop;
 
 public class ShopOrderManage {
 	private long orderNum;
+	private long memberIdx;
+	private String userName;
 	private String orderDate;
+	
 	private int totalMoney;
 	private int usedSaved;
 	private int deliveryCharge;
@@ -10,15 +13,15 @@ public class ShopOrderManage {
 	private int cancelAmount;
 	private int orderState;
 	private String orderStateInfo;
+	
 	private String orderStateDate;
-	private String invoiceNumber;
-	private long memberIdx;
-	private String itemName;
 	private String deliveryName;
+	private String invoiceNumber;
+	
+	private String itemName;
 	private String orderName;
 	private String orderEmail;
 	private String orderTel;
-	private String userName;
 	
 	private int totalOrderCount; // 주문 상품수
 	private int totalQty; // 상품 주문 개수

@@ -129,16 +129,16 @@ table th, td {
                <button class="nav-link ${orderStatus=='status'?'active':''}" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="1" aria-selected="${orderStatus=='status'?'true':'false'}">주문관리</button>
            </li>
            <li class="nav-item" role="presentation">
-               <button class="nav-link ${orderStatus=='status'?'active':''}" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="2" aria-selected="${orderStatus=='status'?'true':'false'}">주문상세</button>
+               <button class="nav-link ${orderStatus=='detail'?'active':''}" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="2" aria-selected="${orderStatus=='status'?'true':'false'}">주문상세</button>
            </li>
            <li class="nav-item" role="presentation">
                <button class="nav-link ${orderStatus=='delivery'?'active':''}" id="tab-3" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="3" aria-selected="${orderStatus=='delivery'?'true':'false'}">배송관리</button>
            </li>
            <li class="nav-item" role="presentation">
-               <button class="nav-link ${orderStatus=='delivery'?'active':''}" id="tab-4" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="4" aria-selected="${orderStatus=='delivery'?'true':'false'}">교환관리</button>
+               <button class="nav-link ${orderStatus=='exchange'?'active':''}" id="tab-4" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="4" aria-selected="${orderStatus=='delivery'?'true':'false'}">교환관리</button>
            </li>
            <li class="nav-item" role="presentation">
-               <button class="nav-link ${orderStatus=='delivery'?'active':''}" id="tab-5" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="5" aria-selected="${orderStatus=='delivery'?'true':'false'}">반품및주문취소</button>
+               <button class="nav-link ${orderStatus=='cancel'?'active':''}" id="tab-5" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="5" aria-selected="${orderStatus=='delivery'?'true':'false'}">반품및주문취소</button>
            </li>
        </ul>
        
@@ -151,13 +151,13 @@ table th, td {
                            <input type="radio" id="order-state1" class="form-check-input" name="orderstatus" value="1" ${state==1 ? "checked='checked'" : ""}> <label class="form-check-label" for="order-state1">신규 주문</label>
                        </div>
                        <div class="form-check form-check-inline">
-                           <input type="radio" id="order-state2" class="form-check-input" name="orderstatus" value="2" ${state==2 ? "checked='checked'" : ""}> <label class="form-check-label" for="order-state2">전체 주문</label>
+                           <input type="radio" id="order-state2" class="form-check-input" name="orderstatus" value="99" ${state==99 ? "checked='checked'" : ""}> <label class="form-check-label" for="order-state2">전체 주문</label>
                        </div>
                    </c:if>
                    <div class="form-check form-check-inline">&nbsp;</div>
                </div>
                <div class="col-auto">
-               1개(1/1 페이지)
+               		${dataCount}개(${page}/${total_page} 페이지)
                </div>
            </div>
            
@@ -186,16 +186,17 @@ table th, td {
                </thead>
                
                <tbody>
-                   <c:forEach var="dto" items="" varStatus="status">
+                   <c:forEach var="dto" items="${ list }" varStatus="status">
                        <tr valign="middle">
-                           <td>11</td>
-                           <td>주문</td>
-                           <td>구매자</td>
-                           <td>2023.12.24</td>
-                           <td>23,000원</td>
-                           <td>1개</td>
-                           <td>0건</td>
-                           <td>상태변경</td>
+                           <td>${ dto.orderNum }</td>
+                           <td>${ dto.orderState }</td>
+                           <td>${ dto.userName }</td>
+                           <td>${ dto.orderDate }</td>
+                           <td><fmt:formatNumber value="${dto.payment}"/></td>
+                           <td>${ dto.totalQty }개</td>
+                           <td>${ dto.detailCancelCount }건</td>
+                           <td>
+                           		<span class="orderStatus-update" data-orderNum="${dto.orderNum}">${orderStatus=="status"?"상태변경":"배송변경"}</span>
                            </td>
                        </tr>
                    </c:forEach>
@@ -203,21 +204,7 @@ table th, td {
            </table>
            
            <div class="page-navigation">
-               <nav aria-label="pnav">
-                   <ul class="pagination">
-                       <li class="page-item">
-                       <a class="page-link" href="#" aria-label="Previous">
-                           <span aria-hidden="true">&laquo;</span>
-                       </a>
-                       </li>
-                       <li class="page-item"><a class="page-link" href="#">1</a></li>
-                       <li class="page-item">
-                       <a class="page-link" href="#" aria-label="Next">
-                       <span aria-hidden="true">&raquo;</span>
-                       </a>
-                       </li>
-                   </ul>
-               </nav>
+				${dataCount == 0 ? "등록된 주문정보가 없습니다." : paging}
            </div>
 
            <div class="row board-list-footer">

@@ -37,7 +37,6 @@
 	        
 	        <intercept-url pattern="/site/main" access="permitAll"/>
 	        <intercept-url pattern="/site/list" access="permitAll"/>
-	        <intercept-url pattern="/site/scroll" access="permitAll"/>
 	        <intercept-url pattern="/site/places/**" access="permitAll"/>
 
 	        <intercept-url pattern="/car/main" access="permitAll"/>

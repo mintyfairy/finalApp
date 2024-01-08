@@ -27,4 +27,27 @@ public class ShopOrderManageServiceImpl implements ShopOrderManageService {
 		return list;
 	}
 
+	@Override
+	public int orderCount(Map<String, Object> map) {
+		int result = 0;
+		try {
+			mapper.orderCount(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@Override
+	public ShopOrderManage findById(long orderNum) {
+		ShopOrderManage dto = null;
+		
+		try {
+			mapper.findById(orderNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
+
 }

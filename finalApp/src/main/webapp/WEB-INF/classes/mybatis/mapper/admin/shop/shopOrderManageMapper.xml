@@ -19,53 +19,63 @@
 			</when>
 		</choose>
 	</sql>
+
+	<select id="orderCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM productOrder po
+		LEFT OUTER JOIN member1 m ON po.memberIdx = m.memberIdx
+		<where>
+			<if test="state == 1">
+				( po.orderState = 0 OR po.orderState = 1 ) 
+			</if>
+			<if test="state == 3">
+				( po.orderState &gt;= 2 AND po.orderState &lt;= 5 ) 
+			</if>
+			<if test="kwd!=null and kwd!='' ">
+				AND <include refid="where-list"/>
+			</if>
+		</where>
+	</select>
 	
 	<!-- 주문 내역리스트 선택 -->
 	<select id="listOrder" parameterType="map" resultType="com.fa.plus.admin.domain.shop.ShopOrderManage">
-		SELECT po.orderNum, po.memberIdx, NVL(userName, orderName) userName, totalMoney, 
-			usedSaved, deliveryCharge, payment, cancelAmount, 
-            TO_CHAR(orderDate, 'YYYY-MM-DD HH24:MI') orderDate, 
-            orderState, deliveryName, invoiceNumber, 
-            NVL(totalOrderCount, 0) totalOrderCount, NVL(totalQty, 0) totalQty, 
-            NVL(detailCancelCount, 0) detailCancelCount 
-		FROM productOrder po 
+		SELECT po.orderNum, po.memberIdx, NVL(userName, orderName) userName, totalMoney,  
+			usedSaved, deliveryCharge, payment, cancelAmount,
+            TO_CHAR(orderDate, 'YYYY-MM-DD HH24:MI') orderDate,
+            orderState, deliveryName, invoiceNumber,
+            NVL(totalOrderCount, 0) totalOrderCount, NVL(totalQty, 0) totalQty,
+            NVL(detailCancelCount, 0) detailCancelCount
+		FROM productOrder po
 		LEFT OUTER JOIN member1 m ON po.memberIdx = m.memberIdx 
-        LEFT OUTER JOIN ( 
-            SELECT orderNum, COUNT(*) totalOrderCount, SUM(qty) totalQty, 
-            	COUNT(DECODE(detailState,3,1,4,1,5,1,10,1,11,1,12,1)) detailCancelCount 
-            FROM orderDetail 
-            GROUP BY orderNum 
-        ) od ON po.orderNum = od.orderNum 
+        LEFT OUTER JOIN (
+            SELECT orderNum, COUNT(*) totalOrderCount, SUM(qty) totalQty,
+            	COUNT(DECODE(detailState,3,1,4,1,5,1,10,1,11,1,12,1)) detailCancelCount
+            FROM orderDetail
+            GROUP BY orderNum
+        ) od ON po.orderNum = od.orderNum
 		<where>
-			<if test="state == 0">
-				( po.orderState = 0) 
-			</if>
 			<if test="state == 1">
-				( po.orderState = 1) 
-			</if>
-			<if test="state == 2">
-				( po.orderState = 2) 
+				( po.orderState = 0 OR po.orderState = 1 ) 
 			</if>
 			<if test="state == 3">
-				( po.orderState = 3) 
-			</if>
-			<if test="state == 4">
-				( po.orderState = 4) 
-			</if>
-			<if test="state == 5">
-				( po.orderState = 5) 
-			</if>
-			<if test="state == 6">
-				( po.orderState = 6) 
-			</if>
-			<if test="state == 7">
-				( po.orderState = 7) 
+				( po.orderState &gt;= 2 AND po.orderState &lt;= 5 ) 
 			</if>
 			<if test="kwd!=null and kwd!='' ">
 				AND <include refid="where-list"/>
 			</if>
 		</where>  
-        ORDER BY po.orderNum DESC 
-        OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY 
+        ORDER BY po.orderNum DESC
+        OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+	
+	<select id="findById" parameterType="Long" resultType="com.fa.plus.admin.domain.shop.ShopOrderManage">
+		SELECT po.orderNum, po.memberIdx, NVL(userName,'손님') userName, orderDate, totalMoney, 
+			usedSaved, deliveryCharge, payment, cancelAmount, orderState,
+			TO_CHAR(orderStateDate, 'YYYY-MM-DD HH24:MI:SS') orderStateDate, deliveryName, invoiceNumber, 
+			payMethod, cardName, authNumber, authDate
+		FROM productOrder po
+		LEFT OUTER JOIN member1 m ON po.memberIdx = m.memberIdx
+		LEFT OUTER JOIN payDetail pd ON po.orderNum = pd.orderNum 
+		WHERE po.orderNum = #{orderNum}
 	</select>
 </mapper>

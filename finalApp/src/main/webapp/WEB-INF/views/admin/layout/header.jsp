@@ -138,7 +138,7 @@ $(function(){
 
 			<ul class="sub_menu">
 				<li class="sub_menu--item">
-					<a href="${pageContext.request.contextPath}/admin/shopOrder/main" class="sub_menu--link">주문 관리</a>
+					<a href="${pageContext.request.contextPath}/admin/shopOrder/status" class="sub_menu--link">주문 관리</a>
 				</li>
 				<li class="sub_menu--item">
 					<a href="${pageContext.request.contextPath}/admin/shopProduct/main" class="sub_menu--link">상품 및 재고 관리</a>

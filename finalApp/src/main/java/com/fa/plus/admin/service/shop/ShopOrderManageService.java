@@ -7,4 +7,6 @@ import com.fa.plus.admin.domain.shop.ShopOrderManage;
 
 public interface ShopOrderManageService {
 	public List<ShopOrderManage> listOrder(Map<String, Object> map);
+	public int orderCount(Map<String, Object> map);
+	public ShopOrderManage findById(long orderNum);
 }

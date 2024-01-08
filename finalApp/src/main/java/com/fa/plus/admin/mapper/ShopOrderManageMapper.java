@@ -10,4 +10,6 @@ import com.fa.plus.admin.domain.shop.ShopOrderManage;
 @Mapper
 public interface ShopOrderManageMapper {
 	public List<ShopOrderManage> listOrder(Map<String, Object> map);
+	public int orderCount(Map<String, Object> map);
+	public ShopOrderManage findById(long orderNum);
 }
