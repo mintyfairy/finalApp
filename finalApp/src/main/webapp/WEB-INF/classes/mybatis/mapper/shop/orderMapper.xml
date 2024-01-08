@@ -40,7 +40,7 @@
     		od2.detailNum detailNum2, od2.optionValue optionValue2
 		FROM product p
 		JOIN productOption po ON p.productNum = po.productNum
-		JOIN productOption po2 ON po.optionNum = po2.parent
+		JOIN productOption po2 ON po.optionNum = po2.parentNum
 		JOIN optionDetail od ON po.optionNum = od.optionNum
 		JOIN optionDetail od2 ON po2.optionNum = od2.optionNum
 		WHERE (od.detailNum, od2.detailNum) IN

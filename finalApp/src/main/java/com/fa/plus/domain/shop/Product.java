@@ -17,6 +17,7 @@ public class Product {
 	private String md;
 	private String starter;
 	private String deletion;
+	private String orderValue;
 	
 	private String startDate;
 	private String endDate;
@@ -255,5 +256,11 @@ public class Product {
 	}
 	public void setSalePrice(int salePrice) {
 		this.salePrice = salePrice;
+	}
+	public String getOrderValue() {
+		return orderValue;
+	}
+	public void setOrderValue(String orderValue) {
+		this.orderValue = orderValue;
 	}
 }

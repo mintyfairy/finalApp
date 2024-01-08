@@ -33,11 +33,12 @@ public class OrderController {
 	private MemberService memberService;
 
 	@RequestMapping("main")
-	public String paymentForm(@RequestParam List<Long> productNums,
+	public String mainForm(@RequestParam List<Long> productNums,
 							  @RequestParam List<Long> detailNums,
 							  @RequestParam List<Long> detailNums2, 
 							  @RequestParam List<Integer> buyQtys,
-							  @RequestParam(defaultValue = "buy") String mode, HttpSession session, Model model) throws Exception {
+							  @RequestParam(defaultValue = "buy") String mode, 
+							  HttpSession session, Model model) throws Exception {
 
 		try {
 			SessionInfo info = (SessionInfo) session.getAttribute("member");
@@ -105,11 +106,11 @@ public class OrderController {
 			e.printStackTrace();
 		}
 
-		return "redirect:/shop/order/main";
+		return "redirect:/";
 	}
 
 	@PostMapping("mainOk")
-	public String paymentSubmit(Order dto, @RequestParam(defaultValue = "buy") String mode, RedirectAttributes reAttr,
+	public String mainSubmit(Order dto, @RequestParam(defaultValue = "buy") String mode, RedirectAttributes reAttr,
 			HttpSession session) throws Exception {
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 
