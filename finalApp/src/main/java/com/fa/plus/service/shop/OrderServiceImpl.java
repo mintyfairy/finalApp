@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fa.plus.domain.shop.Order;
-import com.fa.plus.mapper.MypageMapper;
+import com.fa.plus.mapper.MyPageMapper;
 import com.fa.plus.mapper.OrderMapper;
 
 @Service
@@ -18,7 +18,7 @@ public class OrderServiceImpl implements OrderService {
 	private OrderMapper mapper;
 
 	@Autowired
-	private MypageMapper myPageMapper;
+	private MyPageMapper myPageMapper;
 
 	private static AtomicLong count = new AtomicLong(0);
 

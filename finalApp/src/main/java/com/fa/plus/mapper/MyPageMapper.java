@@ -10,7 +10,7 @@ import com.fa.plus.domain.shop.Order;
 import com.fa.plus.domain.shop.Payment;
 
 @Mapper
-public interface MypageMapper {
+public interface MyPageMapper {
 	public int countPayment(Map<String, Object> map);
 	public List<Payment> listPayment(Map<String, Object> map);
 

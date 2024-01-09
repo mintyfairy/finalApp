@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fa.plus.domain.car.CarReservation;
-import com.fa.plus.mapper.car.CarReservationMapper;
+import com.fa.plus.mapper.CarReservationMapper;
 
 @Service
 public class CarReservationServiceImpl implements CarReservationService {

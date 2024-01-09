@@ -389,5 +389,32 @@ ul {
                 </tbody>
             </table>
         </div>
+        
+        <div class="latest">
+            <h5>장바구니 정보</h5>
+            <a href="#">+ MORE</a>
+        </div>
+
+        <div class="cart my_table">
+            <table summary="등록일자, 상품명, 상품금액">
+                <colgroup>
+                    <col width="150">
+                    <col width="*">
+                    <col width="200">
+                </colgroup>
+                <thead style="border-top: 1px solid black;">
+                    <tr height="50">
+                        <th>DATE</th>
+                        <th>PRODUCT</th>
+                        <th>COST</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr height="50">
+                        <td colspan="3">관심상품 1건</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

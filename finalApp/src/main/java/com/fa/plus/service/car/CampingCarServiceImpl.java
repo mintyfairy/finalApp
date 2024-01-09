@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fa.plus.domain.car.CampingCar;
-import com.fa.plus.mapper.car.CampingCarMapper;
+import com.fa.plus.mapper.CampingCarMapper;
 
 @Service
 public class CampingCarServiceImpl implements CampingCarService {

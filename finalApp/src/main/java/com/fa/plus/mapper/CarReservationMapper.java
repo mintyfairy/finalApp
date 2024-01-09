@@ -1,4 +1,4 @@
-package com.fa.plus.mapper.car;
+package com.fa.plus.mapper;
 
 import java.sql.SQLException;
 

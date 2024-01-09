@@ -524,7 +524,7 @@ function sendOk(mode) {
 		}
 		
 		f.method = "post";
-		//f.action = "${pageContext.request.contextPath}/myPage/saveCart";
+		f.action = "${pageContext.request.contextPath}/shop/myPage/saveCart";
 	}
 	
 	f.submit();
