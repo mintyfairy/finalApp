@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fa.plus.admin.domain.shop.ShopOrderManage;
 import com.fa.plus.admin.service.shop.ShopOrderManageService;
@@ -31,12 +33,15 @@ public class ShopOrderController {
 	@RequestMapping("{orderStatus}")
 	public String list(
 			@PathVariable String orderStatus,
-			@RequestParam(defaultValue = "99") int state,
+			@RequestParam(defaultValue = "1") int state,
 			@RequestParam(value = "page", defaultValue = "1") int current_page,
 			@RequestParam(defaultValue = "orderNum") String schType,
 			@RequestParam(defaultValue = "") String kwd,
 			HttpServletRequest req, 
 			Model model) throws Exception {
+		// 주문 현황
+		// state : 1-전체, 2-결제완료, 3-배송단계
+		// orderStatus : 주문관리-status, 주문상세-detail, 배송관리-delivery, 교환관리-exchange, 반품 및 주문취소-cancel
 				
 		if(orderStatus.equals("delivery")) {
 			state = 3;
@@ -96,5 +101,16 @@ public class ShopOrderController {
 		model.addAttribute("paging", paging);
 		
 		return ".admin.shopOrder.order";
+	}
+	
+	@GetMapping("detail/{orderNum}")
+	@ResponseBody
+	public List<ShopOrderManage> detail(
+			@PathVariable long orderNum, 
+			@RequestParam String orderStatus) throws Exception {
+				
+		List<ShopOrderManage> listDetail = service.findByOrderDetails(orderNum);
+		
+		return listDetail;
 	}
 }

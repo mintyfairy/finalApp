@@ -31,7 +31,7 @@ public class ShopOrderManageServiceImpl implements ShopOrderManageService {
 	public int orderCount(Map<String, Object> map) {
 		int result = 0;
 		try {
-			mapper.orderCount(map);
+			result = mapper.orderCount(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -43,11 +43,47 @@ public class ShopOrderManageServiceImpl implements ShopOrderManageService {
 		ShopOrderManage dto = null;
 		
 		try {
-			mapper.findById(orderNum);
+			dto = mapper.findById(orderNum);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return dto;
+	}
+
+	@Override
+	public List<ShopOrderManage> listOrderDetail(Map<String, Object> map) {
+		List<ShopOrderManage> list = null;
+		
+		try {
+			list = mapper.listOrderDetail(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public List<ShopOrderManage> findByOrderDetails(long orderNum) {
+		List<ShopOrderManage> list = null;
+		
+		try {
+			list = mapper.findByOrderDetails(orderNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public int orderDetailCount(Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			result = mapper.orderDetailCount(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }

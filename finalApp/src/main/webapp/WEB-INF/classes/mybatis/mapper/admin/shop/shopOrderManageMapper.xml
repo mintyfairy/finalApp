@@ -25,7 +25,7 @@
 		FROM productOrder po
 		LEFT OUTER JOIN member1 m ON po.memberIdx = m.memberIdx
 		<where>
-			<if test="state == 1">
+			<if test="state == 2">
 				( po.orderState = 0 OR po.orderState = 1 ) 
 			</if>
 			<if test="state == 3">
@@ -54,7 +54,7 @@
             GROUP BY orderNum
         ) od ON po.orderNum = od.orderNum
 		<where>
-			<if test="state == 1">
+			<if test="state == 2">
 				( po.orderState = 0 OR po.orderState = 1 ) 
 			</if>
 			<if test="state == 3">
@@ -63,14 +63,14 @@
 			<if test="kwd!=null and kwd!='' ">
 				AND <include refid="where-list"/>
 			</if>
-		</where>  
+		</where>
         ORDER BY po.orderNum DESC
         OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
 	
 	<select id="findById" parameterType="Long" resultType="com.fa.plus.admin.domain.shop.ShopOrderManage">
-		SELECT po.orderNum, po.memberIdx, NVL(userName,'손님') userName, orderDate, totalMoney, 
-			usedSaved, deliveryCharge, payment, cancelAmount, orderState,
+		SELECT po.orderNum, po.memberIdx, NVL(userName, orderName) userName, orderDate, totalMoney, 
+			usedSaved, deliveryCharge, payment, cancelAmount, orderState, 
 			TO_CHAR(orderStateDate, 'YYYY-MM-DD HH24:MI:SS') orderStateDate, deliveryName, invoiceNumber, 
 			payMethod, cardName, authNumber, authDate
 		FROM productOrder po
@@ -78,4 +78,80 @@
 		LEFT OUTER JOIN payDetail pd ON po.orderNum = pd.orderNum 
 		WHERE po.orderNum = #{orderNum}
 	</select>
+	
+	<select id="findByOrderDetails" parameterType="Long" resultType="com.fa.plus.admin.domain.shop.ShopOrderManage">
+		SELECT od.orderNum, od.orderDetailNum, qty, od.price, 
+		salePrice, productMoney, od.savedMoney, op.detailNum, 
+		op.optionValue, od.detailNum2, op2.optionValue optionValue2, 
+		od.productNum, productName, od.detailState, a.* 
+		FROM orderDetail od 
+		JOIN 
+		    (SELECT po.orderNum, po.memberIdx, 
+		    NVL(userName, orderName) userName, orderDate, 
+		    totalMoney, usedSaved, deliveryCharge, 
+		    payment, cancelAmount, orderState, 
+		    TO_CHAR(orderStateDate, 'YYYY-MM-DD HH24:MI:SS') orderStateDate, 
+		    deliveryName, invoiceNumber, payMethod, 
+		    cardName, authNumber, authDate 
+		    FROM productOrder po 
+		    LEFT OUTER JOIN member1 m ON po.memberIdx = m.memberIdx 
+		    LEFT OUTER JOIN payDetail pd ON po.orderNum = pd.orderNum) a 
+		ON od.orderNum = a.orderNum 
+		JOIN product p ON od.productNum = p.productNum 
+		JOIN optionDetail op ON od.detailNum = op.detailNum 
+		JOIN optionDetail op2 ON od.detailNum2 = op2.detailNum 
+		WHERE od.orderNum = #{ orderNum }
+	</select>
+	
+	<select id="orderDetailCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM productOrder po
+		LEFT OUTER JOIN member1 m ON po.memberIdx = m.memberIdx 		
+		JOIN orderDetail od ON po.orderNum = od.orderNum
+		<where>
+			<if test="state == 2">
+				( po.orderState = 0 OR po.orderState = 1 ) 
+			</if>
+			<if test="state == 3">
+				( po.orderState &gt;= 2 AND po.orderState &lt;= 5 ) 
+			</if>
+			<if test="kwd!=null and kwd!='' ">
+				AND <include refid="where-list"/>
+			</if>
+		</where>
+	</select>
+	
+	<select id="listOrderDetail" parameterType="map" resultType="com.fa.plus.admin.domain.shop.ShopOrderManage">
+		SELECT po.orderNum, po.memberIdx, NVL(userName,'손님') userName, orderDate, totalMoney, od.savedMoney, 
+			usedSaved, deliveryCharge, payment, od.qty, salePrice,
+			od.orderDetailNum, 
+			op.detailNum, op.optionValue, od.detailNum2, op2.optionValue optionValue2,
+			od.productNum, productMoney, productName, 
+			orderState, od.detailState,
+			deliveryName, invoiceNumber
+		FROM productOrder po
+		LEFT OUTER JOIN member1 m ON po.memberIdx = m.memberIdx 
+		JOIN orderDetail od ON po.orderNum = od.orderNum
+		JOIN product p ON od.productNum = p.productNum
+		JOIN optionDetail op ON od.detailNum = op.detailNum
+		JOIN optionDetail op2 ON od.detailNum2 = op2.detailNum
+		ORDER BY po.orderNum DESC, od.orderDetailNum
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+		<where>
+			<if test="state == 2">
+				( po.orderState = 0 OR po.orderState = 1 ) 
+			</if>
+			<if test="state == 3">
+				( po.orderState &gt;= 2 AND po.orderState &lt;= 5 ) 
+			</if>
+			<if test="kwd!=null and kwd!='' ">
+				AND <include refid="where-list"/>
+			</if>
+		</where>
+	</select>
+	
+	<update id="updateOrderState" parameterType="map">
+		UPDATE productOrder SET orderState = #{orderState}, orderStateDate = SYSDATE
+		WHERE orderNum = #{orderNum}
+	</update>
 </mapper>
