@@ -16,11 +16,25 @@ public class SiteSearch {
 	private	String[] siteOption	;
 	private String minFee;
 	private String maxFee;
+	private String size;
+	private String offset;
 	
 	
 	
 	
 	
+	public String getSize() {
+		return size;
+	}
+	public void setSize(String size) {
+		this.size = size;
+	}
+	public String getOffset() {
+		return offset;
+	}
+	public void setOffset(String offset) {
+		this.offset = offset;
+	}
 	public String getSiteKwd() {
 		return siteKwd;
 	}

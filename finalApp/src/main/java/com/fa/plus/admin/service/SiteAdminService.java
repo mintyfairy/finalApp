@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.fa.plus.domain.site.Site;
 import com.fa.plus.domain.site.SiteDetail;
+import com.fa.plus.domain.site.SiteSearch;
 
 
 public interface SiteAdminService {
@@ -27,6 +28,8 @@ public interface SiteAdminService {
 	
 	public List<Site> listSite(Map<String, Object> map);
 	public List<SiteDetail> listRoom(Map<String, Object> map);
+	public List<Site> listSearchSite(SiteSearch dto);
+	public List<SiteDetail> listSearchRoom(SiteSearch dto);
 	
 	
 	public List<Site> listSiteFile(long siteNum);

@@ -29,7 +29,7 @@
 	<select id="dataCountSite" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*), 0)
 		FROM campingsite 
-		<if test="memberIdx!=0 and memberIdx!=''">		
+		<if test="memberIdx!=null and memberIdx!=''">		
 			where  MEMBERIDX=#{memberIdx}
 		</if>
 	</select>
@@ -60,7 +60,34 @@
 		FROM sitedetail
 		where  sitenum=#{siteNum}
 	</select>
-	
+	<!--  검색용 -->
+	<!-- 
+		
+		
+		-->
+	<sql id="where-list">
+		ENABLED= 0 
+		
+		<if test="siteKwd!=null and siteKwd!=''">
+			and  INSTR(SITENAME, #{siteKwd}) &gt; 0
+		</if>
+		<if test="siteLocal!=null and siteLocal!=''">
+			and  siteLocal=#{siteLocal}
+		</if>
+		<if test="siteEnvironment!=null and siteEnvironment!=''">
+			and    Environment=#{siteEnvironment}
+		</if>
+		<if test="siteCategory!=null and siteCategory!=''">
+			and  CATEGORY=#{siteCategory}
+		</if>
+		<if test="startDate!=null and startDate!=''">
+			and  (ENDDATE>= TO_DATE(#{startDate},'yyyy-mm-dd') and   
+			TO_DATE(#{endDate},'yyyy-mm-dd')>=STARTDATE)
+		</if>
+		<if test="minFee!=null and minFee!=''">
+			and    (#{minFee} &gt; bookprice and #{maxFee} &lt; bookprice)
+		</if>
+	</sql>
 	<!-- 리스트 -->
 	<select id="listSite" parameterType="map" resultType="com.fa.plus.domain.site.Site">
 		SELECT SITENUM,SITENAME,SITELOCAL,addr1,addr2,
@@ -71,6 +98,7 @@
 			<if test="memberIdx!=0 and memberIdx!=''">		
 				where  MEMBERIDX=#{memberIdx}
 			</if>
+			<include refid="where-list"/>
 		</where> 		
 		ORDER BY SITENUM DESC
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
@@ -81,6 +109,21 @@
 		FROM sitedetail 
 		where sitenum=#{siteNum}
 		ORDER BY DETAILNUM DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+		
+	</select>
+	<!-- 사이트용 검색 -->
+	<select id="listSearchSite" parameterType="map" resultType="com.fa.plus.domain.site.Site">
+		SELECT campingsite.SITENUM SITENUM,SITENAME,SITELOCAL,addr1,addr2,
+	 		CATEGORY,ENVIRONMENT,HITCOUNT,
+	 		 AVGSTAR
+		FROM campingsite
+		left join sitedetail on campingsite.SITENUM=sitedetail.SITENUM
+		left join book on sitedetail.DETAILNUM=book.DETAILNUM
+		<where>
+			<include refid="where-list"/>
+		</where> 		
+		ORDER BY SITENUM DESC
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 		
 	</select>
