@@ -1,0 +1,65 @@
+SELECT campingsite.SITENUM SITENUM,SITENAME,SITELOCAL,addr1,addr2, CATEGORY,ENVIRONMENT,HITCOUNT, 
+AVGSTAR FROM campingsite left join sitedetail on campingsite.SITENUM=sitedetail.SITENUM left 
+join book on sitedetail.DETAILNUM=book.DETAILNUM WHERE ENABLED= 0 and INSTR(SITENAME, 's') 
+> 0 and siteLocal='6' and Environment='5' and CATEGORY='3' and (ENDDATE>= TO_DATE('2024-01-12','yyyy-mm-dd') and 
+TO_DATE('2024-01-04','yyyy-mm-dd')>=STARTDATE) and ('111' > bookprice and '222' < bookprice) ORDER BY SITENUM DESC OFFSET 
+'0' ROWS FETCH FIRST '4' ROWS ONLY 
+;
+select * from campingsite;
+select * from book;
+select * from sitedetail;
+
+SELECT campingsite.SITENUM SITENUM,SITENAME,SITELOCAL,addr1,addr2, CATEGORY,ENVIRONMENT,HITCOUNT,introduce,THUMBNAIL ,
+AVGSTAR FROM campingsite left join sitedetail on campingsite.SITENUM=sitedetail.SITENUM left 
+join book on sitedetail.DETAILNUM=book.DETAILNUM WHERE ENABLED= 0 ORDER BY SITENUM DESC OFFSET 
+'0' ROWS FETCH FIRST '4' ROWS ONLY ;
+
+SELECT DISTINCT campingsite.SITENUM SITENUM,SITENAME,SITELOCAL,addr1,addr2, CATEGORY,ENVIRONMENT,HITCOUNT,introduce,THUMBNAIL, 
+AVGSTAR ,(select count(detailnum) cnt from sitedetail where SITENUM=21) roomcnt
+FROM campingsite  
+WHERE ENABLED= 0 and
+    (select  count(*) from sitedetail join  where SITENUM=21 and 10000 < price and 50000>  price)>0
+ORDER BY SITENUM DESC OFFSET '0' ROWS FETCH FIRST '4' ROWS ONLY 
+;
+desc book;
+desc booklist;
+desc sitedetail;
+select count(*) from sitedetail where price<115000;
+insert into booklist values(98,TO_DATE('2023-12-10','yyyy-mm-dd'),12,270000,0);
+insert into book(BOOKNUM,STARTDATE,ENDDATE ,BOOKPRICE ,DETAILNUM ,LISTNUM) 
+VALUES(3,TO_DATE('2023-12-10','yyyy-mm-dd'),TO_DATE('2023-12-13','yyyy-mm-dd'),150000,24,98)
+;
+insert into book(BOOKNUM,STARTDATE,ENDDATE ,BOOKPRICE ,DETAILNUM ,LISTNUM) 
+VALUES(4,TO_DATE('2023-12-14','yyyy-mm-dd'),TO_DATE('2023-12-17','yyyy-mm-dd'),120000,30,98)
+;
+commit;
+--
+
+--select 
+select count(distinct detailnum)  
+							from book 
+							where 
+                            (ENDDATE>= TO_DATE('2022-12-12','yyyy-mm-dd') and   
+			TO_DATE('2022-12-13','yyyy-mm-dd') >= STARTDATE);
+            
+SELECT DISTINCT campingsite.SITENUM SITENUM,SITENAME,SITELOCAL,addr1,addr2, CATEGORY,ENVIRONMENT,HITCOUNT,introduce,THUMBNAIL, 
+AVGSTAR 
+FROM campingsite  
+WHERE ENABLED= 0 and
+    (select  count(*) from sitedetail join  where SITENUM=21 and 10000 < price and 50000>  price)>0
+    and
+    (select count(distinct detailnum)  
+							from book 
+							where detailnum in (select detailnum from sitedetail where SITENUM=21) 
+                            and enddate<sysdate
+                            and(ENDDATE>= TO_DATE('2022-12-12','yyyy-mm-dd') and TO_DATE('2022-12-14','yyyy-mm-dd') >= STARTDATE))
+                             <(select count(detailnum) cnt from sitedetail )
+ORDER BY SITENUM DESC OFFSET '0' ROWS FETCH FIRST '4' ROWS ONLY 
+;
+select sitedetail.DETAILNUM detailnum, DETAILNAME,STARTDATE,ENDDATE from sitedetail left join book on sitedetail.DETAILNUM=book.DETAILNUM
+where ENDDATE> TO_DATE('2022-12-12','yyyy-mm-dd') and TO_DATE('2022-12-14','yyyy-mm-dd') > STARTDATE
+;
+
+
+
+룸목록 가져와서 not in써서 호텔거르기?

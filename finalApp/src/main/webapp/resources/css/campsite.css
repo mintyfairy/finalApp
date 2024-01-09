@@ -16,7 +16,12 @@
 	flex: 0 0 auto;
 	cursor: pointer;
 }
-
+.text-body pre{
+	height:100%;
+	overflow: hidden;
+  text-overflow: clip;
+  white-space:nowrap;
+}
 .photo-layout img { width: 570px; height: 450px; }
 
 * {box-sizing:border-box}

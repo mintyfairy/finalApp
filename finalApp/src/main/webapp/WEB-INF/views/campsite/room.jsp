@@ -358,8 +358,14 @@
         		listNode.innerHTML = '';
         		return;
         	}
-        	
-        	let htmlText;
+        	console.log(data)
+        	console.log(data.list)
+        	let htmlText="";
+        	if (data.list==null) {
+        		htmlText += '  <h1 class="mb-5 text-center "> 검색결과가 없습니다</h1>';
+        		listNode.insertAdjacentHTML('beforeend', htmlText);
+        		return;
+        	}
         	for(let item of data.list) {
         		let sitenum = item.sitenum;
         		let sitename = item.sitename;
@@ -374,7 +380,7 @@
         		htmlText += '     <div class="ps-2">';
         		htmlText += ' <small class="fa fa-star text-primary">'+star+'</small>';
         		htmlText += '</div></div> <div class="d-flex mb-3"></div>';
-        		htmlText += '<p class="text-body mb-3">'+introduce+'</p>';
+        		htmlText += '<div class="text-body container" style="height:80px ">'+introduce+'</div>';
         		htmlText += '<div class="d-flex justify-content-between">';
         		htmlText += '<a class="btn btn-sm btn-primary2 rounded py-2 px-4" href="${pageContext.request.contextPath}/site/places/'+sitenum+'">View Detail</a>';
         		htmlText += '                        </div></div></div> </div>';

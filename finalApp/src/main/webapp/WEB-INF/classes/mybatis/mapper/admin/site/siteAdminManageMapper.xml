@@ -81,24 +81,33 @@
 			and  CATEGORY=#{siteCategory}
 		</if>
 		<if test="startDate!=null and startDate!=''">
-			and  (ENDDATE>= TO_DATE(#{startDate},'yyyy-mm-dd') and   
-			TO_DATE(#{endDate},'yyyy-mm-dd')>=STARTDATE)
+			and  (ENDDATE &gt;= TO_DATE(#{startDate},'yyyy-mm-dd') and   
+			TO_DATE(#{endDate},'yyyy-mm-dd') &gt; STARTDATE)
 		</if>
-		<if test="minFee!=null and minFee!=''">
-			and    (#{minFee} &gt; bookprice and #{maxFee} &lt; bookprice)
-		</if>
+		
+		<choose>
+			<when test="minFee!=null and minFee!='' and maxFee!=null and maxFee!=''">
+				and (select  count(*) from sitedetail where SITENUM= #{sitenum} and  #{minFee} &lt; price and #{maxFee} &gt; price)>0
+			</when>
+			<when test="minFee!=null and minFee!=''">
+				and (select  count(*) from sitedetail where SITENUM= #{sitenum} and  #{minFee} &lt; price )>0
+			</when>
+			<when test="maxFee!=null and maxFee!=''">
+				and (select  count(*) from sitedetail where SITENUM= #{sitenum} and  #{maxFee} &gt; price)>0
+			</when>
+		</choose>
 	</sql>
 	<!-- 리스트 -->
 	<select id="listSite" parameterType="map" resultType="com.fa.plus.domain.site.Site">
 		SELECT SITENUM,SITENAME,SITELOCAL,addr1,addr2,
-	 		CATEGORY,ENVIRONMENT,HITCOUNT,
-	 		 AVGSTAR
+	 		CATEGORY,ENVIRONMENT,HITCOUNT,THUMBNAIL,
+	 		 AVGSTAR,introduce
 		FROM campingsite
 		<where>
-			<if test="memberIdx!=0 and memberIdx!=''">		
-				where  MEMBERIDX=#{memberIdx}
-			</if>
 			<include refid="where-list"/>
+			<if test="memberIdx!=0 and memberIdx!=''">		
+				and MEMBERIDX=#{memberIdx}
+			</if>
 		</where> 		
 		ORDER BY SITENUM DESC
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
@@ -115,7 +124,7 @@
 	<!-- 사이트용 검색 -->
 	<select id="listSearchSite" parameterType="map" resultType="com.fa.plus.domain.site.Site">
 		SELECT campingsite.SITENUM SITENUM,SITENAME,SITELOCAL,addr1,addr2,
-	 		CATEGORY,ENVIRONMENT,HITCOUNT,
+	 		CATEGORY,ENVIRONMENT,HITCOUNT,introduce,THUMBNAIL,
 	 		 AVGSTAR
 		FROM campingsite
 		left join sitedetail on campingsite.SITENUM=sitedetail.SITENUM

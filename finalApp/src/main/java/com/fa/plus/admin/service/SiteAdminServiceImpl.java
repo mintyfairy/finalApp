@@ -305,14 +305,39 @@ public class SiteAdminServiceImpl implements SiteAdminService {
 		// TODO Auto-generated method stub
 		List<Site> list = null;
 		List<Site> list2 = null;
+		//검색 단계에서 너무많은 검색조건이 존재해서 한번에 하는것에 문제가 있어서 걸러보자
 		
 		try {
+			
+			
+			list = mapper.listSearchSite(dto);
+			
+			
+			//옵션검사
+			
+			
+			
+			
 			StringBuffer options = new StringBuffer();
 			// 배열을 스트링으로 변환
 			String[] optionlist=(String[])dto.getSiteOption();
-			System.out.println(options+"체크");
-			
-			list = mapper.listSearchSite(dto);
+			/*
+			 향상된 포문장이 내용물을 remove하면 제대로 다음걸 가져오는지 모르겟다.
+			 if (optionlist != null ) {
+				for (String option : optionlist) {
+					options.append(option);
+				}
+				for (Site vo : list) {
+					int test=Integer.parseInt(options.toString())
+						-Integer.parseInt(vo.getSiteoption());
+					if(Integer.toString(test).indexOf("9")>0) {
+						list.remove(vo);
+						System.out.println(vo+"체크");
+					}//옵션이 다른게 잇으면 뺸값에 9가 존재하게된다.
+				}
+			}else {
+			} 
+			 */
 			
 			if (optionlist != null ) {
 				for (String option : optionlist) {
