@@ -5,6 +5,7 @@
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tabs.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
+
 <style>
 .body-main {
 	width: 1080px;
@@ -20,57 +21,15 @@ img {
 a {
 	color:black; text-decoration: none; outline: none
 }
-.second-tabs {
-	margin-top: 20px;
-	width: 100%;
-}
-
-/* 테이블 */
-.table-list > tbody > tr > td:nth-child(2) {
-  width:250px;
-}
-
-.table-list > tbody > tr > td:nth-child(2) > p {
-  overflow: hidden;  		
-  text-overflow: ellipsis;  
-  white-space: nowrap; 		
-  word-break:break-all;
-  width:250px;
-  height:45px;
-  line-height: 45px;
-  margin-bottom: 0;
-  
-}
-
-.table-list > tbody > tr > td:nth-child(3) {
-  width:350x;
-}
-
-.table-list > tbody > tr > td:nth-child(3) > p {
-  overflow: hidden;  		
-  text-overflow: ellipsis;  
-  white-space: nowrap; 		
-  word-break:break-all;
-  height:45px;
-  width:350px;
-  line-height: 45px;
-  margin-bottom: 0;
-  
-}
 
 .tab-table {
   border: 1px solid white;
 }
-
-.tab-table > tr > td:nth-child(1) {
-  vertical-align: middle;
-}
-
 </style>
 
 <script type="text/javascript">
 $(function(){
-   $("#tab-0").addClass("active");
+   $("#tab-1").addClass("active");
 
    $("ul.tabs li").click(function() {
       let tab = $(this).attr("data-tab");
@@ -81,7 +40,7 @@ $(function(){
       
       $("#tab-"+tab).addClass("active");
       
-      let url = "${pageContext.request.contextPath}/admin/carReview/ask";   
+      let url = "${pageContext.request.contextPath}/admin/carReview/review";   
       location.href = url;
    });
 });
@@ -102,45 +61,36 @@ $(function(){
 		</div>
 		
 		<table class="table tab-table">
-				<tr>
-					<td align="left" width="50%">
-						${dataCount}1개(${page}1/${total_page}2 페이지)
-					</td>
-					<td align="right">
-						<select id="changeShowCar" class="form-select" onchange="changeList();" style="width:160px; text-align:center;">
-							<option value="-1">::전체::</option>
-							<option value="1" ${carShow==1?"selected":""}>답변완료</option>
-							<option value="0" ${carShow==0?"selected":""}>답변대기</option>
-						</select>
-					</td>
-				</tr>
+			<tr>
+				<td align="left" width="50%">
+					${dataCount}1개(${page}1/${total_page}2 페이지)
+				</td>
+			</tr>
 		</table>
 		
 		<table class="table table-border table-list">
 				<thead>
 					<tr> 
-						<th width="80">답변상태</th>
-						<th width="200">제목</th>
-						<th width="300">내용</th>
-						<th width="60">작성자</th>
-						<th width="90">작성일</th>
-						<th width="100">답변하기</th>
+						<th width="200">예약번호</th>
+						<th width="200">예약자 성명</th>
+						<th width="200">대여시작일자</th>
+						<th width="200">대여종료일자</th>
+						<th width="200">예약확인</th>
 					</tr>
 				</thead>
 				
 				<tbody>
 						<tr class="hover" onclick="" style="vertical-align: middle;"> 
-							<td>답변대기</td>
-							<td><p>스타렉스김수연 구려요!스타렉스김수연 구려요!</p></td>
-							<td><p>구리구리구리구리구리구리구리구</p></td>
-							<td>양양양</td>
+							<td>13224435577</td>
+							<td>김뚜띠</td>
+							<td>2023-01-02</td>
 							<td>2023-01-03</td>
 							<td>
 								<c:url var="updateUrl" value="/admin/carManage/update">
 									<c:param name="carNum" value="${dto.carNum}"/>
 									<c:param name="page" value="${page}"/>
 								</c:url>
-								<button type="button" class="btn border" onclick="location.href='${updateUrl}';">답변하기</button>
+								<button type="button" class="btn border" onclick="location.href='${updateUrl}';">예약상세확인</button>
 							</td>
 						</tr>
 				</tbody>
@@ -181,6 +131,7 @@ $(function(){
 					</td>			
 					
 					<td width="150" align="right">
+						<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/admin/carManage/insert';">등록하기</button>
 					</td>
 				</tr>
 			</table>

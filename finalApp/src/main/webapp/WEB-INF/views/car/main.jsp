@@ -115,6 +115,12 @@ main {
     border-radius: 12px;
 }
 
+.car_photo img {
+	background-size: cover;
+	width: 350px;
+	height: 250px;
+}
+
 .car_list .car_item .car_text {
     height: 200px;
     padding-top: 8px;
@@ -294,7 +300,8 @@ main {
          <c:forEach var="dto" items="${list}" varStatus="status">
            <li class="car_item">
                <p><a href="${pageContext.request.contextPath}/car/car_detail?carNum=${dto.carNum}" class="car_photo">
-                       <img src="${pageContext.request.contextPath}/resources/images/campingcar/${dto.thumbnail}/350x250" alt="car_item">
+                       <img src="${pageContext.request.contextPath}/resources/images/campingcar/caravanpic100.jpg" alt="car_item">
+                       <!-- <img src="${pageContext.request.contextPath}/resources/images/campingcar/${dto.thumbnail}/350x250" alt="car_item"> -->
                        <i class="fa-regular fa-heart"></i>
                    </a></p>
                <div class="car_text">
