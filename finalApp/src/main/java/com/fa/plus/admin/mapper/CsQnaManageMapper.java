@@ -1,5 +1,5 @@
-package com.fa.plus.admin.mapper; 
- 
+package com.fa.plus.admin.mapper;  
+  
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.fa.plus.admin.domain;
+package com.fa.plus.admin.domain;  
  
 public class CsQnaManage {
 	private long num;

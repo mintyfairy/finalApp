@@ -1,5 +1,5 @@
-package com.fa.plus.admin.domain; 
- 
+package com.fa.plus.admin.domain;    
+
 public class CsFaqManage {
 		private long num;
 	    private String userId;
