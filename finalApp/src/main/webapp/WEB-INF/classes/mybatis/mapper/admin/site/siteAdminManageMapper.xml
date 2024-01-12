@@ -149,7 +149,7 @@
 	<select id="listSearchSite" parameterType="map" resultType="com.fa.plus.domain.site.Site">
 		SELECT campingsite.SITENUM SITENUM,SITENAME,SITELOCAL,addr1,addr2,
 	 		CATEGORY,ENVIRONMENT,HITCOUNT,introduce,THUMBNAIL,
-	 		 AVGSTAR
+	 		 AVGSTAR,siteoption
 		FROM campingsite
 		join (select distinct(sitenum) chknum from sitedetail)  on chknum=sitenum
 		<if test="startDate!=null and startDate!=''">

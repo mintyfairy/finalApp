@@ -112,37 +112,37 @@
 										  <div class="dropdown-menu p-4 ">
 										    <div class="mb-3">
 										      <div class="form-check">
-										        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck1"  value="0" ${dto.siteOption[0]==1 ? "checked='checked'" : "" }>
+										        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck1"  value=${dto.siteOption[0]==1 ? "'1' checked='checked'" : "'0'" }>
 										        <label class="form-check-label" for="dropdownCheck1">
 										          전기
 										        </label>
 										      </div>
 										      <div class="form-check">
-										        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck2" value="0" ${dto.siteOption[1]==1 ? "checked='checked'" : "" }>
+										        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck2" value=${dto.siteOption[1]==1 ? "'1' checked='checked'" : "'0'" }>
 										        <label class="form-check-label" for="dropdownCheck2">
 										          와이파이
 										        </label>
 										      </div>
 										      <div class="form-check">
-										        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck3" value="0" ${dto.siteOption[2]==1 ? "checked='checked'" : "" }>
+										        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck3" value=${dto.siteOption[2]==1 ? "'1' checked='checked'" : "'0'" }>
 										        <label class="form-check-label" for="dropdownCheck3">
 										          비비큐 장비
 										        </label>
 										      </div>
 										      <div class="form-check">
-										        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck4" value="0" ${dto.siteOption[3]==1 ? "checked='checked'" : "" }>
+										        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck4" value=${dto.siteOption[3]==1 ? "'1' checked='checked'" : "'0'" }>
 										        <label class="form-check-label" for="dropdownCheck3">
 										          운동장
 										        </label>
 										      </div>
 										      <div class="form-check">
-										        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck5" value="0" ${dto.siteOption[4]==1 ? "checked='checked'" : "" }>
+										        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck5" value=${dto.siteOption[4]==1 ? "'1' checked='checked'" : "'0'" }>
 										        <label class="form-check-label" for="dropdownCheck3">
 										          화장실
 										        </label>
 										      </div>
 										      <div class="form-check">
-										        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck6" value="0" ${dto.siteOption[5]==1 ? "checked='checked'" : "" }>
+										        <input type="checkbox" name="siteOption" class="form-check-input" id="dropdownCheck6" value=${dto.siteOption[5]==1 ? "'1' checked='checked'" : "'0' " }>
 										        <label class="form-check-label" for="dropdownCheck3">
 										          샤워장
 										        </label>
@@ -209,7 +209,8 @@
         </div>
         
         
-        <!-- Testimonial End -->
+        <!-- Testimonial End
+       			<div class="row g-4 " >${dataCount}개 검색 완료 </div> -->
                 <div class="row g-4 list-content" data-pageNo="0" data-totalPage="0"> </div>
                 
                 <div class="sentinel" data-loading="false"></div> 
@@ -322,9 +323,16 @@
         function loadContent(page) {
         	let formData = $('form[name=siteSearchForm]').serialize();
         	formData+="&pageNo="+page;
+        	let siteOptionlist= document.siteSearchForm.querySelectorAll('[name=siteOption]')
+        	let list="";
+        	for (let item of siteOptionlist){
+        		list+=item.value
+        	}
+        	formData+="&siteOptionList="+list;
         	let url = '${pageContext.request.contextPath}/site/scroll';
-        	
+        	console.log(formData)
         	const fn = function(data) {
+        		
         		addNewContent(data);
         	};
         	ajaxFun(url, 'post', formData, 'json', fn);
@@ -334,6 +342,7 @@
         	const listNode = document.querySelector('.list-content');
         	const sentinelNode = document.querySelector('.sentinel'); // 센터널 노드(화면의 마지막인지 감시할 마지막 노드)
         	
+
         	let dataCount = data.dataCount;
         	let pageNo = data.pageNo;
         	let total_page = data.total_page;
@@ -355,6 +364,7 @@
         		listNode.insertAdjacentHTML('beforeend', htmlText);
         		return;
         	}
+        	let count=data.dataCount
         	for(let item of data.list) {
         		let sitenum = item.sitenum;
         		let sitename = item.sitename;
@@ -367,12 +377,12 @@
         		htmlText += '        </div><div class="p-4 mt-2"><div class="d-flex justify-content-between mb-3">';
         		htmlText += '        <h5 class="mb-0">'+sitename+'</h5>';
         		htmlText += '     <div class="ps-2">';
-        		htmlText += ' <small class="fa fa-star text-primary">'+star+'</small>';
-        		htmlText += '</div></div> <div class="d-flex mb-3"></div>';
-        		htmlText += '<div class="text-body container" style="height:85px ">'+introduce+'</div>';
-        		htmlText += '<div class="d-flex justify-content-between">';
-        		htmlText += '<a class="btn btn-sm btn-primary2 rounded py-2 px-4" href="${pageContext.request.contextPath}/site/places/'+sitenum+'">View Detail</a>';
-        		htmlText += '                        </div></div></div> </div>';
+        		htmlText += ' 	<small class="fa fa-star text-primary">'+star+'</small>';
+        		htmlText += '	</div></div> <div class="d-flex mb-3"></div>';
+        		htmlText += '	<div class="text-body container" style="height:85px ">'+introduce+'</div>';
+        		htmlText += '	<div class="d-flex justify-content-between">';
+        		htmlText += '	<a class="btn btn-sm btn-primary2 rounded py-2 px-4" href="${pageContext.request.contextPath}/site/places/'+sitenum+'">View Detail</a>';
+        		htmlText += ' </div></div></div> </div>';
         		
         		// 인써트 어제이슨트 함수로 마지막에 HTML 추가
         		listNode.insertAdjacentHTML('beforeend', htmlText);
@@ -404,7 +414,7 @@
             	const listNode = document.querySelector('.list-content');
         		let pageNo = parseInt(listNode.getAttribute('data-pageNo'));
         		let total_page = parseInt(listNode.getAttribute('data-totalPage'));
-        		        		if(pageNo === 0 || pageNo < total_page) {
+        		if(pageNo === 0 || pageNo < total_page) {
         			pageNo++;
         			loadContent(pageNo);
         		}

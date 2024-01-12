@@ -646,7 +646,7 @@ function showroomSlides2(n,slidenum) {
   let index = $(document.querySelector(".slide"+slidenum)).data('slideindex'+slidenum);
   let indexchange = document.querySelector(".slide"+slidenum);
   
-  console.log(index+"입갤"+slides.length)
+  console.log(index+"진입"+slides.length)
   if (index > slides.length) {
   	$(indexchange).data('slideindex'+slidenum,1)
   	index = $(document.querySelector(".slide"+slidenum)).data('slideindex'+slidenum);
@@ -665,12 +665,13 @@ function showroomSlides2(n,slidenum) {
   console.log(index+"결과")
 } 
 
+if(document.querySelector('.slideshow-container2')!=null){
 
-document.querySelector('.slideshow-container2').onload = function(){
-	console.log($(this).data("slidenum"))
-	showroomSlides2(1,$(this).data("slidenum"))
+	document.querySelector('.slideshow-container2').addEventListener("load", function(){
+		console.log($(this).data("slidenum"))
+		showroomSlides2(1,$(this).data("slidenum"))
+	})
 }
-
 
 
 //무의미

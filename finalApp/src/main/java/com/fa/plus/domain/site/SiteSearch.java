@@ -13,7 +13,8 @@ public class SiteSearch {
 	private String siteCategory;
 	//오토캠핑,글램핑,카라반,방갈로,차박
 
-	private	String[] siteOption	;
+	private	int[] siteOption	;
+	private	String siteOptionList	;
 	private String minFee;
 	private String maxFee;
 	private String size;
@@ -23,6 +24,12 @@ public class SiteSearch {
 	
 	
 	
+	public String getSiteOptionList() {
+		return siteOptionList;
+	}
+	public void setSiteOptionList(String siteOptionList) {
+		this.siteOptionList = siteOptionList;
+	}
 	public String getSize() {
 		return size;
 	}
@@ -53,10 +60,11 @@ public class SiteSearch {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
-	public String[] getSiteOption() {
+	
+	public int[] getSiteOption() {
 		return siteOption;
 	}
-	public void setSiteOption(String[] siteOption) {
+	public void setSiteOption(int[] siteOption) {
 		this.siteOption = siteOption;
 	}
 	public String getSiteLocal() {

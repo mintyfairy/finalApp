@@ -36,7 +36,11 @@ public class SiteBookController {
 		
 		List<Site> Adlist = adminService.listAdvertiseSite();
 		model.addAttribute("Adlist", Adlist);
-		if (dto != null)model.addAttribute("dto", dto);
+		
+		if (dto != null) {
+			model.addAttribute("dto", dto);
+			model.addAttribute("dataCount",adminService.searchCountSite(dto));
+		}
 		return ".campsite.room";
 	}
 
