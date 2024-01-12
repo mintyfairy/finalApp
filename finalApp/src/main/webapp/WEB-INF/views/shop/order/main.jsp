@@ -72,12 +72,13 @@ table textarea {
 }
 
 .container {
-  padding-top: 100px;
+  padding-top: 10px;
 }
 
 .container .wrap {
   width: 1080px;
   margin: 0 auto;
+  margin-top: 20px;
 }
 
 .container .wrap h3 {
@@ -195,8 +196,9 @@ table textarea {
 }
 
 #pay_btn {
-  margin-top: 40px;
-  text-align: center;
+  text-align: center!important;
+  margin-top: 80px;
+  height: 10vh;
 }
 
 #pay_btn a {
@@ -204,6 +206,20 @@ table textarea {
   height: 48px;
   font-size: 16px;
   line-height: 48px;
+}
+ 
+ #pay_btn button {
+    margin-right: 10px; 
+    height: 48px;
+  }
+
+#pay_btn .btn-primary {
+  background-color: #000;
+  color: #fff;
+}
+
+#pay_btn .btn-primary:hover {
+  background-color: #333;
 }
 </style>
 
@@ -429,7 +445,7 @@ function sendOk() {
     </div>
     <div id="pay_btn">
      <button type="button" class="btn btn-primary" style="width: 250px;" onclick="sendOk()">결제하기</button>
-	<button type="button" class="btn btn-light btn-lg" style="width: 250px;" onclick="location.href='${pageContext.request.contextPath}/';">결제취소</button>
+	 <button type="button" class="btn btn-light btn-lg" style="width: 250px;" onclick="location.href='${pageContext.request.contextPath}/';">결제취소</button>
     </div>
   </div>
   

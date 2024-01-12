@@ -127,8 +127,9 @@ ol, ul {
 }
 
 .product_value .total_price {
-	display: flex;
-	justify-content: space-between;
+	padding-bottom: 0.5rem !important;
+	margin-top: 0.5rem !important;
+	font-weight: 600 !important;
 }
 
 .btn_list {
@@ -290,6 +291,37 @@ table {
 	font-size: 13px;
 	border-bottom: 1px solid #e6e6e6;
 }
+
+ .order-area {
+    border: 1px solid #e9e9e9;
+    padding: 15px;
+    margin: 10px;
+    background-color: #f7f7f7;
+     margin-bottom: 20px;
+  }
+  
+   .total-price {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 0 20px;
+    align-items: center;
+    border-top: 1px solid #e9e9e9;
+  }
+
+  .total-price .col-auto {
+    font-weight: bold;
+    padding-top: 1px;
+  }
+
+  .total-price label {
+    margin-right: 10px;
+  }
+
+  .product-totalAmount {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
 </style>
 
 <script type="text/javascript">
@@ -560,7 +592,7 @@ function sendOk(mode) {
 						</div>
 						<p class="brand_name">[브랜드명]상품명</p>
 						<div class="mt-2">* 필수 옵션</div>
-					
+
 						<div class="mt-2">
 							<select class="form-select requiredOption"
 								data-optionNum="${listOption[0].optionNum}">
@@ -571,7 +603,7 @@ function sendOk(mode) {
 							</select>
 						</div>
 
-						<div class="mt-2 border-bottom pb-2">
+						<div class="mt-2 pb-2">
 							<select class="form-select requiredOption2"
 								data-optionNum2="${listOption[1].optionNum}">
 								<option value="">${listOption[1].optionName}</option>
@@ -580,21 +612,27 @@ function sendOk(mode) {
 
 						<div class="order-area"></div>
 
-						<div class="total_price">
-							<p>총 상품금액</p>
-							<label>총수량 <span class="product-totalQty">0</span>개 | </label>
-							<label><span class="product-totalAmount fs-5 fw-semibold text-black">0</span>원</label>
+						<div class="total_price d-flex justify-content-between mt-3 px-3">
+							<label>총 수량 <span class="product-totalQty">0</span>개 |
+							</label> <label><span
+								class="product-totalAmount fs-5 fw-semibold text-black">0</span>원</label>
 						</div>
 
+
+
 					</div>
+
 					<div class="btn_list">
 						<input type="hidden" name="mode" value="buy">
-						<button type="button" class="btn btn-dark w-50 btn-buySend" onclick="sendOk('buy');">바로 구매하기</button>
-						<button type="button" class="btn border w-35 btn-productCart" onclick="sendOk('cart');"
+						<button type="button" class="btn btn-dark w-50 btn-buySend"
+							onclick="sendOk('buy');">바로 구매하기</button>
+						<button type="button" class="btn border w-35 btn-productCart"
+							onclick="sendOk('cart');"
 							${empty sessionScope.member.memberIdx ? "disabled='disabled'" : ""}>
 							장바구니 <i class="bi bi-bag"></i>
 						</button>
-						<button type="button" class="btn border w-35 btn-productBlind" ${empty sessionScope.member.memberIdx ? "disabled='disabled'" : ""}>
+						<button type="button" class="btn border w-35 btn-productBlind"
+							${empty sessionScope.member.memberIdx ? "disabled='disabled'" : ""}>
 							찜하기 <i class="bi bi-heart"></i>
 						</button>
 					</div>
