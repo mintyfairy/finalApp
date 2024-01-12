@@ -385,8 +385,10 @@ h4 {
                                 위 내용을 확인하였으며, 결제 및 예약에 동의합니다.
                             </li>
                             <li>
-                            	<div style="margin: 0 auto;">
-                                <button type="submit" id="reservation_check">결제하기</button>
+                            	<div style="width: 100%;">
+                            		<div style="width: 400px; margin: 30px auto;">
+                                		<button type="submit" id="reservation_check">결제하기</button>
+                               		</div>
                                	</div>
                             </li>
                         </ul>

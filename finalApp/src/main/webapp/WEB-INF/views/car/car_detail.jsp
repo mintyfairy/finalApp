@@ -41,6 +41,8 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
+
+
 #wrap2 {
   width: 1000px;;
   box-sizing: border-box;
@@ -160,9 +162,8 @@ h1, h2, h3, h4, h5, h6 {
  
 }
 
-.calendar > p {
+#wrap .calendar > p {
   font-size: 50px;
-  margin-top: 10px;
   color: gray;
 }
 .calendar > input {
@@ -887,9 +888,8 @@ table {
     border-bottom: 1px solid #e6e6e6;
 }
 
-.body-container {
-	max-width: 1000px;
-}
+
+
 
 .nav-tabs .nav-link {
 	min-width: 170px;
@@ -899,13 +899,118 @@ table {
 	color: #333;
 	font-weight: 600;
 }
+
 .nav-tabs .nav-link.active {
 	background: #3d3d4f;
 	color: #fff;
 }
 
-</style>
+.tab-pane { min-height: 300px; }
 
+.score-star { font-size: 0; letter-spacing: -4px; }
+.score-star .item {
+	font-size: 22px; letter-spacing: 1px; display: inline-block;
+	color: #ccc; text-decoration: none; vertical-align: middle;
+}
+.score-star .item:first-child{ margin-left: 0; }
+.score-star .on { color: #f54a4c; }
+
+.graph { font-size: 0;  letter-spacing: 0; word-spacing: 0; }
+.graph-title { padding-right: 3px; }
+.graph .one-space { font-size:13px; background:#eee;}
+.graph .one-space:after { content: ''; display: inline-block; width:17px; }
+.graph .one-space.on{ background:  #f54a4c; }
+.graph .one-space:first-child{ border-top-left-radius:5px;  border-bottom-left-radius:5px; }
+.graph .one-space:last-child{ border-top-right-radius:5px; border-bottom-right-radius:5px; }
+.graph-rate { padding-left: 5px; display: inline-block; width: 60px; text-align: left; }
+
+.deleteReview, .notifyReview { cursor: pointer; padding-left: 5px; }
+.deleteReview:hover, .notifyReview:hover { font-weight: 500; color: #2478FF; }
+
+.qna-form textarea { width: 100%; height: 75px; resize: none; }
+.qna-form .img-grid {
+	display: grid;
+	grid-template-columns:repeat(auto-fill, 54px);
+	grid-gap: 2px;
+}
+
+.qna-form .img-grid .item {
+	object-fit:cover;
+	width: 50px; height: 50px; border-radius: 10px;
+	border: 1px solid #c2c2c2;
+	cursor: pointer;
+}
+
+.deleteQuestion, .notifyQuestion { cursor: pointer; padding-left: 5px; }
+.deleteQuestion:hover, .notifyQuestion:hover { font-weight: 500; color: #2478FF; }
+
+
+.container { 
+	margin: 0 auto;
+	width: 1000px;	
+}
+.body-container { 
+	margin-bottom: 50px;
+	width: 1000px;
+}
+.body-main {
+	margin: 0 auto;
+	width: 900px;
+	
+}
+
+.detail_info { margin: 0 auto; padding: 50px 30px;
+	border: 1px solid silver;
+
+ }
+ 
+.detail_info h3 {
+	margin-bottom: 30px;
+} 
+
+*{margin:0; padding:0;}
+ul{list-style:none;}
+a{text-decoration:none; color:#333;}
+.tab_menu{position:relative;}
+.tab_menu .list{overflow:hidden;}
+.tab_menu .list li{float:left; margin-right:14px;}
+
+.tab_menu .list .btn{
+	font-size:20px;
+	
+}
+
+.tab_menu .list .btn .tmenu {
+	display:inline-block;
+	width: 252.3px;
+	border: 1px solid black;
+	border-bottom-color: white;
+	text-align: center;
+	padding: 5px 0;
+}
+
+
+.tab_menu .list .cont{
+	display: none;
+	position:absolute; 
+	top:25px; 
+	left:0; 
+	background:white; 
+	color:black;
+	border: 1px solid silver; 
+	text-align:center; 
+	width:800px; 
+	margin-top: 10px;
+	padding: 40px;
+}
+.tab_menu .list li.is_on .btn{font-weight:bold; color:black;}
+.tab_menu .list li.is_on .cont{display:inline-block;}
+
+.car_qna { width: 80%; margin: 20px auto; }
+
+.qna_list { width: 90%; margin: 20px auto; }
+
+</style>
 <script type="text/javascript">
 function login() {
 	location.href = '${pageContext.request.contextPath}/member/login';
@@ -969,7 +1074,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 	    let start_date = f.start_date.value;
 	    let end_date = "${carReservation.end_date}";
 	    */
-	    f.method = "get";
+	    // f.method = "get";
 		f.action = "${pageContext.request.contextPath}/car/reservation/orderPage";
 		f.submit();
 	}
@@ -977,7 +1082,6 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 
 
 </script>
-
 
 <div id="wrap">
 
@@ -1055,7 +1159,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
     </div>
   </div>
 
-<div id="wrap2">
+<div id="wrap">
   <hr style="margin-bottom: 40px;">
   <div class="second-container">
     <div class="available-size">
@@ -1164,55 +1268,86 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
         	</c:if>
         </div>
       </div>
+	<hr style="margin-top: 20px; margin-bottom: 20px;">
     </div>
 </div>
 
-    <div class="container">
+
+<div id="wrap">
+<div class="container">
 	<div class="body-container">	
 		<div class="body-main">
-              <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
-                <li class="tap-item" role="presentation">
-					<button class="nav-link active" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane-1" type="button" role="tab" aria-controls="1" aria-selected="true">상세정보</button>
-				</li>
-				<li class="tap-item" role="presentation">
-					<button class="nav-link" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane-2" type="button" role="tab" aria-controls="2" aria-selected="false">리뷰 <span class="title-reviewCount">(2개)</span></button>
-				</li>
-				<li class="tap-item" role="presentation">
-					<button class="nav-link" id="tab-3" data-bs-toggle="tab" data-bs-target="#tab-pane-3" type="button" role="tab" aria-controls="3" aria-selected="false">문의사항 <span class="title-qnaCount">(2개)</span></button>
-				</li>
-              </ul>
-          </div>
-          
-          
-          
-          <div class="detail_img">
-              <img src="https://via.placeholder.com/538x540" alt="detail_img">
-          </div>
-          
-          
-          <div class="detail_qna">
-              <div class="qna_table">
-                  <table summary="번호, 평점, 내용, 작성자, 작성일, 조회">
-                      <colgroup>
-                          <col width="40">
-                          <col width="40">
-                          <col width="*">
-                          <col width="95">
-                          <col width="110">
-                          <col width="40">
-                      </colgroup>
-                      <tbody>
-                          <tr>
-                              <td colspan="6">등록된 리뷰가 없습니다.</td>
-                          </tr>
-                      </tbody>
-                  </table>
-              </div>
-              <div class="qna_write">
-                  <a href="#">글쓰기</a>
-              </div>
-          </div>
-  </div>
+			<div>
+				<div class="detail_info">
+				<h3>상세 정보</h3>
+					<div>${dto.content}</div>
+				</div>
+			</div>
+			<div>
+				<div class="detail_info">
+				<h3>이용 후기 (0건)</h3>
+					<div class="detail_review">
+				<div class="review_table">
+					<table summary="번호, 평점, 내용, 작성자, 작성일, 조회">
+						<colgroup>
+							<col width="40">
+							<col width="40">
+							<col width="*">
+							<col width="95">
+							<col width="110">
+							<col width="40">
+						</colgroup>
+						<tbody>
+							<tr>
+								<td colspan="6">등록된 리뷰가 없습니다.</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="review_write">
+					<a href="#">글쓰기</a>
+				</div>
+			</div>
+				</div>
+			</div>
+			<div>
+				<div class="detail_info">
+				<h3>차량 문의 (0건)</h3>
+					<div class="detail_qna">
+				<div class="qna_table">
+					<table summary="번호, 평점, 내용, 작성자, 작성일, 조회">
+						<colgroup>
+							<col width="40">
+							<col width="40">
+							<col width="*">
+							<col width="95">
+							<col width="110">
+							<col width="40">
+						</colgroup>
+						<tbody>
+							<tr>
+								<td colspan="6">등록된 문의가 없습니다.</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="qna_write">
+					<a href="#">글쓰기</a>
+				</div>
+			</div>
+					<table>
+						<tr>
+							<th>번호</th>
+							<th>답변상태</th>
+							<th>내용</th>
+							<th>작성자</th>
+							<th>작성일자</th>
+						</tr>
+					</table>
+				</div>
+			</div>
+        </div>
+	</div>
 
   <div class="detail_as">
     <div class="as_table">
@@ -1276,6 +1411,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
     </div>
 </div>
 </div>
+</div>
 <a href="https://www.flaticon.com/kr/free-icons/" title="화장실 아이콘">화장실 아이콘  제작자: Creaticca Creative Agency - Flaticon</a>
 <a href="https://www.flaticon.com/kr/free-icons/" title="화장실 아이콘">화장실 아이콘  제작자: Freepik - Flaticon</a>
 <a href="https://www.flaticon.com/kr/free-icons/" title="침실 아이콘">침실 아이콘  제작자: Freepik - Flaticon</a>
@@ -1288,3 +1424,4 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 <a href="https://www.flaticon.com/kr/free-icons/-" title="공기 조절 아이콘">공기 조절 아이콘  제작자: Freepik - Flaticon</a>
 <a href="https://www.flaticon.com/kr/free-icons/" title="히터 아이콘">히터 아이콘  제작자: Linector - Flaticon</a>
 <a href="https://www.flaticon.com/kr/free-icons/" title="배터리 아이콘">배터리 아이콘  제작자: kmg design - Flaticon</a>
+
