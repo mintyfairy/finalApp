@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fa.plus.admin.mapper.CsQnaManageMapper">
+	<sql id="where-list">
+		<if test="schType=='all' ">
+			( INSTR(subject, #{kwd}) &gt; 0 
+				OR INSTR(content, #{kwd}) &gt; 0 )
+		</if>
+		<if test="schType=='subject'">
+			INSTR(subject, #{kwd}) &gt; 0
+		</if>
+		<if test="schType=='content'">
+			DBMS_LOB.INSTR(content, #{kwd}) &gt; 0 
+		</if>
+		<if test="schType=='userName'">
+			userName=#{kwd}
+		</if>
+		<if test="schType=='userId'">
+			INSTR(q.userId, #{kwd}) = 1
+		</if>
+		<if test="schType=='reg_data'">
+			( TO_CHAR(q.reg_date, 'YYYY-MM-DD') = #{kwd}
+				OR TO_CHAR(q.reg_date, 'YYYYMMDD') = #{kwd} )
+		</if>
+	</sql>
+	
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0)
+		FROM qna q
+		JOIN member1 m ON q.userId=m.userId
+		<where>
+			<if test="kwd!=null and kwd!='' "> 
+				AND <include refid="where-list"/>
+			</if>
+		</where>
+
+	</select>
+	
+	 <select id="listQna" parameterType="map" resultType="com.fa.plus.admin.domain.CsQnaManage">
+		SELECT num, q.userId, userName, category, subject,
+			   TO_CHAR(reg_date, 'YYYY-MM-DD') reg_date, answer_date
+		FROM qna q
+		JOIN member1 m ON q.userId=m.userId
+		<where>
+			<if test="kwd!=null and kwd!='' ">
+				AND <include refid="where-list"/>
+			</if>
+		</where>   
+		ORDER BY num DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+	
+	<select id="findById" resultType="com.fa.plus.admin.domain.CsQnaManage" parameterType="Long">
+		SELECT num, q.userId, m.userName, category, subject, content, 
+				reg_date, answerId, a.userName answerName, answer, answer_date
+		FROM qna q
+		JOIN member1 m ON q.userId=m.userId
+		LEFT OUTER JOIN member1 a ON q.answerId = a.userId
+		WHERE num = #{num}
+	</select>
+
+	<update id="updateAnswer" parameterType="com.fa.plus.admin.domain.CsQnaManage">
+		UPDATE qna SET answerId = #{answerId}, answer = #{answer}, answer_date = SYSDATE
+		WHERE num = #{num}
+	</update>
+	
+	<update id="deleteAnswer" parameterType="Long">
+		UPDATE qna SET answerId = NULL, answer = NULL, answer_date = NULL
+		WHERE num = #{num}
+	</update>
+	      
+	<!-- 삭제 -->
+	<delete id="deleteQna" parameterType="Long">
+		DELETE FROM qna WHERE num = #{num}
+	</delete>
+
+
+
+</mapper>

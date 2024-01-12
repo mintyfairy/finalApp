@@ -1,5 +1,5 @@
-package com.fa.plus.admin.domain;
-
+package com.fa.plus.admin.domain; 
+ 
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;

@@ -1,6 +1,7 @@
-package com.fa.plus.admin.controller;
+package com.fa.plus.admin.controller; 
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +29,10 @@ import com.fa.plus.common.FileManager;
 import com.fa.plus.common.MyUtil;
 import com.fa.plus.domain.SessionInfo;
 
+
 @Controller
 @RequestMapping("/admin/cs/notice/*")
 public class CsNoticeController {
-
 	@Autowired
 	private CsNoticeService service;
 
@@ -78,8 +80,7 @@ public class CsNoticeController {
 
 		// 리스트에 출력할 데이터를 가져오기
 		int offset = (current_page - 1) * size;
-		if (offset < 0)
-			offset = 0;
+		if (offset < 0) offset = 0;
 
 		map.put("offset", offset);
 		map.put("size", size);
@@ -181,9 +182,89 @@ public class CsNoticeController {
 
 		CsNoticeManage prevDto = service.findByPrev(map);
 		CsNoticeManage nextDto = service.findByNext(map);
+		
+		List<CsNoticeManage> listFile = service.listNoticeFile(num);
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("prevDto", prevDto);
+		model.addAttribute("nextDto", nextDto);
+		model.addAttribute("listFile", listFile);
+		model.addAttribute("page", page);
+		model.addAttribute("query", query);
 
 		return ".admin.cs.csNoticeManage.article";
 
 	}
+	
+	@GetMapping("update")
+	public String updateForm(@RequestParam long num,
+			@RequestParam String page,
+			HttpSession session,
+			Model model)throws Exception{
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		
+		CsNoticeManage dto = service.findById(num);		
+		if(dto == null || ! info.getUserId().equals(dto.getUserId())) {
+			return "redirect:/admin/cs/notice/list?page=" + page;
+		}
+		List<CsNoticeManage> listFile = service.listNoticeFile(num);
+		
+		model.addAttribute("mode","update");
+		model.addAttribute("page",page);
+		model.addAttribute("dto",dto);
+		model.addAttribute("listFile",listFile);
+		
 
+		return ".admin.cs.csNoticeManage.write";
+	}
+	
+	@PostMapping("update")
+	public String updateSubmit(CsNoticeManage dto,
+			@RequestParam String page,
+			HttpSession session) throws Exception {
+
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+
+		try {
+			String root = session.getServletContext().getRealPath("/");
+			String pathname = root + File.separator + "uploads" + File.separator + "notice";
+
+			dto.setUserId(info.getUserId());
+			service.updateNotice(dto, pathname);
+		} catch (Exception e) {
+		} 
+
+		return "redirect:/admin/cs/notice/list?page=" + page;
+	}
+
+	
+	@GetMapping("download")
+	public void download(@RequestParam long fileNum,
+			HttpServletResponse resp,
+			HttpSession session) throws Exception {
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + "uploads" + File.separator + "notice";
+
+		boolean b = false;
+
+		CsNoticeManage dto = service.findByFileId(fileNum);
+		if (dto != null) {
+			String saveFilename = dto.getSaveFilename();
+			String originalFilename = dto.getOriginalFilename();
+
+			b = fileManager.doFileDownload(saveFilename, originalFilename, pathname, resp);
+		}
+
+		if (! b) {
+			try {
+				resp.setContentType("text/html; charset=utf-8");
+				PrintWriter out = resp.getWriter();
+				out.println("<script>alert('파일 다운로드가 불가능 합니다 !!!');history.back();</script>");
+			} catch (Exception e) {
+			}
+		}
+	}
 }
+
+
+

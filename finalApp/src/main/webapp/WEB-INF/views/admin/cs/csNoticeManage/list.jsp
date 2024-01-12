@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -12,6 +12,23 @@
 .badge {
 	display: inline-block; padding:2px 3px; background: #0d6efd; color: #fff; font-weight: 500;
 	font-size: 11px;
+}
+
+.paginate{
+	width:1200px;
+	margin: 0 auto;
+}
+
+.form-select{
+	width:100px;
+	margin: auto;
+	
+}
+	
+.form-control{
+	width:100;
+	margin: auto;
+	
 }
 
 
@@ -97,9 +114,8 @@ function searchList() {
 			</tbody>
 		</table>
 		 
-		<div class="page-navigation ">
-			
-				${dataCount == 0 ? "등록된 게시물이 없습니다." : paging}
+		<div class="page-navigation">
+			${dataCount == 0 ? "등록된 게시물이 없습니다." : paging}
 		</div>
 		
 		<table class="table">

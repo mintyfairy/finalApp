@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>  
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fa.plus.admin.mapper.CsNoticeManageMapper">
@@ -120,19 +120,25 @@
 		FETCH FIRST 1 ROWS ONLY
 	</select>
 	
+	<!-- 수정 -->
+	<update id="updateNotice" parameterType="com.fa.plus.admin.domain.CsNoticeManage">
+		UPDATE notice SET subject = #{subject}, 
+		content = #{content}, notice = #{notice}, showNotice = #{showNotice}
+		WHERE num=#{num}
+	</update>
 	
 	
+	<insert id="insertNoticeFile" parameterType="com.fa.plus.admin.domain.CsNoticeManage">
+		INSERT INTO noticeFile(fileNum, num, saveFilename, originalFilename, fileSize)
+		VALUES (noticeFile_seq.NEXTVAL, #{num}, #{saveFilename},
+			#{originalFilename}, #{fileSize})
+	</insert>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	<select id="listNoticeFile" parameterType="Long" resultType="com.fa.plus.admin.domain.CsNoticeManage">
+		SELECT fileNum, num, saveFilename, originalFilename, fileSize
+		FROM noticeFile
+		WHERE num=#{num}    
+	</select>
 	
 	
 	

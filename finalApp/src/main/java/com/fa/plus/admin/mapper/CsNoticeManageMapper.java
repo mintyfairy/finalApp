@@ -1,5 +1,5 @@
-package com.fa.plus.admin.mapper;
-
+package com.fa.plus.admin.mapper; 
+ 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +20,7 @@ public interface CsNoticeManageMapper {
 	public void updateHitCount(long num) throws SQLException;
 	public CsNoticeManage findByPrev(Map<String, Object> map);
 	public CsNoticeManage findByNext(Map<String, Object> map);
-
+	
 	public void insertNoticeFile(CsNoticeManage dto) throws SQLException;
 	public List<CsNoticeManage> listNoticeFile(long num);
 	public CsNoticeManage findByFileId(long fileNum);

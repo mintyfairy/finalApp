@@ -1,6 +1,6 @@
-package com.fa.plus.admin.service;
+package com.fa.plus.admin.service; 
 
-import java.util.List;
+import java.util.List; 
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -145,7 +145,30 @@ public class CsNoticeServiceImpl implements CsNoticeService{
 
 	@Override
 	public void updateNotice(CsNoticeManage dto, String pathname) throws Exception {
-		// TODO Auto-generated method stub
+		try {
+			mapper.updateNotice(dto);
+			
+			if(!dto.getSelectFile().isEmpty()) {
+				for(MultipartFile mf : dto.getSelectFile()) {
+					String saveFilename = fileManager.doFileUpload(mf, pathname);
+					if(saveFilename == null) {
+						continue;
+					}
+					
+					String originalFilename = mf.getOriginalFilename();
+					long fileSize = mf.getSize();
+					
+					dto.setOriginalFilename(originalFilename);
+					dto.setSaveFilename(saveFilename);
+					dto.setFileSize(fileSize);
+
+					mapper.insertNoticeFile(dto);
+				}
+			}						
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 		
 	}
 
@@ -157,14 +180,25 @@ public class CsNoticeServiceImpl implements CsNoticeService{
 
 	@Override
 	public List<CsNoticeManage> listNoticeFile(long num) {
-		// TODO Auto-generated method stub
-		return null;
+		List<CsNoticeManage> listFile = null;
+		
+		try {
+			listFile = mapper.listNoticeFile(num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listFile;
 	}
 
 	@Override
 	public CsNoticeManage findByFileId(long fileNum) {
-		// TODO Auto-generated method stub
-		return null;
+		CsNoticeManage dto = null;
+		try {
+			dto = mapper.findByFileId(fileNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
 
 	@Override
