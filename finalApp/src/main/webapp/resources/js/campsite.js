@@ -628,29 +628,47 @@ function showSlides(n) {
 
 
 
-function plusSlides2(n,num) {
-  showroomSlides2(slideIndex += n,num);
+function plusSlides2(n,e) {
+  let aa=$(e).closest('.slideshow-container2');
+  num=aa.data('slidenum') 
+  let data1=$(e).closest('.slideshow-container2').data('slideindex'+num);
+  console.log(data1)
+  aa.data('slideindex'+num,data1+n)
+  index=$(e).closest('.slideshow-container2').data('slideindex'+num)
+  showroomSlides2(index,num);
 }
 
 
 function showroomSlides2(n,slidenum) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides"+slidenum);
-  if (n > slides.length) {slideIndex = 1} 
-  if (n < 1) {slideIndex = slides.length}
+  let i;
+  let slides = document.getElementsByClassName("mySlides"+slidenum);
+  console.log(slides)
+  let index = $(document.querySelector(".slide"+slidenum)).data('slideindex'+slidenum);
+  let indexchange = document.querySelector(".slide"+slidenum);
+  
+  console.log(index+"입갤"+slides.length)
+  if (index > slides.length) {
+  	$(indexchange).data('slideindex'+slidenum,1)
+  	index = $(document.querySelector(".slide"+slidenum)).data('slideindex'+slidenum);
+  } 
+  if (index < 1) {
+  	$(indexchange).data('slideindex'+slidenum,slides.length)
+  	index = $(document.querySelector(".slide"+slidenum)).data('slideindex'+slidenum);
+  	}
   for (i = 0; i < slides.length; i++) {
       slides[i].style.display = "none"; 
   }
-  if(slides[slideIndex-1]!=null){
+  if(slides[index-1]!=null){
   
-  	slides[slideIndex-1].style.display = "block";
+  	slides[index-1].style.display = "block";
   } 
+  console.log(index+"결과")
 } 
 
 
-document.getElementById('slideshow-container2').onload = function(){
-	showroomSlides2(1,this.data("slideNum"))
-	this.data("slideNum")
+document.querySelector('.slideshow-container2').onload = function(){
+	console.log($(this).data("slidenum"))
+	showroomSlides2(1,$(this).data("slidenum"))
 }
 
 
