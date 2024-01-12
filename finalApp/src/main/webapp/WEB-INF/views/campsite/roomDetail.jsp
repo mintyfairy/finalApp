@@ -144,16 +144,15 @@
 	                        <div class="room-item shadow rounded overflow-hidden">
 	                            <div class="position-relative">
 	                            <!-- 이미지구역 -->
-	                                <div class="slideshow-container2" id="slideshow-container2" style="z-index: 55" data-slideNum="${dto.detailnum}" data-slideIndex="1">
-								
-										<c:forEach var="vo" items="${Room32}">
-											<div class="mySlides${dto.detailnum}">
+	                                <div class="slideshow-container2 slide${dto.detailnum}" id="slideshow-container2" style="z-index: 55" data-slidenum="${dto.detailnum}" data-slideindex${dto.detailnum}="1">
+										<c:forEach var="vo" items="${Room[dto.detailnum]}" varStatus="status">
+											<div class="mySlides${dto.detailnum}" style="display: ${status.index==0?'block':'none'};">
 											    <img src="${pageContext.request.contextPath}/uploads/room/${vo.fileName}" style="bottom : 0 ;width:100%;height: 450px; overflow:hidden;object-fit:cover" 
 												>
 											</div>
 										</c:forEach>
-			 							<a class="prev" onclick="plusSlides2(-1,${dto.detailnum})">&#10094;</a>
-			  							<a class="next" onclick="plusSlides2(1,${dto.detailnum})">&#10095;</a>
+			 							<a class="prev" onclick="plusSlides2(-1,this)">&#10094;</a>
+			  							<a class="next" onclick="plusSlides2(1,this)">&#10095;</a>
 									</div>
 	                            <!-- 이미지구역 -->
 	                                <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">${dto.price}원/Night</small>
