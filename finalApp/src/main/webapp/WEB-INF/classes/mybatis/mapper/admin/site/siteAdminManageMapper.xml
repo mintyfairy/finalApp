@@ -111,6 +111,29 @@
 			</when>
 		</choose>
 	</sql>
+	<sql id="where-list-room">
+		
+		<choose>
+			<when test="minFee!=null and minFee!='' and maxFee!=null and maxFee!=''">
+				and sitenum in (select  distinct sitenum from sitedetail where  #{minFee} &lt;= price and #{maxFee} &gt;= price)
+			</when>
+			<when test="minFee!=null and minFee!=''">
+				and sitenum in (select  distinct sitenum from sitedetail where  #{minFee} &lt;= price )
+			</when>
+			<when test="maxFee!=null and maxFee!=''">
+				and sitenum in (select  distinct sitenum from sitedetail where  #{maxFee} &gt;= price)
+			</when>
+		</choose>
+		<if test="startDate!=null and startDate!=''">
+			
+			    
+			       and  detailnum not in
+	(select sitedetail.DETAILNUM detailnum from sitedetail  
+	left join(select detailnum,ENDDATE,STARTDATE from book) book
+    on sitedetail.DETAILNUM=book.DETAILNUM 
+    where  ENDDATE  >= TO_DATE(#{startDate},'yyyy-mm-dd') and TO_DATE(#{endDate},'yyyy-mm-dd') >= STARTDATE) 
+		</if>
+	</sql>
 	<!-- 리스트 -->
 	<select id="listSite" parameterType="map" resultType="com.fa.plus.domain.site.Site">
 		SELECT SITENUM,SITENAME,SITELOCAL,addr1,addr2,
@@ -146,7 +169,7 @@
 		
 	</select>
 	<!-- 사이트용 검색 -->
-	<select id="listSearchSite" parameterType="map" resultType="com.fa.plus.domain.site.Site">
+	<select id="listSearchSite" parameterType="com.fa.plus.domain.site.SiteSearch" resultType="com.fa.plus.domain.site.Site">
 		SELECT campingsite.SITENUM SITENUM,SITENAME,SITELOCAL,addr1,addr2,
 	 		CATEGORY,ENVIRONMENT,HITCOUNT,introduce,THUMBNAIL,
 	 		 AVGSTAR,siteoption
@@ -167,7 +190,17 @@
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 		
 	</select>
-
+	<select id="listSearchRoom" parameterType="com.fa.plus.domain.site.SiteSearch" resultType="com.fa.plus.domain.site.SiteDetail">
+		SELECT DETAILNUM,SITENUM,DETAILNAME,PRICE,AREA,CONTENT,CAPACITY,floor
+		FROM sitedetail 
+		
+		<where>
+		sitenum=#{sitenum} 
+			<include refid="where-list-room"/>
+		</where> 
+		ORDER BY DETAILNUM 
+		
+	</select>
 	<!-- 탐색 -->
 	<select id="findByIdSite" parameterType="Long" resultType="com.fa.plus.domain.site.Site">
 		SELECT SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,

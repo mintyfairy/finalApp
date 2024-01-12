@@ -35,7 +35,7 @@
         <!-- Page Header End -->
 		<div class="container-fluid booking pb-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container">
-            	<form name="siteSearchForm" id="siteSearchForm" >
+            	<form name="roomSearchForm" id="roomSearchForm" >
 	                <div class="bg-white shadow" style="padding: 35px;">
 	                    <div class="row g-2">
 	                        <div class="col-md-12">
@@ -61,7 +61,7 @@
 	                                </div>
 	                                <div class="col-md-auto align-self-center">원</div>
 	                               	<div class="col-md-2">
-			                            <button class="btn btn-primary2 w-100" type="button" onclick="searchSite()">Submit</button>
+			                            <button class="btn btn-primary2 w-100" type="button" onclick="searchRoom(${Sitedto.sitenum})">Submit</button>
 			                        </div>
 	                            </div>
 	                        </div>
@@ -314,5 +314,14 @@
 	  </div>
 	    		    
 	</div>
-
+<script>
+function searchRoom(a) {
+	const f= document.roomSearchForm;
+	
+	query=$('form[name=roomSearchForm]').serialize();
+	console.log(query)
+	f.action = "${pageContext.request.contextPath}/site/places/"+a;
+	f.submit();
+}
+</script>
 	

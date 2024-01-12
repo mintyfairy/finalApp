@@ -371,7 +371,18 @@
         		let introduce = item.introduce;
         		let star = item.avgstar;
         		let thumbnail = item.thumbnail;
-        		
+        		let query="?";
+        		console.log(data.dto)
+        		if (data.dto.startDate!=null){
+        			query+="startDate="+data.dto.startDate;
+        			query+="&endDate="+data.dto.endDate;
+        		}
+        		if (data.dto.minFee!=null){
+        			query+="&minFee="+data.dto.minFee;
+        		}
+        		if (data.dto.maxFee!=null){
+        			query+="&maxFee="+data.dto.maxFee;
+        		}
         		htmlText =  '<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s"> <div class="room-item shadow rounded overflow-hidden"><div class="position-relative">';
         		htmlText += '  <img class="img-fluid" src="${pageContext.request.contextPath}/uploads/site/'+thumbnail+'" alt="">';
         		htmlText += '        </div><div class="p-4 mt-2"><div class="d-flex justify-content-between mb-3">';
@@ -381,7 +392,7 @@
         		htmlText += '	</div></div> <div class="d-flex mb-3"></div>';
         		htmlText += '	<div class="text-body container" style="height:85px ">'+introduce+'</div>';
         		htmlText += '	<div class="d-flex justify-content-between">';
-        		htmlText += '	<a class="btn btn-sm btn-primary2 rounded py-2 px-4" href="${pageContext.request.contextPath}/site/places/'+sitenum+'">View Detail</a>';
+        		htmlText += '	<a class="btn btn-sm btn-primary2 rounded py-2 px-4" href="${pageContext.request.contextPath}/site/places/'+sitenum+query+'">View Detail</a>';
         		htmlText += ' </div></div></div> </div>';
         		
         		// 인써트 어제이슨트 함수로 마지막에 HTML 추가

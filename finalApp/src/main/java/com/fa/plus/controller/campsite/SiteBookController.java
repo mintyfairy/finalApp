@@ -85,6 +85,7 @@ public class SiteBookController {
 		model.put("size", size);
 		model.put("total_page", total_page);
 		model.put("pageNo", current_page);
+		model.put("dto", dto);
 		
 		return model;
 	}
@@ -97,8 +98,8 @@ public class SiteBookController {
 	
 		map.put("siteNum",num);
 		Site Sitedto=adminService.findByIdSite(num);
-		List<SiteDetail> list = adminService.listRoom(map);
-		
+		dto.setSitenum(num);
+		List<SiteDetail> list = adminService.listSearchRoom(dto);
 		for(SiteDetail vo:list) {
 			List<String> filelist = new ArrayList<String>();
 			for(SiteDetail vo2:adminService.listRoomFile(vo.getDetailnum())){
@@ -113,6 +114,7 @@ public class SiteBookController {
 		model.addAttribute("listSiteFile", listSiteFile);
 		model.addAttribute("dataCount", dataCount);
 		model.addAttribute("Sitedto",Sitedto);
+		model.addAttribute("dto", dto);
 		
 		return ".campsite.roomDetail";
 	}

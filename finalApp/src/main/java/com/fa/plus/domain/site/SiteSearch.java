@@ -2,6 +2,7 @@ package com.fa.plus.domain.site;
 
 public class SiteSearch {
 	
+	private int sitenum;
 	private String startDate;
 	private String endDate;
 	private String siteKwd;
@@ -22,8 +23,12 @@ public class SiteSearch {
 	
 	
 	
-	
-	
+	public int getSitenum() {
+		return sitenum;
+	}
+	public void setSitenum(int sitenum) {
+		this.sitenum = sitenum;
+	}
 	public String getSiteOptionList() {
 		return siteOptionList;
 	}
