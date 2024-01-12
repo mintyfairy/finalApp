@@ -778,29 +778,27 @@ function sendOk(mode) {
 </div>
 
 <script type="text/javascript">
-let detail_info;
-let review;
-let question;
-let as;
-detail_info = document.querySelector("#tabs1").offsetTop;
-review = document.querySelector(".detail_tab2").offsetTop;
-question = document.querySelector(".detail_tab3").offsetTop;
-as = document.querySelector(".detail_tab4").offsetTop;
+//변수명 변경
+let detailInfo = document.querySelector("#tabs1").offsetTop;
+let productReview = document.querySelector(".detail_tab2").offsetTop;
+let productQuestion = document.querySelector(".detail_tab3").offsetTop;
+let productAs = document.querySelector(".detail_tab4").offsetTop;
 
-function detailInfo() {
-	console.log(detail_info);
-   window.scrollTo({top:detail_info, left:0, behavior:'smooth'});
-};
+// 함수명 변경
+function scrollToDetailInfo() {
+   window.scrollTo({top: detailInfo, left: 0, behavior: 'smooth'});
+}
 
-function productReview() {
-   window.scrollTo({top:review, left:0, behavior:'smooth'});
-};
+function scrollToProductReview() {
+   window.scrollTo({top: productReview, left: 0, behavior: 'smooth'});
+}
 
-function productQuestion() {
-   window.scrollTo({top:question, left:0, behavior:'smooth'});
-};
+function scrollToProductQuestion() {
+   window.scrollTo({top: productQuestion, left: 0, behavior: 'smooth'});
+}
 
-function productAs() {
-   window.scrollTo({top:as, left:0, behavior:'smooth'});
-};
+function scrollToProductAs() {
+   window.scrollTo({top: productAs, left: 0, behavior: 'smooth'});
+}
+
 </script>

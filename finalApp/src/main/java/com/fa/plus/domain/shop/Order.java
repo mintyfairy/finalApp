@@ -16,10 +16,8 @@ public class Order {
 	private String userId;
 
 	private String orderNum;
-	private long orderDetailNum;
 	private String orderName;
-	private String orderEmail;
-	private String orderTel;
+	private long orderDetailNum;
 	private String orderDate;
 	private int usedSaved;
 	private int payment;
@@ -58,6 +56,7 @@ public class Order {
 	private String addr1;
 	private String addr2;
 	private String destMemo;
+	private String memo;
 
 	// 결제 내역 정보
 	private String payMethod;
@@ -360,19 +359,11 @@ public class Order {
 	public void setOrderName(String orderName) {
 		this.orderName = orderName;
 	}
-	public String getOrderEmail() {
-		return orderEmail;
+	public String getMemo() {
+		return memo;
 	}
-	public void setOrderEmail(String orderEmail) {
-		this.orderEmail = orderEmail;
+	public void setMemo(String memo) {
+		this.memo = memo;
 	}
-	public String getOrderTel() {
-		return orderTel;
-	}
-	public void setOrderTel(String orderTel) {
-		this.orderTel = orderTel;
-	}
-
-	
 	
 }

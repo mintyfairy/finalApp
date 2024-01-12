@@ -312,36 +312,24 @@ function sendOk() {
           <tbody>
             <tr>
               <th>이름</th>
-              <td><input type="text" name="recipientName"></td>
+              <td><input type="text" name="recipientName" value="${orderUser.userName}"></td>
             </tr>
             <tr>
               <th>연락처</th>
               <td>
-                <select name="tel1" id="tel1" style="height: 25px;">
-                  <option value="">선택</option>
-                  <option value="010">010</option>
-                  <option value="011">011</option>
-                  <option value="016">016</option>
-                  <option value="017">017</option>
-                  <option value="018">018</option>
-                  <option value="019">019</option>
-                </select>
-                &nbsp;&#45;&nbsp;
-                <input type="text" name="tel2" id="tel2" style="width: 70px;">
-                &nbsp;&#45;&nbsp;
-                <input type="text" name="tel3" id="tel3" style="width: 70px;">
+                <input type="text" name="tel" id="tel"  value="${orderUser.tel}">
               </td>
             </tr>
             <tr>
               <th>주소</th>
               <td>
-                <input type="text" name="zip" id="zip" placeholder="우편번호" style="width: 110px;" readonly>
+                <input type="text" name="zip" id="zip" placeholder="우편번호" style="width: 110px;" value="${orderUser.zip}" readonly>
                 <button type="button" onclick="daumPostcode();"
                   style="vertical-align: middle; margin-left: 4px; cursor: pointer; background-color: #fff; padding: 2px 4px; border: 1px solid #e5e5e5;">우편번호</button>
                 <br>
-                <input type="text" name="add1" id="addr1" style="margin-top: 7px; width: 300px;" placeholder="기본주소"
+                <input type="text" name="addr1" id="addr1" value="${orderUser.addr1}" style="margin-top: 7px; width: 300px;" placeholder="기본주소"
                   readonly>
-                <input type="text" name="add1" id="addr1" style="margin-top: 7px; margin-left: 4px; width: 300px;"
+                <input type="text" name="addr2" id="addr2" value="${orderUser.addr2}" style="margin-top: 7px; margin-left: 4px; width: 300px;"
                   placeholder="상세주소">
               </td>
             </tr>
