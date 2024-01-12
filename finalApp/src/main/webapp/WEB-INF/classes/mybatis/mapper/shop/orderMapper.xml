@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fa.plus.mapper.OrderMapper">
+	<select id="findByMaxOrderNumber" resultType="String">
+		SELECT orderNum
+		FROM productOrder
+		ORDER BY orderDate DESC
+		FETCH FIRST 1 ROWS ONLY
+	</select>
+	
+	<insert id="insertOrder" parameterType="com.fa.plus.domain.shop.Order">
+		INSERT INTO productOrder(orderNum, memberIdx, orderDate, totalMoney, usedSaved, deliveryCharge, 
+			payment, cancelAmount, orderState, orderName, orderEmail, orderTel) VALUES (#{orderNum}, #{memberIdx}, SYSDATE, 
+			#{totalMoney}, #{usedSaved}, #{deliveryCharge}, #{payment}, 0, 1, #{orderName}, #{orderEmail}, #{orderTel})
+	</insert>
+	
+	<insert id="insertPayDetail" parameterType="com.fa.plus.domain.shop.Order">
+		INSERT INTO payDetail(orderNum, payMethod, cardName, authNumber, authDate) 
+			VALUES (#{orderNum}, #{payMethod}, #{cardName}, #{authNumber}, TO_DATE(#{authDate}, 'YYYY-MM-DD HH24:MI:SS') )
+	</insert>
+	
+	<insert id="insertOrderDetail" parameterType="com.fa.plus.domain.shop.Order">
+		INSERT INTO orderDetail(orderDetailNum, orderNum, qty, price, salePrice, 
+			detailNum, detailNum2, productNum, productMoney, savedMoney, userDelete, detailState) VALUES (orderDetail_seq.NEXTVAL,
+			#{orderNum}, #{qty}, #{price}, #{salePrice}, 
+			#{detailNum}, #{detailNum2}, #{productNum}, #{productMoney}, #{savedMoney}, 0, 0)
+	</insert>
+	
+	<insert id="insertOrderDelivery" parameterType="com.fa.plus.domain.shop.Order">
+		INSERT INTO orderDelivery(orderNum, recipientName, tel, zip, addr1, addr2, memo) 
+			VALUES (#{orderNum}, #{recipientName}, #{tel}, #{zip}, #{addr1}, #{addr2}, 
+					#{memo, jdbcType=VARCHAR})
+	</insert>
+
+	<select id="listProduct" parameterType="java.util.List" resultType="com.fa.plus.domain.shop.Order">
+		SELECT p.productNum, productName, price, savedMoney, discountRate, delivery, thumbnail,
+    		po.optionNum, po.optionName, od.detailNum, od.optionValue,
+    		po2.optionNum optionNum2, po2.optionName optionName2,
+    		od2.detailNum detailNum2, od2.optionValue optionValue2
+		FROM product p
+		JOIN productOption po ON p.productNum = po.productNum
+		JOIN productOption po2 ON po.optionNum = po2.parentNum
+		JOIN optionDetail od ON po.optionNum = od.optionNum
+		JOIN optionDetail od2 ON po2.optionNum = od2.optionNum
+		WHERE (od.detailNum, od2.detailNum) IN
+		<foreach collection="list" item="item" index="index"
+			open="(" separator="," close=")">
+			(#{item.detailNum}, #{item.detailNum2})
+		</foreach>
+	</select>
+
+	<select id="findById" parameterType="Long" resultType="com.fa.plus.domain.shop.Order">
+		SELECT productNum, productName, price, savedMoney, discountRate, delivery, thumbnail
+		FROM product p
+		WHERE p.productNum = #{productNum}
+	</select>
+	
+	<select id="listOptionDetail" parameterType="java.util.List" resultType="com.fa.plus.domain.shop.Order">
+		SELECT detailNum, od.optionNum, optionName, optionValue
+		FROM optionDetail od
+		JOIN productOption po ON od.optionNum = po.optionNum
+		WHERE od.detailNum IN
+		<foreach collection="list" item="detailNum" index="index" open="(" separator="," close=")">
+			#{detailNum}
+		</foreach>
+	</select>
+	
+	<select id="findByDetailId" parameterType="Long" resultType="com.fa.plus.domain.shop.Order">
+		SELECT detailNum, od.optionNum, optionName, optionValue
+		FROM optionDetail od
+		JOIN productOption po ON od.optionNum = po.optionNum
+		WHERE od.detailNum = #{detailNum}
+	</select>
+</mapper>

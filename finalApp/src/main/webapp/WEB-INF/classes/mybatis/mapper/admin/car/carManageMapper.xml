@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fa.plus.admin.mapper.CarManageMapper">
+	<!-- 카라반 등록 -->
+	<select id="carNumseq" resultType="Long">
+		SELECT carNum_seq.NEXTVAL FROM dual
+	</select>
+	
+	<insert id="insertCar" parameterType="com.fa.plus.admin.domain.car.CampingCar">
+		INSERT INTO campingCar(carNum, carName, carSize, thumbnail, discountRate, 
+				carShow, reg_date, rev_date, carMaxNum, sleepNum, 
+				content, petOrNot, description) 
+		VALUES (#{carNum}, #{carName}, #{carSize}, #{thumbnail}, #{discountRate}, 
+				#{carShow}, SYSDATE, SYSDATE, #{carMaxNum}, #{sleepNum}, 
+				#{content}, #{petOrNot}, #{description})
+	</insert>
+	
+	<insert id="insertCarDetail" parameterType="com.fa.plus.admin.domain.car.CampingCar">
+		INSERT INTO carDetail(caravanNum, weekCost, wkndCost, carBirth, carNum) 
+				VALUES (#{caravanNum}, #{weekCost}, #{wkndCost}, #{carBirth}, #{carNum})
+	</insert>
+	
+	<insert id="insertCarOption" parameterType="com.fa.plus.admin.domain.car.CampingCar">
+		INSERT INTO carOption(caravanNum, toilet, shower, bed, sink, microwave,
+		 frige, waterHeater, desk, tv, airCondition, heater, powerBank, induction, gasStove) 
+		VALUES (#{caravanNum}, #{toilet}, #{shower}, #{bed}, #{sink},
+			#{microwave}, #{frige}, #{waterHeater}, #{desk}, #{tv},
+			#{airCondition}, #{heater}, #{powerBank}, #{induction}, #{gasStove})
+	</insert>
+	
+	<!-- 추가 이미지 등록 -->
+	<insert id="insertImageFile" parameterType="com.fa.plus.admin.domain.car.CampingCar">
+		INSERT INTO addImagefile(carImagenum, imageFilename, caravanNum)
+			VALUES(carImagenum_seq.NEXTVAL, #{imageFilename}, #{caravanNum})
+	</insert>
+	
+	<sql id="where-list">
+		<if test="schType=='all'">
+			(INSTR(carName, #{kwd}) &gt; 0
+				OR INSTR(c.carNum, #{kwd}) &gt; 0
+			)
+		</if>
+		<if test="schType=='carNum'">
+			INSTR(c.carNum, #{kwd}) = 1
+		</if>
+		<if test="schType=='carName'">
+			INSTR(c.carName, #{kwd}) &gt; 0
+		</if>
+		<if test="schType=='reg_date'">
+		   ( TO_CHAR(reg_date, 'YYYYMMDD') = #{kwd}
+	          OR TO_CHAR(reg_date, 'YYYY-MM-DD') = #{kwd} )
+		</if>
+	</sql>
+	
+	<!-- 데이터 갯수 세기 -->
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM campingCar c
+		<where>
+			<if test="carShow != -1">
+				AND carShow = #{carShow}
+			</if>
+			<if test="kwd != null and kwd != ''">
+				AND <include refid="where-list"/>
+			</if>
+		</where>
+	</select>
+	
+	<!-- 리스트 -->
+	<select id="listCar" parameterType="map" resultType="com.fa.plus.admin.domain.car.CampingCar">
+		SELECT c.carNum, thumbnail, carName, d.weekCost, d.wkndCost, discountRate, TO_CHAR(reg_date, 'YYYY-MM-DD') reg_date
+		FROM campingCar c 
+		JOIN carDetail d ON c.carNum = d.carNum
+		<where>
+			<if test="carShow != -1">
+				AND carShow = #{carShow}
+			</if>
+			<if test="kwd != null and kwd != ''">
+				AND <include refid="where-list"/>
+			</if>
+		</where>
+		ORDER BY c.carNum DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+	
+	<select id="findById" parameterType="long" resultType="com.fa.plus.admin.domain.car.CampingCar">
+		SELECT c.carNum, carName, carSize, thumbnail, discountRate, 
+			carShow, reg_date, rev_date, carMaxNum, sleepNum, 
+			content, petOrNot, description, d.caravanNum,
+			weekCost, wkndCost, carBirth, toilet, shower, bed, sink, microwave,
+			frige, waterHeater, desk, tv, airCondition, heater,
+			powerbank, induction, gasStove
+		FROM campingCar c
+		JOIN carDetail d ON c.carNum = d.carNum
+		JOIN carOption o ON d.caravanNum = o.caravanNum
+		WHERE c.carNum = #{carNum}
+	</select>
+	
+	<select id="listCarFile" parameterType="long" resultType="com.fa.plus.admin.domain.car.CampingCar">
+		SELECT carImagenum, imageFilename, a.caravanNum, c.carNum
+		FROM addImagefile  a
+		JOIN carDetail d ON a.caravanNum = d.caravanNum
+		JOIN campingCar c ON d.carNum = c.carNum
+		WHERE c.carNum = #{carNum}
+	</select>
+	
+		
+	<!-- 수정  -->
+	<update id="updateCar" parameterType="com.fa.plus.admin.domain.car.CampingCar">
+		UPDATE campingCar SET carName = #{carName}, carSize = #{carSize}, thumbnail = #{thumbnail}, description = #{description},
+			discountRate = #{discountRate}, carShow = #{carShow}, reg_date = SYSDATE, carMaxNum = #{carMaxNum},
+			sleepNum = #{sleepNum}, content = #{content}, petOrNot = #{petOrNot}
+		WHERE carNum = #{carNum}
+	</update>
+	
+	<update id="updateCarDetail" parameterType="com.fa.plus.admin.domain.car.CampingCar">
+		UPDATE carDetail SET weekCost = #{weekCost}, wkndCost = #{wkndCost}, carBirth = #{carBirth}, caravanNum = #{caravanNum}
+		WHERE carNum = #{carNum}
+	</update>
+	
+	
+	<update id="updateCarOption" parameterType="com.fa.plus.admin.domain.car.CampingCar">
+		UPDATE carOption SET toilet = #{toilet}, shower = #{shower}, bed = #{bed}, sink = #{sink},
+			microwave = #{microwave}, frige = #{frige}, waterHeater = #{waterHeater}, desk = #{desk}, tv = #{tv},
+			airCondition = #{airCondition}, heater = #{heater}, powerBank = #{powerBank}, induction = #{induction},
+			gasStove = #{gasStove}
+		WHERE caravanNum = #{caravanNum}
+	</update>
+	
+	
+	
+	<delete id="deleteCar" parameterType="Long">
+		DELETE FROM campingCar WHERE carNum = #{carNum}
+	</delete>
+
+	<delete id="deleteCarFile" parameterType="Long">
+      DELETE FROM addImagefile WHERE carImageNum = #{carImageNum}
+      
+      
+	</delete>
+	
+
+</mapper>

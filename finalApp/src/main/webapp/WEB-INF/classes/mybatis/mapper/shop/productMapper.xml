@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fa.plus.mapper.ProductMapper">
+	<!-- 일반 상품 목록 -->
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL (COUNT(*), 0) FROM product
+		WHERE special=0 AND productShow=1
+		<if test="categoryNum != 0">
+			AND categoryNum = #{categoryNum}
+		</if>
+	</select>
+
+	<select id="listProduct" parameterType="map"
+		resultType="com.fa.plus.domain.shop.Product">
+		SELECT productNum, p.categoryNum, p.brandNum, categoryName,
+		productName, price, discountRate, savedMoney,
+		delivery, thumbnail
+		FROM
+		product p
+		JOIN productCategory c ON p.categoryNum = c.categoryNum
+		LEFT
+		OUTER JOIN brand b ON p.brandNum = b.brandNum
+		WHERE special=0 AND
+		productShow=1
+		<if test="categoryNum != 0">
+			AND categoryNum = #{categoryNum}
+		</if>
+		ORDER BY productNum DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS
+		ONLY
+	</select>
+
+	<select id="findById" parameterType="Long"
+		resultType="com.fa.plus.domain.shop.Product">
+		SELECT p.productNum, p.categoryNum, p.brandNum,
+		categoryName, p.special, p.productShow, p.md, p.starter, p.deletion,
+		productName, price, savedMoney,
+		discountRate, delivery, thumbnail,
+		p.content, p.reg_date,
+		NVL(score, 0) score, NVL(reviewCount, 0)
+		reviewCount,
+		NVL(questionCount, 0) questionCount,
+		TO_CHAR(startDate,
+		'YYYY-MM-DD HH24:MI') startDate,
+		TO_CHAR(endDate, 'YYYY-MM-DD HH24:MI')
+		endDate,
+		NVL(showSpecial, -1) showSpecial,
+		NVL(saleCount, 0) saleCount
+		FROM product p
+		JOIN productCategory c ON p.categoryNum = c.categoryNum
+		LEFT OUTER JOIN specialsDetail d ON p.productNum = d.productNum
+		LEFT
+		OUTER JOIN specials s ON d.specialsNum = s.specialsNum
+		LEFT OUTER JOIN
+		(
+		SELECT productNum, ROUND(AVG(score), 1) score, COUNT(*) reviewCount
+		FROM productReview
+		WHERE showReview = 1
+		GROUP BY productNum
+		) t ON
+		p.productNum = t.productNum
+		LEFT OUTER JOIN (
+		SELECT productNum,
+		COUNT(*) questionCount
+		FROM productQna
+		WHERE showQuestion = 1
+		GROUP BY
+		productNum
+		) q ON p.productNum = q.productNum
+		LEFT OUTER JOIN (
+		SELECT
+		productNum, COUNT(*) saleCount
+		FROM orderDetail
+		GROUP BY productNum
+		) pc
+		ON p.productNum = pc.productNum
+		WHERE p.productShow = 1 AND
+		p.productNum = #{productNum}
+	</select>
+
+	<select id="listProductFile" parameterType="Long"
+		resultType="com.fa.plus.domain.shop.Product">
+		SELECT fileNum, productNum, fileName
+		FROM productFile
+		WHERE
+		productNum = #{productNum}
+	</select>
+
+	<select id="listAllCategory"
+		resultType="com.fa.plus.domain.shop.Product">
+		SELECT categoryNum, categoryName, use, showNo, parentNum,
+		LEVEL FROM (
+		SELECT categoryNum, categoryName, use, showNo, parentNum
+		FROM productCategory
+		WHERE use = 1
+		)
+		START WITH parentNum IS NULL
+		CONNECT
+		BY PRIOR categoryNum =
+		parentNum
+		ORDER SIBLINGS BY showNo
+	</select>
+
+	<select id="listCategory"
+		resultType="com.fa.plus.domain.shop.Product">
+		SELECT categoryNum, categoryName, use, showNo, parentNum
+		FROM productCategory
+		WHERE use = 1 AND parentNum IS NULL
+		ORDER BY showNo
+	</select>
+
+	<select id="listSubCategory" parameterType="Long"
+		resultType="com.fa.plus.domain.shop.Product">
+		SELECT categoryNum, categoryName, use, showNo, parentNum
+		FROM productCategory
+		WHERE use = 1 AND parentNum = #{parentNum}
+		ORDER BY
+		showNo
+	</select>
+
+	<select id="listProductOption" parameterType="Long"
+		resultType="com.fa.plus.domain.shop.Product">
+		SELECT optionNum, optionName, productNum, parentNum
+		FROM
+		productOption WHERE productNum = #{productNum}
+		ORDER BY parentNum NULLS
+		FIRST, parentNum
+	</select>
+
+	<select id="listOptionDetail" parameterType="Long"
+		resultType="com.fa.plus.domain.shop.Product">
+		SELECT detailNum, optionValue, optionNum
+		FROM optionDetail
+		WHERE optionNum = #{optionNum}
+		ORDER BY detailNum
+	</select>
+
+
+	<select id="listOption1" parameterType="Long"
+		resultType="com.fa.plus.domain.shop.Product">
+		SELECT a.*
+		FROM (
+		SELECT optionValue, optionName, productNum,
+		parentNum
+		FROM optionDetail d
+		JOIN productOption o ON d.optionNum =
+		o.optionNum) a
+		JOIN product p ON a.productNum = p.productNum
+		WHERE
+		a.parentNum IS NULL AND p.productNum = #{productNum}
+	</select>
+
+	<select id="listOption2" parameterType="Long"
+		resultType="com.fa.plus.domain.shop.Product">
+		SELECT a.*
+		FROM (
+		SELECT optionValue, optionName, productNum, parentNum
+		FROM optionDetail d
+		JOIN productOption o ON d.optionNum = o.optionNum) a
+		JOIN product p ON a.productNum = p.productNum
+		WHERE a.parentNum IS NOT NULL AND p.productNum = #{productNum}
+	</select>
+</mapper>

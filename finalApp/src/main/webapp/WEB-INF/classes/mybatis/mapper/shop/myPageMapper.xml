@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fa.plus.mapper.MyPageMapper">
+	<select id="countPayment" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM productOrder po
+		JOIN orderDetail od ON po.orderNum = od.orderNum
+		WHERE po.memberIdx = #{memberIdx} AND userDelete = 0
+	</select>
+	
+	<select id="listPayment" parameterType="map" resultType="com.fa.plus.domain.shop.Payment">
+		SELECT po.orderNum, po.memberIdx, orderDate, totalMoney, od.savedMoney, 
+			usedSaved, deliveryCharge, payment, qty, salePrice, 
+			od.orderDetailNum, 
+			op.detailNum, op.optionValue, detailNum2, op2.optionValue optionValue2,
+			od.productNum, productMoney, productName, thumbnail, 
+			orderState, od.detailState,
+			orderStateDate, deliveryName, invoiceNumber,
+			NVL(reviewWrite, 0) reviewWrite
+		FROM productOrder po
+		JOIN orderDetail od ON po.orderNum = od.orderNum
+		JOIN product p ON od.productNum = p.productNum
+		JOIN optionDetail op ON od.detailNum = op.detailNum
+		JOIN optionDetail op2 ON od.detailNum2 = op2.detailNum
+		LEFT OUTER JOIN (
+			SELECT num, 1 reviewWrite
+			FROM productReview
+			WHERE memberIdx = #{memberIdx}
+		) r ON od.orderDetailNum = r.num
+		WHERE po.memberIdx = #{memberIdx} AND userDelete = 0
+		ORDER BY orderDate DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+	
+	<update id="updateOrderDetailState" parameterType="map">
+		UPDATE orderDetail SET detailState = #{detailState}
+		WHERE orderDetailNum = #{orderDetailNum}
+	</update>
+	
+	<update id="updateOrderHistory" parameterType="Long">
+		UPDATE orderDetail SET userDelete = 1
+		WHERE orderDetailNum = #{orderDetailNum}
+	</update>
+	
+	<insert id="insertDetailStateInfo" parameterType="map">
+		INSERT INTO detailStateInfo(stateNum, orderDetailNum, memberIdx, detailState, stateMemo, detailStateDate) VALUES
+			(detailState_seq.NEXTVAL, #{orderDetailNum}, #{memberIdx}, #{detailState}, 
+				#{stateMemo,jdbcType=VARCHAR}, SYSDATE)
+	</insert>
+	
+	<!-- 장바구니 등록 -->
+	<insert id="insertCart" parameterType="com.fa.plus.domain.shop.Order">
+		INSERT INTO cart(cartNum, userId, detailNum2, qty, detailNum, productNum, memberIdx, reg_date) VALUES 
+			(cart_seq.NEXTVAL, #{userId}, #{detailNum2}, #{qty}, #{detailNum}, #{productNum}, #{memberIdx}, SYSDATE)
+	</insert>
+	
+	<update id="updateCart" parameterType="com.fa.plus.domain.shop.Order">
+		UPDATE cart SET qty = #{qty}, reg_date = SYSDATE
+		WHERE detailNum2 = #{detailNum2} AND userId = #{userId}
+	</update>
+
+	<select id="findByCartId" parameterType="map" resultType="com.fa.plus.domain.shop.Order">
+		SELECT userId, detailNum2, qty, detailNum, productNum, reg_date 
+		FROM cart
+		WHERE detailNum2 = #{detailNum2} AND userId = #{userId}
+	</select>
+	
+	<!-- 장바구니 리스트 -->
+	<select id="listCart" resultType="com.fa.plus.domain.shop.Order" parameterType="String">
+		SELECT userId, ct.qty, 
+			ct.detailNum, op.optionValue, ct.detailNum2, op2.optionValue optionValue2,
+			delivery, price, discountRate,
+			ct.productNum, productName, thumbnail, ct.reg_date
+		FROM cart ct
+		JOIN product p ON ct.productNum = p.productNum
+		JOIN optionDetail op ON ct.detailNum = op.detailNum
+		JOIN optionDetail op2 ON ct.detailNum2 = op2.detailNum
+		WHERE userId = #{userId}
+		ORDER BY reg_date DESC
+	</select>
+	
+	<delete id="deleteCart" parameterType="map">
+		DELETE FROM cart
+		WHERE userId = #{userId} 
+		<if test="gubun == 'item' ">
+			AND detailNum2 = #{detailNum2}
+		</if>
+		<if test="gubun == 'list' ">
+			AND detailNum2 IN
+			<foreach collection="list" item="detailNum2" index="index"
+				open="(" separator="," close=")">
+				#{detailNum2}
+			</foreach>
+		</if>
+	</delete>
+
+	<delete id="deleteCartExpiration">
+		DELETE FROM cart
+		WHERE reg_date + 15 &lt; SYSDATE
+	</delete>
+</mapper>

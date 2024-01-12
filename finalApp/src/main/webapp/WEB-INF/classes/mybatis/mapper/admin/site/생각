@@ -1,0 +1,233 @@
+SELECT campingsite.SITENUM SITENUM,SITENAME,SITELOCAL,addr1,addr2, CATEGORY,ENVIRONMENT,HITCOUNT, 
+AVGSTAR FROM campingsite left join sitedetail on campingsite.SITENUM=sitedetail.SITENUM left 
+join book on sitedetail.DETAILNUM=book.DETAILNUM WHERE ENABLED= 0 and INSTR(SITENAME, 's') 
+> 0 and siteLocal='6' and Environment='5' and CATEGORY='3' and (ENDDATE>= TO_DATE('2024-01-12','yyyy-mm-dd') and 
+TO_DATE('2024-01-04','yyyy-mm-dd')>=STARTDATE) and ('111' > bookprice and '222' < bookprice) ORDER BY SITENUM DESC OFFSET 
+'0' ROWS FETCH FIRST '4' ROWS ONLY 
+;
+select * from campingsite;
+select * from book;
+select * from sitedetail;
+
+SELECT campingsite.SITENUM SITENUM,SITENAME,SITELOCAL,addr1,addr2, CATEGORY,ENVIRONMENT,HITCOUNT,introduce,THUMBNAIL ,
+AVGSTAR FROM campingsite left join sitedetail on campingsite.SITENUM=sitedetail.SITENUM left 
+join book on sitedetail.DETAILNUM=book.DETAILNUM WHERE ENABLED= 0 ORDER BY SITENUM DESC OFFSET 
+'0' ROWS FETCH FIRST '4' ROWS ONLY ;
+
+SELECT DISTINCT campingsite.SITENUM SITENUM,SITENAME,SITELOCAL,addr1,addr2, CATEGORY,ENVIRONMENT,HITCOUNT,introduce,THUMBNAIL, 
+AVGSTAR ,(select count(detailnum) cnt from sitedetail where SITENUM=21) roomcnt
+FROM campingsite  
+WHERE ENABLED= 0 and
+    (select  count(*) from sitedetail join  where SITENUM=21 and 10000 < price and 50000>  price)>0
+ORDER BY SITENUM DESC OFFSET '0' ROWS FETCH FIRST '4' ROWS ONLY 
+;
+desc book;
+desc booklist;
+desc sitedetail;
+select count(*) from sitedetail where price<115000;
+insert into booklist values(97,TO_DATE('2024-01-20','yyyy-mm-dd'),12,270000,0);
+insert into book(BOOKNUM,STARTDATE,ENDDATE ,BOOKPRICE ,DETAILNUM ,LISTNUM) 
+VALUES(5,TO_DATE('2024-12-10','yyyy-mm-dd'),TO_DATE('2024-01-13','yyyy-mm-dd'),150000,24,97)
+;
+insert into book(BOOKNUM,STARTDATE,ENDDATE ,BOOKPRICE ,DETAILNUM ,LISTNUM) 
+VALUES(6,TO_DATE('2024-12-14','yyyy-mm-dd'),TO_DATE('2024-12-17','yyyy-mm-dd'),120000,30,97)
+;
+commit;
+select * from book;
+
+--select 
+select count(distinct detailnum)  
+							from book 
+							where 
+                            (ENDDATE>= TO_DATE('2022-12-12','yyyy-mm-dd') and   
+			TO_DATE('2022-12-13','yyyy-mm-dd') >= STARTDATE);
+            
+SELECT DISTINCT campingsite.SITENUM SITENUM,SITENAME,SITELOCAL,addr1,addr2, CATEGORY,ENVIRONMENT,HITCOUNT,introduce,THUMBNAIL, 
+AVGSTAR 
+FROM campingsite  
+WHERE ENABLED= 0 and
+    (select  count(*) from sitedetail join  where SITENUM=21 and 10000 < price and 50000>  price)>0
+    and
+    (select count(distinct detailnum)  
+							from book 
+							where detailnum in (select detailnum from sitedetail where SITENUM=21) 
+                            and enddate<sysdate
+                            and(ENDDATE>= TO_DATE('2022-12-12','yyyy-mm-dd') and TO_DATE('2022-12-14','yyyy-mm-dd') >= STARTDATE))
+                             <(select count(detailnum) cnt from sitedetail )
+ORDER BY SITENUM DESC OFFSET '0' ROWS FETCH FIRST '4' ROWS ONLY 
+;
+
+SELECT campingsite.SITENUM SITENUM,SITENAME,SITELOCAL,addr1,addr2, CATEGORY,ENVIRONMENT,HITCOUNT,introduce,THUMBNAIL, 
+AVGSTAR 
+FROM campingsite 
+
+;
+(select detailnum,ENDDATE,STARTDATE from book where enddate>sysdate)
+;
+
+ select distinct sitenum from sitedetail
+        where detailnum not in
+            (select sitedetail.DETAILNUM detailnum from sitedetail 
+            left join(select detailnum,ENDDATE,STARTDATE from book) book on sitedetail.DETAILNUM=book.DETAILNUM
+             where ENDDATE> TO_DATE('2024-01-21','yyyy-mm-dd') and TO_DATE('2024-01-25','yyyy-mm-dd') > STARTDATE)
+             ;
+             
+ SELECT campingsite.SITENUM SITENUM,SITENAME,SITELOCAL,addr1,addr2, CATEGORY,ENVIRONMENT,HITCOUNT,introduce,THUMBNAIL, 
+AVGSTAR FROM 
+campingsite join ( select distinct sitenum from sitedetail where detailnum not 
+in (select sitedetail.DETAILNUM detailnum from sitedetail left join(select detailnum,ENDDATE,STARTDATE 
+from book where enddate>sysdate) book on sitedetail.DETAILNUM=book.DETAILNUM where ENDDATE> 
+TO_DATE('2022-12-12','yyyy-mm-dd') and TO_DATE('2022-12-15','yyyy-mm-dd') > STARTDATE) ) a 
+on campingsite.sitenum=a.sitenum 
+
+WHERE ENABLED= 0 ORDER BY SITENUM DESC OFFSET '0' ROWS FETCH 
+FIRST '4' ROWS ONLY ;
+
+SELECT campingsite.SITENUM SITENUM,SITENAME,SITELOCAL,addr1,addr2, CATEGORY,ENVIRONMENT,HITCOUNT,introduce,THUMBNAIL, 
+AVGSTAR FROM campingsite 
+WHERE ENABLED= 0 and campingsite.sitenum in (select  distinct sitenum from sitedetail where '70000' 
+< price )
+ORDER BY SITENUM DESC OFFSET '0' ROWS FETCH FIRST '4' ROWS ONLY ;
+
+select CAMPINGSITE_SEQ.NEXTVAL from dual;
+select CAMPINGSITE_SEQ.Currval from dual;
+
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'파라다이스 캠핑장','<p>     인천의 바다를 바라보는 카라반 캠핑장입니다. 파란 하늘과 바다가 어우러지는 풍경을 즐기세요. 캠핑장은 인천공항과 가까이 있어 교통이 편리합니다. 캠핑장 근처에는 월미도차이나타운송도 등의 관광지가 있습니다. 파라다이스 캠핑장에서 인천의 매력을 느껴보세요.<br></p>',	2	,	22783	,'인천 서구 가경주로 10 (가정동)','파라다이스 캠핑장','pic1 (1).jpeg',	3	,	3	,	0	,'16:00','11:00'	,19,0,	'010101'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (37).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (38).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (39).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'블루오션 캠핑장','<p>     인천의 해변가에 위치한 방갈로 캠핑장입니다. 파도소리를 들으며 힐링할 수 있는 곳입니다. 캠핑장은 해수욕장과 인접해 있어 여름에는 수영을 즐길 수 있습니다. 캠핑장 내에는 바베큐장놀이터샤워실 등의 시설이 있습니다. 블루오션 캠핑장에서 바다의 즐거움을 만끽하세요.<br></p>',	2	,	21510	,'인천 남동구 간석로 1 (간석동)','블루오션 캠핑장','pic1 (2).jpeg',	4	,	3	,	0	,'16:00','11:00'	,23,0,	'100010'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (40).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (41).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (42).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'힐링 캠핑장','<p>     경기의 호수가 있는 곳에 있는 차박 캠핑장입니다. 자신의 차에서 호수의 정취를 느낄 수 있습니다. 캠핑장은 호수공원과 연결되어 있어 산책이나 자전거 타기를 할 수 있습니다. 캠핑장 내에는 전기물화장실 등의 기본적인 시설이 제공됩니다. 힐링 캠핑장에서 차박의 매력을 경험하세요.<br></p>',	3	,	15115	,'경기 시흥시 경기과기대로 2 (정왕동, (주)우리철강레이저)','힐링 캠핑장','pic1 (3).jpeg',	5	,	6	,	0	,'16:00','11:00'	,19,0,	'001100'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (43).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (44).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (45).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'그린포레스트 캠핑장','<p>     경기의 산속에 있는 오토캠핑장입니다. 숲의 신선한 공기와 새소리를 들을 수 있습니다. 캠핑장은 산림욕장과 가까이 있어 산림욕을 즐길 수 있습니다. 캠핑장 내에는 텐트테이블의자바베큐장 등의 장비가 구비되어 있습니다. 그린포레스트 캠핑장에서 숲의 힐링을 받으세요.<br></p>',	3	,	12661	,'경기  서구 가경주로 10 (가정동)','그린포레스트 캠핑장','pic1 (4).jpeg',	1	,	1	,	0	,'16:00','11:00'	,23,0,	'000000'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (46).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (47).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (48).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'눈꽃 캠핑장','<p>     강원의 산에 있는 글램핑 캠핑장입니다. 겨울에는 눈꽃이 흩날리는 환상적인 캠핑장입니다. 캠핑장은 스키장과 가까이 있어 스키나 스노보드를 즐길 수 있습니다. 캠핑장 내에는 난방전기물화장실 등의 편의시설이 완벽하게 갖춰져 있습니다. 눈꽃 캠핑장에서 겨울의 로맨틱을 느껴보세요.<br></p>',	4	,	12800	,'강원  서구 가경주로 10 (가정동)','눈꽃 캠핑장','pic1 (5).jpeg',	2	,	1	,	0	,'16:00','11:00'	,19,0,	'110010'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (49).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (50).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (51).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'아이스베어 캠핑장','<p>     강원의 산에 있는 카라반 캠핑장입니다. 따뜻하고 아늑한 카라반에서 산의 경치를 감상하세요. 캠핑장은 산책로와 인접해 있어 산책이나 트래킹을 할 수 있습니다. 캠핑장 내에는 카라반테이블의자바베큐장 등의 장비가 구비되어 있습니다. 아이스베어 캠핑장에서 산의 멋을 즐기세요.<br></p>',	4	,	12939	,'강원  서구 가경주로 10 (가정동)','아이스베어 캠핑장','pic1 (6).jpeg',	3	,	1	,	0	,'16:00','11:00'	,23,0,	'100111'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (52).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (53).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (54).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'플라워 캠핑장','<p>     대전의 평야에 있는 방갈로 캠핑장입니다. 봄에는 꽃이 만발하는 아름다운 캠핑장입니다. 캠핑장은 꽃밭과 연결되어 있어 꽃구경이나 사진찍기를 할 수 있습니다. 캠핑장 내에는 방갈로테이블의자바베큐장 등의 장비가 구비되어 있습니다. 플라워 캠핑장에서 꽃의 향기를 맡으세요.<br></p>',	5	,	13078	,'경기  서구 가경주로 10 (가정동)','플라워 캠핑장','pic1 (7).jpeg',	4	,	7	,	0	,'16:00','11:00'	,19,0,	'101101'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (55).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (56).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (57).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'레인보우 캠핑장','<p>     대전의 평야에 있는 오토캠핑장입니다. 비가 오면 무지개가 보이는 캠핑장입니다. 캠핑장은 무지개공원과 가까이 있어 무지개를 관찰하거나 놀이기구를 탈 수 있습니다. 캠핑장 내에는 텐트테이블의자바베큐장 등의 장비가 구비되어 있습니다. 레인보우 캠핑장에서 무지개의 아름다움을 보세요.<br></p>',	5	,	13217	,'강원  서구 가경주로 10 (가정동)','레인보우 캠핑장','pic1 (8).jpeg',	1	,	7	,	0	,'16:00','11:00'	,23,0,	'110000'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (58).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (59).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (60).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'스카이 캠핑장','<p>     세종의 기타 지역에 있는 차박 캠핑장입니다. 넓은 공간에서 자유롭게 캠핑을 즐길 수 있습니다. 캠핑장은 하늘공원과 가까이 있어 하늘을 관찰하거나 비행기를 탈 수 있습니다. 캠핑장 내에는 전기물화장실 등의 기본적인 시설이 제공됩니다. 스카이 캠핑장에서 하늘의 넓음을 느껴보세요.<br></p>',	6	,	13356	,'강원  서구 가경주로 10 (가정동)','스카이 캠핑장','pic1 (9).jpeg',	5	,	8	,	0	,'16:00','11:00'	,19,0,	'111111'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (61).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (62).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (63).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'써니 캠핑장','<p>     세종의 기타 지역에 있는 글램핑 캠핑장입니다. 햇살이 따뜻하게 비치는 캠핑장입니다. 캠핑장은 햇빛공원과 가까이 있어 햇빛을 즐기거나 태양관찰소를 방문할 수 있습니다. 캠핑장 내에는 난방전기물화장실 등의 편의시설이 완벽하게 갖춰져 있습니다. 써니 캠핑장에서 햇빛의 에너지를 받으세요.<br></p>',	6	,	13495	,'경기  서구 가경주로 10 (가정동)','써니 캠핑장','pic1 (10).jpeg',	2	,	8	,	0	,'16:00','11:00'	,23,0,	'001110'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (64).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (65).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (66).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'라이온 캠핑장','<p>     충북의 계곡에 있는 오토캠핑장입니다. 시원하고 맑은 물이 흐르는 캠핑장입니다. 캠핑장은 계곡과 연결되어 있어 물놀이나 낚시를 할 수 있습니다. 캠핑장 내에는 텐트테이블의자바베큐장 등의 장비가 구비되어 있습니다. 라이온 캠핑장에서 계곡의 시원함을 느껴보세요.<br></p>',	7	,	13634	,'강원  서구 가경주로 10 (가정동)','라이온 캠핑장','pic1 (11).jpeg',	1	,	5	,	0	,'16:00','11:00'	,19,0,	'110101'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (67).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (68).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (69).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'펭귄 캠핑장','<p>     충북의 계곡에 있는 방갈로 캠핑장입니다. 펭귄 모양의 귀여운 방갈로에서 캠핑을 즐기세요. 캠핑장은 계곡과 인접해 있어 물놀이나 낚시를 할 수 있습니다. 캠핑장 내에는 방갈로테이블의자바베큐장 등의 장비가 구비되어 있습니다. 펭귄 캠핑장에서 펭귄의 귀여움을 즐기세요.<br></p>',	7	,	13773	,'강원  서구 가경주로 10 (가정동)','펭귄 캠핑장','pic1 (12).jpeg',	4	,	5	,	0	,'16:00','11:00'	,23,0,	'001001'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (70).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (71).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (72).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'드림 캠핑장','<p>     충남에 위치한 드림 캠핑장은 아름다운 호수를 바라보며 편안하고 고급스러운 글램핑을 즐길 수 있는 곳입니다. 드림 캠핑장은 넓은 잔디밭과 꽃들로 둘러싸여 있으며각 텐트에는 에어컨TV냉장고전기장판 등이 구비되어 있습니다. 드림 캠핑장에서는 호수에서 낚시를 하거나보트를 타거나자전거를 빌려 산책을 할 수 있습니다. 드림 캠핑장은 가족연인친구들과 함께 즐거운 추억을 만들 수 있는 최고의 캠핑장입니다.<br></p>',	8	,	13912	,'경기  서구 가경주로 10 (가정동)','드림 캠핑장','pic1 (13).jpeg',	2	,	6	,	0	,'16:00','11:00'	,19,0,	'111011'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (73).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (74).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (75).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'해피 캠핑장','<p>     충남에 위치한 해피 캠핑장은 호수가 내려다보이는 카라반을 이용할 수 있는 캠핑장입니다. 해피 캠핑장은 깨끗하고 안전한 카라반을 제공하며각 카라반에는 침대쇼파식탁주방화장실 등이 있습니다. 해피 캠핑장에서는 호수에서 수영을 하거나바베큐를 하거나놀이터에서 놀 수 있습니다. 해피 캠핑장은 편리하고 즐거운 캠핑을 원하는 분들에게 추천하는 캠핑장입니다.<br></p>',	8	,	14051	,'강원  서구 가경주로 10 (가정동)','해피 캠핑장','pic1 (14).jpeg',	3	,	6	,	0	,'16:00','11:00'	,23,0,	'101100'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (76).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (77).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (78).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'코코넛 캠핑장','<p>     대구에 위치한 코코넛 캠핑장은 차박을 즐길 수 있는 캠핑장입니다. 코코넛 캠핑장은 넓고 평평한 주차장을 제공하며각 차량에는 전기물샤워시설 등이 연결되어 있습니다. 코코넛 캠핑장에서는 기타를 연주하거나노래를 부르거나영화를 보거나책을 읽을 수 있습니다. 코코넛 캠핑장은 차박을 좋아하는 분들에게 적합한 캠핑장입니다.<br></p>',	9	,	14190	,'강원  서구 가경주로 10 (가정동)','코코넛 캠핑장','pic1 (15).jpeg',	5	,	8	,	0	,'16:00','11:00'	,19,0,	'111011'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (79).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (80).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (81).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'바나나 캠핑장','<p>     대구에 위치한 바나나 캠핑장은 오토캠핑을 즐길 수 있는 캠핑장입니다. 바나나 캠핑장은 잘 정비된 캠핑장으로각 자리에는 테이블의자파라솔그릴화로 등이 있습니다. 바나나 캠핑장에서는 기타를 빌려 캠프파이어를 하거나트램폴린을 타거나미니골프를 할 수 있습니다. 바나나 캠핑장은 오토캠핑을 즐기고 싶은 분들에게 적합한 캠핑장입니다.<br></p>',	9	,	14329	,'경기  서구 가경주로 10 (가정동)','바나나 캠핑장','pic1 (16).jpeg',	1	,	8	,	0	,'16:00','11:00'	,23,0,	'010000'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (82).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (83).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (84).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'샌드 캠핑장','<p>     울산에 위치한 샌드 캠핑장은 바다가 보이는 카라반을 이용할 수 있는 캠핑장입니다. 샌드 캠핑장은 모던하고 세련된 카라반을 제공하며각 카라반에는 에어컨TV냉장고전자레인지커피머신 등이 있습니다. 샌드 캠핑장에서는 바다에서 서핑을 하거나모래성을 쌓거나해변에서 산책을 할 수 있습니다. 샌드 캠핑장은 바다를 사랑하는 분들에게 추천하는 캠핑장입니다.<br></p>',	10	,	14468	,'강원  서구 가경주로 10 (가정동)','샌드 캠핑장','pic1 (17).jpeg',	3	,	3	,	0	,'16:00','11:00'	,19,0,	'100110'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (85).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (86).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (87).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'쉘 캠핑장','<p>     울산에 위치한 쉘 캠핑장은 바다가 보이는 방갈로를 이용할 수 있는 캠핑장입니다. 쉘 캠핑장은 아늑하고 편안한 방갈로를 제공하며각 방갈로에는 침대쇼파식탁주방화장실 등이 있습니다. 쉘 캠핑장에서는 바다에서 낚시를 하거나요트를 타거나해돋이를 볼 수 있습니다. 쉘 캠핑장은 바다의 정취를 느끼고 싶은 분들에게 적합한 캠핑장입니다.<br></p>',	10	,	14607	,'강원  서구 가경주로 10 (가정동)','쉘 캠핑장','pic1 (18).jpeg',	4	,	3	,	0	,'16:00','11:00'	,23,0,	'110000'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (88).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (89).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (90).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'허니 캠핑장','<p>     경북에 위치한 허니 캠핑장은 산속에서 글램핑을 즐길 수 있는 캠핑장입니다. 허니 캠핑장은 아름다운 산경을 바라보며 고급스러운 글램핑을 즐길 수 있는 곳입니다. 허니 캠핑장은 푸른 잔디밭과 나무들로 둘러싸여 있으며각 텐트에는 에어컨TV냉장고전기장판 등이 구비되어 있습니다. 허니 캠핑장에서는 산에서 등산을 하거나산딸기를 따거나산뜻한 공기를 마실 수 있습니다. 허니 캠핑장은 산의 품을 원하는 분들에게 추천하는 캠핑장입니다.<br></p>',	11	,	14746	,'경기  서구 가경주로 10 (가정동)','허니 캠핑장','pic1 (19).jpeg',	2	,	1	,	0	,'16:00','11:00'	,19,0,	'101110'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (91).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (92).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (93).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'베리 캠핑장','<p>     경북에 위치한 베리 캠핑장은 산속에서 오토캠핑을 즐길 수 있는 캠핑장입니다. 베리 캠핑장은 잘 정비된 캠핑장으로각 자리에는 테이블의자파라솔그릴화로 등이 있습니다. 베리 캠핑장에서는 산에서 산책을 하거나캠프파이어를 하거나별을 보거나새소리를 들을 수 있습니다. 베리 캠핑장은 산의 자연을 즐기고 싶은 분들에게 적합한 캠핑장입니다.<br></p>',	11	,	14885	,'강원  서구 가경주로 10 (가정동)','베리 캠핑장','pic1 (20).jpeg',	1	,	1	,	0	,'16:00','11:00'	,23,0,	'111011'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (94).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (95).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (96).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'코랄 캠핑장','<p>     경남에 위치한 코랄 캠핑장은 바다가 보이는 카라반을 이용할 수 있는 캠핑장입니다. 코랄 캠핑장은 색다른 디자인의 카라반을 제공하며각 카라반에는 에어컨TV냉장고전자레인지커피머신 등이 있습니다. 코랄 캠핑장에서는 바다에서 스노클링을 하거나파도타기를 하거나석양을 볼 수 있습니다. 코랄 캠핑장은 바다의 매력을 느낄수 있습니다<br></p>',	12	,	15024	,'강원  서구 가경주로 10 (가정동)','코랄 캠핑장','pic1 (21).jpeg',	3	,	3	,	0	,'16:00','11:00'	,19,0,	'010000'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (97).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (98).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (99).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'펄 캠핑장','<p>     경남에 위치한 펄 캠핑장은 바다가 보이는 방갈로를 이용할 수 있는 캠핑장입니다. 펄 캠핑장은 아늑하고 편안한 방갈로를 제공하며각 방갈로에는 침대쇼파식탁주방화장실 등이 있습니다. 펄 캠핑장에서는 바다에서 산호초를 보거나물개를 만나거나해변에서 바베큐를 할 수 있습니다. 펄 캠핑장은 바다의 아름다움을 느끼고 싶은 분들에게 적합한 캠핑장입니다.<br></p>',	12	,	15163	,'경기  서구 가경주로 10 (가정동)','펄 캠핑장','pic1 (22).jpeg',	4	,	3	,	0	,'16:00','11:00'	,23,0,	'001000'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (100).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (101).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (102).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'라벤더 캠핑장','<p>     전북에 위치한 라벤더 캠핑장은 평야에서 차박을 즐길 수 있는 캠핑장입니다. 라벤더 캠핑장은 넓고 평평한 주차장을 제공하며각 차량에는 전기물샤워시설 등이 연결되어 있습니다. 라벤더 캠핑장에서는 라벤더밭에서 향기를 맡거나드론을 날리거나풍선을 타거나텐트를 치고 잘 수 있습니다. 라벤더 캠핑장은 차박을 좋아하는 분들에게 추천하는 캠핑장입니다.<br></p>',	13	,	15302	,'강원  서구 가경주로 10 (가정동)','라벤더 캠핑장','pic1 (23).jpeg',	5	,	7	,	0	,'16:00','11:00'	,19,0,	'111111'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (103).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (104).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (105).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'로즈 캠핑장','<p>     전북에 위치한 로즈 캠핑장은 평야에서 오토캠핑을 즐길 수 있는 캠핑장입니다. 로즈 캠핑장은 잘 정비된 캠핑장으로각 자리에는 테이블의자파라솔그릴화로 등이 있습니다. 로즈 캠핑장에서는 장미밭에서 꽃을 따거나스윙을 타거나미니동물농장에서 동물들과 놀 수 있습니다. 로즈 캠핑장은 오토캠핑을 즐기고 싶은 분들에게 적합한 캠핑장입니다.<br></p>',	13	,	15441	,'강원  서구 가경주로 10 (가정동)','로즈 캠핑장','pic1 (24).jpeg',	1	,	7	,	0	,'16:00','11:00'	,23,0,	'111001'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (106).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (107).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (108).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'바다사랑 캠핑장','<p>     전남에 위치한 바다사랑 캠핑장은 바다가 보이는 카라반을 이용할 수 있는 캠핑장입니다. 바다사랑 캠핑장은 깨끗하고 안전한 카라반을 제공하며각 카라반에는 침대쇼파식탁주방화장실 등이 있습니다. 바다사랑 캠핑장에서는 바다에서 수영을 하거나바닷가에서 모래놀이를 하거나해수욕을 할 수 있습니다. 바다사랑 캠핑장은 바다를 사랑하는 분들에게 추천하는 캠핑장입니다.<br></p>',	14	,	15580	,'경기  서구 가경주로 10 (가정동)','바다사랑 캠핑장','pic1 (25).jpeg',	3	,	3	,	0	,'16:00','11:00'	,19,0,	'111110'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (109).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (110).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (111).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'해변가 캠핑장','<p>     전남에 위치한 해변가 캠핑장은 바다가 보이는 방갈로를 이용할 수 있는 캠핑장입니다. 해변가 캠핑장은 아늑하고 편안한 방갈로를 제공하며각 방갈로에는 침대쇼파식탁주방화장실 등이 있습니다. 해변가 캠핑장에서는 바다에서 낚시를 하거나바나나보트를 타거나파라세일링을 할 수 있습니다. 해변가 캠핑장은 바다의 스릴을 원하는 분들에게 적합한 캠핑장입니다.<br></p>',	14	,	15719	,'강원  서구 가경주로 10 (가정동)','해변가 캠핑장','pic1 (26).jpeg',	4	,	3	,	0	,'16:00','11:00'	,23,0,	'001110'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (112).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (113).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (114).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'하늘소리 캠핑장','<p>     제주에 위치한 하늘소리 캠핑장은 바다가 보이는 글램핑을 즐길 수 있는 캠핑장입니다. 하늘소리 캠핑장은 아름다운 바다경을 바라보며 편안하고 고급스러운 글램핑을 즐길 수 있는 곳입니다. 하늘소리 캠핑장은 푸른 하늘과 바다로 둘러싸여 있으며각 텐트에는 에어컨TV냉장고전기장판 등이 구비되어 있습니다. 하늘소리 캠핑장에서는 바다에서 서핑을 하거나카약을 타거나섬을 탐험할 수 있습니다. 하늘소리 캠핑장은 제주의 매력을 느끼고 싶은 분들에게 추천하는 캠핑장입니다.<br></p>',	15	,	15858	,'강원  서구 가경주로 10 (가정동)','하늘소리 캠핑장','pic1 (27).jpeg',	2	,	3	,	0	,'16:00','11:00'	,19,0,	'111100'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (115).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (116).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (117).jpeg'	);																	
+insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,	THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,	MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)	values(	CAMPINGSITE_SEQ.NEXTVAL,	'바람결 캠핑장','<p>     제주에 위치한 바람결 캠핑장은 바다가 보이는 오토캠핑을 즐길 수 있는 캠핑장입니다. 바람결 캠핑장은 잘 정비된 캠핑장으로각 자리에는 테이블의자파라솔그릴화로 등이 있습니다. 바람결 캠핑장에서는 바다에서 스쿠버다이빙을 하거나요트를 타거나해변에서 산책을 할 수 있습니다. 바람결 캠핑장은 오토캠핑을 즐기고 싶은 분들에게 적합한 캠핑장입니다.<br></p>',	15	,	15997	,'경기  서구 가경주로 10 (가정동)','바람결 캠핑장','pic1 (28).jpeg',	1	,	3	,	0	,'16:00','11:00'	,23,0,	'001101'	,0);	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (118).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (119).jpeg'	);																	
+INSERT INTO sitePic(SPICNUM, SITENUM, fileName) VALUES(SITEPIC_SEQ.NEXTVAL,CAMPINGSITE_SEQ.Currval,	'pic1 (120).jpeg'	);																	
+																			
+																																		
+commit;
+ SELECT count(*) FROM campingsite WHERE ENABLED= 0
+ORDER BY SITENUM DESC OFFSET '0' ROWS FETCH FIRST 
+'6' ROWS ONLY 
+
+룸목록 가져와서 not in써서 호텔거르기?
+
+방 카운트 테이블
+넘버
+업체번호 
+방번호
+날짜
+카운트
+
+업체번호
+(select count(distinct 방번호) from roomcnt   where startdate<날짜 and 날짜<enddate)
+<(select cnt(방번호) )
+
+전부부르고 자바에서 거르기
+
+호텔1 룸 1 2
+호텔2 룸 1 
+
+방이잇는거만 가져와야...한다?????????
+

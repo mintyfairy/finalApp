@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fa.plus.mapper.CarReservationMapper">
+	
+	<insert id="insertCarReservation" parameterType="com.fa.plus.domain.car.CarReservation">
+		INSERT INTO carReservation(orderNum, orderDate, totMoney, discount, payment, orderState, 
+			start_date, end_date, addRider, memberIdx, carNum) VALUES (#{orderNum, jdbcType=VARCHAR}, #{orderDate, jdbcType=VARCHAR}, #{totMoney}, #{discount}, #{payment},
+			#{orderState}, #{start_date}, #{end_date}, #{addRider}, #{memberIdx}, #{carNum})
+	</insert>
+	
+	<insert id="insertCarPayDetail" parameterType="com.fa.plus.domain.car.CarReservation">
+		INSERT INTO carPayDetail(orderNum, payMethod, cardName, authNumber, authDate) 
+			VALUES (#{orderNum}, #{payMethod}, #{cardName}, #{authNumber}, TO_DATE(#{authDate}, 'YYYY-MM-DD HH24:MI:SS') )
+	</insert>
+	 
+	<select id="listSelectCar" parameterType="java.util.List" resultType="com.fa.plus.domain.car.CarReservation">
+		SELECT c.carNum, c.carName, c.carSize, c.thumbnail, c.discountRate, c.carMaxNum, c.sleepNum, c.petOrNot, 
+			c.description, d.caravanNum, d.weekCost, d.wkndCost,
+			r.orderNum, r.orderDate, r.totMoney, r.discount, r.payment, r.start_date, r.end_date, r.addRider,
+			m.memberIdx, m.userName, m.userId, m2.birth, m2.tel
+		FROM campingCar c
+		JOIN carDetail d ON c.carNum = d.carNum
+		JOIN carReservation r ON d.carNum = r.carNum
+		JOIN member1 m ON r.memberIdx = m.memberIdx
+		JOIN member2 m2 ON m.userId = m2.userId
+		<!-- 
+		WHERE (r.start_date, r.end_date) IN
+		<foreach collection="list" item="item" index="index"
+			open="(" separator="," close=")">
+			(#{item.start_date}, #{item.end_date})
+		</foreach>
+		 -->
+	</select>
+	 
+	<select id="findById" parameterType="Long" resultType="com.fa.plus.domain.car.CarReservation">
+		
+		SELECT c.carNum, c.carName, c.carSize, c.thumbnail, c.discountRate, c.carMaxNum, c.sleepNum, c.petOrNot, 
+			c.description, d.caravanNum, d.weekCost, d.wkndCost
+		FROM campingCar c
+		JOIN carDetail d ON c.carNum = d.carNum
+		WHERE c.carNum = #{carNum}
+		 
+		 <!-- 
+		SELECT c.carNum, c.carName, c.carSize, c.thumbnail, c.discountRate, c.carMaxNum, c.sleepNum, c.petOrNot, 
+			c.description, d.caravanNum, d.weekCost, d.wkndCost,
+			r.totMoney, r.discount, r.addRider,
+			m.memberIdx, m.userName, m.userId, m2.birth, m2.tel
+		FROM campingCar c
+		JOIN carDetail d ON c.carNum = d.carNum
+		JOIN carReservation r ON d.carNum = r.carNum
+		JOIN member1 m ON r.memberIdx = m.memberIdx
+		JOIN member2 m2 ON m.userId = m2.userId
+		WHERE c.carNum = #{carNum}
+		 -->
+	</select>
+	
+	
+	
+	
+</mapper>

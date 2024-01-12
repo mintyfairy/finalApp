@@ -1,0 +1,165 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color: #333;
+    box-sizing: border-box;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+main .recommend {
+    width: 100%;
+    height: 685px;
+    background-color: #f8f9fa;
+    margin-bottom: 110px;
+    padding-top: 90px;
+}
+
+main .recommend h1 {
+    text-align: center;
+    margin-bottom: 75px;
+}
+
+main .recommend .recommend_place {
+    width: 960px;
+    height: 382px;
+    margin: 0 auto;
+}
+
+main .recommend .recommend_place .recommend_list {
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.recommend_list .recommend_item {
+    width: 25%;
+    height: 100%;
+}
+
+.recommend_list .recommend_item .recommend_picture {
+    display: block;
+    width: 170px;
+    height: 170px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.recommend_list .recommend_item .recommend_desc {
+    width: 224px;
+    height: 180px;
+    background-color: #fff;
+    margin: 0 auto;
+    margin-top: 27px;
+}
+
+.recommend_list .recommend_item .recommend_desc h3 {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    color: orange;
+    border-bottom: 1px solid #ccc;
+}
+
+.recommend_list .recommend_item .recommend_desc p {
+    padding: 0 20px;
+    text-align: center;
+    font-size: 14px;
+    color: slategray;
+}
+
+main .excellent {
+    height: 680px;
+    background: url('/image/메인 배경.jpg') no-repeat center center;
+    background-size: cover;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding-top: 88px;
+}
+
+main .excellent .excellent_title {
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 72px;
+}
+
+main .excellent .best_list {
+    width: 1080px;
+    height: 400px;
+    margin: 0 auto;
+    background-color: #fff;
+}
+
+main .excellent .best_list .best_excellent {
+    width: 25%;
+    height: 380px;
+}
+
+.excellent .best_list .best_excellent .bestpic_wrap {
+    display: block;
+    width: 100%;
+    height: 280px;
+}
+
+.best_excellent .excellent_info {
+    height: 164px;
+    background-color: orange;
+    padding: 28px 32px;
+}
+
+.best_excellent .excellent_info h4 {
+    width: 90px;
+    height: 36px;
+    line-height: 36px;
+    color: #fff;
+    font-weight: 300;
+    text-align: center;
+    border: 1px solid #fff;
+    margin-bottom: 10px;
+    border-radius: 18px;
+}
+
+.best_excellent .excellent_info p {
+    color: #fff;
+}
+
+main .story {
+    height: 520px;
+    padding-top: 88px;
+    background-color: #f7f8f9;
+}
+
+.story .story_title {
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 68px;
+}
+
+.story .story_board {
+    width: 1080px;
+    height: 275px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.story .story_board .news {
+    width: 50%;
+    height: 100%;
+    background-color: #fff;
+}
+
+.story .story_board .story_pic {
+    width: 25%;
+    height: 100%;
+}

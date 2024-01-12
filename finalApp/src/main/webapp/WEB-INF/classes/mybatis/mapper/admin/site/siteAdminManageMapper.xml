@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fa.plus.admin.mapper.SiteAdminMapper">
+	<!-- 캠핑장 등록 -->
+	<select id="SiteSeq" resultType="Long">
+		SELECT CAMPINGSITE_SEQ.NEXTVAL FROM dual
+	</select>
+	
+	<insert id="insertSite" parameterType="com.fa.plus.domain.site.Site">
+	insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,
+	 THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,
+	  MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)
+		
+		values(#{sitenum}, #{sitename}, #{introduce}, #{sitelocal}, #{zip}, #{addr1}, #{addr2},
+		 #{thumbnail}, #{category}, #{environment}, 0 , #{checkin}, #{checkout},
+		  #{memberidx}, 0 , #{siteoption}, 0)
+	
+		
+	</insert>
+	
+	<!-- 추가 이미지 등록 -->
+	<insert id="insertSiteFile" parameterType="com.fa.plus.domain.site.Site">
+		INSERT INTO sitePic(SPICNUM, SITENUM, fileName)
+			VALUES(SITEPIC_SEQ.NEXTVAL, #{sitenum}, #{fileName})
+	</insert>
+
+		
+	<select id="dataCountSite" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM campingsite 
+		<if test="memberIdx!=null and memberIdx!=''">		
+			where  MEMBERIDX=#{memberIdx}
+		</if>
+	</select>
+	
+
+	<!-- 방 등록 -->
+	<select id="RoomSeq" resultType="Long">
+		SELECT CAMPINGSITE_SEQ.NEXTVAL FROM dual
+	</select>
+	
+	<insert id="insertRoom" parameterType="com.fa.plus.domain.site.SiteDetail">
+	insert into sitedetail(DETAILNUM,SITENUM,DETAILNAME,PRICE,AREA,CONTENT,CAPACITY,floor)
+		
+		values(#{detailnum},#{sitenum},#{detailname},#{price},#{area},#{content},#{capacity},#{floor})
+	
+		
+	</insert>
+	
+	<!-- 추가 이미지 등록 -->
+	<insert id="insertRoomFile" parameterType="com.fa.plus.domain.site.SiteDetail">
+		INSERT INTO sitedetailPic(SdPICNUM, DETAILNUM, fileName)
+			VALUES(sitedetailPic_SEQ.NEXTVAL, #{detailnum}, #{fileName})
+	</insert>
+
+		
+	<select id="dataCountRoom" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM sitedetail
+		where  sitenum=#{siteNum}
+	</select>
+	<select id="searchCountSite" parameterType="com.fa.plus.domain.site.SiteSearch" resultType="Integer">
+		SELECT count(*)
+		FROM campingsite
+		<if test="startDate!=null and startDate!=''">
+			join ( select distinct sitenum from sitedetail
+			        where detailnum not in
+			            (select sitedetail.DETAILNUM detailnum from sitedetail 
+			            left join(select detailnum,ENDDATE,STARTDATE from book where enddate>sysdate) book on sitedetail.DETAILNUM=book.DETAILNUM
+			             where ENDDATE  &gt;= TO_DATE(#{startDate},'yyyy-mm-dd') and TO_DATE(#{endDate},'yyyy-mm-dd') &gt;= STARTDATE)
+			        ) a on campingsite.sitenum=a.sitenum
+		</if>
+		<where>
+			<include refid="where-list"/>
+		</where> 		
+		
+	</select>
+	<!--  검색용 -->
+	<!-- 
+		
+		
+		-->
+	<sql id="where-list">
+		ENABLED= 0 
+		
+		<if test="siteKwd!=null and siteKwd!=''">
+			and  INSTR(SITENAME, #{siteKwd}) &gt; 0
+		</if>
+		<if test="siteLocal!=null and siteLocal!=''">
+			and  siteLocal=#{siteLocal}
+		</if>
+		<if test="siteEnvironment!=null and siteEnvironment!=''">
+			and    Environment=#{siteEnvironment}
+		</if>
+		<if test="siteCategory!=null and siteCategory!=''">
+			and  CATEGORY=#{siteCategory}
+		</if>
+		
+		
+		<choose>
+			<when test="minFee!=null and minFee!='' and maxFee!=null and maxFee!=''">
+				and campingsite.sitenum in (select  distinct sitenum from sitedetail where  #{minFee} &lt;= price and #{maxFee} &gt;= price)
+			</when>
+			<when test="minFee!=null and minFee!=''">
+				and campingsite.sitenum in (select  distinct sitenum from sitedetail where  #{minFee} &lt;= price )
+			</when>
+			<when test="maxFee!=null and maxFee!=''">
+				and campingsite.sitenum in (select  distinct sitenum from sitedetail where  #{maxFee} &gt;= price)
+			</when>
+		</choose>
+	</sql>
+	<!-- 리스트 -->
+	<select id="listSite" parameterType="map" resultType="com.fa.plus.domain.site.Site">
+		SELECT SITENUM,SITENAME,SITELOCAL,addr1,addr2,
+	 		CATEGORY,ENVIRONMENT,HITCOUNT,THUMBNAIL,
+	 		 AVGSTAR,introduce
+		FROM campingsite
+		<where>
+			<include refid="where-list"/>
+			<if test="memberIdx!=0 and memberIdx!=''">		
+				and MEMBERIDX=#{memberIdx}
+			</if>
+		</where> 		
+		ORDER BY SITENUM DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+		
+	</select>
+	<select id="listAdvertiseSite"  resultType="com.fa.plus.domain.site.Site">
+		SELECT campingsite.SITENUM,SITENAME,SITELOCAL,addr1,addr2,
+	 		CATEGORY,ENVIRONMENT,HITCOUNT,THUMBNAIL,
+	 		 AVGSTAR,introduce
+		FROM campingsite
+		join promotionsite on campingsite.SITENUM=promotionsite.SITENUM
+        where STARTP &lt; sysdate and ENDP &gt; sysdate
+		order by dbms_random.value
+		FETCH FIRST 3 ROWS ONLY
+		
+	</select>
+	<select id="listRoom" parameterType="map" resultType="com.fa.plus.domain.site.SiteDetail">
+		SELECT DETAILNUM,SITENUM,DETAILNAME,PRICE,AREA,CONTENT,CAPACITY,floor
+		FROM sitedetail 
+		where sitenum=#{siteNum}
+		ORDER BY DETAILNUM DESC
+		
+	</select>
+	<!-- 사이트용 검색 -->
+	<select id="listSearchSite" parameterType="map" resultType="com.fa.plus.domain.site.Site">
+		SELECT campingsite.SITENUM SITENUM,SITENAME,SITELOCAL,addr1,addr2,
+	 		CATEGORY,ENVIRONMENT,HITCOUNT,introduce,THUMBNAIL,
+	 		 AVGSTAR
+		FROM campingsite
+		<if test="startDate!=null and startDate!=''">
+			join ( select distinct sitenum from sitedetail
+			        where detailnum not in
+			            (select sitedetail.DETAILNUM detailnum from sitedetail 
+			            left join(select detailnum,ENDDATE,STARTDATE from book where enddate>sysdate) book on sitedetail.DETAILNUM=book.DETAILNUM
+			             where ENDDATE  &gt;= TO_DATE(#{startDate},'yyyy-mm-dd') and TO_DATE(#{endDate},'yyyy-mm-dd') &gt;= STARTDATE)
+			        ) a on campingsite.sitenum=a.sitenum
+		</if>
+		<where>
+			<include refid="where-list"/>
+		</where> 		
+		ORDER BY SITENUM DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+		
+	</select>
+
+	<!-- 탐색 -->
+	<select id="findByIdSite" parameterType="Long" resultType="com.fa.plus.domain.site.Site">
+		SELECT SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,
+	 		 THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,
+	 		 MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED
+		FROM campingsite 
+		where 	SITENUM=#{siteNum}
+	</select>
+	<select id="findByIdRoom" parameterType="Long" resultType="com.fa.plus.domain.site.SiteDetail">
+		SELECT DETAILNUM,SITENUM,DETAILNAME,PRICE,AREA,CONTENT,CAPACITY,floor
+		FROM sitedetail 
+		where 	DETAILNUM=#{detailNum}
+	</select>
+	<select id="listSiteFile" parameterType="Long" resultType="com.fa.plus.domain.site.Site">
+		SELECT SPICNUM fileNum, SITENUM, fileName
+		FROM sitepic
+		WHERE sitenum = #{sitenum}
+	</select>
+	<select id="listRoomFile" parameterType="Long" resultType="com.fa.plus.domain.site.SiteDetail">
+		SELECT SdPICNUM fileNum, DETAILNUM , fileName
+		FROM sitedetailPic
+		WHERE detailNum = #{detailNum}
+	</select>
+	<!-- 업데이트/삭제 -->
+	
+	
+	<update id="updateSite" parameterType="com.fa.plus.domain.site.Site">
+		UPDATE campingsite SET SITENAME=#{sitename},INTrODUCE=#{introduce},
+				SITELOCAL=#{sitelocal},ZIP=#{zip},addr1=#{addr1},addr2=#{addr2},
+	 		 THUMBNAIL= #{thumbnail},CATEGORY=#{category},
+	 		 ENVIRONMENT=#{environment},CHECKIN= #{checkin},checkout= #{checkout},
+	 		 SITEOPTION= #{siteoption}
+		WHERE SITENUM = #{sitenum}
+	</update>
+
+	<delete id="deleteSite" parameterType="Long">
+		DELETE FROM campingsite WHERE  SITENUM = #{siteNum}
+	</delete>
+	
+	<delete id="deleteSiteFile" parameterType="Long">
+		DELETE FROM sitepic WHERE spicnum = #{fileNum}
+	</delete>
+	
+	
+	<update id="updateRoom" parameterType="com.fa.plus.domain.site.Site">
+		UPDATE sitedetail SET
+			DETAILNAME=#{detailname},PRICE=#{price},
+			AREA=#{area},CONTENT=#{content},CAPACITY=#{capacity},floor=#{floor}
+		WHERE detailnum = #{detailnum}
+	</update>
+
+	<delete id="deleteRoom" parameterType="Long">
+		DELETE FROM sitedetail WHERE  detailnum = #{detailNum}
+	</delete>
+	
+	<delete id="deleteRoomFile" parameterType="Long">
+		DELETE FROM sitedetailPic WHERE SdPICNUM = #{SdPicNum}
+	</delete>
+	
+
+</mapper>
