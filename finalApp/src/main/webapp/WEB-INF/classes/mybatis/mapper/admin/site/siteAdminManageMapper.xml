@@ -37,7 +37,7 @@
 
 	<!-- 방 등록 -->
 	<select id="RoomSeq" resultType="Long">
-		SELECT CAMPINGSITE_SEQ.NEXTVAL FROM dual
+		SELECT sitedetail_seq.nextval FROM dual
 	</select>
 	
 	<insert id="insertRoom" parameterType="com.fa.plus.domain.site.SiteDetail">
@@ -62,7 +62,8 @@
 	</select>
 	<select id="searchCountSite" parameterType="com.fa.plus.domain.site.SiteSearch" resultType="Integer">
 		SELECT count(*)
-		FROM campingsite
+		FROM campingsite 
+		join (select distinct(sitenum) chknum from sitedetail)  on chknum=sitenum
 		<if test="startDate!=null and startDate!=''">
 			join ( select distinct sitenum from sitedetail
 			        where detailnum not in
@@ -150,6 +151,7 @@
 	 		CATEGORY,ENVIRONMENT,HITCOUNT,introduce,THUMBNAIL,
 	 		 AVGSTAR
 		FROM campingsite
+		join (select distinct(sitenum) chknum from sitedetail)  on chknum=sitenum
 		<if test="startDate!=null and startDate!=''">
 			join ( select distinct sitenum from sitedetail
 			        where detailnum not in
