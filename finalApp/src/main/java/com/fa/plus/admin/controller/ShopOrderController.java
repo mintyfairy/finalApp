@@ -145,19 +145,15 @@ public class ShopOrderController {
 	@ResponseBody
 	public Map<String, Object> invoiceNumber(@RequestParam Map<String, Object> paramMap) {
 		String state = "true";
-		String url = null;
 		
 		try {
 			service.updateOrder("invoiceNumber", paramMap);
-			url = "${pageContext.request.contextPath}/admin/shopOrder/status";
 		} catch (Exception e) {
 			state = "false";
 		}
 		
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("state", state);
-		model.put("orderStatus", "status");
-		model.put("url", url);
 		return model;
 	}
 	

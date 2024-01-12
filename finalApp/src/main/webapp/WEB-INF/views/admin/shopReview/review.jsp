@@ -105,7 +105,7 @@ div {
 }
 
 .body-container {
-    max-width: 850px;
+    max-width: 1080px;
     clear: both;
     margin: 0 auto 10px;
     min-height: 500px;

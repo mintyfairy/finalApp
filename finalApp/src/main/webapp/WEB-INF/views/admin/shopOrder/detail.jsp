@@ -169,7 +169,7 @@
 				<p>입금이 제대로 되었는지 확인했습니까?</p>
 			</div>
 			<div class="modal-footer">
-				<form name="payCheckForm" method="post" action="${pageContext.request.contextPath}/admin/shopOrder/detail/pay">
+				<form name="payCheckForm">
 					<input type="hidden" name="orderNum" value="${ order.orderNum }">
 					<input type="hidden" name="orderState" value="1">
 				</form>
@@ -189,7 +189,7 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body pt-1">
-				<form class="row text-center" name="invoiceNumberForm" method="post" action="${pageContext.request.contextPath}/admin/shopOrder/detail/invoiceNumber">
+				<form class="row text-center" name="invoiceNumberForm">
 					<div class="col-auto p-1">
 						<select name="deliveryName" class="form-select">
 							<c:forEach var="vo" items="${listDeliveryCompany}">
@@ -203,7 +203,7 @@
 					<div class="col-auto p-1">
 						<input type="hidden" name="orderNum" value="">
 						<input type="hidden" name="orderState" value="2">
-						<button type="submit" class="btn btn-light btnInvoiceNumberOk">변경완료</button>
+						<button type="button" class="btn btn-light btnInvoiceNumberOk">변경완료</button>
 					</div>
 				</form>
 			</div>
@@ -268,6 +268,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 	const settings = {
 			type: method, 
 			data: formData,
+			dataType: dataType,
 			success:function(data) {
 				fn(data);
 			},
@@ -322,7 +323,7 @@ $(function() {
 			if(data.state === "true") {
 				//f.reset();
 				$("#payDialogModal").hide();
-				let url = "${pageContext.request.contextPath}/admin/shopOrder/${orderStatus}?orderStatus=${orderStatus}";
+				let url = "${pageContext.request.contextPath}/admin/shopOrder/status";
 				location.href = url;
 			} else {
 				alert("발송처리가 실패 했습니다.");
@@ -362,11 +363,11 @@ $(function(){
 				
 				f.reset();
 				
-				$("#prepareDialogModal").modal("hide");
+				$("#prepareDialogModal").hide();
 				// $("#orderDialogModal").modal("hide");
 				
-				let url = data.url;
-				location.href = url;
+				let url2 = "${pageContext.request.contextPath}/admin/shopOrder/status";
+				location.href = url2;
 			} else {
 				alert("발송처리가 실패 했습니다.");
 			}
@@ -399,7 +400,7 @@ $(function(){
 				
 				// $("#orderDialogModal").modal("hide");
 				
-				let url = "${pageContext.request.contextPath}/admin/shopOrder/${orderStatus}?orderStatus=${orderStatus}";
+				let url = "${pageContext.request.contextPath}/admin/shopOrder/status";
 				location.href = url;
 			}
 		};
