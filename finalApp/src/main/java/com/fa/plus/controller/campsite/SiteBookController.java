@@ -117,4 +117,7 @@ public class SiteBookController {
 		return ".campsite.roomDetail";
 	}
 
+	
+	
+	
 }

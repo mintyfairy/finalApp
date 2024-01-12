@@ -172,7 +172,7 @@
 	                                </div>
 	                                <p class="text-body mb-3">${dto.content}</p>
 	                                <div class="d-flex justify-content-between">
-	                                    <a class="btn btn-sm btn-primary2 rounded py-2 px-4" onclick="AJAXCART">장바구니에 넣기</a>
+	                                    <a class="btn btn-sm btn-primary2 rounded py-2 px-4" onclick="AJAXCART()">장바구니에 넣기</a>
 	                                    <a class="btn btn-sm btn-dark rounded py-2 px-4 " onclick="location.href ='${pageContext.request.contextPath}/site/book/${dto.detailnum}'">지금 바로 예약하기</a>
 	                                </div>
 	                            </div>
