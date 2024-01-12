@@ -4,7 +4,7 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
 
-<style type="text/css">
+<style type="text/css">  
 .body-main {
 	max-width: 900px;
 }
