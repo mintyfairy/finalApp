@@ -161,26 +161,13 @@
 	
 	<update id="updateProductStock" parameterType="map">
 		UPDATE productStock SET totalStock = #{totalStock} 
-		<where>
-			<if test="detailNum2 != null or detailNum2 != ''">
-				( productNum = #{productNum} AND detailNum = #{detailNum} AND detailNum2 = #{detailNum2} )
-			</if>
-			<if test="detailNum2 == null or detailNum2 == ''">
-				( productNum = #{productNum} AND detailNum = #{detailNum} )
-			</if>
-		</where>
+		WHERE productNum = #{productNum} AND detailNum = #{detailNum} AND detailNum2 = #{detailNum2}
 	</update>
 	
 	<select id="selectTotalStock" parameterType="map" resultType="Integer">
 		SELECT totalStock FROM productStock 
-		<where>
-			<if test="detailNum2 != null or detailNum2 != ''">
-				( productNum = #{productNum} AND detailNum = #{detailNum} AND detailNum2 = #{detailNum2} )
-			</if>
-			<if test="detailNum2 == null or detailNum2 == ''">
-				( productNum = #{productNum} AND detailNum = #{detailNum} )
-			</if>
-		</where>
+		WHERE productNum = #{productNum} AND detailNum = #{detailNum} AND detailNum2 = #{detailNum2}
+
 	</select>
 	
 	<update id="orderDetailCancel" parameterType="Long">

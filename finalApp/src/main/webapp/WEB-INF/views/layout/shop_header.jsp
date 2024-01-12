@@ -20,6 +20,7 @@ ul {
 }
 
 .header_top {
+	background-color: #fff;
     padding: 0 40px;
     border-bottom: 1px solid #efefef;
 }
@@ -76,6 +77,10 @@ ul {
     padding-top: 6px;
 }
 
+.logo a {
+	display: block;
+}
+
 .header_right_wrap {
     padding-top: 20px;
 }
@@ -93,6 +98,7 @@ ul {
 }
 
 .navi_container .border_wrap {
+	background-color: #fff;
     border-top: 1px solid #cecece;
     border-bottom: 1px solid #cecece;
 }
@@ -132,11 +138,25 @@ ul {
     height: 100%;
 }
 
+.cate_container_wrap {
+	position: relative;
+}
+
 .cate_container {
-    width: 1080px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 999;
+    width: 100%;
     height: 0;
     margin: 0 auto;
     padding: 45px 50px;
+    background-color: #fff;
+}
+
+.cate_wrap {
+	width: 1080px;
+	margin: 0 auto;
 }
 
 .cate_wrap h2 {
@@ -190,7 +210,7 @@ ul {
         </div>
 
         <div class="logo">
-            <a href="#">
+            <a href="${pageContext.request.contextPath}/shop/main">
                 <img src="${pageContext.request.contextPath}/resources/images/main/logo.png" alt="logo" width="228">
             </a>
         </div>
@@ -240,78 +260,80 @@ ul {
 	    </div>
     </div>
     
-	<div class="cate_container">
-        <div class="cate_wrap">
-            <h2>전체 카테고리 보기</h2>
-            <ul class="cate_list">
-                <li class="cate_item cate_item1">
-                    <h3>텐트&nbsp;&middot;&nbsp;타프</h3>
-                    <p>거실형텐트</p>
-                    <p>돔형텐트</p>
-                    <p>티피/루프탑텐트</p>
-                    <p>백패킹텐트</p>
-                    <p>면텐트</p>
-                    <p>타프</p>
-                </li>
-                <li class="cate_item cate_item2">
-                    <h3>침낭&nbsp;&middot;&nbsp;매트</h3>
-                    <p>침낭</p>
-                    <p>자충/에어매트</p>
-                    <p>카페트/블랑켓/러그</p>
-                    <p>발포매트/폼매트/레저시트</p>
-                    <p>전기매트</p>
-                </li>
-                <li class="cate_item cate_item3">
-                    <h3>퍼니처</h3>
-                    <p>테이블</p>
-                    <p>릴렉스 체어</p>
-                    <p>미니 경량 체어</p>
-                    <p>야전침대</p>
-                    <p>해먹/스탠드</p>
-                </li>
-                <li class="cate_item cate_item4">
-                    <h3>라이팅</h3>
-                    <p>스토브</p>
-                    <p>가스/오일랜턴</p>
-                    <p>LED랜턴/충전식랜턴</p>
-                    <p>헤드랜턴/후레쉬</p>
-                    <p>릴선</p>
-                    <p>연장선</p>
-                </li>
-                <li class="cate_item cate_item5">
-                    <h3>BBQ</h3>
-                    <p>화로대</p>
-                    <p>그릴/플레이트</p>
-                    <p>가스/연료/착화제</p>
-                    <p>BBQ용품</p>
-                    <p>토치/연료통</p>
-                </li>
-                <li class="cate_item cate_item6">
-                    <h3>키친</h3>
-                    <p>코펠/쿠커</p>
-                    <p>냄비/팬/솔/더치오브</p>
-                    <p>식기/주전자</p>
-                    <p>수저/칼/도마/조리도구</p>
-                    <p>컵/잔/시에라</p>
-                </li>
-                <li class="cate_item cate_item7">
-                    <h3>스토리지</h3>
-                    <p>수납박스/웨건</p>
-                    <p>대형 수납케이스</p>
-                    <p>소형 수납케이스</p>
-                    <p>대형 가방 20L 이상</p>
-                    <p>소형 가방 20L 미만</p>
-                </li>
-                <li class="cate_item cate_item8">
-                    <h3>악세서리</h3>
-                    <p>해머/톱/삽/도끼</p>
-                    <p>나이프/tool</p>
-                    <p>비너/열쇠고리</p>
-                    <p>데코/장식용품</p>
-                    <p>등산용품</p>
-                </li>
-            </ul>
-        </div>
+    <div class="cate_container_wrap">
+		<div class="cate_container">
+	        <div class="cate_wrap">
+	            <h2>전체 카테고리 보기</h2>
+	            <ul class="cate_list">
+	                <li class="cate_item cate_item1">
+	                    <h3>텐트&nbsp;&middot;&nbsp;타프</h3>
+	                    <p>거실형텐트</p>
+	                    <p>돔형텐트</p>
+	                    <p>티피/루프탑텐트</p>
+	                    <p>백패킹텐트</p>
+	                    <p>면텐트</p>
+	                    <p>타프</p>
+	                </li>
+	                <li class="cate_item cate_item2">
+	                    <h3>침낭&nbsp;&middot;&nbsp;매트</h3>
+	                    <p>침낭</p>
+	                    <p>자충/에어매트</p>
+	                    <p>카페트/블랑켓/러그</p>
+	                    <p>발포매트/폼매트/레저시트</p>
+	                    <p>전기매트</p>
+	                </li>
+	                <li class="cate_item cate_item3">
+	                    <h3>퍼니처</h3>
+	                    <p>테이블</p>
+	                    <p>릴렉스 체어</p>
+	                    <p>미니 경량 체어</p>
+	                    <p>야전침대</p>
+	                    <p>해먹/스탠드</p>
+	                </li>
+	                <li class="cate_item cate_item4">
+	                    <h3>라이팅</h3>
+	                    <p>스토브</p>
+	                    <p>가스/오일랜턴</p>
+	                    <p>LED랜턴/충전식랜턴</p>
+	                    <p>헤드랜턴/후레쉬</p>
+	                    <p>릴선</p>
+	                    <p>연장선</p>
+	                </li>
+	                <li class="cate_item cate_item5">
+	                    <h3>BBQ</h3>
+	                    <p>화로대</p>
+	                    <p>그릴/플레이트</p>
+	                    <p>가스/연료/착화제</p>
+	                    <p>BBQ용품</p>
+	                    <p>토치/연료통</p>
+	                </li>
+	                <li class="cate_item cate_item6">
+	                    <h3>키친</h3>
+	                    <p>코펠/쿠커</p>
+	                    <p>냄비/팬/솔/더치오브</p>
+	                    <p>식기/주전자</p>
+	                    <p>수저/칼/도마/조리도구</p>
+	                    <p>컵/잔/시에라</p>
+	                </li>
+	                <li class="cate_item cate_item7">
+	                    <h3>스토리지</h3>
+	                    <p>수납박스/웨건</p>
+	                    <p>대형 수납케이스</p>
+	                    <p>소형 수납케이스</p>
+	                    <p>대형 가방 20L 이상</p>
+	                    <p>소형 가방 20L 미만</p>
+	                </li>
+	                <li class="cate_item cate_item8">
+	                    <h3>악세서리</h3>
+	                    <p>해머/톱/삽/도끼</p>
+	                    <p>나이프/tool</p>
+	                    <p>비너/열쇠고리</p>
+	                    <p>데코/장식용품</p>
+	                    <p>등산용품</p>
+	                </li>
+	            </ul>
+	        </div>
+	    </div>
     </div>
 </nav>
 
@@ -320,24 +342,24 @@ ul {
         $(document).ready(function() {
             $(".cate_container").hide();
         });
-
-    $(".hamburger").mouseover(function(){
-        $(".cate_container").fadeIn( 'slow' );
-        $(".cate_container").css("height", "730px");
-    });
-    $("nav").mouseover(function(){
-        $(".cate_container").css("height", "730px");
-    });
-    $(".cate_container").mouseover(function(){
-        $(this).css("height", "730px");
-    });
-    $(".navi_container").mouseleave(function(){
-        $(".cate_container").css("height", "0");
-        $(".cate_container").fadeOut('fast');
-    });
-    $(".cate_container").mouseleave(function(){
-        $(".cate_container").css("height", "0");
-        $(".cate_container").fadeOut('fast');
-    });
+	
+	   $(".hamburger").mouseover(function(){
+	       $(".cate_container").fadeIn( 'slow' );
+	       $(".cate_container").css("height", "730px");
+	   });
+	   $("nav").mouseover(function(){
+	       $(".cate_container").css("height", "730px");
+	   });
+	   $(".cate_container").mouseover(function(){
+	       $(this).css("height", "730px");
+	   });
+	   $(".navi_container").mouseleave(function(){
+	       $(".cate_container").css("height", "0");
+	       $(".cate_container").fadeOut('fast');
+	   });
+	   $(".cate_container").mouseleave(function(){
+	       $(".cate_container").css("height", "0");
+	       $(".cate_container").fadeOut('fast');
+	   });
     });
 </script>

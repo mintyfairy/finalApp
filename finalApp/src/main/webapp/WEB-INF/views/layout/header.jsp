@@ -23,15 +23,50 @@ ul {
     list-style: none;
 }
 
-.header_top {
-    padding: 18px 120px;
-    overflow: hidden;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid #e5e5e5;
+.header_container {
+	background-color: #fff;
 }
 
+.header_top {
+    padding-right: 120px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header_top #sns_area .sns_list {
+    display: flex;
+    margin-top: 26px;
+}
+
+.header_top #sns_area .sns_list li {
+    width: 27px;
+    height: 27px;
+    line-height: 27px;
+    text-align: center;
+}
+
+.header_top #sns_area .sns_list .sns_item1 {
+    background: url(${pageContext.request.contextPath}/resources/images/main/sns1.gif) no-repeat 0 0;
+    margin-right: 5px;
+}
+
+.header_top #sns_area .sns_list .sns_item2 {
+    background: url(${pageContext.request.contextPath}/resources/images/main/sns1.gif) no-repeat -26px 0;
+    margin-right: 5px;
+}
+
+.header_top #sns_area .sns_list .sns_item3 {
+    background: url(${pageContext.request.contextPath}/resources/images/main/sns1.gif) no-repeat -53px 0;
+    margin-right: 5px;
+}
+
+.header_top #sns_area .sns_list .sns_item4 {
+    background: url(${pageContext.request.contextPath}/resources/images/main/sns1.gif) no-repeat -79px 0;
+    margin-right: 5px;
+}
+
+/*
 .header_top .header_top_list {
     display: flex;
     align-items: center;
@@ -79,9 +114,12 @@ ul {
 #tour_list_wrap .tour_list li a:hover {
     text-decoration: underline;
 }
+*/
 
 .header_top_left {
 	display: flex;
+	justify-content: end;
+    align-items: center;
 }
 
 .header_top_left .login_wrap a {
@@ -151,7 +189,7 @@ ul {
 
 .header_bottom {
     position: relative;
-    height: 149px;
+    height: 143px;
 }
 
 .header_bottom .header_bottom_wrap {
@@ -170,42 +208,75 @@ ul {
     justify-content: space-between;
 }
 
-.header_bottom_list #sns_area .sns_list {
-    display: flex;
-    margin-top: 26px;
-}
 
-.header_bottom_list #sns_area .sns_list li {
-    width: 38px;
-    height: 38px;
-    line-height: 38px;
-    text-align: center;
-}
-
-.header_bottom_list #sns_area .sns_list .sns_item1 {
-    background: url(${pageContext.request.contextPath}/resources/images/main/sns.gif) no-repeat 0 0;
-    margin-right: 5px;
-}
-
-.header_bottom_list #sns_area .sns_list .sns_item2 {
-    background: url(${pageContext.request.contextPath}/resources/images/main/sns.gif) no-repeat -39px 0;
-    margin-right: 5px;
-}
-
-.header_bottom_list #sns_area .sns_list .sns_item3 {
-    background: url(${pageContext.request.contextPath}/resources/images/main/sns.gif) no-repeat -78px 0;
-    margin-right: 5px;
-}
-
-.header_bottom_list #sns_area .sns_list .sns_item4 {
-    background: url(${pageContext.request.contextPath}/resources/images/main/sns.gif) no-repeat -117px 0;
-    margin-right: 5px;
-}
 
 .header_bottom_list .logo_area {
     width: 206px;
     height: 40px;
-    padding-top: 15px;
+}
+
+.bottom_right_wrap .bottom_right {
+    width: 200px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bottom_right_wrap .bottom_right .header_item a {
+    display: inline-block;
+}
+
+.bottom_left_wrap .bottom_left_list {
+    display: flex;
+    padding-left: 0;
+}
+
+.bottom_left_wrap .bottom_left_list .bottom_left_item {
+    text-align: center;
+}
+
+.bottom_left_wrap .bottom_left_list .bottom_left_item:first-child {
+    position: relative;
+}
+
+.bottom_left_wrap .bottom_left_list .bottom_left_item:first-child::after {
+    content: '';
+    position: absolute;
+    top: 21px;
+    right: 0;
+    width: 1px;
+    height: 20px;
+    background-color: #dedede;
+}
+
+.bottom_left_wrap .bottom_left_list .bottom_left_item:nth-child(2) {
+    position: relative;
+}
+
+.bottom_left_wrap .bottom_left_list .bottom_left_item:nth-child(2)::after {
+    content: '';
+    position: absolute;
+    top: 21px;
+    right: 0;
+    width: 1px;
+    height: 20px;
+    background-color: #dedede;
+}
+
+.bottom_left_wrap .bottom_left_list .bottom_left_item:last-child a {
+	padding-right: 0;
+}
+
+.bottom_left_wrap .bottom_left_list .bottom_left_item a {
+    display: block;
+    font-size: 15px;
+    padding: 20px 10px 20px 10px;
+}
+
+.bottom_left_wrap .bottom_left_list .bottom_left_item a:hover {
+    text-decoration: underline;
+    color: orangered;
 }
 
 #logo2 {
@@ -232,20 +303,23 @@ ul {
 
 nav .navi_wrap {
     width: 1200px;
+    height: 54px;
     margin: 0 auto;
 }
 
 nav .navi_wrap .menu_bar {
     display: flex;
+    margin-bottom: 0;
 }
 
 nav .navi_wrap .menu_bar .menu_item {
-    width: 25%;
+    width: 33.3%;
     text-align: center;
 }
 
 nav .navi_wrap .menu_bar .menu_item a {
     display: block;
+    line-height: 20px;
     font-size: 18px;
     padding: 20px 0;
 }
@@ -256,122 +330,166 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
 }
 </style>
 </head>
-	<div class="header_top">
-        <ul class="header_top_list">
-            <li id="logo" class="header_top_item">
-                <a href="${pageContext.request.contextPath}/">
-                    <img src="https://via.placeholder.com/108x38" alt="logo">
-                </a>
-            </li>
-            <li id="tour_list_wrap" class="header_top_item">
-                <ul class="tour_list">
-                    <li>
-                        <a href="#">캠핑장 구석구석</a>
-                    </li>
-                    <li>
-                        <a href="#">열린관광 모두의 캠핑</a>
-                    </li>
-                    <li>
-                        <a href="#">캠핑트립코리아</a>
-                    </li>
-                    <li>
-                        <a href="#">캠핑e배움터</a>
-                    </li>
-                    <li>
-                        <a href="#">캠핑카</a>
-                    </li>
-                    <li>
-                        <a href="#">사진갤러리</a>
-                    </li>
-                    <li>
-                        <a href="#">한국캠핑콘텐츠랩</a>
-                    </li>
-                    <li>
-                        <a href="#">TourAPI</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+	<div class="header_container">
+		<div class="header_top">
+			<!-- 
+	        <ul class="header_top_list">
+	            <li id="logo" class="header_top_item">
+	                <a href="${pageContext.request.contextPath}/">
+	                    <img src="https://via.placeholder.com/108x38" alt="logo">
+	                </a>
+	            </li>
+	            <li id="tour_list_wrap" class="header_top_item">
+	                <ul class="tour_list">
+	                    <li>
+	                        <a href="#">캠핑장 구석구석</a>
+	                    </li>
+	                    <li>
+	                        <a href="#">열린관광 모두의 캠핑</a>
+	                    </li>
+	                    <li>
+	                        <a href="#">캠핑트립코리아</a>
+	                    </li>
+	                    <li>
+	                        <a href="#">캠핑e배움터</a>
+	                    </li>
+	                    <li>
+	                        <a href="#">캠핑카</a>
+	                    </li>
+	                    <li>
+	                        <a href="#">사진갤러리</a>
+	                    </li>
+	                    <li>
+	                        <a href="#">한국캠핑콘텐츠랩</a>
+	                    </li>
+	                    <li>
+	                        <a href="#">TourAPI</a>
+	                    </li>
+	                </ul>
+	            </li>
+	        </ul>
+	         -->
+	
+	        <div class="header_top_left">
+	        	<!-- 
+				<c:if test='${sessionScope.member.authority=="CAMP"||sessionScope.member.authority=="ADMIN"}'>
+			            <div class="login_wrap col-auto">
+			                <a href="${pageContext.request.contextPath}/admin">
+			                	<button class="custom-btn btn-4">관리자</button>
+			                </a>
+			            </div>
+			     </c:if>
+	       		 <c:choose>
+					<c:when test="${empty sessionScope.member}">
+			            <div class="login_wrap col-auto">
+			                <a href="${pageContext.request.contextPath}/member/login">
+			                	<button class="custom-btn btn-4">Login</button>
+			                </a>
+			            </div>
+			            <div class="login_wrap col-auto">
+			                <a href="${pageContext.request.contextPath}/member/join">
+			                	<button class="custom-btn btn-4">Sign Up</button>
+			                </a>
+			            </div>
+			        </c:when>
+			        <c:otherwise>
+						<div class="login_wrap col-auto">
+							<a href="${pageContext.request.contextPath}/member/logout">
+			                	<button class="custom-btn btn-4">Logout</button>
+			                </a>
+			            </div>					
+					</c:otherwise>
+			     </c:choose>
+			      -->
+	            
 
-        <div class="header_top_left">
-			<c:if test='${sessionScope.member.authority=="CAMP"||sessionScope.member.authority=="ADMIN"}'>
-		            <div class="login_wrap col-auto">
-		                <a href="${pageContext.request.contextPath}/admin">
-		                	<button class="custom-btn btn-4">관리자</button>
-		                </a>
-		            </div>
-		     </c:if>
-       		 <c:choose>
-				<c:when test="${empty sessionScope.member}">
-		            <div class="login_wrap col-auto">
-		                <a href="${pageContext.request.contextPath}/member/login">
-		                	<button class="custom-btn btn-4">Login</button>
-		                </a>
-		            </div>
-		            <div class="login_wrap col-auto">
-		                <a href="${pageContext.request.contextPath}/member/join">
-		                	<button class="custom-btn btn-4">Sign Up</button>
-		                </a>
-		            </div>
-		        </c:when>
-		        <c:otherwise>
-					<div class="login_wrap col-auto">
-						<a href="${pageContext.request.contextPath}/member/logout">
-		                	<button class="custom-btn btn-4">Logout</button>
-		                </a>
-		            </div>					
-				</c:otherwise>
-		     </c:choose>
-            
-        </div>
-    </div>
-
-    <div class="header_bottom">
-        <div class="header_bottom_wrap">
-            <div class="header_bottom_in">
-                <ul class="header_bottom_list">
-                    <li id="sns_area">
-                        <ul class="sns_list">
-                            <li class="sns_item1">
-                                <a href="#" target="_blank"></a>
-                            </li>
-                            <li class="sns_item2">
-                                <a href="#" target="_blank"></a>
-                            </li>
-                            <li class="sns_item3">
-                                <a href="#" target="_blank"></a>
-                            </li>
-                            <li class="sns_item4">
-                                <a href="#" target="_blank"></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="logo_area">
-                        <a id="logo2" href="#">
-                            <img src="${pageContext.request.contextPath}/resources/images/main/logo.png" alt="logo" style="width:210px; height:55px;">
-                        </a>
-                    </li>
-                    <li class="my_page">
-                        <a href="#"><i class="fa-regular fa-user"></i>&nbsp;마이페이지</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <nav>
-            <div class="navi_wrap">
-                <ul class="menu_bar">
-                    <li class="menu_item">
-                        <a href="#" onclick="site()">CAMPING AREA</a>
-                    </li>
-                    <li class="menu_item">
-                        <a href="#" onclick="car()">CAMPING CAR</a>
-                    </li>
-                    <li class="menu_item">
-                        <a href="#" onclick="shop()">CAMPING SHOP</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+	        </div>
+	        
+	        
+	        <div id="sns_area">
+	            <ul class="sns_list">
+	                <li class="sns_item1">
+	                    <a href="#" target="_blank"></a>
+	                </li>
+	                <li class="sns_item2">
+	                    <a href="#" target="_blank"></a>
+	                </li>
+	                <li class="sns_item3">
+	                    <a href="#" target="_blank"></a>
+	                </li>
+	                <li class="sns_item4">
+	                    <a href="#" target="_blank"></a>
+	                </li>
+	            </ul>
+	        </div>
+	    </div>
+	    <div class="header_bottom">
+	        <div class="header_bottom_wrap">
+	            <div class="header_bottom_in">
+	                <ul class="header_bottom_list">
+	                    <li class="bottom_left_wrap">
+			                <ul class="bottom_left_list">
+			                    <li class="bottom_left_item">
+			                        <a href="${pageContext.request.contextPath}/site/list" style="padding-left:0;">캠핑예약</a>
+			                    </li>
+			                    <li class="bottom_left_item">
+			                        <a href="${pageContext.request.contextPath}/car/main">캠핑카</a>
+			                    </li>
+			                    <li class="bottom_left_item">
+			                        <a href="${pageContext.request.contextPath}/shop/main">스토어</a>
+			                    </li>
+			                </ul>
+	                    </li>
+	                    <li class="logo_area">
+	                        <a id="logo2" href="#">
+	                            <img src="${pageContext.request.contextPath}/resources/images/main/logo.png" alt="logo" style="width:210px; height:55px;">
+	                        </a>
+	                    </li>
+	                    
+	                    <!-- 
+	                    <li class="my_page">
+	                        <a href="#"><i class="fa-regular fa-user"></i>&nbsp;마이페이지</a>
+	                    </li>
+	                     -->
+	                     
+				        <li class="bottom_right_wrap">
+				            <ul class="bottom_right">
+				            	<c:choose>
+				            		<c:when test="${empty sessionScope.member}">
+				                		<li class="header_item"><a href="${pageContext.request.contextPath}/member/login"><i class="fa-solid fa-arrow-right-to-bracket fa-lg"></i></a></li>
+				                		<li class="header_item"><a href="${pageContext.request.contextPath}/member/join"><i class="fa-solid fa-user-plus fa-lg"></i></a></li>
+				                	</c:when>
+				                	<c:otherwise>
+				                		<li class="header_item"><a href="${pageContext.request.contextPath}/member/logout"><i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i></a></li>
+						                <li class="header_item fa-lg"><a href="#"><i class="fa-regular fa-user fa-lg"></i></a></li>
+				                	</c:otherwise>
+				                </c:choose>
+				                <li class="header_item fa-lg"><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
+				                <li class="header_item fa-lg"><a href="#"><i class="fa-solid fa-headset"></i></a></li>
+				                <c:if test='${sessionScope.member.authority=="CAMP"||sessionScope.member.authority=="ADMIN"}'>
+				                	<li class="header_item fa-lg"><a href="${pageContext.request.contextPath}/admin"><i class="fa-solid fa-user-gear"></i></a></li>
+				                </c:if>
+				            </ul>
+				        </li>
+	                </ul>
+	            </div>
+	        </div>
+	        <nav>
+	            <div class="navi_wrap">
+	                <ul class="menu_bar">
+	                    <li class="menu_item">
+	                        <a href="#" onclick="site()">CAMPING AREA</a>
+	                    </li>
+	                    <li class="menu_item">
+	                        <a href="#" onclick="car()">CAMPING CAR</a>
+	                    </li>
+	                    <li class="menu_item">
+	                        <a href="#" onclick="shop()">CAMPING SHOP</a>
+	                    </li>
+	                </ul>
+	            </div>
+	        </nav>
+	    </div>
+	</div>
 </body>
 </html>

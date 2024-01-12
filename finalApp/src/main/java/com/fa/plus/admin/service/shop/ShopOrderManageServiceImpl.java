@@ -138,7 +138,7 @@ public class ShopOrderManageServiceImpl implements ShopOrderManageService {
 		int result = 0;
 		
 		try {
-			mapper.selectTotalStock(map);
+			result = mapper.selectTotalStock(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

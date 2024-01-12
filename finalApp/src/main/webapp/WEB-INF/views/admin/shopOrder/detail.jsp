@@ -60,6 +60,9 @@
 						</c:if>
 					</td>
 					<td class="text-end">
+						<c:if test="${order.orderState == 0}">
+							<button type="button" class="btn btn-light btn-prepare-pay" data-orderNum="${order.orderNum}">입금확인</button>
+						</c:if>
 						<c:if test="${order.orderState == 1}">
 							<button type="button" class="btn btn-light btn-prepare-order" data-orderNum="${order.orderNum}">발송처리</button>
 						</c:if>
@@ -126,7 +129,7 @@
 							<td><fmt:formatNumber value="${dto.savedMoney}"/></td>
 							<td>${order.orderState==1 && dto.detailState==0?"상품준비중":dto.detailStateInfo}</td>
 							<td >
-								<c:if test="${ order.orderState >= 2 && order.orderState <= 4 }">
+								<c:if test="${ order.orderState < 2}">
 									<span class="orderDetailStatus-cancel" 
 											data-orderNum="${order.orderNum}" 
 											data-orderState="${order.orderState}"
@@ -150,6 +153,29 @@
 				</tbody>
 			</table>
 		
+		</div>
+	</div>
+</div>
+
+<!-- 입금확인 대화상자 -->
+<div class="modal hidden" id="payDialogModal" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Modal title</h5>
+				<button type="button" class="btn-close closeModal" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>입금이 제대로 되었는지 확인했습니까?</p>
+			</div>
+			<div class="modal-footer">
+				<form name="payCheckForm" method="post" action="${pageContext.request.contextPath}/admin/shopOrder/detail/pay">
+					<input type="hidden" name="orderNum" value="${ order.orderNum }">
+					<input type="hidden" name="orderState" value="1">
+				</form>
+				<button type="button" class="btn btn-secondary closeModal" data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary payCheckBtn">입금 확인 완료</button>
+			</div>
 		</div>
 	</div>
 </div>
@@ -180,6 +206,54 @@
 						<button type="submit" class="btn btn-light btnInvoiceNumberOk">변경완료</button>
 					</div>
 				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 주문상세정보-상태변경/상태확인 대화상자  -->
+<div class="modal hidden" id="orderDetailStateDialogModal" tabindex="-1" aria-labelledby="orderDetailStateDialogModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="orderDetailStateDialogModalLabel">주문상세정보</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body pt-1">
+				<div class="mt-1 p-1">
+					<div class="p-1"><p class="form-control-plaintext optionDetail-value"></p></div>
+					<table class="table board-list">
+						<thead class="table-light">
+							<tr>
+								<td width="50">코드</td>
+								<td width="120">구분</td>
+								<td width="90">작성자</td>
+								<td width="120">날짜</td>
+								<td>설명</td>
+							</tr>
+						</thead>
+						<tbody class="detailState-list"></tbody>	
+					</table>
+				</div>
+				
+				<div class="p-1 detailStateUpdate-form">
+					<form name="detailStateForm" class="row justify-content-center">
+						<div class="col-auto p-1">
+							<select name="detailState" class="form-select"></select>
+						</div>
+						<div class="col-6 p-1">
+							<input type="text" name="stateMemo" class="form-control" placeholder="상태 메시지 입력">
+						</div>
+						<div class="col-auto p-1">
+							<input type="hidden" name="orderNum">
+							<input type="hidden" name="orderDetailNum">
+							<input type="hidden" name="productMoney">
+							<input type="hidden" name="cancelAmount">
+							<button type="button" class="btn btn-light btnDetailStateUpdateOk"> 변경 </button>
+						</div>
+					</form>
+				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -223,6 +297,41 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 	$.ajax(url, settings);
 }
 
+// 입금확인 대화상자
+$(function(){
+	$(".btn-prepare-pay").on("click", function(){
+		
+		$("#payDialogModal").show();
+	});
+});
+
+// 입금확인 완료
+$(function() {
+	$('.payCheckBtn').click(function(){
+		
+		if(! confirm('금액이 정확히 입금되었습니까?')) {
+			return false;
+		}
+		
+		let param = $('form[name=payCheckForm]').serialize();
+		let url = '${pageContext.request.contextPath}/admin/shopOrder/detail/pay';
+		
+		const fn = function(data) {
+			console.log(data);
+			//const f = document.payCheckForm;
+			if(data.state === "true") {
+				//f.reset();
+				$("#payDialogModal").hide();
+				let url = "${pageContext.request.contextPath}/admin/shopOrder/${orderStatus}?orderStatus=${orderStatus}";
+				location.href = url;
+			} else {
+				alert("발송처리가 실패 했습니다.");
+			}
+		};
+		ajaxFun(url, "post", param, "json", fn);
+	});
+});
+
 //발송처리 대화상자(송장번호 입력)
 $(function(){
 	$(".btn-prepare-order").on("click" ,function(){
@@ -256,7 +365,7 @@ $(function(){
 				$("#prepareDialogModal").modal("hide");
 				// $("#orderDialogModal").modal("hide");
 				
-				let url = "${pageContext.request.contextPath}/admin/shopOrder/${orderStatus}";
+				let url = data.url;
 				location.href = url;
 			} else {
 				alert("발송처리가 실패 했습니다.");
@@ -290,7 +399,7 @@ $(function(){
 				
 				// $("#orderDialogModal").modal("hide");
 				
-				let url = "${pageContext.request.contextPath}/admin/shopOrder/${orderStatus}";
+				let url = "${pageContext.request.contextPath}/admin/shopOrder/${orderStatus}?orderStatus=${orderStatus}";
 				location.href = url;
 			}
 		};
@@ -343,9 +452,154 @@ $(function(){
 	});
 });
 
+//주문상세 - 상태확인/변경
+$(function(){
+	$('.orderDetailStatus-update').on('click', function(){
+		const f = document.detailStateForm;
+		f.reset();
+		
+		let orderNum = $(this).attr("data-orderNum");
+		let orderState = $(this).attr("data-orderState");
+		let orderDetailNum = $(this).attr("data-orderDetailNum");
+		let detailState = $(this).attr("data-detailState");
+		let productMoney = $(this).attr("data-productMoney");
+		let cancelAmount = $(".order-cancelAmount").attr("data-cancelAmount");
+		
+		f.orderNum.value = orderNum;
+		f.orderDetailNum.value = orderDetailNum;
+		f.productMoney.value = productMoney;
+		f.cancelAmount.value = cancelAmount;
+		
+		let opt = $(this).closest("tr").find("td").eq(4).text();
+
+		let $SELECT = $('form[name=detailStateForm] select[name=detailState]');
+		$('form[name=detailStateForm] select[name=detailState] option').remove();
+		
+		if(orderState==="6") {
+			// 주문상태-판매취소
+			$(".detailStateUpdate-form").hide();
+		} else if(detailState==='1' || detailState==='2' || detailState==='3' || detailState==='5' || detailState==='12') {
+			// 주문상세상태- 구매확정,자동구매확정,취소완료,반품완료,판매취소
+			$SELECT.append('<option value="14">기타</option>');
+		} else if(detailState==='4') { // 주문상세상태-주문취소요청
+			$SELECT.append('<option value="5">주문취소완료</option>');
+		} else if(detailState==='6'){ // 주문상세상태-교환요청
+			$SELECT.append('<option value="7">교환접수</option>');
+			$SELECT.append('<option value="8">교환발송완료</option>');
+			$SELECT.append('<option value="9">교환불가</option>');
+		} else if(detailState==='10'){ // 주문상세상태-반품요청
+			$SELECT.append('<option value="11">반품접수</option>');
+			$SELECT.append('<option value="12">반품완료</option>');
+			$SELECT.append('<option value="13">반품불가</option>');
+		} else {
+			 // 배송완료
+			if(orderState==="5") {
+				$SELECT.append('<option value="2">자동구매확정</option>');
+			}
+			
+			$SELECT.append('<option value="3">판매취소</option>');
+			$SELECT.append('<option value="14">기타</option>');
+		}
+		
+		$('.optionDetail-value').html('옵션 : ' + opt + ' ');
+		$('#orderDetailStateDialogModal').show();
+	});
+	
+	function listDetailState() {
+		$('.detailState-list').empty();
+		
+		const f = document.detailStateForm;
+		let orderDetailNum = f.orderDetailNum.value;
+		
+		let qs = 'orderDetailNum=' + orderDetailNum;
+		let url = '${pageContext.request.contextPath}/admin/order/detail/listDetailState';
+
+		const fn = function(data) {
+			let out;
+			for(let item of data.list) {
+				out  = '<tr>';
+				out += '<td>'+item.DETAILSTATE+'</td>';
+				out += '<td>'+item.DETALSTATEINFO+'</td>';
+				out += '<td>'+item.USERNAME+'</td>';
+				out += '<td>'+item.DETAILSTATEDATE+'</td>';
+				out += '<td align="left">'+item.STATEMEMO+'</td>';
+				out += '</tr>';
+				
+				$('.detailState-list').append(out);
+			}
+		};
+		
+		ajaxFun(url, "get", qs, "json", fn);
+	}
+	
+	const modalEl = document.getElementById('orderDetailStateDialogModal');
+	modalEl.addEventListener('show.bs.modal', function(){
+		// 모달 대화상자가 보일때
+		listDetailState();
+	});
+	
+	modalEl.addEventListener('hidden.bs.modal', function(){
+		// 모달 대화상자가 안보일때
+	});
+	
+	$(".btnDetailStateUpdateOk").click(function(){
+		// 주문상세 상태정보변경 등록
+		const f = document.detailStateForm;
+		let orderDetailNum = f.orderDetailNum.value;
+		let productMoney = f.productMoney.value;
+		let cancelAmount = f.cancelAmount.value;
+		
+		// 이전상태
+		let preDetailState = $("#orderDetail-list" + orderDetailNum).find("td").eq(9).attr("data-detailState");
+		if(preDetailState === "3" || preDetailState === "5" || preDetailState === "12") {
+			alert("판매취소 또는 반품완료 상품은 변경이 불가능합니다.");
+			return false;
+		}
+
+		let changeStateInfo = $("form[name=detailStateForm] select option:selected").text();
+		
+		if(! f.stateMemo.value.trim()) {
+			alert("상태 메시지를 등록하세요");
+			f.stateMemo.focus();
+			return false;
+		}
+		
+		let qs = $('form[name=detailStateForm]').serialize();
+		let url = '${pageContext.request.contextPath}/admin/order/detail/updateDetailState';
+
+		const fn = function(data) {
+			if(data.state === "true") {
+				listDetailState();
+				
+				let detailState = data.detailState;
+
+				$("#orderDetail-list" + orderDetailNum).find("td").eq(8).html(changeStateInfo);
+				$("#orderDetail-list" + orderDetailNum).find("td").eq(9).attr("data-detailState", detailState);
+				
+				// 주문취소완료인 경우
+				if(detailState == 3 || detailState == 5 || detailState == 12) {
+					cancelAmount = parseInt(cancelAmount) + parseInt(productMoney);
+					$(".order-cancelAmount").attr("data-cancelAmount", cancelAmount);
+					$(".order-cancelAmount").text(cancelAmount.toLocaleString());
+				}
+				
+				alert("정보가 변경되었습니다.");
+				f.reset();
+			}
+		};
+		
+		ajaxFun(url, "post", qs, "json", fn);
+		
+	});
+});
+
 //모달창 닫기
 $(function() {
 	$('.closeModal').click(function() {
+		$(this).closest(".modal").hide();
+	});
+	
+	$('.btn-close').click(function() {
 		$(this).closest(".modal").hide();
 	});
 });

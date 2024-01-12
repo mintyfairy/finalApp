@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -124,19 +125,39 @@ public class ShopOrderController {
 		return ".admin.shopOrder.detail";
 	}
 	
-	@RequestMapping("detail/invoiceNumber")
+	@PostMapping("detail/pay")
 	@ResponseBody
-	public Map<String, Object> invoiceNumber(@RequestParam Map<String, Object> paramMap) {
+	public Map<String, Object> pay(@RequestParam Map<String, Object> paramMap) {
 		String state = "true";
 		
 		try {
-			service.updateOrder("invoiceNumber", paramMap);
+			service.updateOrder("state", paramMap);
 		} catch (Exception e) {
 			state = "false";
 		}
 		
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("state", state);
+		return model;
+	}
+	
+	@PostMapping("detail/invoiceNumber")
+	@ResponseBody
+	public Map<String, Object> invoiceNumber(@RequestParam Map<String, Object> paramMap) {
+		String state = "true";
+		String url = null;
+		
+		try {
+			service.updateOrder("invoiceNumber", paramMap);
+			url = "${pageContext.request.contextPath}/admin/shopOrder/status";
+		} catch (Exception e) {
+			state = "false";
+		}
+		
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("state", state);
+		model.put("orderStatus", "status");
+		model.put("url", url);
 		return model;
 	}
 	
