@@ -145,9 +145,9 @@
 	                            <div class="position-relative">
 	                            <!-- 이미지구역 -->
 	                                <div class="slideshow-container2 slide${dto.detailnum}" id="slideshow-container2" style="z-index: 55" data-slidenum="${dto.detailnum}" data-slideindex${dto.detailnum}="1">
-										<c:forEach var="vo" items="${Room[dto.detailnum]}" varStatus="status">
+										<c:forEach var="vo" items="${dto.listFile}" varStatus="status">
 											<div class="mySlides${dto.detailnum}" style="display: ${status.index==0?'block':'none'};">
-											    <img src="${pageContext.request.contextPath}/uploads/room/${vo.fileName}" style="bottom : 0 ;width:100%;height: 450px; overflow:hidden;object-fit:cover" 
+											    <img src="${pageContext.request.contextPath}/uploads/room/${vo}" style="bottom : 0 ;width:100%;height: 450px; overflow:hidden;object-fit:cover" 
 												>
 											</div>
 										</c:forEach>

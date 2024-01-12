@@ -19,7 +19,16 @@ public class SiteDetail {
 	private String fileName;
 	private List<MultipartFile> addFiles;
 	
+	private List<String> listFile;
 	
+	
+	
+	public List<String> getListFile() {
+		return listFile;
+	}
+	public void setListFile(List<String> listFile) {
+		this.listFile = listFile;
+	}
 	public long getDetailnum() {
 		return detailnum;
 	}

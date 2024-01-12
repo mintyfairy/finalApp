@@ -1,6 +1,7 @@
 package com.fa.plus.controller.campsite;
 
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,12 +94,13 @@ public class SiteBookController {
 		map.put("siteNum",num);
 		Site Sitedto=adminService.findByIdSite(num);
 		List<SiteDetail> list = adminService.listRoom(map);
-		String temp;
+		
 		for(SiteDetail vo:list) {
-			System.out.println(vo.getDetailname());
-			temp="Room"+Long.toString(vo.getDetailnum());
-			System.out.println(temp+"@@@");
-			model.addAttribute(temp, adminService.listRoomFile(vo.getDetailnum()));
+			List<String> filelist = new ArrayList<String>();
+			for(SiteDetail vo2:adminService.listRoomFile(vo.getDetailnum())){
+				filelist.add(vo2.getFileName());
+			}
+			if (filelist!=null&&filelist.size() != 0) vo.setListFile(filelist);
 		}
 		List<Site> listSiteFile=adminService.listSiteFile(num);
 		// 전체 페이지 수
