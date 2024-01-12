@@ -5,79 +5,80 @@
 <style>
 @charset "utf-8";
 
+.location-box {
+	margin-top: 50px;
+	
+}
 
-.container{
+.location-container{
   width: 1080px; 
-  height: 120px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
 }
 
-.container .name1 {
+.location-container p {
   font-size: 30px;
   font-weight: bold;
-}
-
-.main div {
-  margin: 0 20px;
-  text-align:center;
-}
-
-.map {
-  width: 1080px;
-  height: 500px;
-}
-
-.come h3 {
-  margin-left: 180px;
-  margin-bottom: 80px;
-}
-
-.come ul {
-  display: flex;
+  width: 100%;
   
 }
 
-.come ul > li {
-  list-style: none;
-  padding-left: 20px;
-  margin-right: 20px;
-  margin-bottom: 30px;
+.name1 {
+	margin-bottom: 50px;
+}
+
+.address1 {
+	border: 2px solid lightgrey;
+	width: 1080px; 
+	display: flex;
+	justify-content: space-between;
+	text-align: center;
+	border-radius: 10px;
+}
+
+.address1 li {
+	margin: 30px 50px;
+}
+
+.map {
+  width: 1080px; 
+  height: 465px;
+  margin: 0 auto;
+  border: 2px solid lightgrey;
+  margin-top: 100px;
+  border-radius: 10px;
+  margin-bottom: 150px;
+}
+
+.iframe {
+  width: 100%;
 }
 
 </style>
 
- <div class="container">
-	<div>
-		<p class="name1" style="line-height:80px; float:left;"><i class="fa-solid fa-location-dot" style="margin-right: 10px;"></i> 오시는길 </p>
+<div class="location-box">
+  <div class="location-container">
+ 	<div class="location-content">
+		<p class="name1" style="float:left;"><i class="fa-solid fa-location-dot"></i> 오시는길 </p>
+		<p style="text-align:center; margin-bottom:50px; font-size: 25px;"> (주) 캠브릿지는  여러분을 환영합니다.</p>
+		<ul class="address1">
+	       <li><i class="fa-solid fa-building"></i>&nbsp;&nbsp;서울특별시 월드컵북로 21 풍성빌딩 2층</li>
+	       <li><i class="fa-solid fa-phone"></i>&nbsp;&nbsp;02 - 333 - 3333</li>
+	       <li><i class="fa-solid fa-fax"></i>&nbsp;&nbsp;02 - 333 - 5555</li>
+	     </ul>
 	</div>
- </div>	
-
- <!-- * 카카오맵 - 지도퍼가기 -->
- <!-- 1. 지도 노드 -->
- <div class="map">
-   <div class="come">
-     <h3>(주)캠:브릿지(캠핑카) <b>언제나 여러분을 환영합니다.</b></h3>
-     <ul>
-       <li><i class="fa-solid fa-building"></i>&nbsp;&nbsp;서울특별시 월드컵북로 21 풍성빌딩 2층</li>
-       <li><i class="fa-solid fa-phone"></i>&nbsp;&nbsp;02 - 333 - 3333</li>
-       <li><i class="fa-solid fa-fax"></i>&nbsp;&nbsp;02 - 333 - 5555</li>
-     </ul>
-   </div>
-
-
- <div id="daumRoughmapContainer1703137349663" class="root_daum_roughmap root_daum_roughmap_landing "></div>
+	
+   
+	
  </div>
  
- <script charset="UTF-8">
-   new daum.roughmap.Lander({
-     "timestamp" : "1703137349663",
-     "key" : "2haio",
-     "mapWidth" : "800",
-     "mapHeight" : "500"
-   }).render();
- </script>
+    <div class="map">
+   		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.9370521620403!2d126.91696831104512!3d37.55654682458487!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c993410ca2f63%3A0x5bc4dfe507bd6544!2z7IyN7Jqp6rCV67aB6rWQ7Jyh7IS87YSw!5e0!3m2!1sko!2skr!4v1705050402911!5m2!1sko!2skr" width="1078" height="463" style="border:0; border-radius:10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+ 	</div>
+</div>
+
+
 
 
 
