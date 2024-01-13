@@ -36,7 +36,7 @@
 		values(booklist_seq.currval,#{totalPrice},#{perchaseMethod},sysdate)
 		
 	</insert>
-	<delete id="deleteAllCart" parameterType="String">
+	<delete id="deleteAllCart" parameterType="long">
 		DELETE FROM sitecart WHERE memberIdx=#{memberIdx}
 	</delete>
 	

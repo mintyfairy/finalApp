@@ -26,17 +26,18 @@ public class SiteCart {
 	
 	//
 	
-	private String periodPrice;
+	private int periodPrice;
 	
 	
 	
 	
 	
 	
-	public String getPeriodPrice() {
+
+	public int getPeriodPrice() {
 		return periodPrice;
 	}
-	public void setPeriodPrice(String periodPrice) {
+	public void setPeriodPrice(int periodPrice) {
 		this.periodPrice = periodPrice;
 	}
 	public String getDetailname() {

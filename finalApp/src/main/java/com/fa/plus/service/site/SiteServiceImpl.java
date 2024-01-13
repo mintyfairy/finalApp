@@ -4,11 +4,11 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Period;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,12 +47,19 @@ public class SiteServiceImpl implements SiteService {
 	public List<SiteCart> listCart(long memberIdx) {
 		// TODO Auto-generated method stub
 		List<SiteCart> list=null;
+		int periods=0;
+		
 		try {
 			list= mapper.listCart(memberIdx);
+			for (SiteCart dto : list ) {
+				periods=period(dto.getStartDate(),dto.getEndDate());
+				dto.setPeriodPrice(periods*Integer.parseInt(dto.getPrice()));
+				 
+			}
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			throw e;
 		}
 				
 		return list;
@@ -60,7 +67,29 @@ public class SiteServiceImpl implements SiteService {
 
 	@Override
 	public void insertPerchase(List<SiteCart> cartList) throws Exception {
-	
+		// TODO Auto-generated method stub
+		Map<String, Object> map=new HashedMap();
+		int totalPrice=0;
+		for (SiteCart dto : cartList ) {
+			totalPrice+=dto.getPeriodPrice();
+		}
+		
+		try {
+			map.put("memberIdx", cartList.get(0).getMemberIdx());
+			map.put("perchaseMethod", "카드");
+			map.put("totalPrice", totalPrice);
+			
+			mapper.insertBookList(map);
+			for (SiteCart dto : cartList ) {
+				mapper.insertBook(dto);
+			}
+			mapper.perchaseSite(map);
+			mapper.deleteAllCart((long)map.get("memberIdx"));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw e;
+		}
 	}
 	public int period(String date1,String date2) throws ParseException {
 		 DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
