@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fa.plus.mapper.QnAMapper">
+	<insert id="insertQuestion" parameterType="com.fa.plus.domain.shop.QnA">
+		INSERT INTO productQna(qnaNum, productNum, memberIdx, secret, question, showQuestion, answerStatus, questionDate)
+			VALUES(productQna_seq.NEXTVAL, #{productNum}, #{memberIdx}, #{secret}, #{question}, 1, 0, SYSDATE)
+	</insert>
+	<insert id="insertQuestionFile" parameterType="com.fa.plus.domain.shop.QnA">
+		INSERT INTO productQnaFile(fileNum, qnaNum, filename)
+			VALUES(productQnaFile_seq.NEXTVAL, productQna_seq.CURRVAL, #{filename})
+	</insert>
+
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM productQna
+		WHERE productNum = #{productNum} AND showQuestion = 1
+	</select>
+		
+	<select id="listQuestion" parameterType="map" resultType="com.fa.plus.domain.shop.QnA">
+		SELECT q.qnaNum, q.memberIdx, m.userName, secret, question, answer, m2.userId answerId, m2.userName answerName, 
+			q.productNum, filename, showQuestion, answerStatus,
+			questionDate, answerDate
+		FROM productQna q
+		JOIN member1 m ON q.memberIdx = m.memberIdx
+		LEFT OUTER JOIN (
+			SELECT qnaNum, LISTAGG(filename, ',') WITHIN GROUP(ORDER BY fileNum) filename
+            FROM productQnaFile
+            GROUP BY qnaNum	
+		) f ON q.qnaNum=f.qnaNum		
+		LEFT OUTER JOIN member1 m2 ON answerId = m2.userId
+		WHERE q.productNum=#{productNum} AND showQuestion = 1
+		ORDER BY q.qnaNum DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+
+	<select id="dataCount2" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM productQna
+		<where>
+			<if test="memberIdx != null">
+				memberIdx = #{memberIdx}
+			</if>
+			<if test="mode != null">
+				<if test="mode == 2">
+					AND ( answer IS NOT NULL )
+				</if>
+				<if test="mode == 3">
+					AND ( answer IS NULL )
+				</if>
+			</if>
+		</where>
+	</select>
+		
+	<select id="listQuestion2" parameterType="map" resultType="com.fa.plus.domain.shop.QnA">
+		SELECT q.qnaNum, q.memberIdx, m.userName, secret, question, answer, 
+			m2.userId answerId, m2.userName answerName, 
+			q.productNum, productName, filename, showQuestion, answerStatus,
+			questionDate, answerDate
+		FROM productQna q
+		JOIN product p ON q.productNum = p.productNum 
+		JOIN member1 m ON q.memberIdx = m.memberIdx
+		LEFT OUTER JOIN (
+			SELECT qnaNum, LISTAGG(filename, ',') WITHIN GROUP(ORDER BY fileNum) filename
+            FROM productQnaFile
+            GROUP BY qnaNum	
+		) f ON q.qnaNum=f.qnaNum		
+		LEFT OUTER JOIN member1 m2 ON answerId = m2.userId
+		<where>
+			<if test="memberIdx != null">
+				q.memberIdx = #{memberIdx}
+			</if>
+			<if test="mode != null">
+				<if test="mode == 2">
+					AND ( answer IS NOT NULL )
+				</if>
+				<if test="mode == 3">
+					AND ( answer IS NULL )
+				</if>
+			</if>
+		</where>
+		ORDER BY q.qnaNum DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+	
+	<update id="updateQuestion" parameterType="com.fa.plus.domain.shop.QnA">
+		UPDATE productQna SET answer = #{answer}, answerId = #{answerId}, answerDate = SYSDATE, 
+			showQuestion = #{showQuestion}, answerStatus = #{answerStatus}, 
+		WHERE qnaNum = #{qnaNum}
+	</update>
+		
+	<select id="listQuestionFile" parameterType="long" resultType="com.fa.plus.domain.shop.QnA">
+		SELECT fileNum, qnaNum, filename
+		FROM productQnaFile
+		WHERE qnaNum = #{qnaNum}
+	</select>
+		
+	<delete id="deleteQuestion" parameterType="long">
+		DELETE FROM productQna
+		WHERE qnaNum = #{qnaNum}
+	</delete>
+</mapper>

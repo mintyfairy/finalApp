@@ -21,8 +21,7 @@
 		JOIN productCategory c ON p.categoryNum = c.categoryNum
 		LEFT
 		OUTER JOIN brand b ON p.brandNum = b.brandNum
-		WHERE special=0 AND
-		productShow=1
+		WHERE productShow=1
 		<if test="categoryNum != 0">
 			AND categoryNum = #{categoryNum}
 		</if>

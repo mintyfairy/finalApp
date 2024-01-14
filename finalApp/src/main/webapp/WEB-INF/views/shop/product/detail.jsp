@@ -643,10 +643,10 @@ function sendOk(mode) {
 		<div class="detail_wrap">
 			<div id="tabs1" class="detail_tab detail_tab1">
 				<ul class="tab_list">
-					<li class="tab_item" onclick="detailInfo();"><a href="#">상세정보</a></li>
-					<li class="tab_item" onclick="productReview();"><a href="#">상품후기0</a></li>
-					<li class="tab_item" onclick="productQuestion();"><a href="#">상품문의0</a></li>
-					<li class="tab_item" onclick="productAs();"><a href="#">배송/교환/반품/AS</a></li>
+					<li class="tab_item" onclick="detail();"><span>상세정보</span></li>
+					<li class="tab_item" onclick="review();"><span>상품후기0</span></li>
+					<li class="tab_item" onclick="question();"><span>상품문의0</span></li>
+					<li class="tab_item" onclick="as();"><span>배송/교환/반품/AS</span></li>
 				</ul>
 			</div>
 			<div class="detail_img">
@@ -654,10 +654,10 @@ function sendOk(mode) {
 			</div>
 			<div class="detail_tab detail_tab2">
 				<ul class="tab_list">
-					<li class="tab_item" onclick="detailInfo();"><a href="#">상세정보</a></li>
-					<li class="tab_item" onclick="productReview();"><a href="#">상품후기0</a></li>
-					<li class="tab_item" onclick="productQuestion();"><a href="#">상품문의0</a></li>
-					<li class="tab_item" onclick="productAs();"><a href="#">배송/교환/반품/AS</a></li>
+					<li class="tab_item" onclick="detail();"><span>상세정보</span></li>
+					<li class="tab_item" onclick="review();"><span>상품후기0</span></li>
+					<li class="tab_item" onclick="question();"><span>상품문의0</span></li>
+					<li class="tab_item" onclick="as();"><span>배송/교환/반품/AS</span></li>
 				</ul>
 			</div>
 			<div class="detail_review">
@@ -678,17 +678,13 @@ function sendOk(mode) {
 						</tbody>
 					</table>
 				</div>
-				<div class="review_write">
-					<a href="#">글쓰기</a>
+				<div class="review_write mt-3 p-2 text-end">
+					<button type="button" class="btnMyQuestion btn btn-dark" ${empty sessionScope.member ? "disabled":""}> 내 Q&amp;A 보기  </button>
+					<button type="button" class="btnQuestion btn btn-dark" ${empty sessionScope.member ? "disabled":""}> 상품 Q&amp;A 작성 </button>
 				</div>
+				<div class="mt-1 p-2 list-question"></div>
 			</div>
-			<div class="detail_tab detail_tab3">
-				<ul class="tab_list">
-					<li class="tab_item" onclick="detailInfo();"><a href="#">상세정보</a></li>
-					<li class="tab_item" onclick="productReview();"><a href="#">상품후기0</a></li>
-					<li class="tab_item" onclick="productQuestion();"><a href="#">상품문의0</a></li>
-					<li class="tab_item" onclick="productAs();"><a href="#">배송/교환/반품/AS</a></li>
-				</ul>
+				
 			</div>
 			<div class="detail_qna">
 				<div class="qna_table">
@@ -708,16 +704,58 @@ function sendOk(mode) {
 						</tbody>
 					</table>
 				</div>
-				<div class="qna_write">
-					<a href="#">글쓰기</a>
+				
+		<div class="modal fade" id="questionDialogModal" tabindex="-1" 
+		data-bs-backdrop="static" data-bs-keyboard="false"
+		aria-labelledby="questionDialogModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="questionDialogModalLabel">상품 문의 하기</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+
+				<div class="qna-form p-2">
+					<form name="questionForm">
+						<div class="row">
+							<div class="col">
+								<span class="fw-bold">문의사항 쓰기</span><span> - 상품 및 상품 구매 과정과 관련없는 글은 삭제 될 수 있습니다.</span>
+							</div>
+							<div class="col-3 text-end">
+								<input type="checkbox" name="secret" id="secret1" class="form-check-input" 
+									value="1">
+								<label class="form-check-label" for="secret1">비공개</label>
+							</div>
+						</div>
+						<div class="p-1">
+							<input type="hidden" name="productNum" value="${dto.productNum}">
+							<textarea name="question" id="question" class="form-control"></textarea>
+						</div>
+						<div class="p-1">
+							<div class="img-grid">
+								<img class="item img-add" src="${pageContext.request.contextPath}/resources/images/add_photo.png">
+							</div>
+							<input type="file" name="selectFile" accept="image/*" multiple class="form-control" style="display: none;">
+						</div>							
+					</form>
 				</div>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary btnQuestionSendOk">문의등록 <i class="bi bi-check2"></i> </button>
+				<button type="button" class="btn btn-secondary btnQuestionSendCancel" data-bs-dismiss="modal">취소</button>
+			</div>			
+		</div>
+	</div>
+</div>
 			</div>
 			<div class="detail_tab detail_tab4">
 				<ul class="tab_list">
-					<li class="tab_item" onclick="detailInfo();"><a href="#">상세정보</a></li>
-					<li class="tab_item" onclick="productReview();"><a href="#">상품후기0</a></li>
-					<li class="tab_item" onclick="productQuestion();"><a href="#">상품문의0</a></li>
-					<li class="tab_item" onclick="productAs();"><a href="#">배송/교환/반품/AS</a></li>
+				<li class="tab_item" onclick="detail();"><span>상세정보</span></li>
+					<li class="tab_item" onclick="review();"><span>상품후기0</span></li>
+					<li class="tab_item" onclick="question();"><span>상품문의0</span></li>
+					<li class="tab_item" onclick="as();"><span>배송/교환/반품/AS</span></li>
 				</ul>
 			</div>
 			<div class="detail_as">
@@ -775,30 +813,204 @@ function sendOk(mode) {
 			</div>
 		</div>
 	</div>
-</div>
-
+	
 <script type="text/javascript">
 //변수명 변경
-let detailInfo = document.querySelector("#tabs1").offsetTop;
-let productReview = document.querySelector(".detail_tab2").offsetTop;
-let productQuestion = document.querySelector(".detail_tab3").offsetTop;
-let productAs = document.querySelector(".detail_tab4").offsetTop;
+let detail_height = document.querySelector(".detail_tab1").offsetTop;
+let review_height = document.querySelector(".detail_tab2").offsetTop;
+let question_height = document.querySelector(".detail_tab3").offsetTop;
+let as_height = document.querySelector(".detail_tab4").offsetTop;
+
+console.log(detail_height);
+console.log(review_height);
+console.log(question_height);
+console.log(as_height);
 
 // 함수명 변경
-function scrollToDetailInfo() {
-   window.scrollTo({top: detailInfo, left: 0, behavior: 'smooth'});
+function detail() {
+   window.scrollTo({top: detail_height, left: 0, behavior: 'smooth'});
 }
 
-function scrollToProductReview() {
-   window.scrollTo({top: productReview, left: 0, behavior: 'smooth'});
+function review() {
+   window.scrollTo({top: review_height, left: 0, behavior: 'smooth'});
 }
 
-function scrollToProductQuestion() {
-   window.scrollTo({top: productQuestion, left: 0, behavior: 'smooth'});
+function question() {
+   window.scrollTo({top: question_height, left: 0, behavior: 'smooth'});
 }
 
-function scrollToProductAs() {
-   window.scrollTo({top: productAs, left: 0, behavior: 'smooth'});
+function as() {
+   window.scrollTo({top: as_height, left: 0, behavior: 'smooth'});
 }
 
+$(function(){
+	$('.reviewSortNo').change(function(){
+		listReview(1);
+	});
+});
+
+function listReview(page) {
+	let productNum = '${dto.productNum}';
+	let sortNo = $('.reviewSortNo').val();
+	let url = '${pageContext.request.contextPath}/review/list';
+	let query = 'productNum='+productNum+'&pageNo='+page+'&sortNo='+sortNo;
+	
+	const fn = function(data) {
+		printReview(data);
+	};
+	ajaxFun(url, 'get', query, 'json', fn);
+}
+
+function printReview(data) {
+	let dataCount = data.dataCount;
+	let pageNo = data.pageNo;
+	let total_page = data.total_page;
+	let size = data.size;
+	let paging = data.paging;
+	
+	if(dataCount > 0) {
+		$('.reviewSort-area').show();
+	} else {
+		$('.reviewSort-area').hide();
+	}
+	
+	let summary = data.summary;
+	printSummary(summary);
+	
+	let out = '';
+	for(let item of data.list) {
+		let num = item.orderDetailNum;
+		let userName = item.userName;
+		let score = item.score;
+		let review = item.review;
+		let review_date = item.reviewDate;
+		let answer = item.answer;
+		let answer_date = item.answerDate;
+		let listFilename = item.listFilename;
+		// let deletePermit = item.deletePermit;
+		
+		out += '<div class="mt-3 border-bottom">';
+		out += '  <div class="row p-2">';
+		out += '     <div class="col-auto fs-2"><i class="bi bi-person-circle text-muted icon"></i></div>';
+		out += '     <div class="col pt-3 ps-0 fw-semibold">'+userName+'</div>';
+		out += '     <div class="col pt-3 text-end"><span>'+reviewDate+'</span>';
+		out += '       |<span class="notifyReview" data-num="' + orderDetailNum + '">신고</span></div>';
+		out += '  </div>';
+		out += '  <div class="row p-2">';
+		out += '    <div class="col-auto pt-0 ps-2 pe-1 score-star">';
+		for(let i=1; i<=5; i++) {
+			out += '  <span class="item fs-6 ' + (score>=i ? 'on' : '') + '"><i class="bi bi-star-fill"></i></span>';
+		}
+		out += '    </div>';
+		out += '    <div class="col-auto ps-0 fs-6"><span>' + score + '점<span></div>';
+		out += '  </div>';
+		out += '  <div class="mt-2 p-2">' + review + '</div>';
+
+		if(listFilename && listFilename.length > 0) {
+			out += '<div class="row gx-1 mt-2 mb-1 p-1">';
+				for(let f of listFilename) {
+					out += '<div class="col-md-auto md-img">';
+					out += '  <img class="border rounded" src="${pageContext.request.contextPath}/uploads/review/'+f+'">';
+					out += '</div>';
+				}
+			out += '</div>';
+		}
+		
+		if(answer) {
+			out += '  <div class="p-3 pt-0">';
+			out += '    <div class="bg-light">';
+			out += '      <div class="p-3 pb-0">';
+			out += '        <label class="text-bg-primary px-2"> 관리자 </label> <label>' + answerDate + '</label>';
+			out += '      </div>';
+			out += '      <div class="p-3 pt-1">' + answer + '</div>';
+			out += '    </div>';
+			out += '  </div>';
+		}
+		out += '</div>';
+	}
+	if(dataCount > 0) {
+		out += '<div class="page-navigation">' + paging + '</div>';
+	}
+	
+	$('.list-review').html(out);
+}
+
+function printSummary(summary) {
+	let count = summary.count;
+	let ave = summary.ave;
+	
+	let score1 = summary.score1;
+	let score2 = summary.score2;
+	let score3 = summary.score3;
+	let score4 = summary.score4;
+	let score5 = summary.score5;
+	let scoreRate1 = summary.scoreRate1;
+	let scoreRate2 = summary.scoreRate2;
+	let scoreRate3 = summary.scoreRate3;
+	let scoreRate4 = summary.scoreRate4;
+	let scoreRate5 = summary.scoreRate5;
+	
+	$(".product-reviewCount").text(count);
+	$(".product-score").text("("+ave+" / 5)");
+	$(".product-star .item").removeClass("on");
+	let roundAve = Math.round(ave);
+	for(let i=1; i<=roundAve; i++) {
+		$(".product-star .item").eq(i-1).addClass("on");
+	}
+	
+	$(".title-reviewCount").text("("+count+")");
+	
+	$(".review-score-star .item").removeClass("on");
+	for(let i=1; i<=roundAve; i++) {
+		$(".review-score-star .item").eq(i-1).addClass("on");
+	}
+	$(".review-score").text(ave+" / 5");
+	$(".review-reviewCount").text(count);
+	
+	$(".review-rate .one-space").removeClass("on");
+
+	for(let i=1; i<=Math.floor(scoreRate5/10); i++) {
+		$(".review-rate .score-5 .one-space").eq(i-1).addClass("on");
+	}
+	$(".review-rate .score-5 .graph-rate").text(scoreRate5+"%");
+	
+	for(let i=1; i<=Math.floor(scoreRate4/10); i++) {
+		$(".review-rate .score-4 .one-space").eq(i-1).addClass("on");
+	}
+	$(".review-rate .score-4 .graph-rate").text(scoreRate4+"%");
+
+	for(let i=1; i<=Math.floor(scoreRate3/10); i++) {
+		$(".review-rate .score-3 .one-space").eq(i-1).addClass("on");
+	}
+	$(".review-rate .score-3 .graph-rate").text(scoreRate3+"%");
+
+	for(let i=1; i<=Math.floor(scoreRate2/10); i++) {
+		$(".review-rate .score-2 .one-space").eq(i-1).addClass("on");
+	}
+	$(".review-rate .score-2 .graph-rate").text(scoreRate2+"%");
+
+	for(let i=1; i<=Math.floor(scoreRate1/10); i++) {
+		$(".review-rate .score-1 .one-space").eq(i-1).addClass("on");
+	}
+	$(".review-rate .score-1 .graph-rate").text(scoreRate1+"%");
+}
+
+$(function(){
+	$('body').on('click', '.notifyReview', function(){
+		let num = $(this).attr('data-orderDetailNum');
+		alert(num);
+	});
+});
+
+//question -----
+function listQuestion(page) {
+	let productNum = '${dto.productNum}';
+	let url = '${pageContext.request.contextPath}/qna/list';
+	let query = 'productNum='+productNum+'&pageNo='+page;
+	
+	const fn = function(data) {
+		printQuestion(data);
+	};
+	ajaxFun(url, 'get', query, 'json', fn);
+}
 </script>

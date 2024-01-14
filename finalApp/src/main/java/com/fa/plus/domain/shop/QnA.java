@@ -1,7 +1,14 @@
 package com.fa.plus.domain.shop;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 public class QnA {
-	private long num;
+	private long qnaNum;
+	private long productNum;
+	private long memberIdx;
+	private String question;
 	private int secret;
 	private String title;
 	private String content;
@@ -13,18 +20,23 @@ public class QnA {
 	private String answerId;
 	private String answerName;
 	private String answer_date;
+	private String questionDate;
+	private int showQuestion;
+	
+	private long fileNum;
+	private String filename;
+	private List<MultipartFile> selectFile;
+
+	private String[] listFilename;
+	
+	private String productName;
 
 	private String lectureCode;
 	private String category;
 	private String lectureSubCode;
 	private String subject;
 	
-	public long getNum() {
-		return num;
-	}
-	public void setNum(long num) {
-		this.num = num;
-	}
+	
 	public int getSecret() {
 		return secret;
 	}
@@ -108,6 +120,72 @@ public class QnA {
 	}
 	public void setSubject(String subject) {
 		this.subject = subject;
+	}
+	public long getProductNum() {
+		return productNum;
+	}
+	public void setProductNum(long productNum) {
+		this.productNum = productNum;
+	}
+	public long getMemberIdx() {
+		return memberIdx;
+	}
+	public void setMemberIdx(long memberIdx) {
+		this.memberIdx = memberIdx;
+	}
+	public String getQuestion() {
+		return question;
+	}
+	public void setQuestion(String question) {
+		this.question = question;
+	}
+	public String getQuestionDate() {
+		return questionDate;
+	}
+	public void setQuestionDate(String questionDate) {
+		this.questionDate = questionDate;
+	}
+	public int getShowQuestion() {
+		return showQuestion;
+	}
+	public void setShowQuestion(int showQuestion) {
+		this.showQuestion = showQuestion;
+	}
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+	public long getFileNum() {
+		return fileNum;
+	}
+	public void setFileNum(long fileNum) {
+		this.fileNum = fileNum;
+	}
+	public List<MultipartFile> getSelectFile() {
+		return selectFile;
+	}
+	public void setSelectFile(List<MultipartFile> selectFile) {
+		this.selectFile = selectFile;
+	}
+	public String[] getListFilename() {
+		return listFilename;
+	}
+	public void setListFilename(String[] listFilename) {
+		this.listFilename = listFilename;
+	}
+	public String getProductName() {
+		return productName;
+	}
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+	public long getQnaNum() {
+		return qnaNum;
+	}
+	public void setQnaNum(long qnaNum) {
+		this.qnaNum = qnaNum;
 	}
 
 }

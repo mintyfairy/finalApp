@@ -34,7 +34,63 @@
 .deleteReview:hover, .deleteQuestion:hover { font-weight: 500; color: #2478FF; }
 </style>
 
+<script type="text/javascript">
+$(function(){
+	$("button[role='tab']").on('click', function(){
+		const tab = $(this).attr("aria-controls");
+		
+		if(tab === "1") {
+			listReview(1);
+		} else if(tab === "2"){
+			listQuestion(1);
+		}
+	});
+	
+	let mode = "${mode}";
+	if(mode === "qna") {
+		listQuestion(1);
+	} else {
+		listReview(1);
+	}
+	
+});
+function login() {
+	location.href = '${pageContext.request.contextPath}/login/login';
+}
 
+function ajaxFun(url, method, formData, dataType, fn, file = false) {
+	const settings = {
+			type: method, 
+			data: formData,
+			success:function(data) {
+				fn(data);
+			},
+			beforeSend: function(jqXHR) {
+				jqXHR.setRequestHeader('AJAX', true);
+			},
+			complete: function () {
+			},
+			error: function(jqXHR) {
+				if(jqXHR.status === 403) {
+					login();
+					return false;
+				} else if(jqXHR.status === 400) {
+					alert('요청 처리가 실패 했습니다.');
+					return false;
+		    	}
+		    	
+				console.log(jqXHR.responseText);
+			}
+	};
+	
+	if(file) {
+		settings.processData = false;  // file 전송시 필수. 서버로전송할 데이터를 쿼리문자열로 변환여부
+		settings.contentType = false;  // file 전송시 필수. 서버에전송할 데이터의 Content-Type. 기본:application/x-www-urlencoded
+	}
+	
+	$.ajax(url, settings);
+}
+</script>
 
 <div class="container">
 	<div class="body-container">	
@@ -58,7 +114,13 @@
 					<div class="mt-2 list-review"></div>
 				</div>
 				
-				
+				<div class="tab-pane fade ${mode=='qna'?'active show':'' }" id="tab-pane-2" role="tabpanel" aria-labelledby="tab-2" tabindex="0">
+					<div class="mt-3 pt-3 border-bottom">
+						<p class="fs-4 fw-semibold">상품 문의</p> 
+					</div>
+			
+					<div class="mt-1 p-2 list-question"></div>
+				</div>
 			</div>
 
 		</div>
@@ -150,7 +212,99 @@ $(function(){
 	});
 });
 
+//question -------------
+function listQuestion(page) {
+	let url = '${pageContext.request.contextPath}/qna/list2';
+	let query = 'pageNo='+page;
+	
+	const fn = function(data) {
+		printQuestion(data);
+	};
+	ajaxFun(url, 'get', query, 'json', fn);	
+}
 
+function printQuestion(data) {
+	let dataCount = data.dataCount;
+	let pageNo = data.pageNo;
+	let total_page = data.total_page;
+	let size = data.size;
+	let paging = data.paging;
+	
+	let out = '';
+	for(let item of data.list) {
+		let num = item.num;
+		let userName = item.userName;
+		let question = item.question;
+		let question_date = item.question_date;
+		let answer = item.answer;
+		let answer_date = item.answer_date;
+		let answerState = answer_date ? '<span class="text-primary">답변완료</span>' : '<span class="text-secondary">답변대기</span>';
+		let listFilename = item.listFilename;
+		let productName = item.productName;
+
+		out += '<div class="mt-1 border-bottom">';
+		out += '  <div class="mt-2 p-2 fw-semibold">' + productName + '</div>';
+		out += '  <div class="p-2">' + question + '</div>';
+
+		if(listFilename && listFilename.length > 0) {
+			out += '<div class="row gx-1 mt-2 mb-1 p-1">';
+				for(let f of listFilename) {
+					out += '<div class="col-md-auto md-img">';
+					out += '  <img class="border rounded" src="${pageContext.request.contextPath}/uploads/qna/'+f+'">';
+					out += '</div>';
+				}
+			out += '</div>';
+		}
+		out += '  <div class="row p-2">';
+		out += '     <div class="col-auto pt-2 pe-0">' + answerState + '</div>';
+		// out += '     <div class="col-auto pt-2 px-0">&nbsp;|&nbsp;'+userName+'</div>';
+		out += '     <div class="col-auto pt-2 px-0">&nbsp;|&nbsp;<span>'+question_date+'</span>';
+		out += '        |<span class="deleteQuestion" data-num="' + num + '">삭제</span>';
+		out += '      </div>';
+		if(answer) {
+			out += '  <div class="col pt-2 text-end"><button class="btn btnAnswerView"> <i class="bi bi-chevron-down"></i> </button></div>';
+		}
+		out += '  </div>';
+		if(answer) {
+			out += '  <div class="p-3 pt-0 answer-content" style="display: none;">';
+			out += '    <div class="bg-light">';
+			out += '      <div class="p-2 pb-0">';
+			out += '        <label class="text-bg-primary px-2"> 관리자 </label> <label>' + answer_date + '</label>';
+			out += '      </div>';
+			out += '      <div class="p-2 pt-1">' + answer + '</div>';
+			out += '    </div>';
+			out += '  </div>';
+		}
+		out += '</div>';
+	}
+	
+	if(dataCount > 0) {
+		out += '<div class="page-navigation">' + paging + '</div>';
+	}
+
+	$('.list-question').html(out);
+}
+
+$(function(){
+	$('.list-question').on('click', '.btnAnswerView', function(){
+		const $btn = $(this);
+		const $EL = $(this).closest('.row').next('.answer-content');
+		if($EL.is(':visible')) {
+			$btn.html(' <i class="bi bi-chevron-down"></i> ');
+			$EL.hide(100);
+		} else {
+			$btn.html(' <i class="bi bi-chevron-up"></i> ');
+			$EL.show(100);
+		}
+	});
+});
+
+$(function(){
+	$('.list-question').on('click', '.deleteQuestion', function(){
+		let num = $(this).attr('data-num');
+		alert(num);
+	});
+});
 
 
 </script>

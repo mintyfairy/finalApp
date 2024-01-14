@@ -12,7 +12,7 @@
 	<insert id="insertOrder" parameterType="com.fa.plus.domain.shop.Order">
 		INSERT INTO productOrder(orderNum, orderName, memberIdx, orderDate, totalMoney, usedSaved, deliveryCharge, 
 			payment, cancelAmount, orderState) VALUES (#{orderNum}, #{orderName, jdbcType=VARCHAR}, #{memberIdx}, SYSDATE, 
-			#{totalMoney}, #{usedSaved}, #{deliveryCharge}, #{payment}, 0, 1)
+			#{totalMoney}, #{usedSaved}, #{deliveryCharge}, #{payment}, 0, 0)
 	</insert>
 	
 	<insert id="insertPayDetail" parameterType="com.fa.plus.domain.shop.Order">

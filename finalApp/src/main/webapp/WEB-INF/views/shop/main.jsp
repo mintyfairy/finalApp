@@ -201,7 +201,90 @@ main {
 }
 </style>
 
+<script type="text/javascript">
+$(function(){
+	$(".product-item").click(function(){
+		let productNum = $(this).attr("data-productNum");
+		let url = "${pageContext.request.contextPath}/product/"+productNum;
+		location.href = url;
+	});
+	
+	$(".product-item").mouseenter(function(e){
+		$(this).find("img").css("transform", "scale(1.05)");
+		$(this).find("img").css("overflow", "hidden");
+		$(this).find("img").css("transition", "all 0.5s");
+	});
+	$(".product-item").mouseleave(function(e){
+		$(this).find("img").css("transform", "scale(1)");
+		$(this).find("img").css("transition", "all 0.5s");
+	});
+});
 
+$(function(){
+	$(".product-container").each(function(){
+		if($(this).find(".product-inner").length < 1) {
+			$(this).hide();
+		} else if($(this).find(".product-inner").length === 1) {
+			$(this).find(".page-move-right").hide();
+		}
+	});
+	
+	$(".product-container .product-inner").hide();
+	$(".product-container").find(".product-inner:first").show();
+	$(".page-move-left").hide();
+	
+	$(".page-move-left").click(function(){
+		let $ps = $(this).closest(".product-container");
+		
+		let $show = null;
+		$ps.find(".product-inner").each(function(){
+			if($(this).is(':visible')) {
+				$show = $(this);
+				return false;
+			}
+		});
+		
+		if($show && $ps.find(".product-inner:first").index() !== $show.index()) {
+			$show.hide('slide');
+			$show.prev().show('slide');
+			$ps.find(".page-move-right").show();
+			if($ps.find(".product-inner:first").index() === $show.prev().index()) {
+				$ps.find(".page-move-left").hide();
+			}
+		}
+	});
+	
+	$(".page-move-right").click(function(){
+		let $ps = $(this).closest(".product-container");
+		
+		let $show = null;
+		$ps.find(".product-inner").each(function(){
+			if($(this).is(':visible')) {
+				$show = $(this);
+				return false;
+			}
+		});
+
+		if($show && $ps.find(".product-inner:last").index() !== $show.index()) {
+			$show.hide('slide');
+			$show.next().show('slide');
+			$ps.find(".page-move-left").show();
+			if($ps.find(".product-inner:last").index() === $show.next().index()) {
+				$ps.find(".page-move-right").hide();
+			}
+		}
+	});
+});
+
+$(function(){
+	$(".product-container").each(function(){
+		if($(this).find(".product-inner").length < 1) {
+			$(this).closest(".product-container").parent().hide();
+			$(this).parent().next(".see-more").hide();
+		}
+	});
+});
+</script>
 
 <div class="main_slider_wrap">
     <div class="main_slider">
