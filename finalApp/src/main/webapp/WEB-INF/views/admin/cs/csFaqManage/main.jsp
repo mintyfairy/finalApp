@@ -1,52 +1,51 @@
-<%@ page contentType="text/html; charset=UTF-8" %>    
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tabs.css" type="text/css">
+
 <style type="text/css">
 .body-main {
-	max-width:1200px;
-	margin: 0 auto; 
+	width: 1080px;
 }
-
-.body-main > div {
+#tab-content{
 	width: 100%;
-	height: 500px;
 }
 
-#tab-content {
-	width: 100%;
-	hegiht: 500px;
-	margin:30px auto;
+img {
+	border: 1px solid rightgrey;
 }
-</style>
 
-<style type="text/css">
+a {
+	color:black; text-decoration: none; outline: none
+}
+
 .accordion {
-	box-sizing:border-box;
-	width: 500px;
+	box-sizing: border-box;
+	width: 100%;
 	min-height: 50px;
-	margin: 500px auto 20px;
+	margin: 50px auto 20px;
 }
 
 .accordion h3.question {
 	box-sizing: border-box;
-    color:#333;
-    font-weight:300;
-    border:1px solid #ccc;
-    background-color:#fff;
-    padding:7px 15px 7px;
-    border-radius:4px;	
-    cursor:pointer;
-    margin: 3px 0 0;
+	color: #333;
+	font-weight: 300;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	padding: 7px 15px 7px;
+	border-radius: 4px;
+	cursor: pointer;
+	margin: 3px 0 0;
 }
+
 .accordion h3.question:hover {
-	 background-color: #F8FFFF;
+	background-color: #F8FFFF;
 }
 
 .accordion h3.question .q {
 	font-weight: 600;
 }
+
 .accordion h3.question .subject:hover {
 	color: #0d58ba;
 }
@@ -60,26 +59,28 @@
 	display: none;
 }
 
-.accordion div.answer > .category {
+.accordion div.answer>.category {
 	height: 35px;
 	line-height: 35px;
 	border-bottom: 1px solid #eee;
 }
 
-.accordion div.answer > .content {
+.accordion div.answer>.content {
 	padding: 7px 15px 5px;
 }
-.accordion div.answer > .content div:first-child {
+
+.accordion div.answer>.content div:first-child {
 	font-weight: 700;
 	/* display: inline-block;  */
 	vertical-align: top;
 	padding-left: 5px;
 }
-.accordion div.answer > .content div:last-child {
+
+.accordion div.answer>.content div:last-child {
 	display: inline-block;
 }
 
-.accordion div.answer > .update {
+.accordion div.answer>.update {
 	text-align: right;
 }
 
@@ -88,6 +89,9 @@
 	background-color: #f8f9fa;
 }
 </style>
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tabs.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
 
 <script type="text/javascript">
 $(function(){
@@ -223,48 +227,72 @@ function deleteFaq(num, page) {
 </script>
 
 <div class="body-container">
-    <div class="body-title">
-		<h2><i class="fa-solid fa-clipboard-question"></i> 자주받는 질문 </h2>
-    </div>
-    
-    
-    <div class="body-main">
+	<div class="body-title">
+		<h2>
+			<i class="fa-solid fa-clipboard-question" style="font-size:23px;"></i> &nbsp;자주받는 질문 
+		</h2>
+		
+	</div>
+
+
+	<div class="body-main">
 
 		<div>
 			<ul class="tabs">
 				<li id="tab-0" data-categoryNum="0">모두</li>
 				<c:forEach var="dto" items="${listCategory}">
-					<li id="tab-${dto.categoryNum}" data-categoryNum="${dto.categoryNum}">${dto.category}</li>
+					<li id="tab-${dto.categoryNum}"
+						data-categoryNum="${dto.categoryNum}">${dto.category}</li>
 				</c:forEach>
 			</ul>
-			<div id="tab-content"></div>
+			<div id="tab-content">
 			
+			</div>
+			
+			
+			<table class="table">
+				<tr>
+				<td align="left" width="150">
+						<button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/admin/cs/faq/write     ';">
+							<i class="bi bi-arrow-clockwise"></i>
+						</button>
+					</td>
+					<td align="center">
+						<form class="row justify-content-center" name="searchForm" action="${pageContext.request.contextPath}/admin/cs/faq/write" method="post">
+							<div class="col-auto p-1">
+								<select name="schType" class="form-select">
+									<option value="all" ${schType=="all"?"selected":""}>제목+내용</option>
+									<option value="subject" ${schType=="subject"?"selected":""}>제목</option>
+									<option value="content" ${schType=="content"?"selected":""}>내용</option>
+								</select>
+							</div>
+							<div class="col-auto p-1">
+								<input type="text" name="kwd" value="${kwd}" class="form-control">
+								<input type="hidden" name="size" value="${size}">
+								<input type="hidden" name="carShow" value="${carShow}">
+							</div>
+							<div class="col-auto p-1">
+								<button type="button" class="btn btn-light" onclick="searchList()"> <i class="bi bi-search"></i> </button>
+							</div>
+						</form>
+					</td>
+					<td width="150" align="right">
+						<button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/admin/cs/faq/write';">글올리기</button>
+					</td>
+					
+					
+				</tr>
+			</table>
 		</div>
-		
-			
-		<table class="table">
-			<tr>
-				
-				<td align="center">
-					<select id="schType" name="schType" class="form-select">
-						<option value="all" ${schType=="all"?"selected":""}>제목+내용</option>
-						<option value="subject" ${schType=="subject"?"selected":""}>제목</option>
-						<option value="content" ${schType=="content"?"selected":""}>내용</option>
-					</select>
-					<input type="text" id="kwd" name="kwd" class="form-control" value="${kwd}">
-					<button type="button" class="btn" onclick="searchList();">검색</button>
-				</td>
-				<td align="right" width="100">
-					<button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/admin/cs/faq/write';">글올리기</button>
-				</td>
-			</tr>
-		</table>
-		
+
+
+
+
 	</div>
 </div>
 
 <form name="faqSearchForm" method="post">
-	<input type="hidden" name="schType" value="all">
-    <input type="hidden" name="kwd" value="">
+	<input type="hidden" name="schType" value="all"> 
+	<input type="hidden" name="kwd" value="">
 </form>
 

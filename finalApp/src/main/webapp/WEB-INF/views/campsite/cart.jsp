@@ -24,6 +24,9 @@
 
 <script type="text/javascript">
 
+
+
+
 </script>
 
 
@@ -62,38 +65,38 @@
 						<c:forEach var="dto" items="${list}">
 							<tr class="text-center" valign="middle">
 								<td>
-									<input type="checkbox" class="form-check-input" name="nums" value="${dto.detailNum2}">
+									<input type="checkbox" class="form-check-input" name="nums" value="${dto.detailNum}">
 								</td>
 								<td width="55">
 									<img class="border rounded" width="50" height="50" src="${pageContext.request.contextPath}/uploads/product/${dto.thumbnail}">
 								</td>
 								<td>
-									<p class="product-title p-1 mb-0 left">${dto.sitename}</p>
+									<p class="product-title p-1 mb-0 left">${dto.content}</p>
 									<p class="product-options p-1 mb-0 left"> 수용인원 : ${dto.capacity}</p>
 
                                     <!--
-									<input type="hidden" name="productNums" value="${dto.productNum}">
+									<input type="hidden" name="productNums" value="${dto.detailNum}">
 									<input type="hidden" name="detailNums" value="${dto.detailNum}">
-									<input type="hidden" name="detailNums2" value="${dto.detailNum2}">
+									
                                     -->
 								</td>
 								<td>
 									<div class="input-group">
-										<p class="product-title p-1 mb-0 left">${dto.detailnum}</p>
+										<p class="product-title p-1 mb-0 left">${dto.detailNum}</p>
 									</div>
 								</td>
 								<td>
-									<fmt:formatDate value="${dto.checkin}"/>
+									<fmt:formatDate value="${dto.startDate}"/>
 								</td>
 								<td>
-									<fmt:formatDate value="${dto.checkout}"/>
+									<fmt:formatDate value="${dto.endDate}"/>
 								</td>
 								<td>
-									<label class="productMoneys"><fmt:formatNumber value="${dto.totalPrice}"/></label><label>원</label>
-									<input type="hidden" name="totalPrice" value="${dto.totalPrice}">
+									<label class="productMoneys"><fmt:formatNumber value="${dto.periodPrice}"/></label><label>원</label>
+									<input type="hidden" name="dayPrice" value="${dto.price}">
 								</td>
 								<td>
-									<button type="button" class="btn cart-delete" onclick="deleteCartItem('${dto.detailNum2}')"><i class="bi bi-x"></i></button>
+									<button type="button" class="btn cart-delete" onclick="deleteCartItem('${dto.detailNum}')"><i class="bi bi-x"></i></button>
 								</td>
 							</tr>
 						
