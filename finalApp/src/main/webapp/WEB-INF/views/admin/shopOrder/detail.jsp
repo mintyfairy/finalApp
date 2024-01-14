@@ -129,6 +129,12 @@
 							<td><fmt:formatNumber value="${dto.savedMoney}"/></td>
 							<td>${order.orderState==1 && dto.detailState==0?"상품준비중":dto.detailStateInfo}</td>
 							<td >
+								<span class="orderDetailStatus-update" 
+										data-orderNum="${order.orderNum}" 
+										data-orderState="${order.orderState}"
+										data-productMoney="${dto.productMoney}"
+										data-orderDetailNum="${dto.orderDetailNum}" 
+										data-detailState="${dto.detailState}">수정</span>
 								<c:if test="${ order.orderState < 2}">
 									<span class="orderDetailStatus-cancel" 
 											data-orderNum="${order.orderNum}" 
@@ -141,12 +147,6 @@
 											data-detailNum2="${dto.detailNum2}"
 											data-cancelAmount="${dto.qty}">판매취소</span>
 								</c:if>
-								<span class="orderDetailStatus-update" 
-										data-orderNum="${order.orderNum}" 
-										data-orderState="${order.orderState}"
-										data-productMoney="${dto.productMoney}"
-										data-orderDetailNum="${dto.orderDetailNum}" 
-										data-detailState="${dto.detailState}">수정</span>
 							</td>
 						</tr>
 					</c:forEach>
@@ -503,6 +503,7 @@ $(function(){
 		}
 		
 		$('.optionDetail-value').html('옵션 : ' + opt + ' ');
+		listDetailState();
 		$('#orderDetailStateDialogModal').show();
 	});
 	
@@ -513,14 +514,14 @@ $(function(){
 		let orderDetailNum = f.orderDetailNum.value;
 		
 		let qs = 'orderDetailNum=' + orderDetailNum;
-		let url = '${pageContext.request.contextPath}/admin/order/detail/listDetailState';
+		let url = '${pageContext.request.contextPath}/admin/shopOrder/detail/listDetailState';
 
 		const fn = function(data) {
 			let out;
 			for(let item of data.list) {
 				out  = '<tr>';
 				out += '<td>'+item.DETAILSTATE+'</td>';
-				out += '<td>'+item.DETALSTATEINFO+'</td>';
+				out += '<td>'+item.DETAILSTATEINFO+'</td>';
 				out += '<td>'+item.USERNAME+'</td>';
 				out += '<td>'+item.DETAILSTATEDATE+'</td>';
 				out += '<td align="left">'+item.STATEMEMO+'</td>';
@@ -551,13 +552,15 @@ $(function(){
 		let cancelAmount = f.cancelAmount.value;
 		
 		// 이전상태
-		let preDetailState = $("#orderDetail-list" + orderDetailNum).find("td").eq(9).attr("data-detailState");
+		let preDetailState = $("#orderDetail-list" + orderDetailNum).find("td").eq(9).find('.orderDetailStatus-update').attr("data-detailState");
+		console.log(preDetailState);
 		if(preDetailState === "3" || preDetailState === "5" || preDetailState === "12") {
 			alert("판매취소 또는 반품완료 상품은 변경이 불가능합니다.");
 			return false;
 		}
 
 		let changeStateInfo = $("form[name=detailStateForm] select option:selected").text();
+		console.log(changeStateInfo);
 		
 		if(! f.stateMemo.value.trim()) {
 			alert("상태 메시지를 등록하세요");
@@ -566,16 +569,17 @@ $(function(){
 		}
 		
 		let qs = $('form[name=detailStateForm]').serialize();
-		let url = '${pageContext.request.contextPath}/admin/order/detail/updateDetailState';
+		let url = '${pageContext.request.contextPath}/admin/shopOrder/detail/updateDetailState';
 
 		const fn = function(data) {
+			console.log(data);
 			if(data.state === "true") {
 				listDetailState();
 				
 				let detailState = data.detailState;
 
 				$("#orderDetail-list" + orderDetailNum).find("td").eq(8).html(changeStateInfo);
-				$("#orderDetail-list" + orderDetailNum).find("td").eq(9).attr("data-detailState", detailState);
+				$("#orderDetail-list" + orderDetailNum).find("td").eq(9).find('.orderDetailStatus-update').attr("data-detailState", detailState);
 				
 				// 주문취소완료인 경우
 				if(detailState == 3 || detailState == 5 || detailState == 12) {

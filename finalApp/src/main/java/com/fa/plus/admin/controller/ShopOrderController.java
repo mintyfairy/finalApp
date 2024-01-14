@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import com.fa.plus.admin.domain.shop.ShopOrderDetailManage;
 import com.fa.plus.admin.domain.shop.ShopOrderManage;
 import com.fa.plus.admin.service.shop.ShopOrderManageService;
 import com.fa.plus.common.MyUtil;
+import com.fa.plus.domain.SessionInfo;
 
 @Controller
 @RequestMapping("/admin/shopOrder/*")
@@ -203,9 +205,9 @@ public class ShopOrderController {
 		System.out.println("@@@@@@@@@@@@@@:" + totalStock);
 		totalStock = totalStock + cancelAmount;
 		
-		Map<String, Object> updateStateMap = new HashMap<String, Object>();
-		updateStateMap.put("orderNum", orderNum);
-		updateStateMap.put("orderState", 6);
+//		Map<String, Object> updateStateMap = new HashMap<String, Object>();
+//		updateStateMap.put("orderNum", orderNum);
+//		updateStateMap.put("orderState", 6);
 		
 		Map<String, Object> cancelAmountMap = new HashMap<String, Object>();
 		cancelAmountMap.put("orderNum", orderNum);
@@ -217,14 +219,63 @@ public class ShopOrderController {
 		updateStockMap.put("detailNum2", detailNum2);
 		updateStockMap.put("totalStock", totalStock);
 		
+		Map<String, Object> updateDetailStateMap = new HashMap<String, Object>();
+		updateDetailStateMap.put("orderDetailNum", orderDetailNum);
+		updateDetailStateMap.put("detailState", 3);
+		
 		try {
-			service.orderCancel(orderDetailNum, updateStateMap, cancelAmountMap, updateStockMap);
+			service.orderCancel(orderDetailNum, cancelAmountMap, updateStockMap, updateDetailStateMap);
 		} catch (Exception e) {
 			state = "false";
 		}
 		
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("state", state);
+		return model;
+	}
+	
+	@PostMapping("detail/updateDetailState")
+	@ResponseBody
+	public Map<String, Object> updateDetailState(@RequestParam Map<String, Object> paramMap,
+			HttpSession session) {
+		// 상세주문별 상태 변경
+		Map<String, Object> model = new HashMap<String, Object>();
+		
+		String state = "true";
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		
+		try {
+			int detailState = Integer.parseInt((String)paramMap.get("detailState"));
+			System.out.println("################" + detailState);
+			
+			paramMap.put("memberIdx", info.getMemberIdx());
+			
+			System.out.println("!!!!!!!!!!!!%%%%" + paramMap);
+			
+			service.updateOrderDetailState(paramMap);
+			
+			model.put("detailState", detailState);
+			
+		} catch (Exception e) {
+			state = "false";
+		}
+		
+		model.put("state", state);
+		return model;
+	}
+	
+	@GetMapping("detail/listDetailState")
+	@ResponseBody
+	public Map<String, Object> listDetailState(@RequestParam long orderDetailNum) {
+		// 상세주문별 상태 리스트
+		List<Map<String, Object>> list = null;
+		try {
+			list = service.listDetailStateInfo(orderDetailNum);
+		} catch (Exception e) {
+		}
+		
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("list", list);
 		return model;
 	}
 	

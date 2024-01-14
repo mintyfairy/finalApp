@@ -1,5 +1,6 @@
 package com.fa.plus.admin.service.shop;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -146,13 +147,14 @@ public class ShopOrderManageServiceImpl implements ShopOrderManageService {
 	}
 
 	@Override
-	public void orderCancel(long orderDetailNum, Map<String, Object> updateStateMap,
-			Map<String, Object> cancelAmountMap, Map<String, Object> updateStockMap) throws Exception {
+	public void orderCancel(long orderDetailNum, Map<String, Object> cancelAmountMap, 
+			Map<String, Object> updateStockMap, Map<String, Object> updateDetailStateMap) throws Exception {
 		try {
-			mapper.updateOrderState(updateStateMap);
+//			mapper.updateOrderState(updateStateMap);
 			mapper.updateCancelAmount(cancelAmountMap);
 			mapper.updateProductStock(updateStockMap);
 			mapper.orderDetailCancel(orderDetailNum);
+			mapper.updateOrderDetailState(updateDetailStateMap);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -160,5 +162,62 @@ public class ShopOrderManageServiceImpl implements ShopOrderManageService {
 		
 	}
 
+	@Override
+	public List<Map<String, Object>> listDetailStateInfo(long orderDetailNum) {
+		List<Map<String, Object>> list = null;
+		
+		try {
+			list = mapper.listDetailStateInfo(orderDetailNum);
+			
+			String detailStateInfo;
+			for(Map<String, Object> map : list) {
+				int detailState = ((BigDecimal) map.get("DETAILSTATE")).intValue();
+				detailStateInfo = OrderState.DETAILSTATEMANAGER[detailState];
+				map.put("DETAILSTATEINFO", detailStateInfo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public void updateOrderDetailState(Map<String, Object> map) throws Exception {
+		try {
+			long orderNum = Long.parseLong((String)map.get("orderNum"));
+			int detailState = Integer.parseInt((String)map.get("detailState"));
+			int productMoney = Integer.parseInt((String)map.get("productMoney"));
+			
+			// 주문에 대한 전체 취소 금액 가져오기
+			int cancelAmount = 0;
+			if(detailState == 3 || detailState == 5 || detailState == 12) {
+				cancelAmount = Integer.parseInt((String)map.get("cancelAmount"));
+			}
+			
+			// orderDetail 테이블 상태 변경
+			mapper.updateOrderDetailState(map);
+			
+			// detailStateInfo 테이블에 상태 내용 및 날짜 저장
+			mapper.insertDetailStateInfo(map);
+			
+			if(detailState == 3 || detailState == 5 || detailState == 12) {
+				cancelAmount += productMoney;
+				map.put("cancelAmount", cancelAmount);
+				
+				mapper.updateCancelAmount(map);
+				
+				// 주문 정보의 모든 주문 내역이 취소이면 주문정보의 상태는 판매 취소로 변경
+				int totalOrderCount = mapper.totalOrderCount(orderNum);
+				if(totalOrderCount == 0) {
+					map.put("orderState", 6);
+					mapper.updateOrderState(map);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
 
 }

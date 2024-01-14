@@ -143,6 +143,18 @@
 		WHERE orderNum = #{orderNum}
 	</update>
 	
+	<update id="updateOrderDetailState" parameterType="map">
+		UPDATE orderDetail SET detailState = #{detailState} 
+		WHERE orderDetailNum = #{orderDetailNum}
+	</update>
+	
+	<!-- 주문에 대한 상세 주문의 주문 취소 이외의 개수 -->
+	<select id="totalOrderCount" parameterType="Long" resultType="Integer">
+		SELECT NVL(COUNT(*), 0) orderCount
+		FROM orderDetail 
+		WHERE orderNum = #{orderNum} AND (detailState != 3 AND detailState != 5 AND detailState != 12)
+	</select>
+	
 	<select id="listDeliveryCompany" resultType="map">
 		SELECT deliveryNum, deliveryName, deliveryTel
 		FROM deliveryCompany
@@ -174,4 +186,19 @@
 		UPDATE orderDetail SET qty = 0 
 			WHERE orderDetailNum = #{orderDetailNum}
 	</update>
+	
+	<insert id="insertDetailStateInfo" parameterType="map">
+		INSERT INTO detailStateInfo(stateNum, orderDetailNum, memberIdx, detailState, stateMemo, detailStateDate) VALUES
+			(detailStateInfo_seq.NEXTVAL, #{orderDetailNum}, #{memberIdx}, #{detailState}, 
+				#{stateMemo,jdbcType=VARCHAR}, SYSDATE)
+	</insert>
+	
+	<select id="listDetailStateInfo" parameterType="long" resultType="map">
+		SELECT stateNum, orderDetailNum, d.memberIdx, NVL(userName, '손님') userName, detailState,
+			 stateMemo, TO_CHAR(detailStateDate, 'YYYYMMDD HH24:MI') detailStateDate
+		FROM detailStateInfo d
+		LEFT OUTER JOIN member1 m ON d.memberIdx = m.memberIdx
+		WHERE orderDetailNum = #{orderDetailNum}
+		ORDER BY stateNum DESC
+	</select>
 </mapper>

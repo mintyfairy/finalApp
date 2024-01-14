@@ -20,8 +20,10 @@ public interface ShopOrderManageMapper {
 	public int orderCount(Map<String, Object> map);
 	public int orderDetailCount(Map<String, Object> map);
 	public int selectTotalStock(Map<String, Object> map);
+	public int totalOrderCount(long orderNum);
 	
 	public void updateOrderState(Map<String, Object> map) throws SQLException;
+	public void updateOrderDetailState(Map<String, Object> map) throws SQLException;
 	
 	public List<Map<String, Object>> listDeliveryCompany();
 	
@@ -30,4 +32,7 @@ public interface ShopOrderManageMapper {
 	public void updateCancelAmount(Map<String, Object> map);
 	public void updateProductStock(Map<String, Object> map);
 	public void orderDetailCancel(long orderDetailNum);
+	
+	public void insertDetailStateInfo(Map<String, Object> map) throws SQLException;
+	public List<Map<String, Object>> listDetailStateInfo(long orderDetailNum);
 }

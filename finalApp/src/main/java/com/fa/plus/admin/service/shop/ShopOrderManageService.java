@@ -21,6 +21,10 @@ public interface ShopOrderManageService {
 	public List<Map<String, Object>> listDeliveryCompany();
 	
 	public void updateOrder(String mode, Map<String, Object> map) throws Exception;
-	public void orderCancel(long orderDetailNum, Map<String, Object> updateStateMap, 
-			Map<String, Object> cancelAmountMap, Map<String, Object> updateStockMap) throws Exception;
+	public void orderCancel(long orderDetailNum, 
+			Map<String, Object> cancelAmountMap, Map<String, Object> updateStockMap, 
+			Map<String, Object> updateDetailStateMap) throws Exception;
+	
+	public List<Map<String, Object>> listDetailStateInfo(long orderDetailNum);
+	public void updateOrderDetailState(Map<String, Object> map) throws Exception;
 }

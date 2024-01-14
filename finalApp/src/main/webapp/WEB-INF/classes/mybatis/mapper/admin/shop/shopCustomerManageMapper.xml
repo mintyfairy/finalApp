@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fa.plus.admin.mapper.ShopCustomerMapper">
+
+	<!-- 상품 리뷰 -->
+	<select id="listReview" parameterType="map" resultType="com.fa.plus.admin.domain.shop.Review">
+		SELECT pr.orderDetailNum, pr.memberIdx, userName, score, review, answer, pr.productNum, filename, showReview, 
+			pr.reviewDate, pr.answerDate, productName, op.optionValue, op2.optionValue optionValue2 
+		FROM productReview pr 
+		JOIN member1 m ON pr.memberIdx = m.memberIdx 
+		JOIN orderDetail od ON pr.orderDetailNum = od.orderDetailNum 
+		JOIN product p ON p.productNum = od.productNum 
+		JOIN optionDetail op ON od.detailNum = op.detailNum 
+		JOIN optionDetail op2 ON od.detailNum2 = op2.detailNum 
+		LEFT OUTER JOIN ( 
+			SELECT fileNum, LISTAGG(filename, ',') WITHIN GROUP(ORDER BY fileNum) filename, orderDetailNum 
+            FROM productReviewFile 
+            GROUP BY fileNum, orderDetailNum 
+		) f ON pr.orderDetailNum=f.orderDetailNum 
+		<where>
+			<if test="memberIdx != null">
+				pr.memberIdx = #{memberIdx}
+			</if>
+			<if test="mode != null">
+				<if test="mode == 2">
+					AND ( answer IS NOT NULL )
+				</if>
+				<if test="mode == 3">
+					AND ( answer IS NULL )
+				</if>
+			</if>
+		</where>
+		ORDER BY review_date DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+	
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM productReview
+		<where>
+			<if test="memberIdx != null">
+				memberIdx = #{memberIdx}
+			</if>
+			<if test="mode != null">
+				<if test="mode == 2">
+					AND ( answer IS NOT NULL )
+				</if>
+				<if test="mode == 3">
+					AND ( answer IS NULL )
+				</if>
+			</if>
+		</where>
+	</select>
+	
+	<update id="updateReview" parameterType="com.fa.plus.admin.domain.shop.Review">
+		UPDATE productReview SET answer = #{answer}, answerDate = SYSDATE, showReview = #{showReview}
+		WHERE orderDetailNum = #{orderDetailNum}
+	</update>
+	
+	<select id="listReviewFile" parameterType="Long" resultType="com.fa.plus.admin.domain.shop.Review">
+		SELECT fileNum, orderDetailNum, filename
+		FROM productReviewFile
+		WHERE orderDetailNum = #{orderDetailNum}
+	</select>
+	
+	<delete id="deleteReview" parameterType="Long">
+		DELETE FROM productReview
+		WHERE orderDetailNum = #{orderDetailNum}
+	</delete>
+	
+	<!-- 상품 문의 -->
+	
+</mapper>
