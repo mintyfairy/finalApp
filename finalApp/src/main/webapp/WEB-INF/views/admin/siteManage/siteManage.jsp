@@ -41,12 +41,12 @@
 				<c:forEach var="dto" items="${ list}" varStatus="status">
 					<tr>
 						<td>${dataCount-(page-1)*size-status.index}</td>
-						<td><a href="${pageContext.request.contextPath}/admin/siteManage/site/${dto.sitenum}">${dto.sitename}</a></td>
+						<td><a href="${pageContext.request.contextPath}/admin/siteManage/site/${dto.siteNum}">${dto.siteName}</a></td>
 						<td>${dto.addr1}</td>
 
 						<td>
-							<button type="button" class="btn-border-primary" onclick="updateSite('${dto.sitenum}')">수정</button>
-							<button type="button" class="btn-border-primary" onclick="deleteSite('${dto.sitenum}')">삭제</button>
+							<button type="button" class="btn-border-primary" onclick="updateSite('${dto.siteNum}')">수정</button>
+							<button type="button" class="btn-border-primary" onclick="deleteSite('${dto.siteNum}')">삭제</button>
 						</td>
 					</tr>
 				</c:forEach>

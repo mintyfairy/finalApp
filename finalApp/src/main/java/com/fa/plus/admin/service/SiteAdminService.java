@@ -16,7 +16,7 @@ public interface SiteAdminService {
 	
 	public void insertRoom(SiteDetail dto, String pathname) throws Exception;
 	public void updateRoom(SiteDetail dto, String pathname) throws Exception;
-	public void deleteRoom(long DetailNum, String pathname) throws Exception;
+	public void deleteRoom(long detailNum, String pathname) throws Exception;
 	public void deleteRoomFile(long SdPicNum, String pathname) throws Exception;
 	
 	public int dataCountSite(Map<String, Object> map);
@@ -24,7 +24,7 @@ public interface SiteAdminService {
 	public int searchCountSite(SiteSearch dto);
 	
 	public Site findByIdSite(long SiteNum) throws Exception ;
-	public SiteDetail findByIdRoom(long DetailNum) throws Exception  ;
+	public SiteDetail findByIdRoom(long detailNum) throws Exception  ;
 	
 	
 	public List<Site> listAdvertiseSite();

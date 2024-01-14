@@ -52,7 +52,7 @@ public class MemberServiceImpl implements MemberService {
 			
 			
 			long memberSeq = mapper.memberSeq();
-			dto.setMemberIdx(memberSeq);
+			dto.setmemberIdx(memberSeq);
 
 			// 회원정보 저장
 			mapper.insertMember(memberSeq);
@@ -152,7 +152,7 @@ public class MemberServiceImpl implements MemberService {
 		Member dto = null;
 
 		try {
-			dto = mapper.findByMemberIdx(memberIdx);
+			dto = mapper.findBymemberIdx(memberIdx);
 
 			if (dto != null) {
 				if (dto.getEmail() != null) {

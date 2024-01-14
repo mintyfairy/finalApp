@@ -5,41 +5,42 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 public class Site {
-	private	long	sitenum	;
-	private	String	sitename	;
+	private	long	siteNum	;
+	private	String	siteName	;
 	private	String	introduce	;
-	private	int	sitelocal	;
+	private	int	siteLocal	;
 	private	String	zip	;
 	private	String	addr1	;
 	private	String	addr2	;
 	private	String	thumbnail	;
-	private	MultipartFile	thumbnailfile	;
+	private	MultipartFile	thumbnailFile	;
 	private	int	category	;
 	private	int	environment	;
-	private	int	hitcount	;
-	private	String	checkin	;
-	private	String	checkout	;
-	private	int	memberidx	;
+	private	int	hitCount	;
+	private	String	checkIn	;
+	private	String	checkOut	;
+	private	long	memberIdx	;
 	private	double	avgstar	;
-	private	String[] siteoptionList	;
-	private	String siteoption	;
+	private	String[] siteOptionList	;
+	private	String siteOption	;
 	private	int	enabled	;
 	
 	
 	private long fileNum;
 	private String fileName;
 	private List<MultipartFile> addFiles;
-	public long getSitenum() {
-		return sitenum;
+	
+	public long getSiteNum() {
+		return siteNum;
 	}
-	public void setSitenum(long sitenum) {
-		this.sitenum = sitenum;
+	public void setSiteNum(long siteNum) {
+		this.siteNum = siteNum;
 	}
-	public String getSitename() {
-		return sitename;
+	public String getSiteName() {
+		return siteName;
 	}
-	public void setSitename(String sitename) {
-		this.sitename = sitename;
+	public void setSiteName(String siteName) {
+		this.siteName = siteName;
 	}
 	public String getIntroduce() {
 		return introduce;
@@ -47,11 +48,11 @@ public class Site {
 	public void setIntroduce(String introduce) {
 		this.introduce = introduce;
 	}
-	public int getSitelocal() {
-		return sitelocal;
+	public int getSiteLocal() {
+		return siteLocal;
 	}
-	public void setSitelocal(int sitelocal) {
-		this.sitelocal = sitelocal;
+	public void setSiteLocal(int siteLocal) {
+		this.siteLocal = siteLocal;
 	}
 	public String getZip() {
 		return zip;
@@ -77,11 +78,11 @@ public class Site {
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
 	}
-	public MultipartFile getThumbnailfile() {
-		return thumbnailfile;
+	public MultipartFile getThumbnailFile() {
+		return thumbnailFile;
 	}
-	public void setThumbnailfile(MultipartFile thumbnailfile) {
-		this.thumbnailfile = thumbnailfile;
+	public void setThumbnailFile(MultipartFile thumbnailFile) {
+		this.thumbnailFile = thumbnailFile;
 	}
 	public int getCategory() {
 		return category;
@@ -95,29 +96,30 @@ public class Site {
 	public void setEnvironment(int environment) {
 		this.environment = environment;
 	}
-	public int getHitcount() {
-		return hitcount;
+	public int getHitCount() {
+		return hitCount;
 	}
-	public void setHitcount(int hitcount) {
-		this.hitcount = hitcount;
+	public void setHitCount(int hitCount) {
+		this.hitCount = hitCount;
 	}
-	public String getCheckin() {
-		return checkin;
+	public String getCheckIn() {
+		return checkIn;
 	}
-	public void setCheckin(String checkin) {
-		this.checkin = checkin;
+	public void setCheckIn(String checkIn) {
+		this.checkIn = checkIn;
 	}
-	public String getCheckout() {
-		return checkout;
+	public String getCheckOut() {
+		return checkOut;
 	}
-	public void setCheckout(String checkout) {
-		this.checkout = checkout;
+	public void setCheckOut(String checkOut) {
+		this.checkOut = checkOut;
 	}
-	int getMemberidx() {
-		return memberidx;
+	
+	public long getMemberIdx() {
+		return memberIdx;
 	}
-	public void setMemberidx(int memberidx) {
-		this.memberidx = memberidx;
+	public void setMemberIdx(long memberIdx) {
+		this.memberIdx = memberIdx;
 	}
 	public double getAvgstar() {
 		return avgstar;
@@ -125,17 +127,17 @@ public class Site {
 	public void setAvgstar(double avgstar) {
 		this.avgstar = avgstar;
 	}
-	public String[] getSiteoptionList() {
-		return siteoptionList;
+	public String[] getSiteOptionList() {
+		return siteOptionList;
 	}
-	public void setSiteoptionList(String[] siteoptionList) {
-		this.siteoptionList = siteoptionList;
+	public void setSiteOptionList(String[] siteOptionList) {
+		this.siteOptionList = siteOptionList;
 	}
-	public String getSiteoption() {
-		return siteoption;
+	public String getSiteOption() {
+		return siteOption;
 	}
-	public void setSiteoption(String siteoption) {
-		this.siteoption = siteoption;
+	public void setSiteOption(String siteOption) {
+		this.siteOption = siteOption;
 	}
 	public int getEnabled() {
 		return enabled;

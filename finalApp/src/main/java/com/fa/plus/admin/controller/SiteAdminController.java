@@ -45,7 +45,7 @@ public class SiteAdminController {
 
 			Map<String, Object> map = new HashMap<String, Object>();
 			SessionInfo info = (SessionInfo)session.getAttribute("member");
-			map.put("memberIdx", info.getMemberIdx());
+			map.put("memberIdx", info.getmemberIdx());
 			
 			dataCount = service.dataCountSite(map);
 			total_page = myUtil.pageCount(dataCount, size);
@@ -148,7 +148,7 @@ public class SiteAdminController {
 		String path = root + "uploads" + File.separator + "site";
 		
 		try {
-			dto.setMemberidx((int)info.getMemberIdx());
+			dto.setMemberIdx(info.getmemberIdx());
 			service.insertSite(dto, path);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -217,7 +217,7 @@ public class SiteAdminController {
 		String path = root + "uploads" + File.separator + "room";
 		
 		try {
-			dto.setSitenum(num);//캠핑장 번호
+			dto.setSiteNum(num);//캠핑장 번호
 			service.insertRoom(dto, path);
 		} catch (Exception e) {
 			e.printStackTrace();

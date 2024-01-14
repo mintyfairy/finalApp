@@ -30,23 +30,23 @@ public class SiteAdminServiceImpl implements SiteAdminService {
 		try {
 			StringBuffer options = new StringBuffer();
 			// 배열을 스트링으로 변환
-			if (dto.getSiteoptionList() != null) {
-				for (String option : dto.getSiteoptionList()) {
+			if (dto.getSiteOptionList() != null) {
+				for (String option : dto.getSiteOptionList()) {
 					options.append(option);
 
 				}
-				dto.setSiteoption(options.toString());
+				dto.setSiteOption(options.toString());
 			} // 여러변 수정되는 문자열이라 스트링버퍼를 사용했다.
 				// [0,0,1...]이던 배열이 001..형태의 스트링이 될것으로 기대된다.
 
 			// 썸네일 이미지
-			String filename = fileManager.doFileUpload(dto.getThumbnailfile(), pathname);
+			String filename = fileManager.doFileUpload(dto.getThumbnailFile(), pathname);
 			dto.setThumbnail(filename);
 
 			// 상품 저장
 			long Num = mapper.SiteSeq();
 
-			dto.setSitenum(Num);
+			dto.setSiteNum(Num);
 			mapper.insertSite(dto);
 
 			// 추가 이미지 저장
@@ -75,17 +75,17 @@ public class SiteAdminServiceImpl implements SiteAdminService {
 		try {
 			StringBuffer options = new StringBuffer();
 			// 배열을 스트링으로 변환
-			if (dto.getSiteoptionList() != null) {
-				for (String option : dto.getSiteoptionList()) {
+			if (dto.getSiteOptionList() != null) {
+				for (String option : dto.getSiteOptionList()) {
 					options.append(option);
 
 				}
-				dto.setSiteoption(options.toString());
+				dto.setSiteOption(options.toString());
 			} // 여러변 수정되는 문자열이라 스트링버퍼를 사용했다.
 				// [0,0,1...]이던 배열이 001..형태의 스트링이 될것으로 기대된다.
 
 			// 썸네일 이미지
-			String filename = fileManager.doFileUpload(dto.getThumbnailfile(), pathname);
+			String filename = fileManager.doFileUpload(dto.getThumbnailFile(), pathname);
 			if (filename != null) {
 				// 이전 파일 지우기
 				if (dto.getThumbnail().length() != 0) {
@@ -162,7 +162,7 @@ public class SiteAdminServiceImpl implements SiteAdminService {
 			// 상품 저장
 			long Num = mapper.RoomSeq();
 
-			dto.setDetailnum(Num);
+			dto.setDetailNum(Num);
 			mapper.insertRoom(dto);
 
 			// 추가 이미지 저장
@@ -213,12 +213,12 @@ public class SiteAdminServiceImpl implements SiteAdminService {
 	}
 
 	@Override
-	public void deleteRoom(long DetailNum, String pathname) throws Exception {
+	public void deleteRoom(long detailNum, String pathname) throws Exception {
 		// TODO Auto-generated method stub
 
 		try {
 
-			mapper.deleteRoom(DetailNum);
+			mapper.deleteRoom(detailNum);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -349,14 +349,14 @@ public class SiteAdminServiceImpl implements SiteAdminService {
 			 * 향상된 포문장이 내용물을 remove하면 제대로 다음걸 가져오는지 모르겟다. if (optionlist != null ) { for
 			 * (String option : optionlist) { options.append(option); } for (Site vo : list)
 			 * { int test=Integer.parseInt(options.toString())
-			 * -Integer.parseInt(vo.getSiteoption());
+			 * -Integer.parseInt(vo.getSiteOption());
 			 * if(Integer.toString(test).indexOf("9")>0) { list.remove(vo);
 			 * System.out.println(vo+"체크"); }//옵션이 다른게 잇으면 뺸값에 9가 존재하게된다. } }else { }
 			 */
 			if (dto.getSiteOptionList()!= null) {
 				
 				for (Site vo : list) {
-					int test = 1000000+Integer.parseInt(vo.getSiteoption())-Integer.parseInt(dto.getSiteOptionList());
+					int test = 1000000+Integer.parseInt(vo.getSiteOption())-Integer.parseInt(dto.getSiteOptionList());
 					
 					if (Integer.toString(test).indexOf("9") < 0) {
 						list2.add(vo);
@@ -397,10 +397,10 @@ public class SiteAdminServiceImpl implements SiteAdminService {
 
 		try {
 			dto = mapper.findByIdSite(SiteNum);
-			String[] options = dto.getSiteoption().split("");
+			String[] options = dto.getSiteOption().split("");
 			// 수정폼을 위해 분해
 
-			dto.setSiteoptionList(options);
+			dto.setSiteOptionList(options);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -411,11 +411,11 @@ public class SiteAdminServiceImpl implements SiteAdminService {
 	}
 
 	@Override
-	public SiteDetail findByIdRoom(long DetailNum) throws Exception {
+	public SiteDetail findByIdRoom(long detailNum) throws Exception {
 		SiteDetail dto = null;
 
 		try {
-			dto = mapper.findByIdRoom(DetailNum);
+			dto = mapper.findByIdRoom(detailNum);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

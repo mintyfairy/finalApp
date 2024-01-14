@@ -61,7 +61,7 @@
 	                                </div>
 	                                <div class="col-md-auto align-self-center">원</div>
 	                               	<div class="col-md-2">
-			                            <button class="btn btn-primary2 w-100" type="button" onclick="searchRoom(${Sitedto.sitenum})">Submit</button>
+			                            <button class="btn btn-primary2 w-100" type="button" onclick="searchRoom(${Sitedto.siteNum})">Submit</button>
 			                        </div>
 	                            </div>
 	                        </div>
@@ -79,7 +79,7 @@
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6">
                         <h6 class="section-title text-start text-primary text-uppercase">About Us</h6>
-                        <h1 class="mb-4">Welcome to <span class="text-primary text-uppercase">${Sitedto.sitename}</span></h1>
+                        <h1 class="mb-4">Welcome to <span class="text-primary text-uppercase">${Sitedto.siteName}</span></h1>
                         <p class="mb-4">${Sitedto.introduce}</p>
                         <div class="row g-3 pb-4">
                             <div class="col-sm-4 wow fadeIn" data-wow-delay="0.1s">
@@ -144,9 +144,9 @@
 	                        <div class="room-item shadow rounded overflow-hidden">
 	                            <div class="position-relative">
 	                            <!-- 이미지구역 -->
-	                                <div class="slideshow-container2 slide${dto.detailnum}" id="slideshow-container2" style="z-index: 55" data-slidenum="${dto.detailnum}" data-slideindex${dto.detailnum}="1">
+	                                <div class="slideshow-container2 slide${dto.detailNum}" id="slideshow-container2" style="z-index: 55" data-slidenum="${dto.detailNum}" data-slideindex${dto.detailNum}="1">
 										<c:forEach var="vo" items="${dto.listFile}" varStatus="status">
-											<div class="mySlides${dto.detailnum}" style="display: ${status.index==0?'block':'none'};">
+											<div class="mySlides${dto.detailNum}" style="display: ${status.index==0?'block':'none'};">
 											    <img src="${pageContext.request.contextPath}/uploads/room/${vo}" style="bottom : 0 ;width:100%;height: 450px; overflow:hidden;object-fit:cover" 
 												>
 											</div>
@@ -160,7 +160,7 @@
 	                            </div>
 	                            <div class="p-4 mt-2">
 	                                <div class="d-flex justify-content-between mb-3">
-	                                    <h5 class="mb-0">${dto.detailname }</h5>
+	                                    <h5 class="mb-0">${dto.detailName }</h5>
 	                                    <div class="ps-2">
 	                                        <small class="fa fa-star text-primary"></small>
 	                                    </div>
@@ -173,7 +173,7 @@
 	                                <p class="text-body mb-3">${dto.content}</p>
 	                                <div class="d-flex justify-content-between">
 	                                    <a class="btn btn-sm btn-primary2 rounded py-2 px-4" onclick="AJAXCART()">장바구니에 넣기</a>
-	                                    <a class="btn btn-sm btn-dark rounded py-2 px-4 " onclick="location.href ='${pageContext.request.contextPath}/site/book/${dto.detailnum}'">지금 바로 예약하기</a>
+	                                    <a class="btn btn-sm btn-dark rounded py-2 px-4 " onclick="location.href ='${pageContext.request.contextPath}/site/book/${dto.detailNum}'">지금 바로 예약하기</a>
 	                                </div>
 	                            </div>
 	                        </div>

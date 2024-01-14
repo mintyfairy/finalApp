@@ -48,7 +48,7 @@
 		WHERE m1.userId = #{userId}
 	</select>
 
-	<select id="findByMemberIdx" parameterType="Long" resultType="com.fa.plus.domain.Member">
+	<select id="findBymemberIdx" parameterType="Long" resultType="com.fa.plus.domain.Member">
 		SELECT m.memberIdx, membership, enabled, 
 			NVL(m1.userId, 'guest') userId, NVL(userName, '손님') userName, userPwd, 
 			register_date, modify_date, last_login,

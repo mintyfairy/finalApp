@@ -36,11 +36,11 @@ public interface SiteAdminMapper {
 	public void deleteSiteFile(long fileNum) throws SQLException;
 	
 	public Site findByIdSite(long SiteNum) throws SQLException;
-	public SiteDetail findByIdRoom(long DetailNum) throws SQLException;
+	public SiteDetail findByIdRoom(long detailNum) throws SQLException;
 	
 	
 	public void updateRoom(SiteDetail dto) throws SQLException;
-	public void deleteRoom(long DetailNum) throws SQLException;
+	public void deleteRoom(long detailNum) throws SQLException;
 	public void deleteRoomFile(long SdPicNum) throws SQLException;
 	public List<Site> listSiteFile(long siteNum);
 	public List<SiteDetail> listRoomFile(long detailNum);

@@ -4,7 +4,7 @@
 <mapper namespace="com.fa.plus.mapper.SiteMapper">
 
 	<insert id="insertCart" parameterType="com.fa.plus.domain.site.SiteCart">
-		insert into sitecart(MEMBERIDX,DETAILNUM,STARTDATE,ENDDATE,REG_DATE	) 
+		insert into sitecart(memberIdx,detailNum,STARTDATE,ENDDATE,REG_DATE	) 
   			  values(#{memberIdx},#{detailNum},#{startDate},#{endDate},sysdate)
 		
 	</insert>
@@ -13,37 +13,37 @@
 	</delete>
 	<select id="findByCart" parameterType="com.fa.plus.domain.site.SiteCart" resultType="com.fa.plus.domain.site.SiteCart">
 		
-		 select MEMBERIDX,DETAILNUM,to_char(STARTDATE,'yyyy-mm-dd') STARTDATE,to_char(ENDDATE,'yyyy-mm-dd') ENDDATE,to_char(REG_DATE,'yyyy-mm-dd') REG_DATE,filename thumbnail
+		 select memberIdx,detailNum,to_char(STARTDATE,'yyyy-mm-dd') STARTDATE,to_char(ENDDATE,'yyyy-mm-dd') ENDDATE,to_char(REG_DATE,'yyyy-mm-dd') REG_DATE,filename thumbnail
 		FROM sitecart 
-		left join (select filename,DETAILNUM dnum from sitedetailpic 
+		left join (select filename,detailNum dnum from sitedetailpic 
         where detailNum = #{detailNum}
         ORDER BY sdpicnum 
 		FETCH FIRST 1 ROWS ONLY
-        ) on dnum=DETAILNUM
+        ) on dnum=detailNum
 		WHERE detailNum = #{detailNum} and  memberIdx=#{memberIdx}
 	</select>
 	
 	<select id="listCart" parameterType="Long" resultType="com.fa.plus.domain.site.SiteCart">
-		SELECT MEMBERIDX,sitecart.DETAILNUM,to_char(STARTDATE,'yyyy-mm-dd') STARTDATE,to_char(ENDDATE,'yyyy-mm-dd') ENDDATE,detailname,price,content,capacity,floor,filename thumbnail
-		FROM sitecart left join sitedetail  on sitedetail.DETAILNUM=sitecart.DETAILNUM
-		left join(select * from (select row_number() over(partition by detailnum order by sdpicnum) rnum,filename,DETAILNUM dnum from sitedetailpic 
-       ) where rnum=1) on dnum=sitecart.DETAILNUM
+		SELECT memberIdx,sitecart.detailNum,to_char(STARTDATE,'yyyy-mm-dd') STARTDATE,to_char(ENDDATE,'yyyy-mm-dd') ENDDATE,detailName,price,content,capacity,floor,filename thumbnail
+		FROM sitecart left join sitedetail  on sitedetail.detailNum=sitecart.detailNum
+		left join(select * from (select row_number() over(partition by detailNum order by sdpicnum) rnum,filename,detailNum dnum from sitedetailpic 
+       ) where rnum=1) on dnum=sitecart.detailNum
 		WHERE memberIdx=#{memberIdx}
 	</select>
 	
 	<select id="dataCountCart" parameterType="Long" resultType="Integer">
 		SELECT NVL(COUNT(*), 0)
 		FROM sitecart 
-		where MEMBERIDX=#{memberIdx}
+		where memberIdx=#{memberIdx}
 	</select>
 	<insert id="insertBookList" parameterType="map">
-		insert into booklist(LISTNUM,ORDER_DATE,MEMBERIDX,TOTALPRICE,STATE) 
+		insert into booklist(LISTNUM,ORDER_DATE,memberIdx,TOTALPRICE,STATE) 
 			values(booklist_seq.nextval,sysdate,#{memberIdx},#{totalPrice},0)
 		
 	</insert>
 	
 	<insert id="insertBook" parameterType="com.fa.plus.domain.site.SiteCart">
-		insert into book(BOOKNUM,STARTDATE,ENDDATE ,BOOKPRICE ,DETAILNUM ,LISTNUM) 
+		insert into book(BOOKNUM,STARTDATE,ENDDATE ,BOOKPRICE ,detailNum ,LISTNUM) 
 			VALUES(book_seq.nextval,#{startDate},#{endDate},#{bookPrice},#{detailNum},booklist_seq.currval)
 		
 	</insert>
@@ -60,13 +60,13 @@
 		
 		<choose>
 			<when test="memberIdx!=null and memberIdx!=''">
-				 MEMBERIDX=#{memberIdx}
+				 memberIdx=#{memberIdx}
 			</when>
 			<when test="minFee!=null and minFee!=''">
-				 MEMBERIDX=#{memberIdx}
+				 memberIdx=#{memberIdx}
 			</when>
 			<when test="maxFee!=null and maxFee!=''">
-				 MEMBERIDX=#{memberIdx}
+				 memberIdx=#{memberIdx}
 			</when>
 		</choose>
 	</sql>
@@ -81,7 +81,7 @@
 		WHERE listnum=#{listNum}
 	</select>
 		<insert id="insertReview" parameterType="com.fa.plus.domain.site.SiteDetail">
-	insert into sitereview(BOOKNUM,SUBJECT,CONTENT,MEMBERIDX,SCORE,REG_DATE,ANSWER,DETAILNUM,SITENUM,ENABLED)
+	insert into sitereview(BOOKNUM,SUBJECT,CONTENT,memberIdx,SCORE,REG_DATE,ANSWER,detailNum,siteNum,ENABLED)
 		
 		values(#{bookNum },#{siteNum},#{detailName},#{price},#{area},#{content},#{capacity},#{floor})
 	
@@ -90,7 +90,7 @@
 	
 	<!-- 추가 이미지 등록 -->
 	<insert id="insertReviewFile" parameterType="com.fa.plus.domain.site.SiteDetail">
-		INSERT INTO sitedetailPic(SdPICNUM, DETAILNUM, fileName)
+		INSERT INTO sitedetailPic(SdPICNUM, detailNum, fileName)
 			VALUES(sitedetailPic_SEQ.NEXTVAL, #{detailNum}, #{fileName})
 	</insert>
 	

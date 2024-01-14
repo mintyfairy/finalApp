@@ -98,11 +98,11 @@ public class SiteBookController {
 	
 		map.put("siteNum",num);
 		Site Sitedto=adminService.findByIdSite(num);
-		dto.setSitenum(num);
+		dto.setSiteNum(num);
 		List<SiteDetail> list = adminService.listSearchRoom(dto);
 		for(SiteDetail vo:list) {
 			List<String> filelist = new ArrayList<String>();
-			for(SiteDetail vo2:adminService.listRoomFile(vo.getDetailnum())){
+			for(SiteDetail vo2:adminService.listRoomFile(vo.getDetailNum())){
 				filelist.add(vo2.getFileName());
 			}
 			if (filelist!=null&&filelist.size() != 0) vo.setListFile(filelist);

@@ -30,7 +30,7 @@ public class SiteCartController {
 		
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 
-			List<SiteCart> list = service.listCart(info.getMemberIdx());
+			List<SiteCart> list = service.listCart(info.getmemberIdx());
 			
 			model.addAttribute("list", list);
 		

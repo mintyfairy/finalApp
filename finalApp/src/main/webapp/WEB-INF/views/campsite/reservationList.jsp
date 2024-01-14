@@ -94,7 +94,7 @@
 									<div class="fs-6 fw-semibold text-black-50"><label> ${이용완료 (이용상태여부 없으면 삭제)} </label><label></label></div>
 								</div>
 								<div class="col-6 text-end">
-									<label class='payment-delete' title="주문내역삭제" data-orderDetailNum="${dto.##}"><i class="bi bi-x-lg"></i></label>
+									<label class='payment-delete' title="주문내역삭제" data-orderdetailNum="${dto.##}"><i class="bi bi-x-lg"></i></label>
 								</div>
 							</div>
 							<div class="row">
@@ -118,7 +118,7 @@
 								<!--이용완료면 리뷰쓰기, 이용 전이면 이용 전 버튼 생성  혹은 alert창으로 이용 전입니다 띄우기-->						
 								<button type="button" class="btn border btnReviewWriteForm" style="width: 130px;"> 리뷰작성</button>
 								
-								<button type="button" class="btn border" style="width: 130px;" data-orderDetailNum="${dto.##}"> 상세내역 </button>
+								<button type="button" class="btn border" style="width: 130px;" data-orderdetailNum="${dto.##}"> 상세내역 </button>
 																						
 								<button type="button" class="btn border" style="width: 130px;" onclick="location.href='${pageContext.request.contextPath}/product/${dto.##}';"> 다시예약 </button>
 							</div>
@@ -148,7 +148,7 @@
 											<input type="file" name="selectFile" accept="image/*" multiple class="form-control" style="display: none;">
 										</div>
 										<div class="p-1 text-end">
-											<input type="hidden" name="num" value="${dto.orderDetailNum}">
+											<input type="hidden" name="num" value="${dto.orderdetailNum}">
 											<button type="button" class="btn btn-dark btnReviewSend ps-5 pe-5">등록하기</button>
 										</div>
 									</form>

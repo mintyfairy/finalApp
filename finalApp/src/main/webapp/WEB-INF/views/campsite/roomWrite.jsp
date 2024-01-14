@@ -61,7 +61,7 @@ function check() {
 	let mode = "${mode}";
 	
 	
-	if(! f.detailname.value.trim()) {
+	if(! f.detailName.value.trim()) {
 		alert("장소명을 입력하세요.");
 		f.productName.focus();
 		return false;
@@ -127,7 +127,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 					<tr>
 						<td class="table-light col-sm-2">장소명</td>
 						<td>
-							<input type="text" name="detailname" class="form-control" value="${dto.detailname}">
+							<input type="text" name="detailName" class="form-control" value="${dto.detailName}">
 						</td>
 					</tr>
 					
@@ -204,7 +204,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 							
 							<button type="button" class="btn btn-light" onclick="location.href='${url}';">${mode=="update"?"수정취소":"등록취소"}</button>
 							<c:if test="${mode=='update'}">
-								<input type="hidden" name="detailnum" value="${dto.detailnum}">
+								<input type="hidden" name="detailNum" value="${dto.detailNum}">
 								<input type="hidden" name="page" value="${page}">
 							</c:if>
 						</td>

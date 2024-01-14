@@ -2,7 +2,7 @@ package com.fa.plus.domain.site;
 
 public class SiteSearch {
 	
-	private int sitenum;
+	private int siteNum;
 	private String startDate;
 	private String endDate;
 	private String siteKwd;
@@ -20,38 +20,11 @@ public class SiteSearch {
 	private String maxFee;
 	private String size;
 	private String offset;
-	
-	
-	
-	public int getSitenum() {
-		return sitenum;
+	public int getSiteNum() {
+		return siteNum;
 	}
-	public void setSitenum(int sitenum) {
-		this.sitenum = sitenum;
-	}
-	public String getSiteOptionList() {
-		return siteOptionList;
-	}
-	public void setSiteOptionList(String siteOptionList) {
-		this.siteOptionList = siteOptionList;
-	}
-	public String getSize() {
-		return size;
-	}
-	public void setSize(String size) {
-		this.size = size;
-	}
-	public String getOffset() {
-		return offset;
-	}
-	public void setOffset(String offset) {
-		this.offset = offset;
-	}
-	public String getSiteKwd() {
-		return siteKwd;
-	}
-	public void setSiteKwd(String siteKwd) {
-		this.siteKwd = siteKwd;
+	public void setSiteNum(int siteNum) {
+		this.siteNum = siteNum;
 	}
 	public String getStartDate() {
 		return startDate;
@@ -65,12 +38,11 @@ public class SiteSearch {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
-	
-	public int[] getSiteOption() {
-		return siteOption;
+	public String getSiteKwd() {
+		return siteKwd;
 	}
-	public void setSiteOption(int[] siteOption) {
-		this.siteOption = siteOption;
+	public void setSiteKwd(String siteKwd) {
+		this.siteKwd = siteKwd;
 	}
 	public String getSiteLocal() {
 		return siteLocal;
@@ -90,6 +62,18 @@ public class SiteSearch {
 	public void setSiteCategory(String siteCategory) {
 		this.siteCategory = siteCategory;
 	}
+	public int[] getSiteOption() {
+		return siteOption;
+	}
+	public void setSiteOption(int[] siteOption) {
+		this.siteOption = siteOption;
+	}
+	public String getSiteOptionList() {
+		return siteOptionList;
+	}
+	public void setSiteOptionList(String siteOptionList) {
+		this.siteOptionList = siteOptionList;
+	}
 	public String getMinFee() {
 		return minFee;
 	}
@@ -102,6 +86,19 @@ public class SiteSearch {
 	public void setMaxFee(String maxFee) {
 		this.maxFee = maxFee;
 	}
+	public String getSize() {
+		return size;
+	}
+	public void setSize(String size) {
+		this.size = size;
+	}
+	public String getOffset() {
+		return offset;
+	}
+	public void setOffset(String offset) {
+		this.offset = offset;
+	}
+	
 	
 	
 	

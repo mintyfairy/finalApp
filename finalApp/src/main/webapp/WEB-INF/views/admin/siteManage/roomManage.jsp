@@ -46,12 +46,12 @@
 				<c:forEach var="dto" items="${list}" varStatus="status">
 					<tr>
 						<td>${dataCount-(page-1)*size-status.index}</td>
-						<td><p>${dto.detailname}</p></td>
+						<td><p>${dto.detailName}</p></td>
 						<td>${dto.price}</td>
 
 						<td>
-							<button type="button" class="btn-border-primary" onclick="updateRoom(${dto.detailnum},${dto.sitenum})">수정</button>
-							<button type="button" class="btn-border-primary" onclick="deleteRoom(${dto.detailnum},${dto.sitenum})">삭제</button>
+							<button type="button" class="btn-border-primary" onclick="updateRoom(${dto.detailNum},${dto.siteNum})">수정</button>
+							<button type="button" class="btn-border-primary" onclick="deleteRoom(${dto.detailNum},${dto.siteNum})">삭제</button>
 						</td>
 					</tr>
 				</c:forEach>
@@ -67,15 +67,15 @@
 
 <div id="member-dialog" style="display: none;"></div>
 <script>
-function deleteRoom(num,sitenum){
+function deleteRoom(num,siteNum){
 	if(confirm('게시판 및 게시판의 게시글을 삭제하시겠습니까?')){
 		let q="detailNum="+num;
-		location.href="${pageContext.request.contextPath}/admin/siteManage/site/"+sitenum+"/delete?"+q;
+		location.href="${pageContext.request.contextPath}/admin/siteManage/site/"+siteNum+"/delete?"+q;
 	}
 }
-function updateRoom(num,sitenum){
+function updateRoom(num,siteNum){
 	let q="detailNum="+num;
-	location.href="${pageContext.request.contextPath}/admin/siteManage/site/"+sitenum+"/update?"+q;
+	location.href="${pageContext.request.contextPath}/admin/siteManage/site/"+siteNum+"/update?"+q;
 	
 }
 </script>

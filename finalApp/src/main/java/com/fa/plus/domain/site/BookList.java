@@ -5,8 +5,6 @@ public class BookList {
 	private	String order_date;
 	private	long memberIdx;
 	private	long totalPrice;
-	
-	
 	public long getListNum() {
 		return listNum;
 	}
@@ -31,6 +29,7 @@ public class BookList {
 	public void setTotalPrice(long totalPrice) {
 		this.totalPrice = totalPrice;
 	}
+	
 	
 	
 }

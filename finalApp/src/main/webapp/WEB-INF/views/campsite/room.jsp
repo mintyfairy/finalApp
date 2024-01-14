@@ -193,10 +193,10 @@
                 	<c:forEach var="dto" items="${Adlist}">
 	                    <div class="testimonial-item position-relative bg-white rounded overflow-hidden">
 	                        <p style="height:100%;overflow: hidden;text-overflow: clip;white-space:nowrap;">${dto.introduce}</p>
-	                        <div class="d-flex align-items-center adclickdiv" data-siteNum='${dto.sitenum }' onclick="location.href ='${pageContext.request.contextPath}/site/places/${dto.sitenum}'">
+	                        <div class="d-flex align-items-center adclickdiv" data-siteNum='${dto.siteNum }' onclick="location.href ='${pageContext.request.contextPath}/site/places/${dto.siteNum}'">
 	                            <img class="img-fluid flex-shrink-0 rounded" src="${pageContext.request.contextPath}/uploads/site/${dto.thumbnail}" alt="" style="width: 45px; height: 45px;">
 	                            <div class="ps-3">
-	                                <h6 class="fw-bold mb-1">${dto.sitename}</h6>
+	                                <h6 class="fw-bold mb-1">${dto.siteName}</h6>
 	                                <small>${dto.addr1}</small>
 	                            </div>
 	                        </div>
@@ -323,9 +323,9 @@
         function loadContent(page) {
         	let formData = $('form[name=siteSearchForm]').serialize();
         	formData+="&pageNo="+page;
-        	let siteOptionlist= document.siteSearchForm.querySelectorAll('[name=siteOption]')
+        	let siteOptionList= document.siteSearchForm.querySelectorAll('[name=siteOption]')
         	let list="";
-        	for (let item of siteOptionlist){
+        	for (let item of siteOptionList){
         		list+=item.value
         	}
         	formData+="&siteOptionList="+list;
@@ -366,8 +366,8 @@
         	}
         	let count=data.dataCount
         	for(let item of data.list) {
-        		let sitenum = item.sitenum;
-        		let sitename = item.sitename;
+        		let siteNum = item.siteNum;
+        		let siteName = item.siteName;
         		let introduce = item.introduce;
         		let star = item.avgstar;
         		let thumbnail = item.thumbnail;
@@ -386,13 +386,13 @@
         		htmlText =  '<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s"> <div class="room-item shadow rounded overflow-hidden"><div class="position-relative">';
         		htmlText += '  <img class="img-fluid" src="${pageContext.request.contextPath}/uploads/site/'+thumbnail+'" alt="">';
         		htmlText += '        </div><div class="p-4 mt-2"><div class="d-flex justify-content-between mb-3">';
-        		htmlText += '        <h5 class="mb-0">'+sitename+'</h5>';
+        		htmlText += '        <h5 class="mb-0">'+siteName+'</h5>';
         		htmlText += '     <div class="ps-2">';
         		htmlText += ' 	<small class="fa fa-star text-primary">'+star+'</small>';
         		htmlText += '	</div></div> <div class="d-flex mb-3"></div>';
         		htmlText += '	<div class="text-body container" style="height:85px ">'+introduce+'</div>';
         		htmlText += '	<div class="d-flex justify-content-between">';
-        		htmlText += '	<a class="btn btn-sm btn-primary2 rounded py-2 px-4" href="${pageContext.request.contextPath}/site/places/'+sitenum+query+'">View Detail</a>';
+        		htmlText += '	<a class="btn btn-sm btn-primary2 rounded py-2 px-4" href="${pageContext.request.contextPath}/site/places/'+siteNum+query+'">View Detail</a>';
         		htmlText += ' </div></div></div> </div>';
         		
         		// 인써트 어제이슨트 함수로 마지막에 HTML 추가

@@ -15,8 +15,8 @@ import com.fa.plus.domain.site.SiteReview;
  * 
  * 카트에는 아직 결제하지않은 주문이 담긴다.
  * 카트에는 
- *			MEMBERIDX	NUMBER 		카트목록의 주인
-			DETAILNUM	NUMBER		이 항목의 방번호
+ *			memberIdx	NUMBER 		카트목록의 주인
+			detailNum	NUMBER		이 항목의 방번호
 			STARTDATE	DATE		예약시작일
 			ENDDATE		DATE		예약종료일
 			REG_DATE	DATE		카트생성일 : 일정시간이 지난 카트를 삭제하려할때 사용될것
@@ -33,7 +33,7 @@ public interface SiteMapper {
 	// 	2.해당페이지를 리다이렉트한다. 
 	//	두가지 방법이 있다.
 	//
-	// cart 컬럼의 primarykey는 (memberidx,detailnum) 이라 둘다 넘겨줘야한다.
+	// cart 컬럼의 primarykey는 (memberIdx,detailNum) 이라 둘다 넘겨줘야한다.
 	// domain이 있으니 담아서 보내주자.
 	public void deleteCart(SiteCart dto) throws SQLException;
 	
@@ -43,7 +43,7 @@ public interface SiteMapper {
 	//카트 개수
 	public int dataCountCart(long memberIdx);
 	
-	//	memberidx로 그사람의 카트 목록을 불러온다. 
+	//	memberIdx로 그사람의 카트 목록을 불러온다. 
 	public List<SiteCart> listCart(long memberIdx);
 	
 	//이하 4개의 메소드는 함꼐 행동한다. 결제검증(구현안됨 지금은 누르면 바로 결제)

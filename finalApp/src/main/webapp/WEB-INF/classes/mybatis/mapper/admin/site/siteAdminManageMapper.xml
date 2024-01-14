@@ -8,21 +8,21 @@
 	</select>
 	
 	<insert id="insertSite" parameterType="com.fa.plus.domain.site.Site">
-	insert into campingsite(SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,
-	 THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,
-	  MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED)
+	insert into campingsite(siteNum,siteName,INTrODUCE,siteLocal,ZIP,addr1,addr2,
+	 THUMBNAIL,CATEGORY,ENVIRONMENT,hitCount,checkIn,checkOut,
+	  memberIdx,AVGSTAR,siteOption,ENABLED)
 		
-		values(#{sitenum}, #{sitename}, #{introduce}, #{sitelocal}, #{zip}, #{addr1}, #{addr2},
-		 #{thumbnail}, #{category}, #{environment}, 0 , #{checkin}, #{checkout},
-		  #{memberidx}, 0 , #{siteoption}, 0)
+		values(#{siteNum}, #{siteName}, #{introduce}, #{siteLocal}, #{zip}, #{addr1}, #{addr2},
+		 #{thumbnail}, #{category}, #{environment}, 0 , #{checkIn}, #{checkOut},
+		  #{memberIdx}, 0 , #{siteOption}, 0)
 	
 		
 	</insert>
 	
 	<!-- 추가 이미지 등록 -->
 	<insert id="insertSiteFile" parameterType="com.fa.plus.domain.site.Site">
-		INSERT INTO sitePic(SPICNUM, SITENUM, fileName)
-			VALUES(SITEPIC_SEQ.NEXTVAL, #{sitenum}, #{fileName})
+		INSERT INTO sitePic(SPICNUM, siteNum, fileName)
+			VALUES(SITEPIC_SEQ.NEXTVAL, #{siteNum}, #{fileName})
 	</insert>
 
 		
@@ -30,7 +30,7 @@
 		SELECT NVL(COUNT(*), 0)
 		FROM campingsite 
 		<if test="memberIdx!=null and memberIdx!=''">		
-			where  MEMBERIDX=#{memberIdx}
+			where  memberIdx=#{memberIdx}
 		</if>
 	</select>
 	
@@ -41,36 +41,36 @@
 	</select>
 	
 	<insert id="insertRoom" parameterType="com.fa.plus.domain.site.SiteDetail">
-	insert into sitedetail(DETAILNUM,SITENUM,DETAILNAME,PRICE,AREA,CONTENT,CAPACITY,floor)
+	insert into sitedetail(detailNum,siteNum,detailName,PRICE,AREA,CONTENT,CAPACITY,floor)
 		
-		values(#{detailnum},#{sitenum},#{detailname},#{price},#{area},#{content},#{capacity},#{floor})
+		values(#{detailNum},#{siteNum},#{detailName},#{price},#{area},#{content},#{capacity},#{floor})
 	
 		
 	</insert>
 	
 	<!-- 추가 이미지 등록 -->
 	<insert id="insertRoomFile" parameterType="com.fa.plus.domain.site.SiteDetail">
-		INSERT INTO sitedetailPic(SdPICNUM, DETAILNUM, fileName)
-			VALUES(sitedetailPic_SEQ.NEXTVAL, #{detailnum}, #{fileName})
+		INSERT INTO sitedetailPic(SdPICNUM, detailNum, fileName)
+			VALUES(sitedetailPic_SEQ.NEXTVAL, #{detailNum}, #{fileName})
 	</insert>
 
 		
 	<select id="dataCountRoom" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*), 0)
 		FROM sitedetail
-		where  sitenum=#{siteNum}
+		where  siteNum=#{siteNum}
 	</select>
 	<select id="searchCountSite" parameterType="com.fa.plus.domain.site.SiteSearch" resultType="Integer">
 		SELECT count(*)
 		FROM campingsite 
-		join (select distinct(sitenum) chknum from sitedetail)  on chknum=sitenum
+		join (select distinct(siteNum) chknum from sitedetail)  on chknum=siteNum
 		<if test="startDate!=null and startDate!=''">
-			join ( select distinct sitenum from sitedetail
-			        where detailnum not in
-			            (select sitedetail.DETAILNUM detailnum from sitedetail 
-			            left join(select detailnum,ENDDATE,STARTDATE from book where enddate>sysdate) book on sitedetail.DETAILNUM=book.DETAILNUM
+			join ( select distinct siteNum from sitedetail
+			        where detailNum not in
+			            (select sitedetail.detailNum detailNum from sitedetail 
+			            left join(select detailNum,ENDDATE,STARTDATE from book where enddate>sysdate) book on sitedetail.detailNum=book.detailNum
 			             where ENDDATE  &gt;= TO_DATE(#{startDate},'yyyy-mm-dd') and TO_DATE(#{endDate},'yyyy-mm-dd') &gt;= STARTDATE)
-			        ) a on campingsite.sitenum=a.sitenum
+			        ) a on campingsite.siteNum=a.siteNum
 		</if>
 		<where>
 			<include refid="where-list"/>
@@ -86,7 +86,7 @@
 		ENABLED= 0 
 		
 		<if test="siteKwd!=null and siteKwd!=''">
-			and  INSTR(SITENAME, #{siteKwd}) &gt; 0
+			and  INSTR(siteName, #{siteKwd}) &gt; 0
 		</if>
 		<if test="siteLocal!=null and siteLocal!=''">
 			and  siteLocal=#{siteLocal}
@@ -101,13 +101,13 @@
 		
 		<choose>
 			<when test="minFee!=null and minFee!='' and maxFee!=null and maxFee!=''">
-				and campingsite.sitenum in (select  distinct sitenum from sitedetail where  #{minFee} &lt;= price and #{maxFee} &gt;= price)
+				and campingsite.siteNum in (select  distinct siteNum from sitedetail where  #{minFee} &lt;= price and #{maxFee} &gt;= price)
 			</when>
 			<when test="minFee!=null and minFee!=''">
-				and campingsite.sitenum in (select  distinct sitenum from sitedetail where  #{minFee} &lt;= price )
+				and campingsite.siteNum in (select  distinct siteNum from sitedetail where  #{minFee} &lt;= price )
 			</when>
 			<when test="maxFee!=null and maxFee!=''">
-				and campingsite.sitenum in (select  distinct sitenum from sitedetail where  #{maxFee} &gt;= price)
+				and campingsite.siteNum in (select  distinct siteNum from sitedetail where  #{maxFee} &gt;= price)
 			</when>
 		</choose>
 	</sql>
@@ -115,112 +115,112 @@
 		
 		<choose>
 			<when test="minFee!=null and minFee!='' and maxFee!=null and maxFee!=''">
-				and sitenum in (select  distinct sitenum from sitedetail where  #{minFee} &lt;= price and #{maxFee} &gt;= price)
+				and siteNum in (select  distinct siteNum from sitedetail where  #{minFee} &lt;= price and #{maxFee} &gt;= price)
 			</when>
 			<when test="minFee!=null and minFee!=''">
-				and sitenum in (select  distinct sitenum from sitedetail where  #{minFee} &lt;= price )
+				and siteNum in (select  distinct siteNum from sitedetail where  #{minFee} &lt;= price )
 			</when>
 			<when test="maxFee!=null and maxFee!=''">
-				and sitenum in (select  distinct sitenum from sitedetail where  #{maxFee} &gt;= price)
+				and siteNum in (select  distinct siteNum from sitedetail where  #{maxFee} &gt;= price)
 			</when>
 		</choose>
 		<if test="startDate!=null and startDate!=''">
 			
 			    
-			       and  detailnum not in
-	(select sitedetail.DETAILNUM detailnum from sitedetail  
-	left join(select detailnum,ENDDATE,STARTDATE from book) book
-    on sitedetail.DETAILNUM=book.DETAILNUM 
+			       and  detailNum not in
+	(select sitedetail.detailNum detailNum from sitedetail  
+	left join(select detailNum,ENDDATE,STARTDATE from book) book
+    on sitedetail.detailNum=book.detailNum 
     where  ENDDATE  >= TO_DATE(#{startDate},'yyyy-mm-dd') and TO_DATE(#{endDate},'yyyy-mm-dd') >= STARTDATE) 
 		</if>
 	</sql>
 	<!-- 리스트 -->
 	<select id="listSite" parameterType="map" resultType="com.fa.plus.domain.site.Site">
-		SELECT SITENUM,SITENAME,SITELOCAL,addr1,addr2,
-	 		CATEGORY,ENVIRONMENT,HITCOUNT,THUMBNAIL,
+		SELECT siteNum,siteName,siteLocal,addr1,addr2,
+	 		CATEGORY,ENVIRONMENT,hitCount,THUMBNAIL,
 	 		 AVGSTAR,introduce
 		FROM campingsite
 		<where>
 			<include refid="where-list"/>
 			<if test="memberIdx!=0 and memberIdx!=''">		
-				and MEMBERIDX=#{memberIdx}
+				and memberIdx=#{memberIdx}
 			</if>
 		</where> 		
-		ORDER BY SITENUM DESC
+		ORDER BY siteNum DESC
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 		
 	</select>
 	<select id="listAdvertiseSite"  resultType="com.fa.plus.domain.site.Site">
-		SELECT campingsite.SITENUM,SITENAME,SITELOCAL,addr1,addr2,
-	 		CATEGORY,ENVIRONMENT,HITCOUNT,THUMBNAIL,
+		SELECT campingsite.siteNum,siteName,siteLocal,addr1,addr2,
+	 		CATEGORY,ENVIRONMENT,hitCount,THUMBNAIL,
 	 		 AVGSTAR,introduce
 		FROM campingsite
-		join promotionsite on campingsite.SITENUM=promotionsite.SITENUM
+		join promotionsite on campingsite.siteNum=promotionsite.siteNum
         where STARTP &lt; sysdate and ENDP &gt; sysdate
 		order by dbms_random.value
 		FETCH FIRST 3 ROWS ONLY
 		
 	</select>
 	<select id="listRoom" parameterType="map" resultType="com.fa.plus.domain.site.SiteDetail">
-		SELECT DETAILNUM,SITENUM,DETAILNAME,PRICE,AREA,CONTENT,CAPACITY,floor
+		SELECT detailNum,siteNum,detailName,PRICE,AREA,CONTENT,CAPACITY,floor
 		FROM sitedetail 
-		where sitenum=#{siteNum}
-		ORDER BY DETAILNUM DESC
+		where siteNum=#{siteNum}
+		ORDER BY detailNum DESC
 		
 	</select>
 	<!-- 사이트용 검색 -->
 	<select id="listSearchSite" parameterType="com.fa.plus.domain.site.SiteSearch" resultType="com.fa.plus.domain.site.Site">
-		SELECT campingsite.SITENUM SITENUM,SITENAME,SITELOCAL,addr1,addr2,
-	 		CATEGORY,ENVIRONMENT,HITCOUNT,introduce,THUMBNAIL,
-	 		 AVGSTAR,siteoption
+		SELECT campingsite.siteNum siteNum,siteName,siteLocal,addr1,addr2,
+	 		CATEGORY,ENVIRONMENT,hitCount,introduce,THUMBNAIL,
+	 		 AVGSTAR,siteOption
 		FROM campingsite
-		join (select distinct(sitenum) chknum from sitedetail)  on chknum=sitenum
+		join (select distinct(siteNum) chknum from sitedetail)  on chknum=siteNum
 		<if test="startDate!=null and startDate!=''">
-			join ( select distinct sitenum from sitedetail
-			        where detailnum not in
-			            (select sitedetail.DETAILNUM detailnum from sitedetail 
-			            left join(select detailnum,ENDDATE,STARTDATE from book where enddate>sysdate) book on sitedetail.DETAILNUM=book.DETAILNUM
+			join ( select distinct siteNum from sitedetail
+			        where detailNum not in
+			            (select sitedetail.detailNum detailNum from sitedetail 
+			            left join(select detailNum,ENDDATE,STARTDATE from book where enddate>sysdate) book on sitedetail.detailNum=book.detailNum
 			             where ENDDATE  &gt;= TO_DATE(#{startDate},'yyyy-mm-dd') and TO_DATE(#{endDate},'yyyy-mm-dd') &gt;= STARTDATE)
-			        ) a on campingsite.sitenum=a.sitenum
+			        ) a on campingsite.siteNum=a.siteNum
 		</if>
 		<where>
 			<include refid="where-list"/>
 		</where> 		
-		ORDER BY SITENUM DESC
+		ORDER BY siteNum DESC
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 		
 	</select>
 	<select id="listSearchRoom" parameterType="com.fa.plus.domain.site.SiteSearch" resultType="com.fa.plus.domain.site.SiteDetail">
-		SELECT DETAILNUM,SITENUM,DETAILNAME,PRICE,AREA,CONTENT,CAPACITY,floor
+		SELECT detailNum,siteNum,detailName,PRICE,AREA,CONTENT,CAPACITY,floor
 		FROM sitedetail 
 		
 		<where>
-		sitenum=#{sitenum} 
+		siteNum=#{siteNum} 
 			<include refid="where-list-room"/>
 		</where> 
-		ORDER BY DETAILNUM 
+		ORDER BY detailNum 
 		
 	</select>
 	<!-- 탐색 -->
 	<select id="findByIdSite" parameterType="Long" resultType="com.fa.plus.domain.site.Site">
-		SELECT SITENUM,SITENAME,INTrODUCE,SITELOCAL,ZIP,addr1,addr2,
-	 		 THUMBNAIL,CATEGORY,ENVIRONMENT,HITCOUNT,CHECKIN,checkout,
-	 		 MEMBERIDX,AVGSTAR,SITEOPTION,ENABLED
+		SELECT siteNum,siteName,INTrODUCE,siteLocal,ZIP,addr1,addr2,
+	 		 THUMBNAIL,CATEGORY,ENVIRONMENT,hitCount,checkIn,checkOut,
+	 		 memberIdx,AVGSTAR,siteOption,ENABLED
 		FROM campingsite 
-		where 	SITENUM=#{siteNum}
+		where 	siteNum=#{siteNum}
 	</select>
 	<select id="findByIdRoom" parameterType="Long" resultType="com.fa.plus.domain.site.SiteDetail">
-		SELECT DETAILNUM,SITENUM,DETAILNAME,PRICE,AREA,CONTENT,CAPACITY,floor
+		SELECT detailNum,siteNum,detailName,PRICE,AREA,CONTENT,CAPACITY,floor
 		FROM sitedetail 
-		where 	DETAILNUM=#{detailNum}
+		where 	detailNum=#{detailNum}
 	</select>
 	<select id="listSiteFile" parameterType="Long" resultType="com.fa.plus.domain.site.Site">
-		SELECT SPICNUM fileNum, SITENUM, fileName
+		SELECT SPICNUM fileNum, siteNum, fileName
 		FROM sitepic
-		WHERE sitenum = #{sitenum}
+		WHERE siteNum = #{siteNum}
 	</select>
 	<select id="listRoomFile" parameterType="Long" resultType="com.fa.plus.domain.site.SiteDetail">
-		SELECT SdPICNUM fileNum, DETAILNUM , fileName
+		SELECT SdPICNUM fileNum, detailNum , fileName
 		FROM sitedetailPic
 		WHERE detailNum = #{detailNum}
 	</select>
@@ -228,16 +228,16 @@
 	
 	
 	<update id="updateSite" parameterType="com.fa.plus.domain.site.Site">
-		UPDATE campingsite SET SITENAME=#{sitename},INTrODUCE=#{introduce},
-				SITELOCAL=#{sitelocal},ZIP=#{zip},addr1=#{addr1},addr2=#{addr2},
+		UPDATE campingsite SET siteName=#{siteName},INTrODUCE=#{introduce},
+				siteLocal=#{siteLocal},ZIP=#{zip},addr1=#{addr1},addr2=#{addr2},
 	 		 THUMBNAIL= #{thumbnail},CATEGORY=#{category},
-	 		 ENVIRONMENT=#{environment},CHECKIN= #{checkin},checkout= #{checkout},
-	 		 SITEOPTION= #{siteoption}
-		WHERE SITENUM = #{sitenum}
+	 		 ENVIRONMENT=#{environment},checkIn= #{checkIn},checkOut= #{checkOut},
+	 		 siteOption= #{siteOption}
+		WHERE siteNum = #{siteNum}
 	</update>
 
 	<delete id="deleteSite" parameterType="Long">
-		DELETE FROM campingsite WHERE  SITENUM = #{siteNum}
+		DELETE FROM campingsite WHERE  siteNum = #{siteNum}
 	</delete>
 	
 	<delete id="deleteSiteFile" parameterType="Long">
@@ -247,13 +247,13 @@
 	
 	<update id="updateRoom" parameterType="com.fa.plus.domain.site.Site">
 		UPDATE sitedetail SET
-			DETAILNAME=#{detailname},PRICE=#{price},
+			detailName=#{detailName},PRICE=#{price},
 			AREA=#{area},CONTENT=#{content},CAPACITY=#{capacity},floor=#{floor}
-		WHERE detailnum = #{detailnum}
+		WHERE detailNum = #{detailNum}
 	</update>
 
 	<delete id="deleteRoom" parameterType="Long">
-		DELETE FROM sitedetail WHERE  detailnum = #{detailNum}
+		DELETE FROM sitedetail WHERE  detailNum = #{detailNum}
 	</delete>
 	
 	<delete id="deleteRoomFile" parameterType="Long">

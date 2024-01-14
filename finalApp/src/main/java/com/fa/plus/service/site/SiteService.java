@@ -16,11 +16,11 @@ public interface SiteService {
 	// 	2.해당페이지를 리다이렉트한다. 
 	//	두가지 방법이 있다.
 	//
-	// cart 컬럼의 primarykey는 (memberidx,detailnum) 이라 둘다 넘겨줘야한다.
+	// cart 컬럼의 primarykey는 (memberIdx,detailNum) 이라 둘다 넘겨줘야한다.
 	// domain이 있으니 담아서 보내주자.
 	public void deleteCart(SiteCart dto) throws SQLException;
 	
-	//	memberidx로 그사람의 카트 목록을 불러온다. 
+	//	memberIdx로 그사람의 카트 목록을 불러온다. 
 	public List<SiteCart> listCart(long memberIdx);
 	
 	//여기안에 map안에 3개의 map이 저장되어 날아가야한다...
