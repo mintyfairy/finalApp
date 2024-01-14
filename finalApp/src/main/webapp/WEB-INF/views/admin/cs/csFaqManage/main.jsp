@@ -5,7 +5,23 @@
 
 <style type="text/css">
 .body-main {
-	width: 1080px;
+	max-width:1200px;
+	margin: 0 auto;
+}
+.paginate{
+	width:1200px;
+	margin: 0 auto;
+}
+.form-select{
+	width:100px;
+	margin: auto;
+	
+}
+	
+.form-control{
+	width:100;
+	margin: auto;
+	
 }
 #tab-content{
 	width: 100%;
@@ -211,7 +227,7 @@ function reloadFaq() {
 
 // 글 삭제
 function deleteFaq(num, page) {
-	var url = "${pageContext.request.contextPath}/admin/cs/faq/delete"; //admin/cs/faq 이건가?
+	var url = "${pageContext.request.contextPath}/admin/cs/faq/delete";
 	var query = "num="+num;
 	
 	if(! confirm("위 게시물을 삭제 하시 겠습니까 ? ")) {

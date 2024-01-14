@@ -9,6 +9,27 @@
 	max-width:1200px;
 	margin: 0 auto;
 }
+.badge {
+	display: inline-block; padding:2px 3px; background: #0d6efd; color: #fff; font-weight: 500;
+	font-size: 11px;
+}
+
+.paginate{
+	width:1200px;
+	margin: 0 auto;
+}
+
+.form-select{
+	width:100px;
+	margin: auto;
+	
+}
+	
+.form-control{
+	width:100;
+	margin: auto;
+	
+}
 </style>
 
 <script type="text/javascript">
@@ -94,18 +115,24 @@ $(function(){
 						<button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/admin/cs/event/${category}/list';" title="새로고침"><i class="fa-solid fa-arrow-rotate-left"></i></button>
 					</td>
 					<td align="center">
-						<form name="searchForm" action="${pageContext.request.contextPath}/admin/cs/event/${category}/list" method="post">
-							<select name="schType" class="form-select">
-								<option value="all" ${schType=="all"?"selected":""}>모두</option>
-								<option value="startDate" ${schType=="startDate"?"selected":""}>시작일</option>
-								<option value="endDate" ${schType=="endDate"?"selected":""}>종료일</option>
-								<option value="winningDate" ${schType=="winningDate"?"selected":""}>발표일</option>
-							</select>
-							<input type="text" name="kwd" value="${kwd}" class="form-control">
-							<button type="button" class="btn" onclick="searchList()">검색</button>
+						<form class="row justify-content-center" name="searchForm" action="${pageContext.request.contextPath}/admin/cs/event/${category}/list" method="post">
+							<div class="col-auto p-1">
+								<select name="schType" class="form-select">
+									<option value="all" ${schType=="all"?"selected":""}>모두</option>
+									<option value="startDate" ${schType=="startDate"?"selected":""}>시작일</option>
+									<option value="endDate" ${schType=="endDate"?"selected":""}>종료일</option>
+									<option value="winningDate" ${schType=="winningDate"?"selected":""}>발표일</option>
+								</select>
+							</div>
+							<div class="col-auto p-1">
+								<input type="text" name="kwd" value="${kwd}" class="form-control">								
+							</div>
+							<div class="col-auto p-1">								
+								<button type="button" class="btn" onclick="searchList()"><i class="bi bi-search"></i> </button>
+							</div>
 						</form>
 					</td>
-					<td align="right" width="100">
+					<td align="right" width="150">
 						<button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/admin/cs/event/${category}/write';">이벤트등록</button>
 					</td>
 				</tr>

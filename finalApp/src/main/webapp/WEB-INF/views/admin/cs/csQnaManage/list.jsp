@@ -6,7 +6,29 @@
 
 <style type="text/css">
 .body-main {
-	max-width: 900px;
+	max-width:1200px;
+	margin: 0 auto;
+}
+.badge {
+	display: inline-block; padding:2px 3px; background: #0d6efd; color: #fff; font-weight: 500;
+	font-size: 11px;
+}
+
+.paginate{
+	width:1200px;
+	margin: 0 auto;
+}
+
+.form-select{
+	width:100px;
+	margin: auto;
+	
+}
+	
+.form-control{
+	width:100;
+	margin: auto;
+	
 }
 </style>
 
@@ -69,17 +91,25 @@ function searchList() {
 					<button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/admin/cs/qna/list';" title="새로고침"><i class="fa-solid fa-arrow-rotate-left"></i></button>
 				</td>
 				<td align="center">
-					<form name="searchForm" action="${pageContext.request.contextPath}/admin/cs/qna/list" method="post">
-						<select name="schType" class="form-select">
-							<option value="all" ${schType=="all"?"selected":""}>제목+내용</option>
-							<option value="userId" ${schType=="userId"?"selected":""}>아이디</option>
-							<option value="userName" ${schType=="userName"?"selected":""}>작성자</option>
-							<option value="reg_date" ${schType=="reg_date"?"selected":""}>등록일</option>
-							<option value="subject" ${schType=="subject"?"selected":""}>제목</option>
-							<option value="content" ${schType=="content"?"selected":""}>내용</option>
-						</select>
-						<input type="text" name="kwd" value="${kwd}" class="form-control">
-						<button type="button" class="btn" onclick="searchList()">검색</button>
+					<form class="row justify-content-center" name="searchForm" action="${pageContext.request.contextPath}/admin/cs/qna/list" method="post">
+						<div class="col-auto p-1">
+							<select name="schType" class="form-select">
+								<option value="all" ${schType=="all"?"selected":""}>제목+내용</option>
+								<option value="userId" ${schType=="userId"?"selected":""}>아이디</option>
+								<option value="userName" ${schType=="userName"?"selected":""}>작성자</option>
+								<option value="reg_date" ${schType=="reg_date"?"selected":""}>등록일</option>
+								<option value="subject" ${schType=="subject"?"selected":""}>제목</option>
+								<option value="content" ${schType=="content"?"selected":""}>내용</option>
+							</select>
+						</div>
+						<div class="col-auto p-1">
+							<input type="text" name="kwd" value="${kwd}" class="form-control">
+						</div>
+						<div class="col-auto p-1">
+							<button type="button" class="btn" onclick="searchList()">검색</button>
+						</div>
+						
+						
 					</form>
 				</td>
 				<td align="right" width="100">

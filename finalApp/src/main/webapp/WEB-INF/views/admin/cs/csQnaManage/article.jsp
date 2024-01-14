@@ -6,7 +6,8 @@
 
 <style type="text/css">  
 .body-main {
-	max-width: 900px;
+	max-width:1200px;
+	margin: 0 auto;
 }
 
 .row-flex { display: flex; justify-content: space-between; }

@@ -1,6 +1,7 @@
 package com.fa.plus.admin.service;  
 
-import java.util.List; 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -174,7 +175,27 @@ public class CsNoticeServiceImpl implements CsNoticeService{
 
 	@Override
 	public void deleteNotice(long num, String pathname) throws Exception {
-		// TODO Auto-generated method stub
+		try {
+			// 파일 지우기
+			List<CsNoticeManage> listFile = listNoticeFile(num);
+			if (listFile != null) {
+				for (CsNoticeManage dto : listFile) {
+					fileManager.doFileDelete(dto.getSaveFilename(), pathname);
+				}
+			}
+
+			// 파일 테이블 내용 지우기
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("field", "num");
+			map.put("num", num);
+			deleteNoticeFile(map);
+
+			// 게시글 지우기
+			mapper.deleteNotice(num);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 		
 	}
 
@@ -203,8 +224,12 @@ public class CsNoticeServiceImpl implements CsNoticeService{
 
 	@Override
 	public void deleteNoticeFile(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		
+		try {
+			mapper.deleteNoticeFile(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 	

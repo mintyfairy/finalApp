@@ -23,8 +23,49 @@
 
 
 <script type="text/javascript">
+$(function(){
+	let cartSize = "${list.size()}";
+	if(cartSize!=="" && cartSize!=="0") {
+		$(".cart-chkAll").prop("checked", true);
+		$("form input[name=nums]").prop("checked", true);
+	}
+	
+    $(".cart-chkAll").click(function() {
+    	$("form input[name=nums]").prop("checked", $(this).is(":checked"));
+    });
+});
 
+<!-- 구매창이 아직 없음
+function sendOk() {
+	// 구매하기
+	const f = document.cartForm;
+	
+	let cnt = $("form input[name=nums]:checked").length;
+    if (cnt === 0) {
+		alert("구매할 상품을 먼저 선택 하세요 !!!");
+		return;
+    }
+    
+    $("form input[name=nums]").each(function(index, item){
+		if(! $(this).is(":checked")) {
+			$(this).closest("tr").remove();
+		}
+	});
+	
+	f.action = "${pageContext.request.contextPath}/campsite/reservation";
+	f.submit();
+}
 
+-->
+
+function deleteCartAll() {
+	// 장바구니 비우기
+	if(! confirm('장바구니를 비우시겠습니까 ? ')) {
+		return;
+	}
+
+	location.href = '${pageContext.request.contextPath}/myPage/deleteCartAll';	
+}
 
 
 </script>

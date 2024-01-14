@@ -5,8 +5,16 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
 <style type="text/css">
 .body-main {
-	max-width: 900px;
+	max-width:1200px;
+	margin: 0 auto;
 }
+.table-form{
+	width:900px;
+	margin: 0 auto;
+}
+
+.delete-file { cursor: pointer; }
+.delete-file:hover { color: #0d58ba; }
 </style> 
 
 

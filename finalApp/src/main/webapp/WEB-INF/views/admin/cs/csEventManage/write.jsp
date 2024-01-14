@@ -7,11 +7,12 @@
 
 <style type="text/css">
 .body-main {
-	max-width: 900px;
+	max-width:1200px;
+	margin: 0 auto;
 }
-
-.table-article img {
-	max-width: 650px;
+.table-form{
+	width:900px;
+	margin: 0 auto;
 }
 </style>
 

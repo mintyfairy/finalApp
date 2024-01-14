@@ -237,6 +237,30 @@ public class CsNoticeController {
 		return "redirect:/admin/cs/notice/list?page=" + page;
 	}
 
+		
+	@GetMapping("delete")
+	public String delete(@RequestParam long num,
+			@RequestParam String page,
+			@RequestParam(defaultValue = "all") String schType,
+			@RequestParam(defaultValue = "") String kwd,
+			HttpSession session) throws Exception {
+
+		kwd = URLDecoder.decode(kwd, "utf-8");
+		String query = "page=" + page;
+		if (kwd.length() != 0) {
+			query += "&schType=" + schType + "&kwd=" + URLEncoder.encode(kwd, "UTF-8");
+		}
+
+		try {
+			String root = session.getServletContext().getRealPath("/");
+			String pathname = root + "uploads" + File.separator + "notice";
+			service.deleteNotice(num, pathname);
+		} catch (Exception e) {
+		}
+
+		return "redirect:/admin/cs/notice/list?" + query;
+	}
+	
 	
 	@GetMapping("download")
 	public void download(@RequestParam long fileNum,

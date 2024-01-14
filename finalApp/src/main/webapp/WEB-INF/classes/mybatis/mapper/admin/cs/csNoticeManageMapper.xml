@@ -127,6 +127,11 @@
 		WHERE num=#{num}
 	</update>
 	
+	  
+	<!-- 삭제 -->
+	<delete id="deleteNotice" parameterType="Long">
+		DELETE FROM notice WHERE num=#{num}
+	</delete>
 	
 	<insert id="insertNoticeFile" parameterType="com.fa.plus.admin.domain.CsNoticeManage">
 		INSERT INTO noticeFile(fileNum, num, saveFilename, originalFilename, fileSize)
@@ -140,6 +145,16 @@
 		WHERE num=#{num}    
 	</select>
 	
+	<select id="findByFileId" parameterType="Long" resultType="com.fa.plus.admin.domain.CsNoticeManage">
+		SELECT fileNum, num, saveFilename, originalFilename, fileSize
+		FROM noticeFile
+	    WHERE fileNum=#{fileNum}
+	</select>
+	
+	<!-- 파일지우는거 -->
+	<delete id="deleteNoticeFile" parameterType="map">
+		DELETE FROM noticeFile WHERE ${field} = #{num}
+	</delete>
 	
 	
 	

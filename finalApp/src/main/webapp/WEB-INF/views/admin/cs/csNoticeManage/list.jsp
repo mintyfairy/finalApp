@@ -120,23 +120,29 @@ function searchList() {
 		
 		<table class="table">
 			<tr>
-				<td align="left" width="100">
+				<td align="left" width="150">
 					<button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/admin/cs/notice/list';" title="새로고침"><i class="fa-solid fa-arrow-rotate-left"></i></button>
 				</td>
 				<td align="center">
-					<form name="searchForm" action="${pageContext.request.contextPath}/admin/cs/notice/list" method="post">
-						<select name="schType" class="form-select">
-							<option value="all" ${schType=="all"?"selected":""}>모두</option>
-							<option value="userName" ${schType=="userName"?"selected":""}>작성자</option>
-							<option value="reg_date" ${schType=="reg_date"?"selected":""}>등록일</option>
-							<option value="subject" ${schType=="subject"?"selected":""}>제목</option>
-							<option value="content" ${schType=="content"?"selected":""}>내용</option>
-						</select>
-						<input type="text" name="kwd" value="${kwd}" class="form-control">
-						<button type="button" class="btn" onclick="searchList()">검색</button>
+					<form class="row justify-content-center" name="searchForm" action="${pageContext.request.contextPath}/admin/cs/notice/list" method="post">
+						<div class="col-auto p-1">
+							<select name="schType" class="form-select">
+								<option value="all" ${schType=="all"?"selected":""}>모두</option>
+								<option value="userName" ${schType=="userName"?"selected":""}>작성자</option>
+								<option value="reg_date" ${schType=="reg_date"?"selected":""}>등록일</option>
+								<option value="subject" ${schType=="subject"?"selected":""}>제목</option>
+								<option value="content" ${schType=="content"?"selected":""}>내용</option>
+							</select>
+						</div>						
+						<div class="col-auto p-1">
+							<input type="text" name="kwd" value="${kwd}" class="form-control">						
+						</div>
+						<div class="col-auto p-1">						
+							<button type="button" class="btn" onclick="searchList()"><i class="bi bi-search"></i></button>
+						</div>
 					</form>
 				</td>
-				<td align="right" width="120">
+				<td align="right" width="150">
 					<button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/admin/cs/notice/write';">글올리기</button>
 				</td>
 			</tr>
