@@ -19,7 +19,7 @@ public class QnA {
 	private String answer;
 	private String answerId;
 	private String answerName;
-	private String answer_date;
+	private String answerDate;
 	private String questionDate;
 	private int showQuestion;
 	
@@ -92,10 +92,10 @@ public class QnA {
 		this.answerName = answerName;
 	}
 	public String getAnswer_date() {
-		return answer_date;
+		return answerDate;
 	}
-	public void setAnswer_date(String answer_date) {
-		this.answer_date = answer_date;
+	public void setAnswer_date(String answerDate) {
+		this.answerDate = answerDate;
 	}
 	public String getLectureCode() {
 		return lectureCode;

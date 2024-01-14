@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<style>
+<style type="text/css">
 @charset "utf-8";
 
 * {
@@ -617,9 +617,6 @@ function sendOk(mode) {
 							</label> <label><span
 								class="product-totalAmount fs-5 fw-semibold text-black">0</span>원</label>
 						</div>
-
-
-
 					</div>
 
 					<div class="btn_list">
@@ -649,9 +646,11 @@ function sendOk(mode) {
 					<li class="tab_item" onclick="as();"><span>배송/교환/반품/AS</span></li>
 				</ul>
 			</div>
+			
 			<div class="detail_img">
 				<img src="https://via.placeholder.com/538x540" alt="detail_img">
 			</div>
+			
 			<div class="detail_tab detail_tab2">
 				<ul class="tab_list">
 					<li class="tab_item" onclick="detail();"><span>상세정보</span></li>
@@ -671,20 +670,85 @@ function sendOk(mode) {
 							<col width="110">
 							<col width="40">
 						</colgroup>
-						<tbody>
-							<tr>
-								<td colspan="6">등록된 리뷰가 없습니다.</td>
-							</tr>
-						</tbody>
 					</table>
 				</div>
-				<div class="review_write mt-3 p-2 text-end">
-					<button type="button" class="btnMyQuestion btn btn-dark" ${empty sessionScope.member ? "disabled":""}> 내 Q&amp;A 보기  </button>
-					<button type="button" class="btnQuestion btn btn-dark" ${empty sessionScope.member ? "disabled":""}> 상품 Q&amp;A 작성 </button>
-				</div>
-				<div class="mt-1 p-2 list-question"></div>
+				<div class="row border-bottom">
+						<div class="col p-3 text-center">
+							<div class="fs-6 fw-semibold">상품만족도</div>
+							<div class="score-star review-score-star">
+								<c:forEach var="n" begin="1" end="5">
+									<c:set var="score" value="${dto.score + ((dto.score%1>=0.5) ? (1-dto.score%1)%1 : -(dto.score%1))}"/>
+									<span class="item fs-2 ${dto.score>=n?'on':''}"><i class="bi bi-star-fill"></i></span>
+								</c:forEach>
+							</div>
+							<div class="fs-2">
+								<label class="review-score">${dto.score} / 5</label> 
+							</div>
+						</div>
+						
+						<div class="col p-3 text-center">
+							<div class="fs-6 fw-semibold">리뷰수</div>
+							<div class="fs-2"><i class="bi bi-chat-right-text"></i></div>
+							<div class="fs-2 review-reviewCount">${dto.reviewCount}</div>
+						</div> 
+						
+						<div class="col p-3 text-center review-rate">
+							<div class="fs-6 fw-semibold">평점비율</div>
+							<div class="p-1 score-5">
+								<span class="graph-title">5점</span>
+								<span class="graph">
+									<c:forEach var="n" begin="1" end="10">
+										<label class="one-space"></label>
+									</c:forEach>
+								</span>
+								<span class="graph-rate">0%</span>
+							</div>
+							<div class="p-1 score-4">
+								<span class="graph-title">4점</span>
+								<span class="graph">
+									<c:forEach var="n" begin="1" end="10">
+										<label class="one-space"></label>
+									</c:forEach>
+								</span>
+								<span class="graph-rate">0%</span>
+							</div>
+							<div class="p-1 score-3">
+								<span class="graph-title">3점</span>
+								<span class="graph">
+									<c:forEach var="n" begin="1" end="10">
+										<label class="one-space"></label>
+									</c:forEach>
+								</span>
+								<span class="graph-rate">0%</span>
+							</div>
+							<div class="p-1 score-2">
+								<span class="graph-title">2점</span>
+								<span class="graph">
+									<c:forEach var="n" begin="1" end="10">
+										<label class="one-space"></label>
+									</c:forEach>
+								</span>
+								<span class="graph-rate">0%</span>
+							</div>
+							<div class="p-1 score-1">
+								<span class="graph-title">1점</span>
+								<span class="graph">
+									<c:forEach var="n" begin="1" end="10">
+										<label class="one-space"></label>
+									</c:forEach>
+								</span>
+								<span class="graph-rate">0%</span>
+							</div>
+						</div>
+					</div>
 			</div>
-				
+			<div class="detail_tab detail_tab3">
+				<ul class="tab_list">
+					<li class="tab_item" onclick="detail();"><span>상세정보</span></li>
+					<li class="tab_item" onclick="review();"><span>상품후기0</span></li>
+					<li class="tab_item" onclick="question();"><span>상품문의0</span></li>
+					<li class="tab_item" onclick="as();"><span>배송/교환/반품/AS</span></li>
+				</ul>
 			</div>
 			<div class="detail_qna">
 				<div class="qna_table">
@@ -697,58 +761,17 @@ function sendOk(mode) {
 							<col width="110">
 							<col width="40">
 						</colgroup>
-						<tbody>
-							<tr>
-								<td colspan="6">등록된 리뷰가 없습니다.</td>
-							</tr>
-						</tbody>
 					</table>
 				</div>
 				
-		<div class="modal fade" id="questionDialogModal" tabindex="-1" 
-		data-bs-backdrop="static" data-bs-keyboard="false"
-		aria-labelledby="questionDialogModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="questionDialogModalLabel">상품 문의 하기</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-
-				<div class="qna-form p-2">
-					<form name="questionForm">
-						<div class="row">
-							<div class="col">
-								<span class="fw-bold">문의사항 쓰기</span><span> - 상품 및 상품 구매 과정과 관련없는 글은 삭제 될 수 있습니다.</span>
-							</div>
-							<div class="col-3 text-end">
-								<input type="checkbox" name="secret" id="secret1" class="form-check-input" 
-									value="1">
-								<label class="form-check-label" for="secret1">비공개</label>
-							</div>
-						</div>
-						<div class="p-1">
-							<input type="hidden" name="productNum" value="${dto.productNum}">
-							<textarea name="question" id="question" class="form-control"></textarea>
-						</div>
-						<div class="p-1">
-							<div class="img-grid">
-								<img class="item img-add" src="${pageContext.request.contextPath}/resources/images/add_photo.png">
-							</div>
-							<input type="file" name="selectFile" accept="image/*" multiple class="form-control" style="display: none;">
-						</div>							
-					</form>
+				<div class="mt-2 list-review"></div>
+				
+				<div class="review_write mt-3 p-2 text-end">
+					<button type="button" class="btnMyQuestion btn btn-dark"> 내 Q&amp;A 보기  </button>
+					<button type="button" class="btnQuestion btn btn-dark"> 상품 Q&amp;A 작성 </button>
 				</div>
-
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary btnQuestionSendOk">문의등록 <i class="bi bi-check2"></i> </button>
-				<button type="button" class="btn btn-secondary btnQuestionSendCancel" data-bs-dismiss="modal">취소</button>
-			</div>			
-		</div>
-	</div>
-</div>
+				<div class="mt-1 p-2 list-question"></div>
+				
 			</div>
 			<div class="detail_tab detail_tab4">
 				<ul class="tab_list">
@@ -812,37 +835,87 @@ function sendOk(mode) {
 				</div>
 			</div>
 		</div>
+			
+			
+		</div>
 	</div>
 	
+<div class="modal hidden" id="questionDialogModal" tabindex="-1" 
+	data-bs-backdrop="static" data-bs-keyboard="false"
+	aria-labelledby="questionDialogModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="questionDialogModalLabel">상품 문의 하기</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+
+				<div class="qna-form p-2">
+					<form name="questionForm">
+						<div class="row">
+							<div class="col">
+								<span class="fw-bold">문의사항 쓰기</span><span> - 상품 및 상품 구매 과정과 관련없는 글은 삭제 될 수 있습니다.</span>
+							</div>
+							<div class="col-3 text-end">
+								<input type="checkbox" name="secret" id="secret1" class="form-check-input" 
+									value="1">
+								<label class="form-check-label" for="secret1">비공개</label>
+							</div>
+						</div>
+						<div class="p-1">
+							<input type="hidden" name="productNum" value="${dto.productNum}">
+							<textarea name="question" id="question" class="form-control"></textarea>
+						</div>
+						<div class="p-1">
+							<div class="img-grid">
+								<img class="item img-add" src="${pageContext.request.contextPath}/resources/images/add_photo.png">
+							</div>
+							<input type="file" name="selectFile" accept="image/*" multiple class="form-control" style="display: none;">
+						</div>							
+					</form>
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary btnQuestionSendOk">문의등록 <i class="bi bi-check2"></i> </button>
+				<button type="button" class="btn btn-secondary btnQuestionSendCancel" data-bs-dismiss="modal">취소</button>
+			</div>			
+		</div>
+	</div>
+</div>
+	
 <script type="text/javascript">
-//변수명 변경
-let detail_height = document.querySelector(".detail_tab1").offsetTop;
-let review_height = document.querySelector(".detail_tab2").offsetTop;
-let question_height = document.querySelector(".detail_tab3").offsetTop;
-let as_height = document.querySelector(".detail_tab4").offsetTop;
+	//변수명 변경
+	let detail_height = document.querySelector(".detail_tab1").offsetTop;
+	let review_height = document.querySelector(".detail_tab2").offsetTop;
+	let question_height = document.querySelector(".detail_tab3").offsetTop;
+	let as_height = document.querySelector(".detail_tab4").offsetTop;
+	
+	console.log(detail_height);
+	console.log(review_height);
+	console.log(question_height);
+	console.log(as_height);
+	
+	// 함수명 변경
+	function detail() {
+	   window.scrollTo({top: detail_height, left: 0, behavior: 'smooth'});
+	}
+	
+	function review() {
+	   window.scrollTo({top: review_height, left: 0, behavior: 'smooth'});
+	}
+	
+	function question() {
+	   window.scrollTo({top: question_height, left: 0, behavior: 'smooth'});
+	}
+	
+	function as() {
+	   window.scrollTo({top: as_height, left: 0, behavior: 'smooth'});
+	}
+</script>
 
-console.log(detail_height);
-console.log(review_height);
-console.log(question_height);
-console.log(as_height);
-
-// 함수명 변경
-function detail() {
-   window.scrollTo({top: detail_height, left: 0, behavior: 'smooth'});
-}
-
-function review() {
-   window.scrollTo({top: review_height, left: 0, behavior: 'smooth'});
-}
-
-function question() {
-   window.scrollTo({top: question_height, left: 0, behavior: 'smooth'});
-}
-
-function as() {
-   window.scrollTo({top: as_height, left: 0, behavior: 'smooth'});
-}
-
+<script type="text/javascript">
 $(function(){
 	$('.reviewSortNo').change(function(){
 		listReview(1);
@@ -852,7 +925,7 @@ $(function(){
 function listReview(page) {
 	let productNum = '${dto.productNum}';
 	let sortNo = $('.reviewSortNo').val();
-	let url = '${pageContext.request.contextPath}/review/list';
+	let url = '${pageContext.request.contextPath}/shop/review/list';
 	let query = 'productNum='+productNum+'&pageNo='+page+'&sortNo='+sortNo;
 	
 	const fn = function(data) {
@@ -879,13 +952,13 @@ function printReview(data) {
 	
 	let out = '';
 	for(let item of data.list) {
-		let num = item.orderDetailNum;
+		let orderDetailNum = item.orderDetailNum;
 		let userName = item.userName;
 		let score = item.score;
 		let review = item.review;
-		let review_date = item.reviewDate;
+		let reviewDate = item.reviewDate;
 		let answer = item.answer;
-		let answer_date = item.answerDate;
+		let answerDate = item.answerDate;
 		let listFilename = item.listFilename;
 		// let deletePermit = item.deletePermit;
 		
@@ -910,7 +983,7 @@ function printReview(data) {
 			out += '<div class="row gx-1 mt-2 mb-1 p-1">';
 				for(let f of listFilename) {
 					out += '<div class="col-md-auto md-img">';
-					out += '  <img class="border rounded" src="${pageContext.request.contextPath}/uploads/review/'+f+'">';
+					out += '  <img class="border rounded" src="${pageContext.request.contextPath}/shop/uploads/review/'+f+'">';
 					out += '</div>';
 				}
 			out += '</div>';
@@ -1013,4 +1086,208 @@ function listQuestion(page) {
 	};
 	ajaxFun(url, 'get', query, 'json', fn);
 }
+
+function printQuestion(data) {
+	let dataCount = data.dataCount;
+	let pageNo = data.pageNo;
+	let total_page = data.total_page;
+	let size = data.size;
+	let paging = data.paging;
+	
+	$('.title-qnaCount').html('(' + dataCount + ')');
+	let out = '';
+	for(let item of data.list) {
+		let qnaNum = item.qnaNum;
+		let userName = item.userName;
+		let question = item.question;
+		let questionDate = item.questionDate;
+		let answer = item.answer;
+		let answerDate = item.answerDate;
+		let answerState = answerDate ? '<span class="text-primary">답변완료</span>' : '<span class="text-secondary">답변대기</span>';
+		let listFilename = item.listFilename;
+		let secret = item.secret;
+
+		out += '<div class="mt-1 border-bottom">';
+		out += '  <div class="mt-2 p-2">' + question + '</div>';
+		
+		if(listFilename && listFilename.length > 0) {
+			out += '<div class="row gx-1 mt-2 mb-1 p-1">';
+				for(let f of listFilename) {
+					out += '<div class="col-md-auto md-img">';
+					out += '  <img class="border rounded" src="${pageContext.request.contextPath}/uploads/qna/'+f+'">';
+					out += '</div>';
+				}
+			out += '</div>';
+		}
+		out += '  <div class="row p-2">';
+		out += '     <div class="col-auto pt-2 pe-0">' + answerState + '</div>';
+		out += '     <div class="col-auto pt-2 px-0">&nbsp;|&nbsp;'+userName+'</div>';
+		out += '     <div class="col-auto pt-2 px-0">&nbsp;|&nbsp;<span>'+questionDate+'</span>';
+		if(secret === 0) {
+			out += '       |<span class="notifyQuestion" data-qnaNum="' + qnaNum + '">신고</span>';
+		}
+		out += '      </div>';
+		if(answer) {
+			out += '  <div class="col pt-2 text-end"><button class="btn btnAnswerView"> <i class="bi bi-chevron-down"></i> </button></div>';
+		}
+		out += '  </div>';
+		if(answer) {
+			out += '  <div class="p-3 pt-0 answer-content" style="display: none;">';
+			out += '    <div class="bg-light">';
+			out += '      <div class="p-3 pb-0">';
+			out += '        <label class="text-bg-primary px-2"> 관리자 </label> <label>' + answerDate + '</label>';
+			out += '      </div>';
+			out += '      <div class="p-3 pt-1">' + answer + '</div>';
+			out += '    </div>';
+			out += '  </div>';
+		}
+		out += '</div>';
+	}
+	
+	if(dataCount > 0) {
+		out += '<div class="page-navigation">' + paging + '</div>';
+	}
+
+	$('.list-question').html(out);
+}
+
+$(function(){
+	$('.list-question').on('click', '.btnAnswerView', function(){
+		const $btn = $(this);
+		const $EL = $(this).closest('.row').next('.answer-content');
+		if($EL.is(':visible')) {
+			$btn.html(' <i class="bi bi-chevron-down"></i> ');
+			$EL.hide(100);
+		} else {
+			$btn.html(' <i class="bi bi-chevron-up"></i> ');
+			$EL.show(100);
+		}
+	});
+});
+
+$(function(){
+	var sel_files = [];
+	
+	$("body").on("click", ".qna-form .img-add", function(){
+		$(this).closest(".qna-form").find("input[name=selectFile]").trigger("click");
+	});
+	
+	$("form[name=questionForm] input[name=selectFile]").change(function(e){
+		if(! this.files) {
+			let dt = new DataTransfer();
+			for(let f of sel_files) {
+				dt.items.add(f);
+			}
+			
+			this.files = dt.files;
+			
+			return false;
+		}
+		
+		let $form = $(this).closest("form");
+		
+		// 유사 배열을  배열로 변환
+		const fileArr = Array.from(this.files);
+		
+		fileArr.forEach((file, index) => {
+			sel_files.push(file);
+			
+			const reader = new FileReader();
+			const $img = $("<img>", {"class":"item img-item"});
+			$img.attr("data-filename", file.name);
+			reader.onload = e => {
+				$img.attr("src", e.target.result);		
+			};
+			reader.readAsDataURL(file);
+			$form.find(".img-grid").append($img);
+		});
+		
+		let dt = new DataTransfer();
+		for(let f of sel_files) {
+			dt.items.add(f);
+		}
+		
+		this.files = dt.files;
+	});
+	
+	$("body").on("click", ".qna-form .img-item", function(){
+		if(! confirm("선택한 파일을 삭제 하시겠습니까 ? ")) {
+			return false;
+		}
+		
+		let filename = $(this).attr("data-filename");
+		
+		for(let i=0; i<sel_files.length; i++) {
+			if(filename === sel_files[i].name) {
+				sel_files.splice(i, 1);
+				break;
+			}
+		}
+		
+		let dt = new DataTransfer();
+		for(let f of sel_files) {
+			dt.items.add(f);
+		}
+		
+		const f = this.closest("form");
+		f.selectFile.files = dt.files;
+		
+		$(this).remove();
+	});
+	
+	$('.btnQuestion').click(function(){
+		$("#questionDialogModal").show();
+	});
+
+	$('.btnQuestionSendOk').click(function(){
+		const f = document.questionForm;
+		let s;
+		
+		s = f.question.value.trim();
+		if( ! s ) {
+			alert("문의 사항을 입력하세요.")	;
+			f.question.focus();
+			return false;
+		}
+		
+		if(f.selectFile.files.length > 5) {
+			alert("이미지는 최대 5개까지 가능합니다..")	;
+			return false;
+		}
+		
+		let url = "${pageContext.request.contextPath}/qna/write";
+		let query = new FormData(f); 
+		
+		const fn = function(data) {
+			if(data.state === "true") {
+				f.reset();
+				$(".qna-form .img-item").each(function(){
+					$(this).remove();
+				});
+				sel_files.length = 0;
+				
+				$("#questionDialogModal").modal("hide");
+				
+				listQuestion(1);
+			}
+		};
+		
+		ajaxFun(url, "post", query, "json", fn, true);		
+	});
+	
+	$('.btnQuestionSendCancel').click(function(){
+		const f = document.questionForm;
+		f.reset();
+		$(".qna-form .img-item").each(function(){
+			$(this).remove();
+		});
+		sel_files.length = 0;
+		
+		$("#questionDialogModal").modal("hide");
+	});	
+	
+	$('.btnMyQuestion').click(function(){
+		location.href = '${pageContext.request.contextPath}/shop/myPage/review?mode=qna';
+	});
+});
 </script>
