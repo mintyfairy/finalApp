@@ -68,7 +68,7 @@
 									<input type="checkbox" class="form-check-input" name="nums" value="${dto.detailNum}">
 								</td>
 								<td width="55">
-									<img class="border rounded" width="50" height="50" src="${pageContext.request.contextPath}/uploads/product/${dto.thumbnail}">
+									<img class="border rounded" width="50" height="50" src="${pageContext.request.contextPath}/uploads/room/${dto.thumbnail}">
 								</td>
 								<td>
 									<p class="product-title p-1 mb-0 left">${dto.content}</p>
@@ -82,14 +82,14 @@
 								</td>
 								<td>
 									<div class="input-group">
-										<p class="product-title p-1 mb-0 left">${dto.detailNum}</p>
+										<p class="product-title p-1 mb-0 left">${dto.detailName}</p>
 									</div>
 								</td>
 								<td>
-									<fmt:formatDate value="${dto.startDate}"/>
+									${dto.startDate}
 								</td>
 								<td>
-									<fmt:formatDate value="${dto.endDate}"/>
+									${dto.endDate}
 								</td>
 								<td>
 									<label class="productMoneys"><fmt:formatNumber value="${dto.periodPrice}"/></label><label>원</label>

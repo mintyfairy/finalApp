@@ -12,6 +12,7 @@ public class SiteCart {
 	private	long	memberIdx	;
 	private	long	detailNum	;
 	
+	private	String	thumbnail	;
 	private	String	startDate	;
 	private	String	endDate	;
 	private	String	reg_date	;
@@ -34,6 +35,12 @@ public class SiteCart {
 	
 	
 
+	public String getThumbnail() {
+		return thumbnail;
+	}
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
 	public int getPeriodPrice() {
 		return periodPrice;
 	}

@@ -5,19 +5,29 @@
 
 	<insert id="insertCart" parameterType="com.fa.plus.domain.site.SiteCart">
 		insert into sitecart(MEMBERIDX,DETAILNUM,STARTDATE,ENDDATE,REG_DATE	) 
-  			  values(#{memberIdx},#{detailNum},#{startDate},#{endDate},#{reg_date})
+  			  values(#{memberIdx},#{detailNum},#{startDate},#{endDate},sysdate)
 		
 	</insert>
 	<delete id="deleteCart" parameterType="com.fa.plus.domain.site.SiteCart">
 		DELETE FROM sitecart WHERE  detailNum = #{detailNum} and memberIdx=#{memberIdx}
 	</delete>
 	<select id="findByCart" parameterType="com.fa.plus.domain.site.SiteCart" resultType="com.fa.plus.domain.site.SiteCart">
-		select MEMBERIDX,DETAILNUM,STARTDATE,ENDDATE,REG_DATE FROM sitecart WHERE  detailNum = #{detailNum} and memberIdx=#{memberIdx}
+		
+		 select MEMBERIDX,DETAILNUM,to_char(STARTDATE,'yyyy-mm-dd') STARTDATE,to_char(ENDDATE,'yyyy-mm-dd') ENDDATE,to_char(REG_DATE,'yyyy-mm-dd') REG_DATE,filename thumbnail
+		FROM sitecart 
+		left join (select filename,DETAILNUM dnum from sitedetailpic 
+        where detailNum = #{detailNum}
+        ORDER BY sdpicnum 
+		FETCH FIRST 1 ROWS ONLY
+        ) on dnum=DETAILNUM
+		WHERE detailNum = #{detailNum} and  memberIdx=#{memberIdx}
 	</select>
 	
 	<select id="listCart" parameterType="Long" resultType="com.fa.plus.domain.site.SiteCart">
-		SELECT MEMBERIDX,sitecart.DETAILNUM,STARTDATE,ENDDATE,detailname,price,content,capacity,floor
-		FROM sitecart join sitedetail  on sitedetail.DETAILNUM=sitecart.DETAILNUM
+		SELECT MEMBERIDX,sitecart.DETAILNUM,to_char(STARTDATE,'yyyy-mm-dd') STARTDATE,to_char(ENDDATE,'yyyy-mm-dd') ENDDATE,detailname,price,content,capacity,floor,filename thumbnail
+		FROM sitecart left join sitedetail  on sitedetail.DETAILNUM=sitecart.DETAILNUM
+		left join(select * from (select row_number() over(partition by detailnum order by sdpicnum) rnum,filename,DETAILNUM dnum from sitedetailpic 
+       ) where rnum=1) on dnum=sitecart.DETAILNUM
 		WHERE memberIdx=#{memberIdx}
 	</select>
 	
@@ -61,13 +71,12 @@
 		</choose>
 	</sql>
 	<select id="listBookList" parameterType="Long" resultType="com.fa.plus.domain.site.BookList">
-		SELECT listNum, order_date, memberIdx,totalPrice
-
+		SELECT listNum,to_char(order_date,'yyyy-mm-dd') order_date, memberIdx,totalPrice 
 		FROM booklist 
 		WHERE memberIdx=#{memberIdx}
 	</select>
 	<select id="listBook" parameterType="Long" resultType="com.fa.plus.domain.site.BookList">
-		SELECT bookNum,startDate,endDate,bookPrice, detailNum,listNum
+		SELECT bookNum,to_char(STARTDATE,'yyyy-mm-dd') STARTDATE,to_char(ENDDATE,'yyyy-mm-dd') ENDDATE,bookPrice, detailNum,listNum
 		FROM book
 		WHERE listnum=#{listNum}
 	</select>

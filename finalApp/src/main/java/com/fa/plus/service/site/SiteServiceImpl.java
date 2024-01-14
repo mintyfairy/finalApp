@@ -95,7 +95,7 @@ public class SiteServiceImpl implements SiteService {
 		 DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		 Date d1 = format.parse(date1);
 		 Date d2 = format.parse(date2);
-		 long Sec = (d1.getTime() - d2.getTime()) / 1000; // 초
+		 long Sec = (  d2.getTime()-d1.getTime()) / 1000; // 초
 		 int Days = (int) (Sec / (24*60*60));
 		 return Days;
 	}
