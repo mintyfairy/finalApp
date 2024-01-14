@@ -45,7 +45,7 @@ public class SiteAdminController {
 
 			Map<String, Object> map = new HashMap<String, Object>();
 			SessionInfo info = (SessionInfo)session.getAttribute("member");
-			map.put("memberIdx", info.getmemberIdx());
+			map.put("memberIdx", info.getMemberIdx());
 			
 			dataCount = service.dataCountSite(map);
 			total_page = myUtil.pageCount(dataCount, size);
@@ -148,7 +148,7 @@ public class SiteAdminController {
 		String path = root + "uploads" + File.separator + "site";
 		
 		try {
-			dto.setMemberIdx(info.getmemberIdx());
+			dto.setMemberIdx(info.getMemberIdx());
 			service.insertSite(dto, path);
 		} catch (Exception e) {
 			e.printStackTrace();

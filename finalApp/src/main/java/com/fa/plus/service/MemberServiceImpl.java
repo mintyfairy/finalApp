@@ -52,7 +52,7 @@ public class MemberServiceImpl implements MemberService {
 			
 			
 			long memberSeq = mapper.memberSeq();
-			dto.setmemberIdx(memberSeq);
+			dto.setMemberIdx(memberSeq);
 
 			// 회원정보 저장
 			mapper.insertMember(memberSeq);

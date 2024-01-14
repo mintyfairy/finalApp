@@ -17,10 +17,10 @@ public class SessionInfo {
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
-	public long getmemberIdx() {
+	public long getMemberIdx() {
 		return memberIdx;
 	}
-	public void setmemberIdx(long memberIdx) {
+	public void setMemberIdx(long memberIdx) {
 		this.memberIdx = memberIdx;
 	}
 	public String getUserId() {

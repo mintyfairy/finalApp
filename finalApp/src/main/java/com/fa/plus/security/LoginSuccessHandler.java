@@ -52,7 +52,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		System.out.println(member+"@@@");
 		System.out.println(member.getAuthority()+"@@@");
 		SessionInfo info= new SessionInfo();
-		info.setmemberIdx(member.getmemberIdx());
+		info.setMemberIdx(member.getMemberIdx());
 		info.setMembership(member.getMembership());
 		info.setUserId(member.getUserId());
 		info.setUserName(member.getUserName());

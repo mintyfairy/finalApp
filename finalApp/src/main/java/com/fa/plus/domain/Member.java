@@ -29,10 +29,10 @@ public class Member {
 	private String registerId;
 	private String reg_date;
 	
-	public long getmemberIdx() {
+	public long getMemberIdx() {
 		return memberIdx;
 	}
-	public void setmemberIdx(long memberIdx) {
+	public void setMemberIdx(long memberIdx) {
 		this.memberIdx = memberIdx;
 	}
 	public int getMembership() {
