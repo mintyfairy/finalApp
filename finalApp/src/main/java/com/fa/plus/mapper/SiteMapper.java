@@ -6,7 +6,10 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.fa.plus.domain.site.Book;
+import com.fa.plus.domain.site.BookList;
 import com.fa.plus.domain.site.SiteCart;
+import com.fa.plus.domain.site.SiteReview;
 
 /***
  * 
@@ -34,9 +37,14 @@ public interface SiteMapper {
 	// domain이 있으니 담아서 보내주자.
 	public void deleteCart(SiteCart dto) throws SQLException;
 	
+	//리뷰 FindById
+	public SiteCart findByCart(SiteCart dto) throws SQLException;
+	
+	//카트 개수
+	public int dataCountCart(long memberIdx);
+	
 	//	memberidx로 그사람의 카트 목록을 불러온다. 
 	public List<SiteCart> listCart(long memberIdx);
-	
 	
 	//이하 4개의 메소드는 함꼐 행동한다. 결제검증(구현안됨 지금은 누르면 바로 결제)
 	// 완료시 북리스트 생성후
@@ -48,10 +56,44 @@ public interface SiteMapper {
 	public void insertBookList(Map<String, Object> map) throws SQLException;
 	//book
 	public void insertBook(SiteCart dto) throws SQLException;
+	
+	
 	//결제
 	public void perchaseSite(Map<String, Object> map) throws SQLException;
 	//결제끝났으니 카트를 비운다.
 	public void deleteAllCart(long memberIdx) throws SQLException;
+	
+	//예약 리스트의 리스트
+	public List<BookList> listBookList(long memberIdx);
+	//예약 상세 리스트 
+	public List<Book> listBook(long listNum);
+	
+	
+	//리뷰 넣기
+	public void insertReview(SiteReview dto) throws SQLException;
+	
+	//리뷰 사진 등록
+	public void insertReviewFile(SiteReview dto) throws SQLException;
+	//리뷰 리스트 1.(memberIdx 존재시) 유저의 예약리스트  2 업체 3 리스트
+	
+	// 리뷰수  1 유저의 리스트 2 업체 3 리스트
+	
+
+	
+	//리뷰파일 리스트 
+	
+	//리뷰 수정
+	//리뷰 삭제
+	//리뷰 파일 삭제
+	
+	//리뷰 findById
+	
+	
+	
+	//리뷰답변입력
+	//별점 갱신
+	
+	
 	
 	
 	//하루지난 카레는 지울까 말까... 일단 나중에

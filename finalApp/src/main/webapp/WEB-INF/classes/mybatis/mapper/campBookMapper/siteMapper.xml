@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fa.plus.mapper.SiteBookMapper">
+<mapper namespace="com.fa.plus.mapper.SiteMapper">
 
 	<insert id="insertCart" parameterType="com.fa.plus.domain.site.SiteCart">
 		insert into sitecart(MEMBERIDX,DETAILNUM,STARTDATE,ENDDATE,REG_DATE	) 
@@ -11,6 +11,9 @@
 	<delete id="deleteCart" parameterType="com.fa.plus.domain.site.SiteCart">
 		DELETE FROM sitecart WHERE  detailNum = #{detailNum} and memberIdx=#{memberIdx}
 	</delete>
+	<select id="findByCart" parameterType="com.fa.plus.domain.site.SiteCart" resultType="com.fa.plus.domain.site.SiteCart">
+		select MEMBERIDX,DETAILNUM,STARTDATE,ENDDATE,REG_DATE FROM sitecart WHERE  detailNum = #{detailNum} and memberIdx=#{memberIdx}
+	</select>
 	
 	<select id="listCart" parameterType="String" resultType="com.fa.plus.domain.site.SiteCart">
 		SELECT MEMBERIDX,sitecart.DETAILNUM,STARTDATE,ENDDATE,detailname,price,content,capacity,floor
@@ -18,7 +21,11 @@
 		WHERE memberIdx=#{memberIdx}
 	</select>
 	
-	
+	<select id="dataCountCart" parameterType="Long" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM sitecart 
+		where MEMBERIDX=#{memberIdx}
+	</select>
 	<insert id="insertBookList" parameterType="map">
 		insert into booklist(LISTNUM,ORDER_DATE,MEMBERIDX,TOTALPRICE,STATE) 
 			values(booklist_seq.nextval,sysdate,#{memberIdx},#{totalPrice},0)
@@ -39,6 +46,45 @@
 	<delete id="deleteAllCart" parameterType="long">
 		DELETE FROM sitecart WHERE memberIdx=#{memberIdx}
 	</delete>
+	<sql id="where-list-cart">
+		
+		<choose>
+			<when test="memberIdx!=null and memberIdx!=''">
+				 MEMBERIDX=#{memberIdx}
+			</when>
+			<when test="minFee!=null and minFee!=''">
+				 MEMBERIDX=#{memberIdx}
+			</when>
+			<when test="maxFee!=null and maxFee!=''">
+				 MEMBERIDX=#{memberIdx}
+			</when>
+		</choose>
+	</sql>
+	<select id="listBookList" parameterType="Long" resultType="com.fa.plus.domain.site.BookList">
+		SELECT listNum, order_date, memberIdx,totalPrice
+
+		FROM booklist 
+		WHERE memberIdx=#{memberIdx}
+	</select>
+	<select id="listBook" parameterType="Long" resultType="com.fa.plus.domain.site.BookList">
+		SELECT bookNum,startDate,endDate,bookPrice, detailNum,listNum
+		FROM book
+		WHERE listnum=#{listNum}
+	</select>
+		<insert id="insertReview" parameterType="com.fa.plus.domain.site.SiteDetail">
+	insert into sitereview(BOOKNUM,SUBJECT,CONTENT,MEMBERIDX,SCORE,REG_DATE,ANSWER,DETAILNUM,SITENUM,ENABLED)
+		
+		values(#{bookNum },#{siteNum},#{detailName},#{price},#{area},#{content},#{capacity},#{floor})
+	
+		
+	</insert>
+	
+	<!-- 추가 이미지 등록 -->
+	<insert id="insertReviewFile" parameterType="com.fa.plus.domain.site.SiteDetail">
+		INSERT INTO sitedetailPic(SdPICNUM, DETAILNUM, fileName)
+			VALUES(sitedetailPic_SEQ.NEXTVAL, #{detailNum}, #{fileName})
+	</insert>
+	
 	
 	
 <!-- 리뷰 등록될떄마다 갱신 -->

@@ -17,7 +17,7 @@ public class SiteCart {
 	private	String	reg_date	;
 	//여기까지는 카트의 정보 이하는 리스트 불러올떄 join할 sitedetail의 정보
 	
-	private	String	detailname	;//여기서name의 n이 소문자인 이유는 SiteDetail 도메인에서 소문자라서...
+	private	String	detailName	;//여기서name의 n이 소문자인 이유는 SiteDetail 도메인에서 소문자라서...
 								//잘못된 상태인데 수정할시간이없어서 유지중
 	private	String	price	;
 	private	String	content	;
@@ -40,11 +40,12 @@ public class SiteCart {
 	public void setPeriodPrice(int periodPrice) {
 		this.periodPrice = periodPrice;
 	}
-	public String getDetailname() {
-		return detailname;
+	
+	public String getDetailName() {
+		return detailName;
 	}
-	public void setDetailname(String detailname) {
-		this.detailname = detailname;
+	public void setDetailName(String detailName) {
+		this.detailName = detailName;
 	}
 	public String getPrice() {
 		return price;
