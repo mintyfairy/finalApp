@@ -275,7 +275,7 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
                 <ul class="header_bottom_list">
                     <li class="my_page">
                           <a href="${pageContext.request.contextPath}/site/list"><i class="fa-regular fa-user"></i>&nbsp;검색창으로</a>
-                          <a href="${pageContext.request.contextPath}/campsite/cart" title="장바구니"><i class="bi bi-cart"></i></a>
+                          <a href="${pageContext.request.contextPath}/campsite/cart" title="장바구니"></a>
                           
                     </li>
                     <li class="logo_area">

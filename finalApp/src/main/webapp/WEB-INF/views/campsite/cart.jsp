@@ -58,16 +58,31 @@ function sendOk() {
 
 -->
 
-function deleteCartAll() {
+function deleteCart() {
 	// 장바구니 비우기
 	if(! confirm('장바구니를 비우시겠습니까 ? ')) {
 		return;
 	}
 
-	location.href = '${pageContext.request.contextPath}/myPage/deleteCartAll';	
+	location.href = '${pageContext.request.contextPath}/campsite/deleteCart';	
 }
 
-
+function deleteCartSelect() {
+	// 선택된 항목 삭제
+	let cnt = $("form input[name=nums]:checked").length;
+    if (cnt === 0) {
+		alert("삭제할 상품을 먼저 선택 하세요 !!!");
+		return;
+    }
+    
+	if(! confirm('선택한 상품을 장바구니에서 비우시겠습니까 ? ')) {
+		return;
+	}
+	
+	const f = document.cartForm;
+	f.action = "${pageContext.request.contextPath}/campsite/deleteListCart";
+	f.submit();
+}
 </script>
 
 

@@ -35,7 +35,7 @@ public interface SiteMapper {
 	//
 	// cart 컬럼의 primarykey는 (memberIdx,detailNum) 이라 둘다 넘겨줘야한다.
 	// domain이 있으니 담아서 보내주자.
-	public void deleteCart(SiteCart dto) throws SQLException;
+	public void deleteCart(Map<String, Object> map) throws SQLException;
 	
 	//리뷰 FindById
 	public SiteCart findByCart(SiteCart dto) throws SQLException;

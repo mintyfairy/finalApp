@@ -18,7 +18,8 @@ public interface SiteService {
 	//
 	// cart 컬럼의 primarykey는 (memberIdx,detailNum) 이라 둘다 넘겨줘야한다.
 	// domain이 있으니 담아서 보내주자.
-	public void deleteCart(SiteCart dto) throws SQLException;
+	public void deleteCart(Map<String, Object> map) throws SQLException;
+	
 	
 	//	memberIdx로 그사람의 카트 목록을 불러온다. 
 	public List<SiteCart> listCart(long memberIdx);

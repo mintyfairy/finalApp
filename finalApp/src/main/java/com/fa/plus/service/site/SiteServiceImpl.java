@@ -32,17 +32,17 @@ public class SiteServiceImpl implements SiteService {
 	}
 
 	@Override
-	public void deleteCart(SiteCart dto) throws SQLException {
+	public void deleteCart(Map<String, Object> map) throws SQLException {
 		// TODO Auto-generated method stub
 		try {
-			mapper.deleteCart(dto);
+			mapper.deleteCart(map);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			throw e;
 		}
 	}
-
+	 
 	@Override
 	public List<SiteCart> listCart(long memberIdx) {
 		// TODO Auto-generated method stub
