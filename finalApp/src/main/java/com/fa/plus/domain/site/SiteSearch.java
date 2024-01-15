@@ -2,7 +2,7 @@ package com.fa.plus.domain.site;
 
 public class SiteSearch {
 	
-	private int siteNum;
+	private long siteNum;
 	private String startDate;
 	private String endDate;
 	private String siteKwd;
@@ -20,10 +20,13 @@ public class SiteSearch {
 	private String maxFee;
 	private String size;
 	private String offset;
-	public int getSiteNum() {
+
+
+	
+	public long getSiteNum() {
 		return siteNum;
 	}
-	public void setSiteNum(int siteNum) {
+	public void setSiteNum(long siteNum) {
 		this.siteNum = siteNum;
 	}
 	public String getStartDate() {

@@ -265,6 +265,16 @@
         function searchSite() {
         	const f= document.siteSearchForm;
         	let list=f.siteOption;
+        	if(f.startDate.vaulue.trim() ||f.endDate.vaulue.trim()){
+        		if (f.startDate.vaulue.trim()){
+        			alert('시작일도 선택해주세요')
+        			return;
+        		}
+        		if (f.endDate.vaulue.trim()){
+        			alert('종료일도 선택해주세요')
+        			return;
+        		}
+        	}
         	for(var i=0; i<list.length; i++){
         		if(list[i].checked){
         			list[i].value="1";

@@ -25,9 +25,13 @@
 	
 	<select id="listCart" parameterType="Long" resultType="com.fa.plus.domain.site.SiteCart">
 		SELECT memberIdx,sitecart.detailNum,to_char(STARTDATE,'yyyy-mm-dd') STARTDATE,to_char(ENDDATE,'yyyy-mm-dd') ENDDATE,detailName,price,content,capacity,floor,filename thumbnail
-		FROM sitecart left join sitedetail  on sitedetail.detailNum=sitecart.detailNum
-		left join(select * from (select row_number() over(partition by detailNum order by sdpicnum) rnum,filename,detailNum dnum from sitedetailpic 
-       ) where rnum=1) on dnum=sitecart.detailNum
+		FROM sitecart
+		left join sitedetail  on sitedetail.detailNum=sitecart.detailNum
+		left join
+		(select * from 
+			(select row_number() over(partition by detailNum order by sdpicnum) rnum,filename,detailNum dnum 
+			from sitedetailpic) where rnum=1
+       	) on dnum=sitecart.detailNum
 		WHERE memberIdx=#{memberIdx}
 	</select>
 	
@@ -56,20 +60,7 @@
 	<delete id="deleteAllCart" parameterType="long">
 		DELETE FROM sitecart WHERE memberIdx=#{memberIdx}
 	</delete>
-	<sql id="where-list-cart">
-		
-		<choose>
-			<when test="memberIdx!=null and memberIdx!=''">
-				 memberIdx=#{memberIdx}
-			</when>
-			<when test="minFee!=null and minFee!=''">
-				 memberIdx=#{memberIdx}
-			</when>
-			<when test="maxFee!=null and maxFee!=''">
-				 memberIdx=#{memberIdx}
-			</when>
-		</choose>
-	</sql>
+
 	<select id="listBookList" parameterType="Long" resultType="com.fa.plus.domain.site.BookList">
 		SELECT listNum,to_char(order_date,'yyyy-mm-dd') order_date, memberIdx,totalPrice 
 		FROM booklist 
@@ -80,22 +71,105 @@
 		FROM book
 		WHERE listnum=#{listNum}
 	</select>
-		<insert id="insertReview" parameterType="com.fa.plus.domain.site.SiteDetail">
-	insert into sitereview(BOOKNUM,SUBJECT,CONTENT,memberIdx,SCORE,REG_DATE,ANSWER,detailNum,siteNum,ENABLED)
+	
+	
+	<insert id="insertReview" parameterType="com.fa.plus.domain.site.SiteDetail">
+	insert into sitereview(BOOKNUM,SUBJECT,CONTENT,memberIdx,SCORE,REG_DATE,detailNum,siteNum,ENABLED)
 		
-		values(#{bookNum },#{siteNum},#{detailName},#{price},#{area},#{content},#{capacity},#{floor})
+		values(#{bookNum},#{subject},#{content},#{memberIdx},#{score},sysdate,#{detailNum},#{siteNum},0)
 	
 		
 	</insert>
 	
 	<!-- 추가 이미지 등록 -->
 	<insert id="insertReviewFile" parameterType="com.fa.plus.domain.site.SiteDetail">
-		INSERT INTO sitedetailPic(SdPICNUM, detailNum, fileName)
-			VALUES(sitedetailPic_SEQ.NEXTVAL, #{detailNum}, #{fileName})
-	</insert>
+		INSERT INTO sitereviewPic(SrPICNUM, booknum, fileName)
+			VALUES(sitereviewPic_SEQ.NEXTVAL, #{booknum}, #{fileName})
+	</insert>	
 	
 	
+	<sql id="where-list-review">
+		
+		<choose>
+			<when test="memberIdx!=null and memberIdx!=''">
+				and memberIdx=#{memberIdx}
+			</when>
+			<when test="siteNum!=null and siteNum!=''">
+				and siteNum=#{siteNum}
+			</when>
+			<when test="detailNum!=null and detailNum!=''">
+				and detailNum=#{detailNum}
+			</when>
+		</choose>
+	</sql>
 	
+	
+	<select id="listSiteReivew" parameterType="map" resultType="com.fa.plus.domain.site.SiteReview">
+		select BOOKNUM,SUBJECT,CONTENT,MEMBERIDX,SCORE,to_char(REG_DATE,'yyyy-mm-dd') REG_DATE,ANSWER,ANSWERIDX,DETAILNUM,SITENUM,fileList
+		 ,username,adminname
+		 from sitereview
+ 	     JOIN (select memberIdx uidx,username from member1 ) m1 ON uidx = memberIdx
+ 		 JOIN (select memberIdx aidx,username adminname from member1 ) m2 ON aidx = memberIdx
+		 LEFT OUTER JOIN (
+					SELECT BOOKNUM bnum, LISTAGG(filename, ',') WITHIN GROUP(ORDER BY srpicNum) fileList
+		            FROM sitereviewpic
+		            GROUP BY booknum	
+				) f ON BOOKNUM=bnum	
+		<where>
+			enabled = 0
+			<include refid="where-list-review"/>
+		</where>
+		 
+	</select>
+	<select id="dataCountReview" parameterType="map" resultType="Integer">
+		select NVL(COUNT(*), 0)
+		 from sitereview
+		<where>
+			enabled = 0
+			<include refid="where-list-review"/>
+		</where>
+		 
+	</select>
+	<update id="updateReview" parameterType="com.fa.plus.domain.site.SiteReview">
+		 update sitereview set
+		 	SUBJECT=#{subject},CONTENT=#{content},SCORE=#{score},REG_DATE=#{reg_date}
+		 where booknum={bookNum}
+	</update>
+
+	
+	<delete id="deleteReview" parameterType="Long">
+		 delete from sitereview
+		 where booknum={bookNum}
+	</delete>
+	
+	<delete id="deleteReviewFile" parameterType="Long">
+		DELETE FROM sitepic WHERE srPicNum = #{srPicNum}
+	</delete>
+	
+
+	<select id="findByReview" parameterType="Long" resultType="com.fa.plus.domain.site.SiteReview">
+		 select BOOKNUM,SUBJECT,CONTENT,MEMBERIDX,SCORE,to_char(REG_DATE,'yyyy-mm-dd') REG_DATE,ANSWER,ANSWERIDX,DETAILNUM,SITENUM,fileList,username,adminname
+			 from sitereview
+			 JOIN (select memberIdx uidx,username from member1 ) m1 ON uidx = memberIdx
+			 LEFT OUTER JOIN (select memberIdx aidx,username adminname from member1 ) m2 ON aidx = memberIdx
+			 LEFT OUTER JOIN (
+						SELECT BOOKNUM bnum, LISTAGG(filename, ',') WITHIN GROUP(ORDER BY srpicNum) fileList
+			            FROM sitereviewpic
+			            GROUP BY booknum	
+					) f ON BOOKNUM=bnum	
+		 where booknum={bookNum}
+	</select>
+	
+	<update id="updateReviewAnswer" parameterType="com.fa.plus.domain.site.SiteReview">
+		 update sitereview set
+		 	answer=#{answer},anweridx=#{answerIdx}
+		 where booknum={bookNum}
+	</update>
+	
+	<update id="updateSiteStar" parameterType="map">
+		update campingsite set avgstar=#{star} 
+		where sitenum=#{siteNum}
+	</update>
 <!-- 리뷰 등록될떄마다 갱신 -->
 <!-- update test set avenum=round((select avg(totalmoney) from productorder)/1000000,1) where num=1; -->
 </mapper>

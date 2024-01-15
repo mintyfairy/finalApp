@@ -8,28 +8,37 @@ public class Site {
 	private	long	siteNum	;
 	private	String	siteName	;
 	private	String	introduce	;
-	private	int	siteLocal	;
+	private	long	siteLocal	;
 	private	String	zip	;
 	private	String	addr1	;
 	private	String	addr2	;
 	private	String	thumbnail	;
 	private	MultipartFile	thumbnailFile	;
-	private	int	category	;
-	private	int	environment	;
-	private	int	hitCount	;
+	private	long	category	;
+	private	long	environment	;
+	private	long	hitCount	;
 	private	String	checkIn	;
 	private	String	checkOut	;
 	private	long	memberIdx	;
 	private	double	avgstar	;
 	private	String[] siteOptionList	;
 	private	String siteOption	;
-	private	int	enabled	;
+	private	long	enabled	;
 	
+	private	long	spicNum	;
 	
 	private long fileNum;
 	private String fileName;
 	private List<MultipartFile> addFiles;
 	
+	
+	
+	public long getSpicNum() {
+		return spicNum;
+	}
+	public void setSpicNum(long spicNum) {
+		this.spicNum = spicNum;
+	}
 	public long getSiteNum() {
 		return siteNum;
 	}
@@ -48,12 +57,7 @@ public class Site {
 	public void setIntroduce(String introduce) {
 		this.introduce = introduce;
 	}
-	public int getSiteLocal() {
-		return siteLocal;
-	}
-	public void setSiteLocal(int siteLocal) {
-		this.siteLocal = siteLocal;
-	}
+	
 	public String getZip() {
 		return zip;
 	}
@@ -84,24 +88,7 @@ public class Site {
 	public void setThumbnailFile(MultipartFile thumbnailFile) {
 		this.thumbnailFile = thumbnailFile;
 	}
-	public int getCategory() {
-		return category;
-	}
-	public void setCategory(int category) {
-		this.category = category;
-	}
-	public int getEnvironment() {
-		return environment;
-	}
-	public void setEnvironment(int environment) {
-		this.environment = environment;
-	}
-	public int getHitCount() {
-		return hitCount;
-	}
-	public void setHitCount(int hitCount) {
-		this.hitCount = hitCount;
-	}
+	
 	public String getCheckIn() {
 		return checkIn;
 	}
@@ -139,10 +126,35 @@ public class Site {
 	public void setSiteOption(String siteOption) {
 		this.siteOption = siteOption;
 	}
-	public int getEnabled() {
+	
+	public long getSiteLocal() {
+		return siteLocal;
+	}
+	public void setSiteLocal(long siteLocal) {
+		this.siteLocal = siteLocal;
+	}
+	public long getCategory() {
+		return category;
+	}
+	public void setCategory(long category) {
+		this.category = category;
+	}
+	public long getEnvironment() {
+		return environment;
+	}
+	public void setEnvironment(long environment) {
+		this.environment = environment;
+	}
+	public long getHitCount() {
+		return hitCount;
+	}
+	public void setHitCount(long hitCount) {
+		this.hitCount = hitCount;
+	}
+	public long getEnabled() {
 		return enabled;
 	}
-	public void setEnabled(int enabled) {
+	public void setEnabled(long enabled) {
 		this.enabled = enabled;
 	}
 	public long getFileNum() {

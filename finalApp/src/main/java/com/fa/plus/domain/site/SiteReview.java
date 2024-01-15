@@ -25,15 +25,40 @@ ENABLED
 	private double score;
 	private String reg_date;
 	private String answer;
+	private String userName;
+	private String adminName;
 	private long detailNum;
 	private long siteNum;
 	private long enabled;
+	
+	
+	private String fileList;
+	
+	private long SrPICNUM;
 	
 	private long fileNum;
 	private String fileName;
 	private List<MultipartFile> addFiles;
 	
 	private List<String> listFile;
+
+	
+	
+	public String getFileList() {
+		return fileList;
+	}
+
+	public void setFileList(String fileList) {
+		this.fileList = fileList;
+	}
+
+	public long getSrPICNUM() {
+		return SrPICNUM;
+	}
+
+	public void setSrPICNUM(long srPICNUM) {
+		SrPICNUM = srPICNUM;
+	}
 
 	public long getBookNum() {
 		return bookNum;

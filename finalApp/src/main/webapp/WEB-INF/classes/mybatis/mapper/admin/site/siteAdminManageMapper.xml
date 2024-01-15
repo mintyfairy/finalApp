@@ -61,7 +61,7 @@
 		where  siteNum=#{siteNum}
 	</select>
 	<select id="searchCountSite" parameterType="com.fa.plus.domain.site.SiteSearch" resultType="Integer">
-		SELECT count(*)
+		SELECT NVL(COUNT(*), 0)
 		FROM campingsite 
 		join (select distinct(siteNum) chknum from sitedetail)  on chknum=siteNum
 		<if test="startDate!=null and startDate!=''">

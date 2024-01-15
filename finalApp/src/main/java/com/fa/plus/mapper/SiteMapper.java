@@ -69,30 +69,39 @@ public interface SiteMapper {
 	public List<Book> listBook(long listNum);
 	
 	
-	//리뷰 넣기
+	//리뷰 넣기 리뷰의 주요키는 결제목록인  booknum, 1대1관계다
 	public void insertReview(SiteReview dto) throws SQLException;
 	
 	//리뷰 사진 등록
 	public void insertReviewFile(SiteReview dto) throws SQLException;
-	//리뷰 리스트 1.(memberIdx 존재시) 유저의 예약리스트  2 업체 3 리스트
+	//리뷰 리스트 1.(memberIdx 존재시) 유저의 예약리스트  2 업체(siteNum) 3 방(detailNum)
+	public List<SiteReview> listSiteReivew(Map<String, Object> map);
 	
-	// 리뷰수  1 유저의 리스트 2 업체 3 리스트
 	
+	// 리뷰수  1 유저의 리스트 2 업체 3 방
+	public int dataCountReview(Map<String, Object> map) ;
 
 	
-	//리뷰파일 리스트 
+	//리뷰파일 리스트 리부 dto에 fileList필드로 반환시켯다. 그것은 
+	//			이름1.jpg,이름2.jpg... 와같은 형태를 하고 있다.
+	//public List<SiteReview> listReviewFile(long bookNum) ;
 	
 	//리뷰 수정
+	public void  updateReview(SiteReview dto); 
 	//리뷰 삭제
+	public void  deleteReview(long bookNum); 
 	//리뷰 파일 삭제
+	public void deleteReviewFile (long srPicNum);
 	
 	//리뷰 findById
-	
-	
+	public SiteReview findByReview(long bookNum);
 	
 	//리뷰답변입력
-	//별점 갱신
+	public void updateReviewAnswer(SiteReview dto);
 	
+	
+	//별점 갱신
+	public void updateSiteStar(Map<String, Object> map);
 	
 	
 	

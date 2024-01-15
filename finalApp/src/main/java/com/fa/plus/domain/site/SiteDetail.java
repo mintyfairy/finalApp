@@ -6,20 +6,32 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class SiteDetail {
 	private	long	detailNum	;
-	private	int	siteNum	;
+	private	long	siteNum	;
 	private	String	detailName	;
-	private	int	price	;
+	private	long	price	;
 	private	String	area	;
 	private	String	content	;
 	private	String	capacity	;
-	private	int	floor	;
+	private	long	floor	;
 	
+
+	
+	private long SdPicNum;
 
 	private long fileNum;
 	private String fileName;
 	private List<MultipartFile> addFiles;
 	
 	private List<String> listFile;
+
+	
+	public long getSdPicNum() {
+		return SdPicNum;
+	}
+
+	public void setSdPicNum(long sdPicNum) {
+		SdPicNum = sdPicNum;
+	}
 
 	public long getDetailNum() {
 		return detailNum;
@@ -29,13 +41,6 @@ public class SiteDetail {
 		this.detailNum = detailNum;
 	}
 
-	public int getSiteNum() {
-		return siteNum;
-	}
-
-	public void setSiteNum(int siteNum) {
-		this.siteNum = siteNum;
-	}
 
 	public String getDetailName() {
 		return detailName;
@@ -45,13 +50,6 @@ public class SiteDetail {
 		this.detailName = detailName;
 	}
 
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
 
 	public String getArea() {
 		return area;
@@ -77,11 +75,28 @@ public class SiteDetail {
 		this.capacity = capacity;
 	}
 
-	public int getFloor() {
+
+	public long getSiteNum() {
+		return siteNum;
+	}
+
+	public void setSiteNum(long siteNum) {
+		this.siteNum = siteNum;
+	}
+
+	public long getPrice() {
+		return price;
+	}
+
+	public void setPrice(long price) {
+		this.price = price;
+	}
+
+	public long getFloor() {
 		return floor;
 	}
 
-	public void setFloor(int floor) {
+	public void setFloor(long floor) {
 		this.floor = floor;
 	}
 
