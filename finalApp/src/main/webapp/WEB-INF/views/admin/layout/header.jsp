@@ -144,7 +144,7 @@ $(function(){
 					<a href="${pageContext.request.contextPath}/admin/shopProduct/main" class="sub_menu--link">상품 및 재고 관리</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="${pageContext.request.contextPath}/admin/shopCustomer/list" class="sub_menu--link">리뷰 및 문의 관리</a>
+					<a href="${pageContext.request.contextPath}/admin/shopReview/main" class="sub_menu--link">리뷰 및 문의 관리</a>
 				</li>
 			</ul>
 		</li>
@@ -160,13 +160,13 @@ $(function(){
 					<a href="${pageContext.request.contextPath}/admin/cs/notice/list" class="sub_menu--link">공지사항</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="${pageContext.request.contextPath}/admin/cs/faq/list" class="sub_menu--link">faq</a>
+					<a href="${pageContext.request.contextPath}/admin/cs/faq/main" class="sub_menu--link">faq</a>
 				</li>
 				<li class="sub_menu--item">
 					<a href="${pageContext.request.contextPath}/admin/cs/qna/list" class="sub_menu--link">1:1문의</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="${pageContext.request.contextPath}/admin/cs/event/list" class="sub_menu--link">이벤트</a>
+					<a href="<c:url value='/admin/cs/event/all/list'/>" class="sub_menu--link">이벤트</a>
 				</li>
 			</ul>
 		</li>
