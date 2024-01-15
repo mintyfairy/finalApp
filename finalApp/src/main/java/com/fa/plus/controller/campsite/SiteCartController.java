@@ -41,42 +41,20 @@ public class SiteCartController {
 		return ".campsite.cart";
 	}
 
-	//ㅏㅈ작동안됨
-	@GetMapping("deleteCart")
-	public String deleteCart(
-			HttpSession session, Model model)throws Exception{
-		SessionInfo info = (SessionInfo)session.getAttribute("member");
-		
-		
-		try {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("memberIdx", info.getMemberIdx());
-			
-		} catch (Exception e) {			
-		}		
-		return "redirect:/campsite/cart";
-		
-		
-	}
 	
-	@PostMapping("deleteListCart")
+	
+	@PostMapping("deleteListCart")  //좌측상단선택삭제를 누르면 선택한 내역이 삭제됨
 	public String deleteListCart(
-			@RequestParam List<Long> nums,
+			@RequestParam("detailNum") Long detailNum,
 			HttpSession session) throws Exception {
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		
 		try {
 			Map<String, Object> map = new HashMap<String, Object>();
-		
-			map.put("memberIdx", info.getMemberIdx());   //map초기화
-			map.put("list", nums);
 			
-			//향상된  for문 구현   list를 돌려서 안의 nums를 map.put으로 돌리자.. ????
-			
-			   for (Long num : nums) {
-		            map.put("num", num);
-		        }
-			   
+			map.put("gubun", "items"); //gubun은 item, list를 가진다. item이라면 detailNum, list면 detailNum필요
+			map.put("memberIdx", info.getMemberIdx());  
+			map.put("detailNum", detailNum);
 			   
 			service.deleteCart(map);
 			
@@ -85,6 +63,25 @@ public class SiteCartController {
 		
 		return "redirect:/campsite/cart"; 
 	}
+	
+	/*
+	@GetMapping("deleteCartAll")
+	public String deleteCartAll(HttpSession session)throws Exception{
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		
+		try {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("gubun", "all");
+			map.put("memberIdx", info.getMemberIdx());
+			
+			service.deleteCart(map);
+		} catch (Exception e) {			
+		}
+		return "redirect:/campsite/cart";
+		
+	}
+	
+	*/
 	
 	@PostMapping("saveCart")
 	public String saveCart(
@@ -101,6 +98,7 @@ public class SiteCartController {
 		return "redirect:/campsite/cart";
 		
 	}
+	
 	/*
 	
 	//예약캠핑장 하나 지우기

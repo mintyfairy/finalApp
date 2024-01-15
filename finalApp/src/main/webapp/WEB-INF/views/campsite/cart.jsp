@@ -58,17 +58,15 @@ function sendOk() {
 
 -->
 
-function deleteCart() {
-	// 장바구니 비우기
-	if(! confirm('장바구니를 비우시겠습니까 ? ')) {
+function deleteCartAll(){
+	if (! confirm('장바구니를 비우시겠습니까?')){
 		return;
-	}
-
-	location.href = '${pageContext.request.contextPath}/campsite/deleteCart';	
+	}	
+	location.href = '${pageContext.request.contextPath}/campsite/deleteCartAll';
 }
 
 function deleteCartSelect() {
-	// 선택된 항목 삭제
+	// 선택삭제
 	let cnt = $("form input[name=nums]:checked").length;
     if (cnt === 0) {
 		alert("삭제할 상품을 먼저 선택 하세요 !!!");
@@ -83,6 +81,8 @@ function deleteCartSelect() {
 	f.action = "${pageContext.request.contextPath}/campsite/deleteListCart";
 	f.submit();
 }
+
+
 </script>
 
 
@@ -114,7 +114,7 @@ function deleteCartSelect() {
 							
 							<th width="200">금액</th>
 							
-							<th width="55">삭제</th>
+							
 						</tr>
 					</thead>
 					<tbody>
@@ -122,6 +122,7 @@ function deleteCartSelect() {
 							<tr class="text-center" valign="middle">
 								<td>
 									<input type="checkbox" class="form-check-input" name="nums" value="${dto.detailNum}">
+									
 								</td>
 								<td width="55">
 									<img class="border rounded" width="50" height="50" src="${pageContext.request.contextPath}/uploads/room/${dto.thumbnail}">
@@ -130,11 +131,11 @@ function deleteCartSelect() {
 									<p class="product-title p-1 mb-0 left">${dto.content}</p>
 									<p class="product-options p-1 mb-0 left"> 수용인원 : ${dto.capacity}</p>
 
-                                    <!--
-									<input type="hidden" name="productNums" value="${dto.detailNum}">
-									<input type="hidden" name="detailNums" value="${dto.detailNum}">
+                                  
+									<input type="hidden" name="memberIdx" value="${dto.memberIdx}">
+									<input type="hidden" name="detailNum" value="${dto.detailNum}">
 									
-                                    -->
+                                   
 								</td>
 								<td>
 									<div class="input-group">
@@ -151,9 +152,7 @@ function deleteCartSelect() {
 									<label class="productMoneys"><fmt:formatNumber value="${dto.periodPrice}"/></label><label>원</label>
 									<input type="hidden" name="dayPrice" value="${dto.price}">
 								</td>
-								<td>
-									<button type="button" class="btn cart-delete" onclick="deleteCartItem('${dto.detailNum}')"><i class="bi bi-x"></i></button>
-								</td>
+								
 							</tr>
 						
 						</c:forEach>

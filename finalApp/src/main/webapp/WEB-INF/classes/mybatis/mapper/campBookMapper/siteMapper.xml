@@ -8,9 +8,17 @@
   			  values(#{memberIdx},#{detailNum},#{startDate},#{endDate},sysdate)
 		
 	</insert>
-	<delete id="deleteCart" parameterType="com.fa.plus.domain.site.SiteCart">
-		DELETE FROM sitecart WHERE  detailNum = #{detailNum} and memberIdx=#{memberIdx}
+	
+	
+	<!-- 장바구니 부분삭제 구현시 필요 -->
+	<delete id="deleteCart" parameterType="map">
+	    DELETE FROM sitecart
+	    WHERE memberIdx = #{memberIdx}
+	    AND detailNum = #{detailNum}
 	</delete>
+	
+
+	
 	<select id="findByCart" parameterType="com.fa.plus.domain.site.SiteCart" resultType="com.fa.plus.domain.site.SiteCart">
 		
 		 select memberIdx,detailNum,to_char(STARTDATE,'yyyy-mm-dd') STARTDATE,to_char(ENDDATE,'yyyy-mm-dd') ENDDATE,to_char(REG_DATE,'yyyy-mm-dd') REG_DATE,filename thumbnail
@@ -57,10 +65,10 @@
 		values(booklist_seq.currval,#{totalPrice},#{perchaseMethod},sysdate)
 		
 	</insert>
-	<delete id="deleteAllCart" parameterType="long">
-		DELETE FROM sitecart WHERE memberIdx=#{memberIdx}
-	</delete>
-
+	
+	
+	
+	
 	<select id="listBookList" parameterType="Long" resultType="com.fa.plus.domain.site.BookList">
 		SELECT listNum,to_char(order_date,'yyyy-mm-dd') order_date, memberIdx,totalPrice 
 		FROM booklist 
