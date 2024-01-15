@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class Review {
+public class ShopReview {
 	private long orderDetailNum;
 	private long memberIdx;
 	private String userName;

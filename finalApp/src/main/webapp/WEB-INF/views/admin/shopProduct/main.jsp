@@ -337,7 +337,7 @@ $(function(){
 				</table>
 				
 			</div>
-		</div> 
+		</div>
 
 	</div>
     

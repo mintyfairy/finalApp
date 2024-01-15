@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class Question {
+public class ShopQuestion {
 	private long qnaNum;
 	private long productNum;
 	private long memberIdx;
