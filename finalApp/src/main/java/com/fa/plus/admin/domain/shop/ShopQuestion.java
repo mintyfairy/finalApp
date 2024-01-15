@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class ShopQuestion {
 	private long qnaNum;
 	private long productNum;
-	private long memberIdx;
+	private long questionIdx;
 	private String userName;
 	private int secret;
 	private String question;
@@ -42,12 +42,12 @@ public class ShopQuestion {
 		this.productNum = productNum;
 	}
 
-	public long getMemberIdx() {
-		return memberIdx;
+	public long getQuestionIdx() {
+		return questionIdx;
 	}
 
-	public void setMemberIdx(long memberIdx) {
-		this.memberIdx = memberIdx;
+	public void setQuestionIdx(long questionIdx) {
+		this.questionIdx = questionIdx;
 	}
 
 	public String getUserName() {

@@ -85,8 +85,8 @@
 		) f ON q.qnaNum=f.qnaNum 
 		LEFT OUTER JOIN member1 m2 ON q.answerIdx = m2.memberIdx
 		<where>
-			<if test="memberIdx != null">
-				q.memberIdx = #{memberIdx}
+			<if test="questionIdx != null">
+				q.questionIdx = #{questionIdx}
 			</if>
 			<if test="mode != null">
 				<if test="mode == 2">
@@ -106,7 +106,7 @@
 		FROM productQna
 		<where>
 			<if test="memberIdx != null">
-				memberIdx = #{memberIdx}
+				answerIdx = #{answerIdx}
 			</if>
 			<if test="mode != null">
 				<if test="mode == 2">

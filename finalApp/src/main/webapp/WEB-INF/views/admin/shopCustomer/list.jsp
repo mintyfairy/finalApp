@@ -81,9 +81,9 @@ $(function(){
 		let tabs = $(this).attr("aria-controls");
 		
 		if(tabs === 1) {
-			location.href="${pageContext.request.contextPath}/admin/shopCustomer/list?tab=" + 1;
+			location.href="${pageContext.request.contextPath}/admin/shopCustomer/list?tab=1";
 		} else if(tabs === 2) {
-			location.href="${pageContext.request.contextPath}/admin/shopCustomer/list?tab=" + 2;
+			location.href="${pageContext.request.contextPath}/admin/shopCustomer/list?tab=2";
 		}
 	});
 });
@@ -174,13 +174,19 @@ $(function(){
 						${ dataCount }개(${ page }/${ total_page } 페이지)
 					</div>
 				</div>
-					<table class="table table-borderless board-list">
+					<table class="table table-borderless board-list" style="width: 1080px;">
+						<colgroup>
+							<col width="100">
+							<col width="*">
+							<col width="100">
+							<col width="100">
+						</colgroup>
 						<thead class="table-light">
-							<tr class="border-bottom1">
-								<th width="100">답변상태</th>
+							<tr class="border-top border-dark table-light">
+								<th>답변상태</th>
 								<th>내용</th>
-								<th width="100">작성자</th>
-								<th width="100">작성일</th>
+								<th>작성자</th>
+								<th>작성일</th>
 							</tr>
 						</thead>
 						
@@ -188,7 +194,7 @@ $(function(){
 							<c:choose>
 								<c:when test="${ tab == 1 }">
 									<c:forEach var="dto" items="${list}" varStatus="status">
-										<tr class="item-basic-content border-bottom">
+										<tr class="middle">
 											<td>
 												${not empty dto.answer ? '<span class="text-primary">답변완료</span>' : '<span class="text-secondary">답변대기</span>'}
 											</td>

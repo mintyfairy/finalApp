@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import com.fa.plus.admin.domain.shop.ShopQuestion;
 import com.fa.plus.admin.domain.shop.ShopReview;
 import com.fa.plus.admin.service.shop.ShopCustomerManageService;
 import com.fa.plus.common.MyUtil;
+import com.fa.plus.domain.SessionInfo;
 
 @Controller
 @RequestMapping("/admin/shopCustomer/*")
@@ -32,7 +34,10 @@ public class ShopCustomerController {
 			@RequestParam(defaultValue = "1") int mode, 
 			@RequestParam(defaultValue = "1") int tab, 
 			HttpServletRequest req, 
+			HttpSession session, 
 			Model model) throws Exception {
+		
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		
 		try {
 			Map<String, Object> map = new HashMap<String, Object>();
@@ -42,6 +47,7 @@ public class ShopCustomerController {
 			
 			if (tab == 1) {
 				map.put("mode", mode);
+				map.put("memberIdx", info.getMemberIdx());
 				dataCount = service.reviewCount(map);
 				
 				int total_page = myUtil.pageCount(dataCount, size);
@@ -72,6 +78,7 @@ public class ShopCustomerController {
 				
 			} else if(tab == 2) {
 				map.put("mode", mode);
+				map.put("questionIdx", info.getMemberIdx());
 				dataCount = service.questionCount(map);
 				
 				int total_page = myUtil.pageCount(dataCount, size);
