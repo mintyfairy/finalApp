@@ -2,6 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
 
 <style>
 @charset "utf-8";
@@ -193,7 +196,8 @@ ul {
     cursor: pointer;
 }
 </style>
-</head>
+
+
 <div class="header_top">
     <div class="header_top_wrap">
         <div class="header_center">
@@ -217,9 +221,16 @@ ul {
 
         <div class="header_right_wrap">
             <ul class="header_right">
-                <li class="header_item"><a href="#"><i class="fa-solid fa-right-to-bracket fa-lg"></i></a></li>
-                <li class="header_item fa-lg"><a href="#"><i class="fa-regular fa-user"></i></a></li>
-                <li class="header_item fa-lg"><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
+            	<c:choose>
+            		<c:when test="${empty sessionScope.member}">
+                		<li class="header_item"><a href="${pageContext.request.contextPath}/member/login"><i class="fa-solid fa-right-to-bracket fa-lg"></i></a></li>
+                	</c:when>
+                	 <c:otherwise>
+				        	<li class="header_item"><a href="${pageContext.request.contextPath}/member/logout" title="로그아웃"><i class="fa-solid fa-unlock" style="font-size:17px;"></i></a></li>
+					 </c:otherwise>
+                </c:choose>
+                
+                <li class="header_item fa-lg"><a href="${pageContext.request.contextPath}/shop/myPage/cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
                 <li class="header_item fa-lg"><a href="#"><i class="fa-solid fa-headset"></i></a></li>
             </ul>
         </div>
@@ -231,15 +242,19 @@ ul {
 	    <div class="navi_wrap">
 	        <ul class="navi_list">
 	            <li class="hamburger">
-	                <a href="#">
+	                <a href="#" id="hamburgerIcon">
 	                    <img src="https://via.placeholder.com/60x60" alt="hamburger">
 	                </a>
 	            </li>
 	            <li class="navi_item">
 	                <a href="#">브랜드</a>
 	            </li>
-	            <li class="navi_item">
+	            <li class="navi_item dropdown">
 	                <a href="#">베스트 셀러</a>
+	                <ul class="submenu1">
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                    </ul>
 	            </li>
 	            <li class="navi_item">
 	                <a href="#">특가상품</a>
@@ -256,6 +271,21 @@ ul {
 	            <li class="navi_item">
 	                <a href="#">고객센터</a>
 	            </li>
+	            
+	             <li class="navi_item dropdown">
+	                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	                	마이페이지
+	                </a>
+	                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="${pageContext.request.contextPath}/shop/myPage/main">주문내역/배송</a></li>
+							<li><a class="dropdown-item" href="#">포인트/쿠폰</a></li>
+							<li><a class="dropdown-item" href="#">찜</a></li>
+							<li><a class="dropdown-item" href="${pageContext.request.contextPath}/shop/myPage/review">리뷰/Q&amp;A</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" href="#">정보수정</a></li>
+					</ul>
+	            </li>
+	            
 	        </ul>
 	    </div>
     </div>
@@ -362,4 +392,17 @@ ul {
 	       $(".cate_container").fadeOut('fast');
 	   });
     });
+    
+    $(document).ready(function(){
+        $("#hamburgerIcon").click(function(){
+            $(".mobile-nav").slideToggle();
+        });
+    });
+    
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $(".dropdown-toggle").dropdown();
+});
 </script>

@@ -326,7 +326,7 @@ table {
 
 <script type="text/javascript">
 function login() {
-	location.href = '${pageContext.request.contextPath}/login/login';
+	location.href = '${pageContext.request.contextPath}/member/login';
 }
 
 function ajaxFun(url, method, formData, dataType, fn, file = false) {
@@ -659,6 +659,7 @@ function sendOk(mode) {
 					<li class="tab_item" onclick="as();"><span>배송/교환/반품/AS</span></li>
 				</ul>
 			</div>
+			
 			<div class="detail_review">
 				<div class="review_table">
 					<table summary="번호, 평점, 내용, 작성자, 작성일, 조회">
@@ -742,6 +743,7 @@ function sendOk(mode) {
 						</div>
 					</div>
 			</div>
+			
 			<div class="detail_tab detail_tab3">
 				<ul class="tab_list">
 					<li class="tab_item" onclick="detail();"><span>상세정보</span></li>
@@ -750,6 +752,7 @@ function sendOk(mode) {
 					<li class="tab_item" onclick="as();"><span>배송/교환/반품/AS</span></li>
 				</ul>
 			</div>
+			
 			<div class="detail_qna">
 				<div class="qna_table">
 					<table summary="번호, 평점, 내용, 작성자, 작성일, 조회">
@@ -781,6 +784,7 @@ function sendOk(mode) {
 					<li class="tab_item" onclick="as();"><span>배송/교환/반품/AS</span></li>
 				</ul>
 			</div>
+			
 			<div class="detail_as">
 				<div class="as_table">
 					<table>
@@ -843,16 +847,17 @@ function sendOk(mode) {
 <div class="modal hidden" id="questionDialogModal" tabindex="-1" 
 	data-bs-backdrop="static" data-bs-keyboard="false"
 	aria-labelledby="questionDialogModalLabel" aria-hidden="true">
+	
 	<div class="modal-dialog modal-dialog-centered modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="questionDialogModalLabel">상품 문의 하기</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				<button type="button" class="btn-close closeModal" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
 
 				<div class="qna-form p-2">
-					<form name="questionForm">
+					<form name="questionForm" enctype="multipart/form-data">
 						<div class="row">
 							<div class="col">
 								<span class="fw-bold">문의사항 쓰기</span><span> - 상품 및 상품 구매 과정과 관련없는 글은 삭제 될 수 있습니다.</span>
@@ -967,7 +972,7 @@ function printReview(data) {
 		out += '     <div class="col-auto fs-2"><i class="bi bi-person-circle text-muted icon"></i></div>';
 		out += '     <div class="col pt-3 ps-0 fw-semibold">'+userName+'</div>';
 		out += '     <div class="col pt-3 text-end"><span>'+reviewDate+'</span>';
-		out += '       |<span class="notifyReview" data-num="' + orderDetailNum + '">신고</span></div>';
+		out += '       |<span class="notifyReview" data-orderDetailNum="' + orderDetailNum + '">신고</span></div>';
 		out += '  </div>';
 		out += '  <div class="row p-2">';
 		out += '    <div class="col-auto pt-0 ps-2 pe-1 score-star">';
@@ -983,7 +988,7 @@ function printReview(data) {
 			out += '<div class="row gx-1 mt-2 mb-1 p-1">';
 				for(let f of listFilename) {
 					out += '<div class="col-md-auto md-img">';
-					out += '  <img class="border rounded" src="${pageContext.request.contextPath}/shop/uploads/review/'+f+'">';
+					out += '  <img class="border rounded" src="${pageContext.request.contextPath}/uploads/review/'+f+'">';
 					out += '</div>';
 				}
 			out += '</div>';
@@ -1070,8 +1075,8 @@ function printSummary(summary) {
 
 $(function(){
 	$('body').on('click', '.notifyReview', function(){
-		let num = $(this).attr('data-orderDetailNum');
-		alert(num);
+		let orderDetailNum = $(this).attr('data-orderDetailNum');
+		alert(orderDetailNum);
 	});
 });
 
@@ -1266,7 +1271,7 @@ $(function(){
 				});
 				sel_files.length = 0;
 				
-				$("#questionDialogModal").modal("hide");
+				$("#questionDialogModal").hide();
 				
 				listQuestion(1);
 			}
@@ -1283,7 +1288,18 @@ $(function(){
 		});
 		sel_files.length = 0;
 		
-		$("#questionDialogModal").modal("hide");
+		$("#questionDialogModal").hide();
+	});	
+	
+	$('.closeModal').click(function(){
+		const f = document.questionForm;
+		f.reset();
+		$(".qna-form .img-item").each(function(){
+			$(this).remove();
+		});
+		sel_files.length = 0;
+		
+		$("#questionDialogModal").hide();
 	});	
 	
 	$('.btnMyQuestion').click(function(){

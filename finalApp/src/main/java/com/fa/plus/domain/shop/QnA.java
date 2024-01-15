@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class QnA {
 	private long qnaNum;
 	private long productNum;
-	private long memberIdx;
+	private long questionIdx;
 	private String question;
 	private int secret;
 	private String title;
@@ -17,7 +17,7 @@ public class QnA {
 	private String reg_date;
 
 	private String answer;
-	private String answerId;
+	private String answerIdx;
 	private String answerName;
 	private String answerDate;
 	private String questionDate;
@@ -79,12 +79,6 @@ public class QnA {
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
-	public String getAnswerId() {
-		return answerId;
-	}
-	public void setAnswerId(String answerId) {
-		this.answerId = answerId;
-	}
 	public String getAnswerName() {
 		return answerName;
 	}
@@ -127,12 +121,7 @@ public class QnA {
 	public void setProductNum(long productNum) {
 		this.productNum = productNum;
 	}
-	public long getMemberIdx() {
-		return memberIdx;
-	}
-	public void setMemberIdx(long memberIdx) {
-		this.memberIdx = memberIdx;
-	}
+	
 	public String getQuestion() {
 		return question;
 	}
@@ -186,6 +175,18 @@ public class QnA {
 	}
 	public void setQnaNum(long qnaNum) {
 		this.qnaNum = qnaNum;
+	}
+	public long getQuestionIdx() {
+		return questionIdx;
+	}
+	public void setQuestionIdx(long questionIdx) {
+		this.questionIdx = questionIdx;
+	}
+	public String getAnswerIdx() {
+		return answerIdx;
+	}
+	public void setAnswerIdx(String answerIdx) {
+		this.answerIdx = answerIdx;
 	}
 
 }

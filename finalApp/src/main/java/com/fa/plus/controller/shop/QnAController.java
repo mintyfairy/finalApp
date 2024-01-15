@@ -40,7 +40,7 @@ public class QnAController {
 			try {
 				
 				SessionInfo info = (SessionInfo)session.getAttribute("member");
-				dto.setMemberIdx(info.getMemberIdx());
+				dto.setQuestionIdx(info.getMemberIdx());
 				
 				service.insertQuestion(dto, pathname);
 			} catch (Exception e) {
@@ -84,7 +84,7 @@ public class QnAController {
 
 				List<QnA> list = service.listQuestion(map);
 				for(QnA dto : list) {
-					if(dto.getSecret() == 1 && (info == null || (info.getMembership() < 50 && dto.getMemberIdx() != info.getMemberIdx()))) {
+					if(dto.getSecret() == 1 && (info == null || (info.getMembership() < 50 && dto.getQuestionIdx() != info.getMemberIdx()))) {
 						dto.setQuestion("비밀글 입니다. <i class='bi bi-file-lock2'></i>");
 						dto.setAnswer("");
 						dto.setListFilename(null);
