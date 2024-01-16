@@ -39,8 +39,8 @@
 		SELECT NVL(COUNT(*), 0)
 		FROM productQna
 		<where>
-			<if test="questionIdx != null">
-				questionIdx = #{questionIdx}
+			<if test="memberIdx != null">
+				questionIdx = #{memberIdx}
 			</if>
 			<if test="mode != null">
 				<if test="mode == 2">
@@ -52,7 +52,26 @@
 			</if>
 		</where>
 	</select>
-
+	
+	<select id="listQuestion2" parameterType="map" resultType="com.fa.plus.domain.shop.QnA">
+		SELECT q.qnaNum, q.questionIdx, m.userName, secret, question, answer, 
+		answerIdx, m2.userName answerName, 
+			q.productNum, productName, filename, showQuestion,
+			questionDate, answerDate
+		FROM productQna q
+		JOIN product p ON q.productNum = p.productNum 
+		JOIN member1 m ON q.questionIdx = m.memberIdx
+		LEFT OUTER JOIN (
+			SELECT qnaNum, LISTAGG(filename, ',') WITHIN GROUP(ORDER BY fileNum) filename
+            FROM productQnaFile
+            GROUP BY qnaNum	
+		) f ON q.qnaNum=f.qnaNum		
+		LEFT OUTER JOIN member1 m2 ON q.answerIdx = m2.memberIdx
+		WHERE q.questionIdx = #{memberIdx}
+		ORDER BY q.qnaNum DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+	
 	<select id="listQuestionFile" parameterType="long" resultType="com.fa.plus.domain.shop.QnA">
 		SELECT fileNum, qnaNum, filename
 		FROM productQnaFile

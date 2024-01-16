@@ -773,7 +773,8 @@ function sendOk(mode) {
 					<button type="button" class="btnMyQuestion btn btn-dark"> 내 Q&amp;A 보기  </button>
 					<button type="button" class="btnQuestion btn btn-dark"> 상품 Q&amp;A 작성 </button>
 				</div>
-				<div class="mt-1 p-2 list-question"></div>
+				<div class="mt-1 p-2 list-question">
+				</div>
 				
 			</div>
 			<div class="detail_tab detail_tab4">
@@ -1093,6 +1094,7 @@ function listQuestion(page) {
 }
 
 function printQuestion(data) {
+	console.log(data);
 	let dataCount = data.dataCount;
 	let pageNo = data.pageNo;
 	let total_page = data.total_page;

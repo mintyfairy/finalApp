@@ -21,6 +21,6 @@ public interface QnAMapper {
 	
 	public void updateQuestion(QnA dto) throws SQLException;
 
-	public List<QnA>listQuestionFile(long num);
-	public void deleteQuestion(long num) throws SQLException;
+	public List<QnA>listQuestionFile(long qnaNum);
+	public void deleteQuestion(long qnaNum) throws SQLException;
 }

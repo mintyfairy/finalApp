@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.poi.poifs.crypt.dsig.facets.XAdESXLSignatureFacet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -218,6 +217,6 @@ public class MyPageController {
 				Model model) throws Exception {
 		
 			model.addAttribute("mode", mode);
-			return ".shop.review";
+			return ".shop.myPage.review";
 	}
 }

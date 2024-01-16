@@ -246,14 +246,25 @@ ul {
 	                    <img src="https://via.placeholder.com/60x60" alt="hamburger">
 	                </a>
 	            </li>
+	            
 	            <li class="navi_item">
 	                <a href="#">브랜드</a>
 	            </li>
+	            
 	            <li class="navi_item dropdown">
-	                <a href="#">베스트 셀러</a>
-	                <ul class="submenu1">
-                        <li><a href="#"></a></li>
-                        <li><a href="#"></a></li>
+	                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	                	베스트셀러
+	                </a>
+	                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                       <li><a class="dropdown-item" href="#">텐트 베스트</a></li>
+							<li><a class="dropdown-item" href="#">타프 베스트</a></li>
+							<li><a class="dropdown-item" href="#">침낭 베스트</a></li>
+							<li><a class="dropdown-item" href="#">매트 베스트</a></li>
+							<li><a class="dropdown-item" href="#">테이블 베스트</a></li>
+							<li><a class="dropdown-item" href="#">체어 베스트</a></li>
+							<li><a class="dropdown-item" href="#">롄턴 베스트</a></li>
+							<li><a class="dropdown-item" href="#">스토브 베스트</a></li>
+							<li><a class="dropdown-item" href="#">쿠커 베스트</a></li>
                     </ul>
 	            </li>
 	            <li class="navi_item">
@@ -268,8 +279,20 @@ ul {
 	            <li class="navi_item">
 	                <a href="#">AS 라운지</a>
 	            </li>
-	            <li class="navi_item">
-	                <a href="#">고객센터</a>
+	            
+	           <li class="navi_item dropdown">
+	                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	                	고객센터
+	                </a>
+	                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                       <li><a class="dropdown-item" href="#">공지&이벤트</a></li>
+							<li><a class="dropdown-item" href="#">문의Q&A</a></li>
+							<li><a class="dropdown-item" href="#">상품 문의</a></li>
+							<li><a class="dropdown-item" href="#">반품&교환</a></li>
+							<li><a class="dropdown-item" href="#">AS문의</a></li>
+							<li><a class="dropdown-item" href="#">AS메뉴얼</a></li>
+							<li><a class="dropdown-item" href="#">구매 후기</a></li>
+                    </ul>
 	            </li>
 	            
 	             <li class="navi_item dropdown">

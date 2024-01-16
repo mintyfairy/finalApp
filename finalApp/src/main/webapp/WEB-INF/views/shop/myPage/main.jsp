@@ -20,12 +20,12 @@ ul {
 
 .container {
     margin-bottom: 60px;
-    padding-top: 160px;
+    padding-top: 50px;
 }
 
 .container .wrap {
     width: 1080px;
-    margin: 0 auto;
+    margin: 20px auto;
 }
 
 .container .wrap .title {
@@ -295,22 +295,24 @@ ul {
                                 <a href="#" class="modify">수정</a>
                             </p>
                             <p>전화</p>
-                            <p>이메일&nbsp;&nbsp;&nbsp;&nbsp;${메일주소}</p>
+                            <p>이메일&nbsp;&nbsp;&nbsp;&nbsp;</p>
                             <p>주소</p>
                         </li>
                     </ul>
                 </li>
                 <li id="my_value" class="my_item">
                     <p>총 주문금액 : &nbsp;&nbsp;&nbsp;${total_price}</p>
-                    <p>적립금 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${bonus}</p>
+                    <p>적립금 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                 </li>
             </ul>
         </div>
 
-        <div class="latest">
+        <div class="latest" id="myTabContent">
+        	<div class="tab-pane fade show active" id="tab-pane-1" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
+        		<div class="mt-3 pt-3 border-bottom">
             <h5>최근 주문 정보</h5>
             <a href="#">+ MORE</a>
-        </div>
+       			 </div>
 
         <div class="latest_order my_table">
             <table summary="주문일자, 상품명, 결제금액, 주문상세">

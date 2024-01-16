@@ -30,7 +30,7 @@ public class QnAServiceImpl implements QnAService {
 					if (filename != null) {
 						dto.setFilename(filename);
 
-						mapper.insertQuestion(dto);
+						mapper.insertQuestionFile(dto);
 					}
 				}
 			}
