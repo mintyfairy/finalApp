@@ -33,7 +33,7 @@ public interface SiteService {
 	public List<BookList> listBookList(long memberIdx);
 
 	// 예약 상세 리스트
-	public List<Book> listBook(long listNum);
+	public List<Book> listBook(Map<String, Object> map);
 
 	// 리뷰 넣기 리뷰의 주요키는 결제목록인 booknum, 1대1관계다
 	public void insertReview(SiteReview dto,String pathname) throws Exception;
@@ -42,6 +42,7 @@ public interface SiteService {
 	// 리뷰 리스트 1.(memberIdx 존재시) 유저의 예약리스트 2 업체(siteNum) 3 방(detailNum)
 	public List<SiteReview> listSiteReivew(Map<String, Object> map);
 
+	public int dataCountBook(Map<String, Object> map);
 	// 리뷰수 1 유저의 리스트 2 업체 3 방
 	public int dataCountReview(Map<String, Object> map);
 

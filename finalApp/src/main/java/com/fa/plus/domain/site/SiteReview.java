@@ -38,12 +38,36 @@ ENABLED
 	
 	private long fileNum;
 	private String fileName;
-	private List<MultipartFile> addFiles;
+	private List<MultipartFile> selectFile;
 	
 	private List<String> listFile;
 
 	
 	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getAdminName() {
+		return adminName;
+	}
+
+	public void setAdminName(String adminName) {
+		this.adminName = adminName;
+	}
+
+	public List<MultipartFile> getSelectFile() {
+		return selectFile;
+	}
+
+	public void setSelectFile(List<MultipartFile> selectFile) {
+		this.selectFile = selectFile;
+	}
+
 	public String getFileList() {
 		return fileList;
 	}
@@ -156,13 +180,7 @@ ENABLED
 		this.fileName = fileName;
 	}
 
-	public List<MultipartFile> getAddFiles() {
-		return addFiles;
-	}
 
-	public void setAddFiles(List<MultipartFile> addFiles) {
-		this.addFiles = addFiles;
-	}
 
 	public List<String> getListFile() {
 		return listFile;

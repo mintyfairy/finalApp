@@ -211,6 +211,72 @@ commit;
 ORDER BY SITENUM DESC OFFSET '0' ROWS FETCH FIRST 
 '6' ROWS ONLY 
 
+
+commit;
+
+insert into sitecart(MEMBERIDX,DETAILNUM,STARTDATE,ENDDATE,REG_DATE	) 
+    values(1,32,'20200101','2020-01-02','2020-01-01')
+    ;
+rollback;
+
+select *from sitedetail;
+SELECT MEMBERIDX,sitecart.DETAILNUM,STARTDATE,ENDDATE,detailname,price,content,capacity,floor
+		FROM sitecart join sitedetail  on sitedetail.DETAILNUM=sitecart.DETAILNUM
+		WHERE memberIdx=1;
+        
+        
+select  * from book;
+select  BOOKNUM,PURCHASECOST,PURCHASEMETHOD,PURCHASEDATE from bookpayment;
+INSERT into bookpayment(BOOKNUM,PURCHASECOST,PURCHASEMETHOD,PURCHASEDATE) values(1,1,'2',sysdate);
+
+insert into booklist(LISTNUM,ORDER_DATE,MEMBERIDX,TOTALPRICE,STATE) 
+values(97,TO_DATE('2024-01-20','yyyy-mm-dd'),12,270000,0);
+insert into book(BOOKNUM,STARTDATE,ENDDATE ,BOOKPRICE ,DETAILNUM ,LISTNUM) 
+VALUES(book_seq.nextval,TO_DATE('2024-12-10','yyyy-mm-dd'),TO_DATE('2024-01-13','yyyy-mm-dd'),150000,24,97)
+;
+insert into book(BOOKNUM,STARTDATE,ENDDATE ,BOOKPRICE ,DETAILNUM ,LISTNUM) 
+VALUES(6,TO_DATE('2024-12-14','yyyy-mm-dd'),TO_DATE('2024-12-17','yyyy-mm-dd'),120000,30,97)
+;
+insert into sitereview(BOOKNUM,SUBJECT,CONTENT,MEMBERIDX,SCORE,REG_DATE,ANSWER,DETAILNUM,SITENUM,ENABLED) values();
+
+SELECT NVL(COUNT(*), 0)
+		FROM sitecart 
+		WHERE memberIdx=1
+        
+        ;
+        
+        
+        SELECT bookNum,startDate,endDate,bookPrice, detailNum,listNum
+		FROM book
+		WHERE listnum=1;
+        
+        select MEMBERIDX,DETAILNUM,STARTDATE,ENDDATE,REG_DATE,filename
+		FROM sitecart 
+		left join (select filename,DETAILNUM dnum from sitedetailpic 
+        where detailNum = 146
+        ORDER BY sdpicnum 
+		FETCH FIRST 1 ROWS ONLY
+        ) on dnum=DETAILNUM
+		WHERE detailNum = 146 and  memberIdx=1;
+        
+        SELECT MEMBERIDX,sitecart.DETAILNUM,to_char(STARTDATE,'yyyy-mm-dd') STARTDATE,ENDDATE,detailname,price,content,capacity,floor,filename thumbnail
+		FROM sitecart 
+        left join sitedetail  on sitedetail.DETAILNUM=sitecart.DETAILNUM
+        left join(select * from (select row_number() over(partition by detailnum order by sdpicnum) rnum,filename,DETAILNUM dnum from sitedetailpic 
+       ) where rnum=1) on dnum=sitecart.DETAILNUM
+		WHERE memberIdx=1;
+        
+        rollback;
+        commit;
+        insert into sitecart(MEMBERIDX,DETAILNUM,STARTDATE,ENDDATE,REG_DATE	) 
+  			  values(1,145,'2020-02-02','2020-02-02',sysdate);
+         insert into sitecart(MEMBERIDX,DETAILNUM,STARTDATE,ENDDATE,REG_DATE	) 
+  			  values(12,145,'2020-02-02','2020-02-02',sysdate);
+              
+              
+              
+            select * from ( select row_number() over(partition by detailnum order by sdpicnum) rnum,filename,DETAILNUM dnum from sitedetailpic 
+       ) where rnum=1 
 룸목록 가져와서 not in써서 호텔거르기?
 
 방 카운트 테이블

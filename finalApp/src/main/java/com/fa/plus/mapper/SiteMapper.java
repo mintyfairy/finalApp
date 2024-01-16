@@ -66,7 +66,7 @@ public interface SiteMapper {
 	//예약 리스트의 리스트
 	public List<BookList> listBookList(long memberIdx);
 	//예약 상세 리스트 
-	public List<Book> listBook(long listNum);
+	public List<Book> listBook(Map<String, Object> map);
 	
 	
 	//리뷰 넣기 리뷰의 주요키는 결제목록인  booknum, 1대1관계다
@@ -103,6 +103,8 @@ public interface SiteMapper {
 	//별점 갱신
 	public void updateSiteStar(Map<String, Object> map);
 	
+	public int dataCountBook(Map<String, Object> map);
+	public int dataCountBookList(long memberIdx);
 	
 	
 	//하루지난 카트는 지울까 말까... 일단 나중에

@@ -41,6 +41,7 @@
 			from sitedetailpic) where rnum=1
        	) on dnum=sitecart.detailNum
 		WHERE memberIdx=#{memberIdx}
+		
 	</select>
 	
 	<select id="dataCountCart" parameterType="Long" resultType="Integer">
@@ -74,14 +75,23 @@
 		FROM booklist 
 		WHERE memberIdx=#{memberIdx}
 	</select>
-	<select id="listBook" parameterType="Long" resultType="com.fa.plus.domain.site.BookList">
-		SELECT bookNum,to_char(STARTDATE,'yyyy-mm-dd') STARTDATE,to_char(ENDDATE,'yyyy-mm-dd') ENDDATE,bookPrice, detailNum,listNum
+	<select id="listBook" parameterType="map" resultType="com.fa.plus.domain.site.Book">
+			SELECT bookNum,to_char(STARTDATE,'yyyy-mm-dd') STARTDATE,to_char(ENDDATE,'yyyy-mm-dd') ENDDATE,bookPrice, detailNum,book.listNum,filename
+		,nvl(writeReview,0) writeReview,detailname,to_char(ORDER_DATE,'yyyy-mm-dd') ORDER_DATE
 		FROM book
-		WHERE listnum=#{listNum}
+        left join booklist on book.listnum=booklist.listnum
+        left join (select * from 
+			(select row_number() over(partition by detailNum order by sdpicnum) rnum,filename,detailNum dnum 
+			from sitedetailpic) where rnum=1
+       	) on dnum=book.detailNum
+       	left join (select 1 writeReview,booknum bnum from sitereview) on bnum=booknum
+        left join (select detailname,detailNum ddnum from sitedetail) on ddnum =detailNum
+		WHERE memberIdx=#{memberIdx}
+		offset #{offset} rows fetch first #{size} rows only
 	</select>
 	
 	
-	<insert id="insertReview" parameterType="com.fa.plus.domain.site.SiteDetail">
+	<insert id="insertReview" parameterType="com.fa.plus.domain.site.SiteReview">
 	insert into sitereview(BOOKNUM,SUBJECT,CONTENT,memberIdx,SCORE,REG_DATE,detailNum,siteNum,ENABLED)
 		
 		values(#{bookNum},#{subject},#{content},#{memberIdx},#{score},sysdate,#{detailNum},#{siteNum},0)
@@ -90,7 +100,7 @@
 	</insert>
 	
 	<!-- 추가 이미지 등록 -->
-	<insert id="insertReviewFile" parameterType="com.fa.plus.domain.site.SiteDetail">
+	<insert id="insertReviewFile" parameterType="com.fa.plus.domain.site.SiteReview">
 		INSERT INTO sitereviewPic(SrPICNUM, booknum, fileName)
 			VALUES(sitereviewPic_SEQ.NEXTVAL, #{booknum}, #{fileName})
 	</insert>	
@@ -123,6 +133,7 @@
 		            FROM sitereviewpic
 		            GROUP BY booknum	
 				) f ON BOOKNUM=bnum	
+		  offset #{offset} rows fetch first #{size} rows only
 		<where>
 			enabled = 0
 			<include refid="where-list-review"/>
@@ -166,6 +177,7 @@
 			            GROUP BY booknum	
 					) f ON BOOKNUM=bnum	
 		 where booknum={bookNum}
+		 
 	</select>
 	
 	<update id="updateReviewAnswer" parameterType="com.fa.plus.domain.site.SiteReview">
@@ -178,6 +190,26 @@
 		update campingsite set avgstar=#{star} 
 		where sitenum=#{siteNum}
 	</update>
+	<select id="dataCountBook" parameterType="map" resultType="Integer">
+		select NVL(COUNT(*), 0)
+		 from book
+         left join booklist on book.listnum=booklist.listnum
+		<where>
+			<if test="memberIdx !=null and memberIdx !=''">
+            	memberIdx=#{memberIdx}
+			</if>
+			<if test="detailㅜum !=null and detailㅜum !=''">
+            	detailnum=#{detailNum}
+			</if>
+		</where>
+		 
+	</select>
+	<select id="dataCountBookList" parameterType="Long" resultType="Integer">
+		select NVL(COUNT(*), 0)
+		 from booklist
+		where memberidx=#{memberIdx}
+		 
+	</select>
 <!-- 리뷰 등록될떄마다 갱신 -->
 <!-- update test set avenum=round((select avg(totalmoney) from productorder)/1000000,1) where num=1; -->
 </mapper>

@@ -7,6 +7,39 @@ public class Book {
 	private	long bookPrice;
 	private	long detailNum;
 	private	long listNum;
+	
+	private String filename;
+	private String writeReview;
+	private String detailName;
+	private String order_date;
+	
+	
+	
+	
+	public String getOrder_date() {
+		return order_date;
+	}
+	public void setOrder_date(String order_date) {
+		this.order_date = order_date;
+	}
+	public String getDetailName() {
+		return detailName;
+	}
+	public void setDetailName(String detailName) {
+		this.detailName = detailName;
+	}
+	public String getWriteReview() {
+		return writeReview;
+	}
+	public void setWriteReview(String writeReview) {
+		this.writeReview = writeReview;
+	}
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
 	public long getBookNum() {
 		return bookNum;
 	}

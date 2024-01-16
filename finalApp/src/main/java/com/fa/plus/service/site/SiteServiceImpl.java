@@ -129,10 +129,10 @@ public class SiteServiceImpl implements SiteService {
 	}
 
 	@Override
-	public List<Book> listBook(long listNum) {
+	public List<Book> listBook(Map<String, Object> map) {
 		List<Book> list = null;
 		try {
-			list = mapper.listBook(listNum);
+			list = mapper.listBook(map);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -149,8 +149,8 @@ public class SiteServiceImpl implements SiteService {
 
 			// 추가 이미지 저장
 			String filename = null;
-			if (!dto.getAddFiles().isEmpty()) {
-				for (MultipartFile mf : dto.getAddFiles()) {
+			if (!dto.getSelectFile().isEmpty()) {
+				for (MultipartFile mf : dto.getSelectFile()) {
 					filename = fileManager.doFileUpload(mf, pathname);
 					if (filename == null) {
 						continue;
@@ -202,8 +202,8 @@ public class SiteServiceImpl implements SiteService {
 			mapper.updateReview(dto);
 
 			String filename = null;
-			if (!dto.getAddFiles().isEmpty()) {
-				for (MultipartFile mf : dto.getAddFiles()) {
+			if (!dto.getSelectFile().isEmpty()) {
+				for (MultipartFile mf : dto.getSelectFile()) {
 					filename = fileManager.doFileUpload(mf, pathname);
 					if (filename == null) {
 						continue;
@@ -294,6 +294,19 @@ public class SiteServiceImpl implements SiteService {
 			throw e;
 		}
 	
+	}
+
+	@Override
+	public int dataCountBook(Map<String, Object> map) {
+		int a=0;
+		try {
+			a=mapper.dataCountBook(map);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw e;
+		}
+		return a;
 	}
 
 }

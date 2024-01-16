@@ -127,7 +127,7 @@
 	<beans:bean id="LoginFailureHandler"
 				class="com.fa.plus.security.LoginFailureHandler">
 				<!--  여기서포스트로 보내서 컨트롤러에서 리퀘스트 매핑으로 받음 -->
-			<beans:property name="defaultFailureUrl" value="member/login?login_error"/>			
+			<beans:property name="defaultFailureUrl" value="login?login_error"/>			
 	</beans:bean>
 
 	<!-- bcrypt: 페스워드에 특화된 password hashing function -->
