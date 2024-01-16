@@ -18,6 +18,7 @@ public class ShopQuestion {
 	private String questionDate;
 	private String answerDate;
 	private int showQuestion;
+	private int mode;
 	
 	private long fileNum;
 	private String filename;
@@ -169,5 +170,13 @@ public class ShopQuestion {
 
 	public void setQuestionId(String questionId) {
 		this.questionId = questionId;
+	}
+
+	public int getMode() {
+		return mode;
+	}
+
+	public void setMode(int mode) {
+		this.mode = mode;
 	}
 }

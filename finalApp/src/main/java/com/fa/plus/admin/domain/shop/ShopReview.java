@@ -16,6 +16,7 @@ public class ShopReview {
 	private String answerDate;
 	private boolean deletePermit;
 	private int showReview;
+	private int mode;
 
 	private long fileNum;
 	private String filename;
@@ -134,6 +135,12 @@ public class ShopReview {
 	}
 	public void setOptionValue2(String optionValue2) {
 		this.optionValue2 = optionValue2;
+	}
+	public int getMode() {
+		return mode;
+	}
+	public void setMode(int mode) {
+		this.mode = mode;
 	}
 	
 }
