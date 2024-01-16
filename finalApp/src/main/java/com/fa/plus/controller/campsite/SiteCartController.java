@@ -64,24 +64,8 @@ public class SiteCartController {
 		return "redirect:/campsite/cart"; 
 	}
 	
-	/*
-	@GetMapping("deleteCartAll")
-	public String deleteCartAll(HttpSession session)throws Exception{
-		SessionInfo info = (SessionInfo)session.getAttribute("member");
-		
-		try {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("gubun", "all");
-			map.put("memberIdx", info.getMemberIdx());
-			
-			service.deleteCart(map);
-		} catch (Exception e) {			
-		}
-		return "redirect:/campsite/cart";
-		
-	}
+
 	
-	*/
 	
 	@PostMapping("saveCart")
 	public String saveCart(
@@ -98,23 +82,12 @@ public class SiteCartController {
 		return "redirect:/campsite/cart";
 		
 	}
+	 
+	 @PostMapping("reservation")
+	    public String reservation() {
+	        // 다른 처리를 수행하고, 최종적으로 reservation.jsp로 리다이렉트  휘겸쓰 예매로 넘어가야한다!!
+	        return ".campsite.reservation";
+	    }
 	
-	/*
-	
-	//예약캠핑장 하나 지우기
-	@GetMapping("deleteCart")
-	public String deleteCart(SiteCart dto,
-			HttpSession session)throws Exception{
-		SessionInfo info = (SessionInfo) session.getAttribute("member");
-	
-		try {
-			dto.setMemberIdx(info.getMemberIdx());
-		//	dto.setDetailNum(info.get);      //detailnum 이 안넘어옴
-		} catch (Exception e) {	
-		}	
-			
-		return "redirect:/campsite/cart";
-		
-	}
-		*/
+
 }

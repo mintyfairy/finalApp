@@ -35,10 +35,10 @@ $(function(){
     });
 });
 
-<!-- 구매창이 아직 없음
+
 function sendOk() {
 	// 구매하기
-	const f = document.cartForm;
+	const f = document.cartForm;	
 	
 	let cnt = $("form input[name=nums]:checked").length;
     if (cnt === 0) {
@@ -52,18 +52,12 @@ function sendOk() {
 		}
 	});
 	
-	f.action = "${pageContext.request.contextPath}/campsite/reservation";
-	f.submit();
+    f.action = "${pageContext.request.contextPath}/campsite/reservation";
+    
+    f.submit();
 }
 
--->
 
-function deleteCartAll(){
-	if (! confirm('장바구니를 비우시겠습니까?')){
-		return;
-	}	
-	location.href = '${pageContext.request.contextPath}/campsite/deleteCartAll';
-}
 
 function deleteCartSelect() {
 	// 선택삭제
@@ -97,7 +91,7 @@ function deleteCartSelect() {
 			
 			<form name="cartForm" method="post">
 				<div style="padding: 15px 0 5px;">
-					<button type="button" class="btn cart-deleteCheck" onclick="deleteCartSelect()();">선택삭제</button>
+					<button type="button" class="btn cart-deleteCheck" onclick="deleteCartSelect();">선택삭제</button>
 				</div>
 				<table class="table cart-list">
 					<thead>

@@ -44,19 +44,16 @@
 								<img class="border rounded md-img" src="${pageContext.request.contextPath}/uploads/product/${dto.thumbnail}">
 							</td>
 							<td>
-								<div class="fw-semibold">솔향기 캠핑장</div>
+								<div class="fw-semibold">${dto.content}</div>
 								
-								<!--
+								
 								<input type="hidden" name="productNums" value="${dto.productNum}">
 								<input type="hidden" name="detailNums" value="${dto.detailNum}">
-								<input type="hidden" name="detailNums2" value="${dto.detailNum2}">
-								<input type="hidden" name="buyQtys" value="${dto.qty}">
-								<input type="hidden" name="productMoneys" value="${dto.productMoney}">
-								<input type="hidden" name="prices" value="${dto.price}">
-								<input type="hidden" name="salePrices" value="${dto.salePrice}">
-								<input type="hidden" name="savedMoneys" value="${dto.savedMoney}">
+								
+								<input type="hidden" name="memberIdx" value="${dto.memberIdx}">
+								<input type="hidden" name="detailNum" value="${dto.detailNum}">
 							</td>
-                                -->
+                                
 							<td>
 								<fmt:requestEncoding value="UTF-8"/>
 								<c:out value="${방이름 }"/>
@@ -72,7 +69,7 @@
 							
 							<td>
 								<label class="fw-semibold">
-									<fmt:formatNumber value="${결제금액} type="currency/>
+									<fmt:formatNumber value="${결제금액}"/>
 								</label>
 							</td>
                             
