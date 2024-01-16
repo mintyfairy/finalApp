@@ -172,7 +172,7 @@
 	                                </div>
 	                                <p class="text-body mb-3">${dto.content}</p>
 	                                <div class="d-flex justify-content-between">
-	                                    <a class="btn btn-sm btn-primary2 rounded py-2 px-4" onclick="AJAXCART()">장바구니에 넣기</a>
+	                                    <a class="btn btn-sm btn-primary2 rounded py-2 px-4" onclick="AJAXCART(${dto.detailnum})">장바구니에 넣기</a>
 	                                    <a class="btn btn-sm btn-dark rounded py-2 px-4 " onclick="location.href ='${pageContext.request.contextPath}/site/book/${dto.detailNum}'">지금 바로 예약하기</a>
 	                                </div>
 	                            </div>
@@ -322,6 +322,56 @@ function searchRoom(a) {
 	console.log(query)
 	f.action = "${pageContext.request.contextPath}/site/places/"+a;
 	f.submit();
+}
+function ajaxFun(url, method, formData, dataType, fn, file = false) {
+	const sentinelNode = document.querySelector('.sentinel');
+	
+	const settings = {
+			type: method, 
+			data: formData,
+			success:function(data) {
+				fn(data);
+			},
+			beforeSend: function(jqXHR) {
+				sentinelNode.setAttribute('data-loading', 'true');
+				
+				jqXHR.setRequestHeader('AJAX', true);
+			},
+			complete: function () {
+			},
+			error: function(jqXHR) {
+				if(jqXHR.status === 403) {
+					login();
+					return false;
+		    	} else if(jqXHR.status === 401) {
+		    		return false;
+		    	} else if(jqXHR.status === 402) {
+		    		alert('권한이 없습니다.');
+		    		return false;
+				} else if(jqXHR.status === 400) {
+					alert('요청 처리가 실패 했습니다.');
+					return false;
+		    	}
+		    	
+				console.log(jqXHR.responseText);
+			}
+	};
+function AJAXCART(dnum){
+	if 
+	f=document.roomSearchForm
+	sdate= f.startDate.value;
+	edate= f.endDate.value;
+	if(f.startDate.value ||f.endDate.value){
+		if (!f.startDate.vaulue){
+			alert('시작일도 선택해주세요')
+			return;
+		}
+		if (!f.endDate.vaulue){
+			alert('종료일도 선택해주세요')
+			return;
+		}
+	}
+ 	let url="${pageContext.request.contextPath}/campsite/saveCart"
 }
 </script>
 	

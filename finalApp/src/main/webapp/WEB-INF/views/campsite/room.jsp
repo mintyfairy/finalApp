@@ -265,12 +265,12 @@
         function searchSite() {
         	const f= document.siteSearchForm;
         	let list=f.siteOption;
-        	if(f.startDate.vaulue.trim() ||f.endDate.vaulue.trim()){
-        		if (f.startDate.vaulue.trim()){
+        	if(f.startDate.value ||f.endDate.value){
+        		if (!f.startDate.value){
         			alert('시작일도 선택해주세요')
         			return;
         		}
-        		if (f.endDate.vaulue.trim()){
+        		if (!f.endDate.value){
         			alert('종료일도 선택해주세요')
         			return;
         		}
