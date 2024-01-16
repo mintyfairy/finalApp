@@ -105,6 +105,6 @@ public interface SiteMapper {
 	
 	
 	
-	//하루지난 카레는 지울까 말까... 일단 나중에
+	//하루지난 카트는 지울까 말까... 일단 나중에
 	public void resetCart();
 }
