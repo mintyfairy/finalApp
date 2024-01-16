@@ -26,6 +26,10 @@
 	min-height: 300px;
 }
 
+.table tr {
+	border-bottom: 1px solid #dedede;
+}
+
 .table .ellipsis {
 	position: relative;
 	min-width: 200px;
@@ -98,10 +102,10 @@ $(function(){
 		<div class="body-main">
 			<ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
 				<li class="nav-item" role="presentation">
-					<button class="nav-link ${tab=='1'?'active':''}" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="1" aria-selected="${tab==1?'true':'false'}">모든상품</button>
+					<button class="nav-link ${tab==1?'active':''}" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="1" aria-selected="${tab==1?'true':'false'}">모든상품</button>
 				</li>
 				<li class="nav-item" role="presentation">
-					<button class="nav-link ${tab=='2'?'active':''}" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="2" aria-selected="${tab==2?'true':'false'}">특가상품</button>
+					<button class="nav-link ${tab==2?'active':''}" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="2" aria-selected="${tab==2?'true':'false'}">특가상품</button>
 				</li>
 			</ul>
 			
@@ -176,10 +180,10 @@ $(function(){
 				</div>
 					<table class="table table-borderless board-list" style="width: 1080px;">
 						<colgroup>
-							<col width="100">
+							<col width="130">
 							<col width="*">
-							<col width="100">
-							<col width="100">
+							<col width="130">
+							<col width="150">
 						</colgroup>
 						<thead class="table-light">
 							<tr class="border-top border-dark table-light">
@@ -198,8 +202,8 @@ $(function(){
 											<td>
 												${not empty dto.answer ? '<span class="text-primary">답변완료</span>' : '<span class="text-secondary">답변대기</span>'}
 											</td>
-											<td class="left ellipsis">
-												<span>${fn:replace(dto.review, "<br>", "")}</span>
+											<td class="left ellipsis list-subject">
+												<p>${fn:replace(dto.review, "<br>", "")}</p>
 											</td>
 											<td>${dto.userName}</td>
 											<td>${fn:substring(dto.reviewDate, 0, 10)}</td>
@@ -258,6 +262,64 @@ $(function(){
 									</c:forEach>
 								</c:when>
 								<c:when test="${ tab == 2 }">
+									<c:forEach var="dto" items="${list}" varStatus="status">
+										<tr class="middle">
+											<td>
+												${not empty dto.answer ? '<span class="text-primary">답변완료</span>' : '<span class="text-secondary">답변대기</span>'}
+											</td>
+											<td class="left ellipsis list-subject">
+												<span>${fn:replace(dto.question, "<br>", "")}</span>
+											</td>
+											<td>${dto.questionId}</td>
+											<td>${fn:substring(dto.questionDate, 0, 10)}</td>
+										</tr>
+										<tr class="item-detail-content">
+											<td colspan="6" class="left p-0">
+												<div class="border-bottom p-2 px-3">
+													<div class="bg-light p-2">
+														<div>
+															<div class="p-2 pb-0 fw-semibold">
+																${dto.productName}
+															</div>
+															
+															<div class="row p-2">
+																<div class="col text-end">
+																	<span>${dto.questionDate}</span>
+																	|<span class="deleteReview" data-num="${dto.qnaNum}">삭제</span>
+																	|<span class="answerReview" data-num="${dto.qnaNum}" data-showReview="${dto.showQuestion}">답변</span>
+																</div>
+															</div>
+															
+															<div class="p-2">${dto.answer}</div>
+															
+															<c:if test="${not empty dto.listFilename}">
+																<div class="row gx-1 mt-2 mb-1 p-1">
+																	<c:forEach var="filename" items="${dto.listFilename}">
+																		<div class="col-md-auto md-img">
+																			<img class="border rounded" src="${pageContext.request.contextPath}/uploads/review/${filename}">
+																		</div>
+																	</c:forEach>
+																</div>
+															</c:if>
+															
+														</div>
+														
+														<c:if test="${not empty dto.answer}">
+															<div class="p-2 pt-0 border-top">
+																<div class="bg-light">
+																	<div class="p-3 pb-0">
+																		<label class="text-bg-primary px-2"> 관리자 </label> <label>${dto.answerDate}</label>
+																	</div>
+																	<div class="p-3 pt-1 pb-1 answer-content">${dto.answer}</div>
+																</div>
+															</div>						
+														</c:if>
+														
+													</div>
+												</div>
+											</td>
+										</tr>
+									</c:forEach>
 								</c:when>
 							</c:choose>
 						</tbody>

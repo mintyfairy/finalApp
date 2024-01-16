@@ -5,23 +5,28 @@
 
 	<!-- 상품 리뷰 -->
 	<select id="listReview" parameterType="map" resultType="com.fa.plus.admin.domain.shop.ShopReview">
-		SELECT pr.orderDetailNum, pr.memberIdx, userName, score, review, answer, pr.productNum, filename, showReview, 
-			pr.reviewDate, pr.answerDate, productName, op.optionValue, op2.optionValue optionValue2 
+		SELECT pr.orderDetailNum, score, review, 
+		answer, reviewDate, answerDate, showReview, 
+		pr.productNum, pr.memberIdx, fileNum, fileName, 
+		productName, userId, optionValue, optionValue2
 		FROM productReview pr 
-		JOIN member1 m ON pr.memberIdx = m.memberIdx 
-		JOIN orderDetail od ON pr.orderDetailNum = od.orderDetailNum 
-		JOIN product p ON p.productNum = od.productNum 
-		JOIN optionDetail op ON od.detailNum = op.detailNum 
-		JOIN optionDetail op2 ON od.detailNum2 = op2.detailNum 
-		LEFT OUTER JOIN ( 
-			SELECT fileNum, LISTAGG(filename, ',') WITHIN GROUP(ORDER BY fileNum) filename, orderDetailNum 
-            FROM productReviewFile 
-            GROUP BY fileNum, orderDetailNum 
-		) f ON pr.orderDetailNum=f.orderDetailNum 
+		LEFT OUTER JOIN productReviewFile f ON pr.orderDetailNum = f.orderDetailNum 
+		LEFT OUTER JOIN product p ON pr.productNum = p.productNum 
+		LEFT OUTER JOIN member1 m ON pr.memberIdx = m.memberIdx 
+		LEFT OUTER JOIN (
+		    SELECT orderDetailNum, d1.detailNum, d1.optionValue optionValue FROM optionDetail d1 
+		    JOIN orderDetail od1 ON d1.detailNum = od1.detailNum ) odd1 
+		ON pr.orderDetailNum = odd1.orderDetailNum 
+		LEFT OUTER JOIN (
+		    SELECT orderDetailNum, d2.detailNum, d2.optionValue optionValue2 FROM optionDetail d2 
+		    JOIN orderDetail od2 ON d2.detailNum = od2.detailNum ) odd2 
+		ON pr.orderDetailNum = odd2.orderDetailNum
 		<where>
+			<!-- 
 			<if test="memberIdx != null">
 				pr.memberIdx = #{memberIdx}
 			</if>
+			 -->
 			<if test="mode != null">
 				<if test="mode == 2">
 					AND ( answer IS NOT NULL )
@@ -39,9 +44,11 @@
 		SELECT NVL(COUNT(*), 0)
 		FROM productReview
 		<where>
+			<!-- 
 			<if test="memberIdx != null">
 				memberIdx = #{memberIdx}
 			</if>
+			 -->
 			<if test="mode != null">
 				<if test="mode == 2">
 					AND ( answer IS NOT NULL )
@@ -71,23 +78,20 @@
 	
 	<!-- 상품 문의 -->
 	<select id="listQuestion" parameterType="map" resultType="com.fa.plus.admin.domain.shop.ShopQuestion">
-		SELECT q.qnaNum, q.questionIdx, m.userId questionId, 
-        m.userName, secret, question, answer, answerIdx, 
-			q.productNum, productName, filename, showQuestion, 
-			questionDate, answerDate 
+		SELECT q.qnaNum, secret, question, answer, questionDate, 
+		answerDate, q.productNum, m1.userId questionId, m2.userId answerId, 
+		showQuestion, fileNum, filename, productName 
 		FROM productQna q 
-		JOIN product p ON q.productNum = p.productNum 
-		JOIN member1 m ON q.answerIdx = m.memberIdx 
-		LEFT OUTER JOIN ( 
-			SELECT qnaNum, LISTAGG(filename, ',') WITHIN GROUP(ORDER BY fileNum) filename 
-            FROM productQnaFile 
-            GROUP BY qnaNum 
-		) f ON q.qnaNum=f.qnaNum 
-		LEFT OUTER JOIN member1 m2 ON q.answerIdx = m2.memberIdx
+		LEFT OUTER JOIN productQnaFile f ON q.qnaNum = f.qnaNum 
+		LEFT OUTER JOIN product p ON q.productNum = p.productNum 
+		LEFT OUTER JOIN member1 m1 ON q.questionIdx = m1.memberIdx 
+		LEFT OUTER JOIN member1 m2 ON q.answerIdx = m2.memberIdx 
 		<where>
+		<!-- 
 			<if test="questionIdx != null">
 				q.questionIdx = #{questionIdx}
 			</if>
+		 -->
 			<if test="mode != null">
 				<if test="mode == 2">
 					AND ( answer IS NOT NULL )
@@ -105,9 +109,11 @@
 		SELECT NVL(COUNT(*), 0)
 		FROM productQna
 		<where>
-			<if test="memberIdx != null">
+			<!-- 
+			<if test="answerIdx != null">
 				answerIdx = #{answerIdx}
 			</if>
+			 -->
 			<if test="mode != null">
 				<if test="mode == 2">
 					AND ( answer IS NOT NULL )

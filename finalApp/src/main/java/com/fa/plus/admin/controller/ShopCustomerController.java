@@ -42,7 +42,7 @@ public class ShopCustomerController {
 		try {
 			Map<String, Object> map = new HashMap<String, Object>();
 			
-			int size = 5;
+			int size = 10;
 			int dataCount = 0;
 			
 			if (tab == 1) {

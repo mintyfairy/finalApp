@@ -8,6 +8,7 @@ public class ShopQuestion {
 	private long qnaNum;
 	private long productNum;
 	private long questionIdx;
+	private String questionId;
 	private String userName;
 	private int secret;
 	private String question;
@@ -160,5 +161,13 @@ public class ShopQuestion {
 
 	public void setProductName(String productName) {
 		this.productName = productName;
+	}
+
+	public String getQuestionId() {
+		return questionId;
+	}
+
+	public void setQuestionId(String questionId) {
+		this.questionId = questionId;
 	}
 }
