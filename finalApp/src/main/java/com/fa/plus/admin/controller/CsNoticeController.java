@@ -30,7 +30,7 @@ import com.fa.plus.common.MyUtil;
 import com.fa.plus.domain.SessionInfo;
 
 
-@Controller
+@Controller("admin.csNoticeController")
 @RequestMapping("/admin/cs/notice/*")
 public class CsNoticeController {
 	@Autowired

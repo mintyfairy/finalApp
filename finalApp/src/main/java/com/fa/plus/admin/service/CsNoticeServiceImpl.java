@@ -13,14 +13,13 @@ import com.fa.plus.admin.mapper.CsNoticeManageMapper;
 import com.fa.plus.common.FileManager;
 
 
-@Service
+@Service("admin.csNoticeServiceImpl")
 public class CsNoticeServiceImpl implements CsNoticeService{
 	@Autowired
 	private CsNoticeManageMapper mapper;
 
 	@Autowired
 	private FileManager fileManager;
-
 
 	@Override
 	public void insertNotice(CsNoticeManage dto, String pathname) throws Exception {
