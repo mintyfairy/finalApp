@@ -21,7 +21,7 @@ import com.fa.plus.domain.shop.Summary;
 import com.fa.plus.service.shop.ReviewService;
 
 @RestController
-@RequestMapping("/shop/review/*")
+@RequestMapping("/review/*")
 public class ReviewController {
 	@Autowired
 	private ReviewService service;
@@ -42,6 +42,7 @@ public class ReviewController {
 				
 				SessionInfo info = (SessionInfo)session.getAttribute("member");
 				dto.setMemberIdx(info.getMemberIdx());
+				dto.setOrderDetailNum(info.getMemberIdx());
 				
 				service.insertReview(dto, pathname);
 			} catch (Exception e) {

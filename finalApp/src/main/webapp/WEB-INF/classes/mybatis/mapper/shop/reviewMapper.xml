@@ -4,7 +4,7 @@
 <mapper namespace="com.fa.plus.mapper.ReviewMapper">
 	<insert id="insertReview" parameterType="com.fa.plus.domain.shop.Review">
 		INSERT INTO productReview(orderDetailNum, score, review, productNum, memberIdx, reviewDate, showReview, answerStatus)
-			VALUES(#{orderDetailNum}, #{score}, #{review}, #{productNum}, #{memberIdx}, SYSDATE, 1, 0)
+			VALUES(#{num}, #{score}, #{review}, #{productNum}, #{memberIdx}, SYSDATE, 1, 0)
 	</insert>
 	
 	<insert id="insertReviewFile" parameterType="com.fa.plus.domain.shop.Review">

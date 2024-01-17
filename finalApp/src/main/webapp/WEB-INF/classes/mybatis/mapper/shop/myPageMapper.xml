@@ -12,7 +12,7 @@
 	<select id="listPayment" parameterType="map" resultType="com.fa.plus.domain.shop.Payment">
 		SELECT po.orderNum, po.memberIdx, orderDate, totalMoney, od.savedMoney, 
 			usedSaved, deliveryCharge, payment, qty, salePrice, 
-			od.orderDetailNum, 
+			od.orderDetailNum, r.num, 
 			op.detailNum, op.optionValue, detailNum2, op2.optionValue optionValue2,
 			od.productNum, productMoney, productName, thumbnail, 
 			orderState, od.detailState,
@@ -24,7 +24,7 @@
 		JOIN optionDetail op ON od.detailNum = op.detailNum
 		JOIN optionDetail op2 ON od.detailNum2 = op2.detailNum
 		LEFT OUTER JOIN (
-			SELECT num, 1 reviewWrite
+			SELECT orderdetailnum AS num, 1 reviewWrite
 			FROM productReview
 			WHERE memberIdx = #{memberIdx}
 		) r ON od.orderDetailNum = r.num
@@ -45,7 +45,7 @@
 	
 	<insert id="insertDetailStateInfo" parameterType="map">
 		INSERT INTO detailStateInfo(stateNum, orderDetailNum, memberIdx, detailState, stateMemo, detailStateDate) VALUES
-			(detailState_seq.NEXTVAL, #{orderDetailNum}, #{memberIdx}, #{detailState}, 
+			(detailStateInfo_seq.NEXTVAL, #{orderDetailNum}, #{memberIdx}, #{detailState}, 
 				#{stateMemo,jdbcType=VARCHAR}, SYSDATE)
 	</insert>
 	

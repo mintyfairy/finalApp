@@ -254,7 +254,7 @@ function deleteCartItem(detailNum2) {
           </thead>
           <tbody>
           	<c:forEach var="dto" items="${list}">
-	            <tr>
+	            <trz>
 	              <td>
 	              	<img class="border rounded" width="50" height="50" src="${pageContext.request.contextPath}/uploads/product/${dto.thumbnail}">
 	              </td>

@@ -6,11 +6,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class Review {
 	private long orderDetailNum;
+	private long num;
 	private long memberIdx;
 	private String userName;
 	private int score;
 	private String review;
 	private String answer;
+	private long productNum;
 	private int answerStatus;
 	private String reviewDate;
 	private String answerDate;
@@ -135,6 +137,19 @@ public class Review {
 	public void setDeletePermit(boolean deletePermit) {
 		this.deletePermit = deletePermit;
 	}
+	public long getProductNum() {
+		return productNum;
+	}
+	public void setProductNum(long productNum) {
+		this.productNum = productNum;
+	}
+	public long getNum() {
+		return num;
+	}
+	public void setNum(long num) {
+		this.num = num;
+	}
+	
 	
 	
 }
