@@ -18,10 +18,11 @@ public interface ShopCustomerMapper {
 	public void updateReview(ShopReview dto) throws SQLException;
 	public void deleteReview(long orderDetailNum) throws SQLException;
 	
-	// 상품 질문
+	// 상품 문의
 	public List<ShopQuestion> listQuestion(Map<String, Object> map);
 	public List<ShopQuestion> listQuestionFile(long qnaNum);
 	public int questionCount(Map<String, Object> map);
-	public void updateQuestion(ShopQuestion dto) throws SQLException;
+	public void updateQuestion(Map<String, Object> map) throws SQLException;
 	public void deleteQuestion(long qnaNum) throws SQLException;
+	public void deleteQuestionFile(long qnaNum) throws SQLException;
 }

@@ -270,7 +270,7 @@ $(function(){
 															<div class="col text-end">
 																<span>${dto.questionDate}</span>
 																|<span class="deleteQuestion" data-num="${dto.qnaNum}">삭제</span>
-																|<span class="answerQuestion" data-num="${dto.qnaNum}" data-showQuestion="${dto.showQuestion}">답변</span>
+																|<span class="answerQuestion" data-num="${dto.qnaNum}" data-showQuestion="${dto.showQuestion}">${ not empty dto.answer ? '답변수정' : '답변' }</span>
 															</div>
 														</div>
 														
@@ -298,7 +298,6 @@ $(function(){
 															</div>
 														</div>						
 													</c:if>
-													
 												</div>
 											</div>
 										</td>
@@ -317,10 +316,146 @@ $(function(){
 	</div>
 </div>
 
+<div class="modal hidden" id="answerDialogModal" tabindex="-1" 
+		data-bs-backdrop="static" data-bs-keyboard="false"
+		aria-labelledby="answerDialogModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="answerDialogModalLabel">상품 문의 답변</h5>
+				<button type="button" class="btn-close btnAnswerSendCancel" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="p-2 answer-form">
+					<form name="answerForm" method="post">
+						<div class="row">
+							<div class="col">
+								<span class="fw-bold">답변 달기</span>
+							</div>
+							<div class="col-3 text-end">
+								<input type="checkbox" name="showQuestion" id="showQuestion1" class="form-check-input" 
+									value="1">
+								<label class="form-check-label" for="showQuestion1">표시</label>
+							</div>
+						</div>
+						<div class="p-1">
+							<input type="hidden" name="qnaNum">
+							<input type="hidden" name="mode" value="${mode}">
+							<input type="hidden" name="page" value="${page}">
+							<input type="hidden" name="col" value="${col}">
+							<textarea name="answer" id="answer" class="form-control"></textarea>
+						</div>
+					</form>
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary btnAnswerSendOk">답변등록 <i class="bi bi-check2"></i> </button>
+				<button type="button" class="btn btn-secondary btnAnswerSendCancel" data-bs-dismiss="modal">취소</button>
+			</div>			
+		</div>
+	</div>
+</div>
+
 <script type="text/javascript">
+function ajaxFun(url, method, formData, dataType, fn, file = false) {
+	const settings = {
+			type: method, 
+			data: formData,
+			dataType: dataType,
+			success:function(data) {
+				fn(data);
+			},
+			beforeSend: function(jqXHR) {
+				jqXHR.setRequestHeader('AJAX', true);
+			},
+			complete: function () {
+			},
+			error: function(jqXHR) {
+				if(jqXHR.status === 403) {
+					login();
+					return false;
+				} else if(jqXHR.status === 400) {
+					alert('요청 처리가 실패 했습니다.');
+					return false;
+		    	}
+		    	
+				console.log(jqXHR.responseText);
+			}
+	};
+	
+	if(file) {
+		settings.processData = false;  // file 전송시 필수. 서버로전송할 데이터를 쿼리문자열로 변환여부
+		settings.contentType = false;  // file 전송시 필수. 서버에전송할 데이터의 Content-Type. 기본:application/x-www-urlencoded
+	}
+	
+	$.ajax(url, settings);
+}
+
 $(function(){
 	$('.list-subject').click(function() {
 		$(this).closest('tr').next().toggleClass('hidden')
 	});
+});
+
+$('.answerQuestion').click(function(){
+	let qnaNum = $(this).attr("data-num");
+	let showQuestion = $(this).attr("data-showQuestion");
+	let $answer = $(this).closest("td").find(".answer-content");
+	let answer = "";
+	if($answer.length) {
+		answer = $answer.text();
+	}
+	const f = document.answerForm;
+	f.qnaNum.value = qnaNum;
+	if(showQuestion === "1") {
+		f.showQuestion.checked = true;
+	}
+	f.answer.value = answer;
+	
+	$("#answerDialogModal").show();
+});
+
+$('.btnAnswerSendOk').click(function(){
+	const f = document.answerForm;
+	let s;
+	
+	s = f.answer.value.trim();
+	if( ! s ) {
+		alert("답변을 입력하세요.")	;
+		f.answer.focus();
+		return false;
+	}
+	
+	let param = $('form[name=answerForm]').serialize();
+	let url = '${pageContext.request.contextPath}/admin/shopCustomer/question/answer';
+	
+	const fn = function(data) {
+		console.log(data);
+		if(data.state === 'true') {
+			
+			f.reset();
+			
+			$('#answerDialogModal').hide();
+			
+			let url2 = '${pageContext.request.contextPath}/admin/shopCustomer/question';
+			url2 += '?page=${page}&mode=${mode}&col=${col}';
+			location.href = url2;
+		} else {
+			alert('발송처리가 실패했습니다.');
+		};
+	};
+	
+	ajaxFun(url, "post", param, "json", fn);
+	
+	//f.action = "${pageContext.request.contextPath}/admin/customer/question/answer";
+	//f.submit();
+});
+
+$('.btnAnswerSendCancel').click(function(){
+	const f = document.answerForm;
+	f.reset();
+	
+	$("#answerDialogModal").hide();
 });
 </script>

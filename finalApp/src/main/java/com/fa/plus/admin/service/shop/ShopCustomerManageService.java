@@ -14,5 +14,6 @@ public interface ShopCustomerManageService {
 	// qna 관리
 	public List<ShopQuestion> listQuestion(Map<String, Object> map);
 	public int questionCount(Map<String, Object> map);
+	public void updateQuestion(Map<String, Object> map) throws Exception;
 	public void deleteQuestion(long qnaNum, String pathname) throws Exception;
 }

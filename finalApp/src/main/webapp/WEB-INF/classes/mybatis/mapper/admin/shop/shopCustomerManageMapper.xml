@@ -138,9 +138,9 @@
 		</where>
 	</select>
 	
-	<update id="updateQuestion" parameterType="com.fa.plus.admin.domain.shop.ShopQuestion">
-		UPDATE productQna SET answer = #{answer}, answerId = #{answerId}, answerDate = SYSDATE, 
-			showQuestion = #{showQuestion}
+	<update id="updateQuestion" parameterType="map">
+		UPDATE productQna SET answer = #{answer}, answerIdx = #{answerIdx}, 
+			answerDate = SYSDATE, showQuestion = #{showQuestion} 
 		WHERE qnaNum = #{qnaNum}
 	</update>
 	
@@ -152,6 +152,11 @@
 	
 	<delete id="deleteQuestion" parameterType="long">
 		DELETE FROM productQna
+		WHERE qnaNum = #{qnaNum}
+	</delete>
+	
+	<delete id="deleteQuestionFile" parameterType="long">
+		DELETE FROM productQnaFile
 		WHERE qnaNum = #{qnaNum}
 	</delete>
 </mapper>

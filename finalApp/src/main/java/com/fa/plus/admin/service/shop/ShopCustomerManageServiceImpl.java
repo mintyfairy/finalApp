@@ -114,6 +114,7 @@ public class ShopCustomerManageServiceImpl implements ShopCustomerManageService 
 				}
 			}
 			
+			mapper.deleteQuestionFile(qnaNum);
 			mapper.deleteQuestion(qnaNum);
 			
 		} catch (Exception e) {
@@ -122,5 +123,16 @@ public class ShopCustomerManageServiceImpl implements ShopCustomerManageService 
 		}
 		
 	}
+
+	@Override
+	public void updateQuestion(Map<String, Object> map) throws Exception {
+		try {
+			mapper.updateQuestion(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
 
 }

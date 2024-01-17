@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fa.plus.admin.domain.shop.ShopQuestion;
 import com.fa.plus.admin.domain.shop.ShopReview;
@@ -134,7 +136,7 @@ public class ShopCustomerController {
 			String cp = req.getContextPath();
 			String listUrl = cp + "/admin/shopCustomer/question";
 			if(mode != 1) {
-				listUrl += "?mode=" + mode + "&tab" + tab + "&col=" + col;
+				listUrl += "?mode=" + mode + "&col=" + col;
 			}
 			String paging = myUtil.paging(current_page, total_page, listUrl);
 			System.out.println("!!!!!!!!!!!!@@@@@@@@@@@@@@ question" + list);
@@ -155,6 +157,27 @@ public class ShopCustomerController {
 		}
 		
 		return ".admin.shopCustomer.question";
+	}
+	
+	@PostMapping("question/answer")
+	@ResponseBody
+	public Map<String, Object> questionAnswer(
+			@RequestParam Map<String, Object> paramMap, 
+			HttpSession session) {
+		String state = "true";
+		System.out.println("!!!!@@@@####$%%" + paramMap.get("showQuestion"));
+		
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		try {
+			paramMap.put("answerIdx", info.getMemberIdx());
+			service.updateQuestion(paramMap);
+		} catch (Exception e) {
+			state = "false";
+		}
+		
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("state", state);
+		return model;
 	}
 	
 	@GetMapping("question/delete")
