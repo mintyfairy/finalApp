@@ -208,8 +208,6 @@ ul {
 
 /* 공통헤더 마지막 */
 
-
-
 </style>
 
 <div class="header_top">
@@ -240,15 +238,13 @@ ul {
 			               	<li class="header_item"><a href="${pageContext.request.contextPath}/member/login"><i class="fa-solid fa-right-to-bracket fa-lg"></i></a></li>
 				        </c:when>
 				        <c:otherwise>
-				        	<li class="header_item"><a href="${pageContext.request.contextPath}/member/logout" title="로그아웃"><i class="fa-solid fa-unlock" style="font-size:17px;"></i></a></li>
+				        	<li class="header_item"><a href="${pageContext.request.contextPath}/member/logout" title="로그아웃"><i class="fa-solid fa-right-to-bracket fa-lg"></i></a></li>
 						</c:otherwise>
 			     </c:choose>
                 
                 <li class="header_item fa-lg"><a href="${pageContext.request.contextPath}/member/join"><i class="fa-solid fa-user-plus"></i></a></li>
                 <li class="header_item fa-lg"><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
-                <c:if test='${sessionScope.member.authority=="CAMP"||sessionScope.member.authority=="ADMIN"}'>
-				    <li class="header_item fa-lg"><a href="${pageContext.request.contextPath}/admin"><i class="fa-solid fa-user-gear"></i></a></li>
-				</c:if>
+                <li class="header_item fa-lg"><a href="#"><i class="fa-solid fa-headset"></i></a></li>
             </ul>
         </div>
     </div>
@@ -265,20 +261,10 @@ ul {
                     <a href="${pageContext.request.contextPath}/car/location">오시는길</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/car/cs.faq">고객센터</a>
-                    <ul class="submenu1">
-                        <li><a href="${pageContext.request.contextPath}/car/cs.faq">FAQ</a></li>
-                        <li><a href="${pageContext.request.contextPath}/car/cs.notice">공지사항</a></li>
-                    </ul>
+                    <a href="${pageContext.request.contextPath}/car/mypage/rider">MY PAGE</a>
                 </li>
                 <li>
-                    <a href="#">마이페이지</a>
-                    <ul class="submenu2">
-                        <li><a href="#">운전자 정보</a></li>
-                        <li><a href="${pageContext.request.contextPath}/car/mypage.zzim">찜</a></li>
-                        <li><a href="#">예약내역</a></li>
-                        <li><a href="#">1:1 문의</a></li>
-                    </ul>
+                	&nbsp;
                 </li>
                 <li>
                 	&nbsp;

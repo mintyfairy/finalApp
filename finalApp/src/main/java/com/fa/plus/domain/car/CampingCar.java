@@ -40,8 +40,15 @@ public class CampingCar {
 	private int reviewCount;
 	private int questionCount;
 	
+	private int fee;
 	
 	
+	public int getFee() {
+		return fee;
+	}
+	public void setFee(int fee) {
+		this.fee = fee;
+	}
 	
 	public double getScore() {
 		return score;

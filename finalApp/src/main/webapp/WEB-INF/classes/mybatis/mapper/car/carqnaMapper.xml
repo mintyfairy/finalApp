@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fa.plus.mapper.CarQnaMapper">
+	<insert id="insertCarQna" parameterType="com.fa.plus.domain.car.CarQna">
+		INSERT INTO carQna(qnaNum, carNum, memberIdx, secret, question, question_date, q_content)
+			VALUES(qnaNum_seq.NEXTVAL, #{carNum, jdbcType=INTEGER}, #{memberIdx}, #{secret}, #{question}, SYSDATE, #{q_content})
+	
+	
+	</insert>
+	
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM carQna
+		WHERE carNum = #{carNum, jdbcType=INTEGER}
+	</select>
+	
+	<select id="listCarQna" parameterType="map" resultType="com.fa.plus.domain.car.CarQna">
+		SELECT q.qnaNum, q.memberIdx, m.userName, secret, question, m2.userId answerId,  
+			q.carNum, question_date, answer_date, q_content
+		FROM carQna q
+		
+		JOIN member1 m ON q.memberIdx = m.memberIdx	
+		LEFT OUTER JOIN member1 m2 ON q.answerId = m2.userId
+		WHERE q.carNum = #{carNum, jdbcType=INTEGER}
+		ORDER BY q.qnaNum DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+	
+</mapper>

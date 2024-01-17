@@ -29,34 +29,13 @@ public class CarReservation {
 	private String end_date;
 	private int addRider;
 	
-	private int memberIdx;
+	private long memberIdx;
 	private String userId;
 	private String userName;
 	private String tel;
 	
-	
-	
-	
-	
-	
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public String getTel() {
-		return tel;
-	}
-	public void setTel(String tel) {
-		this.tel = tel;
-	}
+	private int fee;
+
 	// 결제 내역 정보
 	private String payMethod;
 	private String cardName;
@@ -72,8 +51,6 @@ public class CarReservation {
 	private String addBirth;
 	private String addRegist;
 	private String addLicenseImage;
-	
-	
 	public long getCarNum() {
 		return carNum;
 	}
@@ -218,11 +195,35 @@ public class CarReservation {
 	public void setAddRider(int addRider) {
 		this.addRider = addRider;
 	}
-	public int getMemberIdx() {
+	public long getMemberIdx() {
 		return memberIdx;
 	}
-	public void setMemberIdx(int memberIdx) {
+	public void setMemberIdx(long memberIdx) {
 		this.memberIdx = memberIdx;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+	public int getFee() {
+		return fee;
+	}
+	public void setFee(int fee) {
+		this.fee = fee;
 	}
 	public String getPayMethod() {
 		return payMethod;
@@ -284,7 +285,6 @@ public class CarReservation {
 	public void setAddLicenseImage(String addLicenseImage) {
 		this.addLicenseImage = addLicenseImage;
 	}
-	
-	
+
 
 }

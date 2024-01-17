@@ -66,7 +66,6 @@ public class MainCarController {
 	
 	@GetMapping("car_detail")
 	public String buyRequest(@RequestParam(name = "carNum") long carNum,
-			//@RequestParam(name = "caravanNum") String caravanNum,
 			@RequestParam(defaultValue = "all") String schType,
 			@RequestParam(defaultValue = "") String kwd,
 			Model model) throws Exception {
@@ -85,8 +84,11 @@ public class MainCarController {
 			dto.setImageFilename(dto.getThumbnail());
 			listFile.add(0, dto);
 			
+			dto.setFee(dto.getFee());
+			
 			model.addAttribute("dto", dto);
 			model.addAttribute("listFile", listFile);
+			
 			
 		} catch (Exception e) {
 			// return "redirect:/car/main";

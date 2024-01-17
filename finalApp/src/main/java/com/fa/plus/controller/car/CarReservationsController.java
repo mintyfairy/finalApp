@@ -9,7 +9,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fa.plus.domain.Member;
 import com.fa.plus.domain.SessionInfo;
@@ -28,7 +33,8 @@ public class CarReservationsController {
 	
 	@RequestMapping("orderPage")
 	public String paymentForm(
-			CarReservation SearchDto,
+			CarReservation searchDto,
+			@RequestParam int fee,
 			HttpSession session,
 			Model model) throws Exception {
 		
@@ -37,35 +43,31 @@ public class CarReservationsController {
 			if(info == null) {
 				return "redirect:/member/login";
 			}
-
 			Member orderUser = memberService.findById(info.getMemberIdx());
-
-			CarReservation dto = service.findById(SearchDto.getCarNum());
 			
-			dto.setStart_date(SearchDto.getStart_date());
-			dto.setEnd_date(SearchDto.getEnd_date());
+			String carReservationOrderNumber = null;
+			carReservationOrderNumber = service.carReservationOrderNumber();
+			
+
+			CarReservation dto = service.findById(searchDto.getCarNum());
+			
+			dto.setStart_date(searchDto.getStart_date());
+			dto.setEnd_date(searchDto.getEnd_date());
+			dto.setTotMoney(searchDto.getTotMoney());
+			dto.setDiscount(searchDto.getTotMoney() - searchDto.getFee());
+			dto.setFee(searchDto.getFee());
+			dto.setDiscountRate(searchDto.getDiscountRate());
+			dto.setPayment(searchDto.getFee());
 			
 			List<Map<String, Long>> list = new ArrayList<Map<String,Long>>();
 			List<CarReservation> listSelectCar = service.listSelectCar(list);
 			
-			String orderNum = null; // 주문번호
-			int totalMoney = 0; // 상품합
-			int payment = 0;  // 결제할 금액(상품합 + 배송비)
-			int discount = 0; // 총 할인액
 			
-			orderNum = service.carReservationOrderNumber();
-			
-			// String start_date = dto.getStart_date();
-			// String end_date = dto.getEnd_date();
-			
-			
-			model.addAttribute("carReservationOrderNumber", orderNum);
+			model.addAttribute("carReservationOrderNumber", carReservationOrderNumber);
 			model.addAttribute("listSelectCar", listSelectCar);
 			model.addAttribute("dto", dto);
-			model.addAttribute("carNum", SearchDto.getCarNum());
 			model.addAttribute("orderUser", orderUser);
-			// model.addAttribute("start_date", start_date);
-			// model.addAttribute("end_date", end_date);
+
 			// model.addAttribute("userName", info.getUserName());
 			
 			return ".car.reservation.orderPage";
@@ -76,5 +78,48 @@ public class CarReservationsController {
 		
 		return "redirect:/";
 		
+	}
+	
+	@PostMapping("paymentOk")
+	public String paymentSubmit(
+			CarReservation dto,
+			RedirectAttributes reAttr,
+			HttpSession session) throws Exception {
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+	
+		try {
+			dto.setMemberIdx(info.getMemberIdx());
+			
+			service.insertCarReservation(dto);
+			
+			
+			String p = String.format("%,d", dto.getPayment());
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(info.getUserName() + "님 캠핑카가 예약되었습니다.<br>");
+			sb.append("기간 : "+dto.getStart_date()+"~"+dto.getEnd_date()+"<br>");
+			sb.append("결제 금액 : <label class='fs-5 fw-bold text-primary'>" +  p + "</label>원");
+
+			reAttr.addFlashAttribute("title", "결제 완료");
+			reAttr.addFlashAttribute("message", sb.toString());
+			
+			return "redirect:/car/reservation/complete";
+					
+		} catch (Exception e) {
+		}
+		
+		return "redirect:/";
+	}
+	
+	@GetMapping("complete")
+	public String complete(@ModelAttribute("title") String title, 
+			@ModelAttribute("message") String message
+			) throws Exception {
+		// F5를 누른 경우
+		if (message == null || message.length() == 0) { 
+			return "redirect:/";
+		}
+		
+		return ".car.reservation.complete";
 	}
 }
