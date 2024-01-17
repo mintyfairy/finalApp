@@ -254,7 +254,7 @@ $(function(){
 							<tr valign="middle">
 								<td>${dto.productNum}</td>
 								<td class="product-subject left">
-									<img src="${pageContext.request.contextPath}/uploads/shop/${dto.thumbnail}">
+									<img src="${pageContext.request.contextPath}/uploads/product/${dto.thumbnail}">
 									<a href="#"><label>${ dto.productName }</label></a>
 									<input type="hidden" value="${ dto.productNum }">
 								</td>

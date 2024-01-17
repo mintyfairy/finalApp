@@ -9,11 +9,15 @@ import org.springframework.stereotype.Service;
 import com.fa.plus.admin.domain.shop.ShopQuestion;
 import com.fa.plus.admin.domain.shop.ShopReview;
 import com.fa.plus.admin.mapper.ShopCustomerMapper;
+import com.fa.plus.common.FileManager;
 
 @Service
 public class ShopCustomerManageServiceImpl implements ShopCustomerManageService {
 	@Autowired
 	private ShopCustomerMapper mapper;
+	
+	@Autowired
+	private FileManager fileManager;
 
 	@Override
 	public List<ShopReview> listReview(Map<String, Object> map) {
@@ -98,6 +102,25 @@ public class ShopCustomerManageServiceImpl implements ShopCustomerManageService 
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	@Override
+	public void deleteQuestion(long qnaNum, String pathname) throws Exception {
+		try {
+			List<ShopQuestion> listFile = mapper.listQuestionFile(qnaNum);
+			if(listFile != null) {
+				for (ShopQuestion dto : listFile) {
+					fileManager.doFileDelete(dto.getFilename(), pathname);
+				}
+			}
+			
+			mapper.deleteQuestion(qnaNum);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
 	}
 
 }

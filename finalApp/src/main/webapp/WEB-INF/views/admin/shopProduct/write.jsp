@@ -620,7 +620,7 @@ $(function(){
 $(function(){
 	var img = "${dto.thumbnail}";
 	if( img ) {
-		img = "${pageContext.request.contextPath}/uploads/shop/product/"+img;
+		img = "${pageContext.request.contextPath}/uploads/product/"+img;
 		$(".table-form .thumbnail-viewer").empty();
 		$(".table-form .thumbnail-viewer").css("background-image", "url("+img+")");
 	}
@@ -636,7 +636,7 @@ $(function(){
 			$(".table-form .thumbnail-viewer").empty();
 			
 			if( img ) {
-				img = "${pageContext.request.contextPath}/uploads/shop/product/"+img;
+				img = "${pageContext.request.contextPath}/uploads/product/"+img;
 			} else {
 				img = "${pageContext.request.contextPath}/resources/images/add_photo.png";
 			}

@@ -118,7 +118,7 @@ $(function(){
 					<button class="nav-link ${tab==1?'active':''}" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="1" aria-selected="${tab==1?'true':'false'}">상품리뷰</button>
 				</li>
 				<li class="nav-item" role="presentation">
-					<button class="nav-link ${tab==2?'active':''}" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="2" aria-selected="${tab==2?'true':'false'}">상품후기</button>
+					<button class="nav-link ${tab==2?'active':''}" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="2" aria-selected="${tab==2?'true':'false'}">상품문의</button>
 				</li>
 			</ul>
 			

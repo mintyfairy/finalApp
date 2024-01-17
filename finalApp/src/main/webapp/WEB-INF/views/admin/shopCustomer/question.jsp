@@ -55,6 +55,10 @@
 	align-content: center;
 }
 
+.hidden {
+	display: none;
+}
+
 .score-star { font-size: 0; letter-spacing: -4px; }
 .score-star .item {
 	font-size: 22px; letter-spacing: 1px; display: inline-block;
@@ -66,7 +70,7 @@
 .md-img img { width: 150px; height: 150px; cursor: pointer; object-fit: cover; }
 
 .item-basic-content { cursor: pointer; }
-.item-detail-content { display: none; }
+/* .item-detail-content { display: none; } */
 
 .answer-form textarea { width: 100%; height: 75px; resize: none; }
 
@@ -96,11 +100,37 @@ $(function(){
 $(function(){
 	$('#changeMode').change(function(){
 		let mode = $(this).val();
+		let col = $('#changeSort option:selected').val()
 		let url = '${pageContext.request.contextPath}/admin/shopCustomer/question';
-		if(mode !== '1') {
-			url += '?mode=' + mode;
-		}
+		
+		url += '?mode=' + mode + "&col=" + col;
 		location.href = url;
+	});
+});
+
+// 출력순서 : 최신질문순, 최신답변순, 상품번호순
+$(function(){
+	$('#changeSort').change(function(){
+		let mode = $('#changeMode option:selected').val()
+		let col = $(this).val();
+		let url = '${pageContext.request.contextPath}/admin/shopCustomer/question';
+		
+		url += '?mode=' + mode + "&col=" + col;
+		location.href = url;
+	});
+});
+
+$(function(){
+	$('.deleteQuestion').click(function(){
+		let qnaNum = $(this).attr('data-num');
+		let mode = $('#changeMode option:selected').val();
+		let col = $('#changeSort option:selected').val();
+		console.log(qnaNum + ', ' + mode + ', ' + col);
+				
+		if(confirm('게시글을 삭제 하시겠습니까 ? ')) {
+			let query = 'page=${page}&mode=' + mode + '&col=' + col + '&qnaNum=' + qnaNum;
+			location.href = '${pageContext.request.contextPath}/admin/shopCustomer/question/delete?' + query;
+		}
 	});
 });
 </script>
@@ -117,7 +147,7 @@ $(function(){
 					<button class="nav-link ${tab==1?'active':''}" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="1" aria-selected="${tab==1?'true':'false'}">상품리뷰</button>
 				</li>
 				<li class="nav-item" role="presentation">
-					<button class="nav-link ${tab==2?'active':''}" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="2" aria-selected="${tab==2?'true':'false'}">상품후기</button>
+					<button class="nav-link ${tab==2?'active':''}" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="2" aria-selected="${tab==2?'true':'false'}">상품문의</button>
 				</li>
 			</ul>
 			
@@ -126,15 +156,23 @@ $(function(){
 		        <div class="row board-list-header">
 		            <div class="col-auto me-auto">
 		            	<div class="btn-group" role="group">
-							<select id="changeMode" name="mode" class="form-select" class="form-select">
+							<select id="changeMode" name="mode" class="form-select">
 									<option value="1" ${ mode == 1 ? 'selected' : '' }>:: 전체 ::</option>
 									<option value="2" ${ mode == 2 ? 'selected' : '' }>:: 답변완료 ::</option>
 									<option value="3" ${ mode == 3 ? 'selected' : '' }>:: 미답변 ::</option>
+									<option value="4" ${ mode == 4 ? 'selected' : '' }>:: 비밀글 ::</option>
 							</select>
 		            	</div>
 		            </div>
 		            <div class="col-auto pt-2">
+		            <!-- 
 		            	<span>${dataCount}개(${page}/${total_page} 페이지)</span>
+		             -->
+						<select id="changeSort" name="col" class="form-select">
+								<option value="questionDate" ${ col == 'questionDate' ? 'selected' : '' }>:: 최신순 ::</option>
+								<option value="answerDate" ${ col == 'answerDate' ? 'selected' : '' }>:: 최신답변순 ::</option>
+								<option value="productNum" ${ col == 'productNum' ? 'selected' : '' }>:: 상품번호순 ::</option>
+						</select>
 		            </div>
 		        </div>
 				<div class="tab-pane fade show active" id="tab-pane" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
@@ -219,8 +257,8 @@ $(function(){
 										<td>${dto.questionId}</td>
 										<td>${fn:substring(dto.questionDate, 0, 10)}</td>
 									</tr>
-									<tr class="item-detail-content">
-										<td colspan="6" class="left p-0">
+									<tr class="item-detail-content hidden">
+										<td colspan="4" class="left p-0">
 											<div class="border-bottom p-2 px-3">
 												<div class="bg-light p-2">
 													<div>
@@ -278,3 +316,11 @@ $(function(){
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+$(function(){
+	$('.list-subject').click(function() {
+		$(this).closest('tr').next().toggleClass('hidden')
+	});
+});
+</script>

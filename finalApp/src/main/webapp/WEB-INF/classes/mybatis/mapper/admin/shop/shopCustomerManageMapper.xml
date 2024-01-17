@@ -79,8 +79,8 @@
 	<!-- 상품 문의 -->
 	<select id="listQuestion" parameterType="map" resultType="com.fa.plus.admin.domain.shop.ShopQuestion">
 		SELECT q.qnaNum, secret, question, answer, questionDate, 
-		answerDate, q.productNum, m1.userId questionId, m2.userId answerId, 
-		showQuestion, fileNum, filename, productName 
+		answerDate, q.productNum, m1.userId questionId, m1.userName, 
+		m2.userId answerId, showQuestion, fileNum, filename, productName 
 		FROM productQna q 
 		LEFT OUTER JOIN productQnaFile f ON q.qnaNum = f.qnaNum 
 		LEFT OUTER JOIN product p ON q.productNum = p.productNum 
@@ -99,9 +99,22 @@
 				<if test="mode == 3">
 					AND ( answer IS NULL )
 				</if>
+				<if test="mode == 4">
+					AND ( secret = 1 )
+				</if>
 			</if>
 		</where>
-		ORDER BY q.qnaNum DESC
+		<choose>
+			<when test="col == 'questionDate'">
+				ORDER BY ${col} DESC
+			</when>
+			<when test="col == 'answerDate'">
+				ORDER BY ${col} DESC
+			</when>
+			<when test="col == 'productNum'">
+				ORDER BY ${col}
+			</when>
+		</choose>
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
 	

@@ -17,6 +17,7 @@ public class ShopReview {
 	private boolean deletePermit;
 	private int showReview;
 	private int mode;
+	private String col;
 
 	private long fileNum;
 	private String filename;
@@ -141,6 +142,12 @@ public class ShopReview {
 	}
 	public void setMode(int mode) {
 		this.mode = mode;
+	}
+	public String getCol() {
+		return col;
+	}
+	public void setCol(String col) {
+		this.col = col;
 	}
 	
 }

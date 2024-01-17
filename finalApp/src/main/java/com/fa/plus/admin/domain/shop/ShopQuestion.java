@@ -19,6 +19,7 @@ public class ShopQuestion {
 	private String answerDate;
 	private int showQuestion;
 	private int mode;
+	private String col;
 	
 	private long fileNum;
 	private String filename;
@@ -178,5 +179,13 @@ public class ShopQuestion {
 
 	public void setMode(int mode) {
 		this.mode = mode;
+	}
+
+	public String getCol() {
+		return col;
+	}
+
+	public void setCol(String col) {
+		this.col = col;
 	}
 }
