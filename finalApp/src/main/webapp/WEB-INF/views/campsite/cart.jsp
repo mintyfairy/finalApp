@@ -26,8 +26,8 @@
 $(function(){
 	let cartSize = "${list.size()}";
 	if(cartSize!=="" && cartSize!=="0") {
-		$(".cart-chkAll").prop("checked", true);
-		$("form input[name=nums]").prop("checked", true);
+		$(".cart-chkAll").prop("checked", false);
+		$("form input[name=nums]").prop("checked", false);
 	}
 	
     $(".cart-chkAll").click(function() {
@@ -45,12 +45,12 @@ function sendOk() {
 		alert("구매할 상품을 먼저 선택 하세요 !!!");
 		return;
     }
-    
     $("form input[name=nums]").each(function(index, item){
 		if(! $(this).is(":checked")) {
 			$(this).closest("tr").remove();
 		}
 	});
+  
 	
     f.action = "${pageContext.request.contextPath}/campsite/reservation";
     
@@ -75,6 +75,7 @@ function deleteCartSelect() {
 	f.action = "${pageContext.request.contextPath}/campsite/deleteListCart";
 	f.submit();
 }
+
 
 
 </script>
@@ -145,8 +146,10 @@ function deleteCartSelect() {
 								<td>
 									<label class="productMoneys"><fmt:formatNumber value="${dto.periodPrice}"/></label><label>원</label>
 									<input type="hidden" name="dayPrice" value="${dto.price}">
+									<input type="hidden" name="bookPrice" value="${dto.periodPrice}">
+									<input type="hidden" name="startDate" value="${dto.startDate}">
+									<input type="hidden" name="endDate" value="${dto.endDate}">
 								</td>
-								
 							</tr>
 						
 						</c:forEach>
@@ -163,7 +166,7 @@ function deleteCartSelect() {
 						<div class="mt-3 p-3 text-end">
 							<input type="hidden" name="mode" value="cart">
 							<button type="button" class="btn border btn-primary" style="width: 200px;" onclick="sendOk();"> 선택 캠핑장 예약하기 </button>
-							<button type="button" class="btn border btn-light" onclick="deleteCartAll();"> 장바구니 모두 비우기 </button>
+							<button type="button" class="btn border btn-light" onclick="location.href='${pageContext.request.contextPath}/campsite/deleteAllCart'"> 장바구니 모두 비우기 </button>
 						</div>
 					</c:otherwise>
 				</c:choose>

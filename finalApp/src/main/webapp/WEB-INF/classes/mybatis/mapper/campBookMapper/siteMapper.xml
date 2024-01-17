@@ -17,6 +17,11 @@
 	    AND detailNum = #{detailNum}
 	</delete>
 	
+	<delete id="deleteAllCart" parameterType="map">
+	    DELETE FROM sitecart
+	    WHERE memberIdx = #{memberIdx}
+	</delete>
+	
 
 	
 	<select id="findByCart" parameterType="com.fa.plus.domain.site.SiteCart" resultType="com.fa.plus.domain.site.SiteCart">
@@ -57,7 +62,7 @@
 	
 	<insert id="insertBook" parameterType="com.fa.plus.domain.site.SiteCart">
 		insert into book(BOOKNUM,STARTDATE,ENDDATE ,BOOKPRICE ,detailNum ,LISTNUM) 
-			VALUES(book_seq.nextval,#{startDate},#{endDate},#{bookPrice},#{detailNum},booklist_seq.currval)
+			VALUES(book_seq.nextval,#{startDate},#{endDate},#{periodPrice},#{detailNum},booklist_seq.currval)
 		
 	</insert>
 	

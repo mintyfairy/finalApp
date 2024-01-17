@@ -13,6 +13,7 @@ public class SiteDetail {
 	private	String	content	;
 	private	String	capacity	;
 	private	long	floor	;
+	private	String	floorString	;
 	
 
 	
@@ -25,6 +26,14 @@ public class SiteDetail {
 	private List<String> listFile;
 
 	
+	public String getFloorString() {
+		return floorString;
+	}
+
+	public void setFloorString(String floorString) {
+		this.floorString = floorString;
+	}
+
 	public long getSdPicNum() {
 		return SdPicNum;
 	}

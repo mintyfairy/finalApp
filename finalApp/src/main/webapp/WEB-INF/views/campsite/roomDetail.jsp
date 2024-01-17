@@ -172,8 +172,8 @@
 	                                </div>
 	                                <p class="text-body mb-3">${dto.content}</p>
 	                                <div class="d-flex justify-content-between">
-	                                    <a class="btn btn-sm btn-primary2 rounded py-2 px-4" onclick="AJAXCART(${dto.detailnum})">장바구니에 넣기</a>
-	                                    <a class="btn btn-sm btn-dark rounded py-2 px-4 " onclick="location.href ='${pageContext.request.contextPath}/site/book/${dto.detailNum}'">지금 바로 예약하기</a>
+	                                    <a class="btn btn-sm btn-primary2 rounded py-2 px-4" onclick="ajaxCart('${empty sessionScope.member.memberIdx ?0:dto.detailNum}')">장바구니에 넣기</a>
+	                                    <a class="btn btn-sm btn-dark rounded py-2 px-4 " onclick="gogoCart('${empty sessionScope.member.memberIdx ?0:dto.detailNum}')">지금 바로 예약하기</a>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -325,7 +325,6 @@ function searchRoom(a) {
 }
 function ajaxFun(url, method, formData, dataType, fn, file = false) {
 	const sentinelNode = document.querySelector('.sentinel');
-	
 	const settings = {
 			type: method, 
 			data: formData,
@@ -333,7 +332,6 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 				fn(data);
 			},
 			beforeSend: function(jqXHR) {
-				sentinelNode.setAttribute('data-loading', 'true');
 				
 				jqXHR.setRequestHeader('AJAX', true);
 			},
@@ -356,22 +354,61 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 				console.log(jqXHR.responseText);
 			}
 	};
-function AJAXCART(dnum){
-	if 
+	$.ajax(url, settings);
+}
+function ajaxCart(dnum){
+	if (dnum==0){
+		alert('로그인해주세요')
+		return;
+	}
 	f=document.roomSearchForm
 	sdate= f.startDate.value;
 	edate= f.endDate.value;
-	if(f.startDate.value ||f.endDate.value){
-		if (!f.startDate.vaulue){
-			alert('시작일도 선택해주세요')
-			return;
-		}
-		if (!f.endDate.vaulue){
-			alert('종료일도 선택해주세요')
-			return;
-		}
+	if (!f.startDate.value){
+		alert('시작일도 선택해주세요')
+		return;
 	}
+	if (!f.endDate.value){
+		alert('종료일도 선택해주세요')
+		return;
+	}
+	formData= $('form[name=roomSearchForm]').serialize();
+	formData+='&detailNum='+dnum
+	console.log(formData)
  	let url="${pageContext.request.contextPath}/campsite/saveCart"
+ 	const fn = function(data) {
+		if(confirm('카트에 담았습니다. 카트로 이동하시겠습니까?')){
+			location.href="${pageContext.request.contextPath}/campsite/cart";
+		}
+	};
+	ajaxFun(url, 'post', formData, 'json', fn);
+}
+function gogoCart(dnum){
+	if (dnum==0){
+		alert('로그인해주세요')
+		return;
+	}
+	f=document.roomSearchForm
+	sdate= f.startDate.value;
+	edate= f.endDate.value;
+	if (!f.startDate.value){
+		alert('시작일도 선택해주세요')
+		return;
+	}
+	if (!f.endDate.value){
+		alert('종료일도 선택해주세요')
+		return;
+	}
+	formData= $('form[name=roomSearchForm]').serialize();
+	formData+='&detailNum='+dnum
+	console.log(formData)
+ 	let url="${pageContext.request.contextPath}/campsite/saveCart"
+ 	const fn = function(data) {
+		if(data.state=='GET'){
+			location.href="${pageContext.request.contextPath}/campsite/cart";
+		}
+	};
+	ajaxFun(url, 'get', formData, 'json', fn);
 }
 </script>
 	

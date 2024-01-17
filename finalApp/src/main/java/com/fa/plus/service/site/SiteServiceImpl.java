@@ -55,6 +55,17 @@ public class SiteServiceImpl implements SiteService {
 			throw e;
 		}
 	}
+	@Override
+	public void deleteAllCart(long memberIdx) throws SQLException {
+		// TODO Auto-generated method stub
+		try {
+			mapper.deleteAllCart(memberIdx);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw e;
+		}
+	}
 
 	@Override
 	public List<SiteCart> listCart(long memberIdx) {

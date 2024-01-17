@@ -100,12 +100,19 @@ public class SiteBookController {
 		Site Sitedto=adminService.findByIdSite(num);
 		dto.setSiteNum(num);
 		List<SiteDetail> list = adminService.listSearchRoom(dto);
-		for(SiteDetail vo:list) {
+		for(int n=0;n<list.size();n++) {
 			List<String> filelist = new ArrayList<String>();
-			for(SiteDetail vo2:adminService.listRoomFile(vo.getDetailNum())){
+			for(SiteDetail vo2:adminService.listRoomFile(list.get(n).getDetailNum())){
 				filelist.add(vo2.getFileName());
 			}
-			if (filelist!=null&&filelist.size() != 0) vo.setListFile(filelist);
+			if (filelist!=null&&filelist.size() != 0) list.get(n).setListFile(filelist);
+			
+			long a=list.get(n).getFloor();
+			if (a==1) list.get(n).setFloorString("데크");
+			else if (a==2) list.get(n).setFloorString("잔디");  
+			else if (a==3) list.get(n).setFloorString("자갈");
+			else if (a==4) list.get(n).setFloorString("흙");
+			else if (a==5) list.get(n).setFloorString("기타");
 		}
 		List<Site> listSiteFile=adminService.listSiteFile(num);
 		// 전체 페이지 수
