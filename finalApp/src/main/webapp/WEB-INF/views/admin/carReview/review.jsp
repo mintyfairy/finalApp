@@ -81,7 +81,7 @@ $(function(){
       
       $("#tab-"+tab).addClass("active");
       
-      let url = "${pageContext.request.contextPath}/admin/carReview/ask";   
+      let url = "${pageContext.request.contextPath}/admin/carReview/qna";   
       location.href = url;
    });
 });
