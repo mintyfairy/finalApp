@@ -123,6 +123,6 @@ public class SiteCartController {
 			e.printStackTrace();
 		}
 		
-		return "redirect:/campsite/cart";
+		return "redirect:/site/mypage/bookList";
 	}
 }
