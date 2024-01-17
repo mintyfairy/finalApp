@@ -91,38 +91,66 @@ $(function(){
 	let url = "${pageContext.request.contextPath}/admin/carReservation/bar";
 	
 	$.getJSON(url, function(data){
-		// console.log(data);
-		
-		var chartDom = document.getElementById('barContainer');
-		var myChart = echarts.init(chartDom);
-		var option;
+		//console.log(data);
+		chartsMonth(data);	
+	});
 
+	function chartsMonth(data) {
+		let chartData = [];
+		
+		for(let item of data.months) {
+			let s = parseInt(item.ORDERDATE.substring(4))+'월';
+			let obj = {value:item.TOTALMONEY, name:s};
+			chartData.push(obj);
+		}
+		
+		const chartDom = document.querySelector(".charts-month");
+		let myChart = echarts.init(chartDom);
+		let option;
+		
 		option = {
-		  title: {
-		    text: data.year + "년 월별 매출"
-		  },
 		  tooltip: {
-		    trigger: 'axis'
+		    trigger: 'item'
 		  },
 		  legend: {
-		    data: data.legend
+		    top: '5%',
+		    left: 'center'
 		  },
-		  xAxis: {
-		    type: 'category',
-		    boundaryGap: false,
-		    data: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
-		  },
-		  yAxis: {
-		    type: 'value'
-		  },
-		  series: data.series
+		  series: [
+		    {
+		      name: '월별 판매현황',
+		      type: 'pie',
+		      radius: ['40%', '70%'],
+		      avoidLabelOverlap: false,
+		      itemStyle: {
+		        borderRadius: 10,
+		        borderColor: '#fff',
+		        borderWidth: 2
+		      },
+		      label: {
+		        show: false,
+		        position: 'center'
+		      },
+		      emphasis: {
+		        label: {
+		          show: true,
+		          fontSize: '40',
+		          fontWeight: 'bold'
+		        }
+		      },
+		      labelLine: {
+		        show: false
+		      },
+		      data: chartData
+		    }
+		  ]
 		};
-
+		
 		option && myChart.setOption(option);
-	});
-	
-	
+	}
+
 });
+
 
 </script>
 
@@ -137,26 +165,25 @@ $(function(){
 				<li id="tab-0" data-tab="0"><i class="fa-solid fa-chart-simple"></i>&nbsp;매출확인</li>
 				<li id="tab-1" data-tab="1"><i class="fa-regular fa-note-sticky"></i>&nbsp;예약리스트</li>
 			</ul>
-			
 			<div class="sales-container">
 			  <div class="box">
 			  	<h5>금일 예약건수</h5>
-			  	<span>${today.COUNT}건</span>
+			  	<span><fmt:formatNumber value="${today.COUNT}"/>건</span>
 			  </div>
 			  <div class="box">
-			  	<h5>이달의 매출</h5>
-			  	<span>120 건</span>
+			  	<h5>이번달 매출액</h5>
+			  	<span><fmt:formatNumber value="${thisMonthsales.TOTAL}"/>&nbsp;원</span>
 			  </div>
 			  <div class="box">
-			  	<h5>최근 1년 매출 총액</h5>
-			  	<span>6,307,000 원</span>
+			  	<h5>최근 6개월 매출액</h5>
+			  	<span><fmt:formatNumber value="${thisyearsales.TOTAL}"/>&nbsp;원</span>
 			  </div>
 			</div>
 			
 			<div class="container">
 				
 				<div class="box-container" style="margin-top: 15px;">
-				    <div id="barContainer" class="box"></div>
+				    <div class="charts-month border rounded" style="height: 500px;"></div>
 				</div>
 			</div>
 		</div>

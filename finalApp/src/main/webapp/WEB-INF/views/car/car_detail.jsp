@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <style>
 @charset "utf-8";
 
@@ -74,7 +75,7 @@ h1, h2, h3, h4, h5, h6 {
   box-sizing: border-box;
   border: none;
   width: 500px;
-  height: 550px; 
+  height: 600px; 
   margin: 0 auto;
   padding-left: 50px;
 }
@@ -135,13 +136,15 @@ h1, h2, h3, h4, h5, h6 {
   height: 100px;
   box-sizing: border-box;
   border: gray;
+  display: flex;
+  flex-wrap: wrap;
   
   
 }
 
 .calendar > form {
   display: flex;
-  width: 100%;
+  width: 500px;
   height: 100%;
   justify-content: space-between;
 }
@@ -159,7 +162,6 @@ h1, h2, h3, h4, h5, h6 {
   height: 100%;
   box-sizing: border-box;
   border: gray;
- 
 }
 
 #wrap .calendar > p {
@@ -200,6 +202,17 @@ input[type='date']:valid::before {
   display: none;
 }
 
+.totalFee {
+	height: 50px;
+}
+
+#totalFee {
+	margin: 0 auto; 
+	font-weight: 700;
+	font-size: 20px;
+	text-align: center;
+	
+}
 
 .usetime {
   width: 400px;
@@ -608,342 +621,6 @@ table {
     border-bottom: 1px solid #e6e6e6;
 }
 
-/*탭*/
-
-ol,
-ul {
-    list-style: none;
-}
-
-.container-detail {
-    padding-top: 50px;
-    margin-bottom: 140px;
-}
-
-.container .wrap {
-    width: 1080px;
-    margin: 0 auto;
-}
-
-.product_info_wrap {
-    display: flex;
-    justify-content: space-between;
-}
-
-.product_info_wrap .product_thumb {
-    flex-basis: 50%;
-}
-
-.product_info_wrap .product_info {
-    flex-basis: 47%;
-}
-
-.product_info .product_title {
-    position: relative;
-    border-bottom: 1px solid #efefef;
-    margin-bottom: 28px;
-}
-
-.product_info .product_title .brand {
-    display: block;
-    font-size: 18px;
-    margin-bottom: 5px;
-}
-
-.product_info .product_title .product_name {
-    font-size: 28px;
-    margin-bottom: 28px;
-}
-
-.product_info .product_title .like_btn {
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
-.product_value {
-    margin-bottom: 72px;
-}
-
-.product_value div {
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-}
-
-.product_value .product_price {
-    margin-bottom: 14px;
-}
-
-.product_value div p:first-child {
-    width: 130px;
-    font-size: 13px;
-    font-weight: bold;
-}
-
-.product_value .product_delivery {
-    margin-bottom: 28px;
-}
-
-.product_value .product_delivery p:nth-child(2) {
-    font-size: 13px;
-}
-
-.product_value .brand_name {
-    color: #575757;
-    font-size: 15px;
-    margin-bottom: 15px;
-}
-
-.product_value .cnt_price {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 28px;
-    padding-right: 30px;
-    padding-bottom: 28px;
-    border-bottom: 1px solid #efefef;
-}
-
-.product_value .cnt_price .qty input {
-    width: 60px;
-    height: 35px;
-    padding-left: 15px;
-    font-size: 13px;
-    text-align: left;
-    border-radius: 0;
-    border: 1px solid #e6e6e6;
-}
-
-.product_value .cnt_price .qty button {
-    width: 35px;
-    height: 35px;
-    font-size: 20px;
-    cursor: pointer;
-    background-color: #fff;
-    border-radius: 0;
-    border: 1px solid #e6e6e6;
-}
-
-.product_value .total_price {
-    display: flex;
-    justify-content: space-between;
-}
-
-.btn_list {
-    display: flex;
-}
-
-.btn_list a {
-    display: block;
-    width: 138px;
-    height: 60px;
-    margin-left: 7px;
-    color: black;
-    text-align: center;
-    line-height: 60px;
-    background-color: #fff;
-    border: 1px solid #efefef;
-}
-
-.btn_list a:first-child {
-    width: 224px;
-    color: #fff;
-    background-color: #000;
-    border: 1px solid black;
-}
-
-.detail_wrap {
-    padding-top: 50px;
-}
-
-.detail_wrap .detail_tab .tab_list {
-    display: flex;
-}
-
-.tab_list .tab_item {
-    width: 33%;
-}
-
-.tab_list .tab_item a {
-    display: block;
-    height: 60px;
-    font-size: 15px;
-    color: #9f9f9f;
-    line-height: 60px;
-    text-align: center;
-    border-bottom: 2px solid #e5e5e5;
-}
-
-.tab_list .tab_item a:active {
-    color: #000;
-    border-bottom: 2px solid #000;
-}
-
-.detail_wrap .detail_img {
-    padding-top: 60px;
-    padding-bottom: 100px;
-    text-align: center;
-}
-
-.detail_review {
-    margin-bottom: 100px;
-    padding-top: 60px;
-}
-
-.detail_review .review_table table {
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0;
-    table-layout: fixed;
-    word-wrap: break-word;
-    word-break: keep-all;
-    border-top: 1px solid black;
-}
-
-.detail_review .review_table table tbody tr {
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.detail_review .review_table table tbody tr td {
-    padding: 15px 0;
-    text-align: center;
-    font-size: 13px;
-    font-weight: bold;
-}
-
-.detail_review .review_write {
-    position: relative;
-    margin-top: 20px;
-}
-
-.detail_review .review_write a {
-    position: absolute;
-    right: 0;
-    display: block;
-    width: 108px;
-    height: 38px;
-    font-size: 13px;
-    color: #000;
-    text-align: center;
-    line-height: 38px;
-    border: 1px solid #231f20;
-    background: #fff;
-}
-
-.detail_qna {
-    margin-bottom: 100px;
-    padding-top: 60px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0;
-    table-layout: fixed;
-    word-wrap: break-word;
-    word-break: keep-all;
-    border-top: 1px solid black;
-}
-
-.detail_qna .qna_table table tbody tr {
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.detail_qna .qna_table table tbody tr td {
-    padding: 15px 0;
-    text-align: center;
-    font-size: 13px;
-    font-weight: bold;
-}
-
-.detail_qna .qna_write {
-    position: relative;
-    margin-top: 20px;
-}
-
-.detail_qna .qna_write a {
-    position: absolute;
-    right: 0;
-    display: block;
-    width: 108px;
-    height: 38px;
-    font-size: 13px;
-    color: #000;
-    text-align: center;
-    line-height: 38px;
-    border: 1px solid #231f20;
-    background: #fff;
-}
-
-.detail_as .as_table table tbody tr th {
-    font-size: 16px;
-    font-weight: 500;
-    border-bottom: 1px solid #e6e6e6;
-    background: #f9f9f9;
-}
-
-.detail_as .as_table table tbody tr td {
-    padding: 45px 20px;
-    font-size: 13px;
-    border-bottom: 1px solid #e6e6e6;
-}
-
-
-
-
-.nav-tabs .nav-link {
-	min-width: 170px;
-	background: #f3f5f7;
-	border-radius: 0;
-	border-right: 1px solid #dbdddf;
-	color: #333;
-	font-weight: 600;
-}
-
-.nav-tabs .nav-link.active {
-	background: #3d3d4f;
-	color: #fff;
-}
-
-.tab-pane { min-height: 300px; }
-
-.score-star { font-size: 0; letter-spacing: -4px; }
-.score-star .item {
-	font-size: 22px; letter-spacing: 1px; display: inline-block;
-	color: #ccc; text-decoration: none; vertical-align: middle;
-}
-.score-star .item:first-child{ margin-left: 0; }
-.score-star .on { color: #f54a4c; }
-
-.graph { font-size: 0;  letter-spacing: 0; word-spacing: 0; }
-.graph-title { padding-right: 3px; }
-.graph .one-space { font-size:13px; background:#eee;}
-.graph .one-space:after { content: ''; display: inline-block; width:17px; }
-.graph .one-space.on{ background:  #f54a4c; }
-.graph .one-space:first-child{ border-top-left-radius:5px;  border-bottom-left-radius:5px; }
-.graph .one-space:last-child{ border-top-right-radius:5px; border-bottom-right-radius:5px; }
-.graph-rate { padding-left: 5px; display: inline-block; width: 60px; text-align: left; }
-
-.deleteReview, .notifyReview { cursor: pointer; padding-left: 5px; }
-.deleteReview:hover, .notifyReview:hover { font-weight: 500; color: #2478FF; }
-
-.qna-form textarea { width: 100%; height: 75px; resize: none; }
-.qna-form .img-grid {
-	display: grid;
-	grid-template-columns:repeat(auto-fill, 54px);
-	grid-gap: 2px;
-}
-
-.qna-form .img-grid .item {
-	object-fit:cover;
-	width: 50px; height: 50px; border-radius: 10px;
-	border: 1px solid #c2c2c2;
-	cursor: pointer;
-}
-
-.deleteQuestion, .notifyQuestion { cursor: pointer; padding-left: 5px; }
-.deleteQuestion:hover, .notifyQuestion:hover { font-weight: 500; color: #2478FF; }
-
 
 .container { 
 	margin: 0 auto;
@@ -951,65 +628,46 @@ table {
 }
 .body-container { 
 	margin-bottom: 50px;
-	width: 1000px;
+	max-width: 1000px;
 }
 .body-main {
 	margin: 0 auto;
-	width: 900px;
+	width: 799px;
 	
 }
 
-.detail_info { margin: 0 auto; padding: 50px 30px;
-	border: 1px solid silver;
 
- }
- 
-.detail_info h3 {
-	margin-bottom: 30px;
-} 
 
-*{margin:0; padding:0;}
-ul{list-style:none;}
-a{text-decoration:none; color:#333;}
-.tab_menu{position:relative;}
-.tab_menu .list{overflow:hidden;}
-.tab_menu .list li{float:left; margin-right:14px;}
-
-.tab_menu .list .btn{
-	font-size:20px;
-	
+ul.tabs{
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+ul.tabs li{
+  width: 263px;
+  background: none;
+  color: #222;
+  display: inline-block;
+  padding: 10px 15px;
+  cursor: pointer;
+  text-align: center;
 }
 
-.tab_menu .list .btn .tmenu {
-	display:inline-block;
-	width: 252.3px;
-	border: 1px solid black;
-	border-bottom-color: white;
-	text-align: center;
-	padding: 5px 0;
+ul.tabs li.current{
+  background: #ededed;
+  color: #222;
+  font-weight: 600;
 }
 
-
-.tab_menu .list .cont{
-	display: none;
-	position:absolute; 
-	top:25px; 
-	left:0; 
-	background:white; 
-	color:black;
-	border: 1px solid silver; 
-	text-align:center; 
-	width:800px; 
-	margin-top: 10px;
-	padding: 40px;
+.tab-content{
+  display: none;
+  background: #ededed;
+  padding: 15px;
 }
-.tab_menu .list li.is_on .btn{font-weight:bold; color:black;}
-.tab_menu .list li.is_on .cont{display:inline-block;}
 
-.car_qna { width: 80%; margin: 20px auto; }
-
-.qna_list { width: 90%; margin: 20px auto; }
-
+.tab-content.current{
+  display: inherit;
+}
 </style>
 <script type="text/javascript">
 function login() {
@@ -1048,40 +706,18 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 	
 	$.ajax(url, settings);
 }
-</script>
-
-
-<script type="text/javascript">
- function sendOk() {
-		// 구매하기
-		const f = document.datepickForm;
-		
-		//const day = document.querySelector("#input_date").value;
-		/*
-		let cnt = $("form input[name=nums]:checked").length;
-	    if (cnt === 0) {
-			alert("구매할 상품을 먼저 선택 하세요 !!!");
-			return;
-	    }
-	    
-	    $("form input[name=nums]").each(function(index, item){
-			if(! $(this).is(":checked")) {
-				$(this).closest("tr").remove();
-			}
-		});
-	    */
-	    /*
-	    let start_date = f.start_date.value;
-	    let end_date = "${carReservation.end_date}";
-	    */
-	    // f.method = "get";
-		f.action = "${pageContext.request.contextPath}/car/reservation/orderPage";
-		f.submit();
-	}
- 
 
 
 </script>
+
+
+
+
+
+
+
+
+
 
 <div id="wrap">
 
@@ -1112,50 +748,73 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
           <div class="start-date">
           
             <p style="font-size: medium; font-weight: bold; margin-left: 65px;">대여일</p>
-            <input id="input_date" type="date" name="start_date">
+            <input id="start_date" type="date" name="start_date">
           </div>
           <p style="margin-top: 40px; font-size: large; font-weight: 600;"> | </p>
           <div class="end-date">
             <p style="font-size: medium; font-weight: bold; margin-left: 65px;">반납일</p>
-            <input id="input_date" type="date" name="end_date">
+            <input id="end_date" type="date" name="end_date">
             <input type="hidden" name="carNum" value="${dto.carNum}">
+            <input type="hidden" name="discountRate" value="${dto.discountRate}">
+            <input type="hidden" id="inputTotalFee" name="totMoney" value="0">
+            <input type="hidden" id="inputDisTotalFee" name="fee" value="0">
           </div>
 		</form>
       </div>
+      
       <br>
       <hr style="width: 400px;">
-
-      <div class="usetime">
+	  
+	  <div class="usetime">
         <p>
           출고가능시간 &nbsp;  |&nbsp; 오전 8시 00분 ~ 오전 10시 00분
           <br>          
           반납마감시간 &nbsp;  |&nbsp;  오후 8시 00분
       </div>
+      
       <hr style="width: 400px;">
-
+      
       <div class="borrow-area">
         <p style="font-size: 15px; font-weight: bold;">대여장소</p>
 
         <p style="margin: 10px 65px">서울특별시 월드컵북로 21 풍성빌딩 2층</p>
       </div>
+      
       <hr style="width: 400px;">
     
       <div class="price-reservation">
           <p style="font-size: 15px; font-weight: bold;">차량대여료</p>
           <div class="price">
-          
-          
-          <span>주중 : <fmt:formatNumber value="${dto.weekCost}"/></span>
-          <span>&nbsp;&nbsp;</span>
-          <span>주말 : <fmt:formatNumber value="${dto.wkndCost}"/></span>
+          	<c:if test="${dto.discountRate == 0}">
+              <span>주중 : <fmt:formatNumber value="${dto.weekCost}"/>~</span>
+          	  <span>&nbsp;&nbsp;</span>
+          	  <span>주말 : <fmt:formatNumber value="${dto.wkndCost}"/>~</span>
+            </c:if>
+            <c:if test="${dto.discountRate > 0}">
+              <p style="font-size: 15px;">${dto.discountRate}% 할인가 <i class="fa-solid fa-wand-magic-sparkles"></i></p>
+			  <c:set var="discountedWeekCost" value="${dto.weekCost - (dto.weekCost * (dto.discountRate / 100))}" />
+			  <c:set var="discountedWkndCost" value="${dto.wkndCost - (dto.wkndCost * (dto.discountRate / 100))}" />
+				<span style="color: #FF0000;">주중 : <fmt:formatNumber value="${discountedWeekCost}"/>~</span>
+				<span>&nbsp;&nbsp;</span>
+				<span style="color: #FF0000;">주말 : <fmt:formatNumber value="${discountedWkndCost}"/>~</span>
+            </c:if>
           </div>
-          <button type="button" name="reservation" onclick="sendOk();">
+          <div class="totalFee">
+          	<div id="totalFee"></div>
+          </div>
+      	</div>
+      
+          <div class="totalFee">
+          	<div id="totalFee"></div>
+          </div>
+      
+      <div class="price-reservation">
+         <button type="button" name="reservation" onclick="sendOk();">
           예약하기
           </button>
-          </div>
+      </div>
           
       </div>
-   
     </div>
   </div>
 
@@ -1274,81 +933,83 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 
 
 <div id="wrap">
-<div class="container">
-	<div class="body-container">	
-		<div class="body-main">
-			<div>
-				<div class="detail_info">
-				<h3>상세 정보</h3>
-					<div>${dto.content}</div>
-				</div>
-			</div>
-			<div>
-				<div class="detail_info">
-				<h3>이용 후기 (0건)</h3>
-					<div class="detail_review">
-				<div class="review_table">
-					<table summary="번호, 평점, 내용, 작성자, 작성일, 조회">
-						<colgroup>
-							<col width="40">
-							<col width="40">
-							<col width="*">
-							<col width="95">
-							<col width="110">
-							<col width="40">
-						</colgroup>
-						<tbody>
-							<tr>
-								<td colspan="6">등록된 리뷰가 없습니다.</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="review_write">
-					<a href="#">글쓰기</a>
-				</div>
-			</div>
-				</div>
-			</div>
-			<div>
-				<div class="detail_info">
-				<h3>차량 문의 (0건)</h3>
-					<div class="detail_qna">
-				<div class="qna_table">
-					<table summary="번호, 평점, 내용, 작성자, 작성일, 조회">
-						<colgroup>
-							<col width="40">
-							<col width="40">
-							<col width="*">
-							<col width="95">
-							<col width="110">
-							<col width="40">
-						</colgroup>
-						<tbody>
-							<tr>
-								<td colspan="6">등록된 문의가 없습니다.</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="qna_write">
-					<a href="#">글쓰기</a>
-				</div>
-			</div>
-					<table>
-						<tr>
-							<th>번호</th>
-							<th>답변상태</th>
-							<th>내용</th>
-							<th>작성자</th>
-							<th>작성일자</th>
-						</tr>
-					</table>
-				</div>
-			</div>
-        </div>
-	</div>
+	<div class="container">
+<div class="body-main">
+  <ul class="tabs">
+    <li class="tab-link current" data-tab="tab-1">상세정보</li>
+    <li class="tab-link" data-tab="tab-2">이용후기</li>
+    <li class="tab-link" data-tab="tab-3">차량문의</li>
+  </ul>
 
+  <div id="tab-1" class="tab-content current">
+	${dto.content}
+  </div>
+  
+  <div id="tab-2" class="tab-content">
+  	<h3>후기작성</h3>
+  	
+  </div>
+  
+  <div id="tab-3" class="tab-content">
+		<h3>문의하기</h3>
+		<div style="float: right; margin-bottom: 10px;">
+			<button type="button" class="btnMyQuestion btn btn-dark" ${empty sessionScope.member ? "disabled":""}> 내 Q&amp;A 보기  </button>
+			<button type="button" class="btnQuestion btn btn-dark" ${empty sessionScope.member ? "disabled":""}> Q&amp;A 작성 </button>
+		</div>
+		<div class="list-question" id="carqna-page">
+			<table>
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>답변상태</th>
+						<th>내용</th>
+						<th>작성자</th>
+						<th>작성일자</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<c:forEach var="dto" items="${list}" varStatus="status">
+						<tr>
+							<td>${dataCount - (page-1) * size - status.index}</td>
+							<td class="left">
+								<c:choose>
+									<c:when test="${dto.secret==1}">
+										<c:if test="${sessionScope.member.mid==dto.userId || sessionScope.member.mid=='admin'}">
+											<a href="${articleUrl}&num=${dto.qnaNum}">${dto.question}</a>
+										</c:if>
+										<c:if test="${sessionScope.member.mid!=dto.userId && sessionScope.member.mid!='admin'}">
+											비밀글 입니다.
+										</c:if>
+										<i class="fa-solid fa-key"></i>
+									</c:when>
+									<c:otherwise>
+										<a href="${articleUrl}&num=${dto.qnaNum}">${dto.question}</a>
+									</c:otherwise>
+								</c:choose>								
+								
+							</td>
+							<td>${dto.userId}</td>
+							<td>${dto.reg_date}</td>
+							<td>${not empty dto.answerId?"답변완료":"답변대기"}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			
+			<div class="page-navigation" style="text-align:center; margin:20px auto;">
+				${dataCount == 0 ? "등록된 게시물이 없습니다." : paging}
+			</div>
+		</div>
+										
+	</div>
+  </div>
+	</div>
+</div>
+
+
+<div id="wrap">
+	<div class="container">
   <div class="detail_as">
     <div class="as_table">
         <table>
@@ -1371,7 +1032,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
                         <b>-&nbsp;운전자 나이 만26세 이상</b>
                         <br>
                         <br>
-                        <b>-&nbsp;2종보통</b> 면허이상 필요(차량대여 시 실물면허증 소지)
+                        <b>-&nbsp;1종보통</b> 면허이상 필요(차량대여 시 실물면허증 소지)
                         <br>
                         -&nbsp;면허취득일 상관없음
                        
@@ -1410,8 +1071,9 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
         </table>
     </div>
 </div>
+    </div>
 </div>
-</div>
+
 <a href="https://www.flaticon.com/kr/free-icons/" title="화장실 아이콘">화장실 아이콘  제작자: Creaticca Creative Agency - Flaticon</a>
 <a href="https://www.flaticon.com/kr/free-icons/" title="화장실 아이콘">화장실 아이콘  제작자: Freepik - Flaticon</a>
 <a href="https://www.flaticon.com/kr/free-icons/" title="침실 아이콘">침실 아이콘  제작자: Freepik - Flaticon</a>
@@ -1425,3 +1087,139 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 <a href="https://www.flaticon.com/kr/free-icons/" title="히터 아이콘">히터 아이콘  제작자: Linector - Flaticon</a>
 <a href="https://www.flaticon.com/kr/free-icons/" title="배터리 아이콘">배터리 아이콘  제작자: kmg design - Flaticon</a>
 
+<script>
+$(document).ready(function(){
+	  
+	  $('ul.tabs li').click(function(){
+	    var tab_id = $(this).attr('data-tab');
+
+	    $('ul.tabs li').removeClass('current');
+	    $('.tab-content').removeClass('current');
+
+	    $(this).addClass('current');
+	    $("#"+tab_id).addClass('current');
+	  })
+
+	})
+
+const controllerURL = '/plus/car/qna/list';	
+$.ajax({
+   url: controllerURL,
+   method: 'GET',
+   success: function(data) {
+      // 성공적으로 데이터를 가져온 경우, 해당 div에 내용을 삽입
+      $('#carqna-page').html(data);
+   },
+   error: function() {
+      // 에러 처리 로직 추가
+      console.error('Failed to load the controller content.');
+   }
+});	
+</script>
+
+<script>
+    // 주중 및 주말 요금 설정
+    const weekdayRate = ${dto.weekCost};
+    const weekendRate = ${dto.wkndCost};
+    const discountRate = ${dto.discountRate}; // 할인율 변수 추가
+
+    function calculateFee(startDate, endDate) {
+        const startDateTime = new Date(startDate).getTime();
+        const endDateTime = new Date(endDate).getTime();
+        const dayDifference = Math.ceil((endDateTime - startDateTime) / (1000 * 60 * 60 * 24));
+
+        const dayOfWeekStart = new Date(startDate).getDay();
+        const dayOfWeekEnd = new Date(endDate).getDay();
+
+        let disTotalFee = 0;
+        let totalFee = 0;
+
+        for (let i = 0; i < dayDifference; i++) {
+            const currentDayOfWeek = (dayOfWeekStart + i) % 7;
+
+            // 주말(토요일 또는 일요일)인 경우 주말 요금, 그 외의 경우 주중 요금 적용
+            let fee = (currentDayOfWeek === 0 || currentDayOfWeek === 6) ? weekendRate : weekdayRate;
+            totalFee += parseInt(fee);
+            
+            
+            
+            // 할인율이 적용된 경우, 요금에 할인율을 적용
+            if (discountRate > 0) {
+                const discountAmount = fee * (discountRate / 100);
+                fee -= discountAmount;
+            }
+
+            disTotalFee += fee;
+        }
+        $('#inputTotalFee').val(totalFee);
+        
+        return disTotalFee;
+    }
+
+    document.forms["datepickForm"]["end_date"].addEventListener("change", function() {
+        const startDate = document.forms["datepickForm"]["start_date"].value;
+        const endDate = document.forms["datepickForm"]["end_date"].value;
+
+        // 값이 입력되었을 때만 계산 수행
+        if (startDate && endDate) {
+            const fee = calculateFee(startDate, endDate);
+            
+            // totMoney 값을 URL에 추가하여 페이지를 다시 로드
+            // window.location.href = "page2.html?totMoney=" + fee;
+
+            // 계산된 fee를 hidden input에 할당
+            document.getElementById("inputDisTotalFee").value = fee;
+
+            // 페이지에 결과를 출력
+            document.getElementById("totalFee").innerHTML = "선택한 기간의 요금: " + fee.toLocaleString() + "원";
+
+            // AJAX를 사용하여 서버에 fee 값을 전송
+            $.ajax({
+                url: '/plus/car/reservation/orderPage',
+                method: 'POST',
+                data: { totMoney: fee },
+                success: function(response) {
+                    // 성공적으로 처리된 경우, 필요한 로직 수행
+                    console.log(response);
+                },
+                error: function(error) {
+                    // 에러 처리 로직 추가
+                    console.error('Failed to send fee to the server.');
+                }
+            });
+        }
+    });
+</script>
+
+
+<script type="text/javascript">
+ function sendOk() {
+		// 구매하기
+		const f = document.datepickForm;
+		
+		//const day = document.querySelector("#input_date").value;
+		/*
+		let cnt = $("form input[name=nums]:checked").length;
+	    if (cnt === 0) {
+			alert("구매할 상품을 먼저 선택 하세요 !!!");
+			return;
+	    }
+	    
+	    $("form input[name=nums]").each(function(index, item){
+			if(! $(this).is(":checked")) {
+				$(this).closest("tr").remove();
+			}
+		});
+	    */
+	    
+	    
+	    /*
+	    let start_date = f.start_date.value;
+	    let end_date = "${carReservation.end_date}";
+	    */
+	    // f.method = "get";
+		f.action = "${pageContext.request.contextPath}/car/reservation/orderPage";
+		f.submit();
+	}
+</script>
+	

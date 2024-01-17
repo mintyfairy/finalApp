@@ -87,6 +87,12 @@ main {
     position: relative;
 }
 
+.car_photo img {
+   background-size: cover;
+   width: 350px;
+   height: 250px;
+}
+
 .car_wrap .car_list .car_item p .car_photo i {
     position: absolute;
     top: 7px;
@@ -113,12 +119,6 @@ main {
     overflow: hidden;
     border: 1px solid #dedede;
     border-radius: 12px;
-}
-
-.car_photo img {
-	background-size: cover;
-	width: 350px;
-	height: 250px;
 }
 
 .car_list .car_item .car_text {
@@ -254,7 +254,7 @@ main {
            </div>
            <div class="searchbox">
                <p>캠핑카, 이제는 쉽게 예약하세요</p>
-               <form>
+               <form  class="row" name="searchForm" action="${pageContext.request.contextPath}/car/main" method="post">
                    <table class="car_search" style="text-align: center;">
                        <tr>
                            <td colspan="3">
@@ -284,7 +284,7 @@ main {
                        </tr>
                        <tr>
                            <td colspan="3">
-                               <button type="button" id="searchbutton">캠핑카 검색 <i
+                               <button type="button" id="searchbutton" onclick="searchOk();">캠핑카 검색 <i
                                        class="fa-solid fa-magnifying-glass"
                                        style="color: white;"></i></button>
                            </td>
@@ -321,13 +321,24 @@ main {
                    </div>
 
                    <div class="price">
-                       <p style="color: rgb(80, 103, 231);">주중 : <fmt:formatNumber value="${dto.weekCost}"/>원 부터</p>
-                       <p style="color: rgb(80, 103, 231);">주말 : <fmt:formatNumber value="${dto.wkndCost}"/>원 부터</p>
+                   	   <c:if test="${dto.discountRate == 0}">
+                       	<p style="color: rgb(80, 103, 231);">주중 : <fmt:formatNumber value="${dto.weekCost}"/>원 부터</p>
+                       	<p style="color: rgb(80, 103, 231);">주말 : <fmt:formatNumber value="${dto.wkndCost}"/>원 부터</p>
+                   	   </c:if>
+                   	   <c:if test="${dto.discountRate > 0}">
+                   	   	<p style="font-size: 15px;">${dto.discountRate}% 할인가 <i class="fa-solid fa-wand-magic-sparkles"></i></p>
+						<c:set var="discountedWeekCost" value="${dto.weekCost - (dto.weekCost * (dto.discountRate / 100))}" />
+						<c:set var="discountedWkndCost" value="${dto.wkndCost - (dto.wkndCost * (dto.discountRate / 100))}" />
+						<p style="color: #FF0000;">주중 : <fmt:formatNumber value="${discountedWeekCost}"/>원 부터</p>
+						<p style="color: #FF0000;">주말 : <fmt:formatNumber value="${discountedWkndCost}"/>원 부터</p>
+                   	   </c:if>
                    </div>
                </div>
            </li>
            </c:forEach>
         </ul>
+        
+        
     </div>
 </main>
 

@@ -61,17 +61,24 @@ $(function(){
 		</div>
 		
 		<table class="table tab-table">
-			<tr>
-				<td align="left" width="50%">
-					${dataCount}1개(${page}1/${total_page}2 페이지)
-				</td>
-			</tr>
+				<tr>
+					<td align="left" width="50%">
+						${dataCount}1개(${page}1/${total_page}2 페이지)
+					</td>
+					<td align="right">
+						<select id="changeShowCar" class="form-select" onchange="changeList();" style="width:160px; text-align:center;">
+							<option value="-1">::전체::</option>
+							<option value="1" ${carShow==1?"selected":""}>답변완료</option>
+							<option value="0" ${carShow==0?"selected":""}>답변대기</option>
+						</select>
+					</td>
+				</tr>
 		</table>
 		
 		<table class="table table-border table-list">
 				<thead>
 					<tr> 
-						<th width="200">예약번호</th>
+						<th width="80">번호</th>
 						<th width="200">예약자 성명</th>
 						<th width="200">대여시작일자</th>
 						<th width="200">대여종료일자</th>
@@ -81,7 +88,7 @@ $(function(){
 				
 				<tbody>
 						<tr class="hover" onclick="" style="vertical-align: middle;"> 
-							<td>13224435577</td>
+							<td>1</td>
 							<td>김뚜띠</td>
 							<td>2023-01-02</td>
 							<td>2023-01-03</td>

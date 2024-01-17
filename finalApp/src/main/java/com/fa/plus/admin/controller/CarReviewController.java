@@ -14,9 +14,9 @@ public class CarReviewController {
 		return ".admin.carReview.review";
 	}
 	
-	@RequestMapping("ask")
+	@RequestMapping("qna")
 	public String ask() {
-		return ".admin.carReview.ask";
+		return ".admin.carReview.qna";
 	}
 }
 

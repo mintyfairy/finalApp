@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <style>
 @charset "utf-8";
 
@@ -122,6 +123,7 @@ main {
     justify-content: space-between;
     margin: 10px auto;
     padding: 20px;
+    box-shadow: 5px 5px 5px gray;
 }
 
 .goods_item ul {
@@ -232,6 +234,44 @@ h4 {
 
 </style>
 
+<script type="text/javascript">
+function sendOk() {
+	const f = document.paymentForm;
+	
+	// 결제 API에서 응답 받을 파라미터
+	let payMethod = "카드결제"; // 결제유형
+	let cardName = "BC 카드";  // 카드 이름
+	let authNumber = "1234567890"; // 승인번호
+	let authDate = ""; // 승인 날짜
+	// toISOString() : "YYYY-MM-DDTHH:mm:ss.sssZ" 형식
+	authDate = new Date().toISOString().replace('T', ' ').slice(0, -5); // YYYY-MM-DD HH:mm:ss
+
+	// 결제 API에 요청할 파라미터
+	let payment = f.payment.value; // 결제할 금액
+	let merchant_uid = "${carReservationOrderNumber}";  // 고유 주문번호
+	let carName = "${dto.carName}";  // 주문상품명
+	let buyer_email = "${orderUser.email}";  // 구매자 이메일
+	let buyer_name = "${orderUser.userName}";  // 구매자 이름
+	let buyer_tel = "${orderUser.tel}";   // 구매자 전화번호(필수)
+	
+	// 결제 API로 결제 진행
+	
+	
+	
+	// 결제가 성공한 경우 ------------------------
+	
+	// 결제 방식, 카드번호, 승인번호, 결제 날짜
+	f.payMethod.value = payMethod;
+	f.cardName.value = cardName;
+	f.authNumber.value = authNumber;
+	f.authDate.value = authDate;
+	
+	f.action = "${pageContext.request.contextPath}/car/reservation/paymentOk"
+	f.submit();
+}
+</script>
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -270,9 +310,8 @@ h4 {
 					                       </c:if>
 					                   </div>
 					
-					                   <div class="price">
-					                       <p style="color: rgb(80, 103, 231);">주중 : ${dto.weekCost}원(가격계산)</p>
-					                   </div>
+					                   
+					                   <input type="hidden" name="carNum" value="${dto.carNum}">
 					                   <input type="hidden" name="thumbnail" value="${dto.thumbnail}">
 					                   <input type="hidden" name="carSize" value="${dto.carSize}">
 					                   <input type="hidden" name="carName" value="${dto.carName}">
@@ -315,16 +354,18 @@ h4 {
                                 <li>
                                     <span style="font-size: 20px;">${dto.end_date}</span>
                                     <input type="hidden" name="end_date" value="${dto.end_date}">
-                                    <input type="hidden" name="userName" value="${dto.userName}">
-                            		<input type="hidden" name="tel" value="${dto.tel}">
-                            		<input type="hidden" name="discountRate" value="${dto.discountRate}">
+                                    <input type="hidden" name="userName" value="${sessionScope.member.userName}">
+                            		<input type="hidden" name="tel" value="${orderUser.tel}">
+                                	
+                                	<input type="hidden" name="orderNum" value="${carReservationOrderNumber}">
+                                	 
                                 </li>
                             </ul>
                         </div>
                         <div class="datebox">
                             <ul>
                                 <li>
-                                    <span>총</span>
+                                    <span>총</span> 
                                 </li>
                             </ul>
 
@@ -342,13 +383,14 @@ h4 {
                                 이름 : ${sessionScope.member.userName}
                             </li>
                             <li>
-                                휴대폰 번호 : ${dto.tel}
+                                휴대폰 번호 : ${orderUser.tel}
                             </li>
                             <li>
 			                    <h4>동승운전자 추가 여부 <input type="checkbox" name="add"></h4>
                             </li>
                             
                         </ul>
+                       
                     </li>
                     <li><p>결제 방식</p></li>
                     <li class="goods_item">
@@ -362,17 +404,21 @@ h4 {
                     <li><p>총 대여금액</p></li>
                     <li class="goods_item">
                         <ul>
-                            <li>
-                                차량대여료 : <fmt:formatNumber value="${dto.weekCost}"/>원
+                            <li id="totalFee">
+                                차량대여료 :<fmt:formatNumber value="${dto.totMoney}"/> 원
+                            	<input type="hidden" name="totMoney" value="${dto.totMoney}">
                             </li>
                             <li>
                             	할인율 : ${dto.discountRate}%
+                            	<input type="hidden" name="discountRate" value="${dto.discountRate}">
                             </li>
                             <li>
-                                할인 가격 : ${dto.discount}원
+                                할인 가격 : <fmt:formatNumber value="${dto.discount}"/> 원
+                                <input type="hidden" name="discount" value="${dto.discount}">
                             </li>
                             <li>
-                                총 금액 : ${dto.totMoney}원
+                                총 금액 : <fmt:formatNumber value="${dto.payment}"/> 원
+                                <input type="hidden" name="payment" value="${dto.payment}">
                             </li>
                             <li>
                                 이용약관(보험고지,손해면책 등) <i class="fa-solid fa-angle-right"></i>
@@ -387,7 +433,7 @@ h4 {
                             <li>
                             	<div style="width: 100%;">
                             		<div style="width: 400px; margin: 30px auto;">
-                                		<button type="submit" id="reservation_check">결제하기</button>
+                                		<button type="submit" id="reservation_check" onclick="sendOk()">결제하기</button>
                                		</div>
                                	</div>
                             </li>
@@ -395,7 +441,10 @@ h4 {
                     </li>
                 </ul>
             </div>
-           
+           	<input type="hidden" name="payMethod" value="">
+			<input type="hidden" name="cardName" value="">
+			<input type="hidden" name="authNumber" value="">
+			<input type="hidden" name="authDate" value="">
             </form>
         </div>
         </div>

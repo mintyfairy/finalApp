@@ -7,6 +7,8 @@ import java.util.Map;
 import com.fa.plus.domain.car.CarReservation;
 
 public interface CarReservationMapper {
+	public String findByMaxReservationNumber();
+	
 	public void insertCarReservation(CarReservation dto) throws SQLException;
 	public void insertCarPayDetail(CarReservation dto) throws SQLException;
 	
