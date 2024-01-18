@@ -3,6 +3,7 @@ package com.fa.plus.admin.service;
 import java.util.List;
 import java.util.Map;
 
+import com.fa.plus.admin.domain.site.AdSite;
 import com.fa.plus.domain.site.Site;
 import com.fa.plus.domain.site.SiteDetail;
 import com.fa.plus.domain.site.SiteSearch;
@@ -38,4 +39,5 @@ public interface SiteAdminService {
 	public List<SiteDetail> listRoomFile(long detailNum);
 	
 	
+	public void insertAdList(AdSite dto) throws Exception;
 }

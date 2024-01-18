@@ -28,7 +28,8 @@ public interface SiteService {
 	public List<SiteCart> listCart(long memberIdx);
 
 	// 여기안에 map안에 3개의 map이 저장되어 날아가야한다...
-	public void insertPerchase(List<SiteCart> cartList) throws Exception;
+	public Map<String, Object> insertBookList(List<SiteCart> cartList) throws Exception;
+	public void insertPerchase(Map<String,Object> map) throws Exception;
 
 	// 예약 리스트의 리스트
 	public List<BookList> listBookList(long memberIdx);
@@ -56,6 +57,7 @@ public interface SiteService {
 
 	// 리뷰 삭제
 	public void deleteReview(long bookNum);
+	public void deleteTrashBook(long Num);
 
 	// 리뷰 파일 삭제
 	public void deleteReviewFile(long srPicNum,String pathname);

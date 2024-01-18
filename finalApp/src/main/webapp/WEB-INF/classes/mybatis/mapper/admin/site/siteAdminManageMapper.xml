@@ -24,6 +24,10 @@
 		INSERT INTO sitePic(SPICNUM, siteNum, fileName)
 			VALUES(SITEPIC_SEQ.NEXTVAL, #{siteNum}, #{fileName})
 	</insert>
+	<insert id="insertAdList" parameterType="com.fa.plus.admin.domain.site.AdSite">
+		INSERT INTO promotionsite(ADNUM,SITENUM ,STARTP ,ENDP,ADFEE)
+			VALUES(promotionsite_seq.nextval,#{siteNum}, #{startP}, #{endP},#{adFee})
+	</insert>
 
 		
 	<select id="dataCountSite" parameterType="map" resultType="Integer">
@@ -68,7 +72,8 @@
 			join ( select distinct siteNum from sitedetail
 			        where detailNum not in
 			            (select sitedetail.detailNum detailNum from sitedetail 
-			            left join(select detailNum,ENDDATE,STARTDATE from book where enddate>sysdate) book on sitedetail.detailNum=book.detailNum
+			            left join(select detailNum,ENDDATE,STARTDATE 
+			            from book join booklist on book.listnum=booklist.listnum  where enddate>sysdate and state=0) book on sitedetail.detailNum=book.detailNum
 			             where ENDDATE  &gt;= TO_DATE(#{startDate},'yyyy-mm-dd') and TO_DATE(#{endDate},'yyyy-mm-dd') &gt;= STARTDATE)
 			        ) a on campingsite.siteNum=a.siteNum
 		</if>
@@ -127,13 +132,13 @@
 		<if test="startDate!=null and startDate!=''">
 			
 			    
-			       and  detailNum not in
-	(select sitedetail.detailNum detailNum from sitedetail  
-	left join(select detailNum,ENDDATE,STARTDATE from book) book
-    on sitedetail.detailNum=book.detailNum 
-    where  ENDDATE  >= TO_DATE(#{startDate},'yyyy-mm-dd') and TO_DATE(#{endDate},'yyyy-mm-dd') >= STARTDATE) 
-		</if>
-	</sql>
+				       and  detailNum not in
+		(select sitedetail.detailNum detailNum from sitedetail  
+		left join(select detailNum,ENDDATE,STARTDATE from book  join booklist on book.listnum=booklist.listnum  where enddate>sysdate and state=0) book
+	    on sitedetail.detailNum=book.detailNum 
+	    where  ENDDATE  >= TO_DATE(#{startDate},'yyyy-mm-dd') and TO_DATE(#{endDate},'yyyy-mm-dd') >= STARTDATE) 
+			</if>
+		</sql>
 	<!-- 리스트 -->
 	<select id="listSite" parameterType="map" resultType="com.fa.plus.domain.site.Site">
 		SELECT siteNum,siteName,siteLocal,addr1,addr2,
@@ -179,7 +184,7 @@
 			join ( select distinct siteNum from sitedetail
 			        where detailNum not in
 			            (select sitedetail.detailNum detailNum from sitedetail 
-			            left join(select detailNum,ENDDATE,STARTDATE from book where enddate>sysdate) book on sitedetail.detailNum=book.detailNum
+			            left join(select detailNum,ENDDATE,STARTDATE from book  join booklist on book.listnum=booklist.listnum  where enddate>sysdate and state=0) book on sitedetail.detailNum=book.detailNum
 			             where ENDDATE  &gt;= TO_DATE(#{startDate},'yyyy-mm-dd') and TO_DATE(#{endDate},'yyyy-mm-dd') &gt;= STARTDATE)
 			        ) a on campingsite.siteNum=a.siteNum
 		</if>

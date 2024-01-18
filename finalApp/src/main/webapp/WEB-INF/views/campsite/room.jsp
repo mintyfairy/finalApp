@@ -189,14 +189,15 @@
         <div class="container-xxl testimonial mt-5 py-5 bg-dark wow zoomIn" data-wow-delay="0.1s" style="margin-bottom: 90px;">
             <div class="container">
                 <div class="owl-carousel testimonial-carousel py-5">
-                
+                	<
                 	<c:forEach var="dto" items="${Adlist}">
-	                    <div class="testimonial-item position-relative bg-white rounded overflow-hidden">
+	                    <div class="testimonial-item position-relative bg-white rounded overflow-hidden"  title="이 캠핑장은 광고업체입니다.">
 	                        <p style="height:100%;overflow: hidden;text-overflow: clip;white-space:nowrap;">${dto.introduce}</p>
 	                        <div class="d-flex align-items-center adclickdiv" data-siteNum='${dto.siteNum }' onclick="location.href ='${pageContext.request.contextPath}/site/places/${dto.siteNum}'">
 	                            <img class="img-fluid flex-shrink-0 rounded" src="${pageContext.request.contextPath}/uploads/site/${dto.thumbnail}" alt="" style="width: 45px; height: 45px;">
 	                            <div class="ps-3">
 	                                <h6 class="fw-bold mb-1">${dto.siteName}</h6>
+	                                <img class="img-fluid flex-shrink-0 rounded" src="${pageContext.request.contextPath}/resources/images/campsite/adMark.png" alt="" style="width: 30px; height: 19px;">
 	                                <small>${dto.addr1}</small>
 	                            </div>
 	                        </div>

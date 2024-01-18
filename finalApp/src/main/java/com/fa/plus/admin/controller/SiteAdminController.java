@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fa.plus.admin.domain.site.AdSite;
 import com.fa.plus.admin.service.SiteAdminService;
 import com.fa.plus.common.MyUtil;
 import com.fa.plus.domain.SessionInfo;
@@ -330,5 +331,27 @@ public class SiteAdminController {
 		model.put("state", state);
 		return model;
 	}
+	@GetMapping("adWrite")
+	public String writeForm(Model model) throws Exception {
+
+		//return ".admin.siteManage.write";
+		return "admin/siteManage/write";
+	}
+	@PostMapping("adWrite")
+	@ResponseBody
+	public Map<String, Object> writeSubmit(AdSite dto) throws Exception {
+		Map<String, Object> model = new HashMap<String, Object>();
+		
+
+		try {
+			service.insertAdList(dto);
+			model.put("state", "true");
+		} catch (Exception e) {
+			model.put("state", "false");
+		}
+
+		return model;
+	}
+	
 }
 

@@ -69,7 +69,7 @@ public class SiteMypageController {
 		model.addAttribute("size", size);
 		model.addAttribute("total_page", total_page);
 		model.addAttribute("paging", paging);		
-		System.out.println(list+"머임??");
+		
 		return ".campsite.mypage.bookList";
 	}
 

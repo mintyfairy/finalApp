@@ -26,26 +26,29 @@
 	
 	<select id="findByCart" parameterType="com.fa.plus.domain.site.SiteCart" resultType="com.fa.plus.domain.site.SiteCart">
 		
-		 select memberIdx,detailNum,to_char(STARTDATE,'yyyy-mm-dd') STARTDATE,to_char(ENDDATE,'yyyy-mm-dd') ENDDATE,to_char(REG_DATE,'yyyy-mm-dd') REG_DATE,filename thumbnail
+		 select sitecart.memberIdx,detailNum,to_char(STARTDATE,'yyyy-mm-dd') STARTDATE,to_char(ENDDATE,'yyyy-mm-dd') ENDDATE,to_char(REG_DATE,'yyyy-mm-dd') REG_DATE,filename thumbnail,siteName
 		FROM sitecart 
 		left join (select filename,detailNum dnum from sitedetailpic 
         where detailNum = #{detailNum}
+        
+        left join campingsite on campingsite.sitenum=sitedetail.sitenum
         ORDER BY sdpicnum 
 		FETCH FIRST 1 ROWS ONLY
         ) on dnum=detailNum
-		WHERE detailNum = #{detailNum} and  memberIdx=#{memberIdx}
+		WHERE detailNum = #{detailNum} and  sitecart.memberIdx=#{memberIdx}
 	</select>
 	
 	<select id="listCart" parameterType="Long" resultType="com.fa.plus.domain.site.SiteCart">
-		SELECT memberIdx,sitecart.detailNum,to_char(STARTDATE,'yyyy-mm-dd') STARTDATE,to_char(ENDDATE,'yyyy-mm-dd') ENDDATE,detailName,price,content,capacity,floor,filename thumbnail
+		SELECT sitecart.memberIdx,sitecart.detailNum,to_char(STARTDATE,'yyyy-mm-dd') STARTDATE,to_char(ENDDATE,'yyyy-mm-dd') ENDDATE,detailName,price,content,capacity,floor,filename thumbnail,siteName
 		FROM sitecart
 		left join sitedetail  on sitedetail.detailNum=sitecart.detailNum
+		 left join campingsite on campingsite.sitenum=sitedetail.sitenum
 		left join
 		(select * from 
 			(select row_number() over(partition by detailNum order by sdpicnum) rnum,filename,detailNum dnum 
 			from sitedetailpic) where rnum=1
        	) on dnum=sitecart.detailNum
-		WHERE memberIdx=#{memberIdx}
+		WHERE sitecart.memberIdx=#{memberIdx}
 		
 	</select>
 	
@@ -56,9 +59,17 @@
 	</select>
 	<insert id="insertBookList" parameterType="map">
 		insert into booklist(LISTNUM,ORDER_DATE,memberIdx,TOTALPRICE,STATE) 
-			values(booklist_seq.nextval,sysdate,#{memberIdx},#{totalPrice},0)
+			values(#{listNum},sysdate,#{memberIdx},#{totalPrice},1)
 		
 	</insert>
+	<update id="updateBokkState" parameterType="map">
+		update booklist set STATE=0 where LISTNUM=#{listNum}
+	</update>
+	<select id="listNum" resultType="Integer">
+		select booklist_seq.nextval from dual
+	</select>
+	
+	
 	
 	<insert id="insertBook" parameterType="com.fa.plus.domain.site.SiteCart">
 		insert into book(BOOKNUM,STARTDATE,ENDDATE ,BOOKPRICE ,detailNum ,LISTNUM) 
@@ -68,9 +79,10 @@
 	
 	<insert id="perchaseSite" parameterType="map">
 		INSERT into bookpayment(BOOKNUM,PURCHASECOST,PURCHASEMETHOD,PURCHASEDATE) 
-		values(booklist_seq.currval,#{totalPrice},#{perchaseMethod},sysdate)
+		values(#{listNum},#{totalPrice},#{perchaseMethod},sysdate)
 		
 	</insert>
+	
 	
 	
 	
@@ -78,7 +90,7 @@
 	<select id="listBookList" parameterType="Long" resultType="com.fa.plus.domain.site.BookList">
 		SELECT listNum,to_char(order_date,'yyyy-mm-dd') order_date, memberIdx,totalPrice 
 		FROM booklist 
-		WHERE memberIdx=#{memberIdx}
+		WHERE memberIdx=#{memberIdx} and STATE=0
 	</select>
 	<select id="listBook" parameterType="map" resultType="com.fa.plus.domain.site.Book">
 			SELECT bookNum,to_char(STARTDATE,'yyyy-mm-dd') STARTDATE,to_char(ENDDATE,'yyyy-mm-dd') ENDDATE,bookPrice, detailNum,book.listNum,filename
@@ -91,7 +103,8 @@
        	) on dnum=book.detailNum
        	left join (select 1 writeReview,booknum bnum from sitereview) on bnum=booknum
         left join (select detailname,detailNum ddnum from sitedetail) on ddnum =detailNum
-		WHERE memberIdx=#{memberIdx}
+		WHERE memberIdx=#{memberIdx} and state=0
+		order by booknum desc
 		offset #{offset} rows fetch first #{size} rows only
 	</select>
 	
@@ -138,6 +151,7 @@
 		            FROM sitereviewpic
 		            GROUP BY booknum	
 				) f ON BOOKNUM=bnum	
+		  order by sitereview.booknum desc
 		  offset #{offset} rows fetch first #{size} rows only
 		<where>
 			enabled = 0
@@ -169,6 +183,15 @@
 	<delete id="deleteReviewFile" parameterType="Long">
 		DELETE FROM sitepic WHERE srPicNum = #{srPicNum}
 	</delete>
+	<delete id="deleteTrashBook1" parameterType="Long">
+		DELETE FROM book where listnum=#{listNum}
+	</delete>
+	<delete id="deleteTrashBook2" >
+		DELETE FROM booklist WHERE state=1
+	</delete>
+	<select id="getTrashNum" resultType="Long">
+		select listnum from booklist where state=1
+	</select>
 	
 
 	<select id="findByReview" parameterType="Long" resultType="com.fa.plus.domain.site.SiteReview">
@@ -200,11 +223,12 @@
 		 from book
          left join booklist on book.listnum=booklist.listnum
 		<where>
+				state=0
 			<if test="memberIdx !=null and memberIdx !=''">
-            	memberIdx=#{memberIdx}
+            	and memberIdx=#{memberIdx}
 			</if>
-			<if test="detailㅜum !=null and detailㅜum !=''">
-            	detailnum=#{detailNum}
+			<if test="detailNum !=null and detailNum !=''">
+            	and detailnum=#{detailNum}
 			</if>
 		</where>
 		 
@@ -212,7 +236,7 @@
 	<select id="dataCountBookList" parameterType="Long" resultType="Integer">
 		select NVL(COUNT(*), 0)
 		 from booklist
-		where memberidx=#{memberIdx}
+		where memberidx=#{memberIdx} and state=0    
 		 
 	</select>
 <!-- 리뷰 등록될떄마다 갱신 -->

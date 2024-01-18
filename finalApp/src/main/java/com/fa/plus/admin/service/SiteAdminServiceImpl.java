@@ -1,7 +1,11 @@
 
 package com.fa.plus.admin.service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fa.plus.admin.domain.site.AdSite;
 import com.fa.plus.admin.mapper.SiteAdminMapper;
 import com.fa.plus.common.FileManager;
 import com.fa.plus.domain.site.Site;
@@ -451,6 +456,26 @@ public class SiteAdminServiceImpl implements SiteAdminService {
 			throw e;
 		}
 		return list;
+	}
+
+	@Override
+	public void insertAdList(AdSite dto) throws Exception {
+		try {
+			int period1=period(dto.getStartP(),dto.getEndP());
+			dto.setAdFee(period1*(long)dto.getAdFeePerDay());
+			mapper.insertAdList(dto);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+	public int period(String date1, String date2) throws ParseException {
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date d1 = format.parse(date1);
+		Date d2 = format.parse(date2);
+		long Sec = (d2.getTime() - d1.getTime()) / 1000; // 초
+		int Days = (int) (Sec / (24 * 60 * 60));
+		return Days;
 	}
 
 }

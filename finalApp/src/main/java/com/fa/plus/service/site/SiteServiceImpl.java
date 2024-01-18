@@ -13,11 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fa.plus.admin.mapper.SiteAdminMapper;
 import com.fa.plus.common.FileManager;
 import com.fa.plus.domain.site.Book;
 import com.fa.plus.domain.site.BookList;
-import com.fa.plus.domain.site.Site;
 import com.fa.plus.domain.site.SiteCart;
 import com.fa.plus.domain.site.SiteReview;
 import com.fa.plus.mapper.SiteMapper;
@@ -26,8 +24,6 @@ import com.fa.plus.mapper.SiteMapper;
 public class SiteServiceImpl implements SiteService {
 	@Autowired
 	private SiteMapper mapper;
-	@Autowired
-	private SiteAdminMapper adminMapper;
 
 	@Autowired
 	private FileManager fileManager;
@@ -90,7 +86,7 @@ public class SiteServiceImpl implements SiteService {
 	}
 
 	@Override
-	public void insertPerchase(List<SiteCart> cartList) throws Exception {
+	public Map<String, Object> insertBookList(List<SiteCart> cartList) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		int totalPrice = 0;
@@ -99,16 +95,51 @@ public class SiteServiceImpl implements SiteService {
 		}
 
 		try {
+			
+			map.put("listNum",mapper.listNum());
 			map.put("memberIdx", cartList.get(0).getMemberIdx());
 			map.put("perchaseMethod", "카드");
 			map.put("totalPrice", totalPrice);
 
 			mapper.insertBookList(map);
 			for (SiteCart dto : cartList) {
+				System.out.println(dto.getDetailNum()+" 서비스");
 				mapper.insertBook(dto);
 			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw e;
+		}
+		return map;
+	}
+	@Override
+	public void insertPerchase(Map<String,Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		
+		try {
 			mapper.perchaseSite(map);
+			mapper.updateBokkState(map);
 			mapper.deleteAllCart((long) map.get("memberIdx"));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	@Override
+	public void deleteTrashBook(long num) {
+		// TODO Auto-generated method stub
+		
+		try {
+			long[] numlist=mapper.getTrashNum();
+			if (numlist.length>0) {
+				for(long a:numlist) {
+					mapper.deleteTrashBook1(a);
+				}
+			}
+			mapper.deleteTrashBook2();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

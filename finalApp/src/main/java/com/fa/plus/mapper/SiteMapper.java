@@ -53,6 +53,10 @@ public interface SiteMapper {
 	//insert로시작하는 메소드는 트랜섹션이 되게설정되어잇을테니(아마도) 한메소드에서 진행한다.
 	
 	//booklist
+	public int listNum() throws SQLException;
+	//booklist
+	public void updateBokkState(Map<String, Object> map) throws SQLException;
+	//booklist
 	public void insertBookList(Map<String, Object> map) throws SQLException;
 	//book
 	public void insertBook(SiteCart dto) throws SQLException;
@@ -107,6 +111,7 @@ public interface SiteMapper {
 	public int dataCountBookList(long memberIdx);
 	
 	
-	//하루지난 카트는 지울까 말까... 일단 나중에
-	public void resetCart();
+	public void deleteTrashBook1(long listnum);
+	public void deleteTrashBook2();
+	public long[] getTrashNum();
 }

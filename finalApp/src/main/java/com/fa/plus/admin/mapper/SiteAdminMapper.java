@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.fa.plus.admin.domain.site.AdSite;
 import com.fa.plus.domain.site.Site;
 import com.fa.plus.domain.site.SiteDetail;
 import com.fa.plus.domain.site.SiteSearch;
@@ -45,4 +46,5 @@ public interface SiteAdminMapper {
 	public List<Site> listSiteFile(long siteNum);
 	public List<SiteDetail> listRoomFile(long detailNum);
 	
+	public void insertAdList(AdSite dto) throws SQLException;
 }

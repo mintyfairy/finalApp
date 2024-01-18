@@ -129,6 +129,9 @@ function deleteCartSelect() {
                                   
 									<input type="hidden" name="memberIdx" value="${dto.memberIdx}">
 									<input type="hidden" name="detailNum" value="${dto.detailNum}">
+									<input type="hidden" name="thumbnail" value="${dto.thumbnail}">
+									<input type="hidden" name="siteName" value="${dto.siteName}">
+									<input type="hidden" name="detailName" value="${dto.detailName}">
 									
                                    
 								</td>

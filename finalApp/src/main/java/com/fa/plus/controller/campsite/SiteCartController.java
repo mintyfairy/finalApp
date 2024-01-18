@@ -1,5 +1,6 @@
 package com.fa.plus.controller.campsite;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,14 +13,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fa.plus.common.MyUtil;
+import com.fa.plus.domain.Member;
 import com.fa.plus.domain.SessionInfo;
 import com.fa.plus.domain.site.SiteCart;
+import com.fa.plus.service.MemberService;
 import com.fa.plus.service.site.SiteService;
 
 @Controller
@@ -28,7 +32,7 @@ public class SiteCartController {
 	@Autowired
 	private SiteService service;
 	@Autowired
-	private MyUtil myUtil;
+	private MemberService memberService;
 
 	@GetMapping("cart")
 	public String listCart(HttpSession session, Model model) throws Exception {
@@ -38,6 +42,7 @@ public class SiteCartController {
 		List<SiteCart> list = service.listCart(info.getMemberIdx());
 
 		model.addAttribute("list", list);
+		System.out.println(list.get(0).getSiteName());
 
 		return ".campsite.cart";
 	}
@@ -70,6 +75,7 @@ public class SiteCartController {
 		Map<String, Object> model = new HashMap<>();
 		model.put("state", "false");
 		try {
+			service.deleteTrashBook(info.getMemberIdx());
 			dto.setMemberIdx(info.getMemberIdx());
 			service.insertCart(dto);
 			model.put("state", "Post");
@@ -98,29 +104,98 @@ public class SiteCartController {
 	
 
 	@PostMapping("reservation") // 좌측상단선택삭제를 누르면 선택한 내역이 삭제됨
-	public String bookgogo(
+	public String bookform(
 			@RequestParam("nums") Long[] detailNum,
 			@RequestParam("endDate") String[] endDate,
 			@RequestParam("startDate") String[] startDate,
+			@RequestParam("thumbnail") String[] thumbnail,
+			@RequestParam("detailName") String[] detailName,
+			@RequestParam("siteName") String[] siteName,
 			@RequestParam("bookPrice") int[] bookPrice,
+			RedirectAttributes rattr ,
 			HttpSession session) throws Exception {
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		List<SiteCart> list=new ArrayList<SiteCart>();
+		SiteCart dto=null;
 		try {
-			SiteCart dto=new SiteCart();
 			
-			dto.setMemberIdx(info.getMemberIdx());
 			for (int a=0;a< detailNum.length;a++) {
+				dto=new SiteCart();
+				dto.setMemberIdx(info.getMemberIdx());
 				dto.setDetailNum(detailNum[a]);
 				dto.setStartDate(startDate[a]);
 				dto.setEndDate(endDate[a]);
 				dto.setPeriodPrice(bookPrice[a]);
+				dto.setThumbnail(thumbnail[a]);
+				dto.setDetailName(detailName[a]);
+				dto.setSiteName(siteName[a]);
 				list.add(dto);
 			}
-			service.insertPerchase(list);
+			Map<String, Object> map=service.insertBookList(list);
 			
+			
+			rattr.addFlashAttribute("map", map);
+			rattr.addFlashAttribute("listNum", map.get("listNum"));
+			rattr.addFlashAttribute("totalPrice", map.get("totalPrice"));
+			rattr.addFlashAttribute("perchaseMethod", map.get("perchaseMethod"));
+			rattr.addFlashAttribute("list", list);//리다이렉트 어트리뷰트는 객체도되는지?
+		} catch (ArrayIndexOutOfBoundsException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return "redirect:/";
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		
+		return "redirect:/campsite/go";
+	}
+	@GetMapping("go")
+	public String perchaseForm(
+			//@ModelAttribute("map") Map<String, Object> map,
+			@ModelAttribute("listNum") int listNum,
+			@ModelAttribute("perchaseMethod") String perchaseMethod,
+			@ModelAttribute("totalPrice") int totalPrice,
+			@ModelAttribute("list") List<SiteCart> list,
+			Model model,HttpSession session
+			) {
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		try {
+			Member member =memberService.findById(info.getMemberIdx());
+			//System.out.println(map.get("perchaseMethod"));
+			
+			model.addAttribute("member", member);
+			model.addAttribute("list", list);
+			model.addAttribute("nowdate",  LocalDate.now());
+			model.addAttribute("listNum", listNum);
+			model.addAttribute("totalPrice",totalPrice );
+			model.addAttribute("perchaseMethod", perchaseMethod);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return ".campsite.reservation";
+	}
+	@PostMapping("go")
+	public String perchaseSubmit(
+			@RequestParam("listNum") int listNum,
+			@RequestParam("perchaseMethod") String perchaseMethod,
+			@RequestParam("totalPrice") int totalPrice,
+			Model model,HttpSession session
+			) {
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		try {
+			Map<String, Object> map=new HashMap<String, Object>();
+			map.put("memberIdx", info.getMemberIdx());
+			map.put("listNum", listNum);
+			map.put("perchaseMethod", perchaseMethod);
+			map.put("totalPrice", totalPrice);
+			
+			service.insertPerchase(map);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return "/";
 		}
 		
 		return "redirect:/site/mypage/bookList";
