@@ -3,12 +3,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fa.plus.mapper.CarQnaMapper">
 	<insert id="insertCarQna" parameterType="com.fa.plus.domain.car.CarQna">
-		INSERT INTO carQna(qnaNum, carNum, memberIdx, secret, question, question_date, q_content)
-			VALUES(qnaNum_seq.NEXTVAL, #{carNum, jdbcType=INTEGER}, #{memberIdx}, #{secret}, #{question}, SYSDATE, #{q_content})
-	
-	
+		INSERT INTO carQna(qnaNum, secret, question, memberIdx, carNum, question_date)
+			VALUES(qnaNum_seq.NEXTVAL, #{secret}, #{question}, #{memberIdx}, #{carNum}, SYSDATE)
 	</insert>
 	
+	<insert id="insertCarQnaFile" parameterType="com.fa.plus.domain.car.CarQna">
+		INSERT INTO carQnaFile(fileNum, qnaNum, filename)
+			VALUES(carQnaFile_seq.NEXTVAL, qnaNum_seq.CURRVAL, #{filename})
+	</insert>
+	
+	<!-- 
 	<select id="dataCount" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*), 0)
 		FROM carQna
@@ -26,5 +30,5 @@
 		ORDER BY q.qnaNum DESC
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
-	
+	 -->
 </mapper>

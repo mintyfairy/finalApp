@@ -5,7 +5,9 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.fa.plus.common.FileManager;
 import com.fa.plus.domain.car.CarQna;
 import com.fa.plus.mapper.CarQnaMapper;
 
@@ -13,11 +15,24 @@ import com.fa.plus.mapper.CarQnaMapper;
 public class CarQnaServiceImpl implements CarQnaService {
 	@Autowired
 	private CarQnaMapper mapper;
+	
+	@Autowired
+	private FileManager fileManager;
 
 	@Override
-	public void insertCarQna(CarQna dto) throws Exception {
+	public void insertCarQna(CarQna dto, String pathname) throws Exception {
 		try {
 			mapper.insertCarQna(dto);
+			
+			if(! dto.getSelectFile().isEmpty()) {
+				for(MultipartFile mf : dto.getSelectFile()) {
+					String filename = fileManager.doFileUpload(mf, pathname);
+					if(filename != null) {
+						dto.setFilename(filename);
+						mapper.insertCarQnaFile(dto);
+					}
+				}
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();

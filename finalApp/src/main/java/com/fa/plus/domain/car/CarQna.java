@@ -1,5 +1,9 @@
 package com.fa.plus.domain.car;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 public class CarQna {
 	private int qnaNum;
 	private int secret;
@@ -13,10 +17,34 @@ public class CarQna {
 	private String question_date;
 	private String answer_date;
 	
+	private String q_content;
+	
+	// 상품 질문 이미지
+	private long fileNum;
+	private String filename;
+	private List<MultipartFile> selectFile;
+	
+	private String [] listFilename;
+	
+	public String[] getListFilename() {
+		return listFilename;
+	}
+
+	public void setListFilename(String[] listFilename) {
+		this.listFilename = listFilename;
+	}
+
+	public List<MultipartFile> getSelectFile() {
+		return selectFile;
+	}
+
+	public void setSelectFile(List<MultipartFile> selectFile) {
+		this.selectFile = selectFile;
+	}
+
 	private String userName;
 	
 	private String userId;
-	private String q_content;
 
 	public int getQnaNum() {
 		return qnaNum;
@@ -82,16 +110,6 @@ public class CarQna {
 		this.carNum = carNum;
 	}
 
-	
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
 	public String getQuestion_date() {
 		return question_date;
 	}
@@ -108,6 +126,38 @@ public class CarQna {
 		this.answer_date = answer_date;
 	}
 
+	public String getQ_content() {
+		return q_content;
+	}
+
+	public void setQ_content(String q_content) {
+		this.q_content = q_content;
+	}
+
+	public long getFileNum() {
+		return fileNum;
+	}
+
+	public void setFileNum(long fileNum) {
+		this.fileNum = fileNum;
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	public String getUserId() {
 		return userId;
 	}
@@ -116,17 +166,7 @@ public class CarQna {
 		this.userId = userId;
 	}
 
-	public String getQ_content() {
-		return q_content;
-	}
 
-	public void setQ_content(String q_content) {
-		this.q_content = q_content;
-	}
-	
-	
-	
-	
 	
 	
 	

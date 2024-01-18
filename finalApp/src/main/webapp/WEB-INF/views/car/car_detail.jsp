@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <style>
 @charset "utf-8";
@@ -762,7 +761,6 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
             <p style="font-size: medium; font-weight: bold; margin-left: 65px;">대여일</p>
             <input id="start_date" type="date" name="start_date" style="font-size:16px;, font-weight: 450;">
           </div>
-          <p style="margin-top: 40px; font-size: large; font-weight: 600;"> | </p>
           <div class="end-date">
             <p style="font-size: medium; font-weight: bold; margin-left: 65px;">반납일</p>
             <input id="end_date" type="date" name="end_date" style="font-size:16px;, font-weight: 450;">
@@ -832,207 +830,247 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
   </div>
 
 <div id="wrap">
-  
- <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
-				<li class="nav-item" role="presentation">
-					<button class="nav-link active" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane-1" type="button" role="tab" aria-controls="1" aria-selected="true">상세정보</button>
-				</li>
-				<li class="nav-item" role="presentation">
-					<button class="nav-link" id="tab-3" data-bs-toggle="tab" data-bs-target="#tab-pane-3" type="button" role="tab" aria-controls="3" aria-selected="false">문의사항 <span class="title-qnaCount">(${dto.questionCount})</span></button>
-				</li>
-				<li class="nav-item" role="presentation">
-					<button class="nav-link" id="tab-4" data-bs-toggle="tab" data-bs-target="#tab-pane-4" type="button" role="tab" aria-controls="4" aria-selected="false">배송 및 환불정책</button>
-				</li>
-</ul>
-  
-  
-  
-  
-  
-  
-  
-  
-  <div class="second-container">
-    <div class="available-size">
-      <div class="available-mini">
-        <h5><i class="fa-solid fa-user-group"></i>&nbsp;탑승가능인원</h5>
-        <p>${dto.carMaxNum} 인</p>
-      </div>
-      <br>
-      <div class="available-mini">
-        <h5><i class="fa-solid fa-campground"></i>&nbsp;취침가능인원</h5>
-        <p>${dto.sleepNum} 인</p>
-      </div>
-      <div class="available-mini">
-        <h5><i class="fa-solid fa-dog"></i>&nbsp;반려동물 동반</h5>
-        <p>
-        <c:if test="${dto.petOrNot == 1}">가능</c:if>
-        <c:if test="${dto.petOrNot != 1}">불가능</c:if>
-        </p>
-      </div>
-     </div>
-     </div>
-    <br>
-    <hr style="margin-top: 30px; margin-bottom: 50px; border:none;">
-
-    <div class="car-options">
-      <h4 style="padding: 20px 90px;">보유 옵션</h4>
-      <div class="option-detail">
-      	<div>
-        	<c:if test="${dto.toilet != null}">
-          		<p>화장실</p>
-          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/toilet.png" alt="toilet">
-          	</c:if>
-        </div>
-        <div>
-        	<c:if test="${dto.shower != null}">
-          		<p>샤워실</p>
-          		
-          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/shower.png" alt="shower">
-          	</c:if>
-        </div>
-        <div>
-        	<c:if test="${dto.bed != null}">
-          		<p>침대</p>
-          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/bed.png" alt="bed">
-          	</c:if>
-        </div>
-        <div>
-        	<c:if test="${dto.sink != null}">
-          		<p>싱크대</p>
-          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/sink.png" alt="sink">
-        	</c:if>
-        </div>
-        
-        <div>
-        	<c:if test="${dto.microwave != null}">
-          		<p>전자레인지</p>
-           		<img src="${pageContext.request.contextPath}/resources/images/campingcar/microwave.png" alt="microwave">
-        	</c:if>
-        </div>
-        <div>
-        	<c:if test="${dto.frige != null}">
-          		<p>냉장고</p>
-          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/refrigerator.png" alt="refrigerator">
-        	</c:if>
-        </div>
-        <div>
-        	<c:if test="${dto.desk != null}">
-          		<p>테이블</p>
-          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/table.png" alt="table">
-        	</c:if>
-        </div>
-        <div>
-        	<c:if test="${dto.waterHeater != null}">
-          		<p>온수기</p>
-          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/waterHeater.png" alt="waterHeater">
-        	</c:if>
-        </div>
-        <div>
-        	<c:if test="${dto.tv != null}">
-          		<p>TV</p>
-          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/tv.png" alt="tv">
-        	</c:if>
-        </div>
-        <div>
-        	<c:if test="${dto.airCondition != null}">
-          		<p>에어컨</p>
-          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/airconditioner.png" alt="airconditioner">
-        	</c:if>
-        </div>
-        <div>
-        	<c:if test="${dto.heater != null}">
-          		<p>무시동히터</p>
-          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/heater.png" alt="heater">
-        	</c:if>
-        </div>
-        <div>
-        	<c:if test="${dto.powerbank != null}">
-          		<p>배터리</p>
-          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/battery.png" alt="battery">
-        	</c:if>
-        </div>
-        <div>
-        	<c:if test="${dto.gasStove != null}">
-          		<p>가스레인지</p>
-          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/gasStove.png" alt="gasStove">
-        	</c:if>
-        </div>
-      </div>
-	<hr style="margin-top: 20px; margin-bottom: 50px; border:none;">
-    </div>
+		<div class="detail_wrap">
+			<div id="tabs1" class="detail_tab detail_tab1">
+				<ul class="tab_list">
+					<li class="tab_item" onclick="detail();"><span>상세정보</span></li>
+					<li class="tab_item" onclick="question();"><span>상품문의 [1개]</span></li>
+					<li class="tab_item" onclick="as();"><span>규정 및 주의사항</span></li>
+				</ul>
+			</div>
+			
+			<div class="detail_img">
+				<img src="https://via.placeholder.com/538x540" alt="detail_img">
+			</div>
+			
+			<div class="second-container">
+			    <div class="available-size">
+			      <div class="available-mini">
+			        <h5><i class="fa-solid fa-user-group"></i>&nbsp;탑승가능인원</h5>
+			        <p>${dto.carMaxNum} 인</p>
+			      </div>
+			      <br>
+			      <div class="available-mini">
+			        <h5><i class="fa-solid fa-campground"></i>&nbsp;취침가능인원</h5>
+			        <p>${dto.sleepNum} 인</p>
+			      </div>
+			      <div class="available-mini">
+			        <h5><i class="fa-solid fa-dog"></i>&nbsp;반려동물 동반</h5>
+			        <p>
+			        <c:if test="${dto.petOrNot == 1}">가능</c:if>
+			        <c:if test="${dto.petOrNot != 1}">불가능</c:if>
+			        </p>
+			      </div>
+			     </div>
+			     </div>
+			    <br>
+			    <hr style="margin-top: 30px; margin-bottom: 50px; border:none;">
+			
+			    <div class="car-options">
+			      <h4 style="padding: 20px 90px;">보유 옵션</h4>
+			      <div class="option-detail">
+			      	<div>
+			        	<c:if test="${dto.toilet != null}">
+			          		<p>화장실</p>
+			          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/toilet.png" alt="toilet">
+			          	</c:if>
+			        </div>
+			        <div>
+			        	<c:if test="${dto.shower != null}">
+			          		<p>샤워실</p>
+			          		
+			          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/shower.png" alt="shower">
+			          	</c:if>
+			        </div>
+			        <div>
+			        	<c:if test="${dto.bed != null}">
+			          		<p>침대</p>
+			          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/bed.png" alt="bed">
+			          	</c:if>
+			        </div>
+			        <div>
+			        	<c:if test="${dto.sink != null}">
+			          		<p>싱크대</p>
+			          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/sink.png" alt="sink">
+			        	</c:if>
+			        </div>
+			        
+			        <div>
+			        	<c:if test="${dto.microwave != null}">
+			          		<p>전자레인지</p>
+			           		<img src="${pageContext.request.contextPath}/resources/images/campingcar/microwave.png" alt="microwave">
+			        	</c:if>
+			        </div>
+			        <div>
+			        	<c:if test="${dto.frige != null}">
+			          		<p>냉장고</p>
+			          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/refrigerator.png" alt="refrigerator">
+			        	</c:if>
+			        </div>
+			        <div>
+			        	<c:if test="${dto.desk != null}">
+			          		<p>테이블</p>
+			          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/table.png" alt="table">
+			        	</c:if>
+			        </div>
+			        <div>
+			        	<c:if test="${dto.waterHeater != null}">
+			          		<p>온수기</p>
+			          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/waterHeater.png" alt="waterHeater">
+			        	</c:if>
+			        </div>
+			        <div>
+			        	<c:if test="${dto.tv != null}">
+			          		<p>TV</p>
+			          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/tv.png" alt="tv">
+			        	</c:if>
+			        </div>
+			        <div>
+			        	<c:if test="${dto.airCondition != null}">
+			          		<p>에어컨</p>
+			          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/airconditioner.png" alt="airconditioner">
+			        	</c:if>
+			        </div>
+			        <div>
+			        	<c:if test="${dto.heater != null}">
+			          		<p>무시동히터</p>
+			          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/heater.png" alt="heater">
+			        	</c:if>
+			        </div>
+			        <div>
+			        	<c:if test="${dto.powerbank != null}">
+			          		<p>배터리</p>
+			          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/battery.png" alt="battery">
+			        	</c:if>
+			        </div>
+			        <div>
+			        	<c:if test="${dto.gasStove != null}">
+			          		<p>가스레인지</p>
+			          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/gasStove.png" alt="gasStove">
+			        	</c:if>
+			        </div>
+			      </div>
+				<hr style="margin-top: 20px; margin-bottom: 50px; border:none;">
+			    </div>
+			
+			<div class="detail_tab detail_tab2">
+				<ul class="tab_list">
+					<li class="tab_item" onclick="detail();"><span>상세정보</span></li>
+					<li class="tab_item" onclick="question();"><span>상품문의 [1개]</span></li>
+					<li class="tab_item" onclick="as();"><span>규정 및 주의사항</span></li>
+				</ul>
+			</div>
+			
+			<div class="detail_qna">
+				<div class="qna_table">
+					<table summary="번호, 평점, 내용, 작성자, 작성일, 조회">
+						<colgroup>
+							<col width="40">
+							<col width="40">
+							<col width="*">
+							<col width="95">
+							<col width="110">
+							<col width="40">
+						</colgroup>
+					</table>
+				</div>
+				<div class="review_write mt-3 p-2 text-end">
+					<button type="button" class="btnMyQuestion btn btn-dark"> 내 Q&amp;A 보기  </button>
+					<button type="button" class="btnQuestion btn btn-dark"> 캠핑카 Q&amp;A 작성 </button>
+				</div>
+				<div class="mt-1 p-2 list-question">
+				</div>
+				
+			</div>
+			
+			<div class="detail_tab detail_tab3">
+				<ul class="tab_list">
+					<li class="tab_item" onclick="detail();"><span>상세정보</span></li>
+					<li class="tab_item" onclick="question();"><span>상품문의 [1개]</span></li>
+					<li class="tab_item" onclick="as();"><span>규정 및 주의사항</span></li>
+				</ul>
+			</div>
+			
+			<hr style="margin-top: 20px; margin-bottom: 40px; border:none;">
+			<div id="wrap">
+				<div class="container">
+			  <div class="detail_as">
+			    <div class="as_table">
+			        <table>
+			            <colgroup>
+			                <col width="250">
+			                <col width="*">
+			            </colgroup>
+			            <tbody>
+			                <tr>
+			                    <th>캠핑카 업체</th>
+			                    <td>
+			                        <b>캠브릿지 한국지점</b>
+			                        <br>
+			                        주소 - 서울특별시 마포구 월드컵북로 21 풍성빌딩 2층
+			                    </td>
+			                </tr>
+			                <tr>
+			                    <th>운전자 대여조건</th>
+			                    <td>
+			                        <b>-&nbsp;운전자 나이 만26세 이상</b>
+			                        <br>
+			                        <br>
+			                        <b>-&nbsp;1종보통</b> 면허이상 필요(차량대여 시 실물면허증 소지)
+			                        <br>
+			                        -&nbsp;면허취득일 상관없음
+			                       
+			                    </td>
+			                </tr>
+			                <tr>
+			                    <th>자동차 보험</th>
+			                    <td>
+			                        -&nbsp;렌트카 공제 조합을 통해 대인, 대물, 자손 등의
+			                        <br>
+			                        종합보험에 가입되어 있으며, 자차보험은
+			                        <br>
+			                        별도로 비용을 지불하고 가입 가능합니다.
+			                    </td>
+			                </tr>
+			                <tr>
+			                    <th>유료딜리버리</th>
+			                    <td>
+			                      -&nbsp; 유료 딜리버리는 <b>1:1 문의</b>를 통해
+			                      <br>
+			                      개별적으로 진행 가능합니다.
+			                    </td>
+			                </tr>
+			                <tr>
+			                  <th>취소 규정</th>
+			                  <td>
+			                    -&nbsp; 출발일 기준 7일전 취소시 : 80% 환불 
+			                    <br>
+			                    -&nbsp; 출발일 기준 6일~4일전 취소시 : 50% 환불 
+			                    <br>
+			                    -&nbsp; 출발일 기준 3일~당일 취소시 : 환불 불가 
+			               
+			                  </td>
+			                </tr>
+			            </tbody>
+			        </table>
+			    </div>
+			</div>
+			    </div>
+			</div>
+		</div>
 </div>
-
+	
+  
+  
+  
+  
+  
+  
 
 
  
  
-<hr style="margin-top: 20px; margin-bottom: 40px; border:none;">
-<div id="wrap">
-	<div class="container">
-  <div class="detail_as">
-    <div class="as_table">
-        <table>
-            <colgroup>
-                <col width="250">
-                <col width="*">
-            </colgroup>
-            <tbody>
-                <tr>
-                    <th>캠핑카 업체</th>
-                    <td>
-                        <b>캠브릿지 한국지점</b>
-                        <br>
-                        주소 - 서울특별시 마포구 월드컵북로 21 풍성빌딩 2층
-                    </td>
-                </tr>
-                <tr>
-                    <th>운전자 대여조건</th>
-                    <td>
-                        <b>-&nbsp;운전자 나이 만26세 이상</b>
-                        <br>
-                        <br>
-                        <b>-&nbsp;1종보통</b> 면허이상 필요(차량대여 시 실물면허증 소지)
-                        <br>
-                        -&nbsp;면허취득일 상관없음
-                       
-                    </td>
-                </tr>
-                <tr>
-                    <th>자동차 보험</th>
-                    <td>
-                        -&nbsp;렌트카 공제 조합을 통해 대인, 대물, 자손 등의
-                        <br>
-                        종합보험에 가입되어 있으며, 자차보험은
-                        <br>
-                        별도로 비용을 지불하고 가입 가능합니다.
-                    </td>
-                </tr>
-                <tr>
-                    <th>유료딜리버리</th>
-                    <td>
-                      -&nbsp; 유료 딜리버리는 <b>1:1 문의</b>를 통해
-                      <br>
-                      개별적으로 진행 가능합니다.
-                    </td>
-                </tr>
-                <tr>
-                  <th>취소 규정</th>
-                  <td>
-                    -&nbsp; 출발일 기준 7일전 취소시 : 80% 환불 
-                    <br>
-                    -&nbsp; 출발일 기준 6일~4일전 취소시 : 50% 환불 
-                    <br>
-                    -&nbsp; 출발일 기준 3일~당일 취소시 : 환불 불가 
-               
-                  </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-    </div>
-</div>
+
 
 <a href="https://www.flaticon.com/kr/free-icons/" title="화장실 아이콘">화장실 아이콘  제작자: Creaticca Creative Agency - Flaticon</a>
 <a href="https://www.flaticon.com/kr/free-icons/" title="화장실 아이콘">화장실 아이콘  제작자: Freepik - Flaticon</a>
@@ -1047,6 +1085,321 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 <a href="https://www.flaticon.com/kr/free-icons/" title="히터 아이콘">히터 아이콘  제작자: Linector - Flaticon</a>
 <a href="https://www.flaticon.com/kr/free-icons/" title="배터리 아이콘">배터리 아이콘  제작자: kmg design - Flaticon</a>
 
+
+<div class="modal hidden" id="questionDialogModal" tabindex="-1" 
+	data-bs-backdrop="static" data-bs-keyboard="false"
+	aria-labelledby="questionDialogModalLabel" aria-hidden="true">
+	
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="questionDialogModalLabel">캠핑카 문의 하기</h5>
+				<button type="button" class="btn-close closeModal" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+
+				<div class="qna-form p-2">
+					<form name="questionForm" enctype="multipart/form-data">
+						<div class="row">
+							<div class="col">
+								<span class="fw-bold">문의사항 쓰기</span><span> - 상품과 관련없는 글은 삭제 될 수 있습니다.</span>
+							</div>
+							<div class="col-3 text-end">
+								<input type="checkbox" name="secret" id="secret1" class="form-check-input" 
+									value="1">
+								<label class="form-check-label" for="secret1">비공개</label>
+								
+							</div>
+						</div>
+						<div class="p-1">
+							<input type="hidden" name="carNum" value="${dto.carNum}">
+							<textarea name="question" id="question" class="form-control"></textarea>
+						</div>
+						<div class="p-1">
+							<div class="img-grid">
+								<img class="item img-add" src="${pageContext.request.contextPath}/resources/images/add_photo.png">
+							</div>
+							<input type="file" name="selectFile" accept="image/*" multiple class="form-control" style="display: none;">
+						</div>							
+					</form>
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary btnQuestionSendOk">문의등록 <i class="bi bi-check2"></i> </button>
+				<button type="button" class="btn btn-secondary btnQuestionSendCancel" data-bs-dismiss="modal">취소</button>
+			</div>			
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript">
+	//변수명 변경
+	let detail_height = document.querySelector(".detail_tab1").offsetTop;
+	let question_height = document.querySelector(".detail_tab2").offsetTop;
+	let as_height = document.querySelector(".detail_tab3").offsetTop;
+	
+	console.log(detail_height);
+	console.log(question_height);
+	console.log(as_height);
+	
+	// 함수명 변경
+	function detail() {
+	   window.scrollTo({top: detail_height, left: 0, behavior: 'smooth'});
+	}
+	
+	function question() {
+	   window.scrollTo({top: question_height, left: 0, behavior: 'smooth'});
+	}
+	
+	function as() {
+	   window.scrollTo({top: as_height, left: 0, behavior: 'smooth'});
+	}
+	
+</script>
+
+<!-- 문의  -->
+<script type="text/javascript">
+
+function listQuestion(page) {
+	let carNum = '${dto.carNum}';
+	let url = '${pageContext.request.contextPath}/car/qna/list';
+	let query = 'carNum='+carNum+'&pageNo='+page;
+	
+	const fn = function(data) {
+		printQuestion(data);
+	};
+	ajaxFun(url, 'get', query, 'json', fn);
+}
+
+function printQuestion(data) {
+	console.log(data);
+	let dataCount = data.dataCount;
+	let pageNo = data.pageNo;
+	let total_page = data.total_page;
+	let size = data.size;
+	let paging = data.paging;
+	
+	$('.title-qnaCount').html('(' + dataCount + ')');
+	let out = '';
+	for(let item of data.list) {
+		let qnaNum = item.qnaNum;
+		let userName = item.userName;
+		let question = item.question;
+		let questionDate = item.questionDate;
+		let answer = item.answer;
+		let answerDate = item.answerDate;
+		let answerState = answerDate ? '<span class="text-primary">답변완료</span>' : '<span class="text-secondary">답변대기</span>';
+		let listFilename = item.listFilename;
+		let secret = item.secret;
+
+		out += '<div class="mt-1 border-bottom">';
+		out += '  <div class="mt-2 p-2">' + question + '</div>';
+		
+		if(listFilename && listFilename.length > 0) {
+			out += '<div class="row gx-1 mt-2 mb-1 p-1">';
+				for(let f of listFilename) {
+					out += '<div class="col-md-auto md-img">';
+					out += '  <img class="border rounded" src="${pageContext.request.contextPath}/uploads/qna/'+f+'">';
+					out += '</div>';
+				}
+			out += '</div>';
+		}
+		out += '  <div class="row p-2">';
+		out += '     <div class="col-auto pt-2 pe-0">' + answerState + '</div>';
+		out += '     <div class="col-auto pt-2 px-0">&nbsp;|&nbsp;'+userName+'</div>';
+		out += '     <div class="col-auto pt-2 px-0">&nbsp;|&nbsp;<span>'+questionDate+'</span>';
+		if(secret === 0) {
+			out += '       |<span class="notifyQuestion" data-qnaNum="' + qnaNum + '">신고</span>';
+		}
+		out += '      </div>';
+		if(answer) {
+			out += '  <div class="col pt-2 text-end"><button class="btn btnAnswerView"> <i class="bi bi-chevron-down"></i> </button></div>';
+		}
+		out += '  </div>';
+		if(answer) {
+			out += '  <div class="p-3 pt-0 answer-content" style="display: none;">';
+			out += '    <div class="bg-light">';
+			out += '      <div class="p-3 pb-0">';
+			out += '        <label class="text-bg-primary px-2"> 관리자 </label> <label>' + answerDate + '</label>';
+			out += '      </div>';
+			out += '      <div class="p-3 pt-1">' + answer + '</div>';
+			out += '    </div>';
+			out += '  </div>';
+		}
+		out += '</div>';
+	}
+	
+	if(dataCount > 0) {
+		out += '<div class="page-navigation">' + paging + '</div>';
+	}
+
+	$('.list-question').html(out);
+}
+
+$(function(){
+	$('.list-question').on('click', '.btnAnswerView', function(){
+		const $btn = $(this);
+		const $EL = $(this).closest('.row').next('.answer-content');
+		if($EL.is(':visible')) {
+			$btn.html(' <i class="bi bi-chevron-down"></i> ');
+			$EL.hide(100);
+		} else {
+			$btn.html(' <i class="bi bi-chevron-up"></i> ');
+			$EL.show(100);
+		}
+	});
+});
+
+$(function(){
+	var sel_files = [];
+	
+	$("body").on("click", ".qna-form .img-add", function(){
+		$(this).closest(".qna-form").find("input[name=selectFile]").trigger("click");
+	});
+	
+	$("form[name=questionForm] input[name=selectFile]").change(function(e){
+		if(! this.files) {
+			let dt = new DataTransfer();
+			for(let f of sel_files) {
+				dt.items.add(f);
+			}
+			
+			this.files = dt.files;
+			
+			return false;
+		}
+		
+		let $form = $(this).closest("form");
+		
+		// 유사 배열을  배열로 변환
+		const fileArr = Array.from(this.files);
+		
+		fileArr.forEach((file, index) => {
+			sel_files.push(file);
+			
+			const reader = new FileReader();
+			const $img = $("<img>", {"class":"item img-item"});
+			$img.attr("data-filename", file.name);
+			reader.onload = e => {
+				$img.attr("src", e.target.result);		
+			};
+			reader.readAsDataURL(file);
+			$form.find(".img-grid").append($img);
+		});
+		
+		let dt = new DataTransfer();
+		for(let f of sel_files) {
+			dt.items.add(f);
+		}
+		
+		this.files = dt.files;
+	});
+	
+	$("body").on("click", ".qna-form .img-item", function(){
+		if(! confirm("선택한 파일을 삭제 하시겠습니까 ? ")) {
+			return false;
+		}
+		
+		let filename = $(this).attr("data-filename");
+		
+		for(let i=0; i<sel_files.length; i++) {
+			if(filename === sel_files[i].name) {
+				sel_files.splice(i, 1);
+				break;
+			}
+		}
+		
+		let dt = new DataTransfer();
+		for(let f of sel_files) {
+			dt.items.add(f);
+		}
+		
+		const f = this.closest("form");
+		f.selectFile.files = dt.files;
+		
+		$(this).remove();
+	});
+	
+	$('.btnQuestion').click(function(){
+		$("#questionDialogModal").show();
+	});
+
+	$('.btnQuestionSendOk').click(function(){
+		const f = document.questionForm;
+		let s;
+		
+		s = f.question.value.trim();
+		if( ! s ) {
+			alert("문의 사항을 입력하세요.")	;
+			f.question.focus();
+			return false;
+		}
+		
+		if(f.selectFile.files.length > 2) {
+			alert("이미지는 최대 2개까지 가능합니다..")	;
+			return false;
+		}
+		
+		let url = "${pageContext.request.contextPath}/car/qna/write";
+		let query = new FormData(f); 
+		
+		const fn = function(data) {
+			if(data.state === "true") {
+				f.reset();
+				$(".qna-form .img-item").each(function(){
+					$(this).remove();
+				});
+				sel_files.length = 0;
+				
+				$("#questionDialogModal").hide();
+				
+				listQuestion(1);
+			}
+		};
+		
+		ajaxFun(url, "post", query, "json", fn, true);		
+	});
+	
+	$('.btnQuestionSendCancel').click(function(){
+		const f = document.questionForm;
+		f.reset();
+		$(".qna-form .img-item").each(function(){
+			$(this).remove();
+		});
+		sel_files.length = 0;
+		
+		$("#questionDialogModal").hide();
+	});	
+	
+	$('.closeModal').click(function(){
+		const f = document.questionForm;
+		f.reset();
+		$(".qna-form .img-item").each(function(){
+			$(this).remove();
+		});
+		sel_files.length = 0;
+		
+		$("#questionDialogModal").hide();
+	});	
+	
+	$('.btnMyQuestion').click(function(){
+		location.href = '${pageContext.request.contextPath}/shop/myPage/review?mode=qna';
+	});
+});
+
+
+</script>
+
+
+
+
 <script>
 $(document).ready(function(){
 	  
@@ -1058,23 +1411,10 @@ $(document).ready(function(){
 
 	    $(this).addClass('current');
 	    $("#"+tab_id).addClass('current');
-	  })
+	  });
 
-	})
+})
 
-const controllerURL = '/plus/car/qna/list';	
-$.ajax({
-   url: controllerURL,
-   method: 'GET',
-   success: function(data) {
-      // 성공적으로 데이터를 가져온 경우, 해당 div에 내용을 삽입
-      $('#carqna-page').html(data);
-   },
-   error: function() {
-      // 에러 처리 로직 추가
-      console.error('Failed to load the controller content.');
-   }
-});	
 </script>
 
 <script>

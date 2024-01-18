@@ -1,5 +1,6 @@
 package com.fa.plus.controller.car;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,8 +33,8 @@ public class CarQnaController {
 		public Map<String, Object> writeSubmit(CarQna dto,
 				HttpSession session) throws Exception {
 			
-			//String root = session.getServletContext().getRealPath("/");
-			//String pathname = root + "uploads" + File.separator + "qna";
+			String root = session.getServletContext().getRealPath("/");
+			String pathname = root + "uploads" + File.separator + "carqna";
 			
 			String state = "true";
 			try {
@@ -41,7 +42,7 @@ public class CarQnaController {
 				SessionInfo info = (SessionInfo)session.getAttribute("member");
 				dto.setMemberIdx(info.getMemberIdx());
 				
-				service.insertCarQna(dto);
+				service.insertCarQna(dto, pathname);
 			} catch (Exception e) {
 				state = "false";
 			}

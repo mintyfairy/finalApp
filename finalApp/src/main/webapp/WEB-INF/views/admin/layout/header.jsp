@@ -122,10 +122,7 @@ $(function(){
 					<a href="${pageContext.request.contextPath}/admin/carReservation/chart" class="sub_menu--link">예약 관리</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="${pageContext.request.contextPath}/admin/carReview/review" class="sub_menu--link">리뷰 및 문의 관리</a>
-				</li>
-				<li class="sub_menu--item">
-					<a href="${pageContext.request.contextPath}/admin/carSales/sales" class="sub_menu--link">매출 관리</a>
+					<a href="${pageContext.request.contextPath}/admin/carReview/review" class="sub_menu--link">문의 관리</a>
 				</li>
 			</ul>
 		</li>
