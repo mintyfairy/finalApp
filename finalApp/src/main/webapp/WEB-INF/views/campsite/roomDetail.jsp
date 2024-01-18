@@ -372,9 +372,26 @@ function ajaxCart(dnum){
 		alert('종료일도 선택해주세요')
 		return;
 	}
+	let today = new Date();
+	let date1 = new Date(f.startDate.value);
+	let date2 = new Date(f.endDate.value);
+	if (date1<=today){
+    	alert('오늘 날짜 이후를 입력하세요.');
+		f.startDate.focus();
+		return false;
+    }
+    if (date2<=date1){
+    	alert('종료일은 시작일 이후여야합니다');
+		f.endDate.focus();
+		return false;
+    }
+    if(Math.ceil(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24))>7){
+    	alert('최대 7일까지 예약가능합니다.');
+		return false;
+    	
+    }
 	formData= $('form[name=roomSearchForm]').serialize();
 	formData+='&detailNum='+dnum
-	console.log(formData)
  	let url="${pageContext.request.contextPath}/campsite/saveCart"
  	const fn = function(data) {
 		if(confirm('카트에 담았습니다. 카트로 이동하시겠습니까?')){
@@ -392,13 +409,33 @@ function gogoCart(dnum){
 	sdate= f.startDate.value;
 	edate= f.endDate.value;
 	if (!f.startDate.value){
-		alert('시작일도 선택해주세요')
+		alert('시작일을 선택해주세요')
 		return;
 	}
 	if (!f.endDate.value){
-		alert('종료일도 선택해주세요')
+		alert('종료일을 선택해주세요')
 		return;
 	}
+	let today = new Date();
+	let date1 = new Date(f.startDate.value);
+	let date2 = new Date(f.endDate.value);
+	if (date1<=today){
+    	alert('오늘 날짜 이후를 입력하세요.');
+		f.startDate.focus();
+		return false;
+    }
+    if (date2<=date1){
+    	alert('종료일은 시작일 이후여야합니다');
+		f.endDate.focus();
+		return false;
+    }
+    if(Math.ceil(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24))>7){
+    	alert('최대 7일까지 예약가능합니다.');
+		return false;
+    	
+    }
+	
+	
 	formData= $('form[name=roomSearchForm]').serialize();
 	formData+='&detailNum='+dnum
 	console.log(formData)

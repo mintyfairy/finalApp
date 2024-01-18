@@ -460,7 +460,7 @@ public class SiteAdminServiceImpl implements SiteAdminService {
 
 	@Override
 	public void insertAdList(AdSite dto) throws Exception {
-		try {
+		try {	
 			int period1=period(dto.getStartP(),dto.getEndP());
 			dto.setAdFee(period1*(long)dto.getAdFeePerDay());
 			mapper.insertAdList(dto);

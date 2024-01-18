@@ -268,14 +268,32 @@
         	let list=f.siteOption;
         	if(f.startDate.value ||f.endDate.value){
         		if (!f.startDate.value){
-        			alert('시작일도 선택해주세요')
+        			alert('시작일을 선택해주세요')
         			return;
         		}
         		if (!f.endDate.value){
-        			alert('종료일도 선택해주세요')
+        			alert('종료일을 선택해주세요')
         			return;
         		}
         	}
+        	let today = new Date();
+        	let date1 = new Date(f.startDate.value);
+        	let date2 = new Date(f.endDate.value);
+        	if (date1<=today){
+            	alert('오늘 날짜 이후를 입력하세요.');
+        		f.startDate.focus();
+        		return false;
+            }
+            if (date2<=date1){
+            	alert('종료일은 시작일 이후여야합니다');
+        		f.endDate.focus();
+        		return false;
+            }
+            if(Math.ceil(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24))>7){
+            	alert('최대 7일까지 예약가능합니다.');
+        		return false;
+            	
+            }
         	for(var i=0; i<list.length; i++){
         		if(list[i].checked){
         			list[i].value="1";

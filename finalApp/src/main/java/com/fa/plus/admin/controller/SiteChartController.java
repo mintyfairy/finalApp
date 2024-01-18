@@ -1,25 +1,33 @@
 package com.fa.plus.admin.controller;
 
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import java.util.Map;
 
-@RestController
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.fa.plus.admin.service.SiteChartService;
+
+@Controller
 @RequestMapping("/admin/siteChart/*")
 public class SiteChartController {
+	@Autowired
+	private SiteChartService service;
 
-	@RequestMapping("list")
-	public String list() {
+	//지역,업체,환경,카테고리, 
+	@GetMapping("main")
+	public String chartPage( Model model) {
+		Map<String, Object> previousYear = service.previousYearBook();
+		Map<String, Object> previousMonth = service.previousMonthBook();
+		Map<String, Object> adEfect = service.adEfect();
 		
+		model.addAttribute("adEfect", adEfect);
+		model.addAttribute("previousYear", previousYear);
+		model.addAttribute("previousMonth", previousMonth);
 		
-		return ".campsite.room";
+		return ".admin.siteChart.siteChart";
 	}
-	@RequestMapping("places/{num}")
-	public String sitelist(@PathVariable int num) {
-		
-		
-		return ".campsite.roomDetail";
-	}
-	
 
 }

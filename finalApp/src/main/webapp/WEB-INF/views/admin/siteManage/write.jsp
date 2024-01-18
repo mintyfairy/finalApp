@@ -38,7 +38,7 @@
 					<button type="reset" class="btn btn-light">다시입력</button>
 					<button type="button" class="btn btn-light btnModalClose">등록취소&nbsp;<i class="bi bi-x"></i></button>
 					
-					<input type="hidden" name="siteNum" value="${dto.siteNum}">
+					<input type="hidden" name="siteNum" value="${siteNum}">
 					
 				</td>
 			</tr>

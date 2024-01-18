@@ -45,7 +45,7 @@
 						<td>${dto.addr1}</td>
 
 						<td>
-							<button type="button" class="btn-border-primary btnInsertForm" >광고업체 등록</button>
+							<button type="button" class="btn-border-primary btnInsertForm" data-sitenum="${dto.siteNum}">광고업체 등록</button>
 							<button type="button" class="btn-border-primary" onclick="updateSite('${dto.siteNum}')">수정</button>
 							<button type="button" class="btn-border-primary" onclick="deleteSite('${dto.siteNum}')">삭제</button>
 						</td>
@@ -99,7 +99,6 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 				fn(data);
 			},
 			beforeSend: function(jqXHR) {
-				sentinelNode.setAttribute('data-loading', 'true');
 				
 				jqXHR.setRequestHeader('AJAX', true);
 			},
@@ -134,7 +133,9 @@ $(function(){
 	$('.btnInsertForm').on('click', function(){
 		// 글 등록 폼
 		$('#myDialogModal .modal-body').empty();
-		let url = '${pageContext.request.contextPath}/admin/siteManage/adWrite';
+		let siteNum=$(this).data('sitenum')
+		console.log(siteNum)
+		let url = '${pageContext.request.contextPath}/admin/siteManage/adWrite?siteNum='+siteNum;
 		$.ajaxSetup({ beforeSend: function(e) { e.setRequestHeader('AJAX', true); } });
 		$.get(url, function(data){
 			$('#myDialogModal .modal-body').html(data);
@@ -148,57 +149,57 @@ $(function(){
 });
 
 $(function(){
-	$('.container').on('click', '.btnSendOk', function() {
+	$('.body-container').on('click', '.btnSendOk', function() {
 		//  글 등록 완료 및 수정 완료
-		const f = document.photoForm;
+		const f = document.AdSiteForm;
 		
 		let str;
-			
-		str = f.subject.value.trim();
+		let today = new Date();
+		str = f.startP.value;
 		if(!str) {
-			alert('제목을 입력하세요. ');
-			f.subject.focus();
+			alert('시작일을 입력하세요. ');
+			f.startP.focus();
 			return false;
 		}
 
-		str = f.content.value.trim();
+		str = f.endP.value;
 	    if(!str) {
-	        alert('내용을 입력하세요. ');
-	        f.content.focus();
+	        alert('종료일을 입력하세요. ');
+	        f.endP.focus();
 	        return;
 	    }
-	    
-	    let mode = f.mode.value;
-	    if( (mode === 'write') && (!f.selectFile.value) ) {
-	        alert('이미지 파일을 추가 하세요. ');
-	        f.selectFile.focus();
-	        return;
-		}
-		    
+	    let date1 = new Date(f.startP.value);
+	    let date2 = new Date(f.endP.value);
+	    if (date1<=today){
+	    	alert('오늘 날짜 이후를 입력하세요.');
+			f.startP.focus();
+			return false;
+	    }
+	    if (date2<=date1){
+	    	alert('종료일은 시작일 이후여야합니다');
+			f.endP.focus();
+			return false;
+	    }
+		console.log(f.startP.value)
+		console.log(f.endP.value)
 		let url = "${pageContext.request.contextPath}/admin/siteManage/adWrite";
-	    let formData = new FormData(f);
-
+	    let formData =  $('form[name=AdSiteForm]').serialize();
+		console.log(formData)
+		
 		const fn = function(data){
 			let state = data.state;
 	        if(state === "false") {
-	            alert("게시물을 추가(수정)하지 못했습니다. !!!");
+	            alert("등록실패");
 	            return false;
 	        }
-
-	        $('#searchInput').val('');
-	        $('#searchWord').val('');
-	        
-			$('.list-content').empty();
-	    	loadContent(1);
-	    	
 	    	$('#myDialogModal').modal('hide');
 		};
 		
-		ajaxFun(url, 'post', formData, 'json', fn, true);		
+		ajaxFun(url, 'post', formData, 'json', fn);		
 	});
 });
 $(function(){
-	$('.container').on('click', '.btnModalClose', function() {
+	$('.body-container').on('click', '.btnModalClose', function() {
 		//  대화상자 닫기
 		$('#myDialogModal').modal('hide');
 	});

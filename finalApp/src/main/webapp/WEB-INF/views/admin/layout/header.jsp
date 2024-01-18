@@ -103,7 +103,7 @@ $(function(){
 					<a href="${pageContext.request.contextPath}/admin/siteManage/main" class="sub_menu--link">캠핑장 관리</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="${pageContext.request.contextPath}/admin/siteManage/chart" class="sub_menu--link">통계</a>
+					<a href="${pageContext.request.contextPath}/admin/siteChart/main" class="sub_menu--link">통계</a>
 				</li>
 			</ul>
 		</li>

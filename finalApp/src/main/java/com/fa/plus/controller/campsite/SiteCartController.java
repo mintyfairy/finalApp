@@ -142,7 +142,7 @@ public class SiteCartController {
 		} catch (ArrayIndexOutOfBoundsException e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			return "redirect:/";
+			return "/";
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -172,6 +172,7 @@ public class SiteCartController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			return "/";
 		}
 		
 		return ".campsite.reservation";

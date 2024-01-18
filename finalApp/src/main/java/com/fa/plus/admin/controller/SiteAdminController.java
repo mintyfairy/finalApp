@@ -1,4 +1,4 @@
-package com.fa.plus.admin.controller;
+	package com.fa.plus.admin.controller;
 
 import java.io.File;
 import java.util.HashMap;
@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -332,8 +333,8 @@ public class SiteAdminController {
 		return model;
 	}
 	@GetMapping("adWrite")
-	public String writeForm(Model model) throws Exception {
-
+	public String writeForm(@RequestParam("siteNum") long siteNum,Model model) throws Exception {
+		model.addAttribute("siteNum", siteNum);	
 		//return ".admin.siteManage.write";
 		return "admin/siteManage/write";
 	}
@@ -341,9 +342,10 @@ public class SiteAdminController {
 	@ResponseBody
 	public Map<String, Object> writeSubmit(AdSite dto) throws Exception {
 		Map<String, Object> model = new HashMap<String, Object>();
-		
+			
 
 		try {
+			
 			service.insertAdList(dto);
 			model.put("state", "true");
 		} catch (Exception e) {
@@ -352,6 +354,7 @@ public class SiteAdminController {
 
 		return model;
 	}
+	
 	
 }
 
