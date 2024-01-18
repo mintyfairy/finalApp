@@ -8,6 +8,10 @@
 }
 
 .table-article img { max-width: 650px; }
+.board-article thead>tr:first-child { border-top: 2px solid #454545; }
+
+
+
 </style>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/boot-board.css" type="text/css">

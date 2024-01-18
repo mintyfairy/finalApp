@@ -100,14 +100,14 @@ public class NoticeController {
 		String cp = req.getContextPath();
 		String query = "";
 		String listUrl = cp + "/csCenter/csNoticeList";
-		String articleUrl = cp + "/csCenter/article?page=" + current_page;
+		String articleUrl = cp + "/csCenter/noticeArticle?page=" + current_page;
 		if (kwd.length() != 0) {
 			query = "schType=" + schType + "&kwd=" + URLEncoder.encode(kwd, "utf-8");
 		}
 
 		if (query.length() != 0) {
 			listUrl = cp + "/csCenter/csNoticeList?" + query;
-			articleUrl = cp + "/csCenter/article?page=" + current_page + "&" + query;
+			articleUrl = cp + "/csCenter/noticeArticle?page=" + current_page + "&" + query;
 		}
 
 		String paging = myUtil.paging(current_page, total_page, listUrl);
@@ -166,7 +166,7 @@ public class NoticeController {
 		model.addAttribute("page", page);
 		model.addAttribute("query", query);
 
-		return "csCenter/article";	
+		return ".csCenter.noticeArticle";	
 	}
 	
 	@GetMapping("download")
