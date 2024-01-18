@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 <style>
 @charset "utf-8";
 
@@ -35,8 +36,7 @@ h1, h2, h3, h4, h5, h6 {
 
 
 #wrap {
-  
-  width: 1000px;
+  width: 1080px;
   box-sizing: border-box;
   margin: 50px auto;
 
@@ -45,15 +45,16 @@ h1, h2, h3, h4, h5, h6 {
 
 
 #wrap2 {
-  width: 1000px;;
+  width: 1000px;
   box-sizing: border-box;
   margin: 50px auto;
 }
 
-.first-container { 
+.first-container {
   padding: 25px;
   display: flex;
   margin: 20px auto;
+  border: 1px soild red;
 }
 
 .thumbnail-addImages {
@@ -101,7 +102,7 @@ h1, h2, h3, h4, h5, h6 {
 .carName-liked {
   display: flex;
   justify-content: center;
-  
+  float:left
 }
 
 
@@ -232,11 +233,11 @@ input[type='date']:valid::before {
 }
 
 .price-reservation {
-  margin-top: 15px;
   width: 400px;
   height: 80px;
   box-sizing: border-box;
   border: none;
+  margin-top: 40px;
 }
 .price {
   font-size: 20px;
@@ -291,6 +292,8 @@ button[name=reservation]:hover {
 	text-align: center;
 	margin: 0 auto;
 	width: 250px;
+	margin-top: 18px;
+	margin-right: 10px;
 }
 
 .available-mini h3 { padding-bottom: 15px; color: gray;}
@@ -608,6 +611,10 @@ table {
     background: #fff;
 }
 
+.detail_as {
+	width: 1080px;
+}
+
 .detail_as .as_table table tbody tr th {
     font-size: 16px;
     font-weight: 500;
@@ -623,17 +630,18 @@ table {
 
 
 .container { 
-	margin: 0 auto;
-	width: 1000px;	
+	/* margin: 0 auto; */
+	width: 100%;	
 }
 .body-container { 
 	margin-bottom: 50px;
 	max-width: 1000px;
+	display:flex;
 }
 .body-main {
 	margin: 0 auto;
 	width: 799px;
-	
+	justify-content: space-between;
 }
 
 
@@ -642,9 +650,10 @@ ul.tabs{
   margin: 0px;
   padding: 0px;
   list-style: none;
+  display: flex;
 }
 ul.tabs li{
-  width: 263px;
+  width: 200px;
   background: none;
   color: #222;
   display: inline-block;
@@ -666,8 +675,11 @@ ul.tabs li.current{
 }
 
 .tab-content.current{
+	width: 100%;
   display: inherit;
 }
+
+
 </style>
 <script type="text/javascript">
 function login() {
@@ -735,8 +747,8 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
     </div>
     <div class="car-detail">
       <div class="carName-liked">
-        <h1>${dto.carName}</h1>
-        <i class="fa-regular fa-heart"></i>
+        <h3>${dto.carName}</h3>
+        <i class="fa-regular fa-heart" style="margin-left: 50px;"></i>
       </div>
      
     <div style="text-align: center; margin-top: 5px;">
@@ -748,12 +760,12 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
           <div class="start-date">
           
             <p style="font-size: medium; font-weight: bold; margin-left: 65px;">대여일</p>
-            <input id="start_date" type="date" name="start_date">
+            <input id="start_date" type="date" name="start_date" style="font-size:16px;, font-weight: 450;">
           </div>
           <p style="margin-top: 40px; font-size: large; font-weight: 600;"> | </p>
           <div class="end-date">
             <p style="font-size: medium; font-weight: bold; margin-left: 65px;">반납일</p>
-            <input id="end_date" type="date" name="end_date">
+            <input id="end_date" type="date" name="end_date" style="font-size:16px;, font-weight: 450;">
             <input type="hidden" name="carNum" value="${dto.carNum}">
             <input type="hidden" name="discountRate" value="${dto.discountRate}">
             <input type="hidden" id="inputTotalFee" name="totMoney" value="0">
@@ -816,23 +828,43 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
           
       </div>
     </div>
+    <hr style="margin-bottom: 150px; margin-top: 150px;">
   </div>
 
 <div id="wrap">
-  <hr style="margin-bottom: 40px;">
+  
+ <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
+				<li class="nav-item" role="presentation">
+					<button class="nav-link active" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane-1" type="button" role="tab" aria-controls="1" aria-selected="true">상세정보</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="tab-3" data-bs-toggle="tab" data-bs-target="#tab-pane-3" type="button" role="tab" aria-controls="3" aria-selected="false">문의사항 <span class="title-qnaCount">(${dto.questionCount})</span></button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="tab-4" data-bs-toggle="tab" data-bs-target="#tab-pane-4" type="button" role="tab" aria-controls="4" aria-selected="false">배송 및 환불정책</button>
+				</li>
+</ul>
+  
+  
+  
+  
+  
+  
+  
+  
   <div class="second-container">
     <div class="available-size">
       <div class="available-mini">
-        <h3><i class="fa-solid fa-user-group"></i>&nbsp;탑승가능인원</h3>
+        <h5><i class="fa-solid fa-user-group"></i>&nbsp;탑승가능인원</h5>
         <p>${dto.carMaxNum} 인</p>
       </div>
       <br>
       <div class="available-mini">
-        <h3><i class="fa-solid fa-campground"></i>&nbsp;취침가능인원</h3>
+        <h5><i class="fa-solid fa-campground"></i>&nbsp;취침가능인원</h5>
         <p>${dto.sleepNum} 인</p>
       </div>
       <div class="available-mini">
-        <h3><i class="fa-solid fa-dog"></i>&nbsp;반려동물동반가능여부</h3>
+        <h5><i class="fa-solid fa-dog"></i>&nbsp;반려동물 동반</h5>
         <p>
         <c:if test="${dto.petOrNot == 1}">가능</c:if>
         <c:if test="${dto.petOrNot != 1}">불가능</c:if>
@@ -841,10 +873,10 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
      </div>
      </div>
     <br>
-    <hr style="margin-top: 20px; margin-bottom: 20px;">
+    <hr style="margin-top: 30px; margin-bottom: 50px; border:none;">
 
     <div class="car-options">
-      <h2 style="padding: 20px 90px;">보유 옵션</h2>
+      <h4 style="padding: 20px 90px;">보유 옵션</h4>
       <div class="option-detail">
       	<div>
         	<c:if test="${dto.toilet != null}">
@@ -927,87 +959,15 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
         	</c:if>
         </div>
       </div>
-	<hr style="margin-top: 20px; margin-bottom: 20px;">
+	<hr style="margin-top: 20px; margin-bottom: 50px; border:none;">
     </div>
 </div>
 
 
-<div id="wrap">
-	<div class="container">
-<div class="body-main">
-  <ul class="tabs">
-    <li class="tab-link current" data-tab="tab-1">상세정보</li>
-    <li class="tab-link" data-tab="tab-2">이용후기</li>
-    <li class="tab-link" data-tab="tab-3">차량문의</li>
-  </ul>
 
-  <div id="tab-1" class="tab-content current">
-	${dto.content}
-  </div>
-  
-  <div id="tab-2" class="tab-content">
-  	<h3>후기작성</h3>
-  	
-  </div>
-  
-  <div id="tab-3" class="tab-content">
-		<h3>문의하기</h3>
-		<div style="float: right; margin-bottom: 10px;">
-			<button type="button" class="btnMyQuestion btn btn-dark" ${empty sessionScope.member ? "disabled":""}> 내 Q&amp;A 보기  </button>
-			<button type="button" class="btnQuestion btn btn-dark" ${empty sessionScope.member ? "disabled":""}> Q&amp;A 작성 </button>
-		</div>
-		<div class="list-question" id="carqna-page">
-			<table>
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>답변상태</th>
-						<th>내용</th>
-						<th>작성자</th>
-						<th>작성일자</th>
-					</tr>
-				</thead>
-				
-				<tbody>
-					<c:forEach var="dto" items="${list}" varStatus="status">
-						<tr>
-							<td>${dataCount - (page-1) * size - status.index}</td>
-							<td class="left">
-								<c:choose>
-									<c:when test="${dto.secret==1}">
-										<c:if test="${sessionScope.member.mid==dto.userId || sessionScope.member.mid=='admin'}">
-											<a href="${articleUrl}&num=${dto.qnaNum}">${dto.question}</a>
-										</c:if>
-										<c:if test="${sessionScope.member.mid!=dto.userId && sessionScope.member.mid!='admin'}">
-											비밀글 입니다.
-										</c:if>
-										<i class="fa-solid fa-key"></i>
-									</c:when>
-									<c:otherwise>
-										<a href="${articleUrl}&num=${dto.qnaNum}">${dto.question}</a>
-									</c:otherwise>
-								</c:choose>								
-								
-							</td>
-							<td>${dto.userId}</td>
-							<td>${dto.reg_date}</td>
-							<td>${not empty dto.answerId?"답변완료":"답변대기"}</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-			
-			<div class="page-navigation" style="text-align:center; margin:20px auto;">
-				${dataCount == 0 ? "등록된 게시물이 없습니다." : paging}
-			</div>
-		</div>
-										
-	</div>
-  </div>
-	</div>
-</div>
-
-
+ 
+ 
+<hr style="margin-top: 20px; margin-bottom: 40px; border:none;">
 <div id="wrap">
 	<div class="container">
   <div class="detail_as">
@@ -1222,4 +1182,3 @@ $.ajax({
 		f.submit();
 	}
 </script>
-	
