@@ -248,7 +248,7 @@ ul {
 	            </li>
 	            
 	            <li class="navi_item">
-	                <a href="#">브랜드</a>
+	                <h2>브랜드</h2>
 	            </li>
 	            
 	            <li class="navi_item dropdown">
@@ -387,7 +387,7 @@ ul {
 	            </ul>
 	        </div>
 	    </div>
-    </div>
+	  </div>
 </nav>
 
 <script>

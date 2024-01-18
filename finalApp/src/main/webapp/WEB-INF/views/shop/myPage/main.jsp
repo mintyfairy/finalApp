@@ -278,6 +278,9 @@ ol, ul {
 .star a.on {
 	color: #FFBB00;
 }
+.star a.on > i {
+	color: #FFBB00;
+}
 
 .review-form .img-grid {
 	display: grid;
@@ -607,8 +610,7 @@ $(function(){
 
 					<c:if test="${dto.reviewWrite == 0}">
 						<!-- 리뷰쓰기 -->
-						<div class="review-form border border-secondary p-3 mt-2"
-							style="display: none;">
+						<div class="review-form border border-secondary p-3 mt-2" style="display: none;">
 							<form name="reviewForm">
 								<div class="p-1">
 									<p class="star">
@@ -648,6 +650,7 @@ $(function(){
 
 		</div>
 	</div>
+</div>
 
 <script>
 //리뷰 쓰기 버튼
@@ -675,7 +678,7 @@ $(function(){
 		
 		let s = $(this).closest(".review-form").find(".star .on").length;
 		$(this).closest(".review-form").find("input[name=score").val(s);
-		
+
 		// e.preventDefault(); // 화면 위로 이동 안되게
 		return false;
 	});

@@ -425,6 +425,7 @@ $(function(){
 		
 		let optionValue = $(".requiredOption :selected").text();
 		let optionValue2 = $(".requiredOption2 :selected").text();
+		let stockNum = $(".requiredOption2 :selected").attr("data-stockNum");
 		
 		let salePrice = ${dto.salePrice};
 		let totalPrice = salePrice.toLocaleString();
@@ -443,6 +444,7 @@ $(function(){
 		out += "        <input type='hidden' name='productNums' value='"+productNum+"'>";
 		out += "        <input type='hidden' name='detailNums' value='"+detailNum+"'>";
 		out += "        <input type='hidden' name='detailNums2' value='"+detailNum2+"'>";
+		out += "        <input type='hidden' name='stockNums' value='"+stockNum+"'>";
 		out += "        <i class='bi bi-plus input-group-text bg-white qty-plus'></i>";
 		out += "      </div>";
 		out += "    </div>";
@@ -932,10 +934,10 @@ function listReview(page) {
 	let productNum = '${dto.productNum}';
 	let sortNo = $('.reviewSortNo').val();
 	let url = '${pageContext.request.contextPath}/shop/review/list';
-	let query = 'productNum='+productNum+'&pageNo='+page+'&sortNo='+sortNo;
+	let query = 'productNum='+productNum+'&pageNo='+page+'&sortNo='+1;
 	
 	const fn = function(data) {
-		printReview(data);
+		printReview(data)
 	};
 	ajaxFun(url, 'get', query, 'json', fn);
 }
