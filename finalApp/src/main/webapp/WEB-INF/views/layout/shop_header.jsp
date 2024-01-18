@@ -195,14 +195,80 @@ ul {
     color: #7e7e7e;
     cursor: pointer;
 }
+
+.category-list ul { padding: 0; }
+.category-list li { list-style: none; }
+
+.menu-item {
+	border-radius: 3px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    margin-bottom: -1px;  	
+}
+.menu-link {
+	display: block;
+	color: #666;
+	font-weight: 500px;
+	cursor: pointer;
+	padding: 10px 15px;
+}
+.menu-link:hover {
+	color: #000;
+	background: #e9e9e9;
+}
+.menu-item .opened {
+    color: #ffffff;
+    font-weight: 500;
+    background-color: #aaaaaa;    
+    border-color: #337ab7;
+	border-bottom: 1px solid #dddddd;
+	border-color: #d5d5d5;
+	border-radius: 3px;
+}
+
+.sub-menu {
+	display: none;
+}
+
+.sub-menu .active {
+	color: #000;
+}
+
+.sub-menu-item {
+	cursor: pointer;
+	padding: 10px 20px;
+	background: #f8f9fa;
+}
+.sub-menu-link {
+	font-weight: 500;
+	color: #666;
+}
+.sub-menu-item:hover, .sub-menu-link:hover {
+	color: #000;
+	text-decoration: none;
+}
 </style>
 
+<script type="text/javascript">
+		$(function(){
+			$("ul.condition>li>a").click(function(){
+				$("ul.condition>li>a").removeClass("text-danger");
+				$(this).addClass("text-danger");
+				
+				$(this).closest("form").find("input[name=searchType]").val($(this).attr("data-condition"));
+				$(this).closest("div").find("button").text($(this).text());
+			});
+		});
+	</script>
 
 <div class="header_top">
     <div class="header_top_wrap">
         <div class="header_center">
             <div class="header_center_wrap">
                 <ul class="header_center_list">
+                	<li class="header_center_item">
+						<a href="${pageContext.request.contextPath}/">홈</a>
+					</li>
                     <li class="header_center_item">
                         <a href="${pageContext.request.contextPath}/site/list" style="padding-left:0;">CAMPING AREA</a>
                     </li>
@@ -248,7 +314,7 @@ ul {
 	            </li>
 	            
 	            <li class="navi_item">
-	                <h2>브랜드</h2>
+	                <a class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasCategory" aria-controls="offcanvasCategory">브랜드</a>
 	            </li>
 	            
 	            <li class="navi_item dropdown">
@@ -387,7 +453,7 @@ ul {
 	            </ul>
 	        </div>
 	    </div>
-	  </div>
+    </div>
 </nav>
 
 <script>
@@ -429,3 +495,72 @@ $(document).ready(function() {
     $(".dropdown-toggle").dropdown();
 });
 </script>
+
+<!-- 좌측 카테고리 오프캔버스 -->
+	<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasCategory" aria-labelledby="offcanvasCategoryLabel">
+		<div class="offcanvas-header">
+			<h5 class="offcanvas-title" id="offcanvasCategoryLabel"><i class="bi bi-list-ul"></i> 브랜드</h5>
+			<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+		</div>
+		<div class="offcanvas-body">
+			<div class="d-flex flex-column bd-highlight mt-3 mx-0 px-4">
+				<ul class="category-list px-0"></ul>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+	$(function(){
+		const myOffcanvas = document.getElementById('offcanvasCategory');
+		myOffcanvas.addEventListener('shown.bs.offcanvas', function () {
+			let url = '${pageContext.request.contextPath}/shop/product/listAllCategory';
+
+			$.get(url, null, function(data){
+				let out = '';
+				let listUrl = '${pageContext.request.contextPath}/shop/product/main?categoryNum=';
+
+				let listMain = data.listMain;
+				let listAll = data.listAll;
+				
+				$(listMain).each(function(index, item){
+					let categoryNum = item.categoryNum;
+					let categoryName = item.categoryName;
+					
+					let opened = index === 0 ? 'opened' : '';
+					
+					out += '<li class="menu-item">';
+					out +=   '<label class="menu-link ' + opened + '">';
+					out +=     '<span class="menu-label">'+categoryName+"</span>";
+					out +=   '</label>';
+					out +=   '<ul class="sub-menu">';
+					
+					$(listAll).each(function(index, item){
+						let subNum = item.categoryNum;
+						let subName = item.categoryName;
+						let parentNum = item.parentNum;
+						
+						if(categoryNum === parentNum) {
+							out += '<li class="sub-menu-item"><a href="'+listUrl+subNum+'" class="sub-menu-link">'+subName+'</a></li>';
+						}
+					});
+					
+					out +=   '</ul>';
+					out += '</li>';
+				});
+				
+				$('.category-list').html(out);
+				// $('.category-list .opened').siblings('.sub-menu').show();
+				// $('.category-list .opened').siblings('.sub-menu').first().find('a').first().addClass('active');
+				
+			}, 'json');
+		});
+		
+		$('.category-list').on('click', '.menu-item', function(){
+			const $menu = $(this);
+			$('.category-list .menu-link').removeClass('opened');
+			$('.category-list .sub-menu').hide();
+			$menu.find('.menu-link').addClass('opened');
+			$menu.find('.sub-menu').fadeIn(500);
+		});
+	});
+	</script>

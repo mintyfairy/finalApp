@@ -592,12 +592,13 @@ function sendOk(mode) {
 							<p>배송비</p>
 							<p>총 결제금액이 50,000원 미만시 배송비 3,000원이 청구됩니다.</p>
 						</div>
-						<p class="brand_name">[브랜드명]상품명</p>
-						<div class="mt-2">* 필수 옵션</div>
+						
+						<div class="mt-2">
+							* 필수 옵션
+						</div>
 
 						<div class="mt-2">
-							<select class="form-select requiredOption"
-								data-optionNum="${listOption[0].optionNum}">
+							<select class="form-select requiredOption" data-optionNum="${listOption[0].optionNum}">
 								<option value="">${listOption[0].optionName}</option>
 								<c:forEach var="vo" items="${listOptionDetail}">
 									<option value="${vo.detailNum}">${vo.optionValue}</option>
@@ -605,7 +606,7 @@ function sendOk(mode) {
 							</select>
 						</div>
 
-						<div class="mt-2 pb-2">
+						<div class="mt-2 border-bottom pb-2">
 							<select class="form-select requiredOption2"
 								data-optionNum2="${listOption[1].optionNum}">
 								<option value="">${listOption[1].optionName}</option>
@@ -614,9 +615,9 @@ function sendOk(mode) {
 
 						<div class="order-area"></div>
 
-						<div class="total_price d-flex justify-content-between mt-3 px-3">
-							<label>총 수량 <span class="product-totalQty">0</span>개 |
-							</label> <label><span
+						<div class="row mt2-2 pb-2">
+							<div class="col-auto fw-semibold pt-1">총상품금액</div>
+							 <label><span
 								class="product-totalAmount fs-5 fw-semibold text-black">0</span>원</label>
 						</div>
 					</div>
