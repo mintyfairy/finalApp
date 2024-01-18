@@ -14,13 +14,16 @@
 			WHERE memberIdx = #{memberIdx}
 	</update>
 	
+	
+	
 	<!-- 운전자 정보 보기 -->
+	<!-- 
 	<select id="riderInfo" parameterType="String" resultType="com.fa.plus.domain.car.CarMyPage">
 		SELECT r.memberIdx, licenseDate, licenseImage, m2.birth, m.userId
 		FROM license r
 		JOIN member1 m ON r.memberIdx = m.memberIdx
 		JOIN member2 m2 ON m.userId = m2.userId
 		WHERE userId = #{userId}
-	</select>
-	
+	</select> -->
+	 
 </mapper>

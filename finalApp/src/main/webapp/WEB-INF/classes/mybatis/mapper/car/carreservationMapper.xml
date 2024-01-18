@@ -15,6 +15,12 @@
 			1, #{start_date}, #{end_date}, #{addRider}, #{memberIdx}, #{carNum})
 	</insert>
 	
+	<insert id="insertAddRider" parameterType="com.fa.plus.domain.car.CarReservation">
+		INSERT INTO addLicense(orderNum, addBirth, addRegist, addLicenseImage, addRiderName, addRiderTel)
+		 VALUES (#{orderNum, jdbcType=VARCHAR}, #{addBirth}, #{addRegist}, #{addLicenseImage},
+			#{addRiderName}, #{addRiderTel})
+	</insert>
+	
 	<insert id="insertCarPayDetail" parameterType="com.fa.plus.domain.car.CarReservation">
 		INSERT INTO carPayDetail(orderNum, payMethod, cardName, authNumber, authDate) 
 			VALUES (#{orderNum}, #{payMethod}, #{cardName}, #{authNumber}, TO_DATE(#{authDate}, 'YYYY-MM-DD HH24:MI:SS') )

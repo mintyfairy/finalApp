@@ -8,7 +8,15 @@ public class CarMyPage {
 	private String licenseDate;
 	private String licenseImage;
 	
+	private MultipartFile licenseImageFile;
+	
 	private String birth;
+	public MultipartFile getLicenseImageFile() {
+		return licenseImageFile;
+	}
+	public void setLicenseImageFile(MultipartFile licenseImageFile) {
+		this.licenseImageFile = licenseImageFile;
+	}
 	private String userId;
 	
 	public long getMemberIdx() {

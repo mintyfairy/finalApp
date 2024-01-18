@@ -46,7 +46,7 @@ input[type=date] {
 
 <div class="container">
 	<div class="riderSubmit">
-		<form name="writeForm" method="post" enctype="multipart/form-data">
+		<form name="writeForm" method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/car/mypage/addrider">
 		<input type="hidden" name="memberIdx" value="${dto.memberIdx}">
 		<table class="ridertable">
 			<tr>
@@ -71,8 +71,9 @@ input[type=date] {
 			<tr>
 				<th>면허증 사진</th>
 				<td>
-					<input type="file" name="licenseImage" value="${dto.licenseImage}">
-					
+					<input type="file" id="image-input" name="licenseImageFile" accept="image/*" value="${dto.licenseImage}">
+					<br>
+					<img id="image-preview" alt="이미지 미리보기">
 				</td>
 			</tr>
 		</table>
@@ -85,7 +86,7 @@ input[type=date] {
 				<button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/car/mypage/rider';">${mode=='update'?'수정취소':'등록취소'}</button>
 				<c:if test="${mode=='update'}">
 					<input type="hidden" name="licenseDate" value="${dto.licenseDate}">
-					<input type="hidden" name="licenseImage" value="${dto.licenseImage}">
+					<input type="hidden" name="licenseImageFile" value="${dto.licenseImage}">
 				</c:if>
 			</td>
 		</tr>
@@ -94,7 +95,26 @@ input[type=date] {
 		</form>
 	</div>
 </div>
+<script>
+        document.getElementById('image-input').addEventListener('change', function (event) {
+            const input = event.target;
+            const file = input.files[0];
+
+            if (file) {
+                // FileReader 객체를 사용하여 이미지 파일을 미리보기
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const preview = document.getElementById('image-preview');
+                    preview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+
+
 <script type="text/javascript">
+
 function check() {
     const f = document.writeForm;
     
@@ -115,7 +135,10 @@ function check() {
     }
 	
     f.action = "${pageContext.request.contextPath}/car/mypage/rider";
+
     
     f.submit();
 }
+
+
 </script>

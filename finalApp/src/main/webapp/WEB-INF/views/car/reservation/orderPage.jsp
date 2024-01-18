@@ -269,6 +269,12 @@ function sendOk() {
 	f.action = "${pageContext.request.contextPath}/car/reservation/paymentOk"
 	f.submit();
 }
+
+document.getElementById('driverInfoCheckbox').addEventListener('change', function() {
+    var driverInfoFields = document.getElementById('driverInfoFields');
+    driverInfoFields.style.display = this.checked ? 'block' : 'none';
+});
+
 </script>
 
 
@@ -386,9 +392,19 @@ function sendOk() {
                                 휴대폰 번호 : ${orderUser.tel}
                             </li>
                             <li>
-			                    <h4>동승운전자 추가 여부 <input type="checkbox" name="add"></h4>
+			                    // <h4>동승운전자 추가 여부 <input type="checkbox" name="add"></h4>
+			                    <label for="driverInfoCheckbox">
+							        <input type="checkbox" id="driverInfoCheckbox" name="driverInfoCheckbox">
+							        등록된 운전자 정보 사용
+							    </label>
+							    <div id="driverInfoFields" style="display: none;">
+							        <label for="driverName">운전자 이름:</label>
+							        <input type="text" id="driverName" name="driverName">
+							        
+							        <label for="driverLicense">운전면허 번호:</label>
+							        <input type="text" id="driverLicense" name="driverLicense">
+							    </div>
                             </li>
-                            
                         </ul>
                        
                     </li>
