@@ -55,6 +55,10 @@
 	align-content: center;
 }
 
+.hidden {
+	display: none;
+}
+
 .score-star { font-size: 0; letter-spacing: -4px; }
 .score-star .item {
 	font-size: 22px; letter-spacing: 1px; display: inline-block;
@@ -66,7 +70,7 @@
 .md-img img { width: 150px; height: 150px; cursor: pointer; object-fit: cover; }
 
 .item-basic-content { cursor: pointer; }
-.item-detail-content { display: none; }
+/* .item-detail-content { display: none; } */
 
 .answer-form textarea { width: 100%; height: 75px; resize: none; }
 
@@ -97,11 +101,37 @@ $(function(){
 $(function(){
 	$('#changeMode').change(function(){
 		let mode = $(this).val();
-		let url = '${pageContext.request.contextPath}/admin/shopCustomer/question';
-		if(mode !== '1') {
-			url += '?mode=' + mode;
-		}
+		let col = $('#changeSort option:selected').val()
+		let url = '${pageContext.request.contextPath}/admin/shopCustomer/review';
+		
+		url += '?mode=' + mode + "&col=" + col;
 		location.href = url;
+	});
+});
+
+//출력순서 : 최신질문순, 최신답변순, 상품번호순
+$(function(){
+	$('#changeSort').change(function(){
+		let mode = $('#changeMode option:selected').val()
+		let col = $(this).val();
+		let url = '${pageContext.request.contextPath}/admin/shopCustomer/review';
+		
+		url += '?mode=' + mode + "&col=" + col;
+		location.href = url;
+	});
+});
+
+$(function(){
+	$('.deleteReview').click(function(){
+		let orderDetailNum = $(this).attr('data-num');
+		let mode = $('#changeMode option:selected').val();
+		let col = $('#changeSort option:selected').val();
+		console.log(orderDetailNum + ', ' + mode + ', ' + col);
+				
+		if(confirm('게시글을 삭제 하시겠습니까 ? ')) {
+			let query = 'page=${page}&mode=' + mode + '&col=' + col + '&orderDetailNum=' + orderDetailNum;
+			location.href = '${pageContext.request.contextPath}/admin/shopCustomer/review/delete?' + query;
+		}
 	});
 });
 </script>
@@ -134,7 +164,15 @@ $(function(){
 		            	</div>
 		            </div>
 		            <div class="col-auto pt-2">
+		            <!-- 
 		            	<span>${dataCount}개(${page}/${total_page} 페이지)</span>
+		             -->
+						<select id="changeSort" name="col" class="form-select">
+								<option value="reviewDate" ${ col == 'reviewDate' ? 'selected' : '' }>:: 최신순 ::</option>
+								<option value="answerDate" ${ col == 'answerDate' ? 'selected' : '' }>:: 최신답변순 ::</option>
+								<option value="productNum" ${ col == 'productNum' ? 'selected' : '' }>:: 상품번호순 ::</option>
+								<option value="score" ${ col == 'score' ? 'selected' : '' }>:: 평점순 ::</option>
+						</select>
 		            </div>
 		        </div>
 				<div class="tab-pane fade show active" id="tab-pane" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
@@ -195,6 +233,7 @@ $(function(){
 							<colgroup>
 								<col width="130">
 								<col width="*">
+								<col width="100">
 								<col width="130">
 								<col width="150">
 							</colgroup>
@@ -202,6 +241,7 @@ $(function(){
 								<tr class="border-top border-dark table-light">
 									<th>답변상태</th>
 									<th>내용</th>
+									<th>평점</th>
 									<th>작성자</th>
 									<th>작성일</th>
 								</tr>
@@ -214,12 +254,13 @@ $(function(){
 											${not empty dto.answer ? '<span class="text-primary">답변완료</span>' : '<span class="text-secondary">답변대기</span>'}
 										</td>
 										<td class="left ellipsis list-subject">
-											<p>${fn:replace(dto.review, "<br>", "")}</p>
+											<span>${fn:replace(dto.review, "<br>", "")}</span>
 										</td>
-										<td>${dto.userName}</td>
+										<td>${dto.score}</td>
+										<td>${dto.memberIdx}</td>
 										<td>${fn:substring(dto.reviewDate, 0, 10)}</td>
 									</tr>
-									<tr class="item-detail-content">
+									<tr class="item-detail-content hidden">
 										<td colspan="6" class="left p-0">
 											<div class="border-bottom p-2 px-3">
 												<div class="bg-light p-2">
@@ -237,7 +278,7 @@ $(function(){
 															<div class="col text-end">
 																<span>${dto.reviewDate}</span>
 																|<span class="deleteReview" data-num="${dto.orderDetailNum}">삭제</span>
-																|<span class="answerReview" data-num="${dto.orderDetailNum}" data-showReview="${dto.showReview}">답변</span>
+																|<span class="answerReview" data-num="${dto.orderDetailNum}" data-showReview="${dto.showReview}">${ not empty dto.answer ? '답변수정' : '답변' }</span>
 															</div>
 														</div>
 														
@@ -283,3 +324,147 @@ $(function(){
 		</div>
 	</div>
 </div>
+
+<div class="modal hidden" id="answerDialogModal" tabindex="-1" 
+		data-bs-backdrop="static" data-bs-keyboard="false"
+		aria-labelledby="answerDialogModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="answerDialogModalLabel">상품 문의 답변</h5>
+				<button type="button" class="btn-close btnAnswerSendCancel" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="p-2 answer-form">
+					<form name="answerForm" method="post">
+						<div class="row">
+							<div class="col">
+								<span class="fw-bold">답변 달기</span>
+							</div>
+							<div class="col-3 text-end">
+								<input type="checkbox" name="showReview" id="showReview1" class="form-check-input" 
+									value="1">
+								<label class="form-check-label" for="showReview1">표시</label>
+							</div>
+						</div>
+						<div class="p-1">
+							<input type="hidden" name="orderDetailNum">
+							<input type="hidden" name="mode" value="${mode}">
+							<input type="hidden" name="page" value="${page}">
+							<input type="hidden" name="col" value="${col}">
+							<textarea name="answer" id="answer" class="form-control"></textarea>
+						</div>
+					</form>
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary btnAnswerSendOk">답변등록 <i class="bi bi-check2"></i> </button>
+				<button type="button" class="btn btn-secondary btnAnswerSendCancel" data-bs-dismiss="modal">취소</button>
+			</div>			
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+function ajaxFun(url, method, formData, dataType, fn, file = false) {
+	const settings = {
+			type: method, 
+			data: formData,
+			dataType: dataType,
+			success:function(data) {
+				fn(data);
+			},
+			beforeSend: function(jqXHR) {
+				jqXHR.setRequestHeader('AJAX', true);
+			},
+			complete: function () {
+			},
+			error: function(jqXHR) {
+				if(jqXHR.status === 403) {
+					login();
+					return false;
+				} else if(jqXHR.status === 400) {
+					alert('요청 처리가 실패 했습니다.');
+					return false;
+		    	}
+		    	
+				console.log(jqXHR.responseText);
+			}
+	};
+	
+	if(file) {
+		settings.processData = false;  // file 전송시 필수. 서버로전송할 데이터를 쿼리문자열로 변환여부
+		settings.contentType = false;  // file 전송시 필수. 서버에전송할 데이터의 Content-Type. 기본:application/x-www-urlencoded
+	}
+	
+	$.ajax(url, settings);
+}
+
+$(function(){
+	$('.list-subject').click(function() {
+		$(this).closest('tr').next().toggleClass('hidden')
+	});
+});
+
+$('.answerReview').click(function(){
+	let orderDetailNum = $(this).attr("data-num");
+	let showReview = $(this).attr("data-showReview");
+	let $answer = $(this).closest("td").find(".answer-content");
+	let answer = "";
+	if($answer.length) {
+		answer = $answer.text();
+	}
+	const f = document.answerForm;
+	f.orderDetailNum.value = orderDetailNum;
+	if(showReview === "1") {
+		f.showReview.checked = true;
+	}
+	f.answer.value = answer;
+	
+	$("#answerDialogModal").show();
+});
+
+$('.btnAnswerSendOk').click(function(){
+	const f = document.answerForm;
+	let s;
+	
+	s = f.answer.value.trim();
+	if( ! s ) {
+		alert("답변을 입력하세요.")	;
+		f.answer.focus();
+		return false;
+	}
+	
+	let param = $('form[name=answerForm]').serialize();
+	let url = '${pageContext.request.contextPath}/admin/shopCustomer/review/answer';
+	
+	const fn = function(data) {
+		console.log(data);
+		if(data.state === 'true') {
+			
+			f.reset();
+			
+			$('#answerDialogModal').hide();
+			
+			let url2 = '${pageContext.request.contextPath}/admin/shopCustomer/review';
+			url2 += '?page=${page}&mode=${mode}&col=${col}';
+			location.href = url2;
+		} else {
+			alert('발송처리가 실패했습니다.');
+		};
+	};
+	
+	ajaxFun(url, "post", param, "json", fn);
+	
+	//f.action = "${pageContext.request.contextPath}/admin/customer/review/answer";
+	//f.submit();
+});
+
+$('.btnAnswerSendCancel').click(function(){
+	const f = document.answerForm;
+	f.reset();
+	
+	$("#answerDialogModal").hide();
+});
+</script>

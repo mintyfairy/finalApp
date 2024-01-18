@@ -138,14 +138,10 @@ table th, td {
 			
 			if(tab === "1") { // 주문관리
 				location.href = "${pageContext.request.contextPath}/admin/shopOrder/status";
-			} else if( tab === "2") { // 주문상세
-				location.href = "${pageContext.request.contextPath}/admin/shopOrder/detail";
-			} else if( tab === "3") { // 배송관리
-				location.href = "${pageContext.request.contextPath}/admin/shopOrder/detail";
-			} else if( tab === "4") { // 교환관리
-				location.href = "${pageContext.request.contextPath}/admin/shopOrder/detail";
-			} else if( tab === "5") { // 반품 및 주문 취소
-				location.href = "${pageContext.request.contextPath}/admin/shopOrder/detail";
+			} else if( tab === "2") { // 교환관리
+				location.href = "${pageContext.request.contextPath}/admin/shopOrder/exchange";
+			} else if( tab === "3") { // 반품 및 주문 취소
+				location.href = "${pageContext.request.contextPath}/admin/shopOrder/refund";
 			}
 		});
 	});
@@ -163,16 +159,10 @@ table th, td {
               <button class="nav-link ${orderStatus=='status'?'active':''}" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="1" aria-selected="${orderStatus=='status'?'true':'false'}">주문관리</button>
           </li>
           <li class="nav-item" role="presentation">
-              <button class="nav-link ${orderStatus=='detail'?'active':''}" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="2" aria-selected="${orderStatus=='detail'?'true':'false'}">주문상세</button>
+              <button class="nav-link ${orderStatus=='exchange'?'active':''}" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="2" aria-selected="${orderStatus=='exchange'?'true':'false'}">교환관리</button>
           </li>
           <li class="nav-item" role="presentation">
-              <button class="nav-link ${orderStatus=='delivery'?'active':''}" id="tab-3" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="3" aria-selected="${orderStatus=='delivery'?'true':'false'}">배송관리</button>
-          </li>
-          <li class="nav-item" role="presentation">
-              <button class="nav-link ${orderStatus=='exchange'?'active':''}" id="tab-4" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="4" aria-selected="${orderStatus=='exchange'?'true':'false'}">교환관리</button>
-          </li>
-          <li class="nav-item" role="presentation">
-              <button class="nav-link ${orderStatus=='cancel'?'active':''}" id="tab-5" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="5" aria-selected="${orderStatus=='cancel'?'true':'false'}">반품및주문취소</button>
+              <button class="nav-link ${orderStatus=='refund'?'active':''}" id="tab-3" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="3" aria-selected="${orderStatus=='refund'?'true':'false'}">반품및주문취소</button>
           </li>
       </ul>
       

@@ -15,8 +15,9 @@ public interface ShopCustomerMapper {
 	public List<ShopReview> listReview(Map<String, Object> map);
 	public List<ShopReview> listReviewFile(long orderDetailNum);
 	public int reviewCount(Map<String, Object> map);
-	public void updateReview(ShopReview dto) throws SQLException;
+	public void updateReview(Map<String, Object> map) throws SQLException;
 	public void deleteReview(long orderDetailNum) throws SQLException;
+	public void deleteReviewFile(long orderDetailNum) throws SQLException;
 	
 	// 상품 문의
 	public List<ShopQuestion> listQuestion(Map<String, Object> map);

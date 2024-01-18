@@ -78,6 +78,15 @@
 	align-content: center;
 }
 
+.modal-table {
+	width: 700px;
+	margin: 0 auto;
+}
+
+.modal-table tr {
+	height: 45px;
+}
+
 </style>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tabs.css" type="text/css">
@@ -226,7 +235,7 @@ $(function(){
 				
 				<table class="table table-border table-list" style="width: 1080px;">
 					<colgroup>
-						<col width="100">
+						<col width="120">
 						<col width="*">
 						<col width="80">
 						<col width="100">
@@ -278,6 +287,7 @@ $(function(){
 				</table>
 
 				<div class="page-navigation">
+					<!-- 
 					<nav aria-label="pnav">
                            <ul class="pagination">
                                <li class="page-item">
@@ -293,6 +303,8 @@ $(function(){
                                </li>
                            </ul>
                        </nav>
+                        -->
+					${dataCount == 0 ? "등록된 게시물이 없습니다." : paging}
 				</div>
 				
 				<table class="table table-borderless">
@@ -308,6 +320,7 @@ $(function(){
 										<option value="productNum" >상품코드</option>
 										<option value="productName" >상품명</option>
 										<option value="content">설명</option>
+										<option value="brandName">브랜드명</option>
 									</select>
 								</div>
 								<div class="col-auto p-1">
@@ -467,6 +480,65 @@ $(function() {
 			console.log(...optionValue);
 			
 			let out = "";
+			out += "<table class='modal-table'>";
+			out += "<colgroup>";
+			out += "<col width='200'>";
+			out += "<col width='*'>";
+			out += "</colgroup>";
+			out += "<tbody>";
+			out += "<tr>";
+			out += "<td>분류 : </td>";
+			out += "<td>" + data.categoryName + "</td>";
+			out += "</tr>";
+			out += "<tr>";
+			out += "<td>브랜드 이름 : </td>";
+			out += "<td>" + data.brandName + "</td>";
+			out += "</tr>";
+			out += "<tr>";
+			out += "<td>옵션1 : </td>";
+			out += "<td>" + data.optionName + "</td>";
+			out += "</tr>";
+			out += "<tr>";
+			out += "<td>옵션값1 : </td>";
+			out += "<td>" + data.optionValues + "</td>";
+			out += "</tr>";
+			out += "<tr>";
+			out += "<td>옵션2 : </td>";
+			out += "<td>" + data.optionName2 + "</td>";
+			out += "</tr>";
+			out += "<tr>";
+			out += "<td>옵션값2 : </td>";
+			out += "<td>" + data.optionValues2 + "</td>";
+			out += "</tr>";
+			out += "<tr>";
+			out += "<td>내용 : </td>";
+			out += "<td>" + data.content + "</td>";
+			out += "</tr>";
+			out += "<tr>";
+			out += "<td>배송비 : </td>";
+			out += "<td>" + data.delivery + "</td>";
+			out += "</tr>";
+			out += "<tr>";
+			out += "<td>등록일 : </td>";
+			out += "<td>" + data.reg_date + "</td>";
+			out += "</tr>";
+			out += "<tr>";
+			out += "<td>마지막 수정일 : </td>";
+			out += "<td>" + data.updateDate + "</td>";
+			out += "</tr>";
+			out += "<tr>";
+			out += "<td>썸네일 : </td>";
+			out += "<td>" + data.thumbnail + "</td>";
+			out += "</tr>";
+			out += "<tr>";
+			out += "<td>추가사진 : </td>";
+			out += "<td>" + data.thumbnailFile + "</td>";
+			out += "</tr>";
+			out += "</tbody>";
+			out += "</table>";
+			
+			
+			/*
 			out += "<p>분류 : " + data.categoryName + "</p>";
 			out += "<p>브랜드 이름 : " + data.brandName + "</p>";
 			out += "<p>옵션1 : " + data.optionName + "</p>";
@@ -479,6 +551,7 @@ $(function() {
 			out += "<p>마지막 수정일 : " + data.updateDate + "</p>";
 			out += "<p>썸네일 : " + data.thumbnail + "</p>";
 			out += "<p>추가사진 : " + data.thumbnailFile + "</p>";
+			*/
 			
 			$("#detailModal").find(".modal-body").html(out);
 			

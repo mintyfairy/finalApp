@@ -10,6 +10,8 @@ public interface ShopCustomerManageService {
 	// 리뷰 관리
 	public List<ShopReview> listReview(Map<String, Object> map);
 	public int reviewCount(Map<String, Object> map);
+	public void updateReview(Map<String, Object> map) throws Exception;
+	public void deleteReview(long orderDetailNum, String pathname) throws Exception;
 	
 	// qna 관리
 	public List<ShopQuestion> listQuestion(Map<String, Object> map);

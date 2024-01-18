@@ -1,9 +1,11 @@
 package com.fa.plus.admin.service.shop;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -155,6 +157,16 @@ public class ShopOrderManageServiceImpl implements ShopOrderManageService {
 			mapper.updateProductStock(updateStockMap);
 			mapper.orderDetailCancel(orderDetailNum);
 			mapper.updateOrderDetailState(updateDetailStateMap);
+			
+			// 주문 정보의 모든 주문 내역이 취소이면 주문정보의 상태는 판매 취소로 변경
+			Map<String, Object> map = new HashMap<String, Object>();
+			long orderNum = Long.parseLong(String.valueOf(cancelAmountMap.get("orderNum")));
+			int totalOrderCount = mapper.totalOrderCount(orderNum);
+			if(totalOrderCount == 0) {
+				map.put("orderNum", orderNum);
+				map.put("orderState", 6);
+				mapper.updateOrderState(map);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

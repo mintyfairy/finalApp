@@ -63,6 +63,7 @@ public class ShopOrderController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("state", state);
+		map.put("orderStatus", orderStatus);
 		map.put("schType", schType);
 		map.put("kwd", kwd);
 

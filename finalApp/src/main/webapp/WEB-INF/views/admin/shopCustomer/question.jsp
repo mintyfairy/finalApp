@@ -274,7 +274,7 @@ $(function(){
 															</div>
 														</div>
 														
-														<div class="p-2">${dto.answer}</div>
+														<div class="p-2">${dto.question}</div>
 														
 														<c:if test="${not empty dto.listFilename}">
 															<div class="row gx-1 mt-2 mb-1 p-1">

@@ -36,7 +36,14 @@
 				</if>
 			</if>
 		</where>
-		ORDER BY reviewDate DESC
+		<choose>
+			<when test="col == 'productNum'">
+				ORDER BY ${col}
+			</when>
+			<otherwise>
+				ORDER BY ${col} DESC
+			</otherwise>
+		</choose>
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
 	
@@ -58,9 +65,17 @@
 				</if>
 			</if>
 		</where>
+		<choose>
+			<when test="col == 'productNum'">
+				ORDER BY ${col}
+			</when>
+			<otherwise>
+				ORDER BY ${col} DESC
+			</otherwise>
+		</choose>
 	</select>
 	
-	<update id="updateReview" parameterType="com.fa.plus.admin.domain.shop.ShopReview">
+	<update id="updateReview" parameterType="map">
 		UPDATE productReview SET answer = #{answer}, answerDate = SYSDATE, showReview = #{showReview}
 		WHERE orderDetailNum = #{orderDetailNum}
 	</update>
@@ -73,6 +88,11 @@
 	
 	<delete id="deleteReview" parameterType="Long">
 		DELETE FROM productReview
+		WHERE orderDetailNum = #{orderDetailNum}
+	</delete>
+	
+	<delete id="deleteReviewFile" parameterType="long">
+		DELETE FROM productReviewFile
 		WHERE orderDetailNum = #{orderDetailNum}
 	</delete>
 	
@@ -105,15 +125,12 @@
 			</if>
 		</where>
 		<choose>
-			<when test="col == 'questionDate'">
-				ORDER BY ${col} DESC
-			</when>
-			<when test="col == 'answerDate'">
-				ORDER BY ${col} DESC
-			</when>
 			<when test="col == 'productNum'">
 				ORDER BY ${col}
 			</when>
+			<otherwise>
+				ORDER BY ${col} DESC
+			</otherwise>
 		</choose>
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
@@ -134,8 +151,19 @@
 				<if test="mode == 3">
 					AND ( answer IS NULL )
 				</if>
+				<if test="mode == 4">
+					AND ( secret = 1 )
+				</if>
 			</if>
 		</where>
+		<choose>
+			<when test="col == 'productNum'">
+				ORDER BY ${col}
+			</when>
+			<otherwise>
+				ORDER BY ${col} DESC
+			</otherwise>
+		</choose>
 	</select>
 	
 	<update id="updateQuestion" parameterType="map">

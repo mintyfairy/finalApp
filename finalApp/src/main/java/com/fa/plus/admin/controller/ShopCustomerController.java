@@ -36,6 +36,7 @@ public class ShopCustomerController {
 	public String review(
 			@RequestParam(value = "page", defaultValue = "1") int current_page, 
 			@RequestParam(defaultValue = "1") int mode, 
+			@RequestParam(defaultValue = "reviewDate") String col, 
 			HttpServletRequest req, 
 			HttpSession session, 
 			Model model) throws Exception {
@@ -50,6 +51,7 @@ public class ShopCustomerController {
 			int tab = 1;
 		
 			map.put("mode", mode);
+			map.put("col", col);
 			map.put("memberIdx", info.getMemberIdx());
 			dataCount = service.reviewCount(map);
 			
@@ -69,7 +71,7 @@ public class ShopCustomerController {
 			String cp = req.getContextPath();
 			String listUrl = cp + "/admin/shopCustomer/review";
 			if(mode != 1) {
-				listUrl += "?mode=" + mode + "&tab" + tab;
+				listUrl += "?mode=" + mode + "&col=" + col;
 			}
 			String paging = myUtil.paging(current_page, total_page, listUrl);
 			
@@ -88,6 +90,7 @@ public class ShopCustomerController {
 			model.addAttribute("total_page", total_page);
 			model.addAttribute("mode", mode);
 			model.addAttribute("tab", tab);
+			model.addAttribute("col", col);
 			
 			
 		} catch (Exception e) {
@@ -95,6 +98,50 @@ public class ShopCustomerController {
 		}
 		
 		return ".admin.shopCustomer.review";
+	}
+	
+	@PostMapping("review/answer")
+	@ResponseBody
+	public Map<String, Object> reviewAnswer(
+			@RequestParam Map<String, Object> paramMap, 
+			HttpSession session) {
+		String state = "true";
+		System.out.println("!!!!@@@@####$%%" + paramMap.get("showReview"));
+		
+		try {
+			service.updateReview(paramMap);
+		} catch (Exception e) {
+			state = "false";
+		}
+		
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("state", state);
+		return model;
+	}
+	
+	@GetMapping("review/delete")
+	public String reviewDelete(@RequestParam long orderDetailNum, 
+			@RequestParam String page, 
+			@RequestParam int mode, 
+			@RequestParam String col, 
+			HttpSession session) throws Exception {
+		
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + "uploads" + File.separator + "review";
+		
+		try {
+			service.deleteReview(orderDetailNum, pathname);
+		} catch (Exception e) {
+		}
+		
+		String url = "redirect:/admin/shopCustomer/review?";
+		if(mode == 1) {
+			url += "page=" + page + "&col=" + col;
+		} else {
+			url += "mode=" + mode + "&page=" + page + "&col=" + col;
+		}
+		
+		return url;
 	}
 	
 	@RequestMapping("question")

@@ -424,7 +424,12 @@ public class ShopProductController {
 		
 		service.updateHide(map);
 		
-		return "/admin/shopProduct/main";
+		String url = "/admin/shopProduct/main";
+		String query = "?productShow=" + productShow;
+		
+		url += query;
+		
+		return url;
 	}
 	
 	@PostMapping("deleteFile")

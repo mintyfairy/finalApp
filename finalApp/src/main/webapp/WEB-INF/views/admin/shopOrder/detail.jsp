@@ -112,7 +112,7 @@
 						<th width="100">주문총금액</th>
 						<th width="90">적립금</th>
 						<th width="110">주문상태</th>
-						<th width="60">변경</th>
+						<th width="200">변경</th>
 					</tr>
 				</thead>
 				
@@ -134,7 +134,7 @@
 										data-orderState="${order.orderState}"
 										data-productMoney="${dto.productMoney}"
 										data-orderDetailNum="${dto.orderDetailNum}" 
-										data-detailState="${dto.detailState}">수정</span>
+										data-detailState="${dto.detailState}" style="margin-right: 10px; cursor: pointer;">수정</span>
 								<c:if test="${ order.orderState < 2}">
 									<span class="orderDetailStatus-cancel" 
 											data-orderNum="${order.orderNum}" 
@@ -145,7 +145,7 @@
 											data-productNum="${dto.productNum}"
 											data-detailNum="${dto.detailNum}"
 											data-detailNum2="${dto.detailNum2}"
-											data-cancelAmount="${dto.qty}">판매취소</span>
+											data-cancelAmount="${dto.qty}" style="cursor: pointer;">판매취소</span>
 								</c:if>
 							</td>
 						</tr>

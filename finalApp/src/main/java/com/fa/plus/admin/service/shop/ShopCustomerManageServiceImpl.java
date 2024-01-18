@@ -134,5 +134,35 @@ public class ShopCustomerManageServiceImpl implements ShopCustomerManageService 
 		}
 	}
 
+	@Override
+	public void updateReview(Map<String, Object> map) throws Exception {
+		try {
+			mapper.updateReview(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	@Override
+	public void deleteReview(long orderDetailNum, String pathname) throws Exception {
+		try {
+			List<ShopReview> listFile = mapper.listReviewFile(orderDetailNum);
+			if(listFile != null) {
+				for (ShopReview dto : listFile) {
+					fileManager.doFileDelete(dto.getFilename(), pathname);
+				}
+			}
+			
+			mapper.deleteReviewFile(orderDetailNum);
+			mapper.deleteReview(orderDetailNum);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
 
 }
