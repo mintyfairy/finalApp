@@ -54,7 +54,7 @@
 							<c:forEach var="vo" items="${listFile}" varStatus="status">
 								<p class="border text-secondary mb-1 p-2">
 									<i class="bi bi-folder2-open"></i>
-									<a href="${pageContext.request.contextPath}/csCenter/download?fileNum=${vo.fileNum}">${vo.originalFilename}</a>
+									<a href="${pageContext.request.contextPath}/csCenter/notice/download?fileNum=${vo.fileNum}">${vo.originalFilename}</a>
 									[${vo.fileSize} byte]
 								</p>
 							</c:forEach>
@@ -65,7 +65,7 @@
 						<td colspan="2">
 							이전글 :
 							<c:if test="${not empty prevDto}">
-								<a href="${pageContext.request.contextPath}/csCenter/article?${query}&num=${prevDto.num}">${prevDto.subject}</a>
+								<a href="${pageContext.request.contextPath}/csCenter/notice/article?${query}&num=${prevDto.num}">${prevDto.subject}</a>
 							</c:if>
 						</td>
 					</tr>
@@ -73,7 +73,7 @@
 						<td colspan="2">
 							다음글 :
 							<c:if test="${not empty nextDto}">
-								<a href="${pageContext.request.contextPath}/csCenter/article?${query}&num=${nextDto.num}">${nextDto.subject}</a>
+								<a href="${pageContext.request.contextPath}/csCenter/notice/article?${query}&num=${nextDto.num}">${nextDto.subject}</a>
 							</c:if>
 						</td>
 					</tr>
@@ -84,7 +84,7 @@
 				<tr>
 					<td width="50%">&nbsp;</td>
 					<td class="text-end">
-						<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/csCenter/noticeList?${query}';">리스트</button>
+						<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/csCenter/notice/list?${query}';">리스트</button>
 					</td>
 				</tr>
 			</table>

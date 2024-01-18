@@ -26,7 +26,7 @@ import com.fa.plus.domain.cs.Notice;
 import com.fa.plus.service.NoticeService;
 
 @Controller
-@RequestMapping("/csCenter/*")
+@RequestMapping("/csCenter/notice/*")
 public class NoticeController {
 	@Autowired
 	private NoticeService service;
@@ -37,7 +37,7 @@ public class NoticeController {
 	@Autowired
 	private FileManager fileManager;
 	
-	@RequestMapping(value= "noticeList")
+	@RequestMapping(value= "list")
 	public String list(@RequestParam(value = "page", defaultValue = "1") int current_page,
 			@RequestParam(defaultValue = "all") String schType,
 			@RequestParam(defaultValue = "") String kwd,
@@ -99,15 +99,15 @@ public class NoticeController {
 		
 		String cp = req.getContextPath();
 		String query = "";
-		String listUrl = cp + "/csCenter/csNoticeList";
-		String articleUrl = cp + "/csCenter/noticeArticle?page=" + current_page;
+		String listUrl = cp + "/csCenter/notice/list";
+		String articleUrl = cp + "/csCenter/notice/article?page=" + current_page;
 		if (kwd.length() != 0) {
 			query = "schType=" + schType + "&kwd=" + URLEncoder.encode(kwd, "utf-8");
 		}
 
 		if (query.length() != 0) {
-			listUrl = cp + "/csCenter/csNoticeList?" + query;
-			articleUrl = cp + "/csCenter/noticeArticle?page=" + current_page + "&" + query;
+			listUrl = cp + "/csCenter/notice/list?" + query;
+			articleUrl = cp + "/csCenter/notice/article?page=" + current_page + "&" + query;
 		}
 
 		String paging = myUtil.paging(current_page, total_page, listUrl);
@@ -124,7 +124,8 @@ public class NoticeController {
 		model.addAttribute("schType", schType);
 		model.addAttribute("kwd", kwd);
 
-		return ".csCenter.csNoticeList";
+		return ".csCenter.noticeList";
+		
 		
 	}
 	
@@ -145,7 +146,7 @@ public class NoticeController {
 		
 		Notice dto = service.findById(num);
 		if (dto == null) {
-			return "redirect:/csCenter/csNoticeList?" + query;
+			return "redirect:/csCenter/notice/list?" + query;
 		}
 
 		Map<String, Object> map = new HashMap<String, Object>();
