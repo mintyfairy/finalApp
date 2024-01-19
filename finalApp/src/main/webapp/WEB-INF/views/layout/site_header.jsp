@@ -283,8 +283,8 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
                             <img src="${pageContext.request.contextPath}/resources/images/campsite/logocamp.png" alt="logo" width="206"height= "40">
                         </a>
                     </li>
-                    <li class="">
-                        
+                    <li class="my_page">
+                        <a href="${pageContext.request.contextPath}/site/mypage/bookList"><i class="fa-regular fa-user"></i>&nbsp;예약 목록</a>
                     </li>
                 </ul>
             </div>
