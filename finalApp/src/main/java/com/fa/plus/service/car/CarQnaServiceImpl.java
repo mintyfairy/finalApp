@@ -61,8 +61,11 @@ public class CarQnaServiceImpl implements CarQnaService {
 			list = mapper.listCarQna(map);
 			
 			String s;
-			
 			for(CarQna dto : list) {
+				if(dto.getFilename() != null) {
+					dto.setListFilename(dto.getFilename().split(","));
+				}
+				
 				s = dto.getUserName().substring(0, 1);
 				if(dto.getUserName().length() <= 2) {
 					s += "*";

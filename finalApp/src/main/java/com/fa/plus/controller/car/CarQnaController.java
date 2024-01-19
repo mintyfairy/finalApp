@@ -65,9 +65,10 @@ public class CarQnaController {
 			try {
 				Map<String, Object> map = new HashMap<String, Object>();
 				
-				int size = 5;
+				int size = 3;
 				int dataCount = 0;
 				
+				map.put("memberIdx", info.getMemberIdx());
 				map.put("carNum", carNum);
 				
 				dataCount = service.dataCount(map);

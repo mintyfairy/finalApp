@@ -1,4 +1,4 @@
-package com.fa.plus.domain.car;
+package com.fa.plus.admin.domain.car;
 
 import java.util.List;
 
@@ -16,6 +16,7 @@ public class CarQna {
 	private String carName;
 	private String question_date;
 	private String answer_date;
+	private String userName;
 	
 	
 	// 상품 질문 이미지
@@ -24,10 +25,6 @@ public class CarQna {
 	private List<MultipartFile> selectFile;
 	
 	private String [] listFilename;
-	
-	private String userName;
-	
-	private String userId;
 	
 	
 
@@ -119,6 +116,14 @@ public class CarQna {
 		this.answer_date = answer_date;
 	}
 
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	public long getFileNum() {
 		return fileNum;
 	}
@@ -150,26 +155,6 @@ public class CarQna {
 	public void setListFilename(String[] listFilename) {
 		this.listFilename = listFilename;
 	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	
-	
-
 
 	
 	

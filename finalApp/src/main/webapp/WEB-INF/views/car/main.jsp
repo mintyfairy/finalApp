@@ -24,7 +24,7 @@ main {
 .car_wrap {
     width: 1180px;
     margin: 0 auto;
-   	border: 1px solid yellow;
+   	/*border: 1px solid yellow;*/
 }
 
 /*
@@ -39,7 +39,7 @@ main {
 
 .card-border{
 	display:border-box;
-	border: 1px solid blue ;
+	/*border: 1px solid blue ;*/
 	margin-bottom: 30px;
 	margin-left: 0;
 	background-color: var(--white);
@@ -48,14 +48,19 @@ main {
     0 0.7rem 0.7rem rgba(0, 0, 0, 0.22);
   	overflow: hidden;
   	position: relative;
-	
+	border-radius: 10px;
+}
+
+.car_photo{
+	border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 .car_list {
 	display:flex;
 	justify-content: space-between;
 	padding-left: 0;
-	border: 1px solid pink;
+	/*border: 1px solid pink;*/
 }
 
 .car_wrap .car_list .car_item p .car_photo {
@@ -66,6 +71,7 @@ main {
    background-size: cover;
    width: 350px;
    height: 250px;
+
 }
 
 /*
@@ -87,7 +93,7 @@ main {
     margin: 0px;
     height: 450px;
     /* border: 1px solid skyblue */
-    margin-bottom: 70px;
+    margin-bottom: 120px;
 }
 
 
@@ -161,6 +167,7 @@ main {
     margin-top: 70px;
     width: 1180px;
     margin: 30px auto;
+    margin-bottom: 100px;
    	border: 2px solid silver;
 }
 
@@ -291,7 +298,7 @@ main {
            <li class="car_item">
            	<div class="card-border">
                <p><a href="${pageContext.request.contextPath}/car/car_detail?carNum=${dto.carNum}" class="car_photo">
-                       <img src="${pageContext.request.contextPath}/resources/images/campingcar/caravanpic100.jpg" alt="car_item">
+                       <img src="${pageContext.request.contextPath}/resources/images/campingcar/caravanpic100.jpg" alt="car_item" style="">
                        <!-- <img src="${pageContext.request.contextPath}/resources/images/campingcar/${dto.thumbnail}/350x250" alt="car_item"> -->
                    </a></p>
                <div class="car_text">

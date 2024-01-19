@@ -99,9 +99,7 @@ h1, h2, h3, h4, h5, h6 {
 
 
 .carName-liked {
-  display: flex;
   justify-content: center;
-  float:left
 }
 
 
@@ -747,11 +745,10 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
     <div class="car-detail">
       <div class="carName-liked">
         <h3>${dto.carName}</h3>
-        <i class="fa-regular fa-heart" style="margin-left: 50px;"></i>
       </div>
      
-    <div style="text-align: center; margin-top: 5px;">
-    	<p>${dto.description}</p>
+    <div style="text-align: left; margin-top: 5px; margin-left:5px;">
+    	<p># ${dto.description}</p>
     </div>
       
       <div class="calendar">
@@ -1192,10 +1189,10 @@ function printQuestion(data) {
 		let qnaNum = item.qnaNum;
 		let userName = item.userName;
 		let question = item.question;
-		let questionDate = item.questionDate;
+		let question_date = item.question_date;
 		let answer = item.answer;
-		let answerDate = item.answerDate;
-		let answerState = answerDate ? '<span class="text-primary">답변완료</span>' : '<span class="text-secondary">답변대기</span>';
+		let answerDate = item.answer_date;
+		let answerState = answer_date ? '<span class="text-primary">답변완료</span>' : '<span class="text-secondary">답변대기</span>';
 		let listFilename = item.listFilename;
 		let secret = item.secret;
 
@@ -1206,7 +1203,7 @@ function printQuestion(data) {
 			out += '<div class="row gx-1 mt-2 mb-1 p-1">';
 				for(let f of listFilename) {
 					out += '<div class="col-md-auto md-img">';
-					out += '  <img class="border rounded" src="${pageContext.request.contextPath}/uploads/qna/'+f+'">';
+					out += '  <img class="border rounded" src="${pageContext.request.contextPath}/uploads/carqna/'+f+'">';
 					out += '</div>';
 				}
 			out += '</div>';
@@ -1214,7 +1211,7 @@ function printQuestion(data) {
 		out += '  <div class="row p-2">';
 		out += '     <div class="col-auto pt-2 pe-0">' + answerState + '</div>';
 		out += '     <div class="col-auto pt-2 px-0">&nbsp;|&nbsp;'+userName+'</div>';
-		out += '     <div class="col-auto pt-2 px-0">&nbsp;|&nbsp;<span>'+questionDate+'</span>';
+		out += '     <div class="col-auto pt-2 px-0">&nbsp;|&nbsp;<span>'+question_date+'</span>';
 		if(secret === 0) {
 			out += '       |<span class="notifyQuestion" data-qnaNum="' + qnaNum + '">신고</span>';
 		}
@@ -1227,7 +1224,7 @@ function printQuestion(data) {
 			out += '  <div class="p-3 pt-0 answer-content" style="display: none;">';
 			out += '    <div class="bg-light">';
 			out += '      <div class="p-3 pb-0">';
-			out += '        <label class="text-bg-primary px-2"> 관리자 </label> <label>' + answerDate + '</label>';
+			out += '        <label class="text-bg-primary px-2"> 관리자 </label> <label>' + answer_date + '</label>';
 			out += '      </div>';
 			out += '      <div class="p-3 pt-1">' + answer + '</div>';
 			out += '    </div>';
@@ -1390,7 +1387,7 @@ $(function(){
 	});	
 	
 	$('.btnMyQuestion').click(function(){
-		location.href = '${pageContext.request.contextPath}/shop/myPage/review?mode=qna';
+		location.href = '${pageContext.request.contextPath}/car/myPage/review?mode=qna';
 	});
 });
 

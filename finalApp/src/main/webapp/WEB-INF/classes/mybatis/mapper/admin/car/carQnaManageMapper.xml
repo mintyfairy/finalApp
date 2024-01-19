@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fa.plus.admin.mapper.CarQnaManageMapper">
+	<!-- 상품문의 -->
+	<select id="listQna" parameterType="map" resultType="com.fa.plus.admin.domain.car.CarQna">
+		SELECT q.qnaNum, q.secret, q.question, q.answer, q.question_date, 
+				q.answer_date, q.carNum, m1.memberIdx memberIdx, m1.userName,
+				m2.userId answerId, q.enabled, f.fileNum, f.filename, c.carName
+		FROM carQna q
+		JOIN carQnaFile f ON q.qnaNum = f.qnaNum
+		JOIN campingCar c ON  q.carNum = c.carNum
+		JOIN member1 m1 ON q.memberIdx = m1.memberIdx
+		JOIN member1 m2 ON q.answerId = m2.userId
+		<where>
+			<if test="mode != null">
+				<if test="mode == 2">
+					AND ( q.answer IS NOT NULL )
+				</if>
+				<if test="mode == 3">
+					AND ( q.answer IS NULL )
+				</if>
+				<if test="mode == 4">
+					AND ( q.secret = 1 )
+				</if>
+			</if>
+		</where>
+		<choose>
+			<when test="col == 'carNum'">
+				ORDER BY ${col}
+			</when>
+			<otherwise>
+				ORDER BY ${col} DESC
+			</otherwise>
+		</choose>
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+	
+	<select id="qnaCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM carQna
+		<where>
+			<if test="mode != null">
+				<if test="mode == 2">
+					AND ( answer IS NOT NULL )
+				</if>
+				<if test="mode == 3">
+					AND ( answer IS NULL )
+				</if>
+				<if test="mode == 4">
+					AND ( secret = 1 )
+				</if>
+			</if>
+		</where>
+		<choose>
+			<when test="col == 'carNum'">
+				ORDER BY ${col}
+			</when>
+			<otherwise>
+				ORDER BY ${col} DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	
+</mapper>
