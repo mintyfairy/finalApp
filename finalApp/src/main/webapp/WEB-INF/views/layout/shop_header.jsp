@@ -148,13 +148,29 @@ ul {
 .cate_container {
 	position: absolute;
 	top: 0;
-	left: 0;
+	left: calc(50% - 508px);
 	z-index: 999;
-    width: 100%;
+    width: 1080px;
     height: 0;
     margin: 0 auto;
     padding: 45px 50px;
     background-color: #fff;
+    border: 1px solid #dedede;
+    border-top: none;
+}
+
+.cate_container1 {
+	position: absolute;
+	top: 0;
+	left: calc(50% - 508px);
+	z-index: 999;
+    width: 1080px;
+    height: 0;
+    margin: 0 auto;
+    padding: 45px 50px;
+    background-color: #fff;
+    border: 1px solid #dedede;
+    border-top: none;
 }
 
 .cate_wrap {
@@ -198,6 +214,26 @@ ul {
 
 .category-list ul { padding: 0; }
 .category-list li { list-style: none; }
+
+.brand_search_list {
+	display: flex;
+}
+
+.brand_search_list .cate_item {
+	width: 46px;
+	height: 34px;
+	text-align: center;
+	background-color: #dedede;
+	margin-right: 20px;
+	cursor: pointer;
+	border-radius: 17px;
+}
+
+.brand_search_list .cate_item span {
+	display: inline-block;
+	height: 100%;
+	line-height: 34px;
+}
 
 .menu-item {
 	border-radius: 3px;
@@ -247,19 +283,29 @@ ul {
 	color: #000;
 	text-decoration: none;
 }
+
+.brand-item { cursor: pointer; }
 </style>
 
 <script type="text/javascript">
-		$(function(){
-			$("ul.condition>li>a").click(function(){
-				$("ul.condition>li>a").removeClass("text-danger");
-				$(this).addClass("text-danger");
-				
-				$(this).closest("form").find("input[name=searchType]").val($(this).attr("data-condition"));
-				$(this).closest("div").find("button").text($(this).text());
-			});
-		});
-	</script>
+$(function(){
+	$("ul.condition>li>a").click(function(){
+		$("ul.condition>li>a").removeClass("text-danger");
+		$(this).addClass("text-danger");
+		
+		$(this).closest("form").find("input[name=searchType]").val($(this).attr("data-condition"));
+		$(this).closest("div").find("button").text($(this).text());
+	});
+});
+
+// 브랜드 이름 클릭 이벤트
+$(function() {
+	$('.brand_list .cate_item').click(function() {
+		$(this).siblings('.cate_item').css("background-color", "#dedede");
+		$(this).siblings('.cate_item').$('span').css("color", "#333");
+	});
+});
+</script>
 
 <div class="header_top">
     <div class="header_top_wrap">
@@ -314,7 +360,7 @@ ul {
 	            </li>
 	            
 	            <li class="navi_item">
-	                <a class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasCategory" aria-controls="offcanvasCategory">브랜드</a>
+	                <a class="nav-link brand" data-bs-toggle="offcanvas" href="#offcanvasCategory" aria-controls="offcanvasCategory">브랜드</a>
 	            </li>
 	            
 	            <li class="navi_item dropdown">
@@ -386,12 +432,12 @@ ul {
 	            <ul class="cate_list">
 	                <li class="cate_item cate_item1">
 	                    <h3>텐트&nbsp;&middot;&nbsp;타프</h3>
-	                    <p>거실형텐트</p>
-	                    <p>돔형텐트</p>
-	                    <p>티피/루프탑텐트</p>
-	                    <p>백패킹텐트</p>
-	                    <p>면텐트</p>
-	                    <p>타프</p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=134">거실형텐트</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=135">돔형텐트</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=136">티피/루프탑텐트</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=137">백패킹텐트</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=138">면텐트</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=139">타프</a></p>
 	                </li>
 	                <li class="cate_item cate_item2">
 	                    <h3>침낭&nbsp;&middot;&nbsp;매트</h3>
@@ -453,6 +499,58 @@ ul {
 	            </ul>
 	        </div>
 	    </div>
+	    
+		<div class="cate_container1">
+	        <div class="cate_wrap">
+	            <h2>브랜드</h2>
+	            <ul class="brand_search_list">
+	                <li class="cate_item cate_item1" data-start="가" data-end="나">
+						<span>가</span>
+	                </li>
+	                <li class="cate_item cate_item2" data-start="나" data-end="다">
+						<span>나</span>
+	                </li>
+	                <li class="cate_item cate_item3" data-start="다" data-end="라">
+						<span>다</span>
+	                </li>
+	                <li class="cate_item cate_item4" data-start="라" data-end="마">
+						<span>라</span>
+	                </li>
+	                <li class="cate_item cate_item5" data-start="마" data-end="바">
+						<span>마</span>
+	                </li>
+	                <li class="cate_item cate_item6" data-start="바" data-end="사">
+						<span>바</span>
+	                </li>
+	                <li class="cate_item cate_item7" data-start="사" data-end="아">
+						<span>사</span>
+	                </li>
+	                <li class="cate_item cate_item8" data-start="아" data-end="자">
+						<span>아</span>
+	                </li>
+	                <li class="cate_item cate_item9" data-start="자" data-end="차">
+						<span>자</span>
+	                </li>
+	                <li class="cate_item cate_item10" data-start="차" data-end="카">
+						<span>차</span>
+	                </li>
+	                <li class="cate_item cate_item11" data-start="카" data-end="타">
+						<span>카</span>
+	                </li>
+	                <li class="cate_item cate_item12" data-start="타" data-end="파">
+						<span>타</span>
+	                </li>
+	                <li class="cate_item cate_item13" data-start="파" data-end="하">
+						<span>파</span>
+	                </li>
+	                <li class="cate_item cate_item14" data-start="하" data-end="">
+						<span>하</span>
+	                </li>
+	            </ul>
+	            
+	            <div class="brand-list"></div>
+	        </div>
+	    </div>
     </div>
 </nav>
 
@@ -463,22 +561,61 @@ ul {
         });
 	
 	   $(".hamburger").mouseover(function(){
-	       $(".cate_container").fadeIn( 'slow' );
+	       //$(".cate_container").fadeIn( 'slow' );
+	       $(".cate_container").show();
 	       $(".cate_container").css("height", "730px");
 	   });
-	   $("nav").mouseover(function(){
-	       $(".cate_container").css("height", "730px");
+	   $(".brand").mouseover(function() {
+		   $(".cate_container").css("height", "0");
+		   $(".cate_container").hide();
 	   });
+	   //$("nav").mouseover(function(){
+	   //    $(".cate_container").css("height", "730px");
+	   //});
 	   $(".cate_container").mouseover(function(){
 	       $(this).css("height", "730px");
 	   });
 	   $(".navi_container").mouseleave(function(){
 	       $(".cate_container").css("height", "0");
-	       $(".cate_container").fadeOut('fast');
+	       //$(".cate_container").fadeOut('fast');
+	       $(".cate_container").hide();
 	   });
 	   $(".cate_container").mouseleave(function(){
 	       $(".cate_container").css("height", "0");
-	       $(".cate_container").fadeOut('fast');
+	       //$(".cate_container").fadeOut('fast');
+	       $(".cate_container").hide();
+	   });
+	   
+	   
+	   // 브랜드 슬라이드
+       $(document).ready(function() {
+           $(".cate_container1").hide();
+       });
+	
+	   $(".brand").mouseover(function(){
+	       //$(".cate_container").fadeIn( 'slow' );
+	       $(".cate_container1").show();
+	       $(".cate_container1").css("height", "730px");
+	   });
+	   $(".hamburger").mouseover(function() {
+		   $(".cate_container1").css("height", "0");
+		   $(".cate_container1").hide();
+	   });
+	   //$("nav").mouseover(function(){
+	   //    $(".cate_container").css("height", "730px");
+	   //});
+	   $(".cate_container1").mouseover(function(){
+	       $(this).css("height", "730px");
+	   });
+	   $(".navi_container").mouseleave(function(){
+	       $(".cate_container1").css("height", "0");
+	       //$(".cate_container").fadeOut('fast');
+	       $(".cate_container1").hide();
+	   });
+	   $(".cate_container1").mouseleave(function(){
+	       $(".cate_container1").css("height", "0");
+	       //$(".cate_container").fadeOut('fast');
+	       $(".cate_container1").hide();
 	   });
     });
     
@@ -496,71 +633,35 @@ $(document).ready(function() {
 });
 </script>
 
-<!-- 좌측 카테고리 오프캔버스 -->
-	<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasCategory" aria-labelledby="offcanvasCategoryLabel">
-		<div class="offcanvas-header">
-			<h5 class="offcanvas-title" id="offcanvasCategoryLabel"><i class="bi bi-list-ul"></i> 브랜드</h5>
-			<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-		</div>
-		<div class="offcanvas-body">
-			<div class="d-flex flex-column bd-highlight mt-3 mx-0 px-4">
-				<ul class="category-list px-0"></ul>
-			</div>
-		</div>
-	</div>
 
-<script type="text/javascript">
-	$(function(){
-		const myOffcanvas = document.getElementById('offcanvasCategory');
-		myOffcanvas.addEventListener('shown.bs.offcanvas', function () {
-			let url = '${pageContext.request.contextPath}/shop/product/listAllCategory';
-
-			$.get(url, null, function(data){
-				let out = '';
-				let listUrl = '${pageContext.request.contextPath}/shop/product/main?categoryNum=';
-
-				let listMain = data.listMain;
-				let listAll = data.listAll;
-				
-				$(listMain).each(function(index, item){
-					let categoryNum = item.categoryNum;
-					let categoryName = item.categoryName;
-					
-					let opened = index === 0 ? 'opened' : '';
-					
-					out += '<li class="menu-item">';
-					out +=   '<label class="menu-link ' + opened + '">';
-					out +=     '<span class="menu-label">'+categoryName+"</span>";
-					out +=   '</label>';
-					out +=   '<ul class="sub-menu">';
-					
-					$(listAll).each(function(index, item){
-						let subNum = item.categoryNum;
-						let subName = item.categoryName;
-						let parentNum = item.parentNum;
-						
-						if(categoryNum === parentNum) {
-							out += '<li class="sub-menu-item"><a href="'+listUrl+subNum+'" class="sub-menu-link">'+subName+'</a></li>';
-						}
-					});
-					
-					out +=   '</ul>';
-					out += '</li>';
-				});
-				
-				$('.category-list').html(out);
-				// $('.category-list .opened').siblings('.sub-menu').show();
-				// $('.category-list .opened').siblings('.sub-menu').first().find('a').first().addClass('active');
-				
-			}, 'json');
-		});
+<script>
+$(function(){
+	$(".brand_search_list .cate_item").click(function(){
+		let start = $(this).attr("data-start");
+		let end = $(this).attr("data-end");
+		let url = "${pageContext.request.contextPath}/shop/product/listBrand";
 		
-		$('.category-list').on('click', '.menu-item', function(){
-			const $menu = $(this);
-			$('.category-list .menu-link').removeClass('opened');
-			$('.category-list .sub-menu').hide();
-			$menu.find('.menu-link').addClass('opened');
-			$menu.find('.sub-menu').fadeIn(500);
-		});
+		$.get(url, {start:start, end:end}, function(data){
+			let s;
+			$('.brand-list').empty();
+			for(let item of data.listBrand) {
+				console.log(item);
+				let brandNum = item.brandNum;
+				let brandName = item.brandName;
+				
+				s = '<div class="brand-item" data-brandNum = "'+brandNum+'">'+brandName+'</div>';
+				$('.brand-list').append(s);
+				
+			}
+		}, "json");
 	});
-	</script>
+	
+	$(".brand-list").on("click", ".brand-item", function(){
+		let brandNum = $(this).attr("data-brandNum");
+		alert(brandNum);
+	});
+	
+});
+
+</script>
+

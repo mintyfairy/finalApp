@@ -19,6 +19,9 @@ public interface ProductMapper {
 	public List<Product> listCategory();
 	public List<Product> listSubCategory(long parentNum);
 	
+	public List<Product> listAllBrand();
+	public List<Product> listBrand(Map<String, Object> map);
+	
 	public List<Product> listProductOption(long productNum);
 	public List<Product> listOptionDetail(long optionNum);
 }

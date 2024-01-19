@@ -147,4 +147,29 @@ public class ProductServiceImpl implements ProductService {
 		return list;
 	}
 
+	@Override
+	public List<Product> listAllBrand() {
+		List<Product> list = null;
+		
+		try {
+			list = mapper.listAllBrand();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<Product> listBrand(Map<String, Object> map) {
+		List<Product> list = null;
+		
+		try {
+			list = mapper.listBrand(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 }

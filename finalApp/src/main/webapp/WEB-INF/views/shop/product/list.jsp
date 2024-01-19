@@ -153,7 +153,6 @@ ol, ul {
 								<h4>${dto.discountRate}%</h4>
 								<h4>${dto.salePrice}</h4>
 							</div>
-							<p class="review">리뷰 개수</p>
 						</div></li>
 				</c:forEach>
 			</ul>

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fa.plus.admin.domain.shop.ShopProductManage;
 import com.fa.plus.common.MyUtil;
 import com.fa.plus.domain.shop.Product;
 import com.fa.plus.service.shop.ProductService;
@@ -147,4 +146,17 @@ public class ProductController {
 		
 		return ".shop.product.detail";
 	}
+	
+	
+	@GetMapping("listBrand")
+	@ResponseBody
+	public Map<String, Object> listBrand(@RequestParam Map<String, Object> paramMap) {
+
+		List<Product> listBrand = service.listBrand(paramMap);
+
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("listBrand", listBrand);
+		
+		return model;
+	}	
 }

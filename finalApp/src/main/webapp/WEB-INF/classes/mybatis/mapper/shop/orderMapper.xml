@@ -72,4 +72,9 @@
 		JOIN productOption po ON od.optionNum = po.optionNum
 		WHERE od.detailNum = #{detailNum}
 	</select>
+	
+	<update id="updateOrderDetailState" parameterType="map">
+		UPDATE orderDetail SET detailState = #{detailState} 
+		WHERE orderDetailNum = #{orderDetailNum}
+	</update>
 </mapper>

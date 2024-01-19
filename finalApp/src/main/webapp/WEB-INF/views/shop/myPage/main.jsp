@@ -398,6 +398,7 @@ $(function(){
 	$(".order-cancel").click(function(){
 		// 구매(주문) 취소
 		let orderDetailNum = $(this).attr("data-orderDetailNum");
+		console.log(orderDetailNum);
 
 		const f = document.userOrderDetailForm;
 		f.orderDetailNum.value = orderDetailNum;
@@ -592,12 +593,12 @@ $(function(){
 						<div class="payment-menu">
 							<div class="payment-menu-item order-details"
 								data-orderDetailNum="${dto.orderDetailNum}">주문상세</div>
-							<c:if test="${dto.detailState==0 && dto.orderState==1}">
+							<c:if test="${dto.detailState==0 || dto.orderState==1}">
 								<div class="payment-menu-item order-cancel"
 									data-orderDetailNum="${dto.orderDetailNum}">구매취소</div>
 							</c:if>
 							<c:if
-								test="${dto.detailState==0 && dto.orderState==5 && dto.afterDelivery < 3}">
+								test="${dto.detailState==0 || dto.orderState==5 || dto.afterDelivery < 3}">
 								<div class="payment-menu-item return-request"
 									data-orderDetailNum="${dto.orderDetailNum}">반품요청</div>
 								<div class="payment-menu-item exchange-request"
@@ -642,15 +643,60 @@ $(function(){
 							</form>
 						</div>
 					</c:if>
+					
 				</div>
 			</c:forEach>
 
-			<div class="page-navigation">${dataCount == 0 ? "주문 내역이 없습니다." : paging }
+			<div class="page-navigation">
+				${dataCount == 0 ? "주문 내역이 없습니다." : paging }
 			</div>
 
 		</div>
 	</div>
-</div>
+	<div class="tab-pane fade" id="tab-pane-2" role="tabpanel" aria-labelledby="tab-2" tabindex="0">
+				<div class="mt-3 pt-3 border-bottom">
+					<p class="fs-4 fw-semibold">취소/반품 내역</p> 
+				</div>
+				<div class="mt-3">
+					<p> 취소/반품 내역 입니다. </p>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="tab-pane-3" role="tabpanel" aria-labelledby="tab-3" tabindex="0">
+				<div class="mt-3 pt-3 border-bottom">
+					<p class="fs-4 fw-semibold">정기배송 신청내역</p> 
+				</div>
+				<div class="mt-3">
+					<p> 정기배송 신청내역 입니다. </p>
+				</div>				
+			</div>
+		</div>
+
+<!-- 구매취소/교환요청/반품요청 대화상자  -->
+<div class="modal fade" id="orderDetailUpdateDialogModal" tabindex="-1" aria-labelledby="orderDetailUpdateDialogModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="orderDetailUpdateDialogModalLabel">구매취소</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body pt-1">
+				<div class="p-1">
+					<form name="userOrderDetailForm" method="post" class="row justify-content-center">
+						<div class="col-7 p-1">
+							<input type="text" name="stateMemo" class="form-control" placeholder="사유를 입력 하세요">
+						</div>
+						<div class="col-auto p-1">
+							<input type="hidden" name="page" value="${page}">
+							<input type="hidden" name="orderDetailNum">
+							<input type="hidden" name="detailState">
+							<button type="button" class="btn btn-light btnUserOrderDetailUpdateOk"> 요청하기 </button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
 
 <script>
 //리뷰 쓰기 버튼

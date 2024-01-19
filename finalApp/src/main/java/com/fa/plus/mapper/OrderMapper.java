@@ -17,6 +17,8 @@ public interface OrderMapper {
 	public void insertOrderDetail(Order dto) throws SQLException;
 	public void insertOrderDelivery(Order dto) throws SQLException;
 	
+	public void updateOrderDetailState(Map<String, Object> map) throws SQLException;
+	
 	public List<Order> listProduct(List<Map<String, Long>> list);
 	public Order findById(long productNum);
 	public List<Order> listOptionDetail(List<Long> detailNums);

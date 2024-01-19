@@ -160,4 +160,15 @@
 		JOIN product p ON a.productNum = p.productNum
 		WHERE a.parentNum IS NOT NULL AND p.productNum = #{productNum}
 	</select>
+
+	<select id="listBrand"
+		resultType="com.fa.plus.domain.shop.Product">
+		SELECT BrandNum, BrandName, use, showOrderNo
+		FROM brand
+		WHERE use = 1
+		     AND BrandName &gt; #{start}
+		     <if test="end != null and end != ''">
+		        AND BrandName &lt; #{end}
+		     </if>
+	</select>
 </mapper>

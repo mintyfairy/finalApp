@@ -37,6 +37,7 @@ public class Product {
 	private String brandName;
 	
 	
+	
 	private long fileNum;
 	private String filename;
 	
