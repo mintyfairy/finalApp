@@ -465,7 +465,8 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
 				                	</c:otherwise>
 				                </c:choose>
 				                <li class="header_item fa-lg"><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
-				                <li class="header_item fa-lg"><a href="#"><i class="fa-solid fa-headset"></i></a></li>
+				                <li class="header_item fa-lg">
+				                	<a href="${pageContext.request.contextPath}/csCenter/notice/list"><i class="fa-solid fa-headset"></i></a></li>
 				                <c:if test='${sessionScope.member.authority=="CAMP"||sessionScope.member.authority=="ADMIN"}'>
 				                	<li class="header_item fa-lg"><a href="${pageContext.request.contextPath}/admin"><i class="fa-solid fa-user-gear"></i></a></li>
 				                </c:if>

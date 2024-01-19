@@ -3,8 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <style type="text/css">
-
-
 .body-container {
 	max-width: 1100px;
 }
@@ -23,62 +21,61 @@
 }
 .tab-pane { min-height: 300px; }
 
+.tab-content { width: 850px; margin: 20px auto; }
+
 .table-list { width: 100%; }
 .table-list thead { color: #787878; }
 .table-list tr>th { padding-top: 10px; padding-bottom: 10px; }
 .table-list tr>th, .table-list tr>td { text-align: center; }
 .table-list .left { text-align: left; padding-left: 7px; }
 .table-list .right { text-align: right; padding-left: 7px; padding-right: 7px; }
-
-.product-subject {
-	width: 330px;
-}
-.product-subject img {
-	vertical-align: top;
-	width: 50px;
-	height: 50px;
-	border-radius: 5px;
-	border: 1px solid #d5d5d5;
-}
-.product-subject label {
-	display: inline-block;
-	width: 300px;
-	padding-left: 5px;
-	vertical-align: top;
-	white-space: pre-wrap;
-}
 </style>
 
 <script type="text/javascript">
-	function searchList() {
-		const f = document.searchForm;
-		f.submit();
-	}
+//탭
+$(function(){
+	$("button[role='tab']").on('click', function(){
+		const tab = $(this).attr("aria-controls");
+		
+		if(tab === "1") { // 공지
+			location.href="${pageContext.request.contextPath}/csCenter/notice/list";
+		} else if( tab === "2") { // FAQ
+			location.href="${pageContext.request.contextPath}/csCenter/faq/main";
+		} else if( tab === "3") { // 1:1
+			location.href="${pageContext.request.contextPath}/csCenter/qna/list";
+		} else if( tab === "4") { // 이벤트
+			location.href="${pageContext.request.contextPath}/csCenter/event/progress/list";
+		}
+	});
+});
 
-	function changeList() {
-		let parentNum = $("#changeCategory").val();
-		let productShow = $("#changeShowProduct").val();
+function searchList() {
+	const f = document.searchForm;
+	f.submit();
+}
 
-		const f = document.searchForm;
-		f.parentNum.value = parentNum;
-		f.categoryNum.value = 0;
-		f.productShow.value = productShow;
-		searchList();
-	}
+function changeList() {
+	let parentNum = $("#changeCategory").val();
+	let productShow = $("#changeShowProduct").val();
 
-	function changeSubList() {
-		let parentNum = $("#changeCategory").val();
-		let categoryNum = $("#changeSubCategory").val();
-		let productShow = $("#changeShowProduct").val();
+	const f = document.searchForm;
+	f.parentNum.value = parentNum;
+	f.categoryNum.value = 0;
+	f.productShow.value = productShow;
+	searchList();
+}
 
-		const f = document.searchForm;
-		f.parentNum.value = parentNum;
-		f.categoryNum.value = categoryNum;
-		f.productShow.value = productShow;
-		searchList();
-	}
+function changeSubList() {
+	let parentNum = $("#changeCategory").val();
+	let categoryNum = $("#changeSubCategory").val();
+	let productShow = $("#changeShowProduct").val();
 
-
+	const f = document.searchForm;
+	f.parentNum.value = parentNum;
+	f.categoryNum.value = categoryNum;
+	f.productShow.value = productShow;
+	searchList();
+}
 </script>
 
 <div class="container">
@@ -87,16 +84,16 @@
 		<div class="body-main">
 			<ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
 				<li class="nav-item" role="presentation">
-					<button class="nav-link ${special==0?'active':''}" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="1" aria-selected="${special==0?'true':'false'}">공지사항</button>
+					<button class="nav-link active" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="1" aria-selected="true">공지사항</button>
 				</li>
 				<li class="nav-item" role="presentation">
-					<button class="nav-link ${special==1?'active':''}" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="2" aria-selected="${special==1?'true':'false'}">자주 묻는 질문</button>
+					<button class="nav-link" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="2" aria-selected="false">자주 묻는 질문</button>
 				</li>
 				<li class="nav-item" role="presentation">
-					<button class="nav-link ${special==2?'active':''}" id="tab-3" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="3" aria-selected="${special==2?'true':'false'}">1:1 질문</button>
+					<button class="nav-link" id="tab-3" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="3" aria-selected="false">1:1 질문</button>
 				</li>
                 <li class="nav-item" role="presentation">
-					<button class="nav-link ${special==2?'active':''}" id="tab-3" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="3" aria-selected="${special==2?'true':'false'}">이벤트</button>
+					<button class="nav-link" id="tab-4" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="4" aria-selected="false">이벤트</button>
 				</li>
 			</ul>
 			
@@ -137,6 +134,24 @@
 									</td>
 								</tr>					
 							</c:forEach>
+							
+							<c:forEach var="dto" items="${list}" varStatus="status">
+								<tr valign="middle">
+									<td>${dataCount - (page-1) * size - status.index}</td>
+                                    <td class ="center"> 
+                                        <a href="${articleUrl}&num=${dto.num}" class="text-reset">${dto.subject}</a>
+                                    </td>
+									<td>관리자</td>
+									<td>${dto.reg_date}</td>
+									<td>${dto.hitCount}</td>
+									<td>
+										<c:if test="${dto.fileCount != 0}">
+											<a href="${pageContext.request.contextPath}/csCenter/notice/zipdownload?num=${dto.num}" class="text-reset"><i class="bi bi-file-arrow-down"></i></a>
+										</c:if>
+									</td>
+								</tr>					
+							</c:forEach>
+							
 						</tbody>
 					</table>
 
