@@ -110,9 +110,9 @@
 	
 	
 	<insert id="insertReview" parameterType="com.fa.plus.domain.site.SiteReview">
-	insert into sitereview(BOOKNUM,SUBJECT,CONTENT,memberIdx,SCORE,REG_DATE,detailNum,siteNum,ENABLED)
+	insert into sitereview(BOOKNUM,CONTENT,memberIdx,SCORE,REG_DATE,detailNum,siteNum,ENABLED)
 		
-		values(#{bookNum},#{subject},#{content},#{memberIdx},#{score},sysdate,#{detailNum},#{siteNum},0)
+		values(#{bookNum},#{content},#{memberIdx},#{score},sysdate,#{detailNum},#{siteNum},0)
 	
 		
 	</insert>
@@ -141,7 +141,7 @@
 	
 	
 	<select id="listSiteReivew" parameterType="map" resultType="com.fa.plus.domain.site.SiteReview">
-		select BOOKNUM,SUBJECT,CONTENT,MEMBERIDX,SCORE,to_char(REG_DATE,'yyyy-mm-dd') REG_DATE,ANSWER,ANSWERIDX,DETAILNUM,SITENUM,fileList
+		select BOOKNUM,CONTENT,MEMBERIDX,SCORE,to_char(REG_DATE,'yyyy-mm-dd') REG_DATE,ANSWER,ANSWERIDX,DETAILNUM,SITENUM,fileList
 		 ,username,adminname
 		 from sitereview
  	     JOIN (select memberIdx uidx,username from member1 ) m1 ON uidx = memberIdx
@@ -170,7 +170,7 @@
 	</select>
 	<update id="updateReview" parameterType="com.fa.plus.domain.site.SiteReview">
 		 update sitereview set
-		 	SUBJECT=#{subject},CONTENT=#{content},SCORE=#{score},REG_DATE=#{reg_date}
+		 	CONTENT=#{content},SCORE=#{score},REG_DATE=#{reg_date}
 		 where booknum={bookNum}
 	</update>
 
@@ -195,7 +195,7 @@
 	
 
 	<select id="findByReview" parameterType="Long" resultType="com.fa.plus.domain.site.SiteReview">
-		 select BOOKNUM,SUBJECT,CONTENT,MEMBERIDX,SCORE,to_char(REG_DATE,'yyyy-mm-dd') REG_DATE,ANSWER,ANSWERIDX,DETAILNUM,SITENUM,fileList,username,adminname
+		 select BOOKNUM,CONTENT,MEMBERIDX,SCORE,to_char(REG_DATE,'yyyy-mm-dd') REG_DATE,ANSWER,ANSWERIDX,DETAILNUM,SITENUM,fileList,username,adminname
 			 from sitereview
 			 JOIN (select memberIdx uidx,username from member1 ) m1 ON uidx = memberIdx
 			 LEFT OUTER JOIN (select memberIdx aidx,username adminname from member1 ) m2 ON aidx = memberIdx
