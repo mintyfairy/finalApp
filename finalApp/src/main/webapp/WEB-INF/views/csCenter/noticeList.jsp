@@ -4,7 +4,7 @@
 
 <style type="text/css">
 .body-container {
-	max-width: 1100px;
+	max-width: 1080px; /*수정*/
 }
 
 .nav-tabs .nav-link {
@@ -21,7 +21,7 @@
 }
 .tab-pane { min-height: 300px; }
 
-.tab-content { width: 850px; margin: 20px auto; }
+.tab-content { width: 1080px; margin: 20px auto; } /*수정*/
 
 .table-list { width: 100%; }
 .table-list thead { color: #787878; }
@@ -138,7 +138,7 @@ function changeSubList() {
 							<c:forEach var="dto" items="${list}" varStatus="status">
 								<tr valign="middle">
 									<td>${dataCount - (page-1) * size - status.index}</td>
-                                    <td class ="center"> 
+                                    <td>  <!-- td센터 삭제8 -->
                                         <a href="${articleUrl}&num=${dto.num}" class="text-reset">${dto.subject}</a>
                                     </td>
 									<td>관리자</td>
