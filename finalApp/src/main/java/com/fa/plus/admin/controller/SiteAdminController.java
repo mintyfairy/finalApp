@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,6 +28,7 @@ import com.fa.plus.domain.site.SiteDetail;
 @Controller
 @RequestMapping("/admin/siteManage/*")
 public class SiteAdminController {
+	
 
 	@Autowired
 	private SiteAdminService service;
@@ -103,7 +103,6 @@ public class SiteAdminController {
 			int offset = (current_page - 1) * size;
 			if(offset < 0) offset = 0;
 			
-			map.put("siteNum", num);
 			map.put("offset", offset);
 			map.put("size", size);
 			
@@ -113,10 +112,11 @@ public class SiteAdminController {
 			
 			String paging = myUtil.pagingUrl(current_page, total_page, listUrl);
 			
+			
+			
 			model.addAttribute("num", num);
 			model.addAttribute("list", list);
 			model.addAttribute("dataCount", dataCount);
-			
 			
 			model.addAttribute("page", current_page);
 			model.addAttribute("size", size);

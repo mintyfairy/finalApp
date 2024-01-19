@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fa.plus.admin.service.SiteAdminService;
 import com.fa.plus.domain.site.Site;
 import com.fa.plus.domain.site.SiteDetail;
+import com.fa.plus.domain.site.SiteReview;
 import com.fa.plus.domain.site.SiteSearch;
+import com.fa.plus.service.site.SiteService;
 
 @Controller
 @RequestMapping("/site/*")
@@ -25,6 +27,8 @@ public class SiteBookController {
 	@Autowired
 	private SiteAdminService adminService;
 
+	@Autowired
+	private SiteService siteservice;
 	// @Autowired
 	// private siteCampAdminServiceImpl adminService;
 
@@ -95,6 +99,7 @@ public class SiteBookController {
 		
 		int dataCount;
 		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> mapForRoomReview = new HashMap<String, Object>();
 	
 		map.put("siteNum",num);
 		Site Sitedto=adminService.findByIdSite(num);
@@ -113,10 +118,18 @@ public class SiteBookController {
 			else if (a==3) list.get(n).setFloorString("자갈");
 			else if (a==4) list.get(n).setFloorString("흙");
 			else if (a==5) list.get(n).setFloorString("기타");
+			
+			mapForRoomReview.put("detailNum", list.get(n).getDetailNum());
+			
+			list.get(n).setRoomsiteReviewList(siteservice.listSiteReivew(mapForRoomReview));
 		}
 		List<Site> listSiteFile=adminService.listSiteFile(num);
 		// 전체 페이지 수
+		int reviewCount=siteservice.dataCountReview(map);
 		dataCount = adminService.dataCountRoom(map);
+		model.addAttribute("reviewCount", reviewCount);
+		List<SiteReview> siteReviewList=siteservice.listSiteReivew(map);
+		model.addAttribute("siteReviewList", siteReviewList);
 		model.addAttribute("list", list);
 		model.addAttribute("listSiteFile", listSiteFile);
 		model.addAttribute("dataCount", dataCount);

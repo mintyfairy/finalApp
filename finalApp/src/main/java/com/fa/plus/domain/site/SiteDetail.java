@@ -17,6 +17,7 @@ public class SiteDetail {
 	
 
 	
+	private double star;
 	private long SdPicNum;
 
 	private long fileNum;
@@ -24,8 +25,27 @@ public class SiteDetail {
 	private List<MultipartFile> addFiles;
 	
 	private List<String> listFile;
+	private List<SiteReview> roomsiteReviewList;
+
 
 	
+	
+	public List<SiteReview> getRoomsiteReviewList() {
+		return roomsiteReviewList;
+	}
+
+	public void setRoomsiteReviewList(List<SiteReview> roomsiteReviewList) {
+		this.roomsiteReviewList = roomsiteReviewList;
+	}
+
+	public double getStar() {
+		return star;
+	}
+
+	public void setStar(double star) {
+		this.star = star;
+	}
+
 	public String getFloorString() {
 		return floorString;
 	}

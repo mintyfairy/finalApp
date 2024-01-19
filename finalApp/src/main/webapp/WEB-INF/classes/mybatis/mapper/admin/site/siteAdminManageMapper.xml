@@ -167,10 +167,11 @@
 		
 	</select>
 	<select id="listRoom" parameterType="map" resultType="com.fa.plus.domain.site.SiteDetail">
-		SELECT detailNum,siteNum,detailName,PRICE,AREA,CONTENT,CAPACITY,floor
+		SELECT detailNum,siteNum,detailName,PRICE,AREA,CONTENT,CAPACITY,floor, nvl(star,0) star
 		FROM sitedetail 
+        left join (select trunc(avg(score),1) star,detailnum dnum from sitereview  group by detailnum) on dnum=detailnum
 		where siteNum=#{siteNum}
-		ORDER BY detailNum DESC
+		ORDER BY detailNum DESC;
 		
 	</select>
 	<!-- 사이트용 검색 -->
@@ -196,9 +197,9 @@
 		
 	</select>
 	<select id="listSearchRoom" parameterType="com.fa.plus.domain.site.SiteSearch" resultType="com.fa.plus.domain.site.SiteDetail">
-		SELECT detailNum,siteNum,detailName,PRICE,AREA,CONTENT,CAPACITY,floor
+		SELECT detailNum,siteNum,detailName,PRICE,AREA,CONTENT,CAPACITY,floor, nvl(star,0) star
 		FROM sitedetail 
-		
+		left join (select trunc(avg(score),1) star,detailnum dnum from sitereview  group by detailnum) on dnum=detailnum
 		<where>
 		siteNum=#{siteNum} 
 			<include refid="where-list-room"/>

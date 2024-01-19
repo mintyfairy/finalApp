@@ -347,9 +347,9 @@ public class SiteAdminServiceImpl implements SiteAdminService {
 			list = mapper.listSearchSite(dto);
 
 			// 옵션검사
-			StringBuffer options = new StringBuffer();
+			//StringBuffer options = new StringBuffer();
 			// 배열을 스트링으로 변환
-			int[] optionlist = dto.getSiteOption();
+			//int[] optionlist = dto.getSiteOption();
 			/*
 			 * 향상된 포문장이 내용물을 remove하면 제대로 다음걸 가져오는지 모르겟다. if (optionlist != null ) { for
 			 * (String option : optionlist) { options.append(option); } for (Site vo : list)

@@ -73,7 +73,7 @@ public class SiteMypageController {
 		return ".campsite.mypage.bookList";
 	}
 
-	
+	//String path = root + "uploads" + File.separator + "siteReview"; 파일 저장주소는 이걸 사용 
 	
 	
 
