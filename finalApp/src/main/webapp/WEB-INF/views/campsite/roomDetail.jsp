@@ -198,7 +198,7 @@
 	                            <img class="img-fluid flex-shrink-0 rounded" src="${pageContext.request.contextPath}/uploads/siteReview/${dto.fileList}" style="width: 45px; height: 45px;">
 	                            <div class="ps-3">
 	                                <h6 class="fw-bold mb-1">${dto.userName }</h6>
-	                                <small>${dto.score }</small>
+	                                <small class="fa fa-star text-primary">${dto.score }</small>
 	                            </div>
 	                        </div>
 	                        <i class="fa fa-quote-right fa-3x text-primary position-absolute end-0 bottom-0 me-4 mb-n1"></i>
