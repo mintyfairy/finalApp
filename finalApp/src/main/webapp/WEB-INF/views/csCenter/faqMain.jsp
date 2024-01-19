@@ -21,6 +21,8 @@
 }
 .tab-pane { min-height: 300px; }
 
+.body-main { width: 850px; margin: 20px auto; }
+
 .table-list { width: 100%; }
 .table-list thead { color: #787878; }
 .table-list tr>th { padding-top: 10px; padding-bottom: 10px; }
@@ -28,85 +30,94 @@
 .table-list .left { text-align: left; padding-left: 7px; }
 .table-list .right { text-align: right; padding-left: 7px; padding-right: 7px; }
 
-.product-subject {
-	width: 330px;
+button.btn-category {
+	cursor: pointer;
+	border: none;
+	background: #fff;
+	padding: 7px;
+	
 }
-.product-subject img {
-	vertical-align: top;
-	width: 50px;
-	height: 50px;
-	border-radius: 5px;
-	border: 1px solid #d5d5d5;
+
+button.btnActive {
+	font-weight: 600;
+	border-bottom:1px solid #333;
 }
-.product-subject label {
-	display: inline-block;
-	width: 300px;
-	padding-left: 5px;
-	vertical-align: top;
-	white-space: pre-wrap;
-}
+
 </style>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script type="text/javascript">
+//탭
+$(function(){
+	$("button[role='tab']").on('click', function(){
+		const tab = $(this).attr("aria-controls");
+		
+		if(tab === "1") { // 공지
+			location.href="${pageContext.request.contextPath}/csCenter/notice/list";
+		} else if( tab === "2") { // FAQ
+			location.href="${pageContext.request.contextPath}/csCenter/faq/main";
+		} else if( tab === "3") { // 1:1
+			location.href="${pageContext.request.contextPath}/csCenter/qna/list";
+		} else if( tab === "4") { // 이벤트
+			location.href="${pageContext.request.contextPath}/csCenter/event/progress/list";
+		}
+	});
+});
+</script>
 
 <div class="container">
 	<div class="body-container">	
-		<ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
+			<ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
 				<li class="nav-item" role="presentation">
-					<button class="nav-link ${special==0?'active':''}" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="1" aria-selected="${special==0?'true':'false'}">공지사항</button>
+					<button class="nav-link" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="1" aria-selected="false">공지사항</button>
 				</li>
 				<li class="nav-item" role="presentation">
-					<button class="nav-link ${special==1?'active':''}" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="2" aria-selected="${special==1?'true':'false'}">자주 묻는 질문</button>
+					<button class="nav-link active" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="2" aria-selected="true">자주 묻는 질문</button>
 				</li>
 				<li class="nav-item" role="presentation">
-					<button class="nav-link ${special==2?'active':''}" id="tab-3" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="3" aria-selected="${special==2?'true':'false'}">1:1 질문</button>
+					<button class="nav-link" id="tab-3" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="3" aria-selected="false">1:1 질문</button>
 				</li>
                 <li class="nav-item" role="presentation">
-					<button class="nav-link ${special==2?'active':''}" id="tab-3" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="3" aria-selected="${special==2?'true':'false'}">이벤트</button>
+					<button class="nav-link" id="tab-4" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="4" aria-selected="false">이벤트</button>
 				</li>
 			</ul>
-		&nbsp;
-	    <div class="alert alert-info" role="alert">
-	        <i class="bi bi-search"></i> 궁금한 문의 사항을 빠르게 검색 할 수 있습니다.
-	    </div>  
-	    		
+
 		<div class="body-main">
-			
-			<ul class="nav nav-tabs" id="myTab" role="tablist">
-				<li class="nav-item" role="presentation">
-					<button class="nav-link active" id="tab-0" data-bs-toggle="tab" data-bs-target="#nav-content" type="button" role="tab" aria-controls="0" aria-selected="true" data-categoryNum="0">모두</button>
-				</li>
+		
+			<div class="category-tab">
 				<c:forEach var="dto" items="${listCategory}" varStatus="status">
-					<li class="nav-item" role="presentation">
-						<button class="nav-link" id="tab-${status.count}" data-bs-toggle="tab" data-bs-target="#nav-content" type="button" role="tab" aria-controls="${status.count}" aria-selected="true" data-categoryNum="${dto.categoryNum}">${dto.category}</button>
-					</li>
+					<button class="btn-category ${status.index==0?'btnActive':'' }" type="button" data-categoryNum="${dto.categoryNum}">${dto.category}</button>
 				</c:forEach>
-			</ul>
+			</div>
 			
-			<div class="tab-content pt-2" id="nav-tabContent">
-				<div class="tab-pane fade show active" id="nav-content" role="tabpanel" aria-labelledby="nav-tab-content"></div>
+			<div class="tab-content pt-2" id="nav-tabContent"></div>
+			
+			<div>
+					<div class="row py-3">
+						<div class="col">
+							<button type="button" class="btn btn-light" onclick="reloadFaq();" title="새로고침"><i class="bi bi-arrow-counterclockwise"></i></button>
+						</div>
+						<div class="col-6 text-center">
+							<form class="row" name="searchForm" method="post">
+								<div class="col-auto p-1">
+									<select name="schType" id="schType" class="form-select">
+										<option value="all" ${schType=="all"?"selected":""}>제목+내용</option>
+										<option value="subject" ${schType=="subject"?"selected":""}>제목</option>
+										<option value="content" ${schType=="content"?"selected":""}>내용</option>
+									</select>
+								</div>
+								<div class="col-auto p-1">
+									<input type="text" name="kwd" id="kwd" value="${kwd}" class="form-control">
+								</div>
+								<div class="col-auto p-1">
+									<button type="button" class="btn btn-light" onclick="searchList()"> <i class="bi bi-search"></i> </button>
+								</div>
+							</form>
+						</div>
+						<div class="col text-end">&nbsp;</div>
+					</div>
 				
-				<div class="row py-3">
-					<div class="col">
-						<button type="button" class="btn btn-light" onclick="reloadFaq();" title="새로고침"><i class="bi bi-arrow-counterclockwise"></i></button>
-					</div>
-					<div class="col-6 text-center">
-						<form class="row" name="searchForm" method="post">
-							<div class="col-auto p-1">
-								<select name="schType" id="schType" class="form-select">
-									<option value="all" ${schType=="all"?"selected":""}>제목+내용</option>
-									<option value="subject" ${schType=="subject"?"selected":""}>제목</option>
-									<option value="content" ${schType=="content"?"selected":""}>내용</option>
-								</select>
-							</div>
-							<div class="col-auto p-1">
-								<input type="text" name="kwd" id="kwd" value="${kwd}" class="form-control">
-							</div>
-							<div class="col-auto p-1">
-								<button type="button" class="btn btn-light" onclick="searchList()"> <i class="bi bi-search"></i> </button>
-							</div>
-						</form>
-					</div>
-					<div class="col text-end">&nbsp;</div>
-				</div>				
 			</div>
 			
 		</div>
@@ -159,8 +170,14 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 $(function(){
 	listPage(1);
 	
-    $("button[role='tab']").on("click", function(e){
-		// const tab = $(this).attr("aria-controls");
+    $(".btn-category").on("click", function(e) {
+    	let $btn = $(this);
+    	$('.category-tab .btn-category').each(function(){
+    		$(this).removeClass('btnActive');
+    	});
+    	
+    	$btn.addClass('btnActive');
+    	
     	listPage(1);
     	
     });
@@ -168,15 +185,15 @@ $(function(){
 
 // 글리스트 및 페이징 처리
 function listPage(page) {
-	const $tab = $("button[role='tab'].active");
-	let categoryNum = $tab.attr("data-categoryNum");
+	const $btn = $("button.btnActive");
+	let categoryNum = $btn.attr("data-categoryNum");
 	
 	let url = "${pageContext.request.contextPath}/csCenter/faq/list";
 	let query = "pageNo="+page+"&categoryNum="+categoryNum;
 	let search = $('form[name=faqSearchForm]').serialize();
 	query = query+"&"+search;
 	
-	let selector = "#nav-content";
+	let selector = "#nav-tabContent";
 	
 	const fn = function(data){
 		$(selector).html(data);

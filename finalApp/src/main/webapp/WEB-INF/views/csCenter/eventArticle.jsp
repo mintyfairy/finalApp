@@ -4,7 +4,7 @@
 
 <style type="text/css">
 .body-container {
-	max-width: 850px;
+	max-width: 1100px;
 }
 
 .nav-tabs .nav-link {
@@ -21,20 +21,53 @@
 }
 .tab-pane { min-height: 300px; }
 
+
 .table img {
 	max-width: 650px;
 }
+
+.body-main { width: 850px; margin: 20px auto; }
+
+button.btn-category {
+	cursor: pointer;
+	border: none;
+	background: #fff;
+	padding: 7px;
+	
+}
+
+button.btnActive {
+	font-weight: 600;
+	border-bottom:1px solid #333;
+}
+
 </style>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/boot-board.css" type="text/css">
 
 <script type="text/javascript">
 $(function(){
+	$("button[role='tab']").on('click', function(){
+		const tab = $(this).attr("aria-controls");
+		
+		if(tab === "1") { // 공지
+			location.href="${pageContext.request.contextPath}/csCenter/notice/list";
+		} else if( tab === "2") { // FAQ
+			location.href="${pageContext.request.contextPath}/csCenter/faq/main";
+		} else if( tab === "3") { // 1:1
+			location.href="${pageContext.request.contextPath}/csCenter/qna/list";
+		} else if( tab === "4") { // 이벤트
+			location.href="${pageContext.request.contextPath}/csCenter/event/progress/list";
+		}
+	});
+});
+
+$(function(){
 	let menu = "${category}";
-	$("#tab-"+menu).addClass("active");
-	
-    $("button[role='tab']").on("click", function(e){
-		const tab = $(this).attr("data-tab");
-		let url = "${pageContext.request.contextPath}/csCenter/event/"+tab+"/list";
+	$("#tab-"+menu).addClass("btnActive");
+
+	$(".btn-category").on("click", function(e) {
+		const menu = $(this).attr("data-menu");
+		let url = "${pageContext.request.contextPath}/csCenter/event/"+menu+"/list";
 		location.href = url;
     });
 });
@@ -68,31 +101,32 @@ $(function(){
 
 <div class="container">
 	<div class="body-container">	
-		<div class="body-title">
-			<h3><i class="bi bi-calendar-event"></i> 이벤트 </h3>
-		</div>
-		
-		<div class="body-main">
-
-			<ul class="nav nav-tabs" id="myTab" role="tablist">
+		<ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
 				<li class="nav-item" role="presentation">
-					<button class="nav-link" id="tab-progress" data-bs-toggle="tab" data-bs-target="#nav-content" type="button" role="tab" aria-controls="progress" aria-selected="true" data-tab="progress">진행중인 이벤트</button>
+					<button class="nav-link" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="1" aria-selected="false">공지사항</button>
 				</li>
 				<li class="nav-item" role="presentation">
-					<button class="nav-link" id="tab-winner" data-bs-toggle="tab" data-bs-target="#nav-content" type="button" role="tab" aria-controls="winner" aria-selected="true" data-tab="winner">당첨자 발표</button>
+					<button class="nav-link" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="2" aria-selected="false">자주 묻는 질문</button>
 				</li>
 				<li class="nav-item" role="presentation">
-					<button class="nav-link" id="tab-ended" data-bs-toggle="tab" data-bs-target="#nav-content" type="button" role="tab" aria-controls="ended" aria-selected="true" data-tab="ended">종료된 이벤트</button>
+					<button class="nav-link" id="tab-3" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="3" aria-selected="false">1:1 질문</button>
+				</li>
+                <li class="nav-item" role="presentation">
+					<button class="nav-link active" id="tab-4" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="4" aria-selected="true">이벤트</button>
 				</li>
 			</ul>
-			
-			<div class="tab-content pt-2" id="nav-tabContent">
-			
+		
+		<div class="body-main">
+			<div class="tab-content pt-2" id="nav-tabContent">	
+						&nbsp;
+						&nbsp;
+						&nbsp;
+						
 				<table class="table mb-0">
 					<thead>
 						<tr>
 							<td colspan="2" align="center">
-								${dto.title}
+								<b>${dto.title}</b>
 							</td>
 						</tr>
 					</thead>
