@@ -97,7 +97,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 	$.ajax(url, settings);
 }
 
-// 주문상세, 주문취소, 반품, 교환 메뉴
+// 예약상세, 예약취소, 반품, 교환 메뉴
 $(function(){
 	$("body").on("click", ".payment-dropdown", function(){
 		const $menu = $(this).next(".payment-menu");
@@ -121,8 +121,8 @@ $(function(){
 
 $(function(){
 	$(".payment-delete").click(function(){
-		// 주문 내역 삭제 - 주문자화면에 보이지 않게 설정(userDelete 컬럼을 1로 설정)
-		if(! confirm("주문내역을 삭제하시겠습니까 ?")) {
+		// 예약 내역 삭제 - 예약자화면에 보이지 않게 설정(userDelete 컬럼을 1로 설정)
+		if(! confirm("예약내역을 삭제하시겠습니까 ?")) {
 			return false;
 		}		
 		
@@ -148,7 +148,7 @@ $(function(){
 
 $(function(){
 	$(".order-details").click(function(){
-		// 주문 상세 정보
+		// 예약 상세 정보
 		let orderDetailNum = $(this).attr("data-orderDetailNum");
 		alert(orderDetailNum);
 	});
@@ -156,7 +156,7 @@ $(function(){
 
 $(function(){
 	$(".order-cancel").click(function(){
-		// 구매(주문) 취소
+		// 구매(예약) 취소
 		let orderDetailNum = $(this).attr("data-orderDetailNum");
 
 		const f = document.userOrderDetailForm;
@@ -200,7 +200,7 @@ $(function(){
 
 $(function(){
 	$('.btnUserOrderDetailUpdateOk').click(function(){
-		// 주문취소/교환요청/반품요청 완료
+		// 예약취소/교환요청/반품요청 완료
 		const f = document.userOrderDetailForm;
 
 		if(! f.stateMemo.value.trim()) {
@@ -218,21 +218,10 @@ $(function(){
 <div class="container">
 	<div class="body-container">	
 
-		<ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
-			<li class="nav-item" role="presentation">
-				<button class="nav-link active" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane-1" type="button" role="tab" aria-controls="1" aria-selected="true">주문 내역</button>
-			</li>
-			<li class="nav-item" role="presentation">
-				<button class="nav-link" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane-2" type="button" role="tab" aria-controls="2" aria-selected="false">취소/반품 내역</button>
-			</li>
-			<li class="nav-item" role="presentation">
-				<button class="nav-link" id="tab-3" data-bs-toggle="tab" data-bs-target="#tab-pane-3" type="button" role="tab" aria-controls="3" aria-selected="false">정기배송 신청내역</button>
-			</li>
-		</ul>
 		<div class="tab-content pt-2" id="myTabContent">
 			<div class="tab-pane fade show active" id="tab-pane-1" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
 				<div class="mt-3 pt-3 border-bottom">
-					<p class="fs-4 fw-semibold">주문 내역</p> 
+					<p class="fs-4 fw-semibold">예약 내역</p> 
 				</div>
 				<div class="mt-3">
 
@@ -242,7 +231,7 @@ $(function(){
 								<div class="col-6">
 								</div>
 								<div class="col-6 text-end">
-									<label class='payment-delete' title="주문내역삭제" data-orderDetailNum="${dto.bookNum}"><i class="bi bi-x-lg"></i></label>
+									<label class='payment-delete' title="예약내역삭제" data-orderDetailNum="${dto.bookNum}"><i class="bi bi-x-lg"></i></label>
 								</div>
 							</div>
 							<div class="row">
@@ -258,14 +247,14 @@ $(function(){
 										기간 : ${dto.startDate} ~ ${dto.endDate}
 									</div>
 									<div class="pt-1">
-										<label> 예약금액 : </label>
+										<label> 주문금액 : </label>
 										<label class="fw-semibold ps-3"><fmt:formatNumber value="${dto.bookPrice}"/>원</label>
 									</div>
 								</div>
 							</div>
 							<div class="mt-3 p-3 text-end">
 								
-								<button type="button" class="btn border btnReviewWriteForm" style="width: 130px;"> 리뷰쓰기 </button>
+								<button type="button" class="btn border btnReviewWriteForm" style="width: 130px;"> 리뷰작성 </button>
 								
 															
 								
@@ -306,7 +295,7 @@ $(function(){
 					</c:forEach>
 					
 					<div class="page-navigation">
-						${dataCount == 0 ? "주문 내역이 없습니다." : paging }
+						${dataCount == 0 ? "예약 내역이 없습니다." : paging }
 					</div>
 
 				</div>				
@@ -322,7 +311,7 @@ $(function(){
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="orderDetailUpdateDialogModalLabel">구매취소</h5>
+				<h5 class="modal-title" id="orderDetailUpdateDialogModalLabel">예약취소</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body pt-1">
