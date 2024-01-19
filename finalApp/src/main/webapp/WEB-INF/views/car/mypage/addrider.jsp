@@ -3,62 +3,81 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <style>
+    .container {
+        width: 1000px;
+        margin: 0 auto;
+    }
 
-.container {
-	width: 1000px;
-	margin: 0 auto;
-}
+    .riderSubmit {
+        margin: 70px auto;
+        width: 600px;
+        border: 1px solid silver;
+        padding: 30px;
+    }
 
-.riderSubmit {
-	margin: 70px auto;
-	width: 600px;
-	border: 1px solid silver;
-	padding: 30px;
-}
+    .ridertable {
+        margin: 0 auto;
+        font-size: 20px;
+        padding: 30px;
+        text-align: left;
+    }
 
-.ridertable {
-	margin: 0 auto;
-	font-size: 20px;
-	padding: 30px;
-	text-align: left;
-}
+    .ridertable tr {
+        height: 50px;
+    }
 
-.ridertable tr {
-	height: 50px;
-}
+    .ridertable td {
+        padding-left: 30px;
+    }
 
-.ridertable td {
-	padding-left: 30px;
-}
+    .tablebutton {
+        margin: 0 auto;
+    }
 
-.tablebutton {
-	margin: 0 auto;
-}
-
-input[type=date] {
-	height: 30px;
-	font-size: 18px;
-}
-	
+    input[type=date] {
+        height: 30px;
+        font-size: 18px;
+    }
 </style>
 
+<script type="text/javascript">
+    function check() {
+        const f = document.writeForm;
+        let str;
 
+        str = f.licenseDate.value.trim();
+        if (!str) {
+            alert("면허증 등록일을 입력하세요.");
+            f.licenseDate.focus();
+            return;
+        }
+
+        let mode = "${mode}";
+        if ((mode === 'write') && (!f.selectFile.value)) {
+            alert("이미지 파일을 추가하세요.");
+            f.selectFile.focus();
+            return;
+        }
+
+        f.action = "${pageContext.request.contextPath}/car/mypage/${mode}";
+        f.submit();
+    }
+</script>
 
 <div class="container">
-	<div class="riderSubmit">
-		<form name="writeForm" method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/car/mypage/addrider">
-		<input type="hidden" name="memberIdx" value="${dto.memberIdx}">
-		<table class="ridertable">
-			<tr>
+    <div class="riderSubmit">
+        <form name="writeForm" method="post" enctype="multipart/form-data">
+            <table class="ridertable write-form">
+                <tr>
 				<th>운전자</th>
 				<td>
-					${sessionScope.member.userName}
+					${dto.userName}
 				</td>
 			</tr>
 			<tr>
 				<th>생년월일</th>
 				<td>
-					${orderUser.birth}
+					${dto.birth}
 				</td>
 			</tr>
 			
@@ -71,74 +90,71 @@ input[type=date] {
 			<tr>
 				<th>면허증 사진</th>
 				<td>
-					<input type="file" id="image-input" name="licenseImageFile" accept="image/*" value="${dto.licenseImage}">
-					<br>
-					<img id="image-preview" alt="이미지 미리보기">
+					<div class="img-viewer"></div>
+					<input type="file" name="selectFile" accept="image/*" class="form-control">
 				</td>
 			</tr>
-		</table>
-		
-		<table class="tablebutton">
-		<tr align="center">
-			<td>
-				<button type="submit" class="btn" onclick="check();">${mode=='update'?'수정완료':'등록하기'}</button>
-				<button type="reset" class="btn">다시입력</button>
-				<button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/car/mypage/rider';">${mode=='update'?'수정취소':'등록취소'}</button>
-				<c:if test="${mode=='update'}">
-					<input type="hidden" name="licenseDate" value="${dto.licenseDate}">
-					<input type="hidden" name="licenseImageFile" value="${dto.licenseImage}">
-				</c:if>
-			</td>
-		</tr>
-	</table>
-		
-		</form>
-	</div>
+			
+            </table>
+            <table class="tablebutton">
+                <tr align="center">
+                    <td>
+                        <button type="button" class="btn" onclick="check();">${mode=='update'?'수정완료':'등록하기'}</button>
+                        <button type="reset" class="btn">다시입력</button>
+                        <button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/car/mypage/rider';">${mode=='update'?'수정취소':'등록취소'}</button>
+                        <c:if test="${mode=='update'}">
+                            <input type="hidden" name="licenseDate" value="${dto.licenseDate}">
+                            <input type="hidden" name="licenseImage" value="${dto.licenseImage}">
+                        </c:if>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </div>
-<script>
-        document.getElementById('image-input').addEventListener('change', function (event) {
-            const input = event.target;
-            const file = input.files[0];
-
-            if (file) {
-                // FileReader 객체를 사용하여 이미지 파일을 미리보기
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    const preview = document.getElementById('image-preview');
-                    preview.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    </script>
-
 
 <script type="text/javascript">
+    $(function() {
+        let img = "${dto.licenseImage}";
 
-function check() {
-    const f = document.writeForm;
-    
- 	// 면허증 발급일 유효성 검사
-    const licenseDate = f.licenseDate.value;
-    if (! licenseDate) {
-        alert("면허증 발급일을 입력하세요.");
-        f.licenseDate.focus();
-        return false;
-    }
-	
-	// 면허증 사진 유효성 검사 (파일 업로드 필드)
-    const licenseImage = f.licenseImage;
-    if (! licenseImage.value) {
-        alert("면허증 사진을 등록하세요.");
-        licenseImage.focus();
-        return false;
-    }
-	
-    f.action = "${pageContext.request.contextPath}/car/mypage/rider";
+        if (img) {
+            img = "${pageContext.request.contextPath}/uploads/car/mypage/" + img;
+            $(".write-form .img-viewer").empty();
+            $(".write-form .img-viewer").css("background-image", "url(" + img + ")");
+        }
 
-    
-    f.submit();
-}
+        $(".write-form .img-viewer").click(function() {
+            $("form[name=writeForm] input[name=selectFile]").trigger("click");
+        });
 
+        $("form[name=writeForm] input[name=selectFile]").change(function() {
+            let file = this.files[0];
 
+            if (!file) {
+                $(".write-form .img-viewer").empty();
+
+                if (img) {
+                    img = "${pageContext.request.contextPath}/uploads/car/mypage/" + img;
+                } else {
+                    img = "${pageContext.request.contextPath}/resources/images/campingcar/casper.jpg";
+                }
+
+                $(".write-form .img-viewer").css("background-image", "url(" + img + ")");
+                return false;
+            }
+
+            if (!file.type.match("image.*")) {
+                this.focus();
+                return false;
+            }
+
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                $(".write-form .img-viewer").empty();
+                $(".write-form .img-viewer").css("background-image", "url(" + e.target.result + ")");
+            };
+
+            reader.readAsDataURL(file);
+        });
+    });
 </script>

@@ -27,7 +27,7 @@ public class CarReservationServiceImpl implements CarReservationService {
 			Calendar cal = Calendar.getInstance();
 			String y =String.format("%04d", cal.get(Calendar.YEAR));
 			String m = String.format("%02d", (cal.get(Calendar.MONTH) + 1));
-			String d = String.format("%02d", cal.get(Calendar.DATE));
+			String d = String.format("%03d", cal.get(Calendar.DATE) * 7);
 					
 			String preNumber = y + m + d;
 			String savedPreNumber = "0";
@@ -64,7 +64,7 @@ public class CarReservationServiceImpl implements CarReservationService {
 		
 		try {
 			
-			String orderNum = carReservationOrderNumber();
+			// String orderNum = carReservationOrderNumber();
 			
 			// 주문 정보 저장
 			mapper.insertCarReservation(dto);
@@ -85,7 +85,7 @@ public class CarReservationServiceImpl implements CarReservationService {
 			dto.setMemberIdx(dto.getMemberIdx());
 			dto.setUserId(dto.getUserId());
 			// dto.setOrderDate(dto.getOrderDate());
-			dto.setOrderNum(orderNum);
+			// dto.setOrderNum(orderNum);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

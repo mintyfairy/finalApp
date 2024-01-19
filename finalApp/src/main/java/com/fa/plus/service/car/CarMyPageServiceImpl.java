@@ -19,10 +19,12 @@ public class CarMyPageServiceImpl implements CarMyPageService {
 	public void insertRider(CarMyPage dto, String pathname) throws Exception {
 		try {
 			// 면허증 이미지
-			String filename = fileManager.doFileUpload(dto.getLicenseImageFile(), pathname);
-			dto.setLicenseImage(filename);
-			
-			mapper.insertRider(dto);
+			String saveFilename = fileManager.doFileUpload(dto.getSelectFile(), pathname);
+			if (saveFilename != null) {
+				dto.setLicenseImage(saveFilename);
+
+				mapper.insertRider(dto);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -34,33 +36,34 @@ public class CarMyPageServiceImpl implements CarMyPageService {
 	public void updateRider(CarMyPage dto, String pathname) throws Exception {
 		try {
 			// 썸네일 이미지
-			String filename = fileManager.doFileUpload(dto.getLicenseImageFile(), pathname);
-				if(filename != null) {
+			String saveFilename = fileManager.doFileUpload(dto.getSelectFile(), pathname);
+				if(saveFilename != null) {
 					// 이전 파일 지우기
 					if(dto.getLicenseImage().length() != 0) {
 					fileManager.doFileDelete(dto.getLicenseImage(), pathname);
 				}
-							dto.setLicenseImage(filename);
+							dto.setLicenseImage(saveFilename);
 						}
 			
 			mapper.updateRider(dto);
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		}
 		
 	}
 
 	@Override
-	public CarMyPage riderInfo(String userId) {
+	public CarMyPage riderInfo(long memberIdx) {
 		CarMyPage dto = null;
 		
 		try {
-			dto = mapper.riderInfo(userId);
+			dto = mapper.riderInfo(memberIdx);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		return dto;
 	}
-	
 	
 }

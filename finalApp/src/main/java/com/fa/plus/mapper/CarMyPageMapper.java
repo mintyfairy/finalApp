@@ -8,7 +8,7 @@ public interface CarMyPageMapper {
 	public void insertRider(CarMyPage dto) throws SQLException;
 	public void updateRider(CarMyPage dto) throws SQLException;
 	
-	public CarMyPage riderInfo(String userId) throws SQLException;
+	public CarMyPage riderInfo(long memberIdx) throws SQLException;
 	
 	
 }

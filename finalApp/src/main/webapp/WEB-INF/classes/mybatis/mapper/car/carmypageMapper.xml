@@ -14,16 +14,25 @@
 			WHERE memberIdx = #{memberIdx}
 	</update>
 	
-	
-	
 	<!-- 운전자 정보 보기 -->
-	<!-- 
-	<select id="riderInfo" parameterType="String" resultType="com.fa.plus.domain.car.CarMyPage">
-		SELECT r.memberIdx, licenseDate, licenseImage, m2.birth, m.userId
+	<select id="riderInfo" parameterType="Long" resultType="com.fa.plus.domain.car.CarMyPage">
+		SELECT r.memberIdx, TO_CHAR(birth, 'YYYY-MM-DD') licenseDate, licenseImage, TO_CHAR(m2.birth, 'YYYY-MM-DD') birth, m.userId, m.userName
 		FROM license r
 		JOIN member1 m ON r.memberIdx = m.memberIdx
 		JOIN member2 m2 ON m.userId = m2.userId
-		WHERE userId = #{userId}
-	</select> -->
-	 
+		WHERE r.memberIdx = #{memberIdx}
+	</select>
+	
+	<select id="countPayment" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM carReservation
+		WHERE memberIdx = #{memberIdx} AND userDelete = 0
+	</select>
+	<!-- 
+	<select id="listPayment" parameterType="map" resultType="com.fa.plus.domain.car.CarReservation">
+		SELECT cr.orderNum, memberIdx, orderDate, totalMoney, discount, payment, start_date, end_date,
+		carNum, carName, thumbnail, weekCost, wkndCost, 
+		orderState
+	</select>
+	  -->
 </mapper>

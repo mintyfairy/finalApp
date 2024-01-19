@@ -105,7 +105,7 @@
 	</div>
 
 <body>
-<input type="hidden" name="birth" value="${orderUser.birth}">
+
 
 
 <button id="registerButton" type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/car/mypage/addrider';">${dto.licenseDate != null?'수정하기':'등록하기'}</button>
@@ -119,16 +119,18 @@
 		<div class="licence">
 			<c:if test="${dto.licenseDate == null }">
 				<div class="container">
-					<p>등록된 정보가 없습니다. ${orderUser.birth}</p>
+					<p>등록된 정보가 없습니다.</p>
 				</div>
 			</c:if>
-			<c:if test="${dto.licenseDate != null }">
+			<c:if test="${not empty dto and not empty dto.licenseDate}">
 				<div class="container">
 					<div class="rider">
-						<p>이름 : ${sessionScope.member.userName}</p>
-						<p>생년월일 : ${orderUser.birth}</p>
+						<p>이름 : ${dto.userName}</p>
+						<p>생년월일 : ${dto.birth}</p>
 						<p>면허 발급 일자 : ${dto.licenseDate}</p>
-						<p>면허증 이미지 : ${dto.licenseImage}</p>
+						<c:if test="${not empty dto and not empty dto.licenseImage}">
+							<p>면허증 이미지 : 이미지 업로드 <span style="font-weight: 600">완료</span></p>
+						</c:if>
 					</div>
 				</div>
 			</c:if>

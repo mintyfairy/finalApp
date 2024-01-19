@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fa.plus.domain.Member;
 import com.fa.plus.domain.SessionInfo;
@@ -35,7 +34,7 @@ public class CarMypageController {
 	
 	@RequestMapping("rider")
 	public String rider(
-			CarMyPage dto,
+			
 			HttpSession session,
 			Model model) throws Exception {	
 		
@@ -43,12 +42,15 @@ public class CarMypageController {
 			if(info == null) {
 				return "redirect:/member/login";
 			}
-			//Member orderUser = memberService.findById(info.getMemberIdx());
-			//CarMyPage riderInfo = service.riderInfo(orderUser.getUserId());
+			// CarMyPage dto=new CarMyPage();
+			// dto.setLicenseDate(dto.getLicenseDate());
+			// Member orderUser = memberService.findById(info.getMemberIdx());
+			// CarMyPage riderInfo = service.riderInfo(info.getMemberIdx());
+			CarMyPage dto = service.riderInfo(info.getMemberIdx());
 			
 			model.addAttribute("dto", dto);
-			//model.addAttribute("orderUser", orderUser);
-			//model.addAttribute("riderInfo", riderInfo);
+			// model.addAttribute("orderUser", orderUser);
+			// model.addAttribute("riderInfo", riderInfo);
 		
 		return ".car.mypage.rider";
 		
@@ -78,10 +80,10 @@ public class CarMypageController {
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		
 		String root = session.getServletContext().getRealPath("/");
-		String pathname = root + "uploads" + File.separator + "car/mypage";
+		String pathname = root + "uploads" + File.separator + "mypage";
 		
 		try {
-			dto.setUserId(info.getUserId());
+			dto.setMemberIdx(info.getMemberIdx());
 			service.insertRider(dto, pathname);
 		} catch (Exception e) {
 		}
@@ -90,16 +92,16 @@ public class CarMypageController {
 	}
 	
 	@GetMapping("update")
-	public String updateForm(@RequestParam String userId,
+	public String updateForm(
 			HttpSession session,
 			Model model) throws Exception {
-		
-		CarMyPage dto = service.riderInfo(userId);
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		CarMyPage dto = service.riderInfo(info.getMemberIdx());
 		
 		model.addAttribute("dto", dto);
 		model.addAttribute("mode", "update");
 		
-		return ".car.mypage.rider";
+		return ".car.mypage.addrider";
 	}
 	
 	@PostMapping("update")

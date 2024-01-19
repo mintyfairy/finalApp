@@ -8,16 +8,11 @@ public class CarMyPage {
 	private String licenseDate;
 	private String licenseImage;
 	
-	private MultipartFile licenseImageFile;
+	private MultipartFile selectFile;
 	
 	private String birth;
-	public MultipartFile getLicenseImageFile() {
-		return licenseImageFile;
-	}
-	public void setLicenseImageFile(MultipartFile licenseImageFile) {
-		this.licenseImageFile = licenseImageFile;
-	}
 	private String userId;
+	private String userName;
 	
 	public long getMemberIdx() {
 		return memberIdx;
@@ -37,6 +32,12 @@ public class CarMyPage {
 	public void setLicenseImage(String licenseImage) {
 		this.licenseImage = licenseImage;
 	}
+	public MultipartFile getSelectFile() {
+		return selectFile;
+	}
+	public void setSelectFile(MultipartFile selectFile) {
+		this.selectFile = selectFile;
+	}
 	public String getBirth() {
 		return birth;
 	}
@@ -48,6 +49,12 @@ public class CarMyPage {
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	
 	
