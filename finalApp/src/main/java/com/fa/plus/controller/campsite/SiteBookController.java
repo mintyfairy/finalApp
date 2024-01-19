@@ -121,14 +121,14 @@ public class SiteBookController {
 			
 			mapForRoomReview.put("detailNum", list.get(n).getDetailNum());
 			
-			list.get(n).setRoomsiteReviewList(siteservice.listSiteReivew(mapForRoomReview));
+			list.get(n).setRoomsiteReviewList(siteservice.listSiteGoodReivew(mapForRoomReview));
 		}
 		List<Site> listSiteFile=adminService.listSiteFile(num);
 		// 전체 페이지 수
 		int reviewCount=siteservice.dataCountReview(map);
 		dataCount = adminService.dataCountRoom(map);
 		model.addAttribute("reviewCount", reviewCount);
-		List<SiteReview> siteReviewList=siteservice.listSiteReivew(map);
+		List<SiteReview> siteReviewList=siteservice.listSiteGoodReivew(map);
 		model.addAttribute("siteReviewList", siteReviewList);
 		model.addAttribute("list", list);
 		model.addAttribute("listSiteFile", listSiteFile);

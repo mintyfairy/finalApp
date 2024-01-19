@@ -80,7 +80,7 @@ public interface SiteMapper {
 	public void insertReviewFile(SiteReview dto) throws SQLException;
 	//리뷰 리스트 1.(memberIdx 존재시) 유저의 예약리스트  2 업체(siteNum) 3 방(detailNum)
 	public List<SiteReview> listSiteReivew(Map<String, Object> map);
-	
+	public List<SiteReview> listSiteGoodReivew(Map<String, Object> map);
 	
 	// 리뷰수  1 유저의 리스트 2 업체 3 방
 	public int dataCountReview(Map<String, Object> map) ;

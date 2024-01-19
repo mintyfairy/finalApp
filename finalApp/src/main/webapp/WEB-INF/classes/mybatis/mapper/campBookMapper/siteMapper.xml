@@ -144,20 +144,39 @@
 		select BOOKNUM,CONTENT,MEMBERIDX,SCORE,to_char(REG_DATE,'yyyy-mm-dd') REG_DATE,ANSWER,ANSWERIDX,DETAILNUM,SITENUM,fileList
 		 ,username,adminname
 		 from sitereview
- 	     JOIN (select memberIdx uidx,username from member1 ) m1 ON uidx = memberIdx
- 		 JOIN (select memberIdx aidx,username adminname from member1 ) m2 ON aidx = memberIdx
+ 	   left  JOIN (select memberIdx uidx,username from member1 ) m1 ON uidx = memberIdx
+ 		left	 JOIN (select memberIdx aidx,username adminname from member1 ) m2 ON aidx = ANSWERIDX
 		 LEFT OUTER JOIN (
 					SELECT BOOKNUM bnum, LISTAGG(filename, ',') WITHIN GROUP(ORDER BY srpicNum) fileList
 		            FROM sitereviewpic
 		            GROUP BY booknum	
 				) f ON BOOKNUM=bnum	
-		  order by sitereview.booknum desc
-		  offset #{offset} rows fetch first #{size} rows only
+		 
 		<where>
 			enabled = 0
 			<include refid="where-list-review"/>
 		</where>
+		  order by sitereview.booknum desc
+		  offset #{offset} rows fetch first #{size} rows only
+	</select>
+	<select id="listSiteGoodReivew" parameterType="map" resultType="com.fa.plus.domain.site.SiteReview">
+		select BOOKNUM,CONTENT,MEMBERIDX,SCORE,to_char(REG_DATE,'yyyy-mm-dd') REG_DATE,ANSWER,ANSWERIDX,DETAILNUM,SITENUM,fileList
+		 ,username,adminname
+		 from sitereview
+ 	   left  JOIN (select memberIdx uidx,username from member1 ) m1 ON uidx = memberIdx
+ 		left	 JOIN (select memberIdx aidx,username adminname from member1 ) m2 ON aidx = ANSWERIDX
+		 LEFT OUTER JOIN (
+					SELECT BOOKNUM bnum, LISTAGG(filename, ',') WITHIN GROUP(ORDER BY srpicNum) fileList
+		            FROM sitereviewpic
+		            GROUP BY booknum	
+				) f ON BOOKNUM=bnum	
 		 
+		<where>
+			enabled = 0
+			<include refid="where-list-review"/>
+		</where>
+		   order by score desc
+		  fetch first 5 rows only
 	</select>
 	<select id="dataCountReview" parameterType="map" resultType="Integer">
 		select NVL(COUNT(*), 0)

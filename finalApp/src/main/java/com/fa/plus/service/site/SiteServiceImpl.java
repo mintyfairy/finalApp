@@ -223,6 +223,19 @@ public class SiteServiceImpl implements SiteService {
 
 		return list;
 	}
+	@Override
+	public List<SiteReview> listSiteGoodReivew(Map<String, Object> map) {
+		List<SiteReview> list = null;
+		try {
+			list = mapper.listSiteGoodReivew(map);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw e;
+		}
+		
+		return list;
+	}
 
 	@Override
 	public int dataCountReview(Map<String, Object> map) {
