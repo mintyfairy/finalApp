@@ -217,6 +217,7 @@ ul {
 
 .brand_search_list {
 	display: flex;
+	flex-wrap: wrap;
 }
 
 .brand_search_list .cate_item {
@@ -233,6 +234,13 @@ ul {
 	display: inline-block;
 	height: 100%;
 	line-height: 34px;
+}
+
+.brand_search_list .cate_item p {
+    margin-bottom: 9px;
+    font-size: 14px;
+    color: #7e7e7e;
+    cursor: pointer;
 }
 
 .menu-item {
