@@ -263,7 +263,7 @@ $(function(){
 							<tr valign="middle">
 								<td>${dto.productNum}</td>
 								<td class="product-subject left">
-									<img src="${pageContext.request.contextPath}/uploads/product/${dto.thumbnail}">
+									<img src="${pageContext.request.contextPath}/uploads/shop/${dto.thumbnail}">
 									<a href="#"><label>${ dto.productName }</label></a>
 									<input type="hidden" value="${ dto.productNum }">
 								</td>
@@ -528,11 +528,11 @@ $(function() {
 			out += "</tr>";
 			out += "<tr>";
 			out += "<td>썸네일 : </td>";
-			out += "<td>" + data.thumbnail + "</td>";
+			out += "<td>" + "<img src='${pageContext.request.contextPath}/uploads/shop/" + data.thumbnail + "' width='100' height='100'></td>";
 			out += "</tr>";
 			out += "<tr>";
 			out += "<td>추가사진 : </td>";
-			out += "<td>" + data.thumbnailFile + "</td>";
+			out += "<td>" + "<img src='${pageContext.request.contextPath}/uploads/shop/" + data.thumbnailFile + "'></td>";
 			out += "</tr>";
 			out += "</tbody>";
 			out += "</table>";

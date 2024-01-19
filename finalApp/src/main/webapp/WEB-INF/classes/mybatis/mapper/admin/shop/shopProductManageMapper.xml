@@ -131,7 +131,7 @@
 		SELECT a.*, brandName 
 		FROM 
 	        (SELECT p.productNum, categoryNum, 
-	        md, starter, special, productName, 
+	        md, starter, special, productName, thumbnail, 
 	        price, discountRate, productShow, reg_date, 
 	        TO_CHAR(updateDate, 'YYYY-MM-DD') updateDate, 
 			NVL(totalStock, 0) totalStock, p.brandNum 
