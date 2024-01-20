@@ -3,11 +3,27 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <style>
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color: #333;
+    box-sizing: border-box;
+}
+*, *::after, *::before { box-sizing: border-box; }
+
+ol,
+ul {
+    list-style: none;
+}
+
 #wrap {
   width: 1080px;
   box-sizing: border-box;
   margin: 50px auto;
 }
+
+
 
 #wrap2 {
   width: 1000px;
@@ -51,6 +67,8 @@
   height: 350px;
   box-sizing: border-box;
   border: none;
+  
+ 
 }
 
 .thumbnail > img:first-child {
@@ -58,11 +76,15 @@
   width: 100%;
   background-repeat : no-repeat; 
   background-size : cover 
+  
 }
+
 
 .carName-liked {
   justify-content: center;
 }
+
+
 
 .fa-heart {
   font-size: 25px;
@@ -96,6 +118,8 @@
   border: gray;
   display: flex;
   flex-wrap: wrap;
+  
+  
 }
 
 .calendar > form {
@@ -138,6 +162,8 @@ input[type=date] {
   text-align: center;
   border-radius: 10px;
   margin-top: 5px;
+  
+  
 }
 
 #date {
@@ -201,6 +227,7 @@ input[type='date']:valid::before {
   margin: 10px 0 20px 0;
 }
 
+
 button[name=reservation] {
   background-color: #275efe;
   font-size: 15px;
@@ -226,8 +253,9 @@ button[name=reservation]:hover {
   box-sizing: border-box;
   background-color: white;
   margin: 0 auto;
-  padding-top: 25px;
+  margin-top: 100px;
 }
+
 
 .available-size {
   display: flex;
@@ -274,6 +302,15 @@ button[name=reservation]:hover {
   margin: 15px;
   padding-top: 8px;
 }
+
+/*
+.option-detail > div > img {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 10px;
+  margin-right: 100px;
+}
+*/
 
 .option-detail > div > img{
   width: 50px;
@@ -571,7 +608,6 @@ table {
 	/* margin: 0 auto; */
 	width: 100%;	
 }
-
 .body-container { 
 	margin-bottom: 50px;
 	max-width: 1000px;
@@ -583,25 +619,37 @@ table {
 	justify-content: space-between;
 }
 
-/* 탭 css */
-.nav-tabs .nav-link {
-	min-width: 170px;
-	background: #f3f5f7;
-	border-radius: 0;
-	border-right: 1px solid #dbdddf;
-	color: #333;
-	font-weight: 600;
+ul.tabs{
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  display: flex;
 }
-.nav-tabs .nav-link.active {
-	background: #3d3d4f;
-	color: #fff;
+ul.tabs li{
+  width: 200px;
+  background: none;
+  color: #222;
+  display: inline-block;
+  padding: 10px 15px;
+  cursor: pointer;
+  text-align: center;
 }
-.tab-pane { min-height: 300px; }
 
-.detail-wrap {
-  width: 1080px;
-  clear: both;
-  margin: 150px auto 20px;
+ul.tabs li.current{
+  background: #ededed;
+  color: #222;
+  font-weight: 600;
+}
+
+.tab-content{
+  display: none;
+  background: #ededed;
+  padding: 15px;
+}
+
+.tab-content.current{
+	width: 100%;
+  display: inherit;
 }
 
 
@@ -648,6 +696,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 
 
 <div id="wrap">
+
   <div class="first-container">
     <div class="thumbnail-addImages">
     <form method="post" enctype="multipart/form-data">
@@ -741,154 +790,187 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
           
       </div>
     </div>
+    <hr style="margin-bottom: 150px; margin-top: 150px;">
 </div>
 
-<div class="detail-wrap">
-		<ul class="nav nav-tabs" id="myTab" role="tablist">
-			<li class="nav-item" role="presentation">
-				<button class="nav-link active" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane-1" type="button" role="tab" aria-controls="1" aria-selected="true">상세정보</button>
-			</li>
-			<li class="nav-item" role="presentation">
-				<button class="nav-link" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane-2" type="button" role="tab" aria-controls="2" aria-selected="false">문의사항 <span class="title-qnaCount">(1)</span></button>
-			</li>
-			<li class="nav-item" role="presentation">
-				<button class="nav-link" id="tab-3" data-bs-toggle="tab" data-bs-target="#tab-pane-3" type="button" role="tab" aria-controls="3" aria-selected="false">규정 및 주의사항</button>
-			</li>
-		</ul>
-		
-		<div class="tab-content pt-2" id="myTabContent">
-			<div class="tab-pane fade show active" id="tab-pane-1" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
-				<!-- 상세정보 시작 -->
-				
-				<div class="second-container">
-				    <div class="available-size">
-				      <div class="available-mini">
-				        <h5><i class="fa-solid fa-user-group"></i>&nbsp;탑승가능인원</h5>
-				        <p>${dto.carMaxNum} 인</p>
-				      </div>
-				      <br>
-				      <div class="available-mini">
-				        <h5><i class="fa-solid fa-campground"></i>&nbsp;취침가능인원</h5>
-				        <p>${dto.sleepNum} 인</p>
-				      </div>
-				      <div class="available-mini">
-				        <h5><i class="fa-solid fa-dog"></i>&nbsp;반려동물 동반</h5>
-				        <p>
-				        <c:if test="${dto.petOrNot == 1}">가능</c:if>
-				        <c:if test="${dto.petOrNot != 1}">불가능</c:if>
-				        </p>
-				      </div>
-				     </div>
-				</div>
-				
-				<div style="padding-top: 20px; ">
-					<div class="detail_img">
-						${dto.content}
-					</div>
-				    <div class="car-options">
-				      <h4 style="padding: 20px 90px;">보유 옵션</h4>
-				      <div class="option-detail">
-				      	<div>
-				        	<c:if test="${dto.toilet != 0}">
-				          		<p>화장실</p>
-				          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/toilet.png" alt="toilet">
-				          	</c:if>
-				        </div>
-				        <div>
-				        	<c:if test="${dto.shower == 1}">
-				          		<p>샤워실</p>
-				          		
-				          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/shower.png" alt="shower">
-				          	</c:if>
-				        </div>
-				        <div>
-				        	<c:if test="${dto.bed != 0}">
-				          		<p>침대</p>
-				          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/bed.png" alt="bed">
-				          	</c:if>
-				        </div>
-				        <div>
-				        	<c:if test="${dto.sink == 1}">
-				          		<p>싱크대</p>
-				          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/sink.png" alt="sink">
-				        	</c:if>
-				        </div>
-				        
-				        <div>
-				        	<c:if test="${dto.microwave == 1}">
-				          		<p>전자레인지</p>
-				           		<img src="${pageContext.request.contextPath}/resources/images/campingcar/microwave.png" alt="microwave">
-				        	</c:if>
-				        </div>
-				        <div>
-				        	<c:if test="${dto.frige == 1}">
-				          		<p>냉장고</p>
-				          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/refrigerator.png" alt="refrigerator">
-				        	</c:if>
-				        </div>
-				        <div>
-				        	<c:if test="${dto.desk == 1}">
-				          		<p>테이블</p>
-				          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/table.png" alt="table">
-				        	</c:if>
-				        </div>
-				        <div>
-				        	<c:if test="${dto.waterHeater == 1}">
-				          		<p>온수기</p>
-				          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/waterHeater.png" alt="waterHeater">
-				        	</c:if>
-				        </div>
-				        <div>
-				        	<c:if test="${dto.tv == 1}">
-				          		<p>TV</p>
-				          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/tv.png" alt="tv">
-				        	</c:if>
-				        </div>
-				        <div>
-				        	<c:if test="${dto.airCondition == 1}">
-				          		<p>에어컨</p>
-				          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/airconditioner.png" alt="airconditioner">
-				        	</c:if>
-				        </div>
-				        <div>
-				        	<c:if test="${dto.heater == 1}">
-				          		<p>무시동히터</p>
-				          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/heater.png" alt="heater">
-				        	</c:if>
-				        </div>
-				        <div>
-				        	<c:if test="${dto.powerbank == 1}">
-				          		<p>배터리</p>
-				          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/battery.png" alt="battery">
-				        	</c:if>
-				        </div>
-				        <div>
-				        	<c:if test="${dto.gasStove == 1}">
-				          		<p>가스레인지</p>
-				          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/gasStove.png" alt="gasStove">
-				        	</c:if>
-				        </div>
-				      </div>
-				    </div>
-				
-				</div>
-				
-				<!-- 상세정보 끝 -->
+<div>
+		<div class="detail_wrap">
+			<div id="tabs1" class="detail_tab detail_tab1">
+				<ul class="tab_list">
+					<li class="tab_item" onclick="detail();"><span>상세정보</span></li>
+					<li class="tab_item" onclick="question();"><span>상품문의 [1개]</span></li>
+					<li class="tab_item" onclick="as();"><span>규정 및 주의사항</span></li>
+				</ul>
 			</div>
-			<div class="tab-pane fade" id="tab-pane-2" role="tabpanel" aria-labelledby="tab-2" tabindex="0">
-				<!-- 문의사항 시작 -->
+			
+			<div>
+			
+			</div>
+			
+			
+			
+			
+			
+			
+			
+			
+			<div class="second-container">
+			    <div class="available-size">
+			      <div class="available-mini">
+			        <h5><i class="fa-solid fa-user-group"></i>&nbsp;탑승가능인원</h5>
+			        <p>${dto.carMaxNum} 인</p>
+			      </div>
+			      <br>
+			      <div class="available-mini">
+			        <h5><i class="fa-solid fa-campground"></i>&nbsp;취침가능인원</h5>
+			        <p>${dto.sleepNum} 인</p>
+			      </div>
+			      <div class="available-mini">
+			        <h5><i class="fa-solid fa-dog"></i>&nbsp;반려동물 동반</h5>
+			        <p>
+			        <c:if test="${dto.petOrNot == 1}">가능</c:if>
+			        <c:if test="${dto.petOrNot != 1}">불가능</c:if>
+			        </p>
+			      </div>
+			     </div>
+			     </div>
+			<br>
+			 <hr style="margin-top: 30px; margin-bottom: 50px; border:none;">
+				
+				<div class="detail_img">
+					${dto.content}
+				</div>
+				
+			    <div class="car-options">
+			      <h4 style="padding: 20px 90px;">보유 옵션</h4>
+			      <div class="option-detail">
+			      	<div>
+			        	<c:if test="${dto.toilet != 0}">
+			          		<p>화장실</p>
+			          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/toilet.png" alt="toilet">
+			          	</c:if>
+			        </div>
+			        <div>
+			        	<c:if test="${dto.shower == 1}">
+			          		<p>샤워실</p>
+			          		
+			          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/shower.png" alt="shower">
+			          	</c:if>
+			        </div>
+			        <div>
+			        	<c:if test="${dto.bed != 0}">
+			          		<p>침대</p>
+			          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/bed.png" alt="bed">
+			          	</c:if>
+			        </div>
+			        <div>
+			        	<c:if test="${dto.sink == 1}">
+			          		<p>싱크대</p>
+			          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/sink.png" alt="sink">
+			        	</c:if>
+			        </div>
+			        
+			        <div>
+			        	<c:if test="${dto.microwave == 1}">
+			          		<p>전자레인지</p>
+			           		<img src="${pageContext.request.contextPath}/resources/images/campingcar/microwave.png" alt="microwave">
+			        	</c:if>
+			        </div>
+			        <div>
+			        	<c:if test="${dto.frige == 1}">
+			          		<p>냉장고</p>
+			          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/refrigerator.png" alt="refrigerator">
+			        	</c:if>
+			        </div>
+			        <div>
+			        	<c:if test="${dto.desk == 1}">
+			          		<p>테이블</p>
+			          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/table.png" alt="table">
+			        	</c:if>
+			        </div>
+			        <div>
+			        	<c:if test="${dto.waterHeater == 1}">
+			          		<p>온수기</p>
+			          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/waterHeater.png" alt="waterHeater">
+			        	</c:if>
+			        </div>
+			        <div>
+			        	<c:if test="${dto.tv == 1}">
+			          		<p>TV</p>
+			          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/tv.png" alt="tv">
+			        	</c:if>
+			        </div>
+			        <div>
+			        	<c:if test="${dto.airCondition == 1}">
+			          		<p>에어컨</p>
+			          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/airconditioner.png" alt="airconditioner">
+			        	</c:if>
+			        </div>
+			        <div>
+			        	<c:if test="${dto.heater == 1}">
+			          		<p>무시동히터</p>
+			          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/heater.png" alt="heater">
+			        	</c:if>
+			        </div>
+			        <div>
+			        	<c:if test="${dto.powerbank == 1}">
+			          		<p>배터리</p>
+			          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/battery.png" alt="battery">
+			        	</c:if>
+			        </div>
+			        <div>
+			        	<c:if test="${dto.gasStove == 1}">
+			          		<p>가스레인지</p>
+			          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/gasStove.png" alt="gasStove">
+			        	</c:if>
+			        </div>
+			      </div>
+				<hr style="margin-top: 20px; margin-bottom: 50px; border:none;">
+			    </div>
+			    
+			<div class="detail_tab detail_tab2">
+				<ul class="tab_list">
+					<li class="tab_item" onclick="detail();"><span>상세정보</span></li>
+					<li class="tab_item" onclick="question();"><span>상품문의 [1개]</span></li>
+					<li class="tab_item" onclick="as();"><span>규정 및 주의사항</span></li>
+				</ul>
+			</div>
+			
+			<div class="detail_qna">
+				<div class="qna_table">
+					<table summary="번호, 평점, 내용, 작성자, 작성일, 조회">
+						<colgroup>
+							<col width="40">
+							<col width="40">
+							<col width="*">
+							<col width="95">
+							<col width="110">
+							<col width="40">
+						</colgroup>
+					</table>
+				</div>
 				<div class="review_write mt-3 p-2 text-end">
 					<button type="button" class="btnMyQuestion btn btn-dark"> 내 Q&amp;A 보기  </button>
 					<button type="button" class="btnQuestion btn btn-dark"> 캠핑카 Q&amp;A 작성 </button>
 				</div>
-				<div class="list-question" style="padding-top: 20px;">
+				<div class="mt-1 p-2 list-question">
 				</div>
-				<!-- 문의사항 끝 -->
-			</div>
-			<div class="tab-pane fade" id="tab-pane-3" role="tabpanel" aria-labelledby="tab-3" tabindex="0">
-				<!-- 규정 및 주의사항 시작 -->
 				
-				<div style="padding-top: 20px;">
+			</div>
+			
+			<div class="detail_tab detail_tab3">
+				<ul class="tab_list">
+					<li class="tab_item" onclick="detail();"><span>상세정보</span></li>
+					<li class="tab_item" onclick="question();"><span>상품문의 [1개]</span></li>
+					<li class="tab_item" onclick="as();"><span>규정 및 주의사항</span></li>
+				</ul>
+			</div>
+			
+			<hr style="margin-top: 20px; margin-bottom: 40px; border:none;">
+			<div id="wrap">
+				<div class="container">
+			  <div class="detail_as">
+			    <div class="as_table">
 			        <table>
 			            <colgroup>
 			                <col width="250">
@@ -946,12 +1028,38 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 			                </tr>
 			            </tbody>
 			        </table>
-				</div>
-			
-				<!-- 규정 및 주의사항 끝 -->
+			    </div>
+			</div>
+			    </div>
 			</div>
 		</div>
 </div>
+	
+  
+  
+  
+  
+  
+  
+
+
+ 
+ 
+
+
+<a href="https://www.flaticon.com/kr/free-icons/" title="화장실 아이콘">화장실 아이콘  제작자: Creaticca Creative Agency - Flaticon</a>
+<a href="https://www.flaticon.com/kr/free-icons/" title="화장실 아이콘">화장실 아이콘  제작자: Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/kr/free-icons/" title="침실 아이콘">침실 아이콘  제작자: Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/kr/free-icons/" title="싱크대 아이콘">싱크대 아이콘  제작자: Eucalyp - Flaticon</a>
+<a href="https://www.flaticon.com/kr/free-icons/" title="마이크로파 아이콘">마이크로파 아이콘  제작자: Dreamstale - Flaticon</a>
+<a href="https://www.flaticon.com/kr/free-icons/" title="냉장고 아이콘">냉장고 아이콘  제작자: pojok d - Flaticon</a>
+<a href="https://www.flaticon.com/kr/free-icons/" title="표 아이콘">표 아이콘  제작자: itim2101 - Flaticon</a>
+<a href="https://www.flaticon.com/kr/free-icons/" title="온수기 아이콘">온수기 아이콘  제작자: manshagraphics - Flaticon</a>
+<a href="https://www.flaticon.com/kr/free-icons/tu-tv" title="tu tv 아이콘">Tu tv 아이콘  제작자: Icon.verse - Flaticon</a>
+<a href="https://www.flaticon.com/kr/free-icons/-" title="공기 조절 아이콘">공기 조절 아이콘  제작자: Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/kr/free-icons/" title="히터 아이콘">히터 아이콘  제작자: Linector - Flaticon</a>
+<a href="https://www.flaticon.com/kr/free-icons/" title="배터리 아이콘">배터리 아이콘  제작자: kmg design - Flaticon</a>
+
 
 <div class="modal hidden" id="questionDialogModal" tabindex="-1" 
 	data-bs-backdrop="static" data-bs-keyboard="false"
@@ -1001,124 +1109,39 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 </div>
 
 
-<script type="text/javascript">
-// 주중 및 주말 요금 설정
-const weekdayRate = ${dto.weekCost};
-const weekendRate = ${dto.wkndCost};
-const discountRate = ${dto.discountRate}; // 할인율 변수 추가
 
-function calculateFee(startDate, endDate) {
-    const startDateTime = new Date(startDate).getTime();
-    const endDateTime = new Date(endDate).getTime();
-    const dayDifference = Math.ceil((endDateTime - startDateTime) / (1000 * 60 * 60 * 24));
 
-    const dayOfWeekStart = new Date(startDate).getDay();
-    const dayOfWeekEnd = new Date(endDate).getDay();
 
-    let disTotalFee = 0;
-    let totalFee = 0;
-
-    for (let i = 0; i < dayDifference; i++) {
-        const currentDayOfWeek = (dayOfWeekStart + i) % 7;
-
-        // 주말(토요일 또는 일요일)인 경우 주말 요금, 그 외의 경우 주중 요금 적용
-        let fee = (currentDayOfWeek === 0 || currentDayOfWeek === 6) ? weekendRate : weekdayRate;
-        totalFee += parseInt(fee);
-        
-        
-        
-        // 할인율이 적용된 경우, 요금에 할인율을 적용
-        if (discountRate > 0) {
-            const discountAmount = fee * (discountRate / 100);
-            fee -= discountAmount;
-        }
-
-        disTotalFee += fee;
-    }
-    $('#inputTotalFee').val(totalFee);
-    
-    return disTotalFee;
-}
-
-document.forms["datepickForm"]["end_date"].addEventListener("change", function() {
-    const startDate = document.forms["datepickForm"]["start_date"].value;
-    const endDate = document.forms["datepickForm"]["end_date"].value;
-
-    // 값이 입력되었을 때만 계산 수행
-    if (startDate && endDate) {
-        const fee = calculateFee(startDate, endDate);
-        
-        // totMoney 값을 URL에 추가하여 페이지를 다시 로드
-        // window.location.href = "page2.html?totMoney=" + fee;
-
-        // 계산된 fee를 hidden input에 할당
-        document.getElementById("inputDisTotalFee").value = fee;
-
-        // 페이지에 결과를 출력
-        document.getElementById("totalFee").innerHTML = "선택한 기간의 요금: " + fee.toLocaleString() + "원";
-
-        // AJAX를 사용하여 서버에 fee 값을 전송
-        $.ajax({
-            url: '/plus/car/reservation/orderPage',
-            method: 'POST',
-            data: { totMoney: fee },
-            success: function(response) {
-                // 성공적으로 처리된 경우, 필요한 로직 수행
-                console.log(response);
-            },
-            error: function(error) {
-                // 에러 처리 로직 추가
-                console.error('Failed to send fee to the server.');
-            }
-        });
-    }
-});
-</script>
 
 
 <script type="text/javascript">
-function sendOk() {
-	// 구매하기
-	const f = document.datepickForm;
+	//변수명 변경
+	let detail_height = document.querySelector(".detail_tab1").offsetTop;
+	let question_height = document.querySelector(".detail_tab2").offsetTop;
+	let as_height = document.querySelector(".detail_tab3").offsetTop;
 	
-	//const day = document.querySelector("#input_date").value;
-	/*
-	let cnt = $("form input[name=nums]:checked").length;
-    if (cnt === 0) {
-		alert("구매할 상품을 먼저 선택 하세요 !!!");
-		return;
-    }
-    
-    $("form input[name=nums]").each(function(index, item){
-		if(! $(this).is(":checked")) {
-			$(this).closest("tr").remove();
-		}
-	});
-    */
-    
-    
-    /*
-    let start_date = f.start_date.value;
-    let end_date = "${carReservation.end_date}";
-    */
-    // f.method = "get";
-	f.action = "${pageContext.request.contextPath}/car/reservation/orderPage";
-	f.submit();
-}
+	console.log(detail_height);
+	console.log(question_height);
+	console.log(as_height);
+	
+	// 함수명 변경
+	function detail() {
+	   window.scrollTo({top: detail_height, left: 0, behavior: 'smooth'});
+	}
+	
+	function question() {
+	   window.scrollTo({top: question_height, left: 0, behavior: 'smooth'});
+	}
+	
+	function as() {
+	   window.scrollTo({top: as_height, left: 0, behavior: 'smooth'});
+	}
+	
 </script>
-
-<script type="text/javascript">
-$(function(){
-	$("button[role='tab']").on('click', function(){
-		const tab = $(this).attr("aria-controls");
-		
-		if(tab === "2") { // qna
-			listQuestion(1);
-		}
-	});
-});
 
 <!-- 문의  -->
+<script type="text/javascript">
+
 function listQuestion(page) {
 	let carNum = '${dto.carNum}';
 	let url = '${pageContext.request.contextPath}/car/qna/list';
@@ -1146,7 +1169,7 @@ function printQuestion(data) {
 		let question = item.question;
 		let question_date = item.question_date;
 		let answer = item.answer;
-		let answer_date = item.answer_date;
+		let answerDate = item.answer_date;
 		let answerState = answer_date ? '<span class="text-primary">답변완료</span>' : '<span class="text-secondary">답변대기</span>';
 		let listFilename = item.listFilename;
 		let secret = item.secret;
@@ -1345,8 +1368,132 @@ $(function(){
 		location.href = '${pageContext.request.contextPath}/car/myPage/review?mode=qna';
 	});
 });
+
+
 </script>
 
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/bootstrap5/js/bootstrap.bundle.min.js"></script>
 
+
+<script>
+$(document).ready(function(){
+	  
+	  $('ul.tabs li').click(function(){
+	    var tab_id = $(this).attr('data-tab');
+
+	    $('ul.tabs li').removeClass('current');
+	    $('.tab-content').removeClass('current');
+
+	    $(this).addClass('current');
+	    $("#"+tab_id).addClass('current');
+	  });
+
+})
+
+</script>
+
+<script>
+    // 주중 및 주말 요금 설정
+    const weekdayRate = ${dto.weekCost};
+    const weekendRate = ${dto.wkndCost};
+    const discountRate = ${dto.discountRate}; // 할인율 변수 추가
+
+    function calculateFee(startDate, endDate) {
+        const startDateTime = new Date(startDate).getTime();
+        const endDateTime = new Date(endDate).getTime();
+        const dayDifference = Math.ceil((endDateTime - startDateTime) / (1000 * 60 * 60 * 24));
+
+        const dayOfWeekStart = new Date(startDate).getDay();
+        const dayOfWeekEnd = new Date(endDate).getDay();
+
+        let disTotalFee = 0;
+        let totalFee = 0;
+
+        for (let i = 0; i < dayDifference; i++) {
+            const currentDayOfWeek = (dayOfWeekStart + i) % 7;
+
+            // 주말(토요일 또는 일요일)인 경우 주말 요금, 그 외의 경우 주중 요금 적용
+            let fee = (currentDayOfWeek === 0 || currentDayOfWeek === 6) ? weekendRate : weekdayRate;
+            totalFee += parseInt(fee);
+            
+            
+            
+            // 할인율이 적용된 경우, 요금에 할인율을 적용
+            if (discountRate > 0) {
+                const discountAmount = fee * (discountRate / 100);
+                fee -= discountAmount;
+            }
+
+            disTotalFee += fee;
+        }
+        $('#inputTotalFee').val(totalFee);
+        
+        return disTotalFee;
+    }
+
+    document.forms["datepickForm"]["end_date"].addEventListener("change", function() {
+        const startDate = document.forms["datepickForm"]["start_date"].value;
+        const endDate = document.forms["datepickForm"]["end_date"].value;
+
+        // 값이 입력되었을 때만 계산 수행
+        if (startDate && endDate) {
+            const fee = calculateFee(startDate, endDate);
+            
+            // totMoney 값을 URL에 추가하여 페이지를 다시 로드
+            // window.location.href = "page2.html?totMoney=" + fee;
+
+            // 계산된 fee를 hidden input에 할당
+            document.getElementById("inputDisTotalFee").value = fee;
+
+            // 페이지에 결과를 출력
+            document.getElementById("totalFee").innerHTML = "선택한 기간의 요금: " + fee.toLocaleString() + "원";
+
+            // AJAX를 사용하여 서버에 fee 값을 전송
+            $.ajax({
+                url: '/plus/car/reservation/orderPage',
+                method: 'POST',
+                data: { totMoney: fee },
+                success: function(response) {
+                    // 성공적으로 처리된 경우, 필요한 로직 수행
+                    console.log(response);
+                },
+                error: function(error) {
+                    // 에러 처리 로직 추가
+                    console.error('Failed to send fee to the server.');
+                }
+            });
+        }
+    });
+</script>
+
+
+<script type="text/javascript">
+ function sendOk() {
+		// 구매하기
+		const f = document.datepickForm;
+		
+		//const day = document.querySelector("#input_date").value;
+		/*
+		let cnt = $("form input[name=nums]:checked").length;
+	    if (cnt === 0) {
+			alert("구매할 상품을 먼저 선택 하세요 !!!");
+			return;
+	    }
+	    
+	    $("form input[name=nums]").each(function(index, item){
+			if(! $(this).is(":checked")) {
+				$(this).closest("tr").remove();
+			}
+		});
+	    */
+	    
+	    
+	    /*
+	    let start_date = f.start_date.value;
+	    let end_date = "${carReservation.end_date}";
+	    */
+	    // f.method = "get";
+		f.action = "${pageContext.request.contextPath}/car/reservation/orderPage";
+		f.submit();
+	}
+</script>

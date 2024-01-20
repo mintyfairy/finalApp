@@ -31,7 +31,7 @@
 		    FROM carQnaFile 
 		    GROUP BY qnaNum ) f ON q.qnaNum=f.qnaNum 
 		LEFT OUTER JOIN member1 m2 ON q.answerId = m2.userId 
-		WHERE q.memberIdx = #{memberIdx}
+		WHERE q.carNum = #{carNum}
 		ORDER BY q.qnaNum DESC 
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>

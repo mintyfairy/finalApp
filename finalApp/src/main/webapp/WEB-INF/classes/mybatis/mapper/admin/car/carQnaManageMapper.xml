@@ -5,13 +5,12 @@
 	<!-- 상품문의 -->
 	<select id="listQna" parameterType="map" resultType="com.fa.plus.admin.domain.car.CarQna">
 		SELECT q.qnaNum, q.secret, q.question, q.answer, q.question_date, 
-				q.answer_date, q.carNum, m1.memberIdx memberIdx, m1.userName,
-				m2.userId answerId, q.enabled, f.fileNum, f.filename, c.carName
+				q.answer_date, q.carNum, m1.memberIdx memberIdx, m1.userName, m1.userId,
+				m2.userId answerId, q.enabled, c.carName
 		FROM carQna q
-		JOIN carQnaFile f ON q.qnaNum = f.qnaNum
 		JOIN campingCar c ON  q.carNum = c.carNum
 		JOIN member1 m1 ON q.memberIdx = m1.memberIdx
-		JOIN member1 m2 ON q.answerId = m2.userId
+		LEFT OUTER JOIN member1 m2 ON q.answerId = m2.userId
 		<where>
 			<if test="mode != null">
 				<if test="mode == 2">

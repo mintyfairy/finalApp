@@ -290,7 +290,7 @@ main {
    </div>
 
    
-   
+  
 
    <div class="car_wrap" id="wrap">
        <ul class="car_list">
@@ -298,7 +298,7 @@ main {
            <li class="car_item">
            	<div class="card-border">
                <p><a href="${pageContext.request.contextPath}/car/car_detail?carNum=${dto.carNum}" class="car_photo">
-                       <img src="${pageContext.request.contextPath}/resources/images/campingcar/caravanpic100.jpg" alt="car_item" style="">
+                       <img src="${pageContext.request.contextPath}/uploads/caravan/${dto.thumbnail}" alt="car_item" style="width:350px; height:250px;'">
                        <!-- <img src="${pageContext.request.contextPath}/resources/images/campingcar/${dto.thumbnail}/350x250" alt="car_item"> -->
                    </a></p>
                <div class="car_text">

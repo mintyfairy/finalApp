@@ -68,7 +68,6 @@ public class CarQnaController {
 				int size = 3;
 				int dataCount = 0;
 				
-				map.put("memberIdx", info.getMemberIdx());
 				map.put("carNum", carNum);
 				
 				dataCount = service.dataCount(map);

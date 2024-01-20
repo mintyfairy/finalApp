@@ -83,29 +83,12 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/boot-board.css" type="text/css">
 
 <script type="text/javascript">
-/*
-// 탭
-$(function(){
-	$("button[role='tab']").on('click', function(){
-		let tab = $(this).attr("aria-controls");
-		
-		if(tab === "1") {
-			location.href="${pageContext.request.contextPath}/admin/shopCustomer/review";
-		} else if(tab === "2") {
-			location.href="${pageContext.request.contextPath}/admin/shopCustomer/question";
-		}
-	});
-});
-*/
-
-
-/*
 // 모드 : 전체, 미답변, 답변완료
 $(function(){
 	$('#changeMode').change(function(){
 		let mode = $(this).val();
 		let col = $('#changeSort option:selected').val()
-		let url = '${pageContext.request.contextPath}/admin/shopCustomer/question';
+		let url = '${pageContext.request.contextPath}/admin/carQna/qna';
 		
 		url += '?mode=' + mode + "&col=" + col;
 		location.href = url;
@@ -117,7 +100,7 @@ $(function(){
 	$('#changeSort').change(function(){
 		let mode = $('#changeMode option:selected').val()
 		let col = $(this).val();
-		let url = '${pageContext.request.contextPath}/admin/shopCustomer/question';
+		let url = '${pageContext.request.contextPath}/admin/carQna/qna';
 		
 		url += '?mode=' + mode + "&col=" + col;
 		location.href = url;
@@ -133,17 +116,16 @@ $(function(){
 				
 		if(confirm('게시글을 삭제 하시겠습니까 ? ')) {
 			let query = 'page=${page}&mode=' + mode + '&col=' + col + '&qnaNum=' + qnaNum;
-			location.href = '${pageContext.request.contextPath}/admin/shopCustomer/question/delete?' + query;
+			location.href = '${pageContext.request.contextPath}/admin/carQna/qna/delete?' + query;
 		}
 	});
 });
-*/
 </script>
 
 <div class="container">
 	<div class="body-container">	
 		<div class="body-title">
-			<h3><i class="bi bi-chat-right-text"></i> 상품 문의 </h3>
+			<h3><i class="bi bi-chat-right-text"></i> 캠핑카 문의 </h3>
 		</div>
 		
 		<div class="body-main">
@@ -160,9 +142,6 @@ $(function(){
 		            	</div>
 		            </div>
 		            <div class="col-auto pt-2">
-		            <!-- 
-		            	<span>${dataCount}개(${page}/${total_page} 페이지)</span>
-		             -->
 						<select id="changeSort" name="col" class="form-select">
 								<option value="question_date" ${ col == 'question_date' ? 'selected' : '' }>:: 최신순 ::</option>
 								<option value="answer_date" ${ col == 'answer_date' ? 'selected' : '' }>:: 최신답변순 ::</option>
@@ -375,7 +354,7 @@ $('.btnAnswerSendOk').click(function(){
 	}
 	
 	let param = $('form[name=answerForm]').serialize();
-	let url = '${pageContext.request.contextPath}/admin/shopCustomer/question/answer';
+	let url = '${pageContext.request.contextPath}/admin/carQna/qna/answer';
 	
 	const fn = function(data) {
 		console.log(data);
@@ -385,7 +364,7 @@ $('.btnAnswerSendOk').click(function(){
 			
 			$('#answerDialogModal').hide();
 			
-			let url2 = '${pageContext.request.contextPath}/admin/shopCustomer/question';
+			let url2 = '${pageContext.request.contextPath}/admin/carQna/qna';
 			url2 += '?page=${page}&mode=${mode}&col=${col}';
 			location.href = url2;
 		} else {
@@ -395,8 +374,6 @@ $('.btnAnswerSendOk').click(function(){
 	
 	ajaxFun(url, "post", param, "json", fn);
 	
-	//f.action = "${pageContext.request.contextPath}/admin/customer/question/answer";
-	//f.submit();
 });
 
 $('.btnAnswerSendCancel').click(function(){

@@ -17,8 +17,9 @@ public class CarQna {
 	private String question_date;
 	private String answer_date;
 	private String userName;
-	
-	
+	private String userId;
+	private int enabled;
+
 	// 상품 질문 이미지
 	private long fileNum;
 	private String filename;
@@ -26,6 +27,23 @@ public class CarQna {
 	
 	private String [] listFilename;
 	
+
+	public int getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
+	}	
+	
+	
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 	
 
 	public int getQnaNum() {
