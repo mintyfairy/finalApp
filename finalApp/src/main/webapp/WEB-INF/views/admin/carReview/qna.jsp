@@ -26,9 +26,30 @@
 	min-height: 300px;
 }
 
- 
+ /*
+.table tr {
+	border-bottom: 1px solid #dedede;
+}
 
 
+.table .ellipsis {
+	position: relative;
+	min-width: 200px;
+}
+.table .ellipsis span {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	position: absolute;
+	left: 9px;
+	right: 9px;
+	cursor: pointer;
+}
+.table .ellipsis:before {
+	content: '';
+	display: inline-block;
+}
+*/
 
 .page-navigation {
 	margin: 0 auto;
