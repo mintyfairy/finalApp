@@ -4,7 +4,7 @@
 
 <style type="text/css">
 .body-container {
-	max-width: 1100px;
+	max-width: 1080px; /*수정*/
 }
 
 .nav-tabs .nav-link {
@@ -20,7 +20,7 @@
 	color: #fff;
 }
 .tab-pane { min-height: 300px; }
-
+.tab-content { width: 1080px; margin: 20px auto; } /*수정*/
 .body-main { width: 850px; margin: 20px auto; }
 
 button.btn-category {
@@ -101,71 +101,72 @@ function searchList() {
 					<button class="btn-category" id="tab-ended" type="button" data-menu="ended">종료된 이벤트</button>
 				</div>				
 				
-				<div class="tab-content pt-2" id="nav-tabContent">
-				
-			        <div class="row board-list-header">			  
-			            <div class="col-auto me-auto">	          
-			            	${dataCount}개(${page}/${total_page} 페이지)
-			            </div>
-			            <div class="col-auto">&nbsp;</div>
-			        </div>				
-					
-					<table class="table table-hover board-list">
-						<thead class="table-light">
-							<tr>
-								<th width="60">번호</th>
-								<th>제목</th>
-								<th width="140">시작일</th>
-								<th width="140">종료일</th>
-								<th width="70">${category=="winner" ? "발표" : "조회수"}</th>
-							</tr>
-						</thead>
+				<div class="tab-content pt-2" id="myTabContent"> <!-- 수정 -->
+					<div class="tab-pane fade show active" id="tab-pane" role="tabpanel" aria-labelledby="tab-3" tabindex="0">
+				        <div class="row board-list-header">			  
+				            <div class="col-auto me-auto">	          
+				            	${dataCount}개(${page}/${total_page} 페이지)
+				            </div>
+				            <div class="col-auto">&nbsp;</div>
+				        </div>				
 						
-						<tbody>
-							<c:forEach var="dto" items="${list}" varStatus="status">
+						<table class="table table-hover board-list">
+							<thead class="table-light">
 								<tr>
-									<td>${dataCount - (page-1) * size - status.index}</td>
-									<td class="left">
-										<a href="${articleUrl}&num=${dto.num}" class="text-reset">${dto.title}</a>
-									</td>
-									<td>${dto.startDate}</td>
-									<td>${dto.endDate}</td>
-									<td>${category=="winner" ? (dto.winnerCount==0?"예정":"완료") : dto.hitCount}</td>
+									<th width="60">번호</th>
+									<th>제목</th>
+									<th width="140">시작일</th>
+									<th width="140">종료일</th>
+									<th width="70">${category=="winner" ? "발표" : "조회수"}</th>
 								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+							</thead>
+							
+							<tbody>
+								<c:forEach var="dto" items="${list}" varStatus="status">
+									<tr>
+										<td>${dataCount - (page-1) * size - status.index}</td>
+										<td class="left">
+											<a href="${articleUrl}&num=${dto.num}" class="text-reset">${dto.title}</a>
+										</td>
+										<td>${dto.startDate}</td>
+										<td>${dto.endDate}</td>
+										<td>${category=="winner" ? (dto.winnerCount==0?"예정":"완료") : dto.hitCount}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+						
+						<div class="page-navigation">
+							${dataCount == 0 ? "등록된 이벤트가 없습니다." : paging}
+						</div>
+			
+						<div class="row board-list-footer">
+							<div class="col">
+								<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/csCenter/event/${category}/list';" title="새로고침"><i class="bi bi-arrow-counterclockwise"></i></button>
+							</div>
+							<div class="col-6 text-center">
+								<form class="row" name="searchForm" action="${pageContext.request.contextPath}/csCenter/event/${category}/list" method="post">
+									<div class="col-auto p-1">
+										<select name="schType" class="form-select">
+											<option value="all" ${schType=="all"?"selected":""}>제목+내용</option>
+											<option value="startDate" ${schType=="startDate"?"selected":""}>시작일</option>
+											<option value="endDate" ${schType=="endDate"?"selected":""}>종료일</option>
+											<option value="winningDate" ${schType=="winningDate"?"selected":""}>발표일</option>
+										</select>
+									</div>
+									<div class="col-auto p-1">
+										<input type="text" name="kwd" value="${kwd}" class="form-control">
+									</div>
+									<div class="col-auto p-1">
+										<button type="button" class="btn btn-light" onclick="searchList()"> <i class="bi bi-search"></i> </button>
+									</div>
+								</form>
+							</div>
+							<div class="col text-end"> &nbsp;</div>
+						</div>
 					
-					<div class="page-navigation">
-						${dataCount == 0 ? "등록된 이벤트가 없습니다." : paging}
 					</div>
-		
-					<div class="row board-list-footer">
-						<div class="col">
-							<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/csCenter/event/${category}/list';" title="새로고침"><i class="bi bi-arrow-counterclockwise"></i></button>
-						</div>
-						<div class="col-6 text-center">
-							<form class="row" name="searchForm" action="${pageContext.request.contextPath}/csCenter/event/${category}/list" method="post">
-								<div class="col-auto p-1">
-									<select name="schType" class="form-select">
-										<option value="all" ${schType=="all"?"selected":""}>제목+내용</option>
-										<option value="startDate" ${schType=="startDate"?"selected":""}>시작일</option>
-										<option value="endDate" ${schType=="endDate"?"selected":""}>종료일</option>
-										<option value="winningDate" ${schType=="winningDate"?"selected":""}>발표일</option>
-									</select>
-								</div>
-								<div class="col-auto p-1">
-									<input type="text" name="kwd" value="${kwd}" class="form-control">
-								</div>
-								<div class="col-auto p-1">
-									<button type="button" class="btn btn-light" onclick="searchList()"> <i class="bi bi-search"></i> </button>
-								</div>
-							</form>
-						</div>
-						<div class="col text-end"> &nbsp;</div>
-					</div>
-				
-				</div>
+			</div>
 		</div>
 	</div>
 </div>

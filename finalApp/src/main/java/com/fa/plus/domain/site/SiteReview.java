@@ -18,14 +18,14 @@ detailNum
 SITENUM
 ENABLED
  */
-	private long bookNum;
-	private String subject;
+	private long bookNum; //productNum
+	private String subject; 
 	private String content;
-	private long memberIdx;
-	private double score;
+	private long memberIdx;  //
+	private double score;  //
 	private String reg_date;
-	private String answer;
-	private String userName;
+	private String answer;   //
+	private String userName;  //
 	private String adminName;
 	private long detailNum;
 	private long siteNum;
@@ -36,11 +36,11 @@ ENABLED
 	
 	private long SrPICNUM;
 	
-	private long fileNum;
-	private String fileName;
-	private List<MultipartFile> selectFile;
+	private long fileNum; //
+	private String fileName;  //
+	private List<MultipartFile> selectFile;   //
 	
-	private List<String> listFile;
+	private List<String> listFile;  //listfile
 
 	
 	

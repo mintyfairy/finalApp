@@ -2,6 +2,7 @@ package com.fa.plus.domain.site;
 
 public class Book {
 	private	long bookNum;
+	private	long siteNum;   //추가
 	private	String startDate;
 	private	String endDate;
 	private	long bookPrice;
@@ -13,6 +14,8 @@ public class Book {
 	private String detailName;
 	private String order_date;
 	
+	
+	private int reviewWrite; // 리뷰 유무
 	
 	
 	
@@ -75,6 +78,18 @@ public class Book {
 	}
 	public void setListNum(long listNum) {
 		this.listNum = listNum;
+	}
+	public int getReviewWrite() {
+		return reviewWrite;
+	}
+	public void setReviewWrite(int reviewWrite) {
+		this.reviewWrite = reviewWrite;
+	}
+	public long getSiteNum() {
+		return siteNum;
+	}
+	public void setSiteNum(long siteNum) {
+		this.siteNum = siteNum;
 	}
 	
 	

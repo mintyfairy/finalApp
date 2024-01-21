@@ -92,22 +92,23 @@
 		FROM booklist 
 		WHERE memberIdx=#{memberIdx} and STATE=0
 	</select>
-	<select id="listBook" parameterType="map" resultType="com.fa.plus.domain.site.Book">
-			SELECT bookNum,to_char(STARTDATE,'yyyy-mm-dd') STARTDATE,to_char(ENDDATE,'yyyy-mm-dd') ENDDATE,bookPrice, detailNum,book.listNum,filename
-		,nvl(writeReview,0) writeReview,detailname,to_char(ORDER_DATE,'yyyy-mm-dd') ORDER_DATE
-		FROM book
+	
+	
+	 <select id="listBook" parameterType="map" resultType="com.fa.plus.domain.site.Book">
+         SELECT bookNum,to_char(STARTDATE,'yyyy-mm-dd') STARTDATE,to_char(ENDDATE,'yyyy-mm-dd') ENDDATE,bookPrice, detailNum,book.listNum,filename
+      ,nvl(writeReview,0) writeReview,detailname,to_char(ORDER_DATE,'yyyy-mm-dd') ORDER_DATE,sitenum
+      FROM book
         left join booklist on book.listnum=booklist.listnum
         left join (select * from 
-			(select row_number() over(partition by detailNum order by sdpicnum) rnum,filename,detailNum dnum 
-			from sitedetailpic) where rnum=1
-       	) on dnum=book.detailNum
-       	left join (select 1 writeReview,booknum bnum from sitereview) on bnum=booknum
-        left join (select detailname,detailNum ddnum from sitedetail) on ddnum =detailNum
-		WHERE memberIdx=#{memberIdx} and state=0
-		order by booknum desc
-		offset #{offset} rows fetch first #{size} rows only
-	</select>
-	
+         (select row_number() over(partition by detailNum order by sdpicnum) rnum,filename,detailNum dnum 
+         from sitedetailpic) where rnum=1
+          ) on dnum=book.detailNum
+          left join (select 1 writeReview,booknum bnum from sitereview) on bnum=booknum
+        left join (select detailname,detailNum ddnum,sitenum from sitedetail) on ddnum =detailNum
+      WHERE memberIdx=#{memberIdx} and state=0
+      order by booknum desc
+      offset #{offset} rows fetch first #{size} rows only
+   </select>
 	
 	<insert id="insertReview" parameterType="com.fa.plus.domain.site.SiteReview">
 	insert into sitereview(BOOKNUM,CONTENT,memberIdx,SCORE,REG_DATE,detailNum,siteNum,ENABLED)

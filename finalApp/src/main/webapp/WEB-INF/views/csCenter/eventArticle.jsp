@@ -4,7 +4,7 @@
 
 <style type="text/css">
 .body-container {
-	max-width: 1100px;
+	max-width: 1080px; /*수정*/
 }
 
 .nav-tabs .nav-link {
@@ -20,7 +20,7 @@
 	color: #fff;
 }
 .tab-pane { min-height: 300px; }
-
+.tab-content { width: 1080px; margin: 20px auto; } /*수정*/
 
 .table img {
 	max-width: 650px;

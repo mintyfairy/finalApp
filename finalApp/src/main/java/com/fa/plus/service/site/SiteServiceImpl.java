@@ -147,7 +147,7 @@ public class SiteServiceImpl implements SiteService {
 		}
 	}
 
-	public int period(String date1, String date2) throws ParseException {
+	public int period(String date1, String date2) throws ParseException { 
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date d1 = format.parse(date1);
 		Date d2 = format.parse(date2);

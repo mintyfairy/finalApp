@@ -5,6 +5,12 @@ public class BookList {
 	private	String order_date;
 	private	long memberIdx;
 	private	long totalPrice;
+	private int reviewWrite; // 리뷰 유무
+	
+	
+	
+	
+	
 	public long getListNum() {
 		return listNum;
 	}
@@ -28,6 +34,12 @@ public class BookList {
 	}
 	public void setTotalPrice(long totalPrice) {
 		this.totalPrice = totalPrice;
+	}
+	public int getReviewWrite() {
+		return reviewWrite;
+	}
+	public void setReviewWrite(int reviewWrite) {
+		this.reviewWrite = reviewWrite;
 	}
 	
 	
