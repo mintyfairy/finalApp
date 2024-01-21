@@ -27,27 +27,7 @@
 }
 
  
-.table tr {
-	border-bottom: 1px solid #dedede;
-}
 
-.table .ellipsis {
-	position: relative;
-	min-width: 200px;
-}
-.table .ellipsis span {
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	position: absolute;
-	left: 9px;
-	right: 9px;
-	cursor: pointer;
-}
-.table .ellipsis:before {
-	content: '';
-	display: inline-block;
-}
 
 
 .page-navigation {
@@ -156,15 +136,15 @@ $(function(){
 							${ dataCount }개(${ page }/${ total_page } 페이지)
 						</div>
 					</div>
-						<table class="table table-borderless board-list" style="width: 1080px;">
+						<table class="table table-border table-list" style="width: 1080px;">
 							<colgroup>
 								<col width="130">
 								<col width="*">
 								<col width="130">
 								<col width="150">
 							</colgroup>
-							<thead class="table-light">
-								<tr class="border-top border-dark table-light">
+							<thead>
+								<tr>
 									<th>답변상태</th>
 									<th>내용</th>
 									<th>작성자</th>
