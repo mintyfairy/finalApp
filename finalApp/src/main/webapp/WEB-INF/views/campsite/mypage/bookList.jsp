@@ -163,8 +163,10 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 
 							<div class="mt-3 p-3 text-end">
 								<div>
+								<c:if test="${dto.writeReview==0 }">
 									<button type="button" class="btn border btnReviewWriteForm"
 										style="width: 130px;">리뷰쓰기</button>
+								</c:if>	
 								</div>
 							</div>
 
@@ -183,7 +185,6 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 												<input type="hidden" name="score" value="5"> 
 												<input type="hidden" name="bookNum" value="${dto.bookNum}">
 												<input type="hidden" name="siteNum" value="${dto.siteNum}">
-												<input name="siteNum" value="${dto.siteNum}">
 											</p>
 										</div>
 										<div class="p-1">
