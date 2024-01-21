@@ -277,6 +277,99 @@ SELECT NVL(COUNT(*), 0)
               
             select * from ( select row_number() over(partition by detailnum order by sdpicnum) rnum,filename,DETAILNUM dnum from sitedetailpic 
        ) where rnum=1 
+       
+       
+       select book.detailnum,sitenum,sum(bookprice) sum
+from book
+left join sitedetail on book.detailnum=sitedetail.detailnum
+GROUP BY ROLLUP(book.detailnum,sitenum)
+ORDER BY book.detailnum,sitenum
+;
+select things,sum(bookprice) sum
+from book
+right join (
+        select listnum lnum from booklist
+        where order_date>add_months(sysdate,-12) ) on book.listnum=lnum
+left join (select detailnum dnum,sitenum from sitedetail) on detailnum=dnum
+left join (select sitenum snum,category things  from campingsite) on sitenum=snum
+GROUP BY things
+ORDER BY things 
+;
+select * from booklist where order_date<add_months(sysdate,-12)
+;
+
+
+
+
+
+;
+select detailnum,bookprice
+from book
+ order by detailnum
+;
+select to_date('20201220','yyyymmdd')-22 date1 from dual;
+;
+
+select
+(select sum(bookprice)
+from book
+left join (select detailnum dnum,sitenum  from sitedetail) on detailnum=dnum
+right join(select endp-startp period,startp,endp,sitenum snum from promotionsite) on sitenum=snum
+left join ( select listnum lnum,order_date from booklist) on book.listnum=lnum
+where order_date<=endp and startp<=order_date) adsum
+,
+(select sum(bookprice)
+from book
+left join (select detailnum dnum,sitenum  from sitedetail) on detailnum=dnum
+right join(select endp-startp period,startp,endp,sitenum snum from promotionsite) on sitenum=snum
+left join ( select listnum lnum,order_date from booklist) on book.listnum=lnum
+where order_date<=endp-period and startp-period<=order_date)  nonadsum
+from dual
+
+;
+
+
+    select nvl(campingsite.sitenum,0) sitenum,sitename,sum(bookprice) sum
+		from book
+		left join booklist on book.listnum=booklist.listnum
+		left join sitedetail on book.detailnum=sitedetail.detailnum
+        left join campingsite on campingsite.sitenum=sitedetail.sitenum
+		where order_date > add_months(sysdate,-12)
+		GROUP BY campingsite.sitenum,sitename
+		ORDER BY sum desc
+        ;
+        -----------------------------------------------------------
+    ;    
+        	select sitelocal,sum(bookprice) sum
+		from book
+		left join booklist on book.listnum=booklist.listnum
+		left join sitedetail on book.detailnum=sitedetail.detailnum
+        left join campingsite on campingsite.sitenum=sitedetail.sitenum
+		where order_date > add_months(sysdate,-12)
+		GROUP BY sitelocal
+		ORDER BY sum desc
+
+;
+
+		select order_months,sum(bookprice) sum
+		from book
+		left join (select listnum lnum,to_char(order_date,'mm') order_months from booklist) on book.listnum=lnum
+		left join sitedetail on book.detailnum=sitedetail.detailnum
+		where order_months >= to_char(add_months(sysdate,-12),'mm')
+		GROUP BY ROLLUP(order_months)
+		ORDER BY order_months 
+;
+		select order_days,sum(bookprice) sum
+		from book
+		right join (
+		        select listnum lnum,to_char(order_date,'d') order_days from booklist
+		        where order_date > add_months(sysdate,-12) ) on book.listnum=lnum
+		left join sitedetail on book.detailnum=sitedetail.detailnum
+		GROUP BY ROLLUP(order_days)
+		ORDER BY order_days 
+;
+
+desc campingsite
 룸목록 가져와서 not in써서 호텔거르기?
 
 방 카운트 테이블
