@@ -322,6 +322,21 @@ table {
     font-size: 1.25rem;
     font-weight: bold;
   }
+  
+.qna-form textarea { width: 100%; height: 75px; resize: none; }
+.qna-form .img-grid {
+	display: grid;
+	grid-template-columns:repeat(auto-fill, 54px);
+	grid-gap: 2px;
+}
+
+.qna-form .img-grid .item {
+	object-fit:cover;
+	width: 50px; height: 50px; border-radius: 10px;
+	border: 1px solid #c2c2c2;
+	cursor: pointer;
+}
+  
 </style>
 
 <script type="text/javascript">

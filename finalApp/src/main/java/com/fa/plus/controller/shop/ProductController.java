@@ -32,6 +32,7 @@ public class ProductController {
 	
 	@RequestMapping("list")
 	public String main(@RequestParam(defaultValue = "0") long categoryNum,
+					   @RequestParam(defaultValue = "0") long brandNum, 
 					   @RequestParam(value = "page", defaultValue = "1") int current_page,
 					   HttpServletRequest req,
 					   Model model) throws Exception {
@@ -44,6 +45,7 @@ public class ProductController {
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("categoryNum", categoryNum);
+			map.put("brandNum", brandNum);
 			
 			dataCount = service.dataCount(map);
 			total_page = myUtil.pageCount(dataCount, size);
@@ -60,11 +62,16 @@ public class ProductController {
 			List<Product> list = service.listProduct(map);
 			
 			String listUrl = cp + "/shop/product/list?categoryNum="+categoryNum;
+			if(brandNum != 0) {
+				map.put("brandNum", brandNum);
+				listUrl += "brandNum=" + brandNum;
+			}
 			
 			String paging = myUtil.pagingUrl(current_page, total_page, listUrl);
 			
 			model.addAttribute("list", list);
 			model.addAttribute("categoryNum", categoryNum);
+//			model.addAttribute("brandNum", brandNum);
 			model.addAttribute("page", current_page);
 			model.addAttribute("dataCount", dataCount);
 			model.addAttribute("size", size);

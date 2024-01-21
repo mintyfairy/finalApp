@@ -373,18 +373,18 @@ $(function() {
 	            
 	            <li class="navi_item dropdown">
 	                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-	                	베스트셀러
+	                	인기상품
 	                </a>
 	                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                       <li><a class="dropdown-item" href="#">텐트 베스트</a></li>
-							<li><a class="dropdown-item" href="#">타프 베스트</a></li>
-							<li><a class="dropdown-item" href="#">침낭 베스트</a></li>
-							<li><a class="dropdown-item" href="#">매트 베스트</a></li>
-							<li><a class="dropdown-item" href="#">테이블 베스트</a></li>
-							<li><a class="dropdown-item" href="#">체어 베스트</a></li>
-							<li><a class="dropdown-item" href="#">롄턴 베스트</a></li>
-							<li><a class="dropdown-item" href="#">스토브 베스트</a></li>
-							<li><a class="dropdown-item" href="#">쿠커 베스트</a></li>
+                       <li><a class="dropdown-item" href="#">텐트</a></li>
+							<li><a class="dropdown-item" href="#">타프</a></li>
+							<li><a class="dropdown-item" href="#">침낭</a></li>
+							<li><a class="dropdown-item" href="#">매트</a></li>
+							<li><a class="dropdown-item" href="#">테이블</a></li>
+							<li><a class="dropdown-item" href="#">체어</a></li>
+							<li><a class="dropdown-item" href="#">롄턴</a></li>
+							<li><a class="dropdown-item" href="#">스토브</a></li>
+							<li><a class="dropdown-item" href="#">쿠커</a></li>
                     </ul>
 	            </li>
 	            <li class="navi_item">
@@ -666,7 +666,10 @@ $(function(){
 	
 	$(".brand-list").on("click", ".brand-item", function(){
 		let brandNum = $(this).attr("data-brandNum");
-		alert(brandNum);
+		//alert(brandNum);
+		console.log(brandNum);
+		let url = '${pageContext.request.contextPath}/shop/product/list?brandNum=' + brandNum;
+		location.href = url;
 	});
 	
 });
