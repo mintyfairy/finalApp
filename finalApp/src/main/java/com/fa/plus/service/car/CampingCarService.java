@@ -12,4 +12,5 @@ public interface CampingCarService {
 	public CampingCar findById(long carNum);
 	public List<CampingCar> listCarFile(long carNum);
 	
+	public List<CampingCar> listOption(long carNum);
 }

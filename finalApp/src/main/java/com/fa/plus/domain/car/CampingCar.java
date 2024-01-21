@@ -42,7 +42,6 @@ public class CampingCar {
 	
 	private int fee;
 	
-	
 	public int getFee() {
 		return fee;
 	}
@@ -98,7 +97,7 @@ public class CampingCar {
 	private int tv;
 	private int airCondition;
 	private int heater;
-	private int powerbank;
+	private int powerBank;
 	private int induction;
 	private int gasStove;
 	
@@ -258,11 +257,11 @@ public class CampingCar {
 	public void setHeater(int heater) {
 		this.heater = heater;
 	}
-	public int getPowerbank() {
-		return powerbank;
+	public int getPowerBank() {
+		return powerBank;
 	}
-	public void setPowerbank(int powerbank) {
-		this.powerbank = powerbank;
+	public void setPowerBank(int powerBank) {
+		this.powerBank = powerBank;
 	}
 	public int getInduction() {
 		return induction;

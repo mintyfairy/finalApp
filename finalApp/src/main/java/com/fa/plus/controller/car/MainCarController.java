@@ -81,6 +81,10 @@ public class MainCarController {
 			// 추가 이미지
 			List<CampingCar> listFile = service.listCarFile(carNum);
 			
+			// 옵션
+			List<CampingCar> listOption = service.listOption(carNum);
+			
+			
 			dto.setImageFilename(dto.getThumbnail());
 			listFile.add(0, dto);
 			
@@ -88,6 +92,7 @@ public class MainCarController {
 			
 			model.addAttribute("dto", dto);
 			model.addAttribute("listFile", listFile);
+			model.addAttribute("listOption", listOption);
 			
 			
 		} catch (Exception e) {

@@ -252,7 +252,7 @@ button[name=reservation]:hover {
 
 .option-detail {
   width: 70%;
-  min-height: 500px;
+  min-height: 10px;
   box-sizing: border-box;
   border: none;
   margin: 0 auto;
@@ -260,7 +260,6 @@ button[name=reservation]:hover {
 
 .option-detail > div {
   width: 90%;
-  min-height: 50px;
   box-sizing: border-box;
   border: none;
   display: flex;
@@ -605,6 +604,7 @@ table {
 }
 
 
+
 </style>
 <script type="text/javascript">
 function login() {
@@ -655,8 +655,9 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
         <img src="${pageContext.request.contextPath}/uploads/caravan/${dto.thumbnail}"/>
       </div>
       <div class="addImages">
-        <img src="${pageContext.request.contextPath}/resources/images/campingcar/bed.png" alt="bed">
-        <img src="${pageContext.request.contextPath}/resources/images/campingcar/bed.png" alt="bed">
+      	<c:forEach var="vo" items="${listFile}">
+        <img src="${pageContext.request.contextPath}/uploads/caravan/${vo.imageFilename}">
+        </c:forEach>
       </div>
       </form>
     </div>
@@ -749,7 +750,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 				<button class="nav-link active" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane-1" type="button" role="tab" aria-controls="1" aria-selected="true">상세정보</button>
 			</li>
 			<li class="nav-item" role="presentation">
-				<button class="nav-link" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane-2" type="button" role="tab" aria-controls="2" aria-selected="false">문의사항 <span class="title-qnaCount">(1)</span></button>
+				<button class="nav-link" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane-2" type="button" role="tab" aria-controls="2" aria-selected="false">문의사항 <span class="title-qnaCount"></span></button>
 			</li>
 			<li class="nav-item" role="presentation">
 				<button class="nav-link" id="tab-3" data-bs-toggle="tab" data-bs-target="#tab-pane-3" type="button" role="tab" aria-controls="3" aria-selected="false">규정 및 주의사항</button>
@@ -760,7 +761,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 			<div class="tab-pane fade show active" id="tab-pane-1" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
 				<!-- 상세정보 시작 -->
 				
-				<div class="second-container">
+				<div class="second-container" style="margin-top: 50px;">
 				    <div class="available-size">
 				      <div class="available-mini">
 				        <h5><i class="fa-solid fa-user-group"></i>&nbsp;탑승가능인원</h5>
@@ -781,95 +782,99 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 				     </div>
 				</div>
 				
-				<div style="padding-top: 20px; ">
-					<div class="detail_img">
-						${dto.content}
-					</div>
+				<div style="padding-top: 30px; ">
+					
 				    <div class="car-options">
-				      <h4 style="padding: 20px 90px;">보유 옵션</h4>
+				      <h4 style="width:70%; margin: 50px auto;">보유 옵션</h4>
 				      <div class="option-detail">
+				      <c:forEach var="lo" items="${listOption}">
 				      	<div>
-				        	<c:if test="${dto.toilet != 0}">
+				        	<c:if test="${lo.toilet==1}">
 				          		<p>화장실</p>
 				          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/toilet.png" alt="toilet">
 				          	</c:if>
 				        </div>
 				        <div>
-				        	<c:if test="${dto.shower == 1}">
+				        	<c:if test="${lo.shower==1}">
 				          		<p>샤워실</p>
 				          		
 				          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/shower.png" alt="shower">
 				          	</c:if>
 				        </div>
 				        <div>
-				        	<c:if test="${dto.bed != 0}">
+				        	<c:if test="${lo.bed==1}">
 				          		<p>침대</p>
 				          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/bed.png" alt="bed">
 				          	</c:if>
 				        </div>
+				        
 				        <div>
-				        	<c:if test="${dto.sink == 1}">
+				        	<c:if test="${lo.sink==1}">
 				          		<p>싱크대</p>
 				          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/sink.png" alt="sink">
 				        	</c:if>
 				        </div>
-				        
 				        <div>
-				        	<c:if test="${dto.microwave == 1}">
+				        	<c:if test="${lo.microwave==1}">
 				          		<p>전자레인지</p>
 				           		<img src="${pageContext.request.contextPath}/resources/images/campingcar/microwave.png" alt="microwave">
 				        	</c:if>
 				        </div>
 				        <div>
-				        	<c:if test="${dto.frige == 1}">
+				        	<c:if test="${lo.frige==1}">
 				          		<p>냉장고</p>
 				          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/refrigerator.png" alt="refrigerator">
 				        	</c:if>
 				        </div>
 				        <div>
-				        	<c:if test="${dto.desk == 1}">
+				        	<c:if test="${lo.desk==1}">
 				          		<p>테이블</p>
 				          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/table.png" alt="table">
 				        	</c:if>
 				        </div>
 				        <div>
-				        	<c:if test="${dto.waterHeater == 1}">
+				        	<c:if test="${lo.waterHeater==1}">
 				          		<p>온수기</p>
 				          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/waterHeater.png" alt="waterHeater">
 				        	</c:if>
 				        </div>
 				        <div>
-				        	<c:if test="${dto.tv == 1}">
+				        	<c:if test="${lo.tv==1}">
 				          		<p>TV</p>
 				          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/tv.png" alt="tv">
 				        	</c:if>
 				        </div>
 				        <div>
-				        	<c:if test="${dto.airCondition == 1}">
+				        	<c:if test="${lo.airCondition==1}">
 				          		<p>에어컨</p>
 				          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/airconditioner.png" alt="airconditioner">
 				        	</c:if>
 				        </div>
 				        <div>
-				        	<c:if test="${dto.heater == 1}">
+				        	<c:if test="${lo.heater==1}">
 				          		<p>무시동히터</p>
 				          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/heater.png" alt="heater">
 				        	</c:if>
 				        </div>
 				        <div>
-				        	<c:if test="${dto.powerbank == 1}">
+				        	<c:if test="${lo.powerBank==1}">
 				          		<p>배터리</p>
 				          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/battery.png" alt="battery">
 				        	</c:if>
 				        </div>
 				        <div>
-				        	<c:if test="${dto.gasStove == 1}">
+				        	<c:if test="${lo.gasStove == 1}">
 				          		<p>가스레인지</p>
 				          		<img src="${pageContext.request.contextPath}/resources/images/campingcar/gasStove.png" alt="gasStove">
 				        	</c:if>
 				        </div>
+				        </c:forEach>
 				      </div>
+				      <div class="detail_img" style ="width:90%; margin: 30px auto; text-align:center; margin-top: 100px; padding-bottom: 50px;">
+						${dto.content}
+					  </div>
 				    </div>
+
 				
 				</div>
 				
@@ -895,7 +900,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 			                <col width="*">
 			            </colgroup>
 			            <tbody>
-			                <tr>
+			                <tr style="height: 100px;">
 			                    <th>캠핑카 업체</th>
 			                    <td>
 			                        <b>캠브릿지 한국지점</b>
@@ -903,7 +908,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 			                        주소 - 서울특별시 마포구 월드컵북로 21 풍성빌딩 2층
 			                    </td>
 			                </tr>
-			                <tr>
+			                <tr style="height: 100px;">
 			                    <th>운전자 대여조건</th>
 			                    <td>
 			                        <b>-&nbsp;운전자 나이 만26세 이상</b>
@@ -915,7 +920,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 			                       
 			                    </td>
 			                </tr>
-			                <tr>
+			                <tr style="height: 100px;">
 			                    <th>자동차 보험</th>
 			                    <td>
 			                        -&nbsp;렌트카 공제 조합을 통해 대인, 대물, 자손 등의
@@ -925,7 +930,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 			                        별도로 비용을 지불하고 가입 가능합니다.
 			                    </td>
 			                </tr>
-			                <tr>
+			                <tr style="height: 100px;">
 			                    <th>유료딜리버리</th>
 			                    <td>
 			                      -&nbsp; 유료 딜리버리는 <b>1:1 문의</b>를 통해
@@ -933,7 +938,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 			                      개별적으로 진행 가능합니다.
 			                    </td>
 			                </tr>
-			                <tr>
+			                <tr style="height: 100px;">
 			                  <th>취소 규정</th>
 			                  <td>
 			                    -&nbsp; 출발일 기준 7일전 취소시 : 80% 환불 
@@ -1114,6 +1119,7 @@ $(function(){
 		
 		if(tab === "2") { // qna
 			listQuestion(1);
+			$('.title-qnaCount').css('color', 'white').text('(' + dataCount + ')');
 		}
 	});
 });
@@ -1139,6 +1145,7 @@ function printQuestion(data) {
 	let paging = data.paging;
 	
 	$('.title-qnaCount').html('(' + dataCount + ')');
+	
 	let out = '';
 	for(let item of data.list) {
 		let qnaNum = item.qnaNum;

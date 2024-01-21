@@ -2,10 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <style type="text/css">
 .body-container {
 	max-width: 1080px;
-	margin: 10px auto;
 }
 
 .nav-tabs .nav-link {
@@ -26,6 +26,7 @@
 	min-height: 300px;
 }
 
+ 
 .table tr {
 	border-bottom: 1px solid #dedede;
 }
@@ -47,6 +48,7 @@
 	content: '';
 	display: inline-block;
 }
+
 
 .page-navigation {
 	margin: 0 auto;
@@ -122,10 +124,10 @@ $(function(){
 });
 </script>
 
-<div class="container">
+<!-- <div class="container"> -->
 	<div class="body-container">	
 		<div class="body-title">
-			<h3><i class="bi bi-chat-right-text"></i> 캠핑카 문의 </h3>
+			<h2><i class="bi bi-chat-right-text" style="font-size:23px;"></i> 캠핑카 문의 </h2>
 		</div>
 		
 		<div class="body-main">
@@ -137,7 +139,6 @@ $(function(){
 									<option value="1" ${ mode == 1 ? 'selected' : '' }>:: 전체 ::</option>
 									<option value="2" ${ mode == 2 ? 'selected' : '' }>:: 답변완료 ::</option>
 									<option value="3" ${ mode == 3 ? 'selected' : '' }>:: 미답변 ::</option>
-									<option value="4" ${ mode == 4 ? 'selected' : '' }>:: 비밀글 ::</option>
 							</select>
 		            	</div>
 		            </div>
@@ -240,7 +241,7 @@ $(function(){
 
 		</div>
 	</div>
-</div>
+<!-- </div> -->
 
 <div class="modal hidden" id="answerDialogModal" tabindex="-1" 
 		data-bs-backdrop="static" data-bs-keyboard="false"

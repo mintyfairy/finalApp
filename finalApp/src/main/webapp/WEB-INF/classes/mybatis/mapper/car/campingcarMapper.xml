@@ -39,25 +39,11 @@
 	</select> 
 	
 	<select id="findById" parameterType="Long" resultType="com.fa.plus.domain.car.CampingCar">
-		SELECT c.carNum, c.carName, c.carSize, c.thumbnail, c.carShow, c.discountRate, c.carMaxNum, c.sleepNum, c.content, c.petOrNot, 
+				SELECT c.carNum, c.carName, c.carSize, c.thumbnail, c.carShow, c.discountRate, c.carMaxNum, c.sleepNum, c.content, c.petOrNot, 
 			c.description, c.reg_date,
-			caravanNum, weekCost, wkndCost, carBirth,
-			NVL(score, 0) score, NVL(reviewCount, 0) reviewCount,
-			NVL(questionCount, 0) questionCount
+			caravanNum, weekCost, wkndCost, carBirth
 		FROM campingCar c
 		JOIN carDetail d ON c.carNum = d.carNum
-		LEFT OUTER JOIN (
-			SELECT carNum, ROUND(AVG(score), 1) score, COUNT(*) reviewCount
-			FROM carReview
-			WHERE showReview = 1
-			GROUP BY carNum
-		) t ON c.carNum = t.carNum
-		LEFT OUTER JOIN (
-			SELECT carNum, COUNT(*) questionCount
-			FROM carQna
-			WHERE enabled = 1
-			GROUP BY carNum
-		) q ON c.carNum= q.carNum
 		WHERE carShow = 1 AND c.carNum = #{carNum}
 	</select>
 	
@@ -68,5 +54,14 @@
 		JOIN campingCar c ON d.carNum = c.carNum
 		WHERE c.carNum = #{carNum}
 	</select>
+	
+	<select id="listOption" parameterType="Long" resultType="com.fa.plus.domain.car.CampingCar">
+		SELECT * FROM carOption o
+		JOIN carDetail d ON o.caravanNUM = d.caravanNum
+		JOIN campingCar c ON d.carNum = c.carNum
+		WHERE c.carNUM = #{carNum}
+	</select>
+	
+	
 	
 </mapper>

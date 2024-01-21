@@ -71,6 +71,19 @@ public class CampingCarServiceImpl implements CampingCarService {
 		return list;
 	}
 
+	@Override
+	public List<CampingCar> listOption(long carNum) {
+		List<CampingCar> list = null;
+		
+		try {
+			list = mapper.listOption(carNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
 	
 
 }
