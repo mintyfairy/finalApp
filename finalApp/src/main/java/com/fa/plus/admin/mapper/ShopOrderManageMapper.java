@@ -35,4 +35,15 @@ public interface ShopOrderManageMapper {
 	
 	public void insertDetailStateInfo(Map<String, Object> map) throws SQLException;
 	public List<Map<String, Object>> listDetailStateInfo(long orderDetailNum);
+	
+	// 5일 후 주문 확정
+	public List<Long> listExpiredPeriodOrder();
+	public void updateAutoPurchaseconfirmation(long orderDetailNum) throws SQLException;
+//	public void updateAutoPurchaseconfirmation2() throws SQLException;
+	
+	// 포인트 적립
+	public int getSavedMoney(long orderDetailNum);
+	public int getTotalPoint(long memberIdx);
+	public void updateUserPoint(Map<String, Object> map) throws SQLException;
+	public long getMemberIdx(long orderDetailNum);
 }

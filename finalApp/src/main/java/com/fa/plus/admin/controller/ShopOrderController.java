@@ -280,4 +280,48 @@ public class ShopOrderController {
 		return model;
 	}
 	
+	@GetMapping("autoPurchase")
+	@ResponseBody
+	public String autoPurchase(
+//			@RequestParam String orderStatus,
+//			@RequestParam(defaultValue = "1") int state,
+//			@RequestParam(value = "page", defaultValue = "1") int current_page,
+//			@RequestParam(defaultValue = "orderNum") String schType,
+//			@RequestParam(defaultValue = "") String kwd
+			) {
+		
+		List<Long> listExpiredPeriodOrder = null;
+		Map<String, Object> pointMap = new HashMap<String, Object>();
+		String state = "true";
+		int savedPoint = 0;
+		long memberIdx = 0;
+		int totalPoint = 0;
+		
+		try {
+			listExpiredPeriodOrder = service.listExpiredPeriodOrder();
+			for(long orderDetailNum : listExpiredPeriodOrder) {
+				
+				// 5일 뒤 자동구매확정
+				service.updateAutoPurchaseconfirmation(orderDetailNum);
+				
+				// 유저 포인트 등록
+				savedPoint = service.getSavedMoney(orderDetailNum);
+				memberIdx = service.getMemberIdx(orderDetailNum);
+				totalPoint = service.getTotalPoint(memberIdx);
+				totalPoint += savedPoint;
+				pointMap.put("memberIdx", memberIdx);
+				pointMap.put("totalPoint", totalPoint);
+				pointMap.put("getPoint", savedPoint);
+				
+				service.updateUserPoint(pointMap);
+				
+				System.out.println("포인트" + savedPoint + " 회원번호" + memberIdx + "전체포인트" + totalPoint);
+			}
+		} catch (Exception e) {
+			state = "false";
+		}
+		
+		return state;
+	}
+	
 }

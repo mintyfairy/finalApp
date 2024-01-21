@@ -79,7 +79,7 @@ main .recommend h1 {
 
 main .excellent {
     height: 100vh;
-    background: url("${pageContext.request.contextPath}/resources/images/main/mountain.jpg") no-repeat center center;
+    background: url("${pageContext.request.contextPath}/resources/images/shop/main_background1.jpg") no-repeat center center;
     background-size: cover;
     background-color: rgba(255, 255, 255, 0.5);
     padding-top: 88px;
@@ -96,6 +96,7 @@ main .excellent .best_list {
     height: 400px;
     margin: 0 auto;
     background-color: #fff;
+    display: flex;
 }
 
 main .excellent .best_list .best_excellent {
@@ -130,6 +131,11 @@ main .excellent .best_list .best_excellent {
 
 .best_excellent .excellent_info p {
     color: #fff;
+}
+
+main .excellent .best_list .best_slider {
+	width: 75%;
+	height: 100%;
 }
 
 main .story {
@@ -267,15 +273,17 @@ main .story {
         <h1 class="excellent_title">캠핑 용품</h1>
         <div class="best_list">
             <div class="best_excellent">
-                <a href="#" class="bestpic_wrap">
-                    <img src="https://via.placeholder.com/270x280" alt="photo">
+                <a href="${pageContext.request.contextPath}/shop/main" class="bestpic_wrap">
+                    <img src="${pageContext.request.contextPath}/resources/images/shop/shop01.jpg" alt="photo" width="270" height="280">
                 </a>
                 <div class="excellent_info">
                     <h4>추천해요</h4>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                    <p>가장 많이 찾는 텐트</p>
                 </div>
             </div>
-            <!-- 슬라이더 -->
+            <div class="best_slider">
+            	<jsp:include page="/WEB-INF/views/slider/shop/shop_slider.jsp"/>
+            </div>
         </div>
     </div>
 

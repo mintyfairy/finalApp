@@ -203,8 +203,7 @@ public class ShopProductController {
 		} catch (Exception e) {
 		}
 		
-		String url = "redirect:/admin/shopProduct/main?parentNum=" + dto.getParentNum()
-						+ "&categoryNum=" + dto.getCategoryNum() + "&brandNum=" + dto.getBrandNum();
+		String url = "redirect:/admin/shopProduct/main";
 		
 		return url;
 	}
@@ -212,7 +211,6 @@ public class ShopProductController {
 	@GetMapping("update/{productNum}")
 	public String updateForm(
 			@PathVariable long productNum, 
-			@RequestParam(defaultValue = "0") long parentNum, 
 			@RequestParam String page, 
 			Model model) {
 		
@@ -224,7 +222,7 @@ public class ShopProductController {
 		
 		// 카테고리
 		List<ShopProductManage> listCategory = service.listCategory();
-		List<ShopProductManage> listSubCategory = service.listSubCategory(parentNum);
+		List<ShopProductManage> listSubCategory = service.listSubCategory(dto.getParentNum());
 		List<ShopProductManage> listBrand = service.listBrand();
 		
 		// 추가 이미지
@@ -245,7 +243,10 @@ public class ShopProductController {
 			listOptionDetail2 = service.listOptionDetail(listOption.get(1).getOptionNum());
 		}
 		
+		String categoryNum = Long.toString(dto.getCategoryNum());
+		
 		model.addAttribute("mode", "update");
+		model.addAttribute("categoryNum", categoryNum);
 		
 		model.addAttribute("dto", dto);
 		
@@ -345,7 +346,16 @@ public class ShopProductController {
 				}
 			}
 			dto.setFilename(dto.getThumbnail());
-			listProductFile.add(0, dto);	
+			listProductFile.add(0, dto);
+			
+			if(listProductFile.size() > 0) {
+				List<String> listFiles = new ArrayList<String>();
+				for(ShopProductManage item : listProductFile) {
+					listFiles.add(item.getFilename());
+				}
+				System.out.println(listProductFile);
+				dto.setListFiles(listFiles);
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();

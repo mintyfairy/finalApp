@@ -231,4 +231,74 @@ public class ShopOrderManageServiceImpl implements ShopOrderManageService {
 		
 	}
 
+	@Override
+	public int getSavedMoney(long orderDetailNum) {
+		int result = 0;
+		
+		try {
+			result = mapper.getSavedMoney(orderDetailNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	@Override
+	public List<Long> listExpiredPeriodOrder() {
+		List<Long> list = null;
+		try {
+			list = mapper.listExpiredPeriodOrder();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public long getMemberIdx(long orderDetailNum) {
+		long result = 0;
+		
+		try {
+			result = mapper.getMemberIdx(orderDetailNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int getTotalPoint(long memberIdx) {
+		int result = 0;
+		try {
+			result = mapper.getTotalPoint(memberIdx);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@Override
+	public void updateUserPoint(Map<String, Object> map) throws Exception {
+		try {
+			mapper.updateUserPoint(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public void updateAutoPurchaseconfirmation(long orderDetailNum) throws Exception {
+		try {
+			mapper.updateAutoPurchaseconfirmation(orderDetailNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
 }

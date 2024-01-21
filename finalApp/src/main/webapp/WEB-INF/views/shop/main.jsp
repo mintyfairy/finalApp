@@ -20,49 +20,68 @@ ul {
 
 main {
     margin-bottom: 150px;
+    background-color: #fff;
 }
 
 .main_slider_wrap {
-    position: relative;
-    height: 820px;
-    background: url("${pageContext.request.contextPath}/resources/images/shop/ocean.jpg") no-repeat center center;
-    background-size: cover;
+	width: 1080px;
+    height: 590px;
+    margin: 0 auto;
+    border-radius: 12px;
+    /*
+    background: url("${pageContext.request.contextPath}/resources/images/shop/shop_background01.jpg") no-repeat top center;
+    */
 }
 
 .main_slider {
-    position: absolute;
-    bottom: 0;
-    left: calc(50% - 540px);
-    z-index: 100;
-    width: 1080px;
-    height: 650px;
+    height: 100%;
 }
 
 .category_container {
-    padding: 150px 0;
+    margin-bottom: 40px;
+    padding: 100px 0;
 }
 
 .category_container .category_wrap {
     width: 1080px;
-    height: 320px;
+    height: 240px;
     margin: 0 auto;
 }
 
 .category_container .category_wrap .category_list {
-    height: 160px;
     display: flex;
+    height: 100px;
 }
 
 .category_container .category_wrap .category_list .category_item {
     width: calc(100% / 4);
     cursor: pointer;
-    border: 1px solid black;
+}
+
+.category_container .category_wrap .category_list .category_item a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border-bottom: 1px solid #efefef;
+    border-right: 1px solid #efefef;
+}
+
+.category_container .category_wrap .category_list .category_item a img {
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.category_container .category_wrap .category_list .category_item a span {
+    display: block;
+    text-align: center;
+    font-size: 14px;
 }
 
 .best_container {
     position: relative;
-    height: 590px;
-    padding-top: 60px;
+    height: 520px;
+    margin-bottom: 120px;
 }
 
 .best_container h1 {
@@ -77,20 +96,19 @@ main {
     left: calc(50% - 540px);
     z-index: 100;
     width: 1080px;
-    height: 447px;
+    height: 300px;
     margin: 0 auto;
+    cursor: poi
 }
 
 .focus_container {
     padding-top: 90px;
-    border: 1px solid red;
 }
 
 .focus_container .focus_wrap {
     width: 1080px;
-    height: 700px;
+    height: 580px;
     margin: 0 auto;
-    border: 1px solid blue;
 }
 
 .focus_container .focus_wrap .focus_title {
@@ -109,20 +127,18 @@ main {
 }
 
 .focus_container .focus_wrap .focus_slider {
-    height: 540px;
-    border: 1px solid black;
+    height: 400px;
+    cursor: pointer;
 }
 
 .hot_container {
     padding-top: 80px;
-    border: 1px solid red;
 }
 
 .hot_container .hot_wrap {
     width: 1080px;
     height: 1040px;
     margin: 0 auto;
-    border: 1px solid blue;
 }
 
 .hot_container .hot_wrap h1 {
@@ -287,7 +303,7 @@ $(function(){
 </script>
 
 <div class="main_slider_wrap">
-    <div class="main_slider">
+    <div class="main_slider" style="height: 100%">
         <jsp:include page="/WEB-INF/views/slider/shop/main_slider.jsp"/>
     </div>
 </div>
@@ -295,16 +311,56 @@ $(function(){
 <div class="category_container">
     <div class="category_wrap">
         <ul class="category_list">
-            <li class="category_item"></li>
-            <li class="category_item"></li>
-            <li class="category_item"></li>
-            <li class="category_item"></li>
+            <li class="category_item">
+            	<a href="#">
+	            	<img src="${pageContext.request.contextPath}/resources/images/shop/sort01.png" />
+	            	<span>텐트 타프</span>
+            	</a>
+            </li>
+            <li class="category_item">
+            	<a href="#">
+	            	<img src="${pageContext.request.contextPath}/resources/images/shop/sort02.png" />
+	            	<span>침낭 매트</span>
+            	</a>
+            </li>
+            <li class="category_item">
+            	<a href="#">
+	            	<img src="${pageContext.request.contextPath}/resources/images/shop/sort03.png" />
+	            	<span>퍼니처</span>
+            	</a>
+            </li>
+            <li class="category_item">
+            	<a href="#">
+	            	<img src="${pageContext.request.contextPath}/resources/images/shop/sort04.png" />
+	            	<span>라이팅</span>
+            	</a>
+            </li>
         </ul>
         <ul class="category_list">
-            <li class="category_item"></li>
-            <li class="category_item"></li>
-            <li class="category_item"></li>
-            <li class="category_item"></li>
+            <li class="category_item">
+            	<a href="#">
+	            	<img src="${pageContext.request.contextPath}/resources/images/shop/sort05.png" />
+	            	<span>BBQ</span>
+            	</a>
+            </li>
+            <li class="category_item">
+            	<a href="#">
+	            	<img src="${pageContext.request.contextPath}/resources/images/shop/sort06.png" />
+	            	<span>키친</span>
+            	</a>
+            </li>
+            <li class="category_item">
+            	<a href="#">
+	            	<img src="${pageContext.request.contextPath}/resources/images/shop/sort07.png" />
+	            	<span>스토리지</span>
+            	</a>
+            </li>
+            <li class="category_item">
+            	<a href="#">
+	            	<img src="${pageContext.request.contextPath}/resources/images/shop/sort08.png" />
+	            	<span>악세서리</span>
+            	</a>
+            </li>
         </ul>
     </div>
 </div>
@@ -312,7 +368,7 @@ $(function(){
 <div class="best_container">
     <h1>베스트 셀러</h1>
     <div class="best_slider">
-    	<!-- 베스트 슬라이더 -->
+    	<jsp:include page="/WEB-INF/views/slider/shop/best_slider.jsp"/>
     </div>
 </div>
 
@@ -323,7 +379,7 @@ $(function(){
             <span class="on">ON</span>
         </div>
         <div class="focus_slider">
-            <!-- focus_slider -->
+            <jsp:include page="/WEB-INF/views/slider/shop/focus_slider.jsp"/>
         </div>
     </div>
 </div>

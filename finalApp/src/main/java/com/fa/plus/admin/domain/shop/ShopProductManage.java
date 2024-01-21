@@ -33,6 +33,7 @@ public class ShopProductManage {
 	private long fileNum;
 	private String filename;
 	private List<MultipartFile> addFiles;
+	private List<String> listFiles;
 	
 	private long optionNum;
 	private String optionName;
@@ -372,6 +373,14 @@ public class ShopProductManage {
 
 	public void setStockNum(long stockNum) {
 		this.stockNum = stockNum;
+	}
+
+	public List<String> getListFiles() {
+		return listFiles;
+	}
+
+	public void setListFiles(List<String> listFiles) {
+		this.listFiles = listFiles;
 	}
 	
 	

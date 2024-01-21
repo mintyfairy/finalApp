@@ -190,6 +190,9 @@ table th, td {
               <div class="col-auto">
               		${dataCount}개(${page}/${total_page} 페이지)
               </div>
+              <div style="text-align: right; margin-bottom: 15px;">
+              	<button id="autoPurchase" type="button" class="btn btn-outline-secondary">자동구매확정</button>
+              </div>
           </div>
           
           <table class="table board-list">
@@ -247,8 +250,8 @@ table th, td {
                       <div class="col-auto p-1">
                           <select name="schType" class="form-select">
                               
-                              <option value="orderNum">주문번호</option>
-                              <c:if test="${orderStatus=='delivery'}">
+                              <option value="orderNum" ${schType=="orderNum"?"selected":""}>주문번호</option>
+                              <c:if test="${state==3}">
                                   <option value="invoiceNumber" ${schType=="invoiceNumber"?"selected":""}>송장번호</option>
                               </c:if>
                               <option value="userName" ${schType=="userName"?"selected":""}>주문자</option>
@@ -257,7 +260,7 @@ table th, td {
                       </div>
                       <div class="col-auto p-1">
                           <input type="hidden" name="state" value="${state}">
-                          <input type="text" name="kwd" value="" class="form-control">
+                          <input type="text" name="kwd" value="${kwd}" class="form-control">
                       </div>
                       <div class="col-auto p-1">
                           <button type="button" class="btn btn-light" onclick="searchList()"> <i class="bi bi-search"></i> </button>
@@ -344,6 +347,25 @@ $(function() {
 	});
 });
 */
+
+// 배송 5일 후 자동구매
+$(function() {
+	$('#autoPurchase').click(function() {
+		if(! confirm('자동구매확정을 하시겠습니까?')) {
+			return false;
+		}
+		
+		let query = '';
+		let url = "${pageContext.request.contextPath}/admin/shopOrder/autoPurchase";
+		
+		const fn = function(data) {
+			console.log(data);
+		};
+		ajaxFun(url, "get", query, "json", fn);
+		
+	});
+});
+
 
 //모달창 닫기
 $(function() {

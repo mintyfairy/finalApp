@@ -8,6 +8,7 @@ public class ShopReview {
 	private long orderDetailNum;
 	private long memberIdx;
 	private String userName;
+	private String userId;
 	private int score;
 	private String review;
 	private String answer;
@@ -28,6 +29,9 @@ public class ShopReview {
 	private String productName;
 	private String optionValue;
 	private String optionValue2;
+	
+	private String schType;
+	private String kwd;
 	
 	public long getOrderDetailNum() {
 		return orderDetailNum;
@@ -148,6 +152,24 @@ public class ShopReview {
 	}
 	public void setCol(String col) {
 		this.col = col;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getSchType() {
+		return schType;
+	}
+	public void setSchType(String schType) {
+		this.schType = schType;
+	}
+	public String getKwd() {
+		return kwd;
+	}
+	public void setKwd(String kwd) {
+		this.kwd = kwd;
 	}
 	
 }

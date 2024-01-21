@@ -100,26 +100,28 @@ function searchList() {
 
 function changeList() {
 	let parentNum = $("#changeCategory").val();
-	let productShow = $("#changeShowProduct").val();
-	let brandNum = $("#changeBrand").val();
+	//let productShow = $("#changeShowProduct").val();
+	//let brandNum = $("#changeBrand").val();
 	
 	const f = document.searchForm;
 	f.parentNum.value = parentNum;
-	f.categoryNum.value = 0;
-	f.productShow.value = productShow;
-	f.brandNum.value = brandNum;
+	// f.categoryNum.value = 0;
+	//f.productShow.value = productShow;
+	//f.brandNum.value = brandNum;
 	searchList();
 }
 
-function changeSubList() {
+function searchChange() {
 	let parentNum = $("#changeCategory").val();
 	let categoryNum = $("#changeSubCategory").val();
+	let brandNum = $("#changeBrand").val();
 	let productShow = $("#changeShowProduct").val();
 	
 	const f = document.searchForm;
 	f.parentNum.value = parentNum;
 	f.categoryNum.value = categoryNum;
 	f.productShow.value = productShow;
+	f.brandNum.value = brandNum;
 	searchList();
 }
 
@@ -197,7 +199,7 @@ $(function(){
 								</select>
 							</div>
 							<div class="col-auto pe-1">
-								<select id="changeSubCategory" class="form-select" onchange="changeSubList();">
+								<select id="changeSubCategory" class="form-select"">
 									<c:if test="${listSubCategory.size() == 0}">
 										<option value="0">:: 베이직 텐트 ::</option>
 									</c:if>
@@ -208,7 +210,7 @@ $(function(){
 								</select>
 							</div>
 							<div class="col-auto pe-1">
-								<select id="changeBrand" class="form-select" onchange="changeList();">
+								<select id="changeBrand" class="form-select"">
 									<c:if test="${listBrand.size() == 0}">
 										<option value="0">:: 브랜드 ::</option>
 									</c:if>
@@ -218,12 +220,15 @@ $(function(){
 									</c:forEach>
 								</select>
 							</div>
-							<div class="col-auto ps-1">
-								<select id="changeShowProduct" class="form-select" onchange="changeList();">
+							<div class="col-auto pe-1">
+								<select id="changeShowProduct" class="form-select"">
 									<option value="-1">:: 진열 여부 ::</option>
 									<option value="1" ${productShow==1?"selected":""}>상품 진열</option>
 									<option value="0" ${productShow==0?"selected":""}>상품 숨김</option>
 								</select>						
+							</div>
+							<div class="col-auto pe-1">
+								<button type="button" class="btn btn-light" onclick="searchChange();">검색</button>
 							</div>
 						</div>
 					</div>
@@ -278,7 +283,7 @@ $(function(){
 								<td>
 									<button class="stockBtn" type="button" class="btn border">재고</button>
 									<button class="modifyBtn" type="button" class="btn border" 
-									onclick="location.href='${pageContext.request.contextPath}/admin/shopProduct/update/${dto.productNum}?parentNum=${parentNum}&page=${page}';">수정</button>
+									onclick="location.href='${pageContext.request.contextPath}/admin/shopProduct/update/${dto.productNum}?page=${page}';">수정</button>
 									<button class="hideBtn" type="button" class="btn border">${ dto.productShow == 1 ? "숨김" : "보임" }</button>
 								</td>
 							</tr>					
@@ -480,7 +485,7 @@ $(function() {
 			console.log(...optionValue);
 			
 			let out = "";
-			out += "<table class='modal-table'>";
+			out += "<table class='modal-table' style='width: 500px; margin: 0 auto;'>";
 			out += "<colgroup>";
 			out += "<col width='200'>";
 			out += "<col width='*'>";
@@ -532,7 +537,11 @@ $(function() {
 			out += "</tr>";
 			out += "<tr>";
 			out += "<td>추가사진 : </td>";
-			out += "<td>" + "<img src='${pageContext.request.contextPath}/uploads/shop/" + data.thumbnailFile + "'></td>";
+			out += "<td>";
+			$.each(data.listFiles, function (index, item) {
+				out += "<img src='${pageContext.request.contextPath}/uploads/shop/" + item + "' width='70' height='70'>";				
+			});
+			out += "</td>";
 			out += "</tr>";
 			out += "</tbody>";
 			out += "</table>";
@@ -581,12 +590,23 @@ $(function() {
 			"&nbsp;&nbsp;&nbsp;" + data[0].optionName2 + "</p>";
 			$.each(data, function(index, item) {
 				out += "<div id='stock_num" + index + "' stock-data=" + item.stockNum + ">"
-				out += "<form name='stockForm" + item.stockNum + "' method='post' " + 
-				"action='${pageContext.request.contextPath}/admin/shopProduct/stock'>";
+				out += "<form name='stockForm" + item.stockNum + "'>";
+				out += "<table style='width: 500px; margin: 0 auto;'>";
+				out += "<colgroup>";
+				out += "<col width='200px'>";
+				out += "<col width='*'>";
+				out += "</colgroup>";
+				out += "<tbody>";
+				out += "<tr>";
+				out += "<td>";
 				out += "<p>" + item.optionValue + 
 				"&nbsp;-&nbsp" + item.optionValue2 + 
 				"&nbsp;:&nbsp;<span class='totalStock'>" + 
 				item.totalStock + "</span>";
+				out += "</p>";
+				out += "</td>";
+				out += "<td>";
+				out += "<p>";
 				out += "<input id='qty_value" + index + 
 				"' type='text' name='totalStock' value='' " + 
 				"style='width: 60px; height: 35px; " + 
@@ -609,6 +629,11 @@ $(function() {
 				"style='margin-left: 24px;'>수량변경</button>";
 				out += "<input name='stockNum' type='hidden' " + 
 				"value='" + item.stockNum + "'>";
+				out += "</p>";
+				out += "</td>";
+				out += "</tr>";
+				out += "</tbody>";
+				out += "</table>";
 				out += "</form>";
 				out += "</div>";
 			});
@@ -642,6 +667,9 @@ $(function() {
 	
 	
 	$(document).on('click', '.stockUpdate', function(){
+		if(! confirm('상품 수량을 변경하시겠습니까?')) {
+			return false;
+		}
 		let stockNum = $(this).closest('form').find('input[name="stockNum"]').val();
 		let totalStock = $(this).closest('form').find('input[name="totalStock"]').val();
 		

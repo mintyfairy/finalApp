@@ -27,4 +27,11 @@ public interface ShopOrderManageService {
 	
 	public List<Map<String, Object>> listDetailStateInfo(long orderDetailNum);
 	public void updateOrderDetailState(Map<String, Object> map) throws Exception;
+	
+	public void updateAutoPurchaseconfirmation(long orderDetailNum) throws Exception;
+	public List<Long> listExpiredPeriodOrder();
+	public int getSavedMoney(long orderDetailNum);
+	public long getMemberIdx(long orderDetailNum);
+	public int getTotalPoint(long memberIdx);
+	public void updateUserPoint(Map<String, Object> map) throws Exception;
 }

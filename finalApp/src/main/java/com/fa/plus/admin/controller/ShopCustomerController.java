@@ -1,6 +1,7 @@
 package com.fa.plus.admin.controller;
 
 import java.io.File;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +38,8 @@ public class ShopCustomerController {
 			@RequestParam(value = "page", defaultValue = "1") int current_page, 
 			@RequestParam(defaultValue = "1") int mode, 
 			@RequestParam(defaultValue = "reviewDate") String col, 
+			@RequestParam(defaultValue = "all") String schType,
+			@RequestParam(defaultValue = "") String kwd,
 			HttpServletRequest req, 
 			HttpSession session, 
 			Model model) throws Exception {
@@ -53,6 +56,8 @@ public class ShopCustomerController {
 			map.put("mode", mode);
 			map.put("col", col);
 			map.put("memberIdx", info.getMemberIdx());
+			map.put("schType", schType);
+			map.put("kwd", kwd);
 			dataCount = service.reviewCount(map);
 			
 			int total_page = myUtil.pageCount(dataCount, size);
@@ -69,9 +74,12 @@ public class ShopCustomerController {
 			List<ShopReview> list = service.listReview(map);
 			
 			String cp = req.getContextPath();
-			String listUrl = cp + "/admin/shopCustomer/review";
+			String listUrl = cp + "/admin/shopCustomer/review?col=" + col;
 			if(mode != 1) {
-				listUrl += "?mode=" + mode + "&col=" + col;
+				listUrl += "&mode=" + mode;
+			}
+			if(kwd.length() != 0) {
+				listUrl += "&schType=" + schType + "&kwd=" + URLEncoder.encode(kwd, "UTF-8");
 			}
 			String paging = myUtil.paging(current_page, total_page, listUrl);
 			
@@ -91,6 +99,7 @@ public class ShopCustomerController {
 			model.addAttribute("mode", mode);
 			model.addAttribute("tab", tab);
 			model.addAttribute("col", col);
+			model.addAttribute("schType", schType);
 			
 			
 		} catch (Exception e) {
@@ -127,7 +136,7 @@ public class ShopCustomerController {
 			HttpSession session) throws Exception {
 		
 		String root = session.getServletContext().getRealPath("/");
-		String pathname = root + "uploads" + File.separator + "review";
+		String pathname = root + "uploads" + File.separator + "shop";
 		
 		try {
 			service.deleteReview(orderDetailNum, pathname);

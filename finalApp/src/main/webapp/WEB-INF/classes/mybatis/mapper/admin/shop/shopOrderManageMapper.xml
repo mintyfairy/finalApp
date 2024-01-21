@@ -31,6 +31,12 @@
 			<if test="state == 3">
 				( po.orderState &gt;= 2 AND po.orderState &lt;= 5 ) 
 			</if>
+			<if test="orderStatus == 'exchange'">
+				AND ( detailState IN (6, 7, 8, 9) )
+			</if>
+			<if test="orderStatus == 'refund'">
+				AND ( detailState IN (10, 11, 12, 13) )
+			</if>
 			<if test="kwd!=null and kwd!='' ">
 				AND <include refid="where-list"/>
 			</if>
@@ -61,10 +67,10 @@
 				( po.orderState &gt;= 2 AND po.orderState &lt;= 5 ) 
 			</if>
 			<if test="orderStatus == 'exchange'">
-				AND ( detailState = 6 OR detailState = 7 OR detailState = 8 OR detailState = 9 )
+				AND ( detailState IN (6, 7, 8, 9) )
 			</if>
 			<if test="orderStatus == 'refund'">
-				AND ( detailState = 10 OR detailState = 11 OR detailState = 12 OR detailState = 13 )
+				AND ( detailState IN (10, 11, 12, 13) )
 			</if>
 			<if test="kwd!=null and kwd!='' ">
 				AND <include refid="where-list"/>
@@ -207,4 +213,54 @@
 		WHERE orderDetailNum = #{orderDetailNum}
 		ORDER BY stateNum DESC
 	</select>
+	
+	
+	<!-- 배송완료 5일 후 자동 구매확정 -->
+	<select id="listExpiredPeriodOrder" resultType="Long">
+		SELECT orderDetailNum
+		FROM productOrder po
+		JOIN orderDetail od ON po.orderNum = od.orderNum
+		WHERE po.orderState = 5 AND od.detailState = 0
+	  			AND TRUNC(SYSDATE - orderStateDate) &gt;= 5
+	</select>
+
+	<update id="updateAutoPurchaseconfirmation" parameterType="Long">
+		UPDATE orderDetail SET detailState = 2
+		WHERE orderDetailNum = #{orderDetailNum}
+	</update>
+	
+	<select id="getSavedMoney" parameterType="Long" resultType="Integer">
+		SELECT savedMoney FROM orderDetail
+		WHERE orderDetailNum = #{orderDetailNum};
+	</select>
+	
+	<!-- 
+	<update id="updateAutoPurchaseconfirmation2">
+		UPDATE orderDetail SET detailState = 2
+		WHERE orderDetailNum IN (
+			SELECT orderDetailNum
+			FROM productOrder po
+			JOIN orderDetail od ON po.orderNum = od.orderNum
+			WHERE po.orderState = 5 AND od.detailState = 0
+    			AND TRUNC(SYSDATE - orderStateDate) &gt;= 5
+		)
+	</update>
+	-->
+	
+	<select id="getTotalPoint" parameterType="Long" resultType="Integer">
+		SELECT totalPoint FROM userPoint WHERE memberIdx = #{memberIdx}
+	</select>
+	
+	<update id="updateUserPoint" parameterType="map">
+		UPDATE userPoint SET totalPoint = #{totalPoint}, getPoint = #{getPoint}, 
+		updatePointDate = SYSDATE 
+		WHERE memberIdx = ${memberIdx}
+	</update>
+
+	<select id="getMemberIdx" parameterType="Long" resultType="Long">
+		SELECT memberIdx FROM productOrder po
+		JOIN orderDetail od ON po.orderNum = od.orderNum
+		WHERE orderDetailNum = #{orderDetailNum}
+	</select>
+
 </mapper>

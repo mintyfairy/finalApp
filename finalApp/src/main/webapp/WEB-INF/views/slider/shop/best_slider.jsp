@@ -42,34 +42,64 @@ body {
 }
 </style>
 
-<div class="swiper mySwiper">
+<!-- Swiper -->
+<div class="swiper mySwiper2">
   <div class="swiper-wrapper">
-    <div class="swiper-slide">Slide 1</div>
-    <div class="swiper-slide">Slide 2</div>
-    <div class="swiper-slide">Slide 3</div>
-    <div class="swiper-slide">Slide 4</div>
-    <div class="swiper-slide">Slide 5</div>
-    <div class="swiper-slide">Slide 6</div>
-    <div class="swiper-slide">Slide 7</div>
-    <div class="swiper-slide">Slide 8</div>
-    <div class="swiper-slide">Slide 9</div>
+    <div class="swiper-slide">
+    	<img src="${pageContext.request.contextPath}/resources/images/shop/best01.jpg" />
+    </div>
+    <div class="swiper-slide">
+    	<img src="${pageContext.request.contextPath}/resources/images/shop/best02.jpg" />
+    </div>
+    <div class="swiper-slide">
+    	<img src="${pageContext.request.contextPath}/resources/images/shop/best03.jpg" />
+    </div>
+    <div class="swiper-slide">
+    	<img src="${pageContext.request.contextPath}/resources/images/shop/best04.jpg" />
+    </div>
+    <div class="swiper-slide">
+    	<img src="${pageContext.request.contextPath}/resources/images/shop/best05.jpg" />
+    </div>
+    <div class="swiper-slide">
+    	<img src="${pageContext.request.contextPath}/resources/images/shop/best06.jpg" />
+    </div>
+    <div class="swiper-slide">
+    	<img src="${pageContext.request.contextPath}/resources/images/shop/best07.jpg" />
+    </div>
+    <div class="swiper-slide">
+    	<img src="${pageContext.request.contextPath}/resources/images/shop/best08.jpg" />
+    </div>
+    <div class="swiper-slide">
+    	<img src="${pageContext.request.contextPath}/resources/images/shop/best09.jpg" />
+    </div>
+    <div class="swiper-slide">
+    	<img src="${pageContext.request.contextPath}/resources/images/shop/best10.jpg" />
+    </div>
+    <div class="swiper-slide">
+    	<img src="${pageContext.request.contextPath}/resources/images/shop/best11.jpg" />
+    </div>
+    <div class="swiper-slide">
+    	<img src="${pageContext.request.contextPath}/resources/images/shop/best12.jpg" />
+    </div>
   </div>
-  <div class="swiper-pagination"></div>
 </div>
 
-<!-- Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <!-- Initialize Swiper -->
 <script>
-  var swiper = new Swiper(".mySwiper", {
-    slidesPerView: 4,
-    slidesPerGroup: 4,
-    spaceBetween: 0,
-    centeredSlides: false,
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
+var swiper = new Swiper(".mySwiper2", {
+  loop: true,
+  breakpoints: {
+    769: {
+      slidesPerView: 4,
+      slidesPerGroup: 4,
     },
-  });
+  },
+  autoplay: {
+    delay: 2500,
+    disableOnInteraction: false,
+  },
+});
 </script>

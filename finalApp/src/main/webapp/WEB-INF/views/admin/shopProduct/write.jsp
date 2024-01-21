@@ -257,26 +257,28 @@ $(function(){
 });
 
 $(function(){
-	$("form select[name=brandNum]").ready(function(){
-		
-		$("form select[name=brandNum]").find('option').remove().end()
-			.append("<option value=''>:: 브랜드 선택 ::</option>");	
-		
-		let url = "${pageContext.request.contextPath}/admin/shopProduct/listBrand";
-		let query = "";
-		
-		const fn = function(data) {
-			console.log(data);
-			$.each(data.listBrand, function(index, item){
-				let brandNum = item.brandNum;
-				let brandName = item.brandName;
-				let s = "<option value='"+brandNum+"'>"+brandName+"</option>";
-				$("form select[name=brandNum]").append(s);
-			});
-		};
-		ajaxFun(url, "get", query, "json", fn);
-		
-	});
+	if(${mode} != 'update') {
+		$("form select[name=brandNum]").ready(function(){
+			
+			$("form select[name=brandNum]").find('option').remove().end()
+				.append("<option value=''>:: 브랜드 선택 ::</option>");	
+			
+			let url = "${pageContext.request.contextPath}/admin/shopProduct/listBrand";
+			let query = "";
+			
+			const fn = function(data) {
+				console.log(data);
+				$.each(data.listBrand, function(index, item){
+					let brandNum = item.brandNum;
+					let brandName = item.brandName;
+					let s = "<option value='"+brandNum+"'>"+brandName+"</option>";
+					$("form select[name=brandNum]").append(s);
+				});
+			};
+			ajaxFun(url, "get", query, "json", fn);
+			
+		});
+	}
 });
 </script>
 
@@ -407,7 +409,7 @@ $(function(){
 									<select name="parentNum" class="form-select">
 										<option value="">:: 메인 카테고리 선택 ::</option>
 										<c:forEach var="vo" items="${listCategory}">
-											<option value="${vo.categoryNum}" ${parentNum==vo.categoryNum?"selected":""}>${vo.categoryName}</option>
+											<option value="${vo.categoryNum}" ${dto.parentNum==vo.categoryNum?"selected":""}>${vo.categoryName}</option>
 										</c:forEach>
 									</select>
 								</div>
@@ -427,6 +429,9 @@ $(function(){
 						<td>
 							<select name="brandNum" class="form-select">
 								<option value="">:: 브랜드 선택 ::</option>
+								<c:forEach var="vo" items="${listBrand}">
+									<option value="${vo.brandNum}" ${dto.brandNum==vo.brandNum?"selected":""}>${vo.brandName}</option>
+								</c:forEach>
 							</select>
 						</td>
 					</tr>
@@ -563,7 +568,11 @@ $(function(){
 					<tr>
 						<td class="table-light col-sm-2">대표이미지</td>
 						<td>
-							<div class="thumbnail-viewer"></div>
+							<div class="thumbnail-viewer">
+							<!-- 
+								<img alt="thumbnail" src="${pageContext.request.contextPath}/uploads/shop/${dto.thumbnail}" width="100" height="100">
+								 -->
+							</div>
 							<input type="file" name="thumbnailFile" accept="image/*" class="form-control" style="display: none;">
 						</td>
 					</tr>
@@ -574,7 +583,8 @@ $(function(){
 							<div class="img-grid">
 								<img class="item img-add" src="${pageContext.request.contextPath}/resources/images/add_photo.png">
 								<c:forEach var="vo" items="${listFile}">
-									<img src="${pageContext.request.contextPath}/uploads/product/${vo.filename}"
+									<img src="${pageContext.request.contextPath}/uploads/shop
+									/${vo.filename}"
 										class="item delete-img"
 										data-fileNum="${vo.fileNum}"
 										data-filename="${vo.filename}">

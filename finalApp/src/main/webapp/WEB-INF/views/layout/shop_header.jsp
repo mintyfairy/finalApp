@@ -292,7 +292,23 @@ ul {
 	text-decoration: none;
 }
 
-.brand-item { cursor: pointer; }
+.brand-list {
+	display: flex;
+}
+
+.brand-item {
+    margin-left: 29px;
+    padding: 5px 11px;
+    font-size: 18px;
+	cursor: pointer;
+    border: 1px solid #ccc;
+	border-radius: 20px;
+}
+
+.brand-item:hover {
+	background-color: #ccc;
+	color: #fff;
+}
 </style>
 
 <script type="text/javascript">
