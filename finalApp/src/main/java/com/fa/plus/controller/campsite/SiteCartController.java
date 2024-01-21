@@ -42,7 +42,6 @@ public class SiteCartController {
 		List<SiteCart> list = service.listCart(info.getMemberIdx());
 
 		model.addAttribute("list", list);
-		System.out.println(list.get(0).getSiteName());
 
 		return ".campsite.cart";
 	}
