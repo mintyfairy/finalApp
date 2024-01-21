@@ -163,6 +163,7 @@ ul {
     position: relative;
 }
 
+/* 
 .header_center .header_center_wrap .header_center_list .header_center_item:first-child::after {
     content: '';
     position: absolute;
@@ -173,11 +174,11 @@ ul {
     background-color: #dedede;
 
 }
-
+ */
 .header_center .header_center_wrap .header_center_list .header_center_item a {
     display: block;
     font-size: 18px;
-    padding: 20px;
+    padding: 0px;
 }
 
 .header_center .header_center_wrap .header_center_list .header_center_item a:hover {
@@ -216,10 +217,13 @@ ul {
             <div class="header_center_wrap">
                 <ul class="header_center_list">
                     <li class="header_center_item">
-                        <a href="${pageContext.request.contextPath}/" style="padding-left:0;">CAMPING AREA</a>
+                        <a href="${pageContext.request.contextPath}/" style="padding-left:0;">메인&nbsp;|</a>
                     </li>
                     <li class="header_center_item">
-                        <a href="${pageContext.request.contextPath}/shop/main">CAMPINGSHOP</a>
+                        <a href="${pageContext.request.contextPath}/site/list" style="padding-left:0;">&nbsp;캠핑예약&nbsp;|</a>
+                    </li>
+                    <li class="header_center_item">
+                        <a href="${pageContext.request.contextPath}/shop/main">&nbsp;스토어</a>
                     </li>
                 </ul>
             </div>
@@ -245,6 +249,9 @@ ul {
                 <li class="header_item fa-lg"><a href="${pageContext.request.contextPath}/member/join"><i class="fa-solid fa-user-plus"></i></a></li>
                 <li class="header_item fa-lg"><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
                 <li class="header_item fa-lg"><a href="#"><i class="fa-solid fa-headset"></i></a></li>
+                <c:if test='${sessionScope.member.authority=="CAMP"||sessionScope.member.authority=="ADMIN"}'>
+				   <li class="header_item fa-lg"><a href="${pageContext.request.contextPath}/admin"><i class="fa-solid fa-user-gear"></i></a></li>
+				</c:if>
             </ul>
         </div>
     </div>
