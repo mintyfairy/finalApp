@@ -51,6 +51,9 @@ public class CarReservation {
 	private String addBirth;
 	private String addRegist;
 	private String addLicenseImage;
+	private String addRiderName;
+	private String addRiderTel;
+	
 	public long getCarNum() {
 		return carNum;
 	}
@@ -285,6 +288,18 @@ public class CarReservation {
 	public void setAddLicenseImage(String addLicenseImage) {
 		this.addLicenseImage = addLicenseImage;
 	}
-
+	public String getAddRiderName() {
+		return addRiderName;
+	}
+	public void setAddRiderName(String addRiderName) {
+		this.addRiderName = addRiderName;
+	}
+	public String getAddRiderTel() {
+		return addRiderTel;
+	}
+	public void setAddRiderTel(String addRiderTel) {
+		this.addRiderTel = addRiderTel;
+	}
+	
 
 }

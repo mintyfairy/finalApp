@@ -43,17 +43,30 @@
 <script type="text/javascript">
     function check() {
         const f = document.writeForm;
-        let str;
+        let mode = "${mode}";
+        let licenseDate = new Date(f.licenseDate.value); // 면허증 발급일을 Date 객체로 변환
+        let currentDate = new Date(); // 현재 날짜를 얻음
 
-        str = f.licenseDate.value.trim();
-        if (!str) {
-            alert("면허증 등록일을 입력하세요.");
+        // 밀리초 단위로 시간 차이 계산
+        let timeDifference = currentDate - licenseDate;
+
+        // 1년을 밀리초로 계산 (365일)
+        let oneYearInMillis = 365 * 24 * 60 * 60 * 1000;
+
+        
+        if ((mode === 'addrider') && (!f.licenseDate.value)) {
+            alert("면허증 발급일을 입력하세요.");
+            f.licenseDate.focus();
+            return;
+        }
+        
+        if (mode === 'addrider' && timeDifference < oneYearInMillis) {
+            alert("면허증 발급일은 현재 날짜로부터 1년 이상이어야 합니다.");
             f.licenseDate.focus();
             return;
         }
 
-        let mode = "${mode}";
-        if ((mode === 'write') && (!f.selectFile.value)) {
+        if ((mode === 'addrider') && (!f.selectFile.value)) {
             alert("이미지 파일을 추가하세요.");
             f.selectFile.focus();
             return;
@@ -62,6 +75,7 @@
         f.action = "${pageContext.request.contextPath}/car/mypage/${mode}";
         f.submit();
     }
+    
 </script>
 
 <div class="container">
@@ -71,13 +85,13 @@
                 <tr>
 				<th>운전자</th>
 				<td>
-					${dto.userName}
+					${orderUser.userName}
 				</td>
 			</tr>
 			<tr>
 				<th>생년월일</th>
 				<td>
-					${dto.birth}
+					${orderUser.birth}
 				</td>
 			</tr>
 			
@@ -91,7 +105,7 @@
 				<th>면허증 사진</th>
 				<td>
 					<div class="img-viewer"></div>
-					<input type="file" name="selectFile" accept="image/*" class="form-control">
+					<input type="file" name="selectFile" accept="image/*" class="form-control" value="${dto.licenseImage}">
 				</td>
 			</tr>
 			
@@ -104,7 +118,7 @@
                         <button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/car/mypage/rider';">${mode=='update'?'수정취소':'등록취소'}</button>
                         <c:if test="${mode=='update'}">
                             <input type="hidden" name="licenseDate" value="${dto.licenseDate}">
-                            <input type="hidden" name="licenseImage" value="${dto.licenseImage}">
+                            <input type="hidden" name="selectFile" value="${dto.licenseImage}">
                         </c:if>
                     </td>
                 </tr>

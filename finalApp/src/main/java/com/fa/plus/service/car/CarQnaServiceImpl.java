@@ -87,6 +87,73 @@ public class CarQnaServiceImpl implements CarQnaService {
 		
 		return list;
 	}
+
+	@Override
+	public int dataCount2(Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			result = mapper.dataCount2(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	@Override
+	public List<CarQna> listQuestion2(Map<String, Object> map) {
+		List<CarQna> list = null;
+		
+		try {
+			list = mapper.listQuestion2(map);
+			for(CarQna dto : list) {
+				if(dto.getFilename() != null) {
+					dto.setListFilename(dto.getFilename().split(",")); 
+				}
+				
+				dto.setQuestion(dto.getQuestion().replaceAll("\n", "<br>"));
+				
+				if(dto.getAnswer() != null) {
+					dto.setAnswer(dto.getAnswer().replaceAll("\n", "<br>"));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public void updateQuestion(CarQna dto) throws Exception {
+		try {
+			mapper.updateQuestion(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public void deleteQuestion(long qnaNum, String pathname) throws Exception {
+		try {
+			List<CarQna> listFile = mapper.listQnaFile(qnaNum);
+			if(listFile != null) {
+				for (CarQna dto : listFile) {
+					fileManager.doFileDelete(dto.getFilename());
+				}
+			}
+			
+			mapper.deleteQuestion(qnaNum);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
 	
 	
 	

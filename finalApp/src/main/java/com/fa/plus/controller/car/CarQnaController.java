@@ -105,4 +105,51 @@ public class CarQnaController {
 			
 			return model;
 		}
+		
+		
+		// AJAX - JSON : 마이페이지 - 내 Q&A
+		@GetMapping("list2")
+		public Map<String, Object> list2(
+				@RequestParam(value = "pageNo", defaultValue = "1") int current_page,
+				HttpSession session) throws Exception {
+			SessionInfo info = (SessionInfo)session.getAttribute("member");
+			
+			Map<String, Object> model = new HashMap<String, Object>();
+			
+			try {
+				Map<String, Object> map = new HashMap<String, Object>();
+				
+				int size = 5;
+				int dataCount = 0;
+				
+				map.put("memberIdx", info.getMemberIdx());
+				
+				dataCount = service.dataCount2(map);
+				int total_page = myUtil.pageCount(dataCount, size);
+				if (current_page > total_page) {
+					current_page = total_page;
+				}
+
+				int offset = (current_page - 1) * size;
+				if(offset < 0) offset = 0;
+
+				map.put("offset", offset);
+				map.put("size", size);
+
+				List<CarQna> list = service.listQuestion2(map);
+				
+				String paging = myUtil.pagingFunc(current_page, total_page, "listQuestion");
+				
+				model.put("list", list);
+				model.put("dataCount", dataCount);
+				model.put("size", size);
+				model.put("pageNo", current_page);
+				model.put("paging", paging);
+				model.put("total_page", total_page);
+				
+			} catch (Exception e) {
+			}
+			
+			return model;
+		}
 }

@@ -16,23 +16,30 @@
 	
 	<!-- 운전자 정보 보기 -->
 	<select id="riderInfo" parameterType="Long" resultType="com.fa.plus.domain.car.CarMyPage">
-		SELECT r.memberIdx, TO_CHAR(birth, 'YYYY-MM-DD') licenseDate, licenseImage, TO_CHAR(m2.birth, 'YYYY-MM-DD') birth, m.userId, m.userName
+		SELECT r.memberIdx, TO_CHAR(licenseDate, 'YYYY-MM-DD') licenseDate, licenseImage, TO_CHAR(m2.birth, 'YYYY-MM-DD') birth, m.userId, m.userName
 		FROM license r
 		JOIN member1 m ON r.memberIdx = m.memberIdx
 		JOIN member2 m2 ON m.userId = m2.userId
 		WHERE r.memberIdx = #{memberIdx}
 	</select>
 	
-	<select id="countPayment" parameterType="map" resultType="Integer">
+	
+	<select id="countCarPayment" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*), 0)
 		FROM carReservation
-		WHERE memberIdx = #{memberIdx} AND userDelete = 0
+		WHERE memberIdx = #{memberIdx}
 	</select>
-	<!-- 
-	<select id="listPayment" parameterType="map" resultType="com.fa.plus.domain.car.CarReservation">
-		SELECT cr.orderNum, memberIdx, orderDate, totalMoney, discount, payment, start_date, end_date,
-		carNum, carName, thumbnail, weekCost, wkndCost, 
-		orderState
+	 
+	<select id="listCarPayment" parameterType="map" resultType="com.fa.plus.domain.car.CarReservation">
+		SELECT cr.orderNum, memberIdx, TO_CHAR(orderDate, 'YYYY-MM-DD') orderDate, totMoney, discount, payment, TO_CHAR(start_date, 'YYYY-MM-DD') start_date, TO_CHAR(end_date, 'YYYY-MM-DD') end_date,
+		cr.carNum, carName, thumbnail, orderState,
+		payMethod, cardName, authNumber, authDate
+		FROM carReservation cr
+		JOIN campingCar c ON cr.carNum = c.carNum
+		JOIN carPayDetail p ON cr.orderNum = p.orderNum
+		WHERE memberIdx = #{memberIdx}
+		ORDER BY orderDate DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
-	  -->
+	
 </mapper>

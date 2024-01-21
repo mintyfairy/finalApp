@@ -41,4 +41,62 @@
 		FROM carQnaFile
 		WHERE qnaNum = #{qnaNum}
 	</select>
+	
+	<select id="dataCount2" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM carQna
+		<where>
+			<if test="memberIdx != null">
+				memberIdx = #{memberIdx}
+			</if>
+			<if test="mode != null">
+				<if test="mode == 2">
+					AND ( answer IS NOT NULL )
+				</if>
+				<if test="mode == 3">
+					AND ( answer IS NULL )
+				</if>
+			</if>
+		</where>
+	</select>
+		
+	<select id="listQuestion2" parameterType="map" resultType="com.fa.plus.domain.car.CarQna">
+		SELECT q.qnaNum, q.memberIdx, m.userName, q.secret, q.question, q.answer, 
+		q.carNum, q.enabled, q.question_date, q.answer_date ,c.carName, f.filename , m2.userId answerId
+		FROM carQna q 
+		JOIN campingCar c ON q.carNum = c.carNum 
+		JOIN member1 m ON q.memberIdx = m.memberIdx 
+		LEFT OUTER JOIN ( 
+		    SELECT qnaNum, LISTAGG(filename, ',') WITHIN GROUP(ORDER BY fileNum) filename 
+		    FROM carQnaFile 
+		    GROUP BY qnaNum ) f ON q.qnaNum=f.qnaNum 
+		LEFT OUTER JOIN member1 m2 ON q.answerId = m2.userId 
+		<where>
+			<if test="memberIdx != null">
+				q.memberIdx = #{memberIdx}
+			</if>
+			<if test="mode != null">
+				<if test="mode == 2">
+					AND ( answer IS NOT NULL )
+				</if>
+				<if test="mode == 3">
+					AND ( answer IS NULL )
+				</if>
+			</if>
+		</where>
+		ORDER BY q.qnaNum DESC 
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+	
+	<update id="updateQuestion" parameterType="com.fa.plus.domain.car.CarQna">
+		UPDATE productQna SET answer = #{answer}, answerId = #{answerId}, answer_date = SYSDATE
+		WHERE qnaNum = #{qnaNum}
+	</update>
+	
+	<delete id="deleteQuestion" parameterType="long">
+		DELETE FROM carQna
+		WHERE qnaNum = #{qnaNum}
+	</delete>
+	
+	
 </mapper>

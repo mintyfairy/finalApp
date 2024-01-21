@@ -16,6 +16,13 @@ public interface CarQnaMapper {
 	public int dataCount(Map<String, Object> map);
 	public List<CarQna> listCarQna(Map<String, Object> map);
 	
+	public int dataCount2(Map<String, Object> map);
+	public List<CarQna> listQuestion2(Map<String, Object> map);
+	
 	public List<CarQna> listQnaFile(long qnaNum);
+	
+	public void updateQuestion(CarQna dto) throws SQLException;
+	
+	public void deleteQuestion(long qnaNum) throws SQLException;
 	
 }

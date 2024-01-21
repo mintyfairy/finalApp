@@ -261,7 +261,7 @@ ul {
                     <a href="${pageContext.request.contextPath}/car/location">오시는길</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/car/mypage/rider">MY PAGE</a>
+                    <a href="${pageContext.request.contextPath}/car/mypage/rider">예약정보</a>
                 </li>
                 <li>
                 	&nbsp;

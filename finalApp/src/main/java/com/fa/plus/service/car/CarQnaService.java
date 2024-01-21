@@ -10,5 +10,11 @@ public interface CarQnaService {
 	
 	public int dataCount(Map<String, Object> map);
 	public List<CarQna> listCarQna(Map<String, Object> map);
-
+	
+	public int dataCount2(Map<String, Object> map);
+	public List<CarQna> listQuestion2(Map<String, Object> map);
+	
+	public void updateQuestion(CarQna dto) throws Exception;
+	
+	public void deleteQuestion(long qnaNum, String pathname) throws Exception;
 }
