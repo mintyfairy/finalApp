@@ -350,7 +350,7 @@ table tr {
 							aria-controls="panelsStayOpen-collapseThree">선택 일정</button>
 					</h2>
 					<div id="panelsStayOpen-collapseThree"
-						class="accordion-collapse collapse">
+						class="accordion-collapse collapse show">
 						<div class="accordion-body goods_item">
 							<div class="datebox">
                             <ul>
@@ -412,7 +412,7 @@ table tr {
 							운전자 정보</button>
 					</h2>
 					<div id="panelsStayOpen-collapseTwo"
-						class="accordion-collapse collapse">
+						class="accordion-collapse collapse show">
 						<div class="accordion-body">
 							<table>
 								<tr>
@@ -440,7 +440,7 @@ table tr {
 							결제</button>
 					</h2>
 					<div id="panelsStayOpen-collapseFour"
-						class="accordion-collapse collapse">
+						class="accordion-collapse collapse show">
 						<div class="accordion-body">
 							<table>
 								<tr id="totalFee">
