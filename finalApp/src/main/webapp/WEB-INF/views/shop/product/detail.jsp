@@ -707,6 +707,7 @@ function sendOk(mode) {
 						
 						<div class="col p-3 text-center">
 							<div class="fs-6 fw-semibold">리뷰수</div>
+							
 							<div class="fs-2"><i class="bi bi-chat-right-text"></i></div>
 							<div class="fs-2 review-reviewCount">${dto.reviewCount}</div>
 						</div> 

@@ -146,6 +146,7 @@ public class QnAServiceImpl implements QnAService {
 				}
 			}
 
+			mapper.deleteQnAFile(qnaNum);
 			mapper.deleteQuestion(qnaNum);
 
 		} catch (Exception e) {

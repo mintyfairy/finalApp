@@ -82,4 +82,9 @@
 		DELETE FROM productQna
 		WHERE qnaNum = #{qnaNum}
 	</delete>
+	
+	<delete id="deleteQnAFile" parameterType="long">
+		DELETE FROM productQnaFile
+		WHERE qnaNum = #{qnaNum}
+	</delete>
 </mapper>

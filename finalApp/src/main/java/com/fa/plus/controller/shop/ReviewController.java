@@ -8,11 +8,12 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fa.plus.common.MyUtil;
 import com.fa.plus.domain.SessionInfo;
@@ -20,7 +21,7 @@ import com.fa.plus.domain.shop.Review;
 import com.fa.plus.domain.shop.Summary;
 import com.fa.plus.service.shop.ReviewService;
 
-@RestController
+@Controller
 @RequestMapping("/review/*")
 public class ReviewController {
 	@Autowired
@@ -31,18 +32,19 @@ public class ReviewController {
 	
 	// AJAX - JSON
 		@PostMapping("write")
+		@ResponseBody
 		public Map<String, Object> writeSubmit(Review dto,
 				HttpSession session) throws Exception {
 			
 			String root = session.getServletContext().getRealPath("/");
-			String pathname = root + "uploads" + File.separator + "review";
+			String pathname = root + "uploads" + File.separator + "shop";
 			
 			String state = "true";
 			try {
 				
 				SessionInfo info = (SessionInfo)session.getAttribute("member");
 				dto.setMemberIdx(info.getMemberIdx());
-				dto.setOrderDetailNum(info.getMemberIdx());
+				//dto.setOrderDetailNum(info.getMemberIdx());
 				
 				service.insertReview(dto, pathname);
 			} catch (Exception e) {
@@ -117,6 +119,7 @@ public class ReviewController {
 		
 		// AJAX - JSON : 마이페이지 - 내가 쓴 리뷰
 		@GetMapping("list2")
+		@ResponseBody
 		public Map<String, Object> list2(
 				@RequestParam(value = "pageNo", defaultValue = "1") int current_page,
 				HttpSession session) throws Exception {
@@ -160,4 +163,21 @@ public class ReviewController {
 			
 			return model;
 		}
+		
+		   @GetMapping("delete")
+		   public String reviewDelete(@RequestParam long orderDetailNum, 
+		         HttpSession session) throws Exception {
+		      
+		      String root = session.getServletContext().getRealPath("/");
+		      String pathname = root + "uploads" + File.separator + "shop";
+		      
+		      try {
+		         service.deleteReview(orderDetailNum, pathname);
+		      } catch (Exception e) {
+		      }
+		      
+		      String url = "redirect:/shop/myPage/review";
+		      
+		      return url;
+		   }
 }

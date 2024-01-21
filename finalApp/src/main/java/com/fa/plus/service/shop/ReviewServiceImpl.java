@@ -31,7 +31,7 @@ public class ReviewServiceImpl implements ReviewService {
 					if (filename != null) {
 						dto.setFilename(filename);
 
-						mapper.insertReview(dto);
+						mapper.insertReviewFile(dto);
 					}
 				}
 			}
@@ -153,7 +153,8 @@ public class ReviewServiceImpl implements ReviewService {
 					fileManager.doFileDelete(dto.getFilename(), pathname);
 				}
 			}
-
+			
+			mapper.deleteReviewFile(orderDetailNum);
 			mapper.deleteReview(orderDetailNum);
 
 		} catch (Exception e) {

@@ -296,6 +296,8 @@ ol, ul {
 	border: 1px solid #c2c2c2;
 	cursor: pointer;
 }
+
+
 </style>
 
 <script type="text/javascript">
@@ -606,7 +608,7 @@ $(function(){
 										class="form-control" style="display: none;">
 								</div>
 								<div class="p-1 text-end">
-									<input type="hidden" name="num" value="${dto.orderDetailNum}">
+									<input type="hidden" name="orderDetailNum" value="${dto.orderDetailNum}">
 									<button type="button"
 										class="btn btn-dark btnReviewSend ps-5 pe-5">등록하기</button>
 								</div>

@@ -8,18 +8,19 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fa.plus.common.MyUtil;
-import com.fa.plus.service.shop.QnAService;
-import com.fa.plus.domain.shop.QnA;
 import com.fa.plus.domain.SessionInfo;
+import com.fa.plus.domain.shop.QnA;
+import com.fa.plus.service.shop.QnAService;
 
-@RestController
+@Controller
 @RequestMapping("/qna/*")
 public class QnAController {
 	@Autowired
@@ -34,7 +35,7 @@ public class QnAController {
 				HttpSession session) throws Exception {
 			
 			String root = session.getServletContext().getRealPath("/");
-			String pathname = root + "uploads" + File.separator + "qna";
+			String pathname = root + "uploads" + File.separator + "shop";
 			
 			String state = "true";
 			try {
@@ -56,10 +57,10 @@ public class QnAController {
 		@GetMapping("list")
 		public Map<String, Object> list(
 				@RequestParam long productNum,
+				@RequestParam(defaultValue = "0") int sortNo,
 				@RequestParam(value = "pageNo", defaultValue = "1") int current_page,
 				HttpSession session) throws Exception {
 			SessionInfo info = (SessionInfo)session.getAttribute("member");
-			
 			Map<String, Object> model = new HashMap<String, Object>();
 			
 			try {
@@ -72,13 +73,15 @@ public class QnAController {
 				
 				dataCount = service.dataCount(map);
 				int total_page = myUtil.pageCount(dataCount, size);
+				
 				if (current_page > total_page) {
 					current_page = total_page;
 				}
 
 				int offset = (current_page - 1) * size;
 				if(offset < 0) offset = 0;
-
+				
+				map.put("sortNo", sortNo);
 				map.put("offset", offset);
 				map.put("size", size);
 
@@ -108,11 +111,12 @@ public class QnAController {
 
 		// AJAX - JSON : 마이페이지 - 내 Q&A
 		@GetMapping("list2")
+		@ResponseBody
 		public Map<String, Object> list2(
 				@RequestParam(value = "pageNo", defaultValue = "1") int current_page,
 				HttpSession session) throws Exception {
-			SessionInfo info = (SessionInfo)session.getAttribute("member");
 			
+			SessionInfo info = (SessionInfo)session.getAttribute("member");
 			Map<String, Object> model = new HashMap<String, Object>();
 			
 			try {
@@ -124,6 +128,7 @@ public class QnAController {
 				map.put("memberIdx", info.getMemberIdx());
 				
 				dataCount = service.dataCount2(map);
+				
 				int total_page = myUtil.pageCount(dataCount, size);
 				if (current_page > total_page) {
 					current_page = total_page;
@@ -151,5 +156,22 @@ public class QnAController {
 			
 			return model;
 		}
+		
+		 @GetMapping("delete")
+		   public String reviewDelete(@RequestParam long qnaNum, 
+		         HttpSession session) throws Exception {
+		      
+		      String root = session.getServletContext().getRealPath("/");
+		      String pathname = root + "uploads" + File.separator + "shop";
+		      
+		      try {
+		         service.deleteQuestion(qnaNum, pathname);
+		      } catch (Exception e) {
+		      }
+		      
+		      String url = "redirect:/shop/myPage/review";
+		      
+		      return url;
+		   }
 
 }

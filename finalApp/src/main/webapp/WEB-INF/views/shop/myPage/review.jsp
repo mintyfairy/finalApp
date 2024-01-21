@@ -27,7 +27,7 @@
 	color: #ccc; text-decoration: none; vertical-align: middle;
 }
 .score-star .item:first-child{ margin-left: 0; }
-.score-star .on { color: #00D8FF; }
+.score-star .on { color: #95D9F1; }
 
 .md-img img { width: 150px; height: 150px; cursor: pointer; object-fit: cover; }
 .deleteReview, .deleteQuestion { cursor: pointer; padding-left: 5px; }
@@ -54,6 +54,7 @@ $(function(){
 	}
 	
 });
+
 function login() {
 	location.href = '${pageContext.request.contextPath}/member/login';
 }
@@ -113,7 +114,6 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 					
 					<div class="mt-2 list-review"></div>
 				</div>
-				
 				<div class="tab-pane fade ${mode=='qna'?'active show':'' }" id="tab-pane-2" role="tabpanel" aria-labelledby="tab-2" tabindex="0">
 					<div class="mt-3 pt-3 border-bottom">
 						<p class="fs-4 fw-semibold">상품 문의</p> 
@@ -134,6 +134,7 @@ function listReview(page) {
 	let query = 'pageNo='+page;
 	
 	const fn = function(data) {
+		console.log(data);
 		printReview(data);
 	};
 	ajaxFun(url, 'get', query, 'json', fn);	
@@ -148,13 +149,13 @@ function printReview(data) {
 	
 	let out = '';
 	for(let item of data.list) {
-		let num = item.num;
+		let orderDetailNum = item.orderDetailNum;
 		let userName = item.userName;
 		let score = item.score;
 		let review = item.review;
-		let review_date = item.review_date;
+		let reviewDate = item.reviewDate;
 		let answer = item.answer;
-		let answer_date = item.answer_date;
+		let answerDate = item.answerDate;
 		let listFilename = item.listFilename;
 		
 		let productName = item.productName;
@@ -171,8 +172,8 @@ function printReview(data) {
 			out += '  <span class="item fs-6 ' + (score>=i ? 'on' : '') + '"><i class="bi bi-star-fill"></i></span>';
 		}
 		out += '    </div>';
-		out += '    <div class="col text-end"><span>'+review_date+'</span>';
-		out += '       |<span class="deleteReview" data-num="'+num+'">삭제</span></div>';	
+		out += '    <div class="col text-end"><span>'+reviewDate+'</span>';
+		out += '       |<span class="deleteReview" data-num="'+orderDetailNum+'">삭제</span></div>';	
 		out += '  </div>';
 		out += '  <div class="mt-2 p-2">' + review + '</div>';
 
@@ -180,7 +181,7 @@ function printReview(data) {
 			out += '<div class="row gx-1 mt-2 mb-1 p-1">';
 				for(let f of listFilename) {
 					out += '<div class="col-md-auto md-img">';
-					out += '  <img class="border rounded" src="${pageContext.request.contextPath}/uploads/review/'+f+'">';
+					out += '  <img class="border rounded" src="${pageContext.request.contextPath}/uploads/shop/'+f+'">';
 					out += '</div>';
 				}
 			out += '</div>';
@@ -190,7 +191,7 @@ function printReview(data) {
 			out += '  <div class="p-3 pt-0">';
 			out += '    <div class="bg-light">';
 			out += '      <div class="p-2 pb-0">';
-			out += '        <label class="text-bg-primary px-2"> 관리자 </label> <label>' + answer_date + '</label>';
+			out += '        <label class="text-bg-primary px-2"> 관리자 </label> <label>' + answerDate + '</label>';
 			out += '      </div>';
 			out += '      <div class="p-2 pt-1">' + answer + '</div>';
 			out += '    </div>';
@@ -207,8 +208,12 @@ function printReview(data) {
 
 $(function(){
 	$('.list-review').on('click', '.deleteReview', function(){
-		let num = $(this).attr('data-num');
-		alert(num);
+		let orderDetailNum = $(this).attr('data-num');
+		
+		if(confirm('리뷰를 삭제하시겠습니까?')) {
+			let query = 'orderDetailNum=' + orderDetailNum;
+			location.href = '${pageContext.request.contextPath}/review/delete?' + query;
+		}
 	});
 });
 
@@ -232,13 +237,13 @@ function printQuestion(data) {
 	
 	let out = '';
 	for(let item of data.list) {
-		let num = item.num;
+		let qnaNum = item.qnaNum;
 		let userName = item.userName;
 		let question = item.question;
-		let question_date = item.question_date;
+		let questionDate = item.questionDate;
 		let answer = item.answer;
-		let answer_date = item.answer_date;
-		let answerState = answer_date ? '<span class="text-primary">답변완료</span>' : '<span class="text-secondary">답변대기</span>';
+		let answerDate = item.answerDate;
+		let answerState = answerDate ? '<span class="text-primary">답변완료</span>' : '<span class="text-secondary">답변대기</span>';
 		let listFilename = item.listFilename;
 		let productName = item.productName;
 
@@ -250,7 +255,7 @@ function printQuestion(data) {
 			out += '<div class="row gx-1 mt-2 mb-1 p-1">';
 				for(let f of listFilename) {
 					out += '<div class="col-md-auto md-img">';
-					out += '  <img class="border rounded" src="${pageContext.request.contextPath}/uploads/qna/'+f+'">';
+					out += '  <img class="border rounded" src="${pageContext.request.contextPath}/uploads/shop/'+f+'">';
 					out += '</div>';
 				}
 			out += '</div>';
@@ -258,8 +263,8 @@ function printQuestion(data) {
 		out += '  <div class="row p-2">';
 		out += '     <div class="col-auto pt-2 pe-0">' + answerState + '</div>';
 		// out += '     <div class="col-auto pt-2 px-0">&nbsp;|&nbsp;'+userName+'</div>';
-		out += '     <div class="col-auto pt-2 px-0">&nbsp;|&nbsp;<span>'+question_date+'</span>';
-		out += '        |<span class="deleteQuestion" data-num="' + num + '">삭제</span>';
+		out += '     <div class="col-auto pt-2 px-0">&nbsp;|&nbsp;<span>'+questionDate+'</span>';
+		out += '        |<span class="deleteQuestion" data-num="' + qnaNum + '">삭제</span>';
 		out += '      </div>';
 		if(answer) {
 			out += '  <div class="col pt-2 text-end"><button class="btn btnAnswerView"> <i class="bi bi-chevron-down"></i> </button></div>';
@@ -269,7 +274,7 @@ function printQuestion(data) {
 			out += '  <div class="p-3 pt-0 answer-content" style="display: none;">';
 			out += '    <div class="bg-light">';
 			out += '      <div class="p-2 pb-0">';
-			out += '        <label class="text-bg-primary px-2"> 관리자 </label> <label>' + answer_date + '</label>';
+			out += '        <label class="text-bg-primary px-2"> 관리자 </label> <label>' + answerDate + '</label>';
 			out += '      </div>';
 			out += '      <div class="p-2 pt-1">' + answer + '</div>';
 			out += '    </div>';
@@ -301,8 +306,12 @@ $(function(){
 
 $(function(){
 	$('.list-question').on('click', '.deleteQuestion', function(){
-		let num = $(this).attr('data-num');
-		alert(num);
+		let qnaNum = $(this).attr('data-num');
+		
+		if(confirm('질문을 삭제하시겠습니까?')) {
+			let query = 'qnaNum=' + qnaNum;
+			location.href = '${pageContext.request.contextPath}/qna/delete?' + query;
+		}
 	});
 });
 

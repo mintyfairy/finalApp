@@ -24,4 +24,5 @@ public interface ReviewMapper {
 	
 	public List<Review>listReviewFile(long orderDetailNum);
 	public void deleteReview(long orderDetailNum) throws SQLException;
+	public void deleteReviewFile(long orderDetailNum) throws SQLException;
 }

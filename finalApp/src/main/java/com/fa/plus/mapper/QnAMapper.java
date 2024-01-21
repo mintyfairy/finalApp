@@ -23,4 +23,5 @@ public interface QnAMapper {
 
 	public List<QnA>listQuestionFile(long qnaNum);
 	public void deleteQuestion(long qnaNum) throws SQLException;
+	public void deleteQnAFile(long qnaNum) throws SQLException;
 }
