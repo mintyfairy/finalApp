@@ -32,7 +32,9 @@ public class MyPageController {
 	
 	// 결제 내역 
 	@GetMapping("main")
-	public String main(@RequestParam(value= "page", defaultValue = "1") int current_page,
+	public String main(
+			@RequestParam(value= "page", defaultValue = "1") int current_page,
+			@RequestParam(defaultValue = "1") int buyQtys,
 			HttpServletRequest req,
 			HttpSession session,
 			Model model) throws Exception {
@@ -66,6 +68,7 @@ public class MyPageController {
 		String paging = myUtil.pagingUrl(current_page, total_page, listUrl);
 		
 		model.addAttribute("list", list);
+		model.addAttribute("buyQtys", buyQtys);
 		model.addAttribute("page", current_page);
 		model.addAttribute("dataCount", dataCount);
 		model.addAttribute("size", size);

@@ -336,7 +336,27 @@ table {
 	border: 1px solid #c2c2c2;
 	cursor: pointer;
 }
-  
+
+.score-star { font-size: 0; letter-spacing: -4px; }
+.score-star .item {
+	font-size: 22px; letter-spacing: 1px; display: inline-block;
+	color: #ccc; text-decoration: none; vertical-align: middle;
+}
+.score-star .item:first-child{ margin-left: 0; }
+.score-star .on { color: #f54a4c; }
+ 
+.lg-img img { min-height: 420px; max-height: 420px;}
+.md-img img { width: 150px; height: 150px; cursor: pointer; object-fit: cover; }
+.sm-img img { width: 40px; height: 40px; cursor: pointer; object-fit: cover; }
+
+.graph { font-size: 0;  letter-spacing: 0; word-spacing: 0; }
+.graph-title { padding-right: 3px; }
+.graph .one-space { font-size:13px; background:#eee;}
+.graph .one-space:after { content: ''; display: inline-block; width:17px; }
+.graph .one-space.on{ background:  #f54a4c; }
+.graph .one-space:first-child{ border-top-left-radius:5px;  border-bottom-left-radius:5px; }
+.graph .one-space:last-child{ border-top-right-radius:5px; border-bottom-right-radius:5px; }
+.graph-rate { padding-left: 5px; display: inline-block; width: 60px; text-align: left; }
 </style>
 
 <script type="text/javascript">
@@ -760,7 +780,8 @@ function sendOk(mode) {
 							</div>
 						</div>
 					</div>
-				</div>	
+				<div class="mt-2 list-review"></div>
+			</div>	
 			
 			<div class="detail_tab detail_tab3">
 				<ul class="tab_list">
@@ -771,6 +792,7 @@ function sendOk(mode) {
 				</ul>
 			</div>
 			
+				
 			<div class="detail_qna">
 				<div class="qna_table">
 					<table summary="번호, 평점, 내용, 작성자, 작성일, 조회">
@@ -785,7 +807,6 @@ function sendOk(mode) {
 					</table>
 				</div>
 				
-				<div class="mt-2 list-review"></div>
 				
 				<div class="review_write mt-3 p-2 text-end">
 					<button type="button" class="btnMyQuestion btn btn-dark"> 내 Q&amp;A 보기  </button>
@@ -941,6 +962,8 @@ function sendOk(mode) {
 
 <script type="text/javascript">
 $(function(){
+	listReview(1);
+	
 	$('.reviewSortNo').change(function(){
 		listReview(1);
 	});
@@ -1099,6 +1122,10 @@ $(function(){
 });
 
 //question -----
+$(function(){
+	listQuestion(1);
+});
+
 function listQuestion(page) {
 	let productNum = '${dto.productNum}';
 	let url = '${pageContext.request.contextPath}/qna/list';

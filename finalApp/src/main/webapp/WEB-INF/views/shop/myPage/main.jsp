@@ -297,7 +297,9 @@ ol, ul {
 	cursor: pointer;
 }
 
-
+.bi-star-fill::before {
+    content: "\f586";
+}
 </style>
 
 <script type="text/javascript">
@@ -511,6 +513,7 @@ $(function(){
 
 		<div class="latest_order my_table">
 			<c:forEach var="dto" items="${list}">
+				<div class="mt-3 p-2 border-bottom payment-list">
 				<div class="review_wrap">
 					<table summary="주문일자, 상품명, 결제금액, 주문상세">
 						<colgroup>
@@ -541,6 +544,7 @@ $(function(){
 							data-orderDetailNum="${dto.orderDetailNum}"><i
 							class="bi bi-x-lg"></i></label>
 					</div>
+				</div>
 					<div class="mt-3 p-3 text-end">
 						<c:if
 							test="${dto.reviewWrite==0 && (dto.detailState==1 || dto.detailState==2)}">
@@ -674,7 +678,7 @@ $(function(){
 //리뷰 쓰기 버튼
 $(function(){
 	$(".btnReviewWriteForm").click(function(){
-		const $review = $(this).closest(".review_wrap").find(".review-form");
+		const $review = $(this).closest(".payment-list").find(".review-form");
 		if($review.is(':visible')) {
 			$review.fadeOut(100);
 		} else {
@@ -778,7 +782,7 @@ $(function(){
 $(function(){
 	// 리뷰 등록 완료
 	$(".btnReviewSend").click(function(){
-		let $plist = $(this).closest(".review_wrap").find(".review-form");
+		let $plist = $(this).closest(".payment-list");
 		
 		const f = this.closest("form");
 		let s;

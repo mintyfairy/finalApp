@@ -58,6 +58,7 @@ public class ReviewController {
 		
 		// AJAX - JSON
 		@GetMapping("list")
+		@ResponseBody
 		public Map<String, Object> list(
 				@RequestParam long productNum,
 				@RequestParam(defaultValue = "0") int sortNo,

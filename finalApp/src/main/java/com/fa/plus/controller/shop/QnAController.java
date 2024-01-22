@@ -56,12 +56,14 @@ public class QnAController {
 		
 		// AJAX - JSON
 		@GetMapping("list")
+		@ResponseBody
 		public Map<String, Object> list(
 				@RequestParam long productNum,
 				@RequestParam(defaultValue = "0") int sortNo,
 				@RequestParam(value = "pageNo", defaultValue = "1") int current_page,
 				HttpSession session) throws Exception {
 			SessionInfo info = (SessionInfo)session.getAttribute("member");
+			
 			Map<String, Object> model = new HashMap<String, Object>();
 			
 			try {

@@ -154,7 +154,6 @@ public class ProductController {
 		return ".shop.product.detail";
 	}
 	
-	
 	@GetMapping("listBrand")
 	@ResponseBody
 	public Map<String, Object> listBrand(@RequestParam Map<String, Object> paramMap) {
