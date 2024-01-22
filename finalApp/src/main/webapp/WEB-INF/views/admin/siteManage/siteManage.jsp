@@ -48,8 +48,8 @@ a {
 		<table class="table">
 			<tr>
 				<td align="right">
-					<button type="button" class="btn-border-primary" onclick="
-								location.href ='${pageContext.request.contextPath}/admin/siteManage/site/write'">켐핑장 등록</button>
+					<button type="button" class="btn-outline-secondary btn" onclick="
+								location.href ='${pageContext.request.contextPath}/admin/siteManage/site/write'">캠핑장 등록</button>
 				</td>
 			</tr>
 		</table>
@@ -71,9 +71,9 @@ a {
 						<td>${dto.addr1}</td>
 
 						<td>
-							<button type="button" class="btn-border-primary btnInsertForm" data-sitenum="${dto.siteNum}">광고업체 등록</button>
-							<button type="button" class="btn-border-primary" onclick="updateSite('${dto.siteNum}')">수정</button>
-							<button type="button" class="btn-border-primary" onclick="deleteSite('${dto.siteNum}')">삭제</button>
+							<button type="button" class="btn-outline-secondary btn btnInsertForm" data-sitenum="${dto.siteNum}">광고업체 등록</button>
+							<button type="button" class="btn-outline-secondary btn" onclick="updateSite('${dto.siteNum}')">수정</button>
+							<button type="button" class="btn-outline-secondary btn" onclick="deleteSite('${dto.siteNum}')">삭제</button>
 						</td>
 					</tr>
 				</c:forEach>

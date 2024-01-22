@@ -22,11 +22,11 @@
 		<table class="table mt-1">
 			<tr>
 				<td align="left">
-					<button type="button" class="btn-border-primary" onclick="
+					<button type="button" class="btn-outline-secondary btn" onclick="
 								location.href ='${pageContext.request.contextPath}/admin/siteManage/main'">돌아가기</button>
 				</td>
 				<td align="right">
-					<button type="button" class="btn-border-primary" onclick="
+					<button type="button" class="btn-outline-secondary btn" onclick="
 								location.href ='${pageContext.request.contextPath}/admin/siteManage/site/${num}/write'">장소 등록</button>
 				</td>
 			</tr>
@@ -50,8 +50,8 @@
 						<td>${dto.price}</td>
 
 						<td>
-							<button type="button" class="btn-border-primary" onclick="updateRoom(${dto.detailNum},${dto.siteNum})">수정</button>
-							<button type="button" class="btn-border-primary" onclick="deleteRoom(${dto.detailNum},${dto.siteNum})">삭제</button>
+							<button type="button" class="btn-outline-secondary btn" onclick="updateRoom(${dto.detailNum},${dto.siteNum})">수정</button>
+							<button type="button" class="btn-outline-secondary btn" onclick="deleteRoom(${dto.detailNum},${dto.siteNum})">삭제</button>
 						</td>
 					</tr>
 				</c:forEach>
