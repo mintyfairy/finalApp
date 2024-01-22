@@ -31,6 +31,7 @@ public class QnAController {
 	
 	// AJAX - JSON
 		@PostMapping("write")
+		@ResponseBody
 		public Map<String, Object> writeSubmit(QnA dto,
 				HttpSession session) throws Exception {
 			

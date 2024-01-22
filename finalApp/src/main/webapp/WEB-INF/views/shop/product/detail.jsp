@@ -707,7 +707,6 @@ function sendOk(mode) {
 						
 						<div class="col p-3 text-center">
 							<div class="fs-6 fw-semibold">리뷰수</div>
-							
 							<div class="fs-2"><i class="bi bi-chat-right-text"></i></div>
 							<div class="fs-2 review-reviewCount">${dto.reviewCount}</div>
 						</div> 
@@ -761,7 +760,7 @@ function sendOk(mode) {
 							</div>
 						</div>
 					</div>
-			</div>
+				</div>	
 			
 			<div class="detail_tab detail_tab3">
 				<ul class="tab_list">
@@ -950,7 +949,7 @@ $(function(){
 function listReview(page) {
 	let productNum = '${dto.productNum}';
 	let sortNo = $('.reviewSortNo').val();
-	let url = '${pageContext.request.contextPath}/shop/review/list';
+	let url = '${pageContext.request.contextPath}/review/list';
 	let query = 'productNum='+productNum+'&pageNo='+page+'&sortNo='+1;
 	
 	const fn = function(data) {
@@ -992,7 +991,7 @@ function printReview(data) {
 		out += '     <div class="col-auto fs-2"><i class="bi bi-person-circle text-muted icon"></i></div>';
 		out += '     <div class="col pt-3 ps-0 fw-semibold">'+userName+'</div>';
 		out += '     <div class="col pt-3 text-end"><span>'+reviewDate+'</span>';
-		out += '       |<span class="notifyReview" data-orderDetailNum="' + orderDetailNum + '">신고</span></div>';
+		out += '       |<span class="notifyReview" data-num="' + orderDetailNum + '">신고</span></div>';
 		out += '  </div>';
 		out += '  <div class="row p-2">';
 		out += '    <div class="col-auto pt-0 ps-2 pe-1 score-star">';
@@ -1008,7 +1007,7 @@ function printReview(data) {
 			out += '<div class="row gx-1 mt-2 mb-1 p-1">';
 				for(let f of listFilename) {
 					out += '<div class="col-md-auto md-img">';
-					out += '  <img class="border rounded" src="${pageContext.request.contextPath}/uploads/review/'+f+'">';
+					out += '  <img class="border rounded" src="${pageContext.request.contextPath}/uploads/shop/'+f+'">';
 					out += '</div>';
 				}
 			out += '</div>';
@@ -1095,8 +1094,7 @@ function printSummary(summary) {
 
 $(function(){
 	$('body').on('click', '.notifyReview', function(){
-		let orderDetailNum = $(this).attr('data-orderDetailNum');
-		alert(orderDetailNum);
+		let orderDetailNum = $(this).attr('data-num');
 	});
 });
 
@@ -1298,7 +1296,7 @@ $(function(){
 			}
 		};
 		
-		ajaxFun(url, "post", query, "json", fn, true);		
+		ajaxFun(url, "post", query, "json", fn, true);
 	});
 	
 	$('.btnQuestionSendCancel').click(function(){
