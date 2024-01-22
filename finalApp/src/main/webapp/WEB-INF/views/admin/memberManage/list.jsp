@@ -3,8 +3,18 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <style type="text/css">
+.wrapper {
+	padding: 0;
+}
+
+.body-container {
+	width: 1080px;
+	margin: 60px 0 0 250px;
+}
+
 .body-main {
-	max-width: 930px;
+	display: block;
+	max-width: 1080px;
 }
 </style>
 

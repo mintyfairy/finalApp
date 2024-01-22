@@ -3,6 +3,32 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <style type="text/css">
+* {
+	margin: 0;
+	padding: 0;
+	color: #333;
+	text-decoration: none;
+	box-sizing: border-box;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+a {
+	color: #333;
+	text-decoration: none;
+}
+
+.body-container {
+	padding-left: 250px;
+	margin-top: 60px;
+}
+
+.body-title {
+	width: 1080px;
+}
+
 .body-main {
 	max-width: 930px;
 }
@@ -41,7 +67,7 @@
 				<c:forEach var="dto" items="${ list}" varStatus="status">
 					<tr>
 						<td>${dataCount-(page-1)*size-status.index}</td>
-						<td><a href="${pageContext.request.contextPath}/admin/siteManage/site/${dto.siteNum}">${dto.siteName}</a></td>
+						<td style="text-align: left;"><a href="${pageContext.request.contextPath}/admin/siteManage/site/${dto.siteNum}">${dto.siteName}</a></td>
 						<td>${dto.addr1}</td>
 
 						<td>

@@ -3,6 +3,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- 강좌 질문과답변, selectBox 주의하여 보기  -->
 <style type="text/css">
+.body-container {
+	margin-top: 60px;
+	padding-left: 250px;
+}
+
 .body-main {
 	max-width: 930px;
 }

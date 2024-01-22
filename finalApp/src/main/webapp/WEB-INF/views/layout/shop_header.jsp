@@ -54,16 +54,6 @@ ul {
     position: relative;
 }
 
-.header_center .header_center_wrap .header_center_list .header_center_item:first-child::after {
-    content: '';
-    position: absolute;
-    top: 18px;
-    right: 0;
-    width: 1px;
-    height: 32px;
-    background-color: #dedede;
-}
-
 .header_center .header_center_wrap .header_center_list .header_center_item a {
     display: block;
     font-size: 18px;

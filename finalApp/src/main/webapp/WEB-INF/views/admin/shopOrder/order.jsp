@@ -20,8 +20,13 @@ table th, td {
 }
 
 .body-container {
-	max-width: 1080px;
-	margin: 0 auto;
+	margin-top: 60px;
+	padding-left: 250px;
+}
+
+.body-main {
+	display: block;
+	width: 1080px;
 }
 
 .nav-tabs .nav-link {

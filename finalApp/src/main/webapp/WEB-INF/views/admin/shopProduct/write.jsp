@@ -10,10 +10,10 @@
     margin: 0;
 }
 
-
 .container {
-    margin: 20px 0;
-    padding: 20px;
+	width: 1080px;
+	margin: 0;
+	padding-left: 250px;
 }
 
 .body-title h3 {
@@ -25,11 +25,10 @@
 }
 
 .body-container {
-	max-width: 1080px;
+	width: 1080px;
     clear: both;
-    margin: 0 auto;
     min-height: 500px;
-    padding-top: 20px;
+    margin-top: 60px;
 }
 
 *::after, ::before {

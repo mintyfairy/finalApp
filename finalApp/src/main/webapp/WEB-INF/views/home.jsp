@@ -39,7 +39,6 @@ ul {
 main .recommend {
     width: 100%;
     height: 100vh;
-    background-color: #f8f9fa;
     margin-bottom: 200px;
     padding-top: 90px;
     
@@ -141,7 +140,6 @@ main .excellent .best_list .best_slider {
 main .story {
     height: 100vh;
     padding-top: 88px;
-    background-color: #f7f8f9;
 }
 
 .story .story_title {

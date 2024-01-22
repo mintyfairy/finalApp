@@ -6,6 +6,11 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
 
 <style>
+.body-container {
+	margin-top: 60px;
+	padding-left: 250px;
+}
+
 .body-main {
 	width: 1080px;
 }
