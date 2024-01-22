@@ -39,9 +39,7 @@ ul {
 main .recommend {
     width: 100%;
     height: 100vh;
-    margin-bottom: 200px;
     padding-top: 90px;
-    
 }
 
 main .recommend h1 {
@@ -137,6 +135,7 @@ main .excellent .best_list .best_slider {
 	height: 100%;
 }
 
+/*
 main .story {
     height: 100vh;
     padding-top: 88px;
@@ -226,6 +225,7 @@ main .story {
     text-overflow: ellipsis;
     height: 50px;
 }
+*/
 </style>
 	
 </head>
@@ -240,6 +240,7 @@ main .story {
 	<div class="recommend">
         <h1>인기있는 캠핑카</h1>
         <div class="card-container">
+        <!-- 
 	       	<div class="card" style="width: 18rem;">
 			  <img src="${pageContext.request.contextPath}/resources/images/campingcar/caravanpic1.jpg" class="card-img-top" alt="..." style="background-size: cover;">
 			  <div class="card-body">
@@ -264,6 +265,8 @@ main .story {
 			    <a href="http://localhost:9090/plus/car/car_detail?carNum=13" class="btn btn-primary carbutton">보러가기</a>
 			  </div>
 			 </div>
+			  -->
+			  <jsp:include page="/WEB-INF/views/slider/caravan_slider.jsp"/>
 		</div>
     </div><!-- <div class="recommend"> -->
 
@@ -285,6 +288,7 @@ main .story {
         </div>
     </div>
 
+	<!-- 
 	<div class="story">
 		<h1 class="story_title">캠핑소식</h1>
 		<div class="story_board">
@@ -316,6 +320,7 @@ main .story {
 			</div>
 		</div>
 	</div>
+	 -->
     
 </body>
 </html>
