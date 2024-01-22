@@ -12,6 +12,10 @@
   box-sizing: border-box;
 }
 
+.login_container {
+	margin-bottom: 110px;
+}
+
 .login_wrap {
 	max-width: 1080px;
 	margin: 0 auto;
