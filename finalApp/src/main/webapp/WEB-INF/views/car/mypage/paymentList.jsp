@@ -8,7 +8,7 @@
 		height: 120px;
         margin: 0 auto; /* 왼쪽과 오른쪽에 10px의 공백을 추가합니다. */
    		margin-top: 50px;
-        border: 1px solid #e2e2e2;
+        border: 3px solid #e2e2e2;
         border-radius: 20px;
         display: flex;
         justify-content: space-between;
