@@ -197,7 +197,7 @@ ul {
 
 .header_right_wrap .header_right {
     width: 160px;
-    height: 100%;
+    height: 100%; 
     display: flex;
     justify-content: space-between;
     align-items: center;
