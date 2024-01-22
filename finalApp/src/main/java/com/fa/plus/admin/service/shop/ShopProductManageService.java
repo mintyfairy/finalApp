@@ -26,6 +26,7 @@ public interface ShopProductManageService {
 	
 	public ShopProductManage findById(long productNum);
 	public int findTotalStock(long stockNum);
+	public List<ShopProductManage> findByHotId();
 	
 	// 상품 상위 카테고리 목록
 	public ShopProductManage findByCategory(long categoryNum);

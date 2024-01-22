@@ -452,4 +452,16 @@ public class ShopProductManageServiceImpl implements ShopProductManageService {
 		return totalStock;
 	}
 
+	@Override
+	public List<ShopProductManage> findByHotId() {
+		List<ShopProductManage> list = null;
+		
+		try {
+			list = mapper.findByHotId();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 }

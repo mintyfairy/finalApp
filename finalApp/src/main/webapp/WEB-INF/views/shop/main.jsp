@@ -157,10 +157,6 @@ main {
     gap: 14px 10px;
 }
 
-.hot_container .hot_wrap .hot_list_wrap .hot_list .hot_item {
-    border: 1px solid black;
-}
-
 .hot_list .hot_item .hot_photo {
     display: block;
     height: 262px;
@@ -172,7 +168,6 @@ main {
 .hot_list .hot_item .hot_text {
     height: 200px;
     padding-top: 8px;
-    border: 1px solid red;
 }
 
 .hot_list .hot_item .hot_text .hot_brand {
@@ -389,126 +384,23 @@ $(function(){
         <h1>HOT PRICE</h1>
         <div class="hot_list_wrap">
             <ul class="hot_list">
-                <li class="hot_item">
-                    <a class="hot_photo" href="#">
-                        <img src="https://via.placeholder.com/261x261" alt="hot_item">
-                    </a>
-                    <div class="hot_text">
-                        <p class="hot_brand">브랜드 이름</p>
-                        <p class="hot_title">상품 이름 <span class="hot_sale">15% 할인</span></p>
-                        <p class="price">원가</p>
-                        <div class="price_wrap">
-                            <h4>할인%</h4>
-                            <h4>할인된 가격</h4>
-                        </div>
-                        <p class="review">리뷰 2</p>
-                    </div>
-                </li>
-                <li class="hot_item">
-                    <a class="hot_photo" href="#">
-                        <img src="https://via.placeholder.com/261x261" alt="hot_item">
-                    </a>
-                    <div class="hot_text">
-                        <p class="hot_brand">브랜드 이름</p>
-                        <p class="hot_title">상품 이름 <span class="hot_sale">15% 할인</span></p>
-                        <p class="price">원가</p>
-                        <div class="price_wrap">
-                            <h4>할인%</h4>
-                            <h4>할인된 가격</h4>
-                        </div>
-                        <p class="review">리뷰 2</p>
-                    </div>
-                </li>
-                <li class="hot_item">
-                    <a class="hot_photo" href="#">
-                        <img src="https://via.placeholder.com/261x261" alt="hot_item">
-                    </a>
-                    <div class="hot_text">
-                        <p class="hot_brand">브랜드 이름</p>
-                        <p class="hot_title">상품 이름 <span class="hot_sale">15% 할인</span></p>
-                        <p class="price">원가</p>
-                        <div class="price_wrap">
-                            <h4>할인%</h4>
-                            <h4>할인된 가격</h4>
-                        </div>
-                        <p class="review">리뷰 2</p>
-                    </div>
-                </li>
-                <li class="hot_item">
-                    <a class="hot_photo" href="#">
-                        <img src="https://via.placeholder.com/261x261" alt="hot_item">
-                    </a>
-                    <div class="hot_text">
-                        <p class="hot_brand">브랜드 이름</p>
-                        <p class="hot_title">상품 이름 <span class="hot_sale">15% 할인</span></p>
-                        <p class="price">원가</p>
-                        <div class="price_wrap">
-                            <h4>할인%</h4>
-                            <h4>할인된 가격</h4>
-                        </div>
-                        <p class="review">리뷰 2</p>
-                    </div>
-                </li>
-                <li class="hot_item">
-                    <a class="hot_photo" href="#">
-                        <img src="https://via.placeholder.com/261x261" alt="hot_item">
-                    </a>
-                    <div class="hot_text">
-                        <p class="hot_brand">브랜드 이름</p>
-                        <p class="hot_title">상품 이름 <span class="hot_sale">15% 할인</span></p>
-                        <p class="price">원가</p>
-                        <div class="price_wrap">
-                            <h4>할인%</h4>
-                            <h4>할인된 가격</h4>
-                        </div>
-                        <p class="review">리뷰 2</p>
-                    </div>
-                </li>
-                <li class="hot_item">
-                    <a class="hot_photo" href="#">
-                        <img src="https://via.placeholder.com/261x261" alt="hot_item">
-                    </a>
-                    <div class="hot_text">
-                        <p class="hot_brand">브랜드 이름</p>
-                        <p class="hot_title">상품 이름 <span class="hot_sale">15% 할인</span></p>
-                        <p class="price">원가</p>
-                        <div class="price_wrap">
-                            <h4>할인%</h4>
-                            <h4>할인된 가격</h4>
-                        </div>
-                        <p class="review">리뷰 2</p>
-                    </div>
-                </li>
-                <li class="hot_item">
-                    <a class="hot_photo" href="#">
-                        <img src="https://via.placeholder.com/261x261" alt="hot_item">
-                    </a>
-                    <div class="hot_text">
-                        <p class="hot_brand">브랜드 이름</p>
-                        <p class="hot_title">상품 이름 <span class="hot_sale">15% 할인</span></p>
-                        <p class="price">원가</p>
-                        <div class="price_wrap">
-                            <h4>할인%</h4>
-                            <h4>할인된 가격</h4>
-                        </div>
-                        <p class="review">리뷰 2</p>
-                    </div>
-                </li>
-                <li class="hot_item">
-                    <a class="hot_photo" href="#">
-                        <img src="https://via.placeholder.com/261x261" alt="hot_item">
-                    </a>
-                    <div class="hot_text">
-                        <p class="hot_brand">브랜드 이름</p>
-                        <p class="hot_title">상품 이름 <span class="hot_sale">15% 할인</span></p>
-                        <p class="price">원가</p>
-                        <div class="price_wrap">
-                            <h4>할인%</h4>
-                            <h4>할인된 가격</h4>
-                        </div>
-                        <p class="review">리뷰 2</p>
-                    </div>
-                </li>
+            	<c:forEach var="vo" items="${listHot}">
+	                <li class="hot_item">
+	                    <a class="hot_photo" href="#">
+	                        <img src="${pageContext.request.contextPath}/uploads/shop/${vo.thumbnail}" alt="hot_item" width="260">
+	                    </a>
+	                    <div class="hot_text">
+	                        <p class="hot_brand">${vo.brandName}</p>
+	                        <p class="hot_title">${vo.productName} <span class="hot_sale">${vo.discountRate}% 할인</span></p>
+	                        <p class="price">${vo.price}</p>
+	                        <div class="price_wrap">
+	                            <h4>${vo.discountRate}%</h4>
+	                            <h4>${vo.price*(1-vo.discountRate/100)}</h4>
+	                        </div>
+	                    </div>
+	                </li>
+            	</c:forEach>
+                
             </ul>
         </div>
     </div>

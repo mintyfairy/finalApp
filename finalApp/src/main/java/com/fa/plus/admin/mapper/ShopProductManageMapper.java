@@ -34,6 +34,7 @@ public interface ShopProductManageMapper {
 	public List<ShopProductManage> listProductOption(long productNum);
 	public List<ShopProductManage> listOptionDetail(long optionNum);
 	public ShopProductManage findById(long productNum);
+	public List<ShopProductManage> findByHotId();
 	
 
 	public void updateProduct(ShopProductManage dto) throws SQLException;

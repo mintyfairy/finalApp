@@ -183,6 +183,23 @@
 		WHERE productNum = #{productNum}
 	</select>
 	
+	<select id="findByHotId" resultType="com.fa.plus.admin.domain.shop.ShopProductManage">
+		SELECT f.*, b.brandName 
+		FROM 
+		(SELECT productNum, productName, 
+		special, price, c.categoryNum, c.categoryName, 
+		parentNum, discountRate, savedMoney, delivery, 
+		content, thumbnail, productShow, 
+		reg_date, updateDate, md, starter, 
+		deletion, brandNum 
+		FROM product p 
+		JOIN productCategory c 
+		ON p.categoryNum = c.categoryNum) f 
+		JOIN brand b ON f.brandNum = b.brandNum 
+		WHERE f.productNum &gt;= 29 AND f.productNum &lt;= 36 
+		ORDER BY f.productNum
+	</select>
+	
 	<select id="listProductFile" parameterType="Long" resultType="com.fa.plus.admin.domain.shop.ShopProductManage">
 		SELECT fileNum, productNum, fileName 
 		FROM productFile 
