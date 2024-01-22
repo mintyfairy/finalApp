@@ -252,9 +252,9 @@ main {
                    <table class="car_search" style="text-align: center;">
                        <tr>
                            <td colspan="3">
-                               <select id="search1" name="option">
+                               <select id="search1" name="schType">
                                    <option>차량유형</option>
-                                   <option>모터홈</option>
+                                   <option value="carSize">모터홈</option>
                                    <option>차박형(중형)</option>
                                    <option>차박형(소형)</option>
                                </select>
@@ -299,13 +299,12 @@ main {
            	<div class="card-border">
                <p><a href="${pageContext.request.contextPath}/car/car_detail?carNum=${dto.carNum}" class="car_photo">
                        <img src="${pageContext.request.contextPath}/uploads/caravan/${dto.thumbnail}" alt="car_item" style="width:350px; height:250px;'">
-                       <!-- <img src="${pageContext.request.contextPath}/resources/images/campingcar/${dto.thumbnail}/350x250" alt="car_item"> -->
                    </a></p>
                <div class="car_text">
                    <div style="width: 350px;">
                        <p class="car_sort">${dto.carSize}</p>
                    	   <span class="car_title">${dto.carName}</span>
-                       <span class="car_star" style="text-decoration: underline;">후기 2개</span>
+                       <!-- <span class="car_star" style="text-decoration: underline;">후기 2개</span> -->
                        <!-- <span class="car_star" style="margin-left: 160px;">★ 4.7 ·&nbsp;</span> -->
                    	   <p class="car_content" style="color: #aaaaaa;">${dto.description}</p>
                    </div>

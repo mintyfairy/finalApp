@@ -138,13 +138,16 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 									<label class="text-black-50">${dto.orderDate} 예약</label>
 								</div>
 								<div class="col-auto">
-									<img class="border rounded md-img" src="${pageContext.request.contextPath}/uploads/images/campingcar/${dto.thumbnail}">
+									<img class="border rounded md-img" src="${pageContext.request.contextPath}/uploads/caravan/${dto.thumbnail}">
 								</div>
 								<div class="col">
 									<div class="pt-1 fs-6 fw-bold">
 										<div>
 											<c:if test="${dto.orderState==1}">
 												<span class="badge text-bg-primary">예약완료</span>
+											</c:if>
+											<c:if test="${dto.orderState==2}">
+												<span class="badge text-bg-primary">이용완료</span>
 											</c:if>
 										</div>
 										${dto.start_date} ~ ${dto.end_date}
