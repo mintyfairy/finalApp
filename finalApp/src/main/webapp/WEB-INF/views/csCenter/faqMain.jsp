@@ -83,7 +83,7 @@ $(function(){
 				</li>
 			</ul>
 
-		<div class="body-main">
+		<div class="body-main ms-0">
 		
 			<div class="category-tab">
 				<c:forEach var="dto" items="${listCategory}" varStatus="status">

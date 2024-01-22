@@ -246,6 +246,7 @@ public class CsEventController {
 		try {
 			service.insertEventWinner(dto);
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 		return "redirect:/admin/cs/event/winner/list?page=" + page;

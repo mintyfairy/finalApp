@@ -5,6 +5,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tabs.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
 <style type="text/css">
+
+
 .body-main {
 	max-width: 900px;
 }
@@ -20,7 +22,7 @@
 }
 
 .span-rank {
-	display: inline-block; width: 45px;
+	display: inline-block; width: 60px;
 }
 
 .winnerList-container {
@@ -38,6 +40,48 @@
    align-items: center;
    justify-content: center;
 }
+.radio-container {
+    display: inline-block;
+    position: relative;
+    margin-right: 10px; 
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.radio-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkmark {
+    position: relative;
+    height: 20px; 
+    width: 20px; 
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.radio-container .checkmark:after {
+    content: '';
+    width: 10px;
+    height: 10px; 
+    background-color: #333;
+    border-radius: 50%;
+    display: none;
+}
+ .radio-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.radio-container:hover .checkmark {
+    background-color: #f2f2f2;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -144,7 +188,7 @@ $(function(){
 						<td colspan="2">
 							이전글 :
 							<c:if test="${not empty prevDto}">
-								<a href="${pageContext.request.contextPath}/admin/cs/csEventManage/${category}/article?${query}&num=${prevDto.num}">${prevDto.title}</a>
+								<a href="${pageContext.request.contextPath}/admin/cs/event/${category}/article?${query}&num=${prevDto.num}">${prevDto.title}</a>
 							</c:if>
 						</td>
 					</tr>
@@ -153,7 +197,7 @@ $(function(){
 						<td colspan="2">
 							다음글 :
 							<c:if test="${not empty nextDto}">
-								<a href="${pageContext.request.contextPath}/admin/cs/csEventManage/${category}/article?${query}&num=${nextDto.num}">${nextDto.title}</a>
+								<a href="${pageContext.request.contextPath}/admin/cs/event/${category}/article?${query}&num=${nextDto.num}">${nextDto.title}</a>
 							</c:if>
 						</td>
 					</tr>
@@ -215,7 +259,7 @@ $(function(){
 			$('form .rank-numbers').remove();
 		} else {
 			let out = '<tr class="rank-numbers">';
-			out += '<td valign="top" style="padding-top:12px;">순위별인원</td>';
+			out += '<td valign="top" style="padding-top:12px;">인원</td>';
 			out += '<td>';
 			out += '  <p>';
 			out += '    <span class="span-rank">1등 : </span>';
@@ -302,7 +346,7 @@ $(function(){
 			return false;
 		}
 		
-		f.action = '${pageContext.request.contextPath}/admin/cs/csEventManage/${category}/win';
+		f.action = '${pageContext.request.contextPath}/admin/cs/event/${category}/win';
 		f.submit();
 	});
 	
@@ -337,11 +381,19 @@ $(function(){
 					</tr>
 					<tr>
 						<td>당첨 방식</td>
+						
 						<td>
-							<input type="radio" name="winEvent" value="1" id="winEvent1" class="form-control" checked> <label for="winEvent1">순위 없음</label>
-							&nbsp;&nbsp;
-							<input type="radio" name="winEvent" value="2" id="winEvent2" class="form-control"> <label for="winEvent2">순위별 당첨</label>
-						</td>
+						    <label class="radio-container">
+						        <input type="radio" name="winEvent" value="1" id="winEvent1" class="form-control" checked>
+						        <span class="checkmark"></span>
+						        <span class="radio-label">순위 없음</span>
+						    </label>
+						    <label class="radio-container">
+						        <input type="radio" name="winEvent" value="2" id="winEvent2" class="form-control">
+						        <span class="checkmark"></span>
+						        <span class="radio-label">순위별 당첨</span>
+						    </label>
+						</td>						
 					</tr>
 				</tbody>
 			</table>

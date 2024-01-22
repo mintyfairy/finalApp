@@ -94,7 +94,7 @@ function searchList() {
 			&nbsp;
 			&nbsp;
 			&nbsp;
-			<div class="body-main">
+			<div class="body-main ms-0">
 				<div class="category-tab">
 					<button class="btn-category" id="tab-progress" type="button" data-menu="progress">진행중인 이벤트</button>
 					<button class="btn-category" id="tab-winner" type="button" data-menu="winner">당첨자 발표</button>
