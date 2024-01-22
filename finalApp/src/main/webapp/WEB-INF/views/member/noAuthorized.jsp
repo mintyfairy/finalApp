@@ -9,8 +9,9 @@
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 </head>
 <body>
-<div style="width: 500px ;height: 500px;background: yellow; text-align: center;padding-top: 200px;font-size: 30px;margin-left: 40%">
-	 no no square
+<div style="width: 500px ;height: 500px; text-align: center;padding-top: 200px;font-size: 30px;margin-left: 40%">
+	 <p>금지된 접근 입니다.</p>
+	 <button type="button" class='btn btn-primary' onclick="location.href='${pageContext.request.contextPath}/'">메인화면으로</button>
 </div>
 </body>
 </html>	   

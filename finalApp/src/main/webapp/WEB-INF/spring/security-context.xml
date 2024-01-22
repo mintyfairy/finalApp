@@ -62,8 +62,21 @@
 	        <intercept-url pattern="/uploads/**" access="permitAll"/>
 	        
 			<!-- admin페이지 -->
-			<intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP','ROLE_CAMP')"/>
+			<intercept-url pattern="/admin" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP','ROLE_CAMP')"/>
 			<intercept-url pattern="/cs/**" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>
+			
+			<intercept-url pattern="/admin/memberManage/**" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>
+			<intercept-url pattern="/admin/carManage/**" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>
+			<intercept-url pattern="/admin/carReservation/**" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>
+			<intercept-url pattern="/admin/carQna/**" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>
+
+			<intercept-url pattern="/admin/shopOrder/**" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>
+			<intercept-url pattern="/admin/shopProduct/**" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>
+			<intercept-url pattern="/admin/shopCustomer/**" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>
+
+			<intercept-url pattern="/admin/salesManage/**" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>
+			
+			
 			
 			<intercept-url pattern="/shopping/customer/notice/write" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>
 			<intercept-url pattern="/shopping/customer/notice/update" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>
