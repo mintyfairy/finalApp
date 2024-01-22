@@ -29,7 +29,7 @@
     <tiles:insertAttribute name="header"/>
 </header>
 	
-<main>
+<main style="background-color: #fff;">
     <tiles:insertAttribute name="body"/>
 </main>
 

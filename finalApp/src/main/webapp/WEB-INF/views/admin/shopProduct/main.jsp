@@ -5,7 +5,8 @@
 <style type="text/css">
 .body-container {
 	max-width: 1080px;
-	margin: 0 auto;
+	margin-top: 60px;
+	padding-left: 250px;
 }
 
 .nav-tabs .nav-link {

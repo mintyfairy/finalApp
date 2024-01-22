@@ -24,8 +24,8 @@ main {
 }
 
 .main_slider_wrap {
-	width: 1080px;
-    height: 590px;
+	width: 1280px;
+    height: 700px;
     margin: 0 auto;
     border-radius: 12px;
     /*

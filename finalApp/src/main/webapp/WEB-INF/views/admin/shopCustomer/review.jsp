@@ -3,9 +3,17 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <style type="text/css">
+.container {
+	margin: 60px 0 0 0;
+}
+
 .body-container {
-	max-width: 1080px;
-	margin: 10px auto;
+	padding-left: 250px;
+}
+
+.body-title {
+	width: 1080px;;
+	margin-bottom: 0;
 }
 
 .nav-tabs .nav-link {

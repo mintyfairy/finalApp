@@ -3,6 +3,32 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <style type="text/css">
+* {
+	margin: 0;
+	padding: 0;
+	color: #333;
+	text-decoration: none;
+	box-sizing: border-box;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+a {
+	color: #333;
+	text-decoration: none;
+}
+
+.body-container {
+	padding-left: 250px;
+	margin-top: 60px;
+}
+
+.body-title {
+	width: 1080px;
+}
+
 .body-main {
 	max-width: 930px;
 }
@@ -22,8 +48,8 @@
 		<table class="table">
 			<tr>
 				<td align="right">
-					<button type="button" class="btn-border-primary" onclick="
-								location.href ='${pageContext.request.contextPath}/admin/siteManage/site/write'">켐핑장 등록</button>
+					<button type="button" class="btn-outline-secondary btn" onclick="
+								location.href ='${pageContext.request.contextPath}/admin/siteManage/site/write'">캠핑장 등록</button>
 				</td>
 			</tr>
 		</table>
@@ -41,13 +67,13 @@
 				<c:forEach var="dto" items="${ list}" varStatus="status">
 					<tr>
 						<td>${dataCount-(page-1)*size-status.index}</td>
-						<td><a href="${pageContext.request.contextPath}/admin/siteManage/site/${dto.siteNum}">${dto.siteName}</a></td>
+						<td style="text-align: left;"><a href="${pageContext.request.contextPath}/admin/siteManage/site/${dto.siteNum}">${dto.siteName}</a></td>
 						<td>${dto.addr1}</td>
 
 						<td>
-							<button type="button" class="btn-border-primary btnInsertForm" data-sitenum="${dto.siteNum}">광고업체 등록</button>
-							<button type="button" class="btn-border-primary" onclick="updateSite('${dto.siteNum}')">수정</button>
-							<button type="button" class="btn-border-primary" onclick="deleteSite('${dto.siteNum}')">삭제</button>
+							<button type="button" class="btn-outline-secondary btn btnInsertForm" data-sitenum="${dto.siteNum}">광고업체 등록</button>
+							<button type="button" class="btn-outline-secondary btn" onclick="updateSite('${dto.siteNum}')">수정</button>
+							<button type="button" class="btn-outline-secondary btn" onclick="deleteSite('${dto.siteNum}')">삭제</button>
 						</td>
 					</tr>
 				</c:forEach>

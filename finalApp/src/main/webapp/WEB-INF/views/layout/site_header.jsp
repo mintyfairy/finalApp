@@ -421,7 +421,7 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
 			                </ul>
 	                    </li>
 	                    <li class="logo_area">
-	                        <a id="logo2" href="#">
+	                        <a id="logo2" href="${pageContext.request.contextPath}/">
 	                            <img src="${pageContext.request.contextPath}/resources/images/main/logo.png" alt="logo" style="width:210px; height:55px;">
 	                        </a>
 	                    </li>
@@ -459,13 +459,13 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
 	            <div class="navi_wrap">
 	                <ul class="menu_bar">
 	                    <li class="menu_item">
-	                        <a href="#" onclick="site()">CAMPING AREA</a>
+	                        <a href="${pageContext.request.contextPath}/site/list">CAMPING AREA</a>
 	                    </li>
 	                    <li class="menu_item">
-	                        <a href="#" onclick="car()">CAMPING CAR</a>
+	                        <a href="${pageContext.request.contextPath}/car/main"  >CAMPING CAR</a>
 	                    </li>
 	                    <li class="menu_item">
-	                        <a href="#" onclick="shop()">CAMPING SHOP</a>
+	                        <a href="${pageContext.request.contextPath}/shop/main"  >CAMPING SHOP</a>
 	                    </li>
 	                </ul>
 	            </div>

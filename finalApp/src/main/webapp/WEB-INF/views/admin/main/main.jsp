@@ -2,6 +2,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<style>
+.wrapper {
+	padding: 0;
+}
+
+.body-container {
+	width: 1080px;
+	margin: 60px 0 0 250px;
+}
+</style>
 
 <div class="body-container">
   <h3 style="margin-bottom: 10px;"> DASH BOARD </h3>

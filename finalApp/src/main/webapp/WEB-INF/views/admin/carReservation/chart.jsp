@@ -18,6 +18,11 @@ a:active, a:hover { color: #f28011; text-decoration: underline; }
 	max-width: 930px;
 }
 
+.body-container {
+	margin-top: 60px;
+	padding-left: 250px;
+}
+
 .sales-container {margin: 10px auto; width: 1080px; height: 150px; display: flex;
 	padding-left:10px;
 	justify-content: space-between;

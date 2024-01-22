@@ -192,7 +192,7 @@
         <div class="container-xxl testimonial mt-5 py-5 bg-dark wow zoomIn" data-wow-delay="0.1s" style="margin-bottom: 90px;">
             <div class="container">
                 <div class="owl-carousel testimonial-carousel py-5">
-                	<
+                	
                 	<c:forEach var="dto" items="${Adlist}">
 	                    <div class="testimonial-item position-relative bg-white rounded overflow-hidden"  title="이 캠핑장은 광고업체입니다.">
 	                        <p style="height:100%;overflow: hidden;text-overflow: clip;white-space:nowrap;">${dto.introduce}</p>

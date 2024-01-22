@@ -171,7 +171,7 @@
 		FROM sitedetail 
         left join (select trunc(avg(score),1) star,detailnum dnum from sitereview  group by detailnum) on dnum=detailnum
 		where siteNum=#{siteNum}
-		ORDER BY detailNum DESC;
+		ORDER BY detailNum DESC
 		
 	</select>
 	<!-- 사이트용 검색 -->
