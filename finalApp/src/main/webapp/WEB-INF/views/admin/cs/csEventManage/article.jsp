@@ -167,8 +167,8 @@ $(function(){
 						</tr>
 					</c:if>
 					
-					<tr style="border-bottom: none;">
-						<td colspan="2" valign="top" height="200">
+					<tr  style="border-bottom: none;">
+						<td colspan="2" valign="top" height="200" style="border-bottom: none; text-align: left;">
 							${dto.content}
 						</td>
 					</tr>
