@@ -63,6 +63,10 @@
 	align-content: center;
 }
 
+.board-list-footer {
+	margin-bottom: 80px;
+}
+
 .hidden {
 	display: none;
 }
@@ -345,8 +349,7 @@ $(function(){
                   <form class="row" name="searchForm" action="${pageContext.request.contextPath}/admin/shopCustomer/review" method="post">
                       <div class="col-auto p-1">
                           <select name="schType" class="form-select">
-                              <option value="all" ${schType=="all"?"selected":""}>리뷰 + 상품이름 + 답변</option>
-                              <option value="review" ${schType=="review"?"selected":""}>리뷰</option>
+                              <option value="all" ${schType=="all"?"selected":""}>리뷰내용 + 상품이름</option>
                               <option value="answer" ${schType=="answer"?"selected":""}>답변</option>
                               <option value="userId" ${schType=="userId"?"selected":""}>사용자아이디</option>
                               <option value="reviewDate" ${schType=="reviewDate"?"selected":""}>리뷰작성날짜</option>

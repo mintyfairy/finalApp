@@ -158,6 +158,8 @@ public class ShopCustomerController {
 			@RequestParam(value = "page", defaultValue = "1") int current_page, 
 			@RequestParam(defaultValue = "1") int mode, 
 			@RequestParam(defaultValue = "questionDate") String col, 
+			@RequestParam(defaultValue = "all") String schType, 
+			@RequestParam(defaultValue = "") String kwd, 
 			HttpServletRequest req, 
 			HttpSession session, 
 			Model model) throws Exception {
@@ -174,6 +176,8 @@ public class ShopCustomerController {
 			map.put("mode", mode);
 			map.put("col", col);
 			map.put("questionIdx", info.getMemberIdx());
+			map.put("schType", schType);
+			map.put("kwd", kwd);
 			dataCount = service.questionCount(map);
 			
 			int total_page = myUtil.pageCount(dataCount, size);

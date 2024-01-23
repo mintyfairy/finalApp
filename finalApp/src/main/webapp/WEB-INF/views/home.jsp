@@ -92,7 +92,8 @@ main .excellent .best_list {
     width: 1080px;
     height: 400px;
     margin: 0 auto;
-    background-color: #fff;
+    margin-top: 220px;
+    background-color: transparent;
     display: flex;
 }
 
@@ -132,7 +133,7 @@ main .excellent .best_list .best_excellent {
 
 main .excellent .best_list .best_slider {
 	width: 75%;
-	height: 100%;
+	height: 320px;
 }
 
 /*

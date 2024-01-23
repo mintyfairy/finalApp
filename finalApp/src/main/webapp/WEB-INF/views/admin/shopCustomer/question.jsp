@@ -63,6 +63,10 @@
 	align-content: center;
 }
 
+.board-list-footer {
+	margin-bottom: 80px;
+}
+
 .hidden {
 	display: none;
 }
@@ -91,6 +95,12 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/boot-board.css" type="text/css">
 
 <script type="text/javascript">
+//검색
+function searchList() {
+	const f = document.searchForm;
+	f.submit();
+}
+
 // 탭
 $(function(){
 	$("button[role='tab']").on('click', function(){
@@ -321,6 +331,35 @@ $(function(){
 				</div>
 
 		</div>
+          <div class="row board-list-footer">
+              <div class="col">
+                  <button type="reset" class="btn btn-light" onclick="" title="새로고침"><i class="bi bi-arrow-counterclockwise"></i></button>
+              </div>
+              <div class="col-6 text-center">
+                  <form class="row" name="searchForm" action="${pageContext.request.contextPath}/admin/shopCustomer/question" method="post">
+                      <div class="col-auto p-1">
+                          <select name="schType" class="form-select">
+                              <option value="all" ${schType=="all"?"selected":""}>문의내용 + 상품이름</option>
+                              <option value="answer" ${schType=="answer"?"selected":""}>답변내용</option>
+                              <option value="userId" ${schType=="userId"?"selected":""}>사용자아이디</option>
+                              <option value="questionDate" ${schType=="reviewDate"?"selected":""}>문의작성날짜</option>
+                              <option value="answerDate" ${schType=="answerDate"?"selected":""}>답변날짜</option>
+                          </select>
+                      </div>
+                      <div class="col-auto p-1">
+                          <input type="hidden" name="mode" value="${mode}">
+                          <input type="hidden" name="col" value="${col}">
+                          <input type="text" name="kwd" value="${kwd}" class="form-control">
+                      </div>
+                      <div class="col-auto p-1">
+                          <button type="button" class="btn btn-light" onclick="searchList()"> <i class="bi bi-search"></i> </button>
+                      </div>
+                  </form>
+              </div>
+              <div class="col text-end">
+                  &nbsp;
+              </div>
+          </div>
 	</div>
 </div>
 

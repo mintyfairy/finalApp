@@ -42,6 +42,10 @@
 	padding-top: 50px;
 }
 
+.area_wrap {
+	text-align: center;
+}
+
 .login_area form input {
 	width: 375px;
 	height: 50px;
@@ -79,7 +83,6 @@
 .login_list .member_area {
 	flex-basis: 50%;
 	margin-top: 44px;
-    padding-left: 76px;
 }
 
 .login_list .member_area h3 {
@@ -175,21 +178,25 @@ button[type=submit]{
 		<div class="login_body">
 			<ul class="login_list">
 				<li class="login_area">
-					<h3>회원 로그인</h3>
-					<form method="post" action="${pageContext.request.contextPath}/member/login">
-						<input type="text" name="userId" placeholder="아이디">
-						<input type="password" name="userPwd" placeholder="비밀번호">
-						<div class="login_btn">
-							<button type="submit" class="loginSend">LOG-IN</button>
-						</div>
-					</form>
+					<div class="area_wrap">
+						<h3>회원 로그인</h3>
+						<form method="post" action="${pageContext.request.contextPath}/member/login">
+							<input type="text" name="userId" placeholder="아이디">
+							<input type="password" name="userPwd" placeholder="비밀번호">
+							<div class="login_btn">
+								<button type="submit" class="loginSend">LOG-IN</button>
+							</div>
+						</form>
+					</div>
 				</li>
 				<li class="member_area">
-					<h3>회원가입</h3>
-					<p>회원이 되어 다양한 혜택을 누리세요</p>
-					<button type="button" class="joinBtn" onclick="location.href='${pageContext.request.contextPath}/member/join'">JOIN-US</button>
-					<p>아이디 비밀번호를 잊으셨나요?</p>
-					<button type="button" class="joinBtn">ID/PASSWORD</button>
+					<div class="area_wrap">
+						<h3>회원가입</h3>
+						<p>회원이 되어 다양한 혜택을 누리세요</p>
+						<button type="button" class="joinBtn" onclick="location.href='${pageContext.request.contextPath}/member/join'">JOIN-US</button>
+						<p>아이디 비밀번호를 잊으셨나요?</p>
+						<button type="button" class="joinBtn">ID/PASSWORD</button>
+					</div>
 				</li>
 			</ul>
 		</div>

@@ -19,7 +19,6 @@ ul {
 }
 
 main {
-    margin-bottom: 150px;
     background-color: #fff;
 }
 
@@ -133,6 +132,7 @@ main {
 
 .hot_container {
     padding-top: 80px;
+    padding-bottom: 150px;
 }
 
 .hot_container .hot_wrap {
@@ -395,7 +395,7 @@ $(function(){
 	                        <p class="price">${vo.price}</p>
 	                        <div class="price_wrap">
 	                            <h4>${vo.discountRate}%</h4>
-	                            <h4>${vo.price*(1-vo.discountRate/100)}</h4>
+	                            <h4><fmt:formatNumber type="currency" value="${vo.price*(1-vo.discountRate/100)}"></fmt:formatNumber></h4>
 	                        </div>
 	                    </div>
 	                </li>

@@ -40,9 +40,6 @@
 					( INSTR(productName, #{kwd}) &gt; 0
 						OR DBMS_LOB.INSTR(review, #{kwd}) &gt; 0 )
 				</if>
-				<if test="schType == 'review'">
-					DBMS_LOB.INSTR(review, #{kwd}) &gt; 0
-				</if>
 				<if test="schType == 'answer'">
 					DBMS_LOB.INSTR(answer, #{kwd}) &gt; 0
 				</if>
@@ -62,9 +59,6 @@
 				<if test="schType == 'all'">
 					AND ( INSTR(productName, #{kwd}) &gt; 0
 						OR DBMS_LOB.INSTR(review, #{kwd}) &gt; 0 )
-				</if>
-				<if test="schType == 'review'">
-					AND DBMS_LOB.INSTR(review, #{kwd}) &gt; 0
 				</if>
 				<if test="schType == 'answer'">
 					AND DBMS_LOB.INSTR(answer, #{kwd}) &gt; 0
@@ -115,9 +109,6 @@
 					( INSTR(productName, #{kwd}) &gt; 0
 						OR DBMS_LOB.INSTR(review, #{kwd}) &gt; 0 )
 				</if>
-				<if test="schType == 'review'">
-					DBMS_LOB.INSTR(review, #{kwd}) &gt; 0
-				</if>
 				<if test="schType == 'answer'">
 					DBMS_LOB.INSTR(answer, #{kwd}) &gt; 0
 				</if>
@@ -137,9 +128,6 @@
 				<if test="schType == 'all'">
 					AND ( INSTR(productName, #{kwd}) &gt; 0
 						OR DBMS_LOB.INSTR(review, #{kwd}) &gt; 0 )
-				</if>
-				<if test="schType == 'review'">
-					AND DBMS_LOB.INSTR(review, #{kwd}) &gt; 0
 				</if>
 				<if test="schType == 'answer'">
 					AND DBMS_LOB.INSTR(answer, #{kwd}) &gt; 0
@@ -198,13 +186,53 @@
 		 -->
 			<if test="mode != null">
 				<if test="mode == 2">
-					AND ( answer IS NOT NULL )
+					( answer IS NOT NULL )
 				</if>
 				<if test="mode == 3">
-					AND ( answer IS NULL )
+					( answer IS NULL )
 				</if>
 				<if test="mode == 4">
-					AND ( secret = 1 )
+					( secret = 1 )
+				</if>
+			</if>
+			<if test="mode == 1 and kwd != null and kwd != ''">
+				<if test="schType == 'all'">
+					( INSTR(productName, #{kwd}) &gt; 0
+						OR DBMS_LOB.INSTR(question, #{kwd}) &gt; 0 )
+				</if>
+				<if test="schType == 'answer'">
+					DBMS_LOB.INSTR(answer, #{kwd}) &gt; 0
+				</if>
+				<if test="schType == 'userId'">
+					INSTR(userId, #{kwd}) &gt; 0
+				</if>
+				<if test="schType == 'reviewDate'">
+				   ( INSTR(TO_CHAR(questionDate, 'YYYYMMDD'), #{kwd}) &gt; 0
+			          OR INSTR(TO_CHAR(questionDate, 'YYYY-MM-DD'), #{kwd}) &gt; 0 )
+				</if>
+				<if test="schType == 'answerDate'">
+				   ( INSTR(TO_CHAR(answerDate, 'YYYYMMDD'), #{kwd}) &gt; 0
+			          OR INSTR(TO_CHAR(answerDate, 'YYYY-MM-DD'), #{kwd}) &gt; 0 )
+				</if>
+			</if>
+			<if test="mode != 1 and kwd != null and kwd != ''">
+				<if test="schType == 'all'">
+					AND ( INSTR(productName, #{kwd}) &gt; 0
+						OR DBMS_LOB.INSTR(question, #{kwd}) &gt; 0 )
+				</if>
+				<if test="schType == 'answer'">
+					AND DBMS_LOB.INSTR(answer, #{kwd}) &gt; 0
+				</if>
+				<if test="schType == 'userId'">
+					AND INSTR(userId, #{kwd}) &gt; 0
+				</if>
+				<if test="schType == 'reviewDate'">
+				   AND ( INSTR(TO_CHAR(questionDate, 'YYYYMMDD'), #{kwd}) &gt; 0
+			          OR INSTR(TO_CHAR(questionDate, 'YYYY-MM-DD'), #{kwd}) &gt; 0 )
+				</if>
+				<if test="schType == 'answerDate'">
+				   AND ( INSTR(TO_CHAR(answerDate, 'YYYYMMDD'), #{kwd}) &gt; 0
+			          OR INSTR(TO_CHAR(answerDate, 'YYYY-MM-DD'), #{kwd}) &gt; 0 )
 				</if>
 			</if>
 		</where>
@@ -237,6 +265,46 @@
 				</if>
 				<if test="mode == 4">
 					AND ( secret = 1 )
+				</if>
+			</if>
+			<if test="mode == 1 and kwd != null and kwd != ''">
+				<if test="schType == 'all'">
+					( INSTR(productName, #{kwd}) &gt; 0
+						OR DBMS_LOB.INSTR(question, #{kwd}) &gt; 0 )
+				</if>
+				<if test="schType == 'answer'">
+					DBMS_LOB.INSTR(answer, #{kwd}) &gt; 0
+				</if>
+				<if test="schType == 'userId'">
+					INSTR(userId, #{kwd}) &gt; 0
+				</if>
+				<if test="schType == 'reviewDate'">
+				   ( INSTR(TO_CHAR(questionDate, 'YYYYMMDD'), #{kwd}) &gt; 0
+			          OR INSTR(TO_CHAR(questionDate, 'YYYY-MM-DD'), #{kwd}) &gt; 0 )
+				</if>
+				<if test="schType == 'answerDate'">
+				   ( INSTR(TO_CHAR(answerDate, 'YYYYMMDD'), #{kwd}) &gt; 0
+			          OR INSTR(TO_CHAR(answerDate, 'YYYY-MM-DD'), #{kwd}) &gt; 0 )
+				</if>
+			</if>
+			<if test="mode != 1 and kwd != null and kwd != ''">
+				<if test="schType == 'all'">
+					AND ( INSTR(productName, #{kwd}) &gt; 0
+						OR DBMS_LOB.INSTR(question, #{kwd}) &gt; 0 )
+				</if>
+				<if test="schType == 'answer'">
+					AND DBMS_LOB.INSTR(answer, #{kwd}) &gt; 0
+				</if>
+				<if test="schType == 'userId'">
+					AND INSTR(userId, #{kwd}) &gt; 0
+				</if>
+				<if test="schType == 'reviewDate'">
+				   AND ( INSTR(TO_CHAR(questionDate, 'YYYYMMDD'), #{kwd}) &gt; 0
+			          OR INSTR(TO_CHAR(questionDate, 'YYYY-MM-DD'), #{kwd}) &gt; 0 )
+				</if>
+				<if test="schType == 'answerDate'">
+				   AND ( INSTR(TO_CHAR(answerDate, 'YYYYMMDD'), #{kwd}) &gt; 0
+			          OR INSTR(TO_CHAR(answerDate, 'YYYY-MM-DD'), #{kwd}) &gt; 0 )
 				</if>
 			</if>
 		</where>
