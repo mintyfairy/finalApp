@@ -170,7 +170,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 										<c:forEach var="filename" items="${dto.listFilename}">
 											<div class="col-md-auto md-img">
 												<img class="border rounded"
-													src="${pageContext.request.contextPath}/uploads/qna/${filename}">
+													src="${pageContext.request.contextPath}/uploads/carqna/${filename}">
 											</div>
 										</c:forEach>
 									</div>

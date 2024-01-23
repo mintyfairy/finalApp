@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.fa.plus.domain.car.CampingCar;
 
+
 @Mapper
 public interface CampingCarMapper {
 	
@@ -18,5 +19,5 @@ public interface CampingCarMapper {
 	public List<CampingCar> listCarFile(long carNum);
 	
 	public List<CampingCar> listOption(long carNum);
-	
+
 }

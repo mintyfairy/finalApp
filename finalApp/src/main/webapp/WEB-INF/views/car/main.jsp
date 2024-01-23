@@ -202,7 +202,7 @@ main {
 }
 
 
-#search1, #search2 {
+#search1, #date1, #date2 {
     border: 2px solid silver;
     border-radius: 10px;
     font-size: 18px;
@@ -216,7 +216,7 @@ main {
     margin-bottom: 10px;
 }
 
-#search2 {
+#date1, #date2 {
     width: 170px;
     height: 45px;
     text-align: center;
@@ -236,6 +236,10 @@ main {
     
 }
 
+#searchbutton:hover {
+	background-color: #000069;
+}
+
 
 </style>
 
@@ -248,15 +252,15 @@ main {
            </div>
            <div class="searchbox">
                <p>캠핑카, 이제는 쉽게 예약하세요</p>
-               <form  class="row" name="searchForm" action="${pageContext.request.contextPath}/car/main" method="post">
+               <form  class="row" name="searchForm">
                    <table class="car_search" style="text-align: center;">
                        <tr>
                            <td colspan="3">
-                               <select id="search1" name="schType">
-                                   <option>차량유형</option>
-                                   <option value="carSize">모터홈</option>
-                                   <option>차박형(중형)</option>
-                                   <option>차박형(소형)</option>
+                               <select id="search1" name="carSize">
+                                   <option value="0">차량유형</option>
+                                   <option value="1" ${carSize==1?"selected":"" }>모터홈</option>
+                                   <option value="2" ${carSize==2?"selected":"" }>차박형(중형)</option>
+                                   <option value="3" ${carSize==3?"selected":"" }>차박형(소형)</option>
                                </select>
                            </td>
                        </tr>
@@ -267,13 +271,15 @@ main {
                        </tr>
                        <tr>
                            <td>
-                               <input id="search2" type="date" name="대여일">
+                               <input id="date1" type="date" name="start_date" value="${start_date}"
+                               	placeholder="대여일" data-target="#date1" />
                            </td>
                            <td>
                                ~
                            </td>
                            <td>
-                               <input id="search2" type="date" name="반납일">
+                               <input id="date2" type="date" name="end_date" value="${end_date}"
+                                placeholder="반납일" data-target="#date2" />
                            </td>
                        </tr>
                        <tr>
@@ -288,6 +294,7 @@ main {
            </div>
        </div>
    </div>
+
 
    
   
@@ -341,3 +348,37 @@ main {
     </div>
 </main>
 
+<script type="text/javascript">
+function searchOk() {
+	const f= document.searchForm;
+	
+	if(f.start_date.value ||f.end_date.value){
+		if (!f.start_date.value){
+			alert('시작일을 선택해주세요')
+			return;
+		}
+		if (!f.end_date.value){
+			alert('종료일을 선택해주세요')
+			return;
+		}
+	}
+	let today = new Date();
+	let date1 = new Date(f.start_date.value);
+	let date2 = new Date(f.end_date.value);
+	if (date1<=today){
+    	alert('오늘 날짜 이후를 입력하세요.');
+		f.start_date.focus();
+		return false;
+    }
+    if (date2<=date1){
+    	alert('종료일은 시작일 이후여야합니다');
+		f.end_date.focus();
+		return false;
+    }
+    
+	query=$('form[name=searchForm]').serialize();
+	console.log(query)
+	f.action = "${pageContext.request.contextPath}/car/main";
+	f.submit();
+}
+</script>

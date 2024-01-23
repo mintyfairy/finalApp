@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fa.plus.common.MyUtil;
 import com.fa.plus.domain.car.CampingCar;
+
 import com.fa.plus.service.car.CampingCarService;
 
 @Controller
@@ -31,34 +32,38 @@ public class MainCarController {
 	
 	@RequestMapping(value="main")
 	public String main(
-			@RequestParam(defaultValue = "all") String schType,
-			@RequestParam(defaultValue = "") String kwd,
+			@RequestParam(defaultValue = "0") int carSize,
+			@RequestParam(defaultValue = "") String start_date,
+			@RequestParam(defaultValue = "") String end_date,
 			HttpServletRequest req,
 			Model model) throws Exception {
 		
 		int dataCount = 0;
-
-		if (req.getMethod().equalsIgnoreCase("GET")) { // GET 방식인 경우
-			kwd = URLDecoder.decode(kwd, "utf-8");
-		}
-
+		
+		// DB에 저장된 값이 한글이기 때문에 이 작업 거침.
+		String s = "";
+		if(carSize == 1) s = "모터홈";
+		else if(carSize == 2) s = "차박형(중형)";
+		else if(carSize == 3) s = "차박형(소형)";
+		
 		// 전체 페이지 수
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("carSize", s);
+		map.put("start_date", start_date);
+		map.put("end_date", end_date);
 		
 		dataCount = service.dataCount(map);
-		map.put("schType", schType);
-		map.put("kwd", kwd);
 		// map.put("carNum", carNum);
 
 		// 글 리스트
 		List<CampingCar> list = service.listCampingCar(map);
-
+		
 		model.addAttribute("list", list);
 		model.addAttribute("dataCount", dataCount);
-		model.addAttribute("schType", schType);
-		model.addAttribute("kwd", kwd);
-		// model.addAttribute("carNum",carNum);
-
+		model.addAttribute("carSize", carSize);
+		model.addAttribute("start_date", start_date);
+		model.addAttribute("end_date", end_date);
+		
 		return ".car.main";
 		
 	}

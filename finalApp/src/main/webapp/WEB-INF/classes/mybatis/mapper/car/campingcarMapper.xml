@@ -2,40 +2,47 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fa.plus.mapper.CampingCarMapper">
-	
-	<sql id="where-list">
-		<if test="schType=='carSize' ">
-			INSTR(carSize, #{kwd}) &gt; 0
-		</if>
-		<if test="schType=='start_date' ">
-			( TO_CHAR(start_date, 'YYYY-MM-DD') = #{kwd}
-				OR TO_CHAR(start_date, 'YYYYMMDD') = #{kwd} )
-		</if>
-		<if test="schType=='end_date' ">
-			( TO_CHAR(end_date, 'YYYY-MM-DD') = #{kwd}
-				OR TO_CHAR(end_date, 'YYYYMMDD') = #{kwd} )
-		</if>
-	</sql>
 
 	<select id="dataCount" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*), 0)
-		FROM campingCar
+		FROM campingCar c
+		<if test="start_date!='' and end_date != '' ">
+			JOIN (
+				SELECT carNum,start_date,end_date,orderNum 
+				FROM carReservation
+				WHERE end_date &gt; SYSDATE AND end_date &gt;= TO_DATE(#{start_date},'yyyy-mm-dd') AND TO_DATE(#{end_date},'yyyy-mm-dd') &gt;= start_date
+			) r ON c.carNum=r.carNum
+		</if>		
 		<where>
 			carShow = 1
-			<if test="kwd != null and kwd != '' ">
-				AND <include refid="where-list" />
+			<if test="carSize != '' ">
+				AND carSize = #{carSize}
 			</if>
 		</where> 
 	</select>
 	
 	<select id="listCampingCar" parameterType="map" resultType="com.fa.plus.domain.car.CampingCar">
-		SELECT d.carNum, carName, carSize, thumbnail, discountRate, carShow, carMaxNum, sleepNum, content, petOrNot, 
+		SELECT c.carNum, carName, carSize, thumbnail, discountRate, carShow, carMaxNum, sleepNum, content, petOrNot, 
 			description, caravanNum, weekCost, wkndCost,
 			carBirth
 		FROM campingCar c
 		JOIN carDetail d ON c.carNum = d.carNum
-		WHERE carShow = 1
-		ORDER BY carNum DESC
+		<if test="start_date!='' and end_date != '' ">
+			<![CDATA[
+		        AND c.carNum NOT IN (
+		            SELECT carNum
+		            FROM carReservation
+		            WHERE end_date > SYSDATE AND end_date >= TO_DATE(#{start_date},'yyyy-mm-dd') AND TO_DATE(#{end_date},'yyyy-mm-dd') >= start_date
+		        )
+		    ]]>
+		</if>		
+		<where>
+			carShow = 1
+			<if test="carSize != '' ">
+				AND carSize = #{carSize}
+			</if>
+		</where> 
+		ORDER BY d.carNum DESC
 	</select> 
 	
 	<select id="findById" parameterType="Long" resultType="com.fa.plus.domain.car.CampingCar">
