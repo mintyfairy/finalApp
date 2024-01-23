@@ -382,11 +382,11 @@ $(function() {
 	                	인기상품
 	                </a>
 	                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                       <li><a class="dropdown-item" href="${pageContext.request.contextPath}/shop/product/main?categoryNum=126">텐트&nbsp;&middot;&nbsp;타프</a></li>
-							<li><a class="dropdown-item" href="${pageContext.request.contextPath}/shop/product/main?categoryNum=127">침낭/매트</a></li>
-							<li><a class="dropdown-item" href="${pageContext.request.contextPath}/shop/product/main?categoryNum=145">테이블</a></li>
-							<li><a class="dropdown-item" href="${pageContext.request.contextPath}/shop/product/main?categoryNum=150">스토브</a></li>
-							<li><a class="dropdown-item" href="${pageContext.request.contextPath}/shop/product/main?categoryNum=161">쿠커</a></li>
+                       <li><a class="dropdown-item" href="${pageContext.request.contextPath}/shop/product/list?categoryNum=126">텐트&nbsp;&middot;&nbsp;타프</a></li>
+							<li><a class="dropdown-item" href="${pageContext.request.contextPath}/shop/product/list?categoryNum=127">침낭/매트</a></li>
+							<li><a class="dropdown-item" href="${pageContext.request.contextPath}/shop/product/list?categoryNum=145">테이블</a></li>
+							<li><a class="dropdown-item" href="${pageContext.request.contextPath}/shop/product/list?categoryNum=150">스토브</a></li>
+							<li><a class="dropdown-item" href="${pageContext.request.contextPath}/shop/product/list?categoryNum=161">쿠커</a></li>
                     </ul>
 	            </li>
 	            <li class="navi_item">
