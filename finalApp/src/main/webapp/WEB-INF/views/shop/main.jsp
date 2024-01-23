@@ -307,25 +307,25 @@ $(function(){
     <div class="category_wrap">
         <ul class="category_list">
             <li class="category_item">
-            	<a href="#">
+            	<a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=126">
 	            	<img src="${pageContext.request.contextPath}/resources/images/shop/sort01.png" />
 	            	<span>텐트 타프</span>
             	</a>
             </li>
             <li class="category_item">
-            	<a href="#">
+            	<a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=127">
 	            	<img src="${pageContext.request.contextPath}/resources/images/shop/sort02.png" />
 	            	<span>침낭 매트</span>
             	</a>
             </li>
             <li class="category_item">
-            	<a href="#">
+            	<a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=128">
 	            	<img src="${pageContext.request.contextPath}/resources/images/shop/sort03.png" />
 	            	<span>퍼니처</span>
             	</a>
             </li>
             <li class="category_item">
-            	<a href="#">
+            	<a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=129">
 	            	<img src="${pageContext.request.contextPath}/resources/images/shop/sort04.png" />
 	            	<span>라이팅</span>
             	</a>
@@ -333,25 +333,25 @@ $(function(){
         </ul>
         <ul class="category_list">
             <li class="category_item">
-            	<a href="#">
+            	<a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=130">
 	            	<img src="${pageContext.request.contextPath}/resources/images/shop/sort05.png" />
 	            	<span>BBQ</span>
             	</a>
             </li>
             <li class="category_item">
-            	<a href="#">
+            	<a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=131">
 	            	<img src="${pageContext.request.contextPath}/resources/images/shop/sort06.png" />
 	            	<span>키친</span>
             	</a>
             </li>
             <li class="category_item">
-            	<a href="#">
+            	<a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=132">
 	            	<img src="${pageContext.request.contextPath}/resources/images/shop/sort07.png" />
 	            	<span>스토리지</span>
             	</a>
             </li>
             <li class="category_item">
-            	<a href="#">
+            	<a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=133">
 	            	<img src="${pageContext.request.contextPath}/resources/images/shop/sort08.png" />
 	            	<span>악세서리</span>
             	</a>
@@ -361,7 +361,7 @@ $(function(){
 </div>
 
 <div class="best_container">
-    <h1>베스트 셀러</h1>
+    <h1>인기 상품</h1>
     <div class="best_slider">
     	<jsp:include page="/WEB-INF/views/slider/shop/best_slider.jsp"/>
     </div>

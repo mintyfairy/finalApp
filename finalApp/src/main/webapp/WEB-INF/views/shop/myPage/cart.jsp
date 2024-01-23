@@ -272,7 +272,10 @@ function deleteCartItem(detailNum2) {
 								<input type="hidden" name="detailNums" value="${dto.detailNum}">
 								<input type="hidden" name="detailNums2" value="${dto.detailNum2}">
 							</td>
-							<td>${dto.qty}</td>
+							<td>
+								${dto.qty}
+								<input type="hidden" name="buyQtys" value="${dto.qty}">
+							</td>
 							<td>${dto.savedMoney}</td>
 							<td>${dto.productMoney}</td>
 							<td>${dto.delivery}</td>

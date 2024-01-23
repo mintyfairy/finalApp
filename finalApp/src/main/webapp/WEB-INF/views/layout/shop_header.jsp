@@ -357,7 +357,7 @@ $(function() {
                 </c:choose>
                 
                 <li class="header_item fa-lg"><a href="${pageContext.request.contextPath}/shop/myPage/cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
-                <li class="header_item fa-lg"><a href="#"><i class="fa-solid fa-headset"></i></a></li>
+                <li class="header_item fa-lg"><a href="${pageContext.request.contextPath}/csCenter/notice/list"><i class="fa-solid fa-headset"></i></a></li>
             </ul>
         </div>
     </div>
@@ -382,15 +382,11 @@ $(function() {
 	                	인기상품
 	                </a>
 	                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                       <li><a class="dropdown-item" href="#">텐트</a></li>
-							<li><a class="dropdown-item" href="#">타프</a></li>
-							<li><a class="dropdown-item" href="#">침낭</a></li>
-							<li><a class="dropdown-item" href="#">매트</a></li>
-							<li><a class="dropdown-item" href="#">테이블</a></li>
-							<li><a class="dropdown-item" href="#">체어</a></li>
-							<li><a class="dropdown-item" href="#">롄턴</a></li>
-							<li><a class="dropdown-item" href="#">스토브</a></li>
-							<li><a class="dropdown-item" href="#">쿠커</a></li>
+                       <li><a class="dropdown-item" href="${pageContext.request.contextPath}/shop/product/main?categoryNum=126">텐트&nbsp;&middot;&nbsp;타프</a></li>
+							<li><a class="dropdown-item" href="${pageContext.request.contextPath}/shop/product/main?categoryNum=127">침낭/매트</a></li>
+							<li><a class="dropdown-item" href="${pageContext.request.contextPath}/shop/product/main?categoryNum=145">테이블</a></li>
+							<li><a class="dropdown-item" href="${pageContext.request.contextPath}/shop/product/main?categoryNum=150">스토브</a></li>
+							<li><a class="dropdown-item" href="${pageContext.request.contextPath}/shop/product/main?categoryNum=161">쿠커</a></li>
                     </ul>
 	            </li>
 	            <li class="navi_item">
@@ -415,9 +411,6 @@ $(function() {
 							<li><a class="dropdown-item" href="#">문의Q&A</a></li>
 							<li><a class="dropdown-item" href="#">상품 문의</a></li>
 							<li><a class="dropdown-item" href="#">반품&교환</a></li>
-							<li><a class="dropdown-item" href="#">AS문의</a></li>
-							<li><a class="dropdown-item" href="#">AS메뉴얼</a></li>
-							<li><a class="dropdown-item" href="#">구매 후기</a></li>
                     </ul>
 	            </li>
 	            
@@ -427,11 +420,7 @@ $(function() {
 	                </a>
 	                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item" href="${pageContext.request.contextPath}/shop/myPage/main">주문내역/배송</a></li>
-							<li><a class="dropdown-item" href="#">포인트/쿠폰</a></li>
-							<li><a class="dropdown-item" href="#">찜</a></li>
 							<li><a class="dropdown-item" href="${pageContext.request.contextPath}/shop/myPage/review">리뷰/Q&amp;A</a></li>
-							<li><hr class="dropdown-divider"></li>
-							<li><a class="dropdown-item" href="#">정보수정</a></li>
 					</ul>
 	            </li>
 	            
@@ -445,7 +434,7 @@ $(function() {
 	            <h2>전체 카테고리 보기</h2>
 	            <ul class="cate_list">
 	                <li class="cate_item cate_item1">
-	                    <h3>텐트&nbsp;&middot;&nbsp;타프</h3>
+	                    <h3><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=126">텐트&nbsp;&middot;&nbsp;타프</a></h3>
 	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=134">거실형텐트</a></p>
 	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=135">돔형텐트</a></p>
 	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=136">티피/루프탑텐트</a></p>
@@ -455,60 +444,60 @@ $(function() {
 	                </li>
 	                <li class="cate_item cate_item2">
 	                    <h3>침낭&nbsp;&middot;&nbsp;매트</h3>
-	                    <p>침낭</p>
-	                    <p>자충/에어매트</p>
-	                    <p>카페트/블랑켓/러그</p>
-	                    <p>발포매트/폼매트/레저시트</p>
-	                    <p>전기매트</p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=140">침낭</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=141">자충/에어매트</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=142">카페트/블랑켓/러그</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=143">발포매트/폼매트/레저시트</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=144">전기매트</a></p>
 	                </li>
 	                <li class="cate_item cate_item3">
 	                    <h3>퍼니처</h3>
-	                    <p>테이블</p>
-	                    <p>릴렉스 체어</p>
-	                    <p>미니 경량 체어</p>
-	                    <p>야전침대</p>
-	                    <p>해먹/스탠드</p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=145">테이블</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=146">릴렉스 체어</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=147">미니 경량 체어</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=148">야전침대</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=149">해먹/스탠드</a></p>
 	                </li>
 	                <li class="cate_item cate_item4">
 	                    <h3>라이팅</h3>
-	                    <p>스토브</p>
-	                    <p>가스/오일랜턴</p>
-	                    <p>LED랜턴/충전식랜턴</p>
-	                    <p>헤드랜턴/후레쉬</p>
-	                    <p>릴선</p>
-	                    <p>연장선</p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=150">스토브</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=151">가스/오일랜턴</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=152">LED랜턴/충전식랜턴</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=153">헤드랜턴/후레쉬</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=154">릴선</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=155">연장선</a></p>
 	                </li>
 	                <li class="cate_item cate_item5">
 	                    <h3>BBQ</h3>
-	                    <p>화로대</p>
-	                    <p>그릴/플레이트</p>
-	                    <p>가스/연료/착화제</p>
-	                    <p>BBQ용품</p>
-	                    <p>토치/연료통</p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=156">화로대</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=157">그릴/플레이트</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=158">가스/연료/착화제</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=159">BBQ용품</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=160">토치/연료통</a></p>
 	                </li>
 	                <li class="cate_item cate_item6">
 	                    <h3>키친</h3>
-	                    <p>코펠/쿠커</p>
-	                    <p>냄비/팬/솔/더치오브</p>
-	                    <p>식기/주전자</p>
-	                    <p>수저/칼/도마/조리도구</p>
-	                    <p>컵/잔/시에라</p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=161">코펠/쿠커</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=162">냄비/팬/솔/더치오브</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=163">식기/주전자</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=164">수저/칼/도마/조리도구</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=165">컵/잔/시에라</a></p>
 	                </li>
 	                <li class="cate_item cate_item7">
 	                    <h3>스토리지</h3>
-	                    <p>수납박스/웨건</p>
-	                    <p>대형 수납케이스</p>
-	                    <p>소형 수납케이스</p>
-	                    <p>대형 가방 20L 이상</p>
-	                    <p>소형 가방 20L 미만</p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=166">수납박스/웨건</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=167">대형 수납케이스</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=168">소형 수납케이스</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=169">대형 가방 20L 이상</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=170">소형 가방 20L 미만</a></p>
 	                </li>
 	                <li class="cate_item cate_item8">
 	                    <h3>악세서리</h3>
-	                    <p>해머/톱/삽/도끼</p>
-	                    <p>나이프/tool</p>
-	                    <p>비너/열쇠고리</p>
-	                    <p>데코/장식용품</p>
-	                    <p>등산용품</p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=171">해머/톱/삽/도끼</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=172">나이프/tool</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=173">비너/열쇠고리</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=174">데코/장식용품</a></p>
+	                    <p><a href="${pageContext.request.contextPath}/shop/product/main?categoryNum=175">등산용품</a></p>
 	                </li>
 	            </ul>
 	        </div>

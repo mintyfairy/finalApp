@@ -357,6 +357,22 @@ table {
 .graph .one-space:first-child{ border-top-left-radius:5px;  border-bottom-left-radius:5px; }
 .graph .one-space:last-child{ border-top-right-radius:5px; border-bottom-right-radius:5px; }
 .graph-rate { padding-left: 5px; display: inline-block; width: 60px; text-align: left; }
+
+.bi-star-fill::before {
+    content: "\f586";
+}
+
+.bi::before, [class^="bi-"]::before, [class*=" bi-"]::before {
+    display: inline-block;
+    font-family: bootstrap-icons !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: -0.125em;
+    -webkit-font-smoothing: antialiased;
+ }
 </style>
 
 <script type="text/javascript">
