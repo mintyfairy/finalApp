@@ -92,13 +92,14 @@ $(function(){
 		let values=[];
 		
 		for(let item of data.daysRankYear){
+			if (item.ORDER_DAYS==null) continue;
 			titles.push(item.ORDER_DAYS)
-			values.push(item.SUM)
+			values.push(item.SUM/100000)
 		}
 
 		option = {
 				title: {
-				    text: '요일별 판매액'
+				    text: '요일별 판매액(만)'
 				  },
 		  xAxis: {
 		    type: 'category',
