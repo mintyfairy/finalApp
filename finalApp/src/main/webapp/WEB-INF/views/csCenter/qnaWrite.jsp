@@ -98,10 +98,10 @@ function sendOk() {
 								<td class="bg-light col-sm-2" scope="row">구 분</td>
 								<td>
 									<select name="category" class="form-select">
-										<option value="캠핑장" ${dto.category=="캠핑장 관련 문의"?"selected":"" }>강좌</option>
-										<option value="캠핑카" ${dto.category=="캠핑카 관련 문의"?"selected":"" }>결제문의</option>
-										<option value="쇼핑몰" ${dto.category=="쇼핑몰 관련 문의"?"selected":"" }>회원가입</option>
-										<option value="공통사항" ${dto.category=="공통 문의"?"selected":"" }>기타문의</option>
+										<option value="통합" ${dto.category=="통합 관련 문의"?"selected":"" }>통합</option>
+										<option value="캠핑장" ${dto.category=="캠핑장 관련 문의"?"selected":"" }>캠핑장</option>
+										<option value="캠핑카" ${dto.category=="캠핑카 관련 문의"?"selected":"" }>캠핑카</option>
+										<option value="쇼핑몰" ${dto.category=="쇼핑몰 문의"?"selected":"" }>쇼핑몰</option>
 									</select>
 								</td>
 							</tr>
