@@ -130,7 +130,7 @@ $(function(){
 <!-- <div class="container"> -->
 	<div class="body-container">	
 		<div class="body-title">
-			<h2><i class="bi bi-chat-right-text" style="font-size:23px;"></i> 캠핑카 문의 </h2>
+			<h3><i class="bi bi-chat-right-text" style="font-size:23px;"></i> 캠핑카 문의 </h3>
 		</div>
 		
 		<div class="body-main">

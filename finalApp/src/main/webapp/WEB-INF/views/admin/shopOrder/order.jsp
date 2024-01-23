@@ -30,16 +30,20 @@ table th, td {
 }
 
 .nav-tabs .nav-link {
-	min-width: 170px;
-	background: #f3f5f7;
+	min-width: 110px;
+	height: 40px;
 	border-radius: 0;
 	border-right: 1px solid #dbdddf;
 	color: #333;
-	font-weight: 600;
+	cursor: pointer;
+	line-height: 40px;
+	overflow: hidden;
+	padding: 0 21px;
 }
 .nav-tabs .nav-link.active {
-	background: #3d3d4f;
-	color: #fff;
+	font-weight: 700;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
 }
 .tab-pane { min-height: 300px; }
 
@@ -138,7 +142,7 @@ table th, td {
 	
 	// 탭
 	$(function(){
-		$("button[role='tab']").on('click', function(){
+		$("i[role='tab']").on('click', function(){
 			const tab = $(this).attr("aria-controls");
 			
 			if(tab === "1") { // 주문관리
@@ -155,19 +159,19 @@ table th, td {
 
 <div class="body-container">
    <div class="body-title">
-	<h2><i class="fa-solid fa-user-group"></i> 상품주문관리 </h2>
+	<h3><i class="bi bi-chat-right-text"></i> 상품주문관리 </h3>
    </div>
    
    <div class="body-main">
-      <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
-              <button class="nav-link ${orderStatus=='status'?'active':''}" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="1" aria-selected="${orderStatus=='status'?'true':'false'}">주문관리</button>
+              <i class="nav-link fa-regular fa-note-sticky ${orderStatus=='status'?'active':''}" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane" role="tab" aria-controls="1" aria-selected="${orderStatus=='status'?'true':'false'}"> 주문관리</i>
           </li>
           <li class="nav-item" role="presentation">
-              <button class="nav-link ${orderStatus=='exchange'?'active':''}" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="2" aria-selected="${orderStatus=='exchange'?'true':'false'}">교환관리</button>
+              <i class="nav-link fa-regular fa-note-sticky ${orderStatus=='exchange'?'active':''}" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane" role="tab" aria-controls="2" aria-selected="${orderStatus=='exchange'?'true':'false'}"> 교환관리</i>
           </li>
           <li class="nav-item" role="presentation">
-              <button class="nav-link ${orderStatus=='refund'?'active':''}" id="tab-3" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="3" aria-selected="${orderStatus=='refund'?'true':'false'}">반품및주문취소</button>
+              <i class="nav-link fa-regular fa-note-sticky ${orderStatus=='refund'?'active':''}" id="tab-3" data-bs-toggle="tab" data-bs-target="#tab-pane" role="tab" aria-controls="3" aria-selected="${orderStatus=='refund'?'true':'false'}"> 반품및주문취소</i>
           </li>
       </ul>
       
@@ -192,11 +196,11 @@ table th, td {
                   </c:if>
                   <div class="form-check form-check-inline">&nbsp;</div>
               </div>
-              <div class="col-auto">
-              		${dataCount}개(${page}/${total_page} 페이지)
-              </div>
-              <div style="text-align: right; margin-bottom: 15px;">
+              <div class="col-auto" style="margin-bottom: 15px;">
               	<button id="autoPurchase" type="button" class="btn btn-outline-secondary">자동구매확정</button>
+              </div>
+              <div style="text-align: right;">
+              		${dataCount}개(${page}/${total_page} 페이지)
               </div>
           </div>
           

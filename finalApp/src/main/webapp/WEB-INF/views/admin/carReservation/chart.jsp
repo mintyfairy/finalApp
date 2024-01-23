@@ -161,7 +161,7 @@ $(function(){
 
 <div class="body-container">
     <div class="body-title">
-		<h2><i class="fa-solid fa-clipboard" style="font-size:23px;"></i>&nbsp;예약 및 매출관리 </h2>
+		<h3><i class="fa-solid fa-clipboard" style="font-size:23px;"></i>&nbsp;예약 및 매출관리 </h3>
     </div>
     
     <div class="body-main">

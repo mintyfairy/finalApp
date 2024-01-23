@@ -13,21 +13,25 @@
 
 .body-title {
 	width: 1080px;;
-	margin-bottom: 0;
+	margin-bottom: 25px;
 }
 
 .nav-tabs .nav-link {
 	min-width: 110px;
-	background: #f3f5f7;
+	height: 40px;
 	border-radius: 0;
 	border-right: 1px solid #dbdddf;
 	color: #333;
-	font-weight: 600;
+	cursor: pointer;
+	line-height: 40px;
+	overflow: hidden;
+	padding: 0 21px;
 }
 
 .nav-tabs .nav-link.active {
-	background: #3d3d4f;
-	color: #fff;
+	font-weight: 700;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
 }
 
 .tab-pane {
@@ -103,7 +107,7 @@ function searchList() {
 
 // 탭
 $(function(){
-	$("button[role='tab']").on('click', function(){
+	$("i[role='tab']").on('click', function(){
 		let tab = $(this).attr("aria-controls");
 		
 		if(tab === "1") {
@@ -161,12 +165,12 @@ $(function(){
 		</div>
 		
 		<div class="body-main">
-			<ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
 				<li class="nav-item" role="presentation">
-					<button class="nav-link ${tab==1?'active':''}" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="1" aria-selected="${tab==1?'true':'false'}">상품리뷰</button>
+					<i class="nav-link fa-regular fa-note-sticky active" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane" role="tab" aria-controls="1" aria-selected="${tab==1?'true':'false'}"> 상품리뷰</i>
 				</li>
 				<li class="nav-item" role="presentation">
-					<button class="nav-link ${tab==2?'active':''}" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="2" aria-selected="${tab==2?'true':'false'}">상품문의</button>
+					<i class="nav-link fa-regular fa-note-sticky ${tab==2?'active':''}" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane" role="tab" aria-controls="2" aria-selected="${tab==2?'true':'false'}"> 상품문의</i>
 				</li>
 			</ul>
 			

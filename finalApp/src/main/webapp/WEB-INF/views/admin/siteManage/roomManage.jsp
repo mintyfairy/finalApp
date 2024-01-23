@@ -18,7 +18,7 @@
 
 <div class="body-container">
     <div class="body-title">
-		<h2><i class="fa-solid fa-user-group"></i> 객실 관리 </h2>
+		<h3><i class="fa-solid fa-user-group" style="font-size: 24px"></i> 객실 관리 </h3>
 		<table class="table mt-1">
 			<tr>
 				<td align="left">

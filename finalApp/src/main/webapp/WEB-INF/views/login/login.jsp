@@ -13,7 +13,20 @@
 }
 
 .login_container {
-	margin-bottom: 110px;
+	position: relative;
+	padding-bottom: 110px;
+	background: url("${pageContext.request.contextPath}/resources/images/login_background.jpg") no-repeat;
+	background-size: cover;
+}
+
+.login_container:before {
+    position: absolute;
+    content: "";
+    top:0px;
+    left:0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,0.3);
 }
 
 .login_wrap {
@@ -24,13 +37,15 @@
 
 .login_wrap h5 {
 	padding-bottom: 10px;
-    font-size: 18px;
+    font-size: 24px;
     line-height: 18px;
     font-weight: bold;
-    border-bottom: 1px solid #000;
+    color: #d9d9d9;
 }
 
 .login_list {
+	position: relative;
+	z-index: 50;
 	display: flex;
     height: 458px;
     border: 1px solid #e9e9e9;
@@ -64,6 +79,7 @@
 	padding-top: 35px;
     font-size: 18px;
     font-weight: bold;
+    color: #d9d9d9;
     line-height: 18px;
     margin-bottom: 32px;
 }
@@ -89,6 +105,7 @@
 	padding-top: 35px;
     font-size: 18px;
     font-weight: bold;
+    color: #d9d9d9;
     line-height: 18px;
     margin-bottom: 20px;
 }
@@ -109,7 +126,7 @@
 
 .login_list .member_area p {
     font-size: 11px;
-    color: #adadad;
+    color: #d9d9d9;
 }
 
 
@@ -172,15 +189,48 @@ button[type=submit]{
 
 </style>
 
+<script type="text/javascript">
+$(function(){
+	$(document).ready(function() {
+	    $(document).keyup(function(event) {
+	        if (event.which === 13) {
+	            $(".loginSend").click();
+	        }
+	    });
+	});
+});
+
+$(function(){
+	$('.loginSend').click(function() {
+		const f = document.loginForm;
+		
+		if(! f.userId.value) {
+			alert("아이디를 입력하세요.");
+			f.userId.focus();
+			return false;
+		}
+
+		if(! f.userPwd.value) {
+			alert("패스워드를 입력하세요.");
+			f.userPwd.focus();
+			return false;
+		}
+		
+		f.action = "${pageContext.request.contextPath}/member/login";
+		f.submit();
+	});
+});
+</script>
+
 <div class="login_container">
 	<div class="login_wrap">
-		<h5>로그인</h5>
+		<h5>LOG-IN</h5>
 		<div class="login_body">
 			<ul class="login_list">
 				<li class="login_area">
 					<div class="area_wrap">
 						<h3>회원 로그인</h3>
-						<form method="post" action="${pageContext.request.contextPath}/member/login">
+						<form method="post" name="loginForm">
 							<input type="text" name="userId" placeholder="아이디">
 							<input type="password" name="userPwd" placeholder="비밀번호">
 							<div class="login_btn">

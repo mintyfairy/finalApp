@@ -72,8 +72,8 @@
 		    font-style: normal;
 		}
 		
-		*{
-			font-family: 'S-CoreDream-3Light';
+		* {
+			font-family: S-CoreDream-3Light;
 		}
 	</style>
 </head>

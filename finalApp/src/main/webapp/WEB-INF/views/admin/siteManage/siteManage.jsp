@@ -22,7 +22,7 @@ a {
 
 .body-container {
 	padding-left: 250px;
-	margin-top: 60px;
+	margin-top: 120px;
 }
 
 .body-title {
@@ -44,7 +44,7 @@ a {
 
 <div class="body-container">
     <div class="body-title">
-		<h2><i class="fa-solid fa-user-group"></i> 캠핑장관리 </h2>
+		<h3><i class="fa-solid fa-user-group" style="font-size: 24px;"></i> 캠핑장관리 </h3>
 		<table class="table">
 			<tr>
 				<td align="right">

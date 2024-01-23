@@ -92,7 +92,7 @@ main .excellent .best_list {
     width: 1080px;
     height: 400px;
     margin: 0 auto;
-    margin-top: 220px;
+    margin-top: 132px;
     background-color: transparent;
     display: flex;
 }
@@ -109,9 +109,9 @@ main .excellent .best_list .best_excellent {
 }
 
 .best_excellent .excellent_info {
-    height: 164px;
+    height: 100px;
     background-color: orange;
-    padding: 28px 32px;
+    padding: 8px 0 0 28px;
 }
 
 .best_excellent .excellent_info h4 {

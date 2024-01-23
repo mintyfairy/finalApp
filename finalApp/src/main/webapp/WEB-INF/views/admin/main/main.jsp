@@ -4,7 +4,7 @@
 
 <style>
 .wrapper {
-	padding: 0;
+	padding-top: 60px;
 }
 
 .body-container {

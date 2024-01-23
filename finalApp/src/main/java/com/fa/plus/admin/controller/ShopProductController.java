@@ -74,6 +74,7 @@ public class ShopProductController {
 		map.put("md", md);
 		map.put("starter", starter);
 		map.put("productShow", productShow);
+		map.put("tab", tab);
 		map.put("categoryNum", categoryNum);
 		map.put("brandNum", brandNum);
 		map.put("schType", schType);

@@ -16,6 +16,7 @@
     text-decoration: none;
     color: #333;
     box-sizing: border-box;
+    font-family: S-CoreDream-3Light;
 }
 
 ol,

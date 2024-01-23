@@ -23,7 +23,7 @@ main {
 }
 
 .main_slider_wrap {
-	width: 1280px;
+	width: 1100px;
     height: 700px;
     margin: 0 auto;
     border-radius: 12px;

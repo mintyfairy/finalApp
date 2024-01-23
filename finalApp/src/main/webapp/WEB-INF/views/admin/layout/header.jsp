@@ -54,7 +54,89 @@ $(function(){
 });
 </script>
 
-<header class="header clearfix">
+<style>
+	.header {
+		height: 100px;
+		background-color: #f7f6f2;
+	}
+	
+	.header-container {
+		width: 1080px;
+		margin: 0 auto;
+	}
+	
+	.header-container .header-left {
+		color: #879285;
+	}
+	
+	.header-container .header-left h1 {
+		line-height: 67px;
+	}
+	
+	.header-container .header-right {
+		line-height: 67px;
+	}
+	
+	.header-container .header-right .roll-user .user span {
+		color: #879285;
+	}
+	
+	.header-container .header-right .roll-user .user .fa-solid {
+		font-size: 16px;
+	}
+	
+	.header-container .header-right .roll-user .user span .fa-user:before {
+		color: #8a8b8c;
+	}
+	
+	.header-container .header-right .roll-user .user a .fa-arrow-right-from-bracket:before {
+		color: #8a8b8c;
+	}
+	
+	.vertical_nav {
+		width: 240px;
+		background-color: #f7f6f2;
+	}
+	
+	.menu {
+		position: static;
+		padding-top: 100px;
+	}
+	
+	.sub_menu {
+		background-color: #f7f6f2;
+	}
+	
+	.sub_menu--item {
+		background-color: #e7e6e2;
+	}
+	
+	.menu--link {
+		background-color: #f7f6f2;
+	}
+	
+	.sub_menu--link {
+		color: #8a8b8c;
+	}
+	
+	.fa-house:before, .fa-user-group:before, .fa-tent:before, .fa-caravan:before, .fa-cart-shopping:before, .fa-sack-dollar:before, .fa-lock-open:before {
+		color: #8a8b8c;
+	}
+	
+	.menu--label {
+		color: #8a8b8c;
+	}
+	
+	.menu--link:after {
+		color: #8a8b8c;
+	}
+	
+	.menu--item i {
+		margin-right: 24px;
+	}
+</style>
+
+<header class="header clearfix" style="position: fixed; top: 0; left: 0;">
 	<button type="button" id="toggleMenu" class="toggle_menu">
 		<i class="fa-solid fa-bars"></i>
 	</button>
@@ -66,7 +148,7 @@ $(function(){
 		<div class="header-right">
 			<span class="roll-user">
 				<label class="user">
-					<span class="name">관리자 님<i class="fa-solid fa-user" style="color: #e1e2e5;"></i>&nbsp;</span>
+					<span class="name">관리자 님<i class="fa-solid fa-user"></i>&nbsp;</span>
 					<a href="${pageContext.request.contextPath}/"><i class="fa-solid fa-arrow-right-from-bracket" style="color: #e1e2e5;"></i></a>
 				</label>
 			</span>

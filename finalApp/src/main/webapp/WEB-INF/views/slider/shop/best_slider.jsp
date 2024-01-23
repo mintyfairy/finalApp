@@ -13,7 +13,6 @@ body {
 
 body {
   background: #eee;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 14px;
   color: #000;
   margin: 0;
@@ -46,40 +45,40 @@ body {
 <div class="swiper mySwiper2">
   <div class="swiper-wrapper">
     <div class="swiper-slide">
-    	<img src="${pageContext.request.contextPath}/resources/images/shop/best01.jpg" />
+    	<img src="${pageContext.request.contextPath}/resources/images/shop/best01.jpg" width="270" height="300" style="width: 270px; height: 300px; object-fit: fill;"/>
     </div>
     <div class="swiper-slide">
-    	<img src="${pageContext.request.contextPath}/resources/images/shop/best02.jpg" />
+    	<img src="${pageContext.request.contextPath}/resources/images/shop/best02.jpg" width="270" height="300" style="width: 270px; height: 300px; object-fit: fill;"/>
     </div>
     <div class="swiper-slide">
-    	<img src="${pageContext.request.contextPath}/resources/images/shop/best03.jpg" />
+    	<img src="${pageContext.request.contextPath}/resources/images/shop/best03.jpg" width="270" height="300" style="width: 270px; height: 300px; object-fit: fill;"/>
     </div>
     <div class="swiper-slide">
-    	<img src="${pageContext.request.contextPath}/resources/images/shop/best04.jpg" />
+    	<img src="${pageContext.request.contextPath}/resources/images/shop/best04.jpg" width="270" height="300" style="width: 270px; height: 300px; object-fit: fill;"/>
     </div>
     <div class="swiper-slide">
-    	<img src="${pageContext.request.contextPath}/resources/images/shop/best05.jpg" />
+    	<img src="${pageContext.request.contextPath}/resources/images/shop/best05.jpg" width="270" height="300" style="width: 270px; height: 300px; object-fit: fill;"/>
     </div>
     <div class="swiper-slide">
-    	<img src="${pageContext.request.contextPath}/resources/images/shop/best06.jpg" />
+    	<img src="${pageContext.request.contextPath}/resources/images/shop/best06.jpg" width="270" height="300" style="width: 270px; height: 300px; object-fit: fill;"/>
     </div>
     <div class="swiper-slide">
-    	<img src="${pageContext.request.contextPath}/resources/images/shop/best07.jpg" />
+    	<img src="${pageContext.request.contextPath}/resources/images/shop/best07.jpg" width="270" height="300" style="width: 270px; height: 300px; object-fit: fill;"/>
     </div>
     <div class="swiper-slide">
-    	<img src="${pageContext.request.contextPath}/resources/images/shop/best08.jpg" />
+    	<img src="${pageContext.request.contextPath}/resources/images/shop/best08.jpg" width="270" height="300" style="width: 270px; height: 300px; object-fit: fill;"/>
     </div>
     <div class="swiper-slide">
-    	<img src="${pageContext.request.contextPath}/resources/images/shop/best09.jpg" />
+    	<img src="${pageContext.request.contextPath}/resources/images/shop/best09.jpg" width="270" height="300" style="width: 270px; height: 300px; object-fit: fill;"/>
     </div>
     <div class="swiper-slide">
-    	<img src="${pageContext.request.contextPath}/resources/images/shop/best10.jpg" />
+    	<img src="${pageContext.request.contextPath}/resources/images/shop/best10.jpg" width="270" height="300" style="width: 270px; height: 300px; object-fit: fill;"/>
     </div>
     <div class="swiper-slide">
-    	<img src="${pageContext.request.contextPath}/resources/images/shop/best11.jpg" />
+    	<img src="${pageContext.request.contextPath}/resources/images/shop/best11.jpg" width="270" height="300" style="width: 270px; height: 300px; object-fit: fill;"/>
     </div>
     <div class="swiper-slide">
-    	<img src="${pageContext.request.contextPath}/resources/images/shop/best12.jpg" />
+    	<img src="${pageContext.request.contextPath}/resources/images/shop/best12.jpg" width="270" height="300" style="width: 270px; height: 300px; object-fit: fill;"/>
     </div>
   </div>
 </div>

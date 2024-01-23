@@ -11,16 +11,20 @@
 
 .nav-tabs .nav-link {
 	min-width: 110px;
-	background: #f3f5f7;
+	height: 40px;
 	border-radius: 0;
 	border-right: 1px solid #dbdddf;
 	color: #333;
-	font-weight: 600;
+	cursor: pointer;
+	line-height: 40px;
+	overflow: hidden;
+	padding: 0 21px;
 }
 
 .nav-tabs .nav-link.active {
-	background: #3d3d4f;
-	color: #fff;
+	font-weight: 700;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
 }
 
 .tab-pane {
@@ -53,6 +57,7 @@
 .product-subject {
 	display: flex;
 	align-items: center;
+	cursor: pointer;
 	border: none;
 }
 
@@ -67,9 +72,12 @@
 .product-subject label {
 	display: inline-block;
 	width: 300px;
+	cursor: pointer;
 	padding-left: 5px;
 	vertical-align: top;
-	white-space: pre-wrap;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 .page-navigation {
@@ -128,7 +136,7 @@ function searchChange() {
 
 // 탭
 $(function(){
-	$("button[role='tab']").on('click', function(){
+	$("i[role='tab']").on('click', function(){
 		const tab = $(this).attr("aria-controls");
 		
 		if(tab === "1") { // 일반상품
@@ -163,22 +171,22 @@ $(function(){
 
 <div class="body-container">
     <div class="body-title">
-		<h2><i class="fa-solid fa-user-group"></i> 쇼핑몰상품관리 </h2>
+		<h3><i class="bi bi-chat-right-text"></i> 쇼핑몰상품관리 </h3>
     </div>
     
     <div class="body-main">
-		<ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
+		<ul class="nav nav-tabs" id="myTab" role="tablist">
 			<li class="nav-item" role="presentation">
-				<button class="nav-link ${tab==1?'active':''}" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="1" aria-selected="${tab==1?'true':'false'}">모든상품</button>
+				<i class="${tab==1?'active':''} nav-link fa-regular fa-note-sticky" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane" role="tab" aria-controls="1" aria-selected="${tab==1?'true':'false'}"> 모든상품</i>
 			</li>
 			<li class="nav-item" role="presentation">
-				<button class="nav-link ${special==1?'active':''}" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="2" aria-selected="${special==1?'true':'false'}">특가상품</button>
+				<i class="${tab==2?'active':''} nav-link fa-regular fa-note-sticky" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane" role="tab" aria-controls="2" aria-selected="${special==1?'true':'false'}"> 특가상품</i>
 			</li>
 			<li class="nav-item" role="presentation">
-				<button class="nav-link ${md==1?'active':''}" id="tab-3" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="3" aria-selected="${md==1?'true':'false'}">MD추천</button>
+				<i class="${tab==3?'active':''} nav-link fa-regular fa-note-sticky" id="tab-3" data-bs-toggle="tab" data-bs-target="#tab-pane" role="tab" aria-controls="3" aria-selected="${md==1?'true':'false'}"> MD추천</i>
 			</li>
 			<li class="nav-item" role="presentation">
-				<button class="nav-link ${starter==1?'active':''}" id="tab-4" data-bs-toggle="tab" data-bs-target="#tab-pane" type="button" role="tab" aria-controls="4" aria-selected="${starter==1?'true':'false'}">캠핑스타터</button>
+				<i class="${tab==4?'active':''} nav-link fa-regular fa-note-sticky" id="tab-4" data-bs-toggle="tab" data-bs-target="#tab-pane" role="tab" aria-controls="4" aria-selected="${starter==1?'true':'false'}"> 캠핑스타터</i>
 			</li>
 		</ul>
 		
@@ -200,7 +208,7 @@ $(function(){
 								</select>
 							</div>
 							<div class="col-auto pe-1">
-								<select id="changeSubCategory" class="form-select"">
+								<select id="changeSubCategory" class="form-select">
 									<c:if test="${listSubCategory.size() == 0}">
 										<option value="0">:: 베이직 텐트 ::</option>
 									</c:if>
@@ -211,7 +219,7 @@ $(function(){
 								</select>
 							</div>
 							<div class="col-auto pe-1">
-								<select id="changeBrand" class="form-select"">
+								<select id="changeBrand" class="form-select">
 									<c:if test="${listBrand.size() == 0}">
 										<option value="0">:: 브랜드 ::</option>
 									</c:if>
@@ -222,7 +230,7 @@ $(function(){
 								</select>
 							</div>
 							<div class="col-auto pe-1">
-								<select id="changeShowProduct" class="form-select"">
+								<select id="changeShowProduct" class="form-select">
 									<option value="-1">:: 진열 여부 ::</option>
 									<option value="1" ${productShow==1?"selected":""}>상품 진열</option>
 									<option value="0" ${productShow==0?"selected":""}>상품 숨김</option>
@@ -246,10 +254,9 @@ $(function(){
 						<col width="80">
 						<col width="100">
 						<col width="60">
-						<col width="60">
+						<col width="100">
 						<col width="130">
-						<col width="130">
-						<col width="230">
+						<col width="280">
 					</colgroup>
 					<thead>
 						<tr class="border-top border-dark table-light">
@@ -258,9 +265,8 @@ $(function(){
 							<th>가격</th>
 							<th>할인율</th>
 							<th>재고</th>
-							<th>진열</th>
+							<th>진열여부</th>
 							<th>등록일</th>
-							<th>수정일</th>
 							<th>변경</th>
 						</tr>
 					</thead>
@@ -269,8 +275,8 @@ $(function(){
 							<tr valign="middle">
 								<td>${dto.productNum}</td>
 								<td class="product-subject left">
-									<img src="${pageContext.request.contextPath}/uploads/shop/${dto.thumbnail}">
-									<a href="#"><label>${ dto.productName }</label></a>
+									<img src="${pageContext.request.contextPath}/uploads/shop/${dto.thumbnail}" style="margin-right: 6px;">
+									<label>${ dto.productName }</label>
 									<input type="hidden" value="${ dto.productNum }">
 								</td>
 								<td>${ dto.price }</td>
@@ -280,12 +286,11 @@ $(function(){
 									<input type="hidden" value="${ dto.productShow }">
 								</td>
 								<td>${ dto.reg_date }</td>
-								<td>${ dto.updateDate }</td>
 								<td>
-									<button class="stockBtn" type="button" class="btn border">재고</button>
-									<button class="modifyBtn" type="button" class="btn border" 
+									<button class="stockBtn btn btn-outline-secondary" type="button">재고</button>
+									<button class="modifyBtn btn btn-outline-secondary" type="button" 
 									onclick="location.href='${pageContext.request.contextPath}/admin/shopProduct/update/${dto.productNum}?page=${page}';">수정</button>
-									<button class="hideBtn" type="button" class="btn border">${ dto.productShow == 1 ? "숨김" : "보임" }</button>
+									<button class="hideBtn btn btn-outline-secondary" type="button">${ dto.productShow == 1 ? "숨김" : "보임" }</button>
 								</td>
 							</tr>					
 						</c:forEach>

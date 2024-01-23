@@ -27,6 +27,65 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/vendor/bootstrap5/css/bootstrap.min.css" type="text/css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/vendor/bootstrap5/icon/bootstrap-icons.css" type="text/css">
+
+	<style type="text/css">
+		@font-face {
+		    font-family: 'IBMPlexSansKR-Regular';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		
+		@font-face {
+		    font-family: 'SUITE-Regular';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+		    font-weight: 400;
+		    font-style: normal;
+		}
+		
+		@font-face {
+		     font-family: 'S-CoreDream-3Light';
+		     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+		     font-weight: normal;
+		     font-style: normal;
+		}
+		
+		@font-face {
+		    font-family: 'NanumSquareNeo-Variable';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		
+		@font-face {
+		    font-family: 'BMJUA';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		
+		@font-face {
+		    font-family: 'LINESeedKR-Bd';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+		    font-weight: 700;
+		    font-style: normal;
+		}
+		
+		@font-face {
+		    font-family: 'Hahmlet-Regular';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/Hahmlet-Regular.woff2') format('woff2');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		
+		* {
+			font-family: 'S-CoreDream-3Light';
+		}
+		
+		.wrapper {
+			padding-top: 60px;
+		}
+	</style>
 </head>
 
 <body>
