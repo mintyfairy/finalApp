@@ -141,7 +141,7 @@ ol, ul {
 			<ul class="goods_list">
 				<c:forEach var="dto" items="${list}" varStatus="status">
 					<li class="goods_item"><a href="${pageContext.request.contextPath}/shop/product/${dto.productNum}" class="goods_photo"> <img
-							src="https://via.placeholder.com/250x250" alt="goods_item">
+							src="${pageContext.request.contextPath}/uploads/shop/${dto.thumbnail}" alt="goods_item" width="250" height="250">
 					</a>
 						<div class="goods_text">
 							<p class="goods_brand">${dto.brandName}</p>

@@ -622,7 +622,7 @@ function sendOk(mode) {
 	<div class="wrap">
 		<div class="product_info_wrap">
 			<div class="product_thumb">
-				<img src="https://via.placeholder.com/538x540" alt="thumb"
+				<img src="${pageContext.request.contextPath}/uploads/shop/${dto.thumbnail}" alt="thumb"
 					width="538">
 			</div>
 			<div class="product_info">
@@ -702,7 +702,7 @@ function sendOk(mode) {
 			</div>
 			
 			<div class="detail_img">
-				<img src="https://via.placeholder.com/538x540" alt="detail_img">
+				<img src="${pageContext.request.contextPath}/uploads/shop/${dto.thumbnail}" alt="detail_img">
 			</div>
 			
 			<div class="detail_tab detail_tab2">
