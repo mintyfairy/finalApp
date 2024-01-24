@@ -217,10 +217,10 @@ ul {
             <div class="header_center_wrap">
                 <ul class="header_center_list">
                     <li class="header_center_item">
-                        <a href="${pageContext.request.contextPath}/" style="padding-left:0;">메인&nbsp;|</a>
+                        <a href="${pageContext.request.contextPath}/" style="padding-left:0;">메인&nbsp;&nbsp;&nbsp;</a>
                     </li>
                     <li class="header_center_item">
-                        <a href="${pageContext.request.contextPath}/site/list" style="padding-left:0;">&nbsp;캠핑예약&nbsp;|</a>
+                        <a href="${pageContext.request.contextPath}/site/list" style="padding-left:0;">&nbsp;캠핑예약&nbsp;&nbsp;&nbsp;</a>
                     </li>
                     <li class="header_center_item">
                         <a href="${pageContext.request.contextPath}/shop/main">&nbsp;스토어</a>
