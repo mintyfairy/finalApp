@@ -327,13 +327,13 @@ $(function() {
             <div class="header_center_wrap">
                 <ul class="header_center_list">
                 	<li class="header_center_item">
-						<a href="${pageContext.request.contextPath}/">홈</a>
+						<a href="${pageContext.request.contextPath}/">메인</a>
 					</li>
                     <li class="header_center_item">
-                        <a href="${pageContext.request.contextPath}/site/list" style="padding-left:0;">CAMPING AREA</a>
+                        <a href="${pageContext.request.contextPath}/site/list" style="padding-left:0;">캠핑예약</a>
                     </li>
                     <li class="header_center_item">
-                        <a href="${pageContext.request.contextPath}/car/main">CAMPING CAR</a>
+                        <a href="${pageContext.request.contextPath}/car/main">캠핑카</a>
                     </li>
                 </ul>
             </div>

@@ -21,7 +21,21 @@
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/util-jquery.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/menu.js"></script>
+	
 </head>
+
+<style>
+		@font-face {
+		     font-family: 'S-CoreDream-3Light';
+		     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+		     font-weight: normal;
+		     font-style: normal;
+		}
+		
+		body {
+			font-family: S-CoreDream-3Light;
+		}
+</style>
 
 <body>
 

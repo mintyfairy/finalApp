@@ -46,6 +46,19 @@
     <link href="${pageContext.request.contextPath}/resources/css/campsite.css" rel="stylesheet">
 </head>
 
+<style>
+	@font-face {
+	     font-family: 'S-CoreDream-3Light';
+	     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+	     font-weight: normal;
+	     font-style: normal;
+	}
+	
+	body {
+		font-family: S-CoreDream-3Light;
+	}
+</style>
+
 <body>
 
 <header>

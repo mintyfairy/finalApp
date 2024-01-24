@@ -437,7 +437,7 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
 				            <ul class="bottom_right">
 				            	<c:choose>
 				            		<c:when test="${empty sessionScope.member}">
-				                		<li class="header_item"><a href="${pageContext.request.contextPath}/member/login"><i class="fa-solid fa-arrow-right-to-bracket fa-lg"></i></a></li>
+				                		<li class="header_item"><a id="loginBtn" href="${pageContext.request.contextPath}/member/login"><i class="fa-solid fa-arrow-right-to-bracket fa-lg"></i></a></li>
 				                		<li class="header_item"><a href="${pageContext.request.contextPath}/member/join"><i class="fa-solid fa-user-plus fa-lg"></i></a></li>
 				                	</c:when>
 				                	<c:otherwise>
