@@ -61,7 +61,7 @@
 		LEFT OUTER JOIN member2 m2 ON m1.userId = m2.userId
 		WHERE m1.userId = #{userId}
 	</select>
-
+<!-- 
 	<update id="updateFailureCountReset" parameterType="String">
 		UPDATE member1 SET failure_cnt = 0
 		WHERE userId = #{userId}
@@ -90,8 +90,9 @@
 		ORDER BY num DESC
 		FETCH FIRST 1 ROWS ONLY
 	</select>
+ -->
 
-	<!-- 챠트 쿼리 -->
+	<!-- 챠트 쿼리
 	<select id="listAgeSection" resultType="com.fa.plus.admin.domain.AnalysisManage">
 		WITH  memberAge AS (
 		    SELECT m2.userId, TRUNC(MONTHS_BETWEEN(SYSDATE, birth)/12) age
@@ -116,4 +117,6 @@
 		SELECT '기타' section, COUNT(*) count FROM memberAge WHERE age<10 OR age>=70
 ]]>
 	</select>
+ -->	
+
 </mapper>

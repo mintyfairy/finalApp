@@ -160,7 +160,7 @@ table input[type=text] {
         </table>
   	</div>
   </div>
-  
+  <c:if test="${dto.licenseDate != null}">
   <div class="wrap">
     <h3 class="detail_info">
       <i class="fa-solid fa-user" style="font-size:15px;"></i>&nbsp;운전자 정보 
@@ -210,6 +210,7 @@ table input[type=text] {
         </table>
   	</div>
   </div>
+  </c:if>
   	
    <c:if test="${dto.addRider==1}">
    <div class="wrap">

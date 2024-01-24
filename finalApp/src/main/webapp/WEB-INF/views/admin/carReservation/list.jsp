@@ -103,7 +103,7 @@ function detailModal() {
 				<td align="right" style="border-bottom:white;">
 					<select id="changeShowState" class="form-select" onchange="changeList();">
 						<option value="1">::예약 리스트::</option>
-						<option value="2" ${orderState==2?"selected":""}>이용완료</option>
+						<option value="2" ${orderState==2? "selected" : ""}>이용완료</option>
 						<option value="3" ${orderState==3?"selected":""}>취소</option>
 					</select>
 				</td>

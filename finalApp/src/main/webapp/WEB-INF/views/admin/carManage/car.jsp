@@ -111,8 +111,8 @@ function changeList() {
 						<th width="50">주중가격</th>
 						<th width="50">주말가격</th>
 						<th width="30">할인율</th>
-						<th width="70">수정일</th>
-						<th width="100">변경</th>
+						<th width="100">수정일</th>
+						<th width="70">변경</th>
 					</tr>
 				</thead>
 				

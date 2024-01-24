@@ -104,7 +104,7 @@ $(function(){
 		let chartData = [];
 		
 		for(let item of data.months) {
-			let s = parseInt(item.ORDERDATE.substring(4))+'월';
+			let s = parseInt(item.END_DATE.substring(4))+'월';
 			let obj = {value:item.TOTALMONEY, name:s};
 			chartData.push(obj);
 		}

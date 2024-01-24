@@ -219,11 +219,11 @@ function selectStateChange() {
 						<th width="60">번호</th>
 						<th width="120">아이디</th>
 						<th width="100">이름</th>
-						<th width="100">생년월일</th>
-						<th width="120">전화번호</th>
+						<th width="180">생년월일</th>
+						<th width="180">전화번호</th>
 						<th width="80">회원구분</th>
 						<th width="60">상태</th>
-						<th>이메일</th>
+						<th width="180">이메일</th>
 					</tr>
 				</thead>
 				
@@ -250,9 +250,30 @@ function selectStateChange() {
 			<table class="table">
 				<tr>
 					<td align="left" width="100">
-						<button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/admin/memberManage/list';">새로고침</button>
+						<button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/admin/memberManage/list';"><i class="bi bi-arrow-clockwise"></i></button>
 					</td>
 					<td align="center">
+						<form class="row justify-content-center" name="searchForm" action="${pageContext.request.contextPath}/admin/memberManage/list" method="post">
+							<div class="col-auto p-1">
+								<select name="schType" class="form-select">
+									<option value="userId"     ${schType=="userId" ? "selected":""}>아이디</option>
+									<option value="userName"   ${schType=="userName" ? "selected":""}>이름</option>
+									<option value="email"      ${schType=="email" ? "selected":""}>이메일</option>
+									<option value="tel"        ${schType=="tel" ? "selected":""}>전화번호</option>
+								</select>
+							</div>
+							<div class="col-auto p-1">
+								<input type="text" name="kwd" class="form-control" value="${kwd}">
+							<input type="hidden" name="enabled" value="${enabled}">
+							<input type="hidden" name="page" value="1">
+							</div>
+							<div class="col-auto p-1">
+								<button type="button" class="btn btn-light" onclick="searchList()"> <i class="bi bi-search"></i> </button>
+							</div>
+						</form>
+					</td>
+					<!-- 
+					<td align="center" width="150">
 						<form name="searchForm" action="${pageContext.request.contextPath}/admin/memberManage/list" method="post">
 							<select name="schType" class="form-select">
 								<option value="userId"     ${schType=="userId" ? "selected":""}>아이디</option>
@@ -266,6 +287,7 @@ function selectStateChange() {
 							<button type="button" class="btn" onclick="searchList()">검색</button>
 						</form>
 					</td>
+					 -->
 					<td align="right" width="100">&nbsp;</td>
 				</tr>
 			</table>
