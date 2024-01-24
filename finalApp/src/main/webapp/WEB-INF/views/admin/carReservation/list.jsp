@@ -127,7 +127,22 @@ function detailModal() {
 						<tr class="hover" onclick="" style="vertical-align: middle;"> 
 							<td>${dto.orderNum}</td>
 							<td>${dto.userId}</td>
-							<td>${dto.userName}</td>
+							<td>
+								<script>
+				                    var userName = "${dto.userName}";
+				                    var maskedUserName;
+				
+				                    if (userName.length === 2) {
+				                        maskedUserName = userName.replace(/(?<=.).(?=.*$)/g, '*');
+				                    } else if (userName.length === 3) {
+				                        maskedUserName = userName.substring(0, 1) + '*' + userName.substring(2);
+				                    } else {
+				                        maskedUserName = userName;
+				                    }
+				
+				                    document.write(maskedUserName);
+				                </script>
+				             </td>
 							<td>${dto.start_date}</td>
 							<td>${dto.end_date}</td>
 							<td>

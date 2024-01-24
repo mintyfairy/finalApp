@@ -232,9 +232,37 @@ function selectStateChange() {
 						<tr class="hover" onclick="profile('${dto.userId}');"> 
 							<td>${dataCount - (page-1) * size - status.index}</td>
 							<td>${dto.userId}</td>
-							<td>${dto.userName}</td>
+							<td>
+								<script>
+				                    var userName = "${dto.userName}";
+				                    var maskedUserName;
+				
+				                    if (userName.length >= 2) {
+				                        // 첫 번째 글자와 마지막 글자를 제외하고 나머지를 '*'로 변경
+				                        maskedUserName = userName.substring(0, 1) + '*'.repeat(userName.length - 2) + userName.substring(userName.length - 1);
+				                    } else {
+				                        maskedUserName = userName;
+				                    }
+				
+				                    document.write(maskedUserName);
+				                </script>
+							</td>
 							<td>${dto.birth}</td>
-							<td>${dto.tel}</td>
+							<td>
+								 <script>
+							        var tel = "${dto.tel}";
+							        var maskedTel;
+							
+							        if (tel.length > 4) {
+							            // 마지막 4자리를 '*'로 치환
+							            maskedTel = tel.substring(0, tel.length - 4) + '****';
+							        } else {
+							            maskedTel = '****'; // 전화번호 자체가 4자리 이하인 경우 모두 '*'로 처리
+							        }
+							
+							        document.write(maskedTel);
+							    </script>
+							</td>
 							<td>${dto.membership==1?"일반회원":(dto.membership==31?"강사":"기타")}</td>
 							<td>${dto.enabled==1?"활성":"잠금"}</td>
 							<td>${dto.email}</td>
