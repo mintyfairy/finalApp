@@ -2,6 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<style>
+    .question, .answer, .category, .content, .update {
+        font-size: 18px;
+    }
+</style>
+
+
+
 <c:if test="${list.size() > 0}">
 	<div class="accordion"> 
 		<c:forEach var="dto" items="${list}">

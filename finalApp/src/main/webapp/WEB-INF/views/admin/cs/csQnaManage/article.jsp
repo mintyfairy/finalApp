@@ -7,9 +7,11 @@
 <style type="text/css">  
 .body-main {
 	max-width:1200px;
-	margin: 0 auto;
 }
-
+.body-container {
+	margin-top: 60px;
+	padding-left: 250px;
+}
 .row-flex { display: flex; justify-content: space-between; }
 .left-item {
 	width:40px; margin-right: 1px; padding:10px 10px;

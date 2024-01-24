@@ -10,7 +10,10 @@
 .body-main {
 	max-width: 900px;
 }
-
+.body-container {
+	margin-top: 60px;
+	padding-left: 250px;
+}
 .rank-plus, .rank-minus {
 	cursor: pointer;
 	padding: 7px;
@@ -81,6 +84,9 @@
 .radio-container:hover .checkmark {
     background-color: #f2f2f2;
 }
+
+
+
 
 </style>
 
@@ -261,13 +267,17 @@ $(function(){
 			let out = '<tr class="rank-numbers">';
 			out += '<td valign="top" style="padding-top:12px;">인원</td>';
 			out += '<td>';
-			out += '  <p>';
-			out += '    <span class="span-rank">1등 : </span>';
+			
+			out += '  <div class = "row">';
+			out += '    <span class="span-rank">1등 : </span>';			
 			out += '    <input type="hidden" name="rankNum" value="1">';
 			out += '    <input type="text" name="rankCount" class="form-control" style="width:100px;">&nbsp;';
-			out += '    <i class="fa-solid fa-plus rank-plus"></i>&nbsp;';
-			out += '    <i class="fa-solid fa-minus rank-minus"></i>';
-			out += '  </p>';
+			out += '    <div class = "col">';
+			out += '   		 <i class="fa-solid fa-plus rank-plus"></i>';
+			out += '   		 <i class="fa-solid fa-minus rank-minus"></i>';	
+			out += '    </div>';
+			out += '  </div>';
+			
 			out += '</td>';
 			out += '</tr>';
 			
@@ -295,6 +305,7 @@ $(function(){
 		$minus.closest('p').remove();
 		
 		rankCalc();
+		
 	});
 
 	function rankCalc() {

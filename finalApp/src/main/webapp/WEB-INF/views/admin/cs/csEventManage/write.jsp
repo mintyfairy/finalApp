@@ -10,6 +10,10 @@
 	max-width:1200px;
 	margin: 0 auto;
 }
+.body-container {
+	margin-top: 60px;
+	padding-left: 250px;
+}
 .table-form{
 	width:900px;
 	margin: 0 auto;

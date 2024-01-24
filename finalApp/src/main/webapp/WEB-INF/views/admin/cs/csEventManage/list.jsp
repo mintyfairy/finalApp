@@ -9,6 +9,11 @@
 	max-width:1200px;
 	margin: 0 auto;
 }
+.body-container {
+	margin-top: 60px;
+	padding-left: 250px;
+	padding-right: 300px;
+}
 .badge {
 	display: inline-block; padding:2px 3px; background: #0d6efd; color: #fff; font-weight: 500;
 	font-size: 11px;
@@ -114,7 +119,7 @@ $(function(){
 					<td align="left" width="100">
 						<button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/admin/cs/event/${category}/list';" title="새로고침"><i class="fa-solid fa-arrow-rotate-left"></i></button>
 					</td>
-					<td align="center">
+					<td>
 						<form class="row justify-content-center" name="searchForm" action="${pageContext.request.contextPath}/admin/cs/event/${category}/list" method="post">
 							<div class="col-auto p-1">
 								<select name="schType" class="form-select">

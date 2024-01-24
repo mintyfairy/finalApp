@@ -8,7 +8,11 @@
 	max-width:1200px;
 	margin: 0 auto;
 }
-
+.body-container {
+	margin-top: 60px;
+	padding-left: 250px;
+	padding-right: 300px;
+}
 .badge {
 	display: inline-block; padding:2px 3px; background: #0d6efd; color: #fff; font-weight: 500;
 	font-size: 11px;

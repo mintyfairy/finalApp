@@ -8,6 +8,11 @@
 	max-width:1200px;
 	margin: 0 auto;
 }
+.body-container {
+	margin-top: 60px;
+	padding-left: 250px;
+	padding-right: 300px;
+}
 .paginate{
 	width:1200px;
 	margin: 0 auto;
@@ -59,7 +64,7 @@ a {
 }
 
 .accordion h3.question .q {
-	font-weight: 600;
+	font-weight: 300;
 }
 
 .accordion h3.question .subject:hover {
@@ -87,7 +92,7 @@ a {
 
 .accordion div.answer>.content div:first-child {
 	font-weight: 700;
-	/* display: inline-block;  */
+	/* display: inline-block; */
 	vertical-align: top;
 	padding-left: 5px;
 }

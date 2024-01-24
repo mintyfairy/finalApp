@@ -6,9 +6,11 @@
 <style type="text/css">
 .body-main {
 	max-width:1200px;
-	margin: 0 auto;
 }
-
+.body-container {
+	margin-top: 60px;
+	padding-left: 250px;
+}
 .table-article img { max-width: 650px; }
 .file-item { padding: 7px; margin-bottom: 3px; border: 1px solid #ced4da; color: #777777; }
 </style>
