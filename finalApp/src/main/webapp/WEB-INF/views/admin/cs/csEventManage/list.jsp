@@ -84,8 +84,8 @@ $(function(){
 					<tr>
 						<th width="60">번호</th>
 						<th>제목</th>
-						<th width="150">이벤트 시작일</th>
-						<th width="150">이벤트 종료일</th>
+						<th width="200">이벤트 시작일</th>
+						<th width="200">이벤트 종료일</th>
 						<th width="100">${category=="winner" ? "발표" : "응모자수"}</th>
 					</tr>
 				</thead>

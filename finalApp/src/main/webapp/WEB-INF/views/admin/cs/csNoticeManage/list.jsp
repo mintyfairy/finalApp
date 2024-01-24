@@ -65,7 +65,7 @@ function searchList() {
 					<th width="60">번호</th>
 					<th>제목</th>
 					<th width="100">작성자</th>
-					<th width="100">작성일</th>
+					<th width="150">작성일</th>
 					<th width="70">조회수</th>
 					<th width="50">첨부</th>
 					<th width="50">표시</th>

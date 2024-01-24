@@ -61,7 +61,7 @@ function searchList() {
 					<th width="100">분류</th>
 					<th>제목</th>
 					<th width="100">작성자</th>
-					<th width="80">문의일자</th>
+					<th width="150">문의일자</th>
 					<th width="80">처리결과</th>
 
 				</tr>
