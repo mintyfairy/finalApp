@@ -180,7 +180,7 @@ $(function(){
 			  	<span><fmt:formatNumber value="${thisMonthsales.TOTAL}"/>&nbsp;원</span>
 			  </div>
 			  <div class="box">
-			  	<h5>최근 6개월 매출액</h5>
+			  	<h5>올해의 매출액</h5>
 			  	<span><fmt:formatNumber value="${thisyearsales.TOTAL}"/>&nbsp;원</span>
 			  </div>
 			</div>

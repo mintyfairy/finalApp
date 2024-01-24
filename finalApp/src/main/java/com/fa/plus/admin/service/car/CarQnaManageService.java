@@ -9,4 +9,5 @@ public interface CarQnaManageService {
 	// qna 관리
 	public List<CarQna> listQna(Map<String, Object> map);
 	public int qnaCount (Map<String, Object> map);
+	
 }

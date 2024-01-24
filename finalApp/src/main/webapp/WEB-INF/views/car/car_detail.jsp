@@ -1179,7 +1179,7 @@ function printQuestion(data) {
 			out += '<div class="row gx-1 mt-2 mb-1 p-1">';
 				for(let f of listFilename) {
 					out += '<div class="col-md-auto md-img">';
-					out += '  <img class="border rounded" src="${pageContext.request.contextPath}/uploads/carqna/'+f+'">';
+					out += '  <img class="border rounded" src="${pageContext.request.contextPath}/uploads/carqna/'+f+'" style="width: 100px; height: 100px;">';
 					out += '</div>';
 				}
 			out += '</div>';
@@ -1363,7 +1363,7 @@ $(function(){
 	});	
 	
 	$('.btnMyQuestion').click(function(){
-		location.href = '${pageContext.request.contextPath}/car/myPage/review?mode=qna';
+		location.href = '${pageContext.request.contextPath}/car/mypage/question';
 	});
 });
 </script>

@@ -1,5 +1,6 @@
 package com.fa.plus.admin.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -17,6 +20,7 @@ import com.fa.plus.admin.domain.car.CarQna;
 import com.fa.plus.admin.service.car.CarQnaManageService;
 import com.fa.plus.common.MyUtil;
 import com.fa.plus.domain.SessionInfo;
+import com.fa.plus.service.car.CarQnaService;
 
 @Controller
 @RequestMapping("/admin/carQna/*")
@@ -26,6 +30,9 @@ public class CarReviewController {
 	
 	@Autowired
 	private CarQnaManageService service;
+	
+	@Autowired
+	private CarQnaService qnaService;
 	
 	/*
 	@RequestMapping("review")
@@ -94,5 +101,50 @@ public class CarReviewController {
 		
 		return ".admin.carReview.qna";
 	}
+	
+	@PostMapping("qna/answer")
+	public String qnaAnswer(com.fa.plus.domain.car.CarQna dto,  @RequestParam String page, 
+			@RequestParam int mode,
+			HttpSession session) throws Exception {
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		try {
+			dto.setAnswerId(info.getUserId());
+			qnaService.updateQuestion(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		String url = "redirect:/admin/carQna/qna?";
+		if(mode == 1) {
+			url += "page=" + page;
+		} else {
+			url += "mode=" + mode + "&page=" + page;
+		}
+		return url;
+	}
+	
+	@GetMapping("qna/delete")
+	public String questionDelete(@RequestParam long qnaNum,
+			@RequestParam String page,
+			@RequestParam int mode,
+			HttpSession session) throws Exception {
+		
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + "uploads" + File.separator + "qna";
+		
+		try {
+			qnaService.deleteQuestion(qnaNum, pathname);
+		} catch (Exception e) {
+		}
+		
+		String url = "redirect:/admin/carQna/qna?";
+		if(mode == 1) {
+			url += "page=" + page;
+		} else {
+			url += "mode=" + mode + "&page=" + page;
+		}
+		return url;
+	}
+	
 }
 

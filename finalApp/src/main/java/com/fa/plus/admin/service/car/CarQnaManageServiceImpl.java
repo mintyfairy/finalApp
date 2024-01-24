@@ -8,15 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.fa.plus.admin.domain.car.CarQna;
 import com.fa.plus.admin.mapper.CarQnaManageMapper;
-import com.fa.plus.common.FileManager;
 
 @Service
 public class CarQnaManageServiceImpl implements CarQnaManageService{
 	@Autowired
 	private CarQnaManageMapper mapper;
-	
-	@Autowired
-	private FileManager fileMnager;
 	
 	@Override
 	public List<CarQna> listQna(Map<String, Object> map) {

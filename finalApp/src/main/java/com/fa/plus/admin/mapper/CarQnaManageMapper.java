@@ -13,4 +13,5 @@ public interface CarQnaManageMapper {
 	public List<CarQna> listQna(Map<String, Object> map);
 	public List<CarQna> listQnaFile(long qnaNum);
 	public int qnaCount (Map<String, Object> map);
+	
 }

@@ -89,7 +89,7 @@
 	</select>
 	
 	<update id="updateQuestion" parameterType="com.fa.plus.domain.car.CarQna">
-		UPDATE productQna SET answer = #{answer}, answerId = #{answerId}, answer_date = SYSDATE
+		UPDATE carQna SET answer = #{answer}, answerId = #{answerId}, answer_date = SYSDATE
 		WHERE qnaNum = #{qnaNum}
 	</update>
 	
