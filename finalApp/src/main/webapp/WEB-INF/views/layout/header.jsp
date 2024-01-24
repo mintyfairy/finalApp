@@ -422,7 +422,7 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
 			                </ul>
 	                    </li>
 	                    <li class="logo_area">
-	                        <a id="logo2" href="#">
+	                        <a id="logo2" href="${pageContext.request.contextPath}/">
 	                            <img src="${pageContext.request.contextPath}/resources/images/main/logo.png" alt="logo" style="width:210px; height:55px;">
 	                        </a>
 	                    </li>

@@ -121,7 +121,7 @@
 	<!-- 추가 이미지 등록 -->
 	<insert id="insertReviewFile" parameterType="com.fa.plus.domain.site.SiteReview">
 		INSERT INTO sitereviewPic(SrPICNUM, booknum, fileName)
-			VALUES(sitereviewPic_SEQ.NEXTVAL, #{booknum}, #{fileName})
+			VALUES(sitereviewPic_SEQ.NEXTVAL, #{bookNum}, #{fileName})
 	</insert>	
 	
 	
@@ -191,13 +191,13 @@
 	<update id="updateReview" parameterType="com.fa.plus.domain.site.SiteReview">
 		 update sitereview set
 		 	CONTENT=#{content},SCORE=#{score},REG_DATE=#{reg_date}
-		 where booknum={bookNum}
+		 where booknum=#{bookNum}
 	</update>
 
 	
 	<delete id="deleteReview" parameterType="Long">
 		 delete from sitereview
-		 where booknum={bookNum}
+		 where booknum=#{bookNum}
 	</delete>
 	
 	<delete id="deleteReviewFile" parameterType="Long">
@@ -224,14 +224,14 @@
 			            FROM sitereviewpic
 			            GROUP BY booknum	
 					) f ON BOOKNUM=bnum	
-		 where booknum={bookNum}
+		 where booknum=#{bookNum}
 		 
 	</select>
 	
 	<update id="updateReviewAnswer" parameterType="com.fa.plus.domain.site.SiteReview">
 		 update sitereview set
 		 	answer=#{answer},anweridx=#{answerIdx}
-		 where booknum={bookNum}
+		 where booknum=#{bookNum}
 	</update>
 	
 	<update id="updateSiteStar" parameterType="map">
