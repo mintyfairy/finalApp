@@ -22,4 +22,5 @@ public interface CarAdminReservationMapper {
 	
 	// 예약상세
 	public CarReservation listDetail(Map<String, Object> map);
+	public CarReservation listRiderDetail(Map<String, Object> map);
 }

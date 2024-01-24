@@ -116,6 +116,19 @@ public class CarAdminReservationServiceImpl implements CarReservationService {
 		return dto;
 	}
 
+	@Override
+	public com.fa.plus.admin.domain.car.CarReservation listRiderDetail(Map<String, Object> map) {
+		CarReservation dto = null;
+
+		try {
+			dto = mapper.listDetail(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return dto;
+	}
+
 
 
 }

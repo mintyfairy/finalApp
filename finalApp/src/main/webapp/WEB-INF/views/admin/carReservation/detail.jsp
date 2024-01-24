@@ -98,7 +98,6 @@ table input[type=text] {
 
 </style>
 
-
 <div class="container">
   <div class="wrap">
     <h3 class="detail_info">
@@ -160,7 +159,7 @@ table input[type=text] {
         </table>
   	</div>
   </div>
-  <c:if test="${dto.licenseDate != null}">
+
   <div class="wrap">
     <h3 class="detail_info">
       <i class="fa-solid fa-user" style="font-size:15px;"></i>&nbsp;운전자 정보 
@@ -174,44 +173,48 @@ table input[type=text] {
           <tbody>
             <tr>
               <th>운전자 이름</th>
-              <td><input type="text" name="userName" id="userName" value="${dto.userName}" readonly></td>
+              <td><input type="text" name="userName" id="userName" value="${dto2.userName}" readonly></td>
             </tr>
             <tr>
               <th>연락처</th>
               <td>
-                <input type="text" name="tel" id="tel"  value="${dto.tel}" readonly>
+                <input type="text" name="tel" id="tel"  value="${dto2.tel}" readonly>
               </td>
             </tr>
             <tr>
               <th>이메일</th>
               <td>
-                <input type="text" name="email" id="email" value="${dto.email}" readonly>
+                <input type="text" name="email" id="email" value="${dto2.email}" readonly>
               </td>
             </tr>
             <tr>
               <th>생년월일</th>
               <td>
-                <input type="text" name="birth" id="birth"  value="${dto.birth}" readonly>
+                <input type="text" name="birth" id="birth"  value="${dto2.birth}" readonly>
               </td>
             </tr>
             <tr>
               <th>면허 취득일자</th>
               <td>
-                <input type="text" name="licenseDate" id="licenseDate"  value="${dto.licenseDate}" readonly>
+                <input type="text" name="licenseDate" id="licenseDate"  value="${dto2.licenseDate}" readonly>
+                <c:if test="${empty dto2.licenseDate}">
+                	<span style="color: red;">&nbsp;*&nbsp;운전자 정보를 등록하세요</span>
+            	</c:if>
               </td>
             </tr>
             <tr>
               <th>동승운전자 여부</th>
               <td>
-                <input type="text" name="addRider" id="addRider"  value="${dto.addRider==1? 'O':'X'}" readonly>
+                <input type="text" name="addRider" id="addRider"  value="${dto2.addRider==1? 'O':'X'}" readonly>
               </td>
             </tr>
           </tbody>
         </table>
   	</div>
   </div>
-  </c:if>
-  	
+  
+
+  	<!-- 
    <c:if test="${dto.addRider==1}">
    <div class="wrap">
     <h3 class="detail_info">
@@ -251,4 +254,6 @@ table input[type=text] {
   	</div>
   </div>
   </c:if>
+   -->
 </div>
+

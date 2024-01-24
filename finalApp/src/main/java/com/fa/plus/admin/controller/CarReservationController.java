@@ -151,8 +151,10 @@ public class CarReservationController {
 		map.put("orderNum", orderNum);
 		
 		CarReservation dto = service.listDetail(map);
+		CarReservation dto2 = service.listRiderDetail(map);
 		
 		model.addAttribute("dto", dto);
+		model.addAttribute("dto2", dto2);
 		
 		return "admin/carReservation/detail"; 
 	}
