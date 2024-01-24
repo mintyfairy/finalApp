@@ -268,7 +268,7 @@ $(function(){
 			out += '<td valign="top" style="padding-top:12px;">인원</td>';
 			out += '<td>';
 			
-			out += '  <div class = "row">';
+			out += '  <section class = "row">';
 			out += '    <span class="span-rank">1등 : </span>';			
 			out += '    <input type="hidden" name="rankNum" value="1">';
 			out += '    <input type="text" name="rankCount" class="form-control" style="width:100px;">&nbsp;';
@@ -276,7 +276,7 @@ $(function(){
 			out += '   		 <i class="fa-solid fa-plus rank-plus"></i>';
 			out += '   		 <i class="fa-solid fa-minus rank-minus"></i>';	
 			out += '    </div>';
-			out += '  </div>';
+			out += '  </section>';
 			
 			out += '</td>';
 			out += '</tr>';
@@ -287,9 +287,9 @@ $(function(){
 	
 	$('#event-WinnerInsertdialog').on('click', '.rank-plus', function(){
 		let $td = $(this).closest('td');
-		let $p = $(this).closest('p');
+		let $p = $(this).closest('section');
 		$p.clone(true).appendTo($td);
-		$(".rank-numbers p").last().find('input[name=rankCount]').val('');
+		$(".rank-numbers section").last().find('input[name=rankCount]').val('');
 		
 		rankCalc();
 	});
@@ -298,11 +298,11 @@ $(function(){
 		let $minus = $(this);
 		let $td = $(this).closest('td');
 		
-		if($td.find('p').length === 1) {
+		if($td.find('section').length === 1) {
 			return false;
 		}
 		
-		$minus.closest('p').remove();
+		$minus.closest('section').remove();
 		
 		rankCalc();
 		
@@ -311,7 +311,7 @@ $(function(){
 	function rankCalc() {
 		let rank = 0;
 
-		$('.rank-numbers p').each(function(){
+		$('.rank-numbers section').each(function(){
 			let $span = $(this).find('span');
 			let $rankEL = $(this).find('input[name=rankNum]');
 			
