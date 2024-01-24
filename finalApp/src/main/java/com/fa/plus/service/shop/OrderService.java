@@ -15,4 +15,8 @@ public interface OrderService {
 	public List<Order> listOptionDetail(List<Long> detailNums);
 	
 	public void deleteCart(Map<String, Object> map) throws Exception;
+	
+	public int selectStock(Map<String, Long> map);
+	
+	public void updateStock(Map<String, Object> map) throws Exception;
 }

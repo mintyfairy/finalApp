@@ -23,4 +23,7 @@ public interface OrderMapper {
 	public Order findById(long productNum);
 	public List<Order> listOptionDetail(List<Long> detailNums);
 	public Order findByDetailId(long detailNum);
+	
+	public int selectStock(Map<String, Long> map);
+	public void updateStock(Map<String, Object> map) throws SQLException;
 }

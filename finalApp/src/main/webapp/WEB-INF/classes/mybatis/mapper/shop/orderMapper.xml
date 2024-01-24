@@ -77,4 +77,14 @@
 		UPDATE orderDetail SET detailState = #{detailState} 
 		WHERE orderDetailNum = #{orderDetailNum}
 	</update>
+	
+	<select id="selectStock" parameterType="map" resultType="Integer">
+		SELECT totalStock From productStock 
+		WHERE detailNum = #{detailNum} AND detailNum2 = #{detailNum2}
+	</select>
+	
+	<update id="updateStock" parameterType="map">
+		UPDATE productStock SET totalStock = #{totalStock} 
+		WHERE detailNum = #{detailNum} AND detailNum2 = #{detailNum2}
+	</update>
 </mapper>

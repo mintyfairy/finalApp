@@ -2,6 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<style>
+	.wrapper {
+	    padding-top: 160px;
+	    padding-left: 100px;
+	}
+</style>
+
 <div>
 	<div class="mt-3">
 		<div class="p-3 shadow bg-body rounded">
@@ -55,9 +62,11 @@
 			<table class="table table-borderless mb-1">
 				<tr>
 					<td width="50%">
+						<!-- 
 						<c:if test="${order.orderState < 3}">
 							<button type="button" class="btn btn-light btn-cancel-order" data-orderNum="${order.orderNum}">판매취소</button>
 						</c:if>
+						 -->
 					</td>
 					<td class="text-end">
 						<c:if test="${order.orderState == 0}">
@@ -135,7 +144,7 @@
 										data-productMoney="${dto.productMoney}"
 										data-orderDetailNum="${dto.orderDetailNum}" 
 										data-detailState="${dto.detailState}" style="margin-right: 10px; cursor: pointer;">수정</span>
-								<c:if test="${ order.orderState < 2}">
+								<c:if test="${ order.orderState < 2 && dto.orderDetailNum == 0}">
 									<span class="orderDetailStatus-cancel" 
 											data-orderNum="${order.orderNum}" 
 											data-orderState="${order.orderState}"

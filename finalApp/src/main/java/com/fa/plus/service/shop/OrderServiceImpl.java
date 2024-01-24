@@ -177,4 +177,28 @@ public class OrderServiceImpl implements OrderService {
 		}
 
 	}
+
+	@Override
+	public int selectStock(Map<String, Long> map) {
+		int result = 0;
+		
+		try {
+			result = mapper.selectStock(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	@Override
+	public void updateStock(Map<String, Object> map) throws Exception {
+		
+		try {
+			mapper.updateStock(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
 }

@@ -630,14 +630,11 @@ function sendOk(mode) {
 					<div class="product_title">
 						<strong class="brand">${dto.brandName}</strong>
 						<div class="product_name">${dto.productName}</div>
-						<a href="#" class="like_btn"> <img src="../image/like_btn.png"
-							alt="like_btn">
-						</a>
 					</div>
 					<div class="product_value">
 						<div class="product_price">
 							<p>판매가</p>
-							<h3 id="price">${dto.price}</h3>
+							<h3 id="price">${dto.salePrice}</h3>
 						</div>
 						<div class="product_delivery">
 							<p>배송비</p>

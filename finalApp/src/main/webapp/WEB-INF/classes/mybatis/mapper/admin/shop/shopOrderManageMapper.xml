@@ -70,7 +70,7 @@
 				AND ( detailState IN (6, 7, 8, 9) )
 			</if>
 			<if test="orderStatus == 'refund'">
-				AND ( detailState IN (10, 11, 12, 13) )
+				AND ( detailState IN (4, 5, 10, 11, 12, 13) )
 			</if>
 			<if test="kwd!=null and kwd!='' ">
 				AND <include refid="where-list"/>

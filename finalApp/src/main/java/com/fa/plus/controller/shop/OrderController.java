@@ -40,6 +40,7 @@ public class OrderController {
 							  @RequestParam(defaultValue = "buy") String mode, 
 							  HttpSession session, Model model) throws Exception {
 
+		Map<String, Object> stockMap = new HashMap<String, Object>();
 		try {
 			SessionInfo info = (SessionInfo) session.getAttribute("member");
 			Member orderUser = memberService.findById(info.getMemberIdx());
@@ -51,6 +52,7 @@ public class OrderController {
 			int payment = 0; // 결제할 금액(상품합 + 배송비)
 			int totalSavedMoney = 0; // 적립금 총합
 			int totalDiscountPrice = 0; // 총 할인액
+			int totalStock = 0;
 
 			productOrderNumber = orderService.productOrderNumber();
 
@@ -59,6 +61,12 @@ public class OrderController {
 				Map<String, Long> map = new HashMap<String, Long>();
 				map.put("detailNum", detailNums.get(i));
 				map.put("detailNum2", detailNums2.get(i));
+				totalStock = (int)orderService.selectStock(map);
+				totalStock -= buyQtys.get(i);
+				stockMap.put("detailNum", detailNums.get(i));
+				stockMap.put("detailNum2", detailNums2.get(i));
+				stockMap.put("totalStock", totalStock);
+				orderService.updateStock(stockMap);
 				list.add(map);
 			}
 
@@ -84,7 +92,7 @@ public class OrderController {
 				productOrderName += " 외 " + (listProduct.size() - 1) + " 건 ";
 			}
 
-			deliveryCharge = totalMoney >= 200000 ? 0 : deliveryCharge;
+			deliveryCharge = totalMoney >= 50000 ? 0 : deliveryCharge;
 			payment = totalMoney + deliveryCharge;
 
 			model.addAttribute("productOrderNumber", productOrderNumber); // 주문 번호

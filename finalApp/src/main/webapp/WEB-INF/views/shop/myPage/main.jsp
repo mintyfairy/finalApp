@@ -553,7 +553,7 @@ $(function(){
 						</c:if>
 						<button type="button" class="btn border" style="width: 130px;"
 							data-orderDetailNum="${dto.orderDetailNum}">배송조회</button>
-						<c:if test="${dto.detailState==0}">
+						<c:if test="${dto.detailState==0 && dto.orderState!=0}">
 							<button type="button" class="btn border payment-confirmation"
 								style="width: 130px;"
 								data-orderDetailNum="${dto.orderDetailNum}">구매확정</button>
@@ -574,7 +574,7 @@ $(function(){
 									data-orderDetailNum="${dto.orderDetailNum}">구매취소</div>
 							</c:if>
 							<c:if
-								test="${dto.detailState==0 || dto.orderState==5 || dto.afterDelivery < 3}">
+								test="${(dto.detailState==1 || dto.orderState==2 || dto.afterDelivery < 3) && (dto.orderState!=0 || dto.orderState!=1)}">
 								<div class="payment-menu-item return-request"
 									data-orderDetailNum="${dto.orderDetailNum}">반품요청</div>
 								<div class="payment-menu-item exchange-request"
