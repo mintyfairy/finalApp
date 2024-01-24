@@ -46,7 +46,7 @@
 		left join (select listnum lnum,to_char(order_date,'mm') order_months from booklist) on book.listnum=lnum
 		left join sitedetail on book.detailnum=sitedetail.detailnum
 		where order_months &gt;= to_char(add_months(sysdate,-12),'mm')
-		GROUP BY ROLLUP(order_months)
+		GROUP BY order_months
 		ORDER BY order_months 
 
 	</select>
@@ -58,7 +58,7 @@
 		        select listnum lnum,to_char(order_date,'d') order_days from booklist
 		        where order_date &gt; add_months(sysdate,-12) ) on book.listnum=lnum
 		left join sitedetail on book.detailnum=sitedetail.detailnum
-		GROUP BY ROLLUP(order_days)
+		GROUP BY order_days
 		ORDER BY order_days 
 
 	</select>
@@ -79,7 +79,7 @@
 		 ,${keyword} things  
 		</if>
 		 from campingsite) on sitenum=snum
-		GROUP BY ROLLUP(things)
+		GROUP BY things
 		ORDER BY things 
 
 
