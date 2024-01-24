@@ -51,10 +51,6 @@ main {
 	border-radius: 10px;
 }
 
-.car_photo{
-	border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-}
 
 .car_list {
 	display:flex;
@@ -65,23 +61,18 @@ main {
 
 .car_wrap .car_list .car_item p .car_photo {
     position: relative;
+    border-radius: 10px 10px 0 0;
 }
 
 .car_photo img {
    background-size: cover;
    width: 350px;
    height: 250px;
+   border-radius: 10px 10px 0 0;
 
 }
 
-/*
-.car_wrap .car_list .car_item p .car_photo i {
-    position: absolute;
-    top: 7px;
-    right: 9px;
-    font-size: 30px;
-}
-*/
+
 .car_wrap .car_list {
     display: flex;
     flex-wrap: wrap;
@@ -110,7 +101,7 @@ main {
 
 .car_list .car_item .car_text {
     height: 200px;
-    padding-top: 8px;
+    padding: 8px;
     margin-bottom: 28px;
     display: flex;
     flex-wrap: wrap;
@@ -125,6 +116,11 @@ main {
 	font-size: 23px;
 	font-weight: bold;
     margin: 5px 10px 20px 15px;
+}
+
+.car_sort_wrap {
+	display: flex;
+	justify-content: space-between;
 }
 
 .car_sort {
@@ -168,7 +164,6 @@ main {
     width: 1180px;
     margin: 30px auto;
     margin-bottom: 100px;
-   	border: 2px solid silver;
 }
 
 .maintitle {
@@ -244,7 +239,7 @@ main {
 </style>
 
 <main>
-	<div class="car_main" id="wrap"> <!-- car_wrap -->
+	<div class="car_main shadow-lg p-3 mb-5 bg-body-tertiary" id="wrap"> <!-- car_wrap -->
        <div class="car_list">
            <div class="maintitle">
                <p style="color: white;">캠핑카,</p>
@@ -309,10 +304,13 @@ main {
                    </a></p>
                <div class="car_text">
                    <div style="width: 350px;">
+                   	<div class="car_sort_wrap">
                        <p class="car_sort">${dto.carSize}</p>
+                   	   <c:if test="${dto.discountRate != 0}">
+                   	   		<span class="badge text-bg-danger" style="line-height: 17px; font-size: 13px;">${dto.discountRate}% 할인</span>
+                   	   </c:if>
+                   	</div>
                    	   <span class="car_title">${dto.carName}</span>
-                       <!-- <span class="car_star" style="text-decoration: underline;">후기 2개</span> -->
-                       <!-- <span class="car_star" style="margin-left: 160px;">★ 4.7 ·&nbsp;</span> -->
                    	   <p class="car_content" style="color: #aaaaaa;">${dto.description}</p>
                    </div>
                    <div class="car_option">
@@ -330,7 +328,6 @@ main {
                        
                    	   </c:if>
                    	   <c:if test="${dto.discountRate > 0}">
-                   	   	<p style="font-size: 15px;">${dto.discountRate}% 할인가 <i class="fa-solid fa-wand-magic-sparkles"></i></p>
 						<c:set var="discountedWeekCost" value="${dto.weekCost - (dto.weekCost * (dto.discountRate / 100))}" />
 						<c:set var="discountedWkndCost" value="${dto.wkndCost - (dto.wkndCost * (dto.discountRate / 100))}" />
 						<p style="color: #FF0000;">주중 : <fmt:formatNumber value="${discountedWeekCost}"/>원 부터</p>
