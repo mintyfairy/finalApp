@@ -603,7 +603,10 @@ table {
   margin: 150px auto 20px;
 }
 
-
+.img-item {
+    width: 100px;
+    height: 100px;
+}
 
 </style>
 <script type="text/javascript">
