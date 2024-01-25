@@ -24,5 +24,6 @@ public interface CarQnaMapper {
 	public void updateQuestion(CarQna dto) throws SQLException;
 	
 	public void deleteQuestion(long qnaNum) throws SQLException;
+	public void deleteQnAFile(long qnaNum) throws SQLException;
 	
 }

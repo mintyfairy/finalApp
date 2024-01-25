@@ -247,7 +247,7 @@ function printQuestion(data) {
 			out += '<div class="row gx-1 mt-2 mb-1 p-1">';
 				for(let f of listFilename) {
 					out += '<div class="col-md-auto md-img">';
-					out += '  <img class="border rounded" src="${pageContext.request.contextPath}/uploads/qna/'+f+'">';
+					out += '  <img class="border rounded" src="${pageContext.request.contextPath}/uploads/carqna/'+f+'">';
 					out += '</div>';
 				}
 			out += '</div>';
@@ -296,12 +296,16 @@ $(function(){
 	});
 });
 
+
 $(function(){
 	$('.list-question').on('click', '.deleteQuestion', function(){
-		let num = $(this).attr('data-num');
-		alert(num);
+		let qnaNum = $(this).attr('data-num');
+		
+		if(confirm('질문을 삭제하시겠습니까?')) {
+			let query = 'qnaNum=' + qnaNum;
+			location.href = '${pageContext.request.contextPath}/car/qna/delete?' + query;
+		}
 	});
 });
-
 
 </script>

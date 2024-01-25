@@ -98,5 +98,9 @@
 		WHERE qnaNum = #{qnaNum}
 	</delete>
 	
+	<delete id="deleteQnAFile" parameterType="long">
+		DELETE FROM carQnaFile
+		WHERE qnaNum = #{qnaNum}
+	</delete>
 	
 </mapper>

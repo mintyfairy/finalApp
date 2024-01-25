@@ -52,7 +52,9 @@
 	
 }
 
-
+.rider_info {
+	margin-bottom: 100px;
+}
 
 
 .img {
