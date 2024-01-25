@@ -263,7 +263,7 @@ function deleteCartItem(detailNum2) {
 							</td>
 							
 							<td>
-								<img class="border rounded" width="50" height="50" src="${pageContext.request.contextPath}/uploads/product/${dto.thumbnail}">
+								<img class="border rounded" width="50" height="50" src="${pageContext.request.contextPath}/uploads/shop/${dto.thumbnail}">
 							</td>
 							<td>${dto.productName}
 
