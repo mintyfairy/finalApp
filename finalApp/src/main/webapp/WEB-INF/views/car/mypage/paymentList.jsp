@@ -133,10 +133,10 @@ $(function() {
 
 		<ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
 			<li class="nav-item" role="presentation">
-				<button class="nav-link active" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane-1" type="button" role="tab" aria-controls="1" aria-selected="true">떠날 여정</button>
+				<button class="nav-link active" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab-pane-1" type="button" role="tab" aria-controls="1" aria-selected="true">이용 내역</button>
 			</li>
 			<li class="nav-item" role="presentation">
-				<button class="nav-link" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane-2" type="button" role="tab" aria-controls="2" aria-selected="false">지난 여정</button>
+				<button class="nav-link" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab-pane-2" type="button" role="tab" aria-controls="2" aria-selected="false">취소 내역</button>
 			</li>
 		</ul>
 		<div class="tab-content pt-2" id="myTabContent">
@@ -158,7 +158,7 @@ $(function() {
 												<span class="badge text-bg-primary">예약완료</span>
 											</c:if>
 											<c:if test="${dto.orderState==2}">
-												<span class="badge text-bg-primary">이용완료</span>
+												<span class="badge text-bg-secondary">이용완료</span>
 											</c:if>
 										</div>
 										${dto.start_date} ~ ${dto.end_date}

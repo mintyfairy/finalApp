@@ -88,7 +88,7 @@
 	
 	<!-- 예약 리스트 -->
 	<select id="listReservation" parameterType="map" resultType="com.fa.plus.admin.domain.car.CarReservation">
-		SELECT orderNum, userId, userName, TO_CHAR(start_date, 'YYYY-MM-DD')start_date, TO_CHAR(end_date, 'YYYY-MM-DD')end_date, r.memberIdx, orderState
+		SELECT orderNum, userId, userName, TO_CHAR(start_date, 'YYYY-MM-DD') start_date, TO_CHAR(end_date, 'YYYY-MM-DD') end_date, r.memberIdx, orderState
 		FROM carReservation r
 		JOIN member1 m1 ON r.memberIdx = m1.memberIdx
 		<where>
@@ -118,8 +118,9 @@
 	</select>
 	-->
 	
+	<!-- 
 	<select id="listDetail" parameterType="map" resultType="com.fa.plus.admin.domain.car.CarReservation">
-        SELECT r.orderNum, m1.userId, userName, tel, email, TO_CHAR(start_date, 'YYYY-MM-DD')start_date, TO_CHAR(end_date, 'YYYY-MM-DD')end_date,
+        SELECT r.orderNum, m1.userId, userName, tel, email, TO_CHAR(start_date, 'YYYY-MM-DD') start_date, TO_CHAR(end_date, 'YYYY-MM-DD') end_date,
             carName, payment, addRider
 		FROM carReservation r
 		JOIN member1 m1 ON r.memberIdx = m1.memberIdx
@@ -127,10 +128,19 @@
 		JOIN member2 m2 ON m1.userId = m2.userId
 		WHERE r.orderNum = #{orderNum}
 	</select>
+	 -->
+	<select id="listDetail" parameterType="map" resultType="com.fa.plus.admin.domain.car.CarReservation">
+        SELECT r.orderNum, m1.userId, userName, tel, email, TO_CHAR(start_date, 'YYYY-MM-DD') start_date, TO_CHAR(end_date, 'YYYY-MM-DD') end_date,
+            carName, payment, addRider, TO_CHAR(m2.birth, 'YYYY-MM-DD') birth
+		FROM carReservation r
+		JOIN member1 m1 ON r.memberIdx = m1.memberIdx
+		JOIN campingCar c ON r.carNum = c.carNum
+		JOIN member2 m2 ON m1.userId = m2.userId
+		WHERE r.orderNum = #{orderNum}
+	</select>
 	
-	<!-- 예약 디테일 운전자 정보 -->
 	<select id="listRiderDetail" parameterType="map" resultType="com.fa.plus.admin.domain.car.CarReservation">
-        SELECT TO_CHAR(m2.birth, 'YYYY-MM-DD')birth, TO_CHAR(licenseDate, 'YYYY-MM-DD')licenseDate, r.addRider,
+        SELECT TO_CHAR(licenseDate, 'YYYY-MM-DD') licenseDate, r.addRider,
         userName, tel, email
 		FROM carReservation r
 		JOIN license l ON r.memberIdx = l.memberIdx
@@ -138,5 +148,17 @@
         JOIN member2 m2 on m1.userId = m2.userId
 		WHERE r.orderNum = #{orderNum}
 	</select>
-	
+		
+	<!--
+	 예약 디테일 운전자 정보
+	<select id="listRiderDetail" parameterType="map" resultType="com.fa.plus.admin.domain.car.CarReservation">
+        SELECT TO_CHAR(m2.birth, 'YYYY-MM-DD') birth, TO_CHAR(licenseDate, 'YYYY-MM-DD') licenseDate, r.addRider,
+        userName, tel, email
+		FROM carReservation r
+		JOIN license l ON r.memberIdx = l.memberIdx
+        JOIN member1 m1 ON l. memberIdx = m1.memberIdx
+        JOIN member2 m2 on m1.userId = m2.userId
+		WHERE r.orderNum = #{orderNum}
+	</select>
+	 -->  
 </mapper>

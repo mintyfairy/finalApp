@@ -201,7 +201,7 @@ $(function(){
 					<a href="${pageContext.request.contextPath}/admin/carManage/car" class="sub_menu--link">캠핑카 관리</a>
 				</li>
 				<li class="sub_menu--item">
-					<a href="${pageContext.request.contextPath}/admin/carReservation/chart" class="sub_menu--link">예약 관리</a>
+					<a href="${pageContext.request.contextPath}/admin/carReservation/chart" class="sub_menu--link">예약 및 매출관리</a>
 				</li>
 				<li class="sub_menu--item">
 					<a href="${pageContext.request.contextPath}/admin/carQna/qna" class="sub_menu--link">문의 관리</a>
@@ -250,16 +250,6 @@ $(function(){
 			</ul>
 		</li>
 		
-		
-		
-		<li class="menu--item">
-	        <a href="<c:url value='/admin/salesManage/main'/>" class="menu--link" title="매출 관리">
-				<i class="menu--icon  fa-fw fa-solid fa-sack-dollar"></i>
-				<span class="menu--label">매출 관리</span>
-			</a>
-		</li>
-
-
 		<li class="menu--item">
 			<a href="${pageContext.request.contextPath}/member/logout" class="menu--link" title="Logout">
 				<i class="menu--icon fa-fw fa-solid fa-lock-open"></i>

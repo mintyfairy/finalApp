@@ -121,7 +121,7 @@ public class CarAdminReservationServiceImpl implements CarReservationService {
 		CarReservation dto = null;
 
 		try {
-			dto = mapper.listDetail(map);
+			dto = mapper.listRiderDetail(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

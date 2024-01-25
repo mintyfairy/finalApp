@@ -48,79 +48,79 @@ body {
             <div class="card" style="width: 18rem;">
 			  <img src="${pageContext.request.contextPath}/resources/images/campingcar/caravanpic1.jpg" class="card-img-top" alt="..." style="background-size: cover;">
 			  <div class="card-body">
-			    <h5 class="card-title">코치멘 오라이온20 CB</h5>
+			    <h5 class="card-title">르노마스터 캠핑카</h5>
 			    <p class="card-text">5명이서 자도 넉넉한 공간으로 캠핑을 낙낙하게 즐겨보세요</p>
-			    <a href="http://localhost:9090/plus/car/car_detail?carNum=14" class="btn btn-primary carbutton">보러가기</a>
+			    <a href="http://localhost:9090/plus/car/car_detail?carNum=62" class="btn btn-primary carbutton">보러가기</a>
 			  </div>
 			</div>
             </div>
             <div class="swiper-slide">
             	<div class="card" style="width: 18rem;">
-			  <img src="${pageContext.request.contextPath}/resources/images/campingcar/caravanpic1.jpg" class="card-img-top" alt="..." style="background-size: cover;">
+			  <img src="${pageContext.request.contextPath}/resources/images/campingcar/caravanpic2.png" class="card-img-top" alt="..." style="background-size: cover;">
 			  <div class="card-body">
-			    <h5 class="card-title">코치멘 오라이온20 CB</h5>
-			    <p class="card-text">5명이서 자도 넉넉한 공간으로 캠핑을 낙낙하게 즐겨보세요</p>
-			    <a href="http://localhost:9090/plus/car/car_detail?carNum=14" class="btn btn-primary carbutton">보러가기</a>
+			    <h5 class="card-title">쏠라티</h5>
+			    <p class="card-text">현대자동차에서 제작한 유럽식 럭셔리 캠핑카</p>
+			    <a href="http://localhost:9090/plus/car/car_detail?carNum=55" class="btn btn-primary carbutton">보러가기</a>
 			  </div>
 			</div>
             </div>
             <div class="swiper-slide">
             	<div class="card" style="width: 18rem;">
-			  <img src="${pageContext.request.contextPath}/resources/images/campingcar/caravanpic1.jpg" class="card-img-top" alt="..." style="background-size: cover;">
+			  <img src="${pageContext.request.contextPath}/resources/images/campingcar/caravanpic3.png" class="card-img-top" alt="..." style="background-size: cover;">
 			  <div class="card-body">
-			    <h5 class="card-title">코치멘 오라이온20 CB</h5>
-			    <p class="card-text">5명이서 자도 넉넉한 공간으로 캠핑을 낙낙하게 즐겨보세요</p>
-			    <a href="http://localhost:9090/plus/car/car_detail?carNum=14" class="btn btn-primary carbutton">보러가기</a>
+			    <h5 class="card-title">코치멘 오라이온 20tb</h5>
+			    <p class="card-text">세련된 감성의 캠핑을 즐겨보세요</p>
+			    <a href="http://localhost:9090/plus/car/car_detail?carNum=56" class="btn btn-primary carbutton">보러가기</a>
 			  </div>
 			</div>
             </div>
             <div class="swiper-slide">
             	<div class="card" style="width: 18rem;">
-			  <img src="${pageContext.request.contextPath}/resources/images/campingcar/caravanpic1.jpg" class="card-img-top" alt="..." style="background-size: cover;">
+			  <img src="${pageContext.request.contextPath}/resources/images/campingcar/caravanpic4.png" class="card-img-top" alt="..." style="background-size: cover;">
 			  <div class="card-body">
-			    <h5 class="card-title">코치멘 오라이온20 CB</h5>
-			    <p class="card-text">5명이서 자도 넉넉한 공간으로 캠핑을 낙낙하게 즐겨보세요</p>
-			    <a href="http://localhost:9090/plus/car/car_detail?carNum=14" class="btn btn-primary carbutton">보러가기</a>
+			    <h5 class="card-title">포터 캠핑카</h5>
+			    <p class="card-text">독일 명품 캠핑카</p>
+			    <a href="http://localhost:9090/plus/car/car_detail?carNum=57" class="btn btn-primary carbutton">보러가기</a>
 			  </div>
 			</div>
             </div>
             <div class="swiper-slide">
             	<div class="card" style="width: 18rem;">
-			  <img src="${pageContext.request.contextPath}/resources/images/campingcar/caravanpic1.jpg" class="card-img-top" alt="..." style="background-size: cover;">
+			  <img src="${pageContext.request.contextPath}/resources/images/campingcar/ray.png" class="card-img-top" alt="..." style="background-size: cover;">
 			  <div class="card-body">
-			    <h5 class="card-title">코치멘 오라이온20 CB</h5>
-			    <p class="card-text">5명이서 자도 넉넉한 공간으로 캠핑을 낙낙하게 즐겨보세요</p>
-			    <a href="http://localhost:9090/plus/car/car_detail?carNum=14" class="btn btn-primary carbutton">보러가기</a>
+			    <h5 class="card-title">레이</h5>
+			    <p class="card-text">아늑한 분위기 커플 추천 캠핑카</p>
+			    <a href="http://localhost:9090/plus/car/car_detail?carNum=54" class="btn btn-primary carbutton">보러가기</a>
 			  </div>
 			</div>
             </div>
             <div class="swiper-slide">
             	<div class="card" style="width: 18rem;">
-			  <img src="${pageContext.request.contextPath}/resources/images/campingcar/caravanpic1.jpg" class="card-img-top" alt="..." style="background-size: cover;">
+			  <img src="${pageContext.request.contextPath}/resources/images/campingcar/canibal.png" class="card-img-top" alt="..." style="background-size: cover;">
 			  <div class="card-body">
-			    <h5 class="card-title">코치멘 오라이온20 CB</h5>
-			    <p class="card-text">5명이서 자도 넉넉한 공간으로 캠핑을 낙낙하게 즐겨보세요</p>
-			    <a href="http://localhost:9090/plus/car/car_detail?carNum=14" class="btn btn-primary carbutton">보러가기</a>
+			    <h5 class="card-title">루프탑 카니발</h5>
+			    <p class="card-text">캠핑의 밤, 루프탑에서 감성을 느껴보세요</p>
+			    <a href="http://localhost:9090/plus/car/car_detail?carNum=61" class="btn btn-primary carbutton">보러가기</a>
 			  </div>
 			</div>
             </div>
             <div class="swiper-slide">
             	<div class="card" style="width: 18rem;">
-			  <img src="${pageContext.request.contextPath}/resources/images/campingcar/caravanpic1.jpg" class="card-img-top" alt="..." style="background-size: cover;">
+			  <img src="${pageContext.request.contextPath}/resources/images/campingcar/casper.jpg" class="card-img-top" alt="..." style="background-size: cover;">
 			  <div class="card-body">
-			    <h5 class="card-title">코치멘 오라이온20 CB</h5>
-			    <p class="card-text">5명이서 자도 넉넉한 공간으로 캠핑을 낙낙하게 즐겨보세요</p>
-			    <a href="http://localhost:9090/plus/car/car_detail?carNum=14" class="btn btn-primary carbutton">보러가기</a>
+			    <h5 class="card-title">캐스퍼 캠핑카</h5>
+			    <p class="card-text">귀엽고 깜찍한 디자인으로 솔로캠핑 추천</p>
+			    <a href="http://localhost:9090/plus/car/car_detail?carNum=59" class="btn btn-primary carbutton">보러가기</a>
 			  </div>
 			</div>
             </div>
-            <div class="swiper-slide">
+             <div class="swiper-slide">
             	<div class="card" style="width: 18rem;">
-			  <img src="${pageContext.request.contextPath}/resources/images/campingcar/caravanpic1.jpg" class="card-img-top" alt="..." style="background-size: cover;">
+			  <img src="${pageContext.request.contextPath}/resources/images/campingcar/caravanpic3.png" class="card-img-top" alt="..." style="background-size: cover;">
 			  <div class="card-body">
-			    <h5 class="card-title">코치멘 오라이온20 CB</h5>
-			    <p class="card-text">5명이서 자도 넉넉한 공간으로 캠핑을 낙낙하게 즐겨보세요</p>
-			    <a href="http://localhost:9090/plus/car/car_detail?carNum=14" class="btn btn-primary carbutton">보러가기</a>
+			    <h5 class="card-title">코치멘 오라이온 20tb</h5>
+			    <p class="card-text">세련된 감성의 캠핑을 즐겨보세요</p>
+			    <a href="http://localhost:9090/plus/car/car_detail?carNum=56" class="btn btn-primary carbutton">보러가기</a>
 			  </div>
 			</div>
             </div>

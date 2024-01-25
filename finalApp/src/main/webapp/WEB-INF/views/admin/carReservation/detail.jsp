@@ -173,24 +173,24 @@ table input[type=text] {
           <tbody>
             <tr>
               <th>운전자 이름</th>
-              <td><input type="text" name="userName" id="userName" value="${dto2.userName}" readonly></td>
+              <td><input type="text" name="userName" id="userName" value="${dto.userName}" readonly></td>
             </tr>
             <tr>
               <th>연락처</th>
               <td>
-                <input type="text" name="tel" id="tel"  value="${dto2.tel}" readonly>
+                <input type="text" name="tel" id="tel"  value="${dto.tel}" readonly>
               </td>
             </tr>
             <tr>
               <th>이메일</th>
               <td>
-                <input type="text" name="email" id="email" value="${dto2.email}" readonly>
+                <input type="text" name="email" id="email" value="${dto.email}" readonly>
               </td>
             </tr>
             <tr>
               <th>생년월일</th>
               <td>
-                <input type="text" name="birth" id="birth"  value="${dto2.birth}" readonly>
+                <input type="text" name="birth" id="birth"  value="${dto.birth}" readonly>
               </td>
             </tr>
             <tr>

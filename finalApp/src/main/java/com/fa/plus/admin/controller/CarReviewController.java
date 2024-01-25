@@ -54,7 +54,7 @@ public class CarReviewController {
 		try {
 			Map<String, Object> map = new HashMap<String, Object>();
 			
-			int size = 3;
+			int size = 10;
 			int dataCount = 0;
 			int tab = 2;
 			

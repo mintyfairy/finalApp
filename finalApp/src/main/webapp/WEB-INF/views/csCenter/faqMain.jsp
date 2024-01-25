@@ -21,7 +21,7 @@
 }
 .tab-pane { min-height: 300px; }
 
-.body-main { width: 850px; margin: 20px auto; }
+.body-main { width: 1080px; margin: 20px auto; }
 
 .table-list { width: 100%; }
 .table-list thead { color: #787878; }
