@@ -7,7 +7,10 @@
         width: 1000px;
         margin: 0 auto;
     }
-
+	.rider-info{
+		margin-bottom: 100px;
+	}
+	
     .riderSubmit {
         margin: 70px auto;
         width: 600px;
@@ -90,6 +93,7 @@
 </script>
 
 <div class="container">
+	<div class="rider-info">
     <div class="riderSubmit shadow p-3 mb-5 bg-body-tertiary rounded">
         <form name="writeForm" method="post" enctype="multipart/form-data">
             <table class="ridertable write-form">
@@ -135,6 +139,7 @@
                 </tr>
             </table>
         </form>
+    </div>
     </div>
 </div>
 

@@ -23,7 +23,6 @@ import com.fa.plus.domain.car.CarMyPage;
 import com.fa.plus.domain.car.CarReservation;
 import com.fa.plus.service.MemberService;
 import com.fa.plus.service.car.CarMyPageService;
-import com.fa.plus.service.car.CarQnaService;
 
 @Controller
 @RequestMapping("/car/mypage/*")

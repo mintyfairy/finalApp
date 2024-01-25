@@ -618,7 +618,7 @@ table {
   margin: 150px auto 20px;
 }
 
-.car_item {
+.img-item {
 	width: 100px;
 	height: 100px;
 }
