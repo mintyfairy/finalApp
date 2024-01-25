@@ -32,19 +32,35 @@ a:active, a:hover { color: #f28011; text-decoration: underline; }
 	padding: 20px;
 	width: 30%;
 	height: 80%;
-	border: 1px solid #ccc;
 	margin: 10px;
 	text-align: center;
+	background-color: #FFA500;
+	color: white;
+	font-weight: bold;
 }
+
+.sales-container .box1 {
+	box-sizing: border-box;
+	padding: 20px;
+	width: 30%;
+	height: 80%;
+	margin: 10px;
+	text-align: center;
+	background-color: #0078FF;
+	color: white;
+	font-weight: bold;
+}
+
 .container { margin: 30px auto; width: 1080px; }
 .box-container .box {
+	
 	box-sizing: border-box;
 	padding: 20px;
 	width: 100%;
 	height: 500px;
-	border: 1px solid #ccc;
 	margin: 10px;
 	text-align: center;
+
 }
 
 .body-main {
@@ -178,11 +194,11 @@ $(function(){
 			  	<h5>금일 예약건수</h5>
 			  	<span><fmt:formatNumber value="${today.COUNT}"/>건</span>
 			  </div>
-			  <div class="box">
+			  <div class="box1">
 			  	<h5>이번달 매출액</h5>
 			  	<span><fmt:formatNumber value="${thisMonthsales.TOTAL}"/>&nbsp;원</span>
 			  </div>
-			  <div class="box">
+			  <div class="box1">
 			  	<h5>올해의 매출액</h5>
 			  	<span><fmt:formatNumber value="${thisyearsales.TOTAL}"/>&nbsp;원</span>
 			  </div>
@@ -191,7 +207,7 @@ $(function(){
 			<div class="container">
 				
 				<div class="box-container" style="margin-top: 15px;">
-				    <div class="charts-month border rounded" style="height: 500px;"></div>
+				    <div class="charts-month border rounded" style="height: 500px; padding: 20px;"></div>
 				</div>
 			</div>
 		</div>
