@@ -255,30 +255,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 							<input type="file" name="addFiles" accept="image/*" multiple class="form-control" style="display: none;">
 						</td>
 					</tr>
-					
-					<!-- 
-					<tr>
-						<td class="table-light col-sm-2">대표이미지</td>
-						<td>
-							<div class="thumbnail-viewer"></div>
-							<input type="file" name="thumbnailFile" accept="image/*" class="form-control" style="display: none;">
-						</td>
-					</tr>
-					<tr>
-						<td class="bg-light col-sm-2" scope="row">추가이미지</td>
-						<td>
-							<div class="img-grid"><img class="item img-add rounded" src="${pageContext.request.contextPath}/resources/images/add_photo.png"></div>
-								<c:forEach var="vo" items="${listFile}">
-									<img src="${pageContext.request.contextPath}/uploads/campingcar/caravan/${vo.imageFilename}"
-										class="item delete-img"
-										data-fileNum="${vo.carImagenum}"
-										data-filename="${vo.imageFilename}">
-								</c:forEach>
-							<input type="file" name="addFiles" accept="image/*" multiple style="display: none;" class="form-control" value="${addFiles}">
-						</td>
-					</tr>
-					 -->
-					
+										
 					<tr>
 						<td class="table-light col-sm-2">할인율</td>
 						<td><input type="text" name="discountRate" class="form-control" value="${dto.discountRate}"></td>

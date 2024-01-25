@@ -567,7 +567,6 @@ $(function() {
         });
 	
 	   $(".hamburger").mouseover(function(){
-	       //$(".cate_container").fadeIn( 'slow' );
 	       $(".cate_container").show();
 	       $(".cate_container").css("height", "730px");
 	   });
@@ -575,20 +574,15 @@ $(function() {
 		   $(".cate_container").css("height", "0");
 		   $(".cate_container").hide();
 	   });
-	   //$("nav").mouseover(function(){
-	   //    $(".cate_container").css("height", "730px");
-	   //});
 	   $(".cate_container").mouseover(function(){
 	       $(this).css("height", "730px");
 	   });
 	   $(".navi_container").mouseleave(function(){
 	       $(".cate_container").css("height", "0");
-	       //$(".cate_container").fadeOut('fast');
 	       $(".cate_container").hide();
 	   });
 	   $(".cate_container").mouseleave(function(){
 	       $(".cate_container").css("height", "0");
-	       //$(".cate_container").fadeOut('fast');
 	       $(".cate_container").hide();
 	   });
 	   
@@ -599,7 +593,6 @@ $(function() {
        });
 	
 	   $(".brand").mouseover(function(){
-	       //$(".cate_container").fadeIn( 'slow' );
 	       $(".cate_container1").show();
 	       $(".cate_container1").css("height", "730px");
 	   });
@@ -607,20 +600,15 @@ $(function() {
 		   $(".cate_container1").css("height", "0");
 		   $(".cate_container1").hide();
 	   });
-	   //$("nav").mouseover(function(){
-	   //    $(".cate_container").css("height", "730px");
-	   //});
 	   $(".cate_container1").mouseover(function(){
 	       $(this).css("height", "730px");
 	   });
 	   $(".navi_container").mouseleave(function(){
 	       $(".cate_container1").css("height", "0");
-	       //$(".cate_container").fadeOut('fast');
 	       $(".cate_container1").hide();
 	   });
 	   $(".cate_container1").mouseleave(function(){
 	       $(".cate_container1").css("height", "0");
-	       //$(".cate_container").fadeOut('fast');
 	       $(".cate_container1").hide();
 	   });
     });
@@ -664,8 +652,6 @@ $(function(){
 	
 	$(".brand-list").on("click", ".brand-item", function(){
 		let brandNum = $(this).attr("data-brandNum");
-		//alert(brandNum);
-		console.log(brandNum);
 		let url = '${pageContext.request.contextPath}/shop/product/list?brandNum=' + brandNum;
 		location.href = url;
 	});

@@ -237,7 +237,6 @@ function sendOk() {
 	let cardName = "BC 카드";  // 카드 이름
 	let authNumber = "1234567890"; // 승인번호
 	let authDate = ""; // 승인 날짜
-	// toISOString() : "YYYY-MM-DDTHH:mm:ss.sssZ" 형식
 	authDate = new Date().toISOString().replace('T', ' ').slice(0, -5); // YYYY-MM-DD HH:mm:ss
 
 	// 결제 API에 요청할 파라미터
@@ -323,11 +322,11 @@ function sendOk() {
             <tr>
               <th>주소</th>
               <td>
-                <input type="text" name="zip" id="zip" placeholder="우편번호" style="width: 110px;" value="${orderUser.zip}" placeholder="" readonly>
+                <input type="text" name="zip" id="zip" placeholder="우편번호" style="width: 110px;" value="" placeholder="" readonly>
                 <button type="button" onclick="daumPostcode();"
                   style="vertical-align: middle; margin-left: 4px; cursor: pointer; background-color: #fff; padding: 2px 4px; border: 1px solid #e5e5e5;">우편번호</button>
                 <br>
-                <input type="text" name="addr1" id="addr1" value="${orderUser.addr1}" style="margin-top: 7px; width: 300px;" placeholder="기본주소"
+                <input type="text" name="addr1" id="addr1" value="" style="margin-top: 7px; width: 300px;" placeholder="기본주소"
                   readonly>
                 <input type="text" name="addr2" id="addr2" value="${orderUser.addr2}" style="margin-top: 7px; margin-left: 4px; width: 300px;"
                   placeholder="상세주소">
@@ -372,7 +371,7 @@ function sendOk() {
             <td>
               <div class="thumb_wrap">
                 <div class="thumb">
-                  <img src="https://via.placeholder.com/70x70" alt="thumb" width="70">
+                  <img src="${pageContext.request.contextPath}/uploads/shop/${dto.thumbnail}" alt="thumb" width="70" height="70">
                 </div>
               </div>
             </td>

@@ -128,7 +128,7 @@ ol, ul {
 
 <div class="container">
 	<div class="wrap">
-		<h1>대분류명</h1>
+		<h1>${categoryName}</h1>
 		<div class="option_wrap">
 			<ul class="option_list">
 				<c:forEach var="dto" items="${list}" varStatus="status">

@@ -112,7 +112,6 @@ $(function(){
 	let url = "${pageContext.request.contextPath}/admin/carReservation/bar";
 	
 	$.getJSON(url, function(data){
-		//console.log(data);
 		chartsMonth(data);	
 	});
 

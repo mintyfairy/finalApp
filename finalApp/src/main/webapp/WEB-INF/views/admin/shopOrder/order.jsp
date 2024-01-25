@@ -181,14 +181,6 @@ table th, td {
           <div class="row board-list-header">
               <div class="col-auto me-auto">
                   <c:if test="${orderStatus =='status'}">
-                  <!-- 
-                      <div class="form-check form-check-inline">
-                          <input type="radio" id="order-state2" class="form-check-input" name="orderstatus" value="1" ${state==1 ? "checked='checked'" : ""}> <label class="form-check-label" for="order-state2">전체 주문</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                          <input type="radio" id="order-state1" class="form-check-input" name="orderstatus" value="2" ${state==2 ? "checked='checked'" : ""}> <label class="form-check-label" for="order-state1">신규 주문</label>
-                      </div>
-                       -->
                        <select id="listState" name="state" class="form-select" onchange="changeState();">
 						<option value="1" ${ state == 1 ? 'selected' : '' }>:: 전체 ::</option>
 						<option value="2" ${ state == 2 ? 'selected' : '' }>:: 최근주문 ::</option>
@@ -362,23 +354,6 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 	
 	$.ajax(url, settings);
 }
-
-// 상품 상세 모달창 띄우기
-/*
-$(function() {
-	$('.orderStatus-update').click(function () {
-		let orderNum = $(this).attr("data-orderNum");
-		let orderStatus = "${orderStatus}";
-		console.log(orderNum);
-		
-		let url = "${pageContext.request.contextPath}/admin/shopOrder/detail/" + orderNum + "?orderStatus=" + orderStatus;
-		
-		$('.modal-orderDetail-body').load(url);
-		
-		$('#orderDialogModal').show();
-	});
-});
-*/
 
 // 배송 5일 후 자동구매
 $(function() {

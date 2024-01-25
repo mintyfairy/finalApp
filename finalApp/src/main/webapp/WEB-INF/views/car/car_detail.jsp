@@ -892,22 +892,6 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 						${dto.content}
 					  </div>
 				    </div>
-				    <!-- 
-	  				<div style="width:10px; height: 5px; color:white;">
-					  	<a href="https://www.flaticon.com/kr/free-icons/" title="화장실 아이콘">화장실 아이콘  제작자: Creaticca Creative Agency - Flaticon</a>
-						<a href="https://www.flaticon.com/kr/free-icons/" title="화장실 아이콘">화장실 아이콘  제작자: Freepik - Flaticon</a>
-						<a href="https://www.flaticon.com/kr/free-icons/" title="침실 아이콘">침실 아이콘  제작자: Freepik - Flaticon</a>
-						<a href="https://www.flaticon.com/kr/free-icons/" title="싱크대 아이콘">싱크대 아이콘  제작자: Eucalyp - Flaticon</a>
-						<a href="https://www.flaticon.com/kr/free-icons/" title="마이크로파 아이콘">마이크로파 아이콘  제작자: Dreamstale - Flaticon</a>
-						<a href="https://www.flaticon.com/kr/free-icons/" title="냉장고 아이콘">냉장고 아이콘  제작자: pojok d - Flaticon</a>
-						<a href="https://www.flaticon.com/kr/free-icons/" title="표 아이콘">표 아이콘  제작자: itim2101 - Flaticon</a>
-						<a href="https://www.flaticon.com/kr/free-icons/" title="온수기 아이콘">온수기 아이콘  제작자: manshagraphics - Flaticon</a>
-						<a href="https://www.flaticon.com/kr/free-icons/tu-tv" title="tu tv 아이콘">Tu tv 아이콘  제작자: Icon.verse - Flaticon</a>
-						<a href="https://www.flaticon.com/kr/free-icons/-" title="공기 조절 아이콘">공기 조절 아이콘  제작자: Freepik - Flaticon</a>
-						<a href="https://www.flaticon.com/kr/free-icons/" title="히터 아이콘">히터 아이콘  제작자: Linector - Flaticon</a>
-						<a href="https://www.flaticon.com/kr/free-icons/" title="배터리 아이콘">배터리 아이콘  제작자: kmg design - Flaticon</a>
-					</div>
-					 -->
 				</div>
 				
 				<!-- 상세정보 끝 -->
@@ -1085,8 +1069,6 @@ document.forms["datepickForm"]["end_date"].addEventListener("change", function()
     if (startDate && endDate) {
         const fee = calculateFee(startDate, endDate);
         
-        // totMoney 값을 URL에 추가하여 페이지를 다시 로드
-        // window.location.href = "page2.html?totMoney=" + fee;
 
         // 계산된 fee를 hidden input에 할당
         document.getElementById("inputDisTotalFee").value = fee;

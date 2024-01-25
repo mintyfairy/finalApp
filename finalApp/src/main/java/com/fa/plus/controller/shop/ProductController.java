@@ -42,6 +42,7 @@ public class ProductController {
 			int size = 20;
 			int total_page;
 			int dataCount;
+			String categoryName = "";
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("categoryNum", categoryNum);
@@ -61,6 +62,10 @@ public class ProductController {
 			
 			List<Product> list = service.listProduct(map);
 			
+			if(list != null) {
+				categoryName = list.get(0).getCategoryName();
+			}
+			
 			String listUrl = cp + "/shop/product/list?categoryNum="+categoryNum;
 			if(brandNum != 0) {
 				map.put("brandNum", brandNum);
@@ -71,6 +76,7 @@ public class ProductController {
 			
 			model.addAttribute("list", list);
 			model.addAttribute("categoryNum", categoryNum);
+			model.addAttribute("categoryName", categoryName);
 //			model.addAttribute("brandNum", brandNum);
 			model.addAttribute("page", current_page);
 			model.addAttribute("dataCount", dataCount);

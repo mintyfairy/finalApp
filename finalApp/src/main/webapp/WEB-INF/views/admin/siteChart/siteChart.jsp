@@ -25,7 +25,6 @@ $(function(){
 	});
 	
 	function siteRankYear(data) {
-		//console.log(data.days)
 
 		var chartDom = document.querySelector(".charts-day");
 		

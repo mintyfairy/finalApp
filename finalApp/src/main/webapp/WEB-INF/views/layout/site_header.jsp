@@ -302,58 +302,7 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
 </style>
 </head>
 	<div class="header_top">
-	<!-- 
-        <ul class="header_top_list">
-            <li id="logo" class="header_top_item">
-                <a href="${pageContext.request.contextPath}/">
-                    <img src="https://via.placeholder.com/108x38" alt="logo">
-                </a>
-            </li>
-            <li id="tour_list_wrap" class="header_top_item">
-                <ul class="tour_list">
-                    <li>
-                        <a href="#">캠핑장 구석구석</a>
-                    </li>
-                    <li>
-                        <a href="#">열린관광 모두의 캠핑</a>
-                    </li>
-                    <li>
-                        <a href="#">캠핑트립코리아</a>
-                    </li>
-                    <li>
-                        <a href="#">캠핑e배움터</a>
-                    </li>
-                    <li>
-                        <a href="#">캠핑카</a>
-                    </li>
-                    <li>
-                        <a href="#">사진갤러리</a>
-                    </li>
-                    <li>
-                        <a href="#">한국캠핑콘텐츠랩</a>
-                    </li>
-                    <li>
-                        <a href="#">TourAPI</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
--->
         <div class="header_top_left">
-        <!-- 
-       		 <c:choose>
-				<c:when test="${empty sessionScope.member}">
-		            <div class="login_wrap">
-		                <a href="${pageContext.request.contextPath}/member/login">통합로그인</a>
-		            </div>
-		        </c:when>
-		        <c:otherwise>
-					<div class="p-2">
-						<a href="${pageContext.request.contextPath}/member/logout" title="로그아웃">로그아웃</a>
-					</div>					
-				</c:otherwise>
-		     </c:choose>
-         -->
             
         </div>
          <div id="sns_area">
@@ -398,12 +347,6 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
 	                        </a>
 	                    </li>
 	                    
-	                    <!-- 
-	                    <li class="my_page">
-	                        <a href="#"><i class="fa-regular fa-user"></i>&nbsp;마이페이지</a>
-	                    </li>
-	                     -->
-	                     
 				        <li class="bottom_right_wrap">
 				            <ul class="bottom_right">
 				            	<c:choose>

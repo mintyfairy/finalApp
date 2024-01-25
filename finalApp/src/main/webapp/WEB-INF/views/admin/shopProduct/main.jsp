@@ -109,14 +109,9 @@ function searchList() {
 
 function changeList() {
 	let parentNum = $("#changeCategory").val();
-	//let productShow = $("#changeShowProduct").val();
-	//let brandNum = $("#changeBrand").val();
 	
 	const f = document.searchForm;
 	f.parentNum.value = parentNum;
-	// f.categoryNum.value = 0;
-	//f.productShow.value = productShow;
-	//f.brandNum.value = brandNum;
 	searchList();
 }
 
@@ -298,23 +293,6 @@ $(function(){
 				</table>
 
 				<div class="page-navigation">
-					<!-- 
-					<nav aria-label="pnav">
-                           <ul class="pagination">
-                               <li class="page-item">
-                               <a class="page-link" href="#" aria-label="Previous">
-                                   <span aria-hidden="true">&laquo;</span>
-                               </a>
-                               </li>
-                               <li class="page-item"><a class="page-link" href="#">1</a></li>
-                               <li class="page-item">
-                               <a class="page-link" href="#" aria-label="Next">
-                               <span aria-hidden="true">&raquo;</span>
-                               </a>
-                               </li>
-                           </ul>
-                       </nav>
-                        -->
 					${dataCount == 0 ? "등록된 게시물이 없습니다." : paging}
 				</div>
 				
@@ -688,9 +666,6 @@ $(function() {
 			console.log(f.find('.totalStock').text());
 			f.find('.totalStock').text(data.totalStock);
 			
-			//console.log($(this).closest('form').find('.totalStock').text());
-			//$('#stockModal').find("#stock_num").find('.totalStock').text(data);
-			//console.log($(this).closest('form').find('.totalStock').text());
 			
 		};
 		ajaxFun(url, "post", query, "json", fn);

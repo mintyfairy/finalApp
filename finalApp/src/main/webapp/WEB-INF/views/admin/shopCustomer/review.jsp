@@ -186,9 +186,6 @@ $(function(){
 		            	</div>
 		            </div>
 		            <div class="col-auto pt-2">
-		            <!-- 
-		            	<span>${dataCount}개(${page}/${total_page} 페이지)</span>
-		             -->
 						<select id="changeSort" name="col" class="form-select">
 								<option value="reviewDate" ${ col == 'reviewDate' ? 'selected' : '' }>:: 최신순 ::</option>
 								<option value="answerDate" ${ col == 'answerDate' ? 'selected' : '' }>:: 최신답변순 ::</option>
@@ -199,54 +196,6 @@ $(function(){
 		        </div>
 				<div class="tab-pane fade show active" id="tab-pane" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
 					<div class="row mb-2">
-					<!-- 
-						<c:if test="${ tab == 1 }">
-						<div id="option_wrap" class="col">
-							<div class="row text-end">
-								<div class="col-auto pe-1">
-									<select id="changeCategory" class="form-select" onchange="changeList();">
-										<c:if test="${listCategory.size() == 0}">
-											<option value="0">:: 텐트 ::</option>
-										</c:if>
-										<option value="0">대분류</option>
-										<c:forEach var="vo" items="${listCategory}">
-											<option value="${vo.categoryNum}" ${parentNum==vo.categoryNum?"selected":""}>${ vo.categoryName }</option>
-										</c:forEach>
-									</select>
-								</div>
-								<div class="col-auto pe-1">
-									<select id="changeSubCategory" class="form-select" onchange="changeSubList();">
-										<c:if test="${listSubCategory.size() == 0}">
-											<option value="0">:: 베이직 텐트 ::</option>
-										</c:if>
-										<option value="0">상세분류</option>
-										<c:forEach var="vo" items="${listSubCategory}">
-											<option value="${vo.categoryNum}" ${categoryNum==vo.categoryNum?"selected":""}>${ vo.categoryName }</option>
-										</c:forEach>
-									</select>
-								</div>
-								<div class="col-auto pe-1">
-									<select id="changeBrand" class="form-select" onchange="changeList();">
-										<c:if test="${listBrand.size() == 0}">
-											<option value="0">:: 브랜드 ::</option>
-										</c:if>
-										<option value="0">브랜드</option>
-										<c:forEach var="vo" items="${listBrand}">
-											<option value="${vo.brandNum}" ${brandNum==vo.brandNum?"selected":""}>${vo.brandName}</option>
-										</c:forEach>
-									</select>
-								</div>
-								<div class="col-auto ps-1">
-									<select id="changeShowProduct" class="form-select" onchange="changeList();">
-										<option value="-1">:: 숨김 여부 ::</option>
-										<option value="1" ${productShow==1?"selected":""}>상품 진열</option>
-										<option value="0" ${productShow==0?"selected":""}>상품 숨김</option>
-									</select>						
-								</div>
-							</div>
-						</div>
-						</c:if>
-						 -->
 						<div class="col-auto pt-2 text-end">
 							${ dataCount }개(${ page }/${ total_page } 페이지)
 						</div>
@@ -310,7 +259,7 @@ $(function(){
 															<div class="row gx-1 mt-2 mb-1 p-1">
 																<c:forEach var="filename" items="${dto.listFilename}">
 																	<div class="col-md-auto md-img">
-																		<img class="border rounded" src="${pageContext.request.contextPath}/uploads/review/${filename}">
+																		<img class="border rounded" src="${pageContext.request.contextPath}/uploads/shop/${filename}">
 																	</div>
 																</c:forEach>
 															</div>
@@ -509,8 +458,6 @@ $('.btnAnswerSendOk').click(function(){
 	
 	ajaxFun(url, "post", param, "json", fn);
 	
-	//f.action = "${pageContext.request.contextPath}/admin/customer/review/answer";
-	//f.submit();
 });
 
 $('.btnAnswerSendCancel').click(function(){

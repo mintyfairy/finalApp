@@ -249,8 +249,14 @@ ul {
 				        	<li class="header_item"><a href="${pageContext.request.contextPath}/member/logout" title="로그아웃"><i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i></a></li>
 						</c:otherwise>
 			     </c:choose>
-                
-                <li class="header_item fa-lg"><a href="${pageContext.request.contextPath}/member/join"><i class="fa-solid fa-user-plus"></i></a></li>
+                <c:choose>
+                	<c:when test="${empty sessionScope.member}">
+	                <li class="header_item fa-lg"><a href="${pageContext.request.contextPath}/member/join"><i class="fa-solid fa-user-plus"></i></a></li>
+                	</c:when>
+                	<c:otherwise>
+                		<li class="header_item fa-lg"><a href="#"><i class="fa-solid fa-user"></i></a></li>
+                	</c:otherwise>
+                </c:choose>
                 <li class="header_item fa-lg"><a href="${pageContext.request.contextPath}/csCenter/notice/list"><i class="fa-solid fa-headset"></i></a></li>
                 <c:if test='${sessionScope.member.authority=="CAMP"||sessionScope.member.authority=="ADMIN"}'>
 				   <li class="header_item fa-lg"><a href="${pageContext.request.contextPath}/admin/carManage/car"><i class="fa-solid fa-user-gear"></i></a></li>

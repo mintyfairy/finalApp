@@ -314,7 +314,6 @@ table tr {
 									<div>
 										<p class="car_sort">${dto.carSize}</p>
 										<span class="car_title">${dto.carName}</span>
-										<!-- <span class="car_star" style="margin-left: 160px;">★ 4.7 ·&nbsp;</span> -->
 										<p class="car_content" style="color: #aaaaaa;">${dto.description}</p>
 									</div>
 									<div class="car_option">

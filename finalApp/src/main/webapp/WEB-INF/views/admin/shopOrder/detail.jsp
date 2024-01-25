@@ -62,11 +62,6 @@
 			<table class="table table-borderless mb-1">
 				<tr>
 					<td width="50%">
-						<!-- 
-						<c:if test="${order.orderState < 3}">
-							<button type="button" class="btn btn-light btn-cancel-order" data-orderNum="${order.orderNum}">판매취소</button>
-						</c:if>
-						 -->
 					</td>
 					<td class="text-end">
 						<c:if test="${order.orderState == 0}">
@@ -233,11 +228,11 @@
 					<div class="p-1"><p class="form-control-plaintext optionDetail-value"></p></div>
 					<table class="table board-list">
 						<thead class="table-light">
-							<tr>
-								<td width="50">코드</td>
-								<td width="120">구분</td>
-								<td width="90">작성자</td>
-								<td width="120">날짜</td>
+							<tr align="center">
+								<td width="70">코드</td>
+								<td width="130">구분</td>
+								<td width="150">작성자</td>
+								<td width="240">날짜</td>
 								<td>설명</td>
 							</tr>
 						</thead>
@@ -328,9 +323,7 @@ $(function() {
 		
 		const fn = function(data) {
 			console.log(data);
-			//const f = document.payCheckForm;
 			if(data.state === "true") {
-				//f.reset();
 				$("#payDialogModal").hide();
 				let url = "${pageContext.request.contextPath}/admin/shopOrder/status";
 				location.href = url;
@@ -373,7 +366,6 @@ $(function(){
 				f.reset();
 				
 				$("#prepareDialogModal").hide();
-				// $("#orderDialogModal").modal("hide");
 				
 				let url2 = "${pageContext.request.contextPath}/admin/shopOrder/status";
 				location.href = url2;
@@ -407,7 +399,6 @@ $(function(){
 		const fn = function(data) {
 			if(data.state === "true") {
 				
-				// $("#orderDialogModal").modal("hide");
 				
 				let url = "${pageContext.request.contextPath}/admin/shopOrder/status";
 				location.href = url;
@@ -528,7 +519,7 @@ $(function(){
 		const fn = function(data) {
 			let out;
 			for(let item of data.list) {
-				out  = '<tr>';
+				out  = '<tr align="center">';
 				out += '<td>'+item.DETAILSTATE+'</td>';
 				out += '<td>'+item.DETAILSTATEINFO+'</td>';
 				out += '<td>'+item.USERNAME+'</td>';

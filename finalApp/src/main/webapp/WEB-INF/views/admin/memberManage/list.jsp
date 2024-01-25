@@ -300,22 +300,6 @@ function selectStateChange() {
 							</div>
 						</form>
 					</td>
-					<!-- 
-					<td align="center" width="150">
-						<form name="searchForm" action="${pageContext.request.contextPath}/admin/memberManage/list" method="post">
-							<select name="schType" class="form-select">
-								<option value="userId"     ${schType=="userId" ? "selected":""}>아이디</option>
-								<option value="userName"   ${schType=="userName" ? "selected":""}>이름</option>
-								<option value="email"      ${schType=="email" ? "selected":""}>이메일</option>
-								<option value="tel"        ${schType=="tel" ? "selected":""}>전화번호</option>
-							</select>
-							<input type="text" name="kwd" class="form-control" value="${kwd}">
-							<input type="hidden" name="enabled" value="${enabled}">
-							<input type="hidden" name="page" value="1">
-							<button type="button" class="btn" onclick="searchList()">검색</button>
-						</form>
-					</td>
-					 -->
 					<td align="right" width="100">&nbsp;</td>
 				</tr>
 			</table>

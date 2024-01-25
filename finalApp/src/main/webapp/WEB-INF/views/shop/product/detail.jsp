@@ -1029,7 +1029,6 @@ function printReview(data) {
 		let answer = item.answer;
 		let answerDate = item.answerDate;
 		let listFilename = item.listFilename;
-		// let deletePermit = item.deletePermit;
 		
 		out += '<div class="mt-3 border-bottom">';
 		out += '  <div class="row p-2">';

@@ -65,7 +65,6 @@ ul {
 
 <div class="search_box">
 	<form name="camSearchForm" id="camSearchForm" action="">
-		<!--<button type="button" id="detail_search">상세검색&nbsp;+</button>-->
 
 		<div class="search_box_wrap">
 			<div class="search_box_form">
@@ -340,12 +339,7 @@ $(function(){
 	$('.btn-chooseLoc').click(function(){
 		let $i=document.querySelector(".siteHtml")
 		$i.innerHTML=' <i class="fa-solid fa-location-dot"></i> '+$(this).text();
-		//document.querySelector(".siteLocal")
-//		$i.closest(".localBox").find(".siteLocal").val=$(this).attr("data-location")
 		document.querySelector(".siteLocal").value=$(this).data("location")
-		/*console.log($(this).text());
-		console.log($(this).attr("data-location"));
-		console.log(document.querySelector(".siteLocal").value);*/
 		$(this).closest(".modal").hide();
     });
 	$('.btn-chooseEnv').click(function(){

@@ -132,7 +132,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 					</tr>
 					
 					<tr>
-						<td class="table-light col-sm-2 ">일일 대여비(원)</td><!-- 나중에 특별 요금변화 (성수기)테이블 추가? -->
+						<td class="table-light col-sm-2 ">일일 대여비(원)</td>
 						<td class="col-auto">
 							<input type="text" name="price" class="form-control " value="${dto.price}"> 
 						</td>

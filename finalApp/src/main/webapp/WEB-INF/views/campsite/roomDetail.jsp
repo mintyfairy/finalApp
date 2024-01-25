@@ -20,15 +20,6 @@
                 <div class="container text-center pb-5">
                     <h1 class="display-3 text-white mb-3 animated slideInDown">캠핑장
 					</h1>
-                  <!--  
-					<nav aria-label="breadcrumb">
-                        <ol class="breadcrumb justify-content-center text-uppercase">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                            <li class="breadcrumb-item text-white active" aria-current="page">Rooms</li>
-                        </ol>
-                    </nav>
-                   -->
                 </div>
             </div>
         </div>
@@ -213,12 +204,7 @@
 
 
         
-<!-- 
 
-						
- -->
-
-        <!-- 달력... 안쓰기로 했다. -->
         <a href="#" class="btn btn-lg btn-primary2 btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 	

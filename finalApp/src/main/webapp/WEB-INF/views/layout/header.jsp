@@ -313,75 +313,8 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
 </head>
 	<div class="header_container">
 		<div class="header_top">
-			<!-- 
-	        <ul class="header_top_list">
-	            <li id="logo" class="header_top_item">
-	                <a href="${pageContext.request.contextPath}/">
-	                    <img src="https://via.placeholder.com/108x38" alt="logo">
-	                </a>
-	            </li>
-	            <li id="tour_list_wrap" class="header_top_item">
-	                <ul class="tour_list">
-	                    <li>
-	                        <a href="#">캠핑장 구석구석</a>
-	                    </li>
-	                    <li>
-	                        <a href="#">열린관광 모두의 캠핑</a>
-	                    </li>
-	                    <li>
-	                        <a href="#">캠핑트립코리아</a>
-	                    </li>
-	                    <li>
-	                        <a href="#">캠핑e배움터</a>
-	                    </li>
-	                    <li>
-	                        <a href="#">캠핑카</a>
-	                    </li>
-	                    <li>
-	                        <a href="#">사진갤러리</a>
-	                    </li>
-	                    <li>
-	                        <a href="#">한국캠핑콘텐츠랩</a>
-	                    </li>
-	                    <li>
-	                        <a href="#">TourAPI</a>
-	                    </li>
-	                </ul>
-	            </li>
-	        </ul>
-	         -->
 	
 	        <div class="header_top_left">
-	        	<!-- 
-				<c:if test='${sessionScope.member.authority=="CAMP"||sessionScope.member.authority=="ADMIN"}'>
-			            <div class="login_wrap col-auto">
-			                <a href="${pageContext.request.contextPath}/admin">
-			                	<button class="custom-btn btn-4">관리자</button>
-			                </a>
-			            </div>
-			     </c:if>
-	       		 <c:choose>
-					<c:when test="${empty sessionScope.member}">
-			            <div class="login_wrap col-auto">
-			                <a href="${pageContext.request.contextPath}/member/login">
-			                	<button class="custom-btn btn-4">Login</button>
-			                </a>
-			            </div>
-			            <div class="login_wrap col-auto">
-			                <a href="${pageContext.request.contextPath}/member/join">
-			                	<button class="custom-btn btn-4">Sign Up</button>
-			                </a>
-			            </div>
-			        </c:when>
-			        <c:otherwise>
-						<div class="login_wrap col-auto">
-							<a href="${pageContext.request.contextPath}/member/logout">
-			                	<button class="custom-btn btn-4">Logout</button>
-			                </a>
-			            </div>					
-					</c:otherwise>
-			     </c:choose>
-			      -->
 	            
 
 	        </div>
@@ -427,12 +360,6 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
 	                        </a>
 	                    </li>
 	                    
-	                    <!-- 
-	                    <li class="my_page">
-	                        <a href="#"><i class="fa-regular fa-user"></i>&nbsp;마이페이지</a>
-	                    </li>
-	                     -->
-	                     
 				        <li class="bottom_right_wrap">
 				            <ul class="bottom_right">
 				            	<c:choose>

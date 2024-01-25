@@ -242,35 +242,9 @@ main .story {
 	<div class="recommend">
         <h1>인기있는 캠핑카</h1>
         <div class="card-container">
-        <!-- 
-	       	<div class="card" style="width: 18rem;">
-			  <img src="${pageContext.request.contextPath}/resources/images/campingcar/caravanpic1.jpg" class="card-img-top" alt="..." style="background-size: cover;">
-			  <div class="card-body">
-			    <h5 class="card-title">코치멘 오라이온20 CB</h5>
-			    <p class="card-text">5명이서 자도 넉넉한 공간으로 캠핑을 낙낙하게 즐겨보세요</p>
-			    <a href="http://localhost:9090/plus/car/car_detail?carNum=14" class="btn btn-primary carbutton">보러가기</a>
-			  </div>
-			</div>
-			  <div class="card" style="width: 18rem;">
-			 <img src="${pageContext.request.contextPath}/resources/images/campingcar/caravanpic1.jpg" class="card-img-top" class="card-img-top" alt="..." style="background-size: cover;">
-			 <div class="card-body">
-			    <h5 class="card-title">카슬라350S</h5>
-			    <p class="card-text">나들이 가기 좋은 감성 캠핑카.</p>
-				<a href="http://localhost:9090/plus/car/car_detail?carNum=15" class="btn btn-primary carbutton">보러가기</a>
-			  </div>
-			</div>
-			<div class="card" style="width: 18rem;">
-   			  <img src="${pageContext.request.contextPath}/resources/images/campingcar/caravanpic1.jpg" class="card-img-top" class="card-img-top" alt="..." style="background-size: cover;">
-			  <div class="card-body">
-			    <h5 class="card-title">바이슨900</h5>
-			    <p class="card-text">보기보다 넉넉. 최대 3인까지 추천</p>
-			    <a href="http://localhost:9090/plus/car/car_detail?carNum=13" class="btn btn-primary carbutton">보러가기</a>
-			  </div>
-			 </div>
-			  -->
 			  <jsp:include page="/WEB-INF/views/slider/caravan_slider.jsp"/>
 		</div>
-    </div><!-- <div class="recommend"> -->
+    </div>
 
     <div class="excellent">
         <h1 class="excellent_title" style="color: #f7f8f9;">캠핑 용품</h1>
@@ -290,39 +264,6 @@ main .story {
         </div>
     </div>
 
-	<!-- 
-	<div class="story">
-		<h1 class="story_title">캠핑소식</h1>
-		<div class="story_board">
-			<div class="news">
-				<div class="news_title">
-					<div class="news_title_right">
-						<h3>캠핑스토리</h3>
-						<span>소식</span>
-					</div>
-					<a href="#">see more</a>
-				</div>
-				<div class="news_subject">
-					<p class="subject subject1">Lorem ipsum dolor sit amet consectetur adipisicing.</p>
-					<p class="subject subject1">Lorem ipsum dolor sit amet consectetur adipisicing.</p>
-					<p class="subject subject1">Lorem ipsum dolor sit amet consectetur adipisicing.</p>
-					<p class="subject subject1">Lorem ipsum dolor sit amet consectetur adipisicing.</p>
-					<p class="subject subject1">Lorem ipsum dolor sit amet consectetur adipisicing.</p>
-				</div>
-			</div>
-			<div class="story_pic story_pic1">
-				<a href="#">
-					<img src="https://via.placeholder.com/300x274" alt="pic1">
-				</a>
-			</div>
-			<div class="story_pic story_pic2">
-				<a href="#">
-					<img src="https://via.placeholder.com/300x274" alt="pic2">
-				</a>
-			</div>
-		</div>
-	</div>
-	 -->
     
 </body>
 </html>

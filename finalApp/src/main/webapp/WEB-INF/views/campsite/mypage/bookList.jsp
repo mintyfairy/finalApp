@@ -259,7 +259,6 @@ $(function(){
 		let s = $(this).closest(".review-form").find(".star .on").length;
 		$(this).closest(".review-form").find("input[name=score").val(s);
 		
-		// e.preventDefault(); // 화면 위로 이동 안되게
 		return false;
 	});
 });

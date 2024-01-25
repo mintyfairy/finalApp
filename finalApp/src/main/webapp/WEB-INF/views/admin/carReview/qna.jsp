@@ -127,7 +127,6 @@ $(function(){
 });
 </script>
 
-<!-- <div class="container"> -->
 	<div class="body-container">	
 		<div class="body-title">
 			<h3><i class="bi bi-chat-right-text" style="font-size:23px;"></i> 캠핑카 문의 </h3>
@@ -207,16 +206,6 @@ $(function(){
 														
 														<div class="p-3">${dto.question}</div>
 														
-														<!-- 
-														<div class="row p-2">
-															<div class="col text-end">
-																<span>${dto.question_date}</span>
-																|<span class="deleteQuestion" data-num="${dto.qnaNum}">삭제</span>
-																|<span class="answerQuestion" data-num="${dto.qnaNum}" data-enabled="${dto.enabled}">${ not empty dto.answer ? '답변수정' : '답변' }</span>
-															</div>
-														</div>
-														 -->
-														
 														<c:if test="${not empty dto.listFilename}">
 															<div class="row gx-1 mt-2 mb-1 p-1">
 																<c:forEach var="filename" items="${dto.listFilename}">
@@ -254,7 +243,6 @@ $(function(){
 
 		</div>
 	</div>
-<!-- </div> -->
 
 <div class="modal hidden" id="answerDialogModal" tabindex="-1" 
 		data-bs-backdrop="static" data-bs-keyboard="false"
@@ -371,7 +359,6 @@ $('.btnAnswerSendOk').click(function(){
 	let url = '${pageContext.request.contextPath}/admin/carQna/qna/answer';
 	
 	const fn = function(data) {
-		//console.log(data);
 		if(data.state === 'true') {
 			
 			

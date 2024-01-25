@@ -77,7 +77,7 @@
 			</if>
 		</where>
 		<choose>
-			<when test="col == 'productNum'">
+			<when test="col == 'answerDate'">
 				ORDER BY ${col}
 			</when>
 			<otherwise>
