@@ -574,7 +574,7 @@ $(function(){
 									data-orderDetailNum="${dto.orderDetailNum}">구매취소</div>
 							</c:if>
 							<c:if
-								test="${(dto.detailState==1 || dto.orderState==2 || dto.afterDelivery < 3) && (dto.orderState!=0 || dto.orderState!=1)}">
+								test="${(dto.detailState==1 || dto.orderState==2 || dto.afterDelivery < 3) && dto.orderState!=0 && dto.orderState!=1}">
 								<div class="payment-menu-item return-request"
 									data-orderDetailNum="${dto.orderDetailNum}">반품요청</div>
 								<div class="payment-menu-item exchange-request"

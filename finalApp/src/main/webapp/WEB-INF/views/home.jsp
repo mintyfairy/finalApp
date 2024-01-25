@@ -83,8 +83,9 @@ main .excellent {
 }
 
 main .excellent .excellent_title {
-    font-size: 36px;
+    font-size: 52px;
     text-align: center;
+    color: f7f8f9;
     margin-bottom: 72px;
 }
 
@@ -272,7 +273,7 @@ main .story {
     </div><!-- <div class="recommend"> -->
 
     <div class="excellent">
-        <h1 class="excellent_title">캠핑 용품</h1>
+        <h1 class="excellent_title" style="color: #f7f8f9;">캠핑 용품</h1>
         <div class="best_list">
             <div class="best_excellent">
                 <a href="${pageContext.request.contextPath}/shop/main" class="bestpic_wrap">
