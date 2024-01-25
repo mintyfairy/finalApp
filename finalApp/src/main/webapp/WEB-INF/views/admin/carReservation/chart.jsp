@@ -114,6 +114,9 @@ $(function(){
 		let option;
 		
 		option = {
+				title:{
+					text:"최근 6개월 월별 판매 현황"
+				},
 		  tooltip: {
 		    trigger: 'item'
 		  },
