@@ -63,6 +63,7 @@
 	        
 			<!-- admin페이지 -->
 			<intercept-url pattern="/admin" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP','ROLE_CAMP')"/>
+			<intercept-url pattern="/admin/" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP','ROLE_CAMP')"/>
 			<intercept-url pattern="/cs/**" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>
 			
 			<intercept-url pattern="/admin/memberManage/**" access="hasAnyRole('ROLE_ADMIN','ROLE_EMP')"/>
