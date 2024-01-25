@@ -190,8 +190,17 @@ input[type='date']:valid::before {
   height: 80px;
   box-sizing: border-box;
   border: none;
-  margin-top: 40px;
+  margin-top: 20px;
 }
+
+.prbutton {
+  width: 400px;
+  height: 80px;
+  box-sizing: border-box;
+  border: none;
+  margin-top: 60px;
+}
+
 .price {
   font-size: 20px;
   font-weight: 700;
@@ -582,6 +591,12 @@ table {
 	justify-content: space-between;
 }
 
+.badge {
+	line-height: 17px;
+	font-size: 13px;
+	margin: 0 0 10px 3px;
+}
+
 /* 탭 css */
 .nav-tabs .nav-link {
 	min-width: 170px;
@@ -603,10 +618,11 @@ table {
   margin: 150px auto 20px;
 }
 
-.img-item {
-    width: 100px;
-    height: 100px;
+.car_item {
+	width: 100px;
+	height: 100px;
 }
+
 
 </style>
 <script type="text/javascript">
@@ -650,6 +666,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 </script>
 
 
+
 <div id="wrap">
   <div class="first-container">
     <div class="thumbnail-addImages">
@@ -666,7 +683,10 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
     </div>
     <div class="car-detail">
       <div class="carName-liked">
-        <h3>${dto.carName}</h3>
+        <span style="font-size: 30px; font-weight: 700">${dto.carName}</span>
+        <c:if test="${dto.discountRate != 0}">
+            <span class="badge text-bg-danger" style="line-height: 17px; font-size: 13px;">${dto.discountRate}% 할인</span>
+        </c:if>
       </div>
      
     <div style="text-align: left; margin-top: 5px; margin-left:5px;">
@@ -720,7 +740,6 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
           	  <span>주말 : <fmt:formatNumber value="${dto.wkndCost}"/>~</span>
             </c:if>
             <c:if test="${dto.discountRate > 0}">
-              <p style="font-size: 15px;">${dto.discountRate}% 할인가 <i class="fa-solid fa-wand-magic-sparkles"></i></p>
 			  <c:set var="discountedWeekCost" value="${dto.weekCost - (dto.weekCost * (dto.discountRate / 100))}" />
 			  <c:set var="discountedWkndCost" value="${dto.wkndCost - (dto.wkndCost * (dto.discountRate / 100))}" />
 				<span style="color: #FF0000;">주중 : <fmt:formatNumber value="${discountedWeekCost}"/>~</span>
@@ -733,11 +752,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
           </div>
       	</div>
       
-          <div class="totalFee">
-          	<div id="totalFee"></div>
-          </div>
-      
-      <div class="price-reservation">
+      <div class="prbutton">
          <button type="button" name="reservation" onclick="sendOk();">
           예약하기
           </button>
@@ -1008,7 +1023,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 							<div class="img-grid">
 								<img class="item img-add" src="${pageContext.request.contextPath}/resources/images/add_photo.png">
 							</div>
-							<input type="file" name="selectFile" accept="image/*" multiple class="form-control" style="display: none;">
+							<input type="file" name="selectFile" accept="image/*" multiple class="form-control" style="display: none; width: 100px; height: 100px;">
 						</div>							
 					</form>
 				</div>
@@ -1103,27 +1118,32 @@ function sendOk() {
 	// 구매하기
 	const f = document.datepickForm;
 	
-	//const day = document.querySelector("#input_date").value;
-	/*
-	let cnt = $("form input[name=nums]:checked").length;
-    if (cnt === 0) {
-		alert("구매할 상품을 먼저 선택 하세요 !!!");
-		return;
+	if(f.start_date.value ||f.end_date.value){
+		if (!f.start_date.value){
+			alert('시작일을 선택해주세요')
+			return;
+		}
+		if (!f.end_date.value){
+			alert('종료일을 선택해주세요')
+			return;
+		}
+	}
+	let today = new Date();
+	let date1 = new Date(f.start_date.value);
+	let date2 = new Date(f.end_date.value);
+	if (date1<=today){
+    	alert('오늘 날짜 이후를 입력하세요.');
+		f.start_date.focus();
+		return false;
+    }
+    if (date2<=date1){
+    	alert('종료일은 시작일 이후여야합니다');
+		f.end_date.focus();
+		return false;
     }
     
-    $("form input[name=nums]").each(function(index, item){
-		if(! $(this).is(":checked")) {
-			$(this).closest("tr").remove();
-		}
-	});
-    */
-    
-    
-    /*
-    let start_date = f.start_date.value;
-    let end_date = "${carReservation.end_date}";
-    */
-    // f.method = "get";
+	query=$('form[name=datepickForm]').serialize();
+	console.log(query)
 	f.action = "${pageContext.request.contextPath}/car/reservation/orderPage";
 	f.submit();
 }

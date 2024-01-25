@@ -290,8 +290,6 @@ main {
        </div>
    </div>
 
-
-   
   
 
    <div class="car_wrap" id="wrap">
