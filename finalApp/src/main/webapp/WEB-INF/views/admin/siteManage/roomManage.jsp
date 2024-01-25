@@ -3,6 +3,32 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <style type="text/css">
+* {
+	margin: 0;
+	padding: 0;
+	color: #333;
+	text-decoration: none;
+	box-sizing: border-box;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+a {
+	color: #333;
+	text-decoration: none;
+}
+
+.body-container {
+	padding-left: 250px;
+	margin-top: 120px;
+}
+
+.body-title {
+	width: 1080px;
+}
+
 .body-main {
 	max-width: 930px;
 }
@@ -18,7 +44,7 @@
 
 <div class="body-container">
     <div class="body-title">
-		<h3><i class="fa-solid fa-user-group" style="font-size: 24px"></i> 객실 관리 </h3>
+		<h3><i class="fa-solid fa-user-group" style="font-size: 24px"></i> 캠핑존 관리 </h3>
 		<table class="table mt-1">
 			<tr>
 				<td align="left">
