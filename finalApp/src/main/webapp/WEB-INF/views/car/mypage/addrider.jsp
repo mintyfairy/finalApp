@@ -11,7 +11,6 @@
     .riderSubmit {
         margin: 70px auto;
         width: 600px;
-        border: 1px solid silver;
         padding: 30px;
     }
 
@@ -38,6 +37,18 @@
         height: 30px;
         font-size: 18px;
     }
+    
+    .btn {
+	border: none;
+	color: #FFF;
+	background-color: #5DC8CD;
+}
+
+.btn:hover {
+	color: #FFF;
+	background-color: #01939A;
+}
+    
 </style>
 
 <script type="text/javascript">
@@ -79,7 +90,7 @@
 </script>
 
 <div class="container">
-    <div class="riderSubmit">
+    <div class="riderSubmit shadow p-3 mb-5 bg-body-tertiary rounded">
         <form name="writeForm" method="post" enctype="multipart/form-data">
             <table class="ridertable write-form">
                 <tr>

@@ -42,7 +42,7 @@
 				AND carSize = #{carSize}
 			</if>
 		</where> 
-		ORDER BY d.carNum DESC
+		ORDER BY c.carNum DESC
 	</select> 
 	
 	<select id="findById" parameterType="Long" resultType="com.fa.plus.domain.car.CampingCar">

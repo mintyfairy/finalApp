@@ -195,7 +195,7 @@ main {
 }
 
 .car_sort {
-	font-size: 10px;
+	font-size: 13px;
 	font-weight: 500;
 	margin: 0 0 30px 10px;
 }
@@ -230,8 +230,10 @@ table {
 
 table tr {
 	height: 40px;
-}
 
+.accordion-button {
+	background-color: white;
+}
 </style>
 
 <script type="text/javascript">
@@ -289,12 +291,12 @@ table tr {
 
 <body>
 	<div class="container">
-		<h2 style="padding-left: 30px; margin: 0 0 10px 0;"><i class="fa-solid fa-angles-left"></i></h2>
-        <h2 style="padding-left: 30px; margin-bottom: 30px; font-weight: 600; ">차량 예약 </h2>
+		<h2 style="padding-left: 20px; margin: 0 0 10px 0;"><i class="fa-solid fa-angles-left"></i></h2>
+        <h2 style="padding-left: 20px; margin-bottom: 30px; font-weight: 600; ">차량 예약 </h2>
 		<div class="accordion" id="accordionPanelsStayOpenExample">
 			<form name="paymentForm" method="post" enctype="multipart/form-data">
 				<div class="accordion-item">
-					<h2 class="accordion-header">
+					<h2 class="accordion-header accordion-header1">
 						<button class="accordion-button" type="button"
 							data-bs-toggle="collapse"
 							data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
@@ -475,6 +477,9 @@ table tr {
 							<div>
 								<input type="checkbox" name="submit"> &nbsp;위 내용을
 								확인하였으며, 결제 및 예약에 동의합니다.
+
+
+
 
 								<div style="width: 100%;">
 									<div style="width: 400px; margin: 30px auto;">
