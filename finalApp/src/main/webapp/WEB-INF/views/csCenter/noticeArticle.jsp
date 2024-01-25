@@ -5,6 +5,7 @@
 <style type="text/css">
 .body-container {
 	max-width: 1080px; /*수정*/
+	
 }
 
 .nav-tabs .nav-link {
