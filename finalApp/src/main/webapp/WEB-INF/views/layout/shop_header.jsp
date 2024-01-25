@@ -411,9 +411,9 @@ $(function() {
 	                </a>
 	                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                        <li><a class="dropdown-item" href="#">공지&이벤트</a></li>
-							<li><a class="dropdown-item" href="#">문의Q&A</a></li>
-							<li><a class="dropdown-item" href="#">상품 문의</a></li>
-							<li><a class="dropdown-item" href="#">반품&교환</a></li>
+							<li><a class="dropdown-item" href="${pageContext.request.contextPath}/shop/myPage/review">문의Q&A</a></li>
+							<li><a class="dropdown-item" href="${pageContext.request.contextPath}/shop/product/detail">상품 문의</a></li>
+							<li><a class="dropdown-item" href="${pageContext.request.contextPath}/shop/myPage/main">반품&교환</a></li>
                     </ul>
 	            </li>
 	            
