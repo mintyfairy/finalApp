@@ -142,10 +142,11 @@ public class CarQnaServiceImpl implements CarQnaService {
 			List<CarQna> listFile = mapper.listQnaFile(qnaNum);
 			if(listFile != null) {
 				for (CarQna dto : listFile) {
-					fileManager.doFileDelete(dto.getFilename());
+					fileManager.doFileDelete(dto.getFilename(), pathname);
 				}
 			}
 			
+			mapper.deleteQnAFile(qnaNum);
 			mapper.deleteQuestion(qnaNum);
 			
 		} catch (Exception e) {

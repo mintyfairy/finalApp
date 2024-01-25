@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fa.plus.admin.domain.car.CarQna;
 import com.fa.plus.admin.service.car.CarQnaManageService;
@@ -103,24 +104,23 @@ public class CarReviewController {
 	}
 	
 	@PostMapping("qna/answer")
-	public String qnaAnswer(com.fa.plus.domain.car.CarQna dto,  @RequestParam String page, 
+	@ResponseBody
+	public Map<String, Object> qnaAnswer(com.fa.plus.domain.car.CarQna dto,  @RequestParam String page, 
 			@RequestParam int mode,
 			HttpSession session) throws Exception {
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		Map<String, Object> model=new HashMap<String, Object>();
+		model.put("state", "true");
 		try {
 			dto.setAnswerId(info.getUserId());
 			qnaService.updateQuestion(dto);
+			model.put("text", dto.getAnswer());
 		} catch (Exception e) {
+			model.put("state", "false");
 			e.printStackTrace();
 		}
 		
-		String url = "redirect:/admin/carQna/qna?";
-		if(mode == 1) {
-			url += "page=" + page;
-		} else {
-			url += "mode=" + mode + "&page=" + page;
-		}
-		return url;
+		return model;
 	}
 	
 	@GetMapping("qna/delete")

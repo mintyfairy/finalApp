@@ -253,19 +253,4 @@ $(function(){
 	</div>
 </div>
 
-<!-- 
-  <div class="login-container">
-    <p>로그인</p>
-
-    <form class="loginForm" method="Post" action="${pageContext.request.contextPath}/member/login">
-      <input type="text" name="userId" placeholder="아이디" class="form-control"> 
-      <input type="password" name="userPwd" placeholder="비밀번호" class="form-control"> 
-      <br>
-      <div class="checkbox"><input type="checkbox" name="checkbox" > 로그인 상태유지 </div>
-      <button type="submit" class="btn btn-primary">로그인</button>
-      <div class="find"><a href="${pageContext.request.contextPath}/member/join">회원가입</a> <a href="#">아이디,패스워드 찾기</a></div>
-    </form>
-
-   </div>
-    -->
 

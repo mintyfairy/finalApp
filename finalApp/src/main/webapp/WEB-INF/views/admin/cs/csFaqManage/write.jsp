@@ -281,7 +281,6 @@ $(function(){
 			  }
 		});
 	});
-	// $('.category-dialog').dialog("close"); // 창종료
 
 	// 카테고리 등록
 	$("#category-dialog").on("click", ".btnCategoryAddOk", function(){	

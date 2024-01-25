@@ -131,7 +131,7 @@ body {
 /*-- main_box -- */
 .main_box {
 	width: 250px;
-	height: 100px;
+	height: 130px;
 	background-color: #0078FF;
 	color: white;
 	padding: 10px;
@@ -140,7 +140,7 @@ body {
 
 .main_box1 {
 	width: 250px;
-	height: 100px;
+	height: 130px;
 	background-color: #FFA500;
 	color: white;
 	padding: 10px;
@@ -168,12 +168,13 @@ body {
 
 /*-- main chart --*/
 .visitor_chart {
-	width: 520px;
-	height: 330px;
+	width:424px; 
+	height:415px
 	border: 1px solid gray;
 	border-radius: 15px;
 	
-	margin: 10px;
+	margin: 20px;
+	margin-right: 80px;
 }
 
 .visitor_chart th {

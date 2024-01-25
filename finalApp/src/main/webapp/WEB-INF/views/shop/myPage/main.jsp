@@ -569,12 +569,12 @@ $(function(){
 						<div class="payment-menu">
 							<div class="payment-menu-item order-details"
 								data-orderDetailNum="${dto.orderDetailNum}">주문상세</div>
-							<c:if test="${dto.detailState==0 || dto.orderState==1}">
+							<c:if test="${dto.detailState==0 || dto.orderState==1 || dto.orderState==0}">
 								<div class="payment-menu-item order-cancel"
 									data-orderDetailNum="${dto.orderDetailNum}">구매취소</div>
 							</c:if>
 							<c:if
-								test="${(dto.detailState==1 || dto.orderState==2 || dto.afterDelivery < 3) && (dto.orderState!=0 || dto.orderState!=1)}">
+								test="${(dto.detailState==1 || dto.orderState==2 || dto.afterDelivery < 3) && dto.orderState!=0 && dto.orderState!=1}">
 								<div class="payment-menu-item return-request"
 									data-orderDetailNum="${dto.orderDetailNum}">반품요청</div>
 								<div class="payment-menu-item exchange-request"
@@ -701,7 +701,6 @@ $(function(){
 		let s = $(this).closest(".review-form").find(".star .on").length;
 		$(this).closest(".review-form").find("input[name=score").val(s);
 
-		// e.preventDefault(); // 화면 위로 이동 안되게
 		return false;
 	});
 });

@@ -214,46 +214,6 @@ table input[type=text] {
   </div>
   
 
-  	<!-- 
-   <c:if test="${dto.addRider==1}">
-   <div class="wrap">
-    <h3 class="detail_info">
-      <i class="fa-solid fa-user" style="font-size:15px;"></i>&nbsp;동승운전자 정보 
-    </h3>
-    <div class="detail_wrap">
-        <table class="detail_table">
-          <colgroup>
-            <col width="160">
-            <col width="*">
-          </colgroup>
-          <tbody>
-            <tr>
-              <th>이름</th>
-              <td><input type="text" name="addRiderName" id="addRiderName" value="${dto.addRiderName}" readonly></td>
-            </tr>
-            <tr>
-              <th>연락처</th>
-              <td>
-                <input type="text" name="addRiderTel" id="addRiderTel"  value="${dto.addRiderTel}" readonly>
-              </td>
-            </tr>
-            <tr>
-              <th>생년월일</th>
-              <td>
-                <input type="text" name="addBirth" id="addBirth"  value="${dto.addBirth}" readonly>
-              </td>
-            </tr>
-            <tr>
-              <th>면허 취득일자</th>
-              <td>
-                <input type="text" name="addRegist" id="addRegist"  value="${dto.addRegist}" readonly>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-  	</div>
-  </div>
-  </c:if>
-   -->
+ 
 </div>
 

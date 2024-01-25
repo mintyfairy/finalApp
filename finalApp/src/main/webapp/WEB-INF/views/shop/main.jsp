@@ -386,7 +386,7 @@ $(function(){
             <ul class="hot_list">
             	<c:forEach var="vo" items="${listHot}">
 	                <li class="hot_item">
-	                    <a class="hot_photo" href="#">
+	                    <a class="hot_photo" href="${pageContext.request.contextPath}/shop/product/${vo.productNum}">
 	                        <img src="${pageContext.request.contextPath}/uploads/shop/${vo.thumbnail}" alt="hot_item" width="260">
 	                    </a>
 	                    <div class="hot_text">

@@ -83,7 +83,6 @@ function check() {
 			list[i].value="0";
 		}
 		list[i].checked=true;
-		//console.log(list[i].value);
 	}
 	f.action = "${pageContext.request.contextPath}/admin/siteManage/site/${mode}";
 	return true;

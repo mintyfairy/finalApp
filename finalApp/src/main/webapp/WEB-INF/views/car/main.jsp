@@ -334,7 +334,7 @@ main {
                    </div>
                </div>
              </div>
-           </li> <!-- <li class="car_item"> -->
+           </li>
            
            </c:forEach>
         </ul>

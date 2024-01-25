@@ -4,9 +4,9 @@
 
 <style type="text/css">
 .main{
-		width: 950px; /* 너비를 70%로 설정합니다. */
+		width: 950px;
 		height: 120px;
-        margin: 0 auto; /* 왼쪽과 오른쪽에 10px의 공백을 추가합니다. */
+        margin: 0 auto;
    		margin-top: 50px;
         border: 3px solid #e2e2e2;
         border-radius: 20px;
@@ -55,6 +55,11 @@
 
 .detail_table tr th { width: 60%; }
 
+table tr td:nth-child(2) {
+	text-align: left;
+	padding-left: 20px;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -95,6 +100,12 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 	
 	$.ajax(url, settings);
 }
+
+$(function() {
+	$('.detailBtn').click(function() {
+		$(this).closest('div').find('#collapseExample').toggleClass('show');
+	});
+});
 </script>
 
 	<div class="main">
@@ -162,40 +173,40 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 							</div>
 							<div class="mt-3 p-3 text-end">
 								<p class="d-inline-flex gap-1">
-								  <a class="btn btn-dark-subtle" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+								  <a class="btn btn-dark-subtle detailBtn" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
 								    상세 보기
 								  </a>
 								</p>
-								<div class="collapse" id="collapseExample">
+								<div class="collapse" id="collapseExample" style="width: 350px; text-align: right; margin-left: 440px;">
 								  <div class="card card-body">
-								  	<h6>예약번호 ${dto.orderNum}</h6>
+								  	<h6 style="text-align: left; padding: 10px 0 10px 24px;">예약번호 ${dto.orderNum}</h6>
 								    <table class="detail_table">
 								    	<tr>
-								    		<th>예약금액</th>
+								    		<td>예약금액</td>
 								    		<td>${dto.totMoney}</td>
 								    	</tr>
 								    	<tr>
-								    		<th>할인금액</th>
+								    		<td>할인금액</td>
 								    		<td>${dto.discount}</td>
 								    	</tr>
 								    	<tr>
-								    		<th>결제금액</th>
+								    		<td>결제금액</td>
 								    		<td>${dto.payment}</td>
 								    	</tr>
 								    	<tr>
-								    		<th>결제수단</th>
+								    		<td>결제수단</td>
 								    		<td>${dto.payMethod}</td>
 								    	</tr>
 								    	<tr>
-								    		<th>카드이름</th>
+								    		<td>카드이름</td>
 								    		<td>${dto.cardName}</td>
 								    	</tr>
 								    	<tr>
-								    		<th>승인번호</th>
+								    		<td>승인번호</td>
 								    		<td>${dto.authNumber}</td>
 								    	</tr>
 								    	<tr>
-								    		<th>결제일시</th>
+								    		<td>결제일시</td>
 								    		<td>${dto.authDate}</td>
 								    	</tr>
 								    </table>

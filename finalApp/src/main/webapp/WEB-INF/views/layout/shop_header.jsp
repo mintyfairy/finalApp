@@ -349,7 +349,7 @@ $(function() {
             <ul class="header_right">
             	<c:choose>
             		<c:when test="${empty sessionScope.member}">
-                		<li class="header_item"><a href="${pageContext.request.contextPath}/member/login"><i class="fa-solid fa-right-to-bracket fa-lg"></i></a></li>
+                		<li class="header_item"><a href="${pageContext.request.contextPath}/member/login"><i class="fa-solid fa-arrow-right-to-bracket fa-lg"></i></a></li>
                 	</c:when>
                 	 <c:otherwise>
 				        	<li class="header_item"><a href="${pageContext.request.contextPath}/member/logout" title="로그아웃"><i class="fa-solid fa-arrow-right-from-bracket fa-lg" style="font-size:17px;"></i></a></li>
@@ -358,6 +358,9 @@ $(function() {
                 
                 <li class="header_item fa-lg"><a href="${pageContext.request.contextPath}/shop/myPage/cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
                 <li class="header_item fa-lg"><a href="${pageContext.request.contextPath}/csCenter/notice/list"><i class="fa-solid fa-headset"></i></a></li>
+                <c:if test='${sessionScope.member.authority=="CAMP"||sessionScope.member.authority=="ADMIN"}'>
+				   <li class="header_item fa-lg"><a href="${pageContext.request.contextPath}/admin/shopProduct/main"><i class="fa-solid fa-user-gear"></i></a></li>
+				</c:if>
             </ul>
         </div>
     </div>
@@ -408,9 +411,9 @@ $(function() {
 	                </a>
 	                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                        <li><a class="dropdown-item" href="#">공지&이벤트</a></li>
-							<li><a class="dropdown-item" href="#">문의Q&A</a></li>
-							<li><a class="dropdown-item" href="#">상품 문의</a></li>
-							<li><a class="dropdown-item" href="#">반품&교환</a></li>
+							<li><a class="dropdown-item" href="${pageContext.request.contextPath}/shop/myPage/review">문의Q&A</a></li>
+							<li><a class="dropdown-item" href="${pageContext.request.contextPath}/shop/product/detail">상품 문의</a></li>
+							<li><a class="dropdown-item" href="${pageContext.request.contextPath}/shop/myPage/main">반품&교환</a></li>
                     </ul>
 	            </li>
 	            
@@ -564,7 +567,6 @@ $(function() {
         });
 	
 	   $(".hamburger").mouseover(function(){
-	       //$(".cate_container").fadeIn( 'slow' );
 	       $(".cate_container").show();
 	       $(".cate_container").css("height", "730px");
 	   });
@@ -572,20 +574,15 @@ $(function() {
 		   $(".cate_container").css("height", "0");
 		   $(".cate_container").hide();
 	   });
-	   //$("nav").mouseover(function(){
-	   //    $(".cate_container").css("height", "730px");
-	   //});
 	   $(".cate_container").mouseover(function(){
 	       $(this).css("height", "730px");
 	   });
 	   $(".navi_container").mouseleave(function(){
 	       $(".cate_container").css("height", "0");
-	       //$(".cate_container").fadeOut('fast');
 	       $(".cate_container").hide();
 	   });
 	   $(".cate_container").mouseleave(function(){
 	       $(".cate_container").css("height", "0");
-	       //$(".cate_container").fadeOut('fast');
 	       $(".cate_container").hide();
 	   });
 	   
@@ -596,7 +593,6 @@ $(function() {
        });
 	
 	   $(".brand").mouseover(function(){
-	       //$(".cate_container").fadeIn( 'slow' );
 	       $(".cate_container1").show();
 	       $(".cate_container1").css("height", "730px");
 	   });
@@ -604,20 +600,15 @@ $(function() {
 		   $(".cate_container1").css("height", "0");
 		   $(".cate_container1").hide();
 	   });
-	   //$("nav").mouseover(function(){
-	   //    $(".cate_container").css("height", "730px");
-	   //});
 	   $(".cate_container1").mouseover(function(){
 	       $(this).css("height", "730px");
 	   });
 	   $(".navi_container").mouseleave(function(){
 	       $(".cate_container1").css("height", "0");
-	       //$(".cate_container").fadeOut('fast');
 	       $(".cate_container1").hide();
 	   });
 	   $(".cate_container1").mouseleave(function(){
 	       $(".cate_container1").css("height", "0");
-	       //$(".cate_container").fadeOut('fast');
 	       $(".cate_container1").hide();
 	   });
     });
@@ -661,8 +652,6 @@ $(function(){
 	
 	$(".brand-list").on("click", ".brand-item", function(){
 		let brandNum = $(this).attr("data-brandNum");
-		//alert(brandNum);
-		console.log(brandNum);
 		let url = '${pageContext.request.contextPath}/shop/product/list?brandNum=' + brandNum;
 		location.href = url;
 	});

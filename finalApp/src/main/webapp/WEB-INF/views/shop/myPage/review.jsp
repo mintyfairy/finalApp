@@ -262,7 +262,6 @@ function printQuestion(data) {
 		}
 		out += '  <div class="row p-2">';
 		out += '     <div class="col-auto pt-2 pe-0">' + answerState + '</div>';
-		// out += '     <div class="col-auto pt-2 px-0">&nbsp;|&nbsp;'+userName+'</div>';
 		out += '     <div class="col-auto pt-2 px-0">&nbsp;|&nbsp;<span>'+questionDate+'</span>';
 		out += '        |<span class="deleteQuestion" data-num="' + qnaNum + '">삭제</span>';
 		out += '      </div>';

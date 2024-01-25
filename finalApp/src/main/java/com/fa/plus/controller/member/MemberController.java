@@ -47,7 +47,6 @@ public class MemberController {
 			Model model) {
 
 		try {
-			
 			service.insertMember(dto);
 		} catch (DuplicateKeyException e) {
 			// 기본키 중복에 의한 제약 조건 위반

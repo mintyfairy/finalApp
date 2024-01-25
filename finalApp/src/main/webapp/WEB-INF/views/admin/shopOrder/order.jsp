@@ -20,8 +20,9 @@ table th, td {
 }
 
 .body-container {
+	max-width: 1080px;
 	margin-top: 60px;
-	padding-left: 250px;
+	margin-left: 250px;
 }
 
 .body-main {
@@ -180,14 +181,6 @@ table th, td {
           <div class="row board-list-header">
               <div class="col-auto me-auto">
                   <c:if test="${orderStatus =='status'}">
-                  <!-- 
-                      <div class="form-check form-check-inline">
-                          <input type="radio" id="order-state2" class="form-check-input" name="orderstatus" value="1" ${state==1 ? "checked='checked'" : ""}> <label class="form-check-label" for="order-state2">전체 주문</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                          <input type="radio" id="order-state1" class="form-check-input" name="orderstatus" value="2" ${state==2 ? "checked='checked'" : ""}> <label class="form-check-label" for="order-state1">신규 주문</label>
-                      </div>
-                       -->
                        <select id="listState" name="state" class="form-select" onchange="changeState();">
 						<option value="1" ${ state == 1 ? 'selected' : '' }>:: 전체 ::</option>
 						<option value="2" ${ state == 2 ? 'selected' : '' }>:: 최근주문 ::</option>
@@ -206,15 +199,15 @@ table th, td {
           
           <table class="table board-list">
               <colgroup>
-			<col width="100">
-			<col width="100">
-			<col width="130">
-			<col width="150">
-			<col width="130">
-			<col width="100">
-			<col width="100">
-			<col width="120">
-			</colgroup>
+				<col width="100">
+				<col width="120">
+				<col width="130">
+				<col width="*">
+				<col width="130">
+				<col width="100">
+				<col width="100">
+				<col width="120">
+			  </colgroup>
               <thead class="table-light">
                   <tr>
                       <th>주문번호</th>
@@ -232,7 +225,29 @@ table th, td {
                   <c:forEach var="dto" items="${ list }" varStatus="status">
                       <tr valign="middle">
                           <td>${ dto.orderNum }</td>
-                          <td>${ dto.orderState }</td>
+                          <c:choose>
+                          	<c:when test="${ dto.orderState == 0 }">
+	                          <td>입금대기</td>
+                          	</c:when>
+                          	<c:when test="${ dto.orderState == 1 }">
+	                          <td>결제완료</td>
+                          	</c:when>
+                          	<c:when test="${ dto.orderState == 2 }">
+	                          <td>발송처리</td>
+                          	</c:when>
+                          	<c:when test="${ dto.orderState == 3 }">
+	                          <td>배송시작</td>
+                          	</c:when>
+                          	<c:when test="${ dto.orderState == 4 }">
+	                          <td>배송중</td>
+                          	</c:when>
+                          	<c:when test="${ dto.orderState == 5 }">
+	                          <td>배송완료</td>
+                          	</c:when>
+                          	<c:otherwise>
+                          		<td>판매/주문취소</td>
+                          	</c:otherwise>
+                          </c:choose>
                           <td>${ dto.userName }</td>
                           <td>${ dto.orderDate }</td>
                           <td><fmt:formatNumber value="${dto.payment}"/></td>
@@ -339,23 +354,6 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 	
 	$.ajax(url, settings);
 }
-
-// 상품 상세 모달창 띄우기
-/*
-$(function() {
-	$('.orderStatus-update').click(function () {
-		let orderNum = $(this).attr("data-orderNum");
-		let orderStatus = "${orderStatus}";
-		console.log(orderNum);
-		
-		let url = "${pageContext.request.contextPath}/admin/shopOrder/detail/" + orderNum + "?orderStatus=" + orderStatus;
-		
-		$('.modal-orderDetail-body').load(url);
-		
-		$('#orderDialogModal').show();
-	});
-});
-*/
 
 // 배송 5일 후 자동구매
 $(function() {

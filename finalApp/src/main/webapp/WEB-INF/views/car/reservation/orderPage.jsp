@@ -231,9 +231,8 @@ table {
 table tr {
 	height: 40px;
 
-.accordion-button {
-	background-color: white;
-}
+
+
 </style>
 
 <script type="text/javascript">
@@ -297,7 +296,7 @@ table tr {
 			<form name="paymentForm" method="post" enctype="multipart/form-data">
 				<div class="accordion-item">
 					<h2 class="accordion-header accordion-header1">
-						<button class="accordion-button" type="button"
+						<button class="accordion-button bg-body-secondary" type="button"
 							data-bs-toggle="collapse"
 							data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
 							aria-controls="panelsStayOpen-collapseOne">선택한 여정</button>
@@ -315,7 +314,6 @@ table tr {
 									<div>
 										<p class="car_sort">${dto.carSize}</p>
 										<span class="car_title">${dto.carName}</span>
-										<!-- <span class="car_star" style="margin-left: 160px;">★ 4.7 ·&nbsp;</span> -->
 										<p class="car_content" style="color: #aaaaaa;">${dto.description}</p>
 									</div>
 									<div class="car_option">
@@ -345,7 +343,7 @@ table tr {
 				</div>
 				<div class="accordion-item">
 					<h2 class="accordion-header">
-						<button class="accordion-button collapsed" type="button"
+						<button class="accordion-button collapsed bg-body-secondary" type="button"
 							data-bs-toggle="collapse"
 							data-bs-target="#panelsStayOpen-collapseThree"
 							aria-expanded="false"
@@ -407,7 +405,7 @@ table tr {
 				</div>
 				<div class="accordion-item">
 					<h2 class="accordion-header">
-						<button class="accordion-button collapsed" type="button"
+						<button class="accordion-button collapsed bg-body-secondary" type="button"
 							data-bs-toggle="collapse"
 							data-bs-target="#panelsStayOpen-collapseTwo"
 							aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
@@ -435,7 +433,7 @@ table tr {
 				</div>
 				<div class="accordion-item">
 					<h2 class="accordion-header">
-						<button class="accordion-button collapsed" type="button"
+						<button class="accordion-button collapsed bg-body-secondary" type="button"
 							data-bs-toggle="collapse"
 							data-bs-target="#panelsStayOpen-collapseFour"
 							aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">

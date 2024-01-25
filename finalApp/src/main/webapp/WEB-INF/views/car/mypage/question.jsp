@@ -4,9 +4,9 @@
 
 <style type="text/css">
 .main {
-	width: 950px; /* 너비를 70%로 설정합니다. */
+	width: 950px;
 	height: 120px;
-	margin: 0 auto; /* 왼쪽과 오른쪽에 10px의 공백을 추가합니다. */
+	margin: 0 auto;
 	margin-top: 50px;
 	border: 3px solid #e2e2e2;
 	border-radius: 20px;
@@ -247,14 +247,13 @@ function printQuestion(data) {
 			out += '<div class="row gx-1 mt-2 mb-1 p-1">';
 				for(let f of listFilename) {
 					out += '<div class="col-md-auto md-img">';
-					out += '  <img class="border rounded" src="${pageContext.request.contextPath}/uploads/qna/'+f+'">';
+					out += '  <img class="border rounded" src="${pageContext.request.contextPath}/uploads/carqna/'+f+'">';
 					out += '</div>';
 				}
 			out += '</div>';
 		}
 		out += '  <div class="row p-2">';
 		out += '     <div class="col-auto pt-2 pe-0">' + answerState + '</div>';
-		// out += '     <div class="col-auto pt-2 px-0">&nbsp;|&nbsp;'+userName+'</div>';
 		out += '     <div class="col-auto pt-2 px-0">&nbsp;|&nbsp;<span>'+question_date+'</span>';
 		out += '        |<span class="deleteQuestion" data-num="' + qnaNum + '">삭제</span>';
 		out += '      </div>';
@@ -296,12 +295,16 @@ $(function(){
 	});
 });
 
+
 $(function(){
 	$('.list-question').on('click', '.deleteQuestion', function(){
-		let num = $(this).attr('data-num');
-		alert(num);
+		let qnaNum = $(this).attr('data-num');
+		
+		if(confirm('질문을 삭제하시겠습니까?')) {
+			let query = 'qnaNum=' + qnaNum;
+			location.href = '${pageContext.request.contextPath}/car/qna/delete?' + query;
+		}
 	});
 });
-
 
 </script>

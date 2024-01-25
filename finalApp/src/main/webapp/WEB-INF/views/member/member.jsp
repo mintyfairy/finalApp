@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
  
-<div style="background-image:url('/plus/resources/images/member/loginbackground.jpg'); background-repeat : no-repeat; background-size : cover;">
+<div style="background-image:url('/plus/resources/images/member/loginbackground.jpg'); background-repeat : no-repeat; background-size : cover; padding: 50px 0;">
   <div>
     <div class="" style="width: 670px; height: 960px; background: #FFFFFF; border: 1px solid #AACDFF; box-shadow: 7px 7px 39px rgba(0, 104, 255, 0.25);  margin: auto; padding: 20px;">
         <div class="container">

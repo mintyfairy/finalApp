@@ -5,6 +5,7 @@
 <style type="text/css">
 .body-container {
 	max-width: 1080px; /*수정*/
+	
 }
 
 .nav-tabs .nav-link {
@@ -26,7 +27,6 @@
 	max-width: 650px;
 }
 
-.body-main { width: 850px; margin: 20px auto; }
 
 button.btn-category {
 	cursor: pointer;

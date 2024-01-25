@@ -179,7 +179,6 @@ ul {
     display: block;
     font-size: 18px;
     padding: 0px;
-    margin-right: 20px;
 }
 
 .header_center .header_center_wrap .header_center_list .header_center_item a:hover {
@@ -208,6 +207,10 @@ ul {
     display: inline-block;
 }
 
+.fa-solid {
+	font-size: 17px;
+}
+
 /* 공통헤더 마지막 */
 
 </style>
@@ -218,13 +221,13 @@ ul {
             <div class="header_center_wrap">
                 <ul class="header_center_list">
                     <li class="header_center_item">
-                        <a href="${pageContext.request.contextPath}/" style="padding-left:0;">메인</a>
+                        <a href="${pageContext.request.contextPath}/" style="padding-left:0;">메인&nbsp;&nbsp;&nbsp;</a>
                     </li>
                     <li class="header_center_item">
-                        <a href="${pageContext.request.contextPath}/site/list" style="padding-left:0;">캠핑예약</a>
+                        <a href="${pageContext.request.contextPath}/site/list" style="padding-left:0;">&nbsp;캠핑예약&nbsp;&nbsp;&nbsp;</a>
                     </li>
                     <li class="header_center_item">
-                        <a href="${pageContext.request.contextPath}/shop/main">스토어</a>
+                        <a href="${pageContext.request.contextPath}/shop/main">&nbsp;스토어</a>
                     </li>
                 </ul>
             </div>
@@ -240,14 +243,20 @@ ul {
             <ul class="header_right">
             	<c:choose>
 						<c:when test="${empty sessionScope.member}">
-			               	<li class="header_item"><a href="${pageContext.request.contextPath}/member/login"><i class="fa-solid fa-right-to-bracket fa-lg"></i></a></li>
+			               	<li class="header_item"><a href="${pageContext.request.contextPath}/member/login"><i class="fa-solid fa-arrow-right-to-bracket fa-lg"></i></a></li>
 				        </c:when>
 				        <c:otherwise>
-				        	<li class="header_item"><a href="${pageContext.request.contextPath}/member/logout" title="로그아웃"><i class="fa-solid fa-right-to-bracket fa-lg"></i></a></li>
+				        	<li class="header_item"><a href="${pageContext.request.contextPath}/member/logout" title="로그아웃"><i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i></a></li>
 						</c:otherwise>
 			     </c:choose>
-                
-                <li class="header_item fa-lg"><a href="${pageContext.request.contextPath}/member/join"><i class="fa-solid fa-user-plus"></i></a></li>
+                <c:choose>
+                	<c:when test="${empty sessionScope.member}">
+	                <li class="header_item fa-lg"><a href="${pageContext.request.contextPath}/member/join"><i class="fa-solid fa-user-plus"></i></a></li>
+                	</c:when>
+                	<c:otherwise>
+                		<li class="header_item fa-lg"><a href="#"><i class="fa-solid fa-user"></i></a></li>
+                	</c:otherwise>
+                </c:choose>
                 <li class="header_item fa-lg"><a href="${pageContext.request.contextPath}/csCenter/notice/list"><i class="fa-solid fa-headset"></i></a></li>
                 <c:if test='${sessionScope.member.authority=="CAMP"||sessionScope.member.authority=="ADMIN"}'>
 				   <li class="header_item fa-lg"><a href="${pageContext.request.contextPath}/admin/carManage/car"><i class="fa-solid fa-user-gear"></i></a></li>

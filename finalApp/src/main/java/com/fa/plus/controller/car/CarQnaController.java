@@ -152,4 +152,24 @@ public class CarQnaController {
 			
 			return model;
 		}
+		
+		@GetMapping("delete")
+		   public String qnaDelete(@RequestParam long qnaNum, 
+		         HttpSession session) throws Exception {
+		      
+		      String root = session.getServletContext().getRealPath("/");
+		      String pathname = root + "uploads" + File.separator + "car";
+		      
+		      try {
+		         service.deleteQuestion(qnaNum, pathname);
+		      } catch (Exception e) {
+		      }
+		      
+		      String url = "redirect:/car/mypage/question";
+		      
+		      return url;
+		   }
+		
+		
+		
 }

@@ -235,41 +235,13 @@ ul {
     text-align: center;
 }
 
-.bottom_left_wrap .bottom_left_list .bottom_left_item:first-child {
-    position: relative;
-}
-
-.bottom_left_wrap .bottom_left_list .bottom_left_item:first-child::after {
-    content: '';
-    position: absolute;
-    top: 21px;
-    right: 0;
-    width: 1px;
-    height: 20px;
-    background-color: #dedede;
-}
-
-.bottom_left_wrap .bottom_left_list .bottom_left_item:nth-child(2) {
-    position: relative;
-}
-
-.bottom_left_wrap .bottom_left_list .bottom_left_item:nth-child(2)::after {
-    content: '';
-    position: absolute;
-    top: 21px;
-    right: 0;
-    width: 1px;
-    height: 20px;
-    background-color: #dedede;
-}
-
 .bottom_left_wrap .bottom_left_list .bottom_left_item:last-child a {
 	padding-right: 0;
 }
 
 .bottom_left_wrap .bottom_left_list .bottom_left_item a {
     display: block;
-    font-size: 15px;
+    font-size: 18px;
     padding: 20px 10px 20px 10px;
 }
 
@@ -330,58 +302,7 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
 </style>
 </head>
 	<div class="header_top">
-	<!-- 
-        <ul class="header_top_list">
-            <li id="logo" class="header_top_item">
-                <a href="${pageContext.request.contextPath}/">
-                    <img src="https://via.placeholder.com/108x38" alt="logo">
-                </a>
-            </li>
-            <li id="tour_list_wrap" class="header_top_item">
-                <ul class="tour_list">
-                    <li>
-                        <a href="#">캠핑장 구석구석</a>
-                    </li>
-                    <li>
-                        <a href="#">열린관광 모두의 캠핑</a>
-                    </li>
-                    <li>
-                        <a href="#">캠핑트립코리아</a>
-                    </li>
-                    <li>
-                        <a href="#">캠핑e배움터</a>
-                    </li>
-                    <li>
-                        <a href="#">캠핑카</a>
-                    </li>
-                    <li>
-                        <a href="#">사진갤러리</a>
-                    </li>
-                    <li>
-                        <a href="#">한국캠핑콘텐츠랩</a>
-                    </li>
-                    <li>
-                        <a href="#">TourAPI</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
--->
         <div class="header_top_left">
-        <!-- 
-       		 <c:choose>
-				<c:when test="${empty sessionScope.member}">
-		            <div class="login_wrap">
-		                <a href="${pageContext.request.contextPath}/member/login">통합로그인</a>
-		            </div>
-		        </c:when>
-		        <c:otherwise>
-					<div class="p-2">
-						<a href="${pageContext.request.contextPath}/member/logout" title="로그아웃">로그아웃</a>
-					</div>					
-				</c:otherwise>
-		     </c:choose>
-         -->
             
         </div>
          <div id="sns_area">
@@ -410,7 +331,7 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
 	                    <li class="bottom_left_wrap">
 			                <ul class="bottom_left_list">
 			                    <li class="bottom_left_item">
-			                        <a href="${pageContext.request.contextPath}/site/list" style="padding-left:0;">캠핑예약</a>
+			                        <a href="${pageContext.request.contextPath}/" style="padding-left:0;">홈</a>
 			                    </li>
 			                    <li class="bottom_left_item">
 			                        <a href="${pageContext.request.contextPath}/car/main">캠핑카</a>
@@ -421,17 +342,11 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
 			                </ul>
 	                    </li>
 	                    <li class="logo_area">
-	                        <a id="logo2" href="${pageContext.request.contextPath}/">
+	                        <a id="logo2" href="${pageContext.request.contextPath}/site/list">
 	                            <img src="${pageContext.request.contextPath}/resources/images/main/logo.png" alt="logo" style="width:210px; height:55px;">
 	                        </a>
 	                    </li>
 	                    
-	                    <!-- 
-	                    <li class="my_page">
-	                        <a href="#"><i class="fa-regular fa-user"></i>&nbsp;마이페이지</a>
-	                    </li>
-	                     -->
-	                     
 				        <li class="bottom_right_wrap">
 				            <ul class="bottom_right">
 				            	<c:choose>

@@ -127,7 +127,6 @@ $(function(){
 });
 </script>
 
-<!-- <div class="container"> -->
 	<div class="body-container">	
 		<div class="body-title">
 			<h3><i class="bi bi-chat-right-text" style="font-size:23px;"></i> 캠핑카 문의 </h3>
@@ -191,8 +190,8 @@ $(function(){
 										<td colspan="4" class="left p-0">
 											<div class="border-bottom p-2 px-3">
 												<div class="bg-light p-2">
-													<div>
-														<div class="p-2 pb-0 fw-semibold">
+													<div style="display: flex; justify-content: space-between; padding: 0 14px;">
+														<div>
 															${dto.carName}
 														</div>
 														
@@ -203,8 +202,9 @@ $(function(){
 																|<span class="answerQuestion" data-num="${dto.qnaNum}" data-enabled="${dto.enabled}">${ not empty dto.answer ? '답변수정' : '답변' }</span>
 															</div>
 														</div>
+														</div>
 														
-														<div class="p-2">${dto.question}</div>
+														<div class="p-3">${dto.question}</div>
 														
 														<c:if test="${not empty dto.listFilename}">
 															<div class="row gx-1 mt-2 mb-1 p-1">
@@ -219,17 +219,16 @@ $(function(){
 													</div>
 													
 													<c:if test="${not empty dto.answer}">
-														<div class="p-2 pt-0 border-top">
+														<div class="border-top">
 															<div class="bg-light">
-																<div class="p-3 pb-0">
+																<div class="p-3 pb-4">
 																	<label class="text-bg-primary px-2"> 관리자 </label> <label>${dto.answer_date}</label>
 																</div>
-																<div class="p-3 pt-1 pb-1 answer-content">${dto.answer}</div>
+																<div class="p-3 pt-1 pb-3 answer-content">${dto.answer}</div>
 															</div>
 														</div>						
 													</c:if>
 												</div>
-											</div>
 										</td>
 									</tr>
 								</c:forEach>
@@ -244,7 +243,6 @@ $(function(){
 
 		</div>
 	</div>
-<!-- </div> -->
 
 <div class="modal hidden" id="answerDialogModal" tabindex="-1" 
 		data-bs-backdrop="static" data-bs-keyboard="false"
@@ -361,12 +359,12 @@ $('.btnAnswerSendOk').click(function(){
 	let url = '${pageContext.request.contextPath}/admin/carQna/qna/answer';
 	
 	const fn = function(data) {
-		console.log(data);
 		if(data.state === 'true') {
 			
-			f.reset();
 			
 			$('#answerDialogModal').hide();
+			console.log(data.text)
+			location.reload();
 			
 			let url2 = '${pageContext.request.contextPath}/admin/carQna/qna';
 			url2 += '?page=${page}&mode=${mode}&col=${col}';
@@ -384,6 +382,6 @@ $('.btnAnswerSendCancel').click(function(){
 	const f = document.answerForm;
 	f.reset();
 	
-	$("#answerDialogModal").hide();
+	$("#").hide();
 });
 </script>

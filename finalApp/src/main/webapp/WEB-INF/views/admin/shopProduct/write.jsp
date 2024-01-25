@@ -568,9 +568,8 @@ $(function(){
 						<td class="table-light col-sm-2">대표이미지</td>
 						<td>
 							<div class="thumbnail-viewer">
-							<!-- 
+								<img class="item img-add" src="${pageContext.request.contextPath}/resources/images/add_photo.png">
 								<img alt="thumbnail" src="${pageContext.request.contextPath}/uploads/shop/${dto.thumbnail}" width="100" height="100">
-								 -->
 							</div>
 							<input type="file" name="thumbnailFile" accept="image/*" class="form-control" style="display: none;">
 						</td>

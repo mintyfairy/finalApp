@@ -39,8 +39,6 @@
     <link href="${pageContext.request.contextPath}/resources/lib/campsite/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/lib/campsite/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
-    <!-- Customized Bootstrap Stylesheet 
-    <link href="css/bootstrap.min.css" rel="stylesheet">-->
 
     <!-- Template Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/css/campsite.css" rel="stylesheet">

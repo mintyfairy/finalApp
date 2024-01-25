@@ -28,7 +28,6 @@
 			let category = $(this).attr('data-category');
 			
 			location.href = '${pageContext.request.contextPath}/admin/cs/event/'+category+'/list';
-			//location.href = '${pageContext.request.contextPath}/admin/cs/csEventManage/'+category+'/list';
 		});
 	});
 

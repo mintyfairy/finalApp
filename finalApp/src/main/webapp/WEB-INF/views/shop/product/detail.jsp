@@ -702,10 +702,10 @@ function sendOk(mode) {
 				<img src="${pageContext.request.contextPath}/uploads/shop/${dto.thumbnail}" alt="detail_img">
 			</div>
 			
-			<div class="detail_tab detail_tab2">
+			<div id="tabs2" class="detail_tab detail_tab2">
 				<ul class="tab_list">
 					<li class="tab_item" onclick="detail();"><span>상세정보</span></li>
-					<li class="tab_item" onclick="review();"><span>상품후기0</span></li>
+					<li id="bbb" class="tab_item" onclick="review();"><span>상품후기0</span></li>
 					<li class="tab_item" onclick="question();"><span>상품문의0</span></li>
 					<li class="tab_item" onclick="as();"><span>배송/교환/반품/AS</span></li>
 				</ul>
@@ -730,7 +730,16 @@ function sendOk(mode) {
 							<div class="score-star review-score-star">
 								<c:forEach var="n" begin="1" end="5">
 									<c:set var="score" value="${dto.score + ((dto.score%1>=0.5) ? (1-dto.score%1)%1 : -(dto.score%1))}"/>
-									<span class="item fs-2 ${dto.score>=n?'on':''}"><i class="bi bi-star-fill"></i></span>
+										<span class="item fs-2">
+										<c:choose>
+											<c:when test="${score>=n}">
+												<i class="bi bi-star-fill"></i>
+											</c:when>
+											<c:otherwise>
+												<i class="bi bi-star"></i>
+											</c:otherwise>
+										</c:choose>
+										</span>
 								</c:forEach>
 							</div>
 							<div class="fs-2">
@@ -800,7 +809,7 @@ function sendOk(mode) {
 				<ul class="tab_list">
 					<li class="tab_item" onclick="detail();"><span>상세정보</span></li>
 					<li class="tab_item" onclick="review();"><span>상품후기0</span></li>
-					<li class="tab_item" onclick="question();"><span>상품문의0</span></li>
+					<li id="tabs3" class="tab_item" onclick="question();"><span>상품문의0</span></li>
 					<li class="tab_item" onclick="as();"><span>배송/교환/반품/AS</span></li>
 				</ul>
 			</div>
@@ -829,7 +838,7 @@ function sendOk(mode) {
 				</div>
 				
 			</div>
-			<div class="detail_tab detail_tab4">
+			<div id="tabs4" class="detail_tab detail_tab4">
 				<ul class="tab_list">
 				<li class="tab_item" onclick="detail();"><span>상세정보</span></li>
 					<li class="tab_item" onclick="review();"><span>상품후기0</span></li>
@@ -945,10 +954,10 @@ function sendOk(mode) {
 	
 <script type="text/javascript">
 	//변수명 변경
-	let detail_height = document.querySelector(".detail_tab1").offsetTop;
-	let review_height = document.querySelector(".detail_tab2").offsetTop;
-	let question_height = document.querySelector(".detail_tab3").offsetTop;
-	let as_height = document.querySelector(".detail_tab4").offsetTop;
+	let detail_height = document.querySelector("#tabs1").offsetTop;
+	let review_height = document.querySelector("#bbb").offsetTop;
+	let question_height = document.querySelector("#tabs3").offsetTop;
+	let as_height = document.querySelector("#tabs4").offsetTop;
 	
 	console.log(detail_height);
 	console.log(review_height);
@@ -1020,7 +1029,6 @@ function printReview(data) {
 		let answer = item.answer;
 		let answerDate = item.answerDate;
 		let listFilename = item.listFilename;
-		// let deletePermit = item.deletePermit;
 		
 		out += '<div class="mt-3 border-bottom">';
 		out += '  <div class="row p-2">';
@@ -1032,7 +1040,7 @@ function printReview(data) {
 		out += '  <div class="row p-2">';
 		out += '    <div class="col-auto pt-0 ps-2 pe-1 score-star">';
 		for(let i=1; i<=5; i++) {
-			out += '  <span class="item fs-6 ' + (score>=i ? 'on' : '') + '"><i class="bi bi-star-fill"></i></span>';
+			out += '  <span class="item fs-6">' + (score>=i ? '<i class="bi bi-star-fill"></i>' : '<i class="bi bi-star"></i>') + '</span>';
 		}
 		out += '    </div>';
 		out += '    <div class="col-auto ps-0 fs-6"><span>' + score + '점<span></div>';
@@ -1178,7 +1186,7 @@ function printQuestion(data) {
 			out += '<div class="row gx-1 mt-2 mb-1 p-1">';
 				for(let f of listFilename) {
 					out += '<div class="col-md-auto md-img">';
-					out += '  <img class="border rounded" src="${pageContext.request.contextPath}/uploads/qna/'+f+'">';
+					out += '  <img class="border rounded" src="${pageContext.request.contextPath}/uploads/shop/'+f+'">';
 					out += '</div>';
 				}
 			out += '</div>';
