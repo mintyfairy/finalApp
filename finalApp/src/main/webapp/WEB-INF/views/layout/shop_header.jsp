@@ -349,7 +349,7 @@ $(function() {
             <ul class="header_right">
             	<c:choose>
             		<c:when test="${empty sessionScope.member}">
-                		<li class="header_item"><a href="${pageContext.request.contextPath}/member/login"><i class="fa-solid fa-right-to-bracket fa-lg"></i></a></li>
+                		<li class="header_item"><a href="${pageContext.request.contextPath}/member/login"><i class="fa-solid fa-arrow-right-to-bracket fa-lg"></i></a></li>
                 	</c:when>
                 	 <c:otherwise>
 				        	<li class="header_item"><a href="${pageContext.request.contextPath}/member/logout" title="로그아웃"><i class="fa-solid fa-arrow-right-from-bracket fa-lg" style="font-size:17px;"></i></a></li>
@@ -358,6 +358,9 @@ $(function() {
                 
                 <li class="header_item fa-lg"><a href="${pageContext.request.contextPath}/shop/myPage/cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
                 <li class="header_item fa-lg"><a href="${pageContext.request.contextPath}/csCenter/notice/list"><i class="fa-solid fa-headset"></i></a></li>
+                <c:if test='${sessionScope.member.authority=="CAMP"||sessionScope.member.authority=="ADMIN"}'>
+				   <li class="header_item fa-lg"><a href="${pageContext.request.contextPath}/admin/shopProduct/main"><i class="fa-solid fa-user-gear"></i></a></li>
+				</c:if>
             </ul>
         </div>
     </div>

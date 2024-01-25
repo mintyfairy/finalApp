@@ -20,8 +20,9 @@ table th, td {
 }
 
 .body-container {
+	max-width: 1080px;
 	margin-top: 60px;
-	padding-left: 250px;
+	margin-left: 250px;
 }
 
 .body-main {
@@ -206,15 +207,15 @@ table th, td {
           
           <table class="table board-list">
               <colgroup>
-			<col width="100">
-			<col width="100">
-			<col width="130">
-			<col width="150">
-			<col width="130">
-			<col width="100">
-			<col width="100">
-			<col width="120">
-			</colgroup>
+				<col width="100">
+				<col width="120">
+				<col width="130">
+				<col width="*">
+				<col width="130">
+				<col width="100">
+				<col width="100">
+				<col width="120">
+			  </colgroup>
               <thead class="table-light">
                   <tr>
                       <th>주문번호</th>
@@ -232,7 +233,29 @@ table th, td {
                   <c:forEach var="dto" items="${ list }" varStatus="status">
                       <tr valign="middle">
                           <td>${ dto.orderNum }</td>
-                          <td>${ dto.orderState }</td>
+                          <c:choose>
+                          	<c:when test="${ dto.orderState == 0 }">
+	                          <td>입금대기</td>
+                          	</c:when>
+                          	<c:when test="${ dto.orderState == 1 }">
+	                          <td>결제완료</td>
+                          	</c:when>
+                          	<c:when test="${ dto.orderState == 2 }">
+	                          <td>발송처리</td>
+                          	</c:when>
+                          	<c:when test="${ dto.orderState == 3 }">
+	                          <td>배송시작</td>
+                          	</c:when>
+                          	<c:when test="${ dto.orderState == 4 }">
+	                          <td>배송중</td>
+                          	</c:when>
+                          	<c:when test="${ dto.orderState == 5 }">
+	                          <td>배송완료</td>
+                          	</c:when>
+                          	<c:otherwise>
+                          		<td>판매/주문취소</td>
+                          	</c:otherwise>
+                          </c:choose>
                           <td>${ dto.userName }</td>
                           <td>${ dto.orderDate }</td>
                           <td><fmt:formatNumber value="${dto.payment}"/></td>

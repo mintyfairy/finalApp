@@ -323,7 +323,7 @@ function sendOk() {
             <tr>
               <th>주소</th>
               <td>
-                <input type="text" name="zip" id="zip" placeholder="우편번호" style="width: 110px;" value="${orderUser.zip}" readonly>
+                <input type="text" name="zip" id="zip" placeholder="우편번호" style="width: 110px;" value="${orderUser.zip}" placeholder="" readonly>
                 <button type="button" onclick="daumPostcode();"
                   style="vertical-align: middle; margin-left: 4px; cursor: pointer; background-color: #fff; padding: 2px 4px; border: 1px solid #e5e5e5;">우편번호</button>
                 <br>

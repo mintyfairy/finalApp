@@ -235,41 +235,13 @@ ul {
     text-align: center;
 }
 
-.bottom_left_wrap .bottom_left_list .bottom_left_item:first-child {
-    position: relative;
-}
-
-.bottom_left_wrap .bottom_left_list .bottom_left_item:first-child::after {
-    content: '';
-    position: absolute;
-    top: 21px;
-    right: 0;
-    width: 1px;
-    height: 20px;
-    background-color: #dedede;
-}
-
-.bottom_left_wrap .bottom_left_list .bottom_left_item:nth-child(2) {
-    position: relative;
-}
-
-.bottom_left_wrap .bottom_left_list .bottom_left_item:nth-child(2)::after {
-    content: '';
-    position: absolute;
-    top: 21px;
-    right: 0;
-    width: 1px;
-    height: 20px;
-    background-color: #dedede;
-}
-
 .bottom_left_wrap .bottom_left_list .bottom_left_item:last-child a {
 	padding-right: 0;
 }
 
 .bottom_left_wrap .bottom_left_list .bottom_left_item a {
     display: block;
-    font-size: 15px;
+    font-size: 18px;
     padding: 20px 10px 20px 10px;
 }
 
@@ -410,7 +382,7 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
 	                    <li class="bottom_left_wrap">
 			                <ul class="bottom_left_list">
 			                    <li class="bottom_left_item">
-			                        <a href="${pageContext.request.contextPath}/site/list" style="padding-left:0;">캠핑예약</a>
+			                        <a href="${pageContext.request.contextPath}/" style="padding-left:0;">홈</a>
 			                    </li>
 			                    <li class="bottom_left_item">
 			                        <a href="${pageContext.request.contextPath}/car/main">캠핑카</a>
@@ -421,7 +393,7 @@ nav .navi_wrap .menu_bar .menu_item a:hover {
 			                </ul>
 	                    </li>
 	                    <li class="logo_area">
-	                        <a id="logo2" href="${pageContext.request.contextPath}/">
+	                        <a id="logo2" href="${pageContext.request.contextPath}/site/list">
 	                            <img src="${pageContext.request.contextPath}/resources/images/main/logo.png" alt="logo" style="width:210px; height:55px;">
 	                        </a>
 	                    </li>
