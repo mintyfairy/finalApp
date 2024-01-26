@@ -372,7 +372,7 @@ $(function() {
 	        <ul class="navi_list">
 	            <li class="hamburger">
 	                <a href="#" id="hamburgerIcon">
-	                    <img src="https://via.placeholder.com/60x60" alt="hamburger">
+	                    <img src="${pageContext.request.contextPath}/resources/images/shop/category.png" alt="hamburger" width="60" height="60">
 	                </a>
 	            </li>
 	            
