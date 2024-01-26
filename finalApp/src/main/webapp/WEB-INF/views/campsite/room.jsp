@@ -96,7 +96,7 @@
 	                    <div class="row g-2">
 	                        <div class="col-md-10">
 								<div class="row g-2">
-	                                <div class="col-md-3 dropdown ">
+	                                <div class="col-md-2 dropdown ">
 										  <button type="button" class="form-select " data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
 										    부대시설
 										  </button>
@@ -155,12 +155,12 @@
 	                                     <input type="text" class="form-control" placeholder="캠핑장 이름 검색" name="siteKwd"  value="${dto.siteKwd}">
 	                                </div>
 		                         <div class="col-md-auto">
-		                            <button class="btn btn-primary2 w-100" type="button" onclick="location.href ='${pageContext.request.contextPath}/site/list'">초기화</button>
+		                            <button class="btn btn-primary2 w-100 resetbtn" type="button" onclick="location.href ='${pageContext.request.contextPath}/site/list'">초기화</button>
 		                        </div>
 	                            </div>
 	                        </div>
 	                         <div class="col-md-2">
-	                            <button class="btn btn-primary2 w-100" type="button" onclick="searchSite()">검색</button>
+	                            <button class="btn btn-primary2 w-100 gogomaniac" type="button" onclick="searchSite()">검색</button>
 	                        </div>
 	                    </div>
 	                </div>
@@ -379,8 +379,8 @@
         		listNode.innerHTML = '';
         		return;
         	}
-        	console.log(data)
-        	console.log(data.list)
+        	//console.log(data)
+        	//console.log(data.list)
         	let htmlText="";
         	if (data.list==null) {
         		htmlText += '  <h1 class="mb-5 text-center "> 검색결과가 없습니다</h1>';

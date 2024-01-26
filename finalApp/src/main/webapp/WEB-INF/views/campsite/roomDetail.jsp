@@ -162,9 +162,9 @@
 	                                    <small><i class="fa-solid fa-grip-lines text-primary me-2"></i>${dto.floorString}</small>
 	                                </div>
 	                                <p class="text-body mb-3">${dto.content}</p>
-	                                <div class="d-flex justify-content-between">
-	                                    <a class="btn btn-sm btn-primary2 rounded py-2 px-4" onclick="ajaxCart('${empty sessionScope.member.memberIdx ?0:dto.detailNum}')">장바구니에 넣기</a>
-	                                    <a class="btn btn-sm btn-dark rounded py-2 px-4 " onclick="gogoCart('${empty sessionScope.member.memberIdx ?0:dto.detailNum}')">지금 바로 예약하기</a>
+	                                <div class="d-flex justify-content-between senddiv">
+	                                    <a class="btn btn-sm btn-primary2 rounded py-2 px-4 btncart" onclick="ajaxCart('${empty sessionScope.member.memberIdx ?0:dto.detailNum}')">장바구니에 넣기</a>
+	                                    <a class="btn btn-sm btn-dark rounded py-2 px-4 btnexcute" onclick="gogoCart('${empty sessionScope.member.memberIdx ?0:dto.detailNum}')">지금 바로 예약하기</a>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -282,11 +282,12 @@
 	    		    
 	</div>
 <script>
+console.log(document.querySelector('.DetailBox > div:first-child >div >div:nth-child(2) >div.senddiv > .btncart'))
 function searchRoom(a) {
 	const f= document.roomSearchForm;
 	
 	query=$('form[name=roomSearchForm]').serialize();
-	console.log(query)
+	//console.log(query)
 	f.action = "${pageContext.request.contextPath}/site/places/"+a;
 	f.submit();
 }
@@ -318,7 +319,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 					return false;
 		    	}
 		    	
-				console.log(jqXHR.responseText);
+			//	console.log(jqXHR.responseText);
 			}
 	};
 	$.ajax(url, settings);
@@ -405,7 +406,7 @@ function gogoCart(dnum){
 	
 	formData= $('form[name=roomSearchForm]').serialize();
 	formData+='&detailNum='+dnum
-	console.log(formData)
+	//console.log(formData)
  	let url="${pageContext.request.contextPath}/campsite/saveCart"
  	const fn = function(data) {
 		if(data.state=='GET'){

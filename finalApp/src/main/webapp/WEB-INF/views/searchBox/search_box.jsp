@@ -99,7 +99,7 @@ ul {
 					</div>
 				</div>
 				<div class="search_wrap" style="width: 534px; margin-top: 12px;">
-					<button type="button" onclick="what()" style="background-color: #606060; width: 100%;"
+					<button type="button" id="gogomaniac" onclick="what()" style="background-color: #606060; width: 100%;"
 						class=" btn col-12 m-2 text-white">검색</button>
 				</div>
 			</div>
@@ -173,7 +173,7 @@ ul {
 									data-location="13">전북</button>
 								<button class="btn ms-1 btn-light btn-lg  border-dark btn-chooseLoc"
 									data-location="14">전남</button>
-								<button class="btn ms-1 btn-light btn-lg  border-dark btn-chooseLoc"
+								<button class="btn ms-1 btn-light btn-lg  border-dark btn-chooseLoc jeju"
 									data-location="15">제주</button>
 							</td>
 						</tr>
@@ -205,7 +205,7 @@ ul {
 									data-environment="1">산</button>
 								<button class="btn ms-1 btn-light btn-lg  border-dark btn-chooseEnv"
 									data-environment="2">강</button>
-								<button class="btn ms-1 btn-light btn-lg  border-dark btn-chooseEnv"
+								<button class="btn ms-1 btn-light btn-lg  border-dark btn-chooseEnv sea"
 									data-environment="3">바다</button>
 							</td>
 						</tr>
